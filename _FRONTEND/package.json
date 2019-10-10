@@ -104,7 +104,7 @@
     "webpack-s3-plugin": "^1.0.3"
   },
   "reactSnap": {
-    "crawl": true,
+    "crawl": false,
     "destination": "../templates/prerendered",
     "source": "build",
     "concurrency": 4,
