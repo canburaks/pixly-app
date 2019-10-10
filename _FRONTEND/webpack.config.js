@@ -32,9 +32,10 @@ const productionSettings = {
 	entry: './src/index.js',
 	output: {
 		path: path.resolve(__dirname, './build'),
-		publicPath: "https://s3.eu-west-2.amazonaws.com/cbs-static/static/bundle/dist/",
+		publicPath: "/",//"https://s3.eu-west-2.amazonaws.com/cbs-static/static/bundle/dist/",
 		filename: 'static/js/[name].js',
-		chunkFilename: 'static/js/[name].chunk.js'
+		chunkFilename: 'static/js/[name].chunk.js',
+		futureEmitAssets: true,
 	},
     optimization: {
 		minimize: true,
@@ -183,7 +184,7 @@ const productionSettings = {
 		new HtmlWebPackPlugin({
 			inject: true,
 			template: "./src/index.html",
-			filename: "./index.html",
+			filename: "./original-webpack-html-plugin-output.html",
 			minify: {
 					removeComments: true,
 					removeRedundantAttributes: true,

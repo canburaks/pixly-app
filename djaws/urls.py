@@ -26,12 +26,15 @@ from django.views.generic import RedirectView
 from django.views.decorators.csrf import csrf_exempt
 #from django.contrib.auth import login, logout
 from django.contrib.auth.views import login, logout
+from django.conf.urls.static import static
 
 from graphene_django.views import GraphQLView
 from persons.views import HomeList
 from django.views.generic import TemplateView
 from django.contrib import auth
 from filebrowser.sites import site
+from django.views.static import serve
+
 from graphene_file_upload.django import FileUploadGraphQLView
 from django.http import HttpResponse
 from django.contrib.sitemaps.views import sitemap
@@ -91,113 +94,12 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
 
-   # path(r'^logout/$', auth.logout, {'next_page': settings.LOGOUT_REDIRECT_URL}),
-
-    #path(r'', TemplateView.as_view(template_name="index.html")),
-    #path("",HomeList.as_view(), name="home"),
-
-
-
     re_path(r'^graphql', csrf_exempt(FileUploadGraphQLView.as_view(graphiql=True))),
     re_path(r'^gql', csrf_exempt(GraphQLView.as_view(graphiql=True))),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
-#if True Create React App settings will render
-#otherwise webpack code splitted
-CRA = False
-SNAP = True
-##########################################################################3
-# STATIC PATH GENERATORS
-def static_list_path():
-    from django.db.models.functions import Length
-    from items.models import List
-    summary_limit = settings.LIST_MIN_SUMMARY
-    lqs = List.objects.annotate(text_len=Length('summary')).filter(
-            text_len__gt=summary_limit, list_type__in=["df", "fw" "ms"]).only("slug", "id")
-    pprint(lqs)
-    new_paths = []
-    for liste in lqs:
-        try:
-            new_path = path(f'list/{liste.slug}/1',
-                    TemplateView.as_view(
-                        template_name=f"build/list/{liste.slug}/1/index.html"
-                        ))
-            new_paths.append(new_path)
-            #print(new_path)
-        except:
-            continue
-    new_paths.append(path(f'list/{liste.slug}/1',TemplateView.as_view(template_name=f"build/list/{liste.slug}/1/index.html")))
 
-    #print(new_paths)
-    return new_paths
-
-def static_person_path():
-    from persons.models import Person
-    pqs = Person.objects.filter(active=True).only("slug", "id")
-    new_paths = []
-    for person in pqs:
-        try:
-            new_path = path(f'person/{person.slug}',
-                    TemplateView.as_view(
-                        template_name=f"build/person/{person.slug}/index.html"
-                        ))
-            #print(new_path)
-            new_paths.append(new_path)
-        except:
-            continue
-    return new_paths
-
-def static_movie_path():
-    from .sitemaps import movie_filter
-    mqs = movie_filter()
-    new_paths = []
-    for movie in mqs:
-        try:
-            new_path = path(f'movie/{movie.slug}',
-                    TemplateView.as_view(
-                        template_name=f"build/movie/{movie.slug}/index.html"
-                        ))
-            new_paths.append(new_path)
-        except:
-            continue
-    return new_paths
-
-
-
-##########################################################################3
-
-    # first static sites
-if CRA==False and SNAP == True:
-    #urlpatterns = urlpatterns + list_paths + person_paths
-    
-    #movie_paths = static_movie_path()
-    #urlpatterns = urlpatterns + list_paths + person_paths + movie_paths
-    
-    
-    #list_paths = static_list_path()
-    #person_paths = static_person_path()
-    urlpatterns = urlpatterns + custom_url_pages
-    pprint(custom_url_pages)
-    #pass
-
-##########################################################################3
-
-if CRA:
-    urlpatterns = urlpatterns + [
-
-    #react snap
-    #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="build/index.html")),
-    
-    #for Webpack splitted output
-    #re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index-chunk.html")),
-
-    #-Original 
-    #re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html"))
-    re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html"))
-]
-if not CRA:
-
-    urlpatterns = urlpatterns + [
+urlpatterns = urlpatterns + [
     #path('directors/1', TemplateView.as_view(template_name="build/directors/1/index.html")),
 #
     #path('list', TemplateView.as_view(template_name="build/list/index.html")),
@@ -207,10 +109,8 @@ if not CRA:
     #react snap
     #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="build/index-chunk.html")),
     #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="build/404.html")),
-    path("collections", TemplateView.as_view(template_name="build/collections/index.html")),
-
-    path("/", TemplateView.as_view(template_name="index.html")),
-    re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="build/200.html")),
+    #path("collections", TemplateView.as_view(template_name="build/collections/index.html")),
+    re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="index.html")),
 
     #for Webpack splitted output
     #re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index-chunk.html")),
@@ -221,12 +121,12 @@ if not CRA:
     #STATIC RENDERING
     #path('movie/<int:question_id>/vote/', views.vote, name='vote'),
 
-]
+] + static(settings.FRONTEND_FILE_STORAGE, document_root=settings.FRONTEND_FILE_STORAGE)
 
 
 
-ping_google()
 """
+ping_google()
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
