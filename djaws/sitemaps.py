@@ -13,7 +13,7 @@ from pprint import pprint
 #----------------------------------------------------------------------------
 # CUSTOM SELECTED PAGES FOR PRE-RENDER
 static_slugs =[
-    "/collections",
+    "collections",
 
 ]
 movie__slugs = [
