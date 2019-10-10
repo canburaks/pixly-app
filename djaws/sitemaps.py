@@ -72,17 +72,6 @@ custom_person_pages = page_template_generator(person__slugs)
 custom_list_pages = page_template_generator( liste_slugs)
 custom_url_pages = custom_movie_pages + custom_person_pages +custom_list_pages
 
-def page_url_generator(page, movie__slug):
-    new_paths = []
-    for slug in movie__slug:
-        try:
-            new_path = path(f'{page}/{slug}',TemplateView.as_view(
-                    template_name=f"build/{page}/{slug}/index.html"))
-            new_paths.append(new_path)
-        except:
-            continue
-    return new_paths
-
 
 #----------------------------------------------------------------------------
 
