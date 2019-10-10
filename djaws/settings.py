@@ -236,14 +236,13 @@ IMAGEKIT_DEFAULT_FILE_STORAGE = DEFAULT_FILE_STORAGE
 IMAGEKIT_CACHEFILE_DIR =  MEDIA_URL +  "CACHE/"
 
 #STATIC_URL = '/static/'
-STATIC_ROOT = '_FRONTEND'
+#STATIC_ROOT = 'static'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 STATICFILES_DIRS = [
     _FRONTEND + "/build",
-    _FRONTEND + "/build/static",
     (os.path.join(_FRONTEND,"build"), "frontend"),
     os.path.join(BASE_DIR, 'static'),
 ]
@@ -259,9 +258,9 @@ LOGOUT_URL = "/logout/"
 LOGIN_URL = "login"
 """
 
-# FIND FILE AND SEARCH LOCATIONS
+# FIND FILE AND SEARCH
 #from django.contrib.staticfiles import finders
-#result = finders.find("js/main.js")
+#result = finders.find('css/base.css')
 #searched_locations = finders.searched_locations
 
 
