@@ -133,7 +133,7 @@ class ListSitemap(Sitemap):
         return filtered_list
     
     def location(self, item):
-        return f"/list/{item.slug}/1/"
+        return f"/list/{item.slug}/1"
 
 
 class MovieSitemap(Sitemap):
@@ -150,7 +150,7 @@ class MovieSitemap(Sitemap):
         return mqs_mini  
 
     def location(self, item):
-        return f"/movie/{item.slug}/"
+        return f"/movie/{item.slug}"
 
 
 
@@ -167,7 +167,7 @@ class DirectorSitemap(Sitemap):
         return Person.objects.filter(id__in=director_ids).only("id", "slug")
     
     def location(self, item):
-        return f"/person/{item.slug}/"
+        return f"/person/{item.slug}"
 
 class ProfilePageSitemap(Sitemap):
     changefreq = "yearly"
@@ -185,7 +185,7 @@ class StaticSitemap(Sitemap):
             "/","/welcome", "/directors/1"
         ]
         for i in range(1,5,1):
-            statics.append(f"/movies/{i}/")
+            statics.append(f"/movies/{i}")
         return statics
 
     def location(self, item):
