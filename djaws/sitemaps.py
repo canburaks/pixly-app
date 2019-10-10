@@ -38,6 +38,29 @@ movie__slugs = [
     "movie/get-out-2017",
     "movie/on-body-and-soul-2017",
     "movie/ex-machina-2015",
+    "movie/the-grand-budapest-hotel-2014",
+    "movie/whiplash-2014",
+    "movie/the-wolf-of-wall-street-2013",
+    "movie/her-2013",
+    "movie/marley-2012",
+    "movie/the-white-ribbon-2009",
+    "movie/enter-the-void-2009",
+    "movie/the-dark-knight-rises-2012",
+    "movie/life-of-pi-2012",
+    "movie/the-hobbit-an-unexpected-journey-2012",
+    "movie/inception-2010",
+    "movie/black-swan-2010",
+    "movie/the-kings-speech-2010",
+    "movie/the-dark-knight-2008",
+    "movie/v-for-vendetta-2006",
+    "movie/hotel-rwanda-2004",
+    "movie/kill-bill-vol-1-2003",
+    "movie/old-boy-2003",
+    "movie/the-lord-of-the-rings-the-return-of-the-king-2003",
+    "movie/city-of-god-2002",
+    "movie/the-lord-of-the-rings-the-fellowship-of-the-ring-2001",
+    "movie/amelie-2001",
+    "movie/beautiful-mind-a-2001",
 ]
 
 #[print(f"https://pixly.app/movie/{ms}") for ms in movie__slugs]
@@ -115,11 +138,15 @@ class ListSitemap(Sitemap):
 
 class MovieSitemap(Sitemap):
     changefreq = "yearly"
-    slugs = [x.split("movie/")[1] for x in movie__slugs]
+    #slugs = [x.split("movie/")[1] for x in movie__slugs]
     priority = 0.9
     def items(self):
+        #print(movie__slugs)
+        slugs = [x.split("movie/")[1] for x in movie__slugs]
+        #print(slugs)
         #mqs = movie_filter()
         mqs_mini = Movie.objects.filter(slug__in=slugs).only("id", "slug", "name", "year")
+        #print(mqs_mini)
         return mqs_mini  
 
     def location(self, item):
