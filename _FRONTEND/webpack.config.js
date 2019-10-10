@@ -125,8 +125,8 @@ const productionSettings = {
 				use: {
 					loader: "babel-loader",
 					options: {
-						presets: ["@babel/preset-env"],
-						plugins: ["@babel/plugin-proposal-object-rest-spread"],
+						presets: [["@babel/preset-env", {"loose": true,  "useBuiltIns": "entry", "corejs": 3, forceAllTransforms:true }] ],
+						plugins: ["@babel/plugin-proposal-object-rest-spread", "@babel/plugin-transform-runtime"],
 						cacheDirectory: true
 					}
 				}
