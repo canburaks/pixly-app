@@ -20,6 +20,9 @@ import fetch from 'unfetch';
 
 
 import { hydrate, render } from "react-dom";
+import "core-js";
+
+
 //import { GET_DIRECTOR_LIST } from "./functions/gql"
 
 //import "slick-carousel/slick/slick.css";
@@ -119,8 +122,7 @@ const rootElement = document.getElementById("root");
 
 
 
-
-if (development){
+if (!development){
     ReactDOM.render(<Pixly />, rootElement)
 }
 else{

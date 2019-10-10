@@ -31,7 +31,13 @@ movie__slugs = [
     "movie/taxi-driver-1976",
     "movie/ida-2013",
     "movie/the-seventh-seal-1957",
-    "movie/life-is-beautiful-1997"
+    "movie/life-is-beautiful-1997",
+    "movie/suspiria-2018",
+    "movie/the-favourite-2018",
+    "movie/roma-2018",
+    "movie/get-out-2017",
+    "movie/on-body-and-soul-2017",
+    "movie/ex-machina-2015",
 ]
 
 #[print(f"https://pixly.app/movie/{ms}") for ms in movie__slugs]
@@ -109,10 +115,11 @@ class ListSitemap(Sitemap):
 
 class MovieSitemap(Sitemap):
     changefreq = "yearly"
+    slugs = [x.split("movie/")[1] for x in movie__slugs]
     priority = 0.9
     def items(self):
         #mqs = movie_filter()
-        mqs_mini = Movie.objects.filter(slug__in=movie__slugs).only("id", "slug", "name", "year")
+        mqs_mini = Movie.objects.filter(slug__in=slugs).only("id", "slug", "name", "year")
         return mqs_mini  
 
     def location(self, item):
