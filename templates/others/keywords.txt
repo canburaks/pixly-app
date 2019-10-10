@@ -1,0 +1,77 @@
+movies to watch,
+similar movies,
+movie recommendations,
+movie suggestions,
+famous director's top movies,
+famous director's best movies,
+list of movies,
+curated movie lists
+
+
+Festival/DirectorsTop/
+
+Palm d'Or Winner Movies
+cannes film festival winners
+best film festival movies
+international film festival movies
+Venice film festival winners
+Berlin film festival winners
+golden bear winner movies
+golden lion winner movies
+golden palm winner movies
+the greatest movies according to directors
+List of director's favorite movies
+influential movie lists of directors
+Stanley Kubrick's favorite films
+Stanley Kubrick's favorite movies
+best movies according to Stanley Kubrick
+best films according to Stanley Kubrick
+best movies according to Jane Campion
+best films according to Jane Campion
+best movies according to Richard Linklater
+best films according to Richard Linklater
+best films according to Nicolas Roeg
+best movies according to Nicolas Roeg
+best films according to Xavier Dolan
+best movies according to Xavier Dolan
+best films according to Quentin Tarantino
+best movies according to Quentin Tarantino
+best films according to Woody Allen
+best movies according to Woody Allen
+best films according to Nuri Bilge Ceylan
+best movies according to Nuri Bilge Ceylan
+best films according to David Fincher
+best movies according to David Fincher
+Jane Campion's Top Movies
+Richard Linklater's Top Movies
+Nicolas Roeg's Top Movies
+Nicolas Roeg's favorite films
+Jane Campion's favorite films
+Jane Campion's favorite movies
+Richard Linklater favorite films
+Xavier Dolan's Top Movies
+Xavier Dolan's top films
+Xavier Dolan's favorite movies
+Xavier Dolan's favorite films
+Quentin Tarantino's favourite movies
+Quentin Tarantino's favorite movies
+Quentin Tarantino's favorite films
+Quentin Tarantino's top movies
+Woody Allen Lists the Greatest Films of All Time
+Woody Allen's top movies
+Woody Allen's top films
+Woody Allen's favorite movies
+Woody Allen's favorite films
+Nuri Bilge Ceylan's Top 10 Favorite Films
+Nuri Bilge Ceylan's Top 10 Films
+Nuri Bilge Ceylan's Top 10 movies
+Nuri Bilge Ceylan's favorite movies
+Nuri Bilge Ceylan's favorite films
+David Fincher's favorite movies
+David Fincher's favorite films
+The Best 10 Philosophical Movies of The 1960s
+Philosophical movie lists
+The Best 20 Philosophical Movies of The 1970s
+The Best Philosophical Movies of The 1980s
+Recommended movies of directors
+Movies recommended by directors
