@@ -9,10 +9,10 @@
   "scripts": {
     "start": "webpack-dev-server --open --hot --mode development",
     "build": "webpack --mode production",
-    "deploy": "config/python upload.py",
-    "fullbuild": "npm run build && npm run deploy",
-    "backend-deploy":"cd .. && git add . && git commit -m '...' && git push",
-    "snap": "react-snap"
+    "deploy-frontend": "python config/upload.py",
+    "deploy-backend":"cd .. && git add . && git commit -m '...' && git push",
+    "snap": "react-snap",
+    "fullbuild": "npm run build && npm run deploy-frontend && npm run snap && npm run deploy-backend"
   },
   "babel": {
     "presets": [
@@ -25,6 +25,7 @@
       "@babel/preset-react"
     ]
   },
+  "browserslist": "> 0.25%, not dead",
   "dependencies": {
     "@apollo/react-hooks": "^3.0.1",
     "@glidejs/glide": "^3.3.0",
