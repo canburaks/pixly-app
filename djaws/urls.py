@@ -26,15 +26,12 @@ from django.views.generic import RedirectView
 from django.views.decorators.csrf import csrf_exempt
 #from django.contrib.auth import login, logout
 from django.contrib.auth.views import login, logout
-from django.conf.urls.static import static
 
 from graphene_django.views import GraphQLView
 from persons.views import HomeList
 from django.views.generic import TemplateView
 from django.contrib import auth
 from filebrowser.sites import site
-from django.views.static import serve
-
 from graphene_file_upload.django import FileUploadGraphQLView
 from django.http import HttpResponse
 from django.contrib.sitemaps.views import sitemap
@@ -67,28 +64,18 @@ sitemaps = {
 urlpatterns = [
     path(f'termsofservice', TemplateView.as_view(template_name=f"others/terms_of_service.html")),
     path(f'privacy', TemplateView.as_view(template_name=f"others/privacy.html")),
+    #facebook bussiness
+    path(f'qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html', TemplateView.as_view(template_name=f"others/qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html")),
 
-    path(f'qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html', TemplateView.as_view(template_name=f"qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html")),
-
-    #re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    #path('sitemap.xml', views.index, {'sitemaps': sitemaps}),
-    #path('<section>.xml', views.sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    
-    #re_path(r'^sitemap.xml', cache_page(360)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     re_path(r'^slug-site-map.xml', cache_page(300)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    #re_path(r'^sitemap.xml/', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+
     re_path(r'^robots.txt', lambda x: HttpResponse("User-Agent: *\nSitemap: https://pixly.app/slug-site-map.xml\nDisallow:",
             content_type="text/plain"), name="robots_file"),
             
     re_path(r'^.well-known/brave-rewards-verification.txt', lambda x: HttpResponse("This is a Brave Rewards publisher verification file.\n\nDomain: pixly.app\nToken: b8b10bb0d60345f4f49ec7839609e9c92a9799ed95004ce17065b097604f0161",
             content_type="text/plain"), name="robots_file"),
 
-    #facebook bussiness
-    path(f'qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html', TemplateView.as_view(template_name=f"qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html")),
-
-    #re_path(r'^ads.txt', lambda x: HttpResponse("google.com, pub-9259748524746137, DIRECT, f08c47fec0942fa0",
-    #    content_type="text/plain"), name="ads_file"),
-    path("ads.txt", TemplateView.as_view(template_name="ads.txt")),
+    path("ads.txt", TemplateView.as_view(template_name="others/ads.txt")),
 
     path('admin/filebrowser/', site.urls),
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
@@ -99,34 +86,75 @@ urlpatterns = [
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
-urlpatterns = urlpatterns + [
-    #path('directors/1', TemplateView.as_view(template_name="build/directors/1/index.html")),
-#
-    #path('list', TemplateView.as_view(template_name="build/list/index.html")),
+urlpatterns = urlpatterns + custom_url_pages + [
 
-    #path('', TemplateView.as_view(template_name="build/404.html")),
 
-    #react snap
-    #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="build/index-chunk.html")),
-    #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="build/404.html")),
-    #path("collections", TemplateView.as_view(template_name="build/collections/index.html")),
-    re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="index.html")),
+    path("/", TemplateView.as_view(template_name="prerendered/404.html")), #bcs 404 returns to main-page
+    re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")), #200.html is original - not prerendered page template 
 
-    #for Webpack splitted output
-    #re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index-chunk.html")),
 
-    #-Original 
-    #re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html"))
-
-    #STATIC RENDERING
-    #path('movie/<int:question_id>/vote/', views.vote, name='vote'),
-
-] + static(settings.FRONTEND_FILE_STORAGE, document_root=settings.FRONTEND_FILE_STORAGE)
+]
 
 
 
-"""
 ping_google()
+"""
+
+# STATIC PATH GENERATORS
+def static_list_path():
+    from django.db.models.functions import Length
+    from items.models import List
+    summary_limit = settings.LIST_MIN_SUMMARY
+    lqs = List.objects.annotate(text_len=Length('summary')).filter(
+            text_len__gt=summary_limit, list_type__in=["df", "fw" "ms"]).only("slug", "id")
+    pprint(lqs)
+    new_paths = []
+    for liste in lqs:
+        try:
+            new_path = path(f'list/{liste.slug}/1',
+                    TemplateView.as_view(
+                        template_name=f"build/list/{liste.slug}/1/index.html"
+                        ))
+            new_paths.append(new_path)
+            #print(new_path)
+        except:
+            continue
+    new_paths.append(path(f'list/{liste.slug}/1',TemplateView.as_view(template_name=f"build/list/{liste.slug}/1/index.html")))
+
+    #print(new_paths)
+    return new_paths
+
+def static_person_path():
+    from persons.models import Person
+    pqs = Person.objects.filter(active=True).only("slug", "id")
+    new_paths = []
+    for person in pqs:
+        try:
+            new_path = path(f'person/{person.slug}',
+                    TemplateView.as_view(
+                        template_name=f"build/person/{person.slug}/index.html"
+                        ))
+            #print(new_path)
+            new_paths.append(new_path)
+        except:
+            continue
+    return new_paths
+
+def static_movie_path():
+    from .sitemaps import movie_filter
+    mqs = movie_filter()
+    new_paths = []
+    for movie in mqs:
+        try:
+            new_path = path(f'movie/{movie.slug}',
+                    TemplateView.as_view(
+                        template_name=f"build/movie/{movie.slug}/index.html"
+                        ))
+            new_paths.append(new_path)
+        except:
+            continue
+    return new_paths
+
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [

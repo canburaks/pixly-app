@@ -24,7 +24,7 @@ environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-_FRONTEND =os.path.join(os.path.join(BASE_DIR, '_FRONTEND'),)
+REACT_APP =os.path.join(os.path.join(BASE_DIR, 'frontend'),)
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
@@ -125,7 +125,6 @@ CORS_ORIGIN_WHITELIST = (
     )
 
 MIDDLEWARE = [
-    'django_brotli.middleware.BrotliMiddleware',
     'django_hosts.middleware.HostsRequestMiddleware',   #for subdomain
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -165,7 +164,7 @@ GRAPHENE = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': (os.path.join(_FRONTEND,"build"), os.path.join(BASE_DIR, 'templates'),),
+        'DIRS': (os.path.join(BASE_DIR, 'templates'),),
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -173,7 +172,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
             ],
         },
     },
@@ -206,65 +204,6 @@ CACHES={
         },
     }
 }
-
-#########################################################################
-#       S3
-#STATIC_URL = '/static/'
-
-
-AWS_ACCESS_KEY_ID = env('AWS_KEY')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_KEY')
-AWS_STORAGE_BUCKET_NAME = "cbs-static"
-AWS_DEFAULT_ACL = "public-read"
-AWS_QUERYSTRING_AUTH = False
-DEFAULT_FILE_STORAGE = "djaws.storage_backends.MediaStorage"
-FRONTEND_FILE_STORAGE = "djaws.storage_backends.FrontendStorage"
-AWS_QUERYSTRING_AUTH = False
-
-
-##########################################################################
-
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-STATIC_URL="https://s3.eu-west-2.amazonaws.com/cbs-static/static/"
-MEDIA_URL="https://s3.eu-west-2.amazonaws.com/cbs-static/static/media/"
-
-
-IMAGEKIT_DEFAULT_FILE_STORAGE = DEFAULT_FILE_STORAGE
-IMAGEKIT_CACHEFILE_DIR =  MEDIA_URL +  "CACHE/"
-
-#STATIC_URL = '/static/'
-#STATIC_ROOT = 'static'
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
-STATICFILES_DIRS = [
-    _FRONTEND + "/build",
-    (os.path.join(_FRONTEND,"build"), "frontend"),
-    os.path.join(BASE_DIR, 'static'),
-]
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media') #for upload files
-CKEDITOR_UPLOAD_PATH = "uploads/"
-
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/logout/"
-LOGOUT_URL = "/logout/"
-
-"""
-LOGIN_URL = "login"
-"""
-
-# FIND FILE AND SEARCH
-#from django.contrib.staticfiles import finders
-#result = finders.find('css/base.css')
-#searched_locations = finders.searched_locations
-
-
-
 
 
 
@@ -302,3 +241,44 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+#########################################################################
+#       S3
+#STATIC_URL = '/static/'
+
+
+AWS_ACCESS_KEY_ID = env('AWS_KEY')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_KEY')
+AWS_STORAGE_BUCKET_NAME = "cbs-static"
+AWS_DEFAULT_ACL = "public-read"
+AWS_QUERYSTRING_AUTH = False
+DEFAULT_FILE_STORAGE = "djaws.storage_backends.MediaStorage"
+AWS_QUERYSTRING_AUTH = False
+
+
+##########################################################################
+
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+STATIC_URL="https://s3.eu-west-2.amazonaws.com/cbs-static/static/"
+MEDIA_URL="https://s3.eu-west-2.amazonaws.com/cbs-static/static/media/"
+
+
+IMAGEKIT_DEFAULT_FILE_STORAGE = DEFAULT_FILE_STORAGE
+IMAGEKIT_CACHEFILE_DIR =  MEDIA_URL +  "CACHE/"
+
+#STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media') #for upload files
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/logout/"
+LOGOUT_URL = "/logout/"
+
+"""
+LOGIN_URL = "login"
+"""

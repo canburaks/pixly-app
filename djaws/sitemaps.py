@@ -8,7 +8,7 @@ from django.db.models.functions import Length
 from django.conf import settings
 from django.views.generic import TemplateView
 from django.urls import path, include, re_path
-
+from pprint import pprint
 
 #----------------------------------------------------------------------------
 # CUSTOM SELECTED PAGES FOR PRE-RENDER
@@ -28,9 +28,7 @@ movie__slugs = [
     "movie/toy-story-4-2019",
     "movie/us-2019",
     "movie/the-matrix-1999",
-    "movie/the-mirror-1975",
     "movie/taxi-driver-1976",
-    "movie/the-terminator-1984",
     "movie/ida-2013",
     "movie/the-seventh-seal-1957",
     "movie/life-is-beautiful-1997"
@@ -59,7 +57,7 @@ def page_template_generator(routes):
     new_paths = []
     for route in routes:
         try:
-            new_path = path(route, TemplateView.as_view(template_name=f"build/{route}/index.html"))
+            new_path = path(route, TemplateView.as_view(template_name=f"prerendered/{route}/index.html"))
             new_paths.append(new_path)
         except:
             continue
@@ -67,11 +65,13 @@ def page_template_generator(routes):
 
 
 
+custom_static_pages = page_template_generator( static_slugs )
 custom_movie_pages = page_template_generator( movie__slugs)
 custom_person_pages = page_template_generator(person__slugs)
 custom_list_pages = page_template_generator( liste_slugs)
-custom_url_pages = custom_movie_pages + custom_person_pages +custom_list_pages
+custom_url_pages = custom_static_pages + custom_movie_pages + custom_person_pages + custom_list_pages
 
+#pprint(custom_url_pages)
 
 #----------------------------------------------------------------------------
 

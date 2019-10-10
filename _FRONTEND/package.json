@@ -104,7 +104,7 @@
   },
   "reactSnap": {
     "crawl": true,
-    "destination": "build/prerendered",
+    "destination": "../templates/prerendered",
     "source": "build",
     "concurrency": 4,
     "include": [
