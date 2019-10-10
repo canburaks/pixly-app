@@ -133,7 +133,7 @@ class ListSitemap(Sitemap):
         return filtered_list
     
     def location(self, item):
-        return f"/list/{item.slug}/1"
+        return f"/list/{item.slug}/1/"
 
 
 class MovieSitemap(Sitemap):
