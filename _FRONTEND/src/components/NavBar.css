@@ -1,0 +1,219 @@
+:root {
+    --nav-item-color:rgba(255, 255, 255, 0.8)
+}
+
+nav#new-nav{
+    position: absolute;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 20px !important;
+    /*
+    max-height:120px;
+    */
+
+    min-height: var(--navbar-height) !important;
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+
+    transition: all 0.3s ease-in-out;
+    overflow-y: visible;
+    z-index: 1500;
+}
+nav#new-nav a {
+    color:var(--nav-item-color);
+    text-shadow: -0.5px 0.5px 1px rgba(0, 0, 0, 0.8);
+
+}
+.nav-blurbox{
+    position: absolute;
+    left:-5px;
+    top:-10px;
+    bottom:0px;
+    width:100%;
+    filter:blur(2px) !important;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: -1;
+    transition: opacity 2s ease-in-out;
+}
+
+/* NAV-ITEMS */
+nav#new-nav .nav-item {
+    margin:0 8px;
+    font-size: 14px;
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+}
+nav#new-nav .nav-item:hover {
+    color:rgba(255, 255, 255, 1);
+    /*
+    color:rgba(255, 255, 255, 0.95);
+
+    */
+}
+
+/* MIDDLE PAGES */
+nav#new-nav .nav-pages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*RIGHT ACTIONS*/
+
+
+nav#new-nav > .nav-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-width:25% ; 
+}
+
+nav#new-nav > .actions{
+    cursor: pointer;
+}
+
+nav#new-nav .nav-item.logout {
+    margin-right: 18px;
+}
+/*
+a.actions.signup{
+    background-color: var(--active-color);
+    border-radius: 50%;
+    padding: 15px;
+    color:white !important;
+    min-width:90px !important;
+}
+*/
+
+input#searchbox-input[type=text]{
+    border:2px solid rgba(255, 255, 255, 0.75) !important;
+    border-radius:24px !important;
+    padding:1px 10px;
+    width:80% !important;
+    height:100% !important;
+}
+div.autocomplete-items{
+    min-width:180px !important; 
+    margin-top: 5px !important;
+    background-color: transparent !important;
+}
+
+div.ac-list-item{
+    border-radius: 0;
+    color:var(--color-dark) !important;
+}
+div.ac-list-item:first-child{
+    border-top-left-radius:8px;
+    border-top-right-radius:8px;
+}
+div.ac-list-item:last-child{
+    border-bottom-left-radius:8px;
+    border-bottom-right-radius:8px;
+}
+.svg-inline--fa.fa-search.fa-w-16.input-icon{
+    visibility: hidden;
+}
+
+@media all and (max-width: 736px) { 
+    nav#new-nav{
+        /*
+        */
+        height:var(--navbar-height) !important;
+        transition: 0.3s;
+        padding: 8px 4px;
+    }
+    #brand-svg{
+        width:60px;
+    }
+    .nav-left{
+        width: 30%;
+    }
+    .nav-middle{
+        order:0;
+        flex-grow: 1 !important;
+        min-width:50% !important;
+    }
+    .nav-right{
+        justify-content: space-between !important;
+    }
+    .nav-item{
+        font-size: 12px;
+        color:rgba(255, 255, 255, 0.95) !important;
+    }
+    .my-search-box{
+        /*
+        width:70% !important;
+        */
+        display: none !important;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+div.brand-box{
+    
+    min-width:15%;
+}
+
+
+p.brand-pixly-new{
+    color:#cacdd0;
+    background-color:#000000;
+    background-color:rgba(0, 0, 0, 0);
+    font-size:24px;
+    line-height:26px;
+    font-weight: 700;
+}
+p.brand-pixly-new .span-1{
+    opacity: 0.9;
+}
+p.brand-pixly-new .span-2{
+    opacity: 0.8;
+}
+p.brand-pixly-new .span-3{
+    opacity: 0.7;
+}
+
+
+::placeholder { /* Firefox, Chrome, Opera */ 
+    color: rgba(80, 80, 80, 0.9) !important; 
+    text-align: start;
+    padding-left:5px;
+} 
+::-webkit-input-placeholder { color: #666;} 
+:-ms-input-placeholder { color: #666; }
+:-ms-input-placeholder { /* Internet Explorer 10-11 */ 
+    color: rgba(80, 80, 80, 0.9) !important; 
+    text-align: start;
+    padding-left:5px;
+} 
+  
+::-ms-input-placeholder { /* Microsoft Edge */ 
+    color: rgba(80, 80, 80, 0.9) !important; 
+    text-align: start;
+    padding-left:5px;
+} 
+input#searchbox-input[type=text]:focus  ::placeholder { /* Firefox, Chrome, Opera */ 
+    color: var(--active-color); 
+    border-color:white;
+} 
+  
+input#searchbox-input[type=text]:focus  :-ms-input-placeholder { /* Internet Explorer 10-11 */ 
+    color: var(--active-color); 
+    border-color:white;
+} 
+  
+input#searchbox-input[type=text]:focus  ::-ms-input-placeholder { /* Microsoft Edge */ 
+    color: var(--active-color); 
+    border-color:white;
+} 

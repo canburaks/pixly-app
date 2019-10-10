@@ -1,0 +1,172 @@
+
+.directorfm-component{
+    border:3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    margin: 5vh 5vw;
+    padding: 5vh 5vw;
+
+    box-shadow: 15px 15px 15px 1px rgba(0, 0, 0, 0.8);
+
+}
+.directorfm-header{
+    font-size:28px;
+    margin-top: 20px;
+    font-weight: 900;
+    color:var(--light) !important;
+    text-shadow: 2px 2px 1px rgba(140,140,140, 0.9);    letter-spacing: 0.25px;
+    word-spacing: 3px;
+}
+
+.directorfm-list-component{
+    width:25vw;
+    height:11vh;
+    border:1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding:4px;
+    margin:1px;
+    align-items: stretch;
+    overflow: visible;
+}
+.directorfm-list-component:hover {
+    background-color:var(--pair-11);
+    color:black;
+}
+.flip-text{
+    min-width:20vw;
+    font-size:14px !important;
+    font-weight: 900;
+    height:100%;
+    color: rgba(255, 255, 255, 1) !important;
+    z-index: 5 !important;
+}
+.flip-text:hover {
+    font-weight: 900;
+}
+.show-button{
+    border:2px solid rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: rgba(240, 240, 240, 0.0);
+    cursor: pointer;
+    transition: transform .6s; /* Animation */
+
+}
+
+.show-button:hover{
+    color: #D3CCE3;  /* fallback for old browsers */
+    color: -webkit-linear-gradient(to top, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+    color: linear-gradient(to top, #E9E4F0, #D3CCE3);
+    border-color: transparent;
+  background-image: linear-gradient(
+    to top,
+    #3f51b5,
+    #4354b7,
+    #4757b9,
+    #4a5bba,
+    #4e5ebc,
+    #5262be,
+    #5766c0,
+    #5b6ac2,
+    #616fc5,
+    #6775c9,
+    #6c7acc,
+    #7280cf
+  );
+}
+
+
+
+.festival-component{
+    border:3px solid rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    margin: 5vh 5vw;
+    padding: 5vh 5vw;
+    background: #D3CCE3;  /* fallback for old browsers */
+    background-color: linear-gradient(to top, #E9E4F0, #D3CCE3); 
+    box-shadow: 15px 15px 15px 1px rgba(0, 0, 0, 0.8);
+    background-image: url("https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/kisspng-cannes-film-festival-logo-award-png-transparent-image-5a752917887964.722025241517627671559.png");  
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow:  hidden;
+    transition: transform .2s; /* Animation */
+
+}
+.festival-header{
+    font-size:22px;
+    margin-top: 20px;
+    font-weight: 900;
+    color:black !important;
+    text-shadow: 2px 2px 1px rgba(255,255,255, 0.4);
+
+}
+.festival-list-component{
+    width:100%;
+    background-color: rgba(240, 240, 240, 0.8);
+    padding:12px;
+    border:1px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.4);
+
+}
+.festival-list-component:hover{
+    box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 1);
+
+}
+
+.festival-name{
+    position: relative;
+    top:-3vh;
+    left:0;
+    font-size:16px;
+    margin-top: 0px;
+    font-weight: 800;
+    color:black !important;
+    z-index: 5;
+    padding: 1vw;
+}
+
+.festival-list-component-poster{
+    position: relative;
+    top:-1vw;
+    height:80%;
+    width: 100%;
+    z-index: 1;
+}
+
+.single-item-grid{
+    padding:5px 1px;
+    margin:5px 1px;
+}
+
+/* SEARCH COMP */
+.search-component{
+    border:3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    margin: 5vh 5vw;
+    padding: 5vh 5vw;
+    background-color: rgba(240, 240, 240, 0.8);
+    box-shadow: 15px 15px 15px 1px rgba(0, 0, 0, 0.8);
+    overflow:  hidden;
+    transition: transform .2s; /* Animation */
+
+}
+.search-header{
+    font-size:22px;
+    margin-top: 20px;
+    font-weight: 900;
+    color:black !important;
+    text-shadow: 2px 2px 1px rgba(140,140,140, 0.9);
+}
+
+
+.text-gradient{
+  font-size: 72px;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

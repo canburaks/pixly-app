@@ -1,0 +1,420 @@
+import React, { useState, useEffect, useRef } from "react";
+import { useGraphQL } from "./grec"
+
+// Hook
+export function useDebounce(value, delay) {
+  // State and setters for debounced value
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(
+    () => {
+      // Update debounced value after delay
+      const handler = setTimeout(() => {
+        setDebouncedValue(value);
+      }, delay);
+
+      // Cancel the timeout if value changes (also on delay change or unmount)
+      // This is how we prevent debounced value from updating if value is changed ...
+      // .. within the delay period. Timeout gets cleared and restarted.
+      return () => {
+        clearTimeout(handler);
+      };
+    },
+    [value, delay] // Only re-call effect if value or delay changes
+  );
+
+  return debouncedValue;
+}
+
+
+export const useScrollPosition = () => {
+    const [scrollPosition, setScrollPosition] = useState(0)
+  
+    useEffect(() => {
+      let last_known_scroll_position = 0
+      let ticking = false
+      const handleScroll = e => {
+        last_known_scroll_position = window.scrollY
+  
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            setScrollPosition(last_known_scroll_position)
+            ticking = false
+          })
+  
+          ticking = true
+        }
+      }
+      window.addEventListener('scroll', handleScroll)
+  
+      return () => {
+        window.removeEventListener('scroll', handleScroll)
+      }
+    })
+  
+    return scrollPosition
+  }
+  
+
+
+export function useHover() {
+    const [value, setValue] = useState(false);
+
+    const ref = useRef(null);
+
+    const handleMouseOver = () => setValue(true);
+    const handleMouseOut = () => setValue(false);
+
+    useEffect(
+        () => {
+            const node = ref.current;
+            if (node) {
+                node.addEventListener('mouseover', handleMouseOver);
+                node.addEventListener('mouseout', handleMouseOut);
+
+                return () => {
+                    node.removeEventListener('mouseover', handleMouseOver);
+                    node.removeEventListener('mouseout', handleMouseOut);
+                };
+            }
+        },
+         // Recall only if ref changes
+    );
+
+    return [ref, value];
+}
+
+export function useAuthCheck() {
+    function authCheck(){
+        if (localStorage.getItem("USERNAME") !== null && localStorage.getItem("AUTH_TOKEN") !== null){
+            return true
+        }
+        return false
+    }
+    const [status, setStatus] = useState(authCheck())//      
+
+    const authListener = () => {
+        const currentStatus = authCheck();
+        // console.log("current status", status)
+        if (status !== currentStatus) {
+            // console.log("auth status changed", status)
+            setStatus(authCheck())
+            // console.log("new status", status)
+        }
+    }
+    useEffect(() => {
+        //console.log("ue")
+        authListener()
+    })
+    return status
+}
+
+export function useLocation(){
+    const [ location, setLocation ] = useState(window.location.pathname)
+    function locListener(){
+        if(location!==window.location.pathname){
+            setLocation(window.location.pathname)
+        }
+    }
+
+    useEffect(() =>{
+        locListener()
+        window.addEventListener("location", locListener);
+        // for removing repeatedly rendering
+        return () =>{
+            window.removeEventListener("location", locListener);
+        }
+    })
+    return location
+}
+
+export function useGql(query, variables){
+    const { data,loading, error } = useGraphQL(query, variables)
+    const response = { data, loading, error }
+
+    return response
+}
+
+function ResponsiveSize(width,xs=370, s=480, m=736, l=980, xl=1280 ){
+    if (width<xs) return "XS";
+    else if (width<s && width>=xs) return "S";
+    else if (width<m && width>=s) return "M";
+    else if (width<l && width>=m) return "L";
+    else if (width<xl && width>=l) return "XL";
+    else if(width<1581 && width>=xl) return "XXL";
+    else if (width >=2500) return "XXXL"
+    else return "XXXL"
+}
+
+export function useWindowSize() {
+    const [screenSize, setScreenSize] = useState(ResponsiveSize(window.innerWidth))//      S | M | L
+    
+    const screenListener = () => {
+        const currentSize = ResponsiveSize(window.innerWidth);
+        //if size (not width) is changed, then change state
+        if (screenSize != currentSize) {
+            setScreenSize(currentSize);
+        }
+    }
+
+    useEffect(() => {
+        // Once screenSize changed this will be fired
+        window.addEventListener("resize", screenListener);
+        // for removing repeatedly rendering
+        return () => {
+            window.removeEventListener("resize", screenListener);
+        }
+    })
+
+
+    return screenSize
+}
+//Get Responsive values
+export function useValues(values){
+    const screen = useWindowSize()
+    const variations = values.length
+    function pair(screen){
+        switch(screen){
+            case "XS":
+                return values[0]
+            case "S":
+                return values[1] || values[variations -1]
+            case "M":
+                return values[2] || values[variations -1]
+            case "L":
+                return values[3] || values[variations -1]
+            case "XL":
+                return values[4] || values[variations -1]
+            case "XXL":
+                return values[5] || values[variations -1]
+            case "XXXL":
+                return values[6] || values[variations -1]
+        }
+    }
+    const result = pair(screen)
+    //console.log(values, screen, variations, result)
+    return result
+}
+
+
+
+export function useWindowLocation(){
+    const pathname = window.location.pathname;
+    const [ location, setLocation] = useState(pathname)//      
+    
+    const locationListener = () =>{
+        const currentLocation = window.location.pathname;
+        //console.log("current", currentLocation)
+        //console.log("previous", location)
+        if(location!=currentLocation){
+            //console.log("window location changes",location)
+            setLocation(currentLocation)
+        }
+    }
+
+    useEffect(() =>{
+        locationListener()
+
+    }, [window.location.pathname])
+
+    return location
+}
+
+export function useClientWidth(clsname){
+    const [ width, setWidth] = useState(null)//      
+    
+    const widthListener = () =>{
+        const currentWidth = document.getElementsByClassName(clsname)[0].clientWidth
+        if(width!=currentWidth){
+            setWidth(currentWidth)
+        }
+    }
+    
+
+    useEffect(() =>{
+        widthListener()
+    })
+
+    return width
+}
+
+
+let cachedScripts = [];
+export function useScript(src) {
+  // Keeping track of script loaded and error state
+  const [state, setState] = useState({
+    loaded: false,
+    error: false
+  });
+
+  useEffect(
+    () => {
+      // If cachedScripts array already includes src that means another instance ...
+      // ... of this hook already loaded this script, so no need to load again.
+      if (cachedScripts.includes(src)) {
+        setState({
+          loaded: true,
+          error: false
+        });
+      } else {
+        cachedScripts.push(src);
+
+        // Create script
+        let script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+
+        // Script event listener callbacks for load and error
+        const onScriptLoad = () => {
+          setState({
+            loaded: true,
+            error: false
+          });
+        };
+
+        const onScriptError = () => {
+          // Remove from cachedScripts we can try loading again
+          const index = cachedScripts.indexOf(src);
+          if (index >= 0) cachedScripts.splice(index, 1);
+          script.remove();
+
+          setState({
+            loaded: true,
+            error: true
+          });
+        };
+
+        script.addEventListener('load', onScriptLoad);
+        script.addEventListener('error', onScriptError);
+
+        // Add script to document body
+        document.body.appendChild(script);
+
+        // Remove event listeners on cleanup
+        return () => {
+          script.removeEventListener('load', onScriptLoad);
+          script.removeEventListener('error', onScriptError);
+        };
+      }
+    },
+    [src] // Only re-run effect if script src changes
+  );
+
+  return [state.loaded, state.error];
+}
+
+
+
+/*
+
+
+export function usePersistLists(){
+    const localLists = JSON.parse(window.localStorage.getItem("lists")) || [];
+    const [ lists, updateLists] = useState(localLists)
+
+    function movieCounter(movieLists){
+        var totalMovies = 0;
+        movieLists.forEach(liste => totalMovies + liste.numMovies);
+        return totalMovies
+    }
+
+    const updateState = () =>{
+        //console.log("update state fired")
+        const currentLists = JSON.parse(window.localStorage.getItem("lists")) || [];
+        const currentNumMovies = currentLists.length>0 ?  movieCounter(currentLists) : 0;
+        const oldNumMovies = movieCounter(lists);
+
+        if(currentLists.length!=lists.length || currentNumMovies!=oldNumMovies){
+            updateLists(currentLists);
+        }
+    }
+
+    useEffect(() =>{
+
+        window.addEventListener("storage", updateState);
+        //console.log("hooks ue add")
+        return ()=>{
+            window.removeEventListener("storage", updateState);
+            //console.log("hooks ue remove")
+        }
+    })
+
+
+    //console.log("persist lists", lists)
+    return lists
+}
+
+export function useLocalStorage(){
+    const [ lists, updateLists ] = useState([])
+
+    function jsonize(input){
+        if((typeof input)==="string"){
+            return JSON.parse(input)
+        }
+        else if((typeof input)===Object){
+            return JSON.stringify(input)
+        }
+    }
+
+    function storeListener(){
+        const myLists = jsonize(localStorage.getItem("LISTS"))
+        const stateNums = movieCounter(lists)
+        const storedNums = movieCounter(myLists)
+        if(myLists.length!==lists.length || stateNums!==storedNums){
+            updateLists(myLists)
+        }
+        else{
+        }
+    }
+
+    function movieCounter(movieList){
+        var sum = 0;
+        movieList.forEach(movie => sum +=movie.numMovies)
+        return sum
+    }
+    const storedLists = jsonize(localStorage.getItem("LISTS"))
+    useEffect(() =>{
+        storeListener()
+        return () =>{
+        }
+    }, [storedLists])
+
+    return lists
+}
+
+
+export function useTimer(start, limit=null ){
+    const [active, setActive] = useState(false)
+
+    const [startTime, setStartTime ] = useState(null)
+    const [ passedTime, setpassedTime ] = useState(0)
+
+    const update = () => {
+        if (active){
+            setpassedTime(now().toFixed(0) - startTime)
+        }
+    }
+
+    useEffect(() =>{
+        //when start props was changed to true from parent
+        if (start==true && startTime==null && active==false){
+            setStartTime(now().toFixed(0));
+            setActive(true);
+        }
+        // when start props changed to false from parent
+        else if(start==false && startTime!=null && active==true){
+            setActive(false)
+            return () => console.log("finished by parent")
+        }
+        // when limit time is up and terminated by limit
+        else if(limit && passedTime>=limit && active==true){
+            setActive(false);
+            return () => console.log("finished by limit")
+        }
+        else if (start==true && startTime!=null && active==true){
+            update()
+        }
+    })
+    return passedTime
+}
+*/

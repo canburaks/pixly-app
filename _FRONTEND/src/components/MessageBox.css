@@ -1,0 +1,140 @@
+.message-box{
+    margin: 20px 0 0 0;
+    width: 100% !important;
+    max-width:92vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /*
+    */
+    border: 1px solid rgba(40,40,40, 0.4);
+    box-shadow: 1px 5px 8px -8px rgba(0,0,0, 0.9);
+    box-sizing: border-box !important;
+    overflow: hidden;
+    background-color: var(--color-light);
+}
+.top-box{
+    font-family:Montserrat, sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(40,40,40, 0.4);
+    padding: 12px 16px;
+    max-height:300px;
+}
+.text-box {
+    flex-grow:1;
+}
+.image-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:30%;
+    overflow: hidden;
+}
+.image-box img {
+    width:100%;
+    max-height:150px;
+}
+
+.message-box .content-box{
+    width: 100%;
+    padding: 16px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+@media all and (min-width: 300px) { 
+    .text-box{
+        width:100%;
+        order:1;
+    }
+    .image-box{
+        width:100%;
+        order:0;
+    }
+    .image-box img {
+        width:80%;
+    }
+    .message-box h2{
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+@media all and (min-width: 480px) { 
+    .text-box{
+        width:70%;
+        order:0
+    }
+    .image-box{
+        width:30%;
+        order:1;
+    }
+    .message-box h2{
+        font-size: 20px;
+    }
+    .message-box h4{
+        font-size: 18px;
+    }
+    .image-box img {
+        max-width:200px;
+    }
+}
+@media all and (min-width: 736px) { 
+
+}
+@media all and (min-width: 980px) { 
+
+}
+
+@media all and (min-width: 1280px) { 
+
+}
+
+@media all and (min-width: 1581px) { 
+
+}
+
+/*
+.message-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    border: 1px solid rgba(40,40,40, 0.4);
+    box-shadow: 1px 5px 8px -8px rgba(0,0,0, 0.9);
+    padding: 12px 16px;
+    margin: 12px;
+}
+
+.content-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: center;
+    flex-grow: 1;
+    width: 70%;
+}
+
+.image-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:30%;
+    overflow: hidden;
+}
+
+
+*/

@@ -1,0 +1,140 @@
+@import "./styles/reset.css";
+@import url('https://fonts.googleapis.com/css?family=Archivo+Narrow|Poppins:400,700&display=swap');
+@import "./styles/atoms/cbs-colors.css";
+@import "./styles/atoms/cbs-layout.css";
+@import "./styles/atoms/cbs-grid.css";
+@import "./styles/components.css";
+@import "./styles/atoms/cbs-components.css";
+@import "../node_modules/semantic-ui-css/semantic.css";
+/*
+@import '~semantic-ui-css/semantic.css';
+@import "./styles/atoms/cbs-components.css"; 
+*/
+
+@import "./styles/forms.css";
+@import "./styles/atoms/cbs-fonts.css";
+
+/*
+@import "./styles/themes.css";
+
+@import "./styles/fonts.css";
+*/
+
+:root {
+    --navbar-height: 65px;
+}
+html, body {
+    width:100vw !important;
+}
+.main-content-container {
+    margin-top: var(--navbar-height);
+}
+
+.App {
+    position: absolute;
+    left:0;
+    right:0;
+    display: flex;
+    min-width: 100%;
+    height: auto;
+    flex-direction: column;
+    /*font-family: "Open Sans", sans-serif;*/
+    font-size: 16px;
+    scroll-behavior: smooth !important;
+}
+
+.adsbygoogle {
+    height: auto;
+    /*
+    min-height: 150px !important;
+    */
+    min-width: 300px !important;
+    width: 100%;
+}
+
+.main-content-container {
+    position: relative;
+    min-height: 100vh;
+    /*margin-right:5%;
+    margin-left:5%;
+    */
+    margin-top: var(--navbar-height) !important;
+}
+
+.page-container {
+    position: relative;
+    width: 99vw;
+    height: auto;
+    color: var(--font-color);
+    background: var(--bg-color);
+}
+a {color:var(--color-dark);}
+
+
+.content-container {
+    position: relative;
+    height: auto;
+    width: 100%;
+    top: -10px;
+    height: 100%;
+    padding: 0vw 3vw 3vw 3vw !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-light);
+    /*
+    background: -webkit-linear-gradient(to top, #E9E4F0, #D3CCE3); 
+    background: linear-gradient(to top, #E9E4F0, #D3CCE3);
+    color: rgba(240, 240, 240, 1);
+    background-image:url("https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/patterns.svg");
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    */
+}
+span[data-forhalf]{
+    text-shadow: 0px 1px 1px black;
+}
+div#left-col {
+    padding: 1vw 1vw 1vw 1vw;
+}
+
+div.content-container[screen="S"] {
+    padding: 1vw 3vw 1vw 3vw;
+}
+
+div.content-container[screen="M"] {
+    padding: 1vw 1vw 1vw 1vw;
+}
+
+div.content-container[screen="L"] {
+    padding: 1vw 3vw 1vw 3vw;
+}
+
+.container-header {
+    text-decoration: underline;
+    margin: 10px;
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.loading-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.disable-section {
+    margin: 10px;
+    border-color: #303743;
+    padding: 5px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.active.f-icon.fa-plus {
+    color: var(--color-green-light);
+}

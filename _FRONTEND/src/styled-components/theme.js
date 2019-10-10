@@ -1,0 +1,122 @@
+
+
+/* ----------------------THEME----------------------------------- */
+const breakpoints = ["370px",'480px', '736px', '980px', '1280px', "1581px", "2500px"]
+
+// aliases
+breakpoints.xs = breakpoints[0]
+breakpoints.sm = breakpoints[1]
+breakpoints.md = breakpoints[2]
+breakpoints.lg = breakpoints[2]
+breakpoints.xl = breakpoints[3]
+breakpoints.xxl = breakpoints[4]
+breakpoints.xxxl = breakpoints[5]
+breakpoints.xxxxl = breakpoints[6]
+
+const themes = {default:{}}
+
+themes.default.fonts = {
+	primary: 'Helvetica Neue, Helvetica, Roboto, sans-serif',
+	header: "'Nunito', sans-serif",
+	paragraph: "'Montserrat', sans-serif",
+	quote: 'Georgia, serif',
+
+	fira: 	"'Fira Sans', sans-serif"
+}
+
+themes.default.fontSizes = {
+	xxxs:8,
+	xxs:10,
+	xs:12,
+	s:14,
+	m:16,
+	l:18,
+	xl:22,
+	xxl:26,
+	xxxl:30,
+	large:44,
+	huge:64,
+}
+
+themes.default.colors = {
+	black: '#000e1a',
+	white: '#fff',
+	light: "#f1f1f1",
+	lightDark1: "#dadada",
+	lightDark2: "#cacaca",
+	dark:  "#181818",
+	transparent:"transparent",
+
+	blue:"#3437c7",
+	blue2: "#3633CC",
+	blue3:"#3D33CC",
+
+	pink: "#fc2f70",
+	
+	accent1:  '#3437c7',
+	accent2: "#f42c04",
+	active: '#3437c7',
+
+	green: "#30c5b1",
+
+	error:"#db2829",
+	warning: "#f2c037",
+	success: "#38ba45;",
+}
+
+
+
+themes.default.space  = [0, 4, 8, 16, 32, 64, 128, 256, 512]
+themes.default.sizes  = [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48,52]
+
+themes.default.breakpoints  = breakpoints
+themes.default.transitions  = {
+	fast:"all 0.15s ease-in-out",
+	medium:"all 0.95s ease-in-out"
+}
+
+
+themes.default.shadows = {
+	light:"0px 2px 4px rgba(255, 255, 255, 1)",
+	dark: "-1px 2px 1px rgba(20, 20, 20, 0.87)",
+	textDark:"-2px 1px 1px rgba(0, 0, 0, 0.57)",
+	textLight:"-2px 1px 1px rgba(255, 255, 255, 0.57)",
+
+	//small:"rgba(40, 40, 40, 0.45) 0px 1px 5px, " +
+	//		"rgba(50, 50, 50, 0.05) 0px 1px 10px, " + 
+	//		"rgba(60, 0, 100, 0.08) 0px 20px 30px",
+	xs: "8px 10px 9px -8px rgba(0, 0, 0, 0.37)",
+
+	small: "8px 30px 29px -8px rgba(0, 0, 0, 0.37)",
+
+	//hover: "0 20px 19px -2px rgba(0, 0, 0, 0.5)",
+
+	medium:"0px 15px 29px -8px rgba(0, 0, 0, 0.67)",
+	large: "0px 30px 69px 8px rgba(0, 0, 0, 0.77)",
+
+	duo:"0px 30px 69px 8px rgba(0, 0, 0, 0.77), " + 
+		"0 15px 30px -8px rgba(255,255,255, 0.37)", 
+
+
+	mosaic: "8px 0px 9px -2px rgba(0, 0, 0, 0.57)",
+
+	diffuse: "2px  1px 1px rgba(0,0,0,0.12), " + 
+			 "-2px 2px 2px rgba(0,0,0,0.12), " + 
+			 "0    4px 8px rgba(0,0,0,0.16), " + 
+			 "0    8px 16px rgba(0,0,0,0.20);",
+
+	diffuse2:"0 1px 1px rgba(0,0,0,0.08), " +
+			"0 2px 2px rgba(0,0,0,0.12), " +
+			"0 4px 4px rgba(0,0,0,0.16), " +
+			"0 8px 8px rgba(0,0,0,0.20) " ,
+			 
+	hover:  "0 1px 1px   rgba(0, 0, 0,   0.22), " +
+			"0 2px 2px   rgba(0, 0, 0,   0.22), " + 
+			"0 4px 4px   rgba(0, 0, 0,   0.22), " + 
+			"0 8px 8px   rgba(0, 0, 0, 0.22), " + 
+			"0 16px 16px rgba(0, 0, 0, 0.22), " + 
+			"0 32px 32px rgba(0, 0, 255, 0.12)" 
+}
+themes.default.shadows.card = themes.default.shadows.diffuse2
+
+export default themes

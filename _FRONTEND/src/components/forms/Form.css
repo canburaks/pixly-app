@@ -1,0 +1,148 @@
+.form-main-container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding:2vmin;
+  background-color:rgba(80, 80, 80, 0.95);
+  border-radius: 10px;
+}
+
+#progress-bar{
+  height:30px;
+  width: 100%;
+}
+div.progress{
+  background-color: rgba(140, 140, 140, 0.0)
+}
+.form-text-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 20vh ;
+  width: 100%;
+}
+.form-row{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 30px;
+  margin:2px;
+  margin-bottom:10px;
+}
+.form-row-step{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 30px;
+  color:white;
+  margin:0;
+  padding: 0;
+  font-size: 20;
+  font-weight: 700;
+
+}
+
+.form-row-label{
+  width: 20%;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color:rgba(200, 200, 200, 0.95);
+  text-align: left;
+}
+.char-num{
+  color:rgba(140, 140, 140, 0.95);
+  font-size: 12px;
+  margin-left: 5px;
+
+}
+
+.form-row-input{
+width: 100%;
+background-color:rgba(80, 80, 80, 0.95);
+color:white
+
+}
+.form-input{
+  border-radius: 5px;
+  height: 100%;
+}
+.form-input:focus{
+  background-color:rgba(140, 140, 140, 0.95);
+
+}
+
+input[type=text], select {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.form-step-2{
+  min-height:300px;
+  width:100%;
+  font-style: italic;
+  color:white;
+  font-size:18;
+}
+.form-movie-search{
+  min-height:50px;
+  background-color:rgba(80, 80, 80, 0.95);
+  width:80%;
+  margin-right: 15px;
+  font-style: italic;
+  color:white;
+  font-size:28px;
+  box-shadow: 0 3px 10px 0.5px black;
+}
+
+.form-row-buttons{
+  justify-items: flex-end;
+  align-self: flex-end;
+  bottom:10px;
+  margin-top: 10px;
+  min-height: 40px;
+}
+.movies-container{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding:2%;
+
+}
+
+.movie-item-container{
+  z-index: 10;
+  height:172px;
+  width:112px;
+  position: relative;
+  margin-right:15px;
+}
+.form-item-close-icon{
+  position: absolute;
+  right: -5px;
+  top:-5px;
+  z-index: 10;
+}
+.movie-item-image{
+  height:172px;
+  width:112px;
+  box-shadow: 0 1px 5px 0.5px black;
+}
+.form-success{
+  font-size: 15px;
+}
+@media (max-width: 380px) {
+  .form-row-label{
+    font-size:0.65rem;
+  }
+}
