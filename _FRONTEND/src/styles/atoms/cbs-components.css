@@ -1,0 +1,99 @@
+:root{
+    --size-factor:1.25;
+    --size-m:80px;
+    --size-s: calc(var(--size-m) / var(--size-factor));
+    --size-xs: calc(var(--size-m) / (var(--size-factor) * var(--size-factor)));
+}
+/*------------------------------------*/
+/*-----BUTTONS----------------------*/
+button.btn {
+    min-width: var(--size-m);
+    min-height:30px;
+    margin: var(--space-x);
+    padding:var(--space-2x) var(--space-x);
+    cursor: pointer;
+    transition:  .15s ease-in;
+    border-radius:var(--space-x);
+    box-sizing: border-box;
+    font-weight: 600;
+}
+
+button.btn.s{
+    min-width: var(--size-s);
+}
+
+button.btn.xs{
+    min-width: var(--size-xs);
+    height:25px;
+    padding:var(--space-x) var(--space-x);
+    font-size: 12px;
+
+}
+
+button.btn.primary{
+    background: hsl(236, 59%, 49%);
+    border: 2px solid hsl(236, 59%, 49%);
+    color:hsl(0, 0%, 100%);
+}
+button.btn.primary:hover{
+    background: hsl(236, 59%, 60%);
+    border: 2px solid hsl(236, 59%, 60%);
+}
+
+
+button.btn.secondary {
+    background: hsl(0, 0%, 100%);
+    border: 3px solid hsl(236, 59%, 49%);
+    color:hsl(236, 59%, 49%);
+}
+button.btn.secondary:hover{
+    background: hsl(0, 0%, 90%);
+}
+
+button.btn.green{
+    background: hsl(166, 66%, 26%); 
+    border: 2px solid  hsl(166, 66%, 26%); 
+    color:hsl(0, 0%, 100%);
+}
+button.btn.green:hover{
+    background: hsl(118, 45%, 48%);
+    border: 2px solid hsl(118, 45%, 48%);
+}
+
+
+/*------------------------------------*/
+/*---------BOXES----------------------*/
+.tag{
+    border:1px solid;
+    box-sizing: border-box;
+    border-color: var(--color-dark);
+    color:var(--color-dark);
+    padding:1px 2px !important;
+    margin:1px 4px;
+    width:auto !important;
+    font-weight: bold !important;
+    border-radius:4px;
+}
+.tag.xs{
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.tag-shadow{
+    color: rgba(241, 241, 241, 0.95) !important;
+    text-shadow: 2px 2px 2px  rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 2px 2px  rgba(0, 0, 0, 0.47);
+    font-weight: bold;
+}
+/*
+.message-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px solid rgba(40,40,40, 0.4);
+    box-shadow: 1px 5px 8px -8px rgba(0,0,0, 0.9);
+    margin: 12px;
+
+}
+*/

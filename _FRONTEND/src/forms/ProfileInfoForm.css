@@ -1,0 +1,70 @@
+select.frm-item{
+    border:1px solid black !important;
+}
+input[type="submit"].frm-item.info-submit {
+    cursor: pointer;
+    position: relative;
+    background-color: white;
+    left:10%;
+    width:80%;
+    box-shadow: 0 6px 10px -4px rgba(75, 85, 225, 0.7);
+    font-weight: bold;
+	margin-top: 32px;
+    border: 2px solid var(--active-color);
+    color:var(--active-color);
+    border-radius: 8px !important;
+    transition: 0.2s ease-in-out;
+}
+input[type="submit"].frm-item.info-submit:hover {
+    box-shadow: 0 7px 10px -4px rgba(75, 85, 225, 1);
+}
+.profile-info-form .fbook-svg{
+    margin-top:32px;
+    min-height: 25px;
+    /*
+    width:100% !important;
+    */
+}
+.profile-info-form .fbook-svg:first(rect){
+    float: left !important;
+    height:25px !important; 
+}
+
+.form-avatar {
+    height:30%;
+    width:30%;
+    border-radius: 50%;
+}
+
+
+.frm-form input[type="file"].frm-file-input{
+    margin:0 8px;
+	outline: 1px dotted #000 !important;
+	outline: -webkit-focus-ring-color auto 5px !important;
+}
+
+.frm-form input[type="file"].frm-file-input::before {
+  content: 'Upload Image';
+  border-radius: 3px;
+  padding: 5px 32px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: bold;
+  font-size: 10pt;
+  text-align: center
+}
+/* FILE UPLOAD */
+.frm-form input[type="file"].frm-file-input::-webkit-file-upload-button {
+  display: none;
+}
+.frm-form input[type="file"].frm-file-input:hover::before {
+  border-color: black;
+}
+
+.frm-form input[type="file"].frm-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+
+}

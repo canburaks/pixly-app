@@ -1,0 +1,118 @@
+/* RIPPLE */
+button.ripple {
+    color: #1D9AF2;
+    background-color: #292D3E;
+    border: 1px solid #1D9AF2;
+    border-radius: 4px;
+    padding: 15px 18px 30px 15px;
+    cursor: pointer;
+    height:32px;
+    font-size:14px;
+    box-shadow: 0 0 4px #999;
+    background-position: center;
+    transition: background 0.8s;
+}
+button.ripple:hover {
+    background:#47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+    color: white;
+}
+button.ripple:active{
+    background-color:#292d3e;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+/* GROW */
+button.grow {
+color: #1D9AF2;
+background-color: #292D3E;
+border: 1px solid #1D9AF2;
+border-radius: 4px;
+padding: 0 15px;
+cursor: pointer;
+height:32px;
+font-size:14px;
+transition: all 0.2s ease-in-out;
+}
+button.grow:hover {
+transform: scale(1.1);
+}
+
+/* BUBBLE */
+button {
+  z-index: 1;
+  position: relative;
+  font-size: inherit;
+  font-family: inherit;
+  color: white;
+  padding: 0.5em 1em;
+  outline: none;
+  border: none;
+  background-color: hsl(236, 32%, 26%);
+  overflow: hidden;
+  transition: color 0.4s ease-in-out;
+}
+
+button.bubble::before {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  bottom: 100%;
+  left: 100%;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: #3cefff;
+  transform-origin: center;
+  transform: translate3d(-50%, 50%, 0) scale3d(0, 0, 0);
+  transition: transform 0.45s ease-in-out;
+}
+
+button.bubble:hover {
+  cursor: pointer;
+  color: #161616;
+}
+
+button.bubble:hover::before {
+  transform: translate3d(-50%, 50%, 0) scale3d(15, 15, 15);
+}
+
+/* PULSE */
+.effect {
+  z-index: 1;
+  position: relative;
+  font-size: inherit;
+  font-family: inherit;
+  color: white;
+  padding: 0.5em 1em;
+  outline: none;
+  border: none;
+  background-color: hsl(236, 32%, 26%);
+}
+
+.effect.pulse:hover {
+  cursor: pointer;
+}
+
+.effect.pulse::before {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 4px solid hsl(236, 32%, 26%);
+  transform-origin: center;
+  transform: scale(1);
+}
+
+.effect.pulse:hover::before {
+  transition: all 0.75s ease-in-out;
+  transform-origin: center;
+  transform: scale(1.75);
+  opacity: 0;
+}
+
+
+/* INPUT TRACE */

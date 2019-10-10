@@ -1,0 +1,63 @@
+.person-poster-panel {
+    min-height:30vh;
+    width:100vw;
+    position: relative; 
+    margin-bottom:40px;
+    background: rgba(90, 90, 90, 0.2);
+    box-sizing: border-box;
+    top:0vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:16px;
+
+}
+.person-poster-panel .cbs-title {
+    color: var(--color-dark) !important;
+    text-shadow: 2px 2px 2px  rgba(180, 180, 180, 0.3);
+    font-weight: bold;
+}
+.person-poster-panel .cbs-social-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:  flex-start;
+}
+
+
+img.person-poster{
+    width:200px;
+    height:200px;
+    border-radius: 100%;
+}
+.flexible-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:  center;
+}
+.person-poster-panel .svg-inline--fa.fa-home,
+.person-poster-panel .svg-inline--fa.fa-imdb{
+    color:rgba(0, 0, 0, 0.9) !important;
+}
+
+@media all and (min-width: 300px) { 
+    .person-poster-panel svg.f-icon {font-size: 28px !important; height:28px; width:28px; margin-top:12px; margin-left:12px;}
+    .rating-container span{font-size: 32px !important; height:34px; width:28px;}
+    img.person-poster {width:150px; height:150px; border-radius:100%;}
+}
+
+@media all and (min-width: 480px) { 
+    .person-poster-panel svg.f-icon {font-size: 28px !important; height:28px; width:28px; margin-top:12px; margin-left:12px;}
+    .rating-container span{font-size: 32px !important; height:34px; width:28px;}
+    img.person-poster {width:200px; height:200px; border-radius:100%;}
+}
+
+@media all and (min-width: 736px) { 
+    .person-poster-panel svg.f-icon {font-size: 28px !important; height:28px; width:28px; margin-top:12px; margin-left:12px;}
+    .rating-container span{font-size: 44px !important; height:50px; max-height:80px; width:36px; max-width:42px}
+    img.person-poster {width:200px; height:200px; border-radius:100%;}
+    .person-poster-panel { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; padding:24px 100px;}
+    .flexible-box {margin-left: 200px;}
+}

@@ -1,0 +1,220 @@
+/*
+@import url('https://fonts.googleapis.com/css?family=Archivo+Narrow|Poppins:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,900|Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Playfair+Display:400,700&display=swap');
+*/
+
+
+
+
+:root{
+    --scale: 1.2;
+    --font-1: 'Nunito', sans-serif;
+    --font-2: 'Montserrat', sans-serif;
+    --font-3: 'Roboto', sans-serif;
+    --font-4: 'Montserrat', sans-serif;
+
+    --header-font: var(--font-1);
+    --paragraph-font: var(--font-4) ;
+    /*
+
+    */
+}
+
+html {
+  font-size: 100%; 
+}
+
+
+body {
+    font-family: var(--paragraph-font);
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400 ;
+    color: var(--font-color);
+}
+h1, h2,h3, h4{
+  all: unset;
+}
+
+
+
+@media all and (min-width: 300px) { 
+    .t-res { font-size:  calc(2.5vw * var(--scale)* var(--scale) * var(--scale) * var(--scale)* var(--scale)) ; }
+    .t-fluid{
+        font-size: calc(14px + 8 * ((100vw - 320px) / 960)) !important;
+    }
+
+}
+@media all and (min-width: 480px) { 
+    .t-res { font-size:  calc(2.5vw * var(--scale)* var(--scale) * var(--scale)* var(--scale)); }
+
+
+}
+@media all and (min-width: 736px) { 
+    .t-res { font-size:  calc(2.5vw * var(--scale) * var(--scale)* var(--scale)); }
+
+
+}
+@media all and (min-width: 980px) { 
+    .t-res { font-size:  calc(2.5vw * var(--scale) * var(--scale)); }
+}
+
+@media all and (min-width: 1280px) { 
+    .t-res { font-size: calc(2.5vw * var(--scale) ); }
+    .t-fluid{
+        font-size: 22px !important;
+  }
+}
+
+@media all and (min-width: 1581px) { 
+    .t-res { font-size: 2.5vw; }
+}
+
+
+h1 {
+    font-size: calc(1rem * var(--scale)* var(--scale)* var(--scale)* var(--scale)* var(--scale)* var(--scale));
+    font-family: var(--header-font);
+    font-weight: 400 ;
+    letter-spacing: 0.8px;
+
+}
+
+h2 {
+    font-size:  calc(1rem * var(--scale)* var(--scale)* var(--scale)* var(--scale)* var(--scale));
+    font-family: var(--header-font);
+    font-weight: 400 ;
+
+}
+h3 {
+    font-size:  calc(1rem * var(--scale)* var(--scale)* var(--scale)* var(--scale));
+    font-family: var(--header-font);
+    font-weight: 400 ;
+
+}
+
+h4 {
+    font-size:  calc(1rem * var(--scale)* var(--scale)* var(--scale));
+    font-family: var(--header-font);
+    font-weight: 400 ;
+
+}
+h5 {
+    font-size:  calc(1rem * var(--scale)* var(--scale));
+    font-family: var(--paragraph-font);
+    font-weight: 400 ;
+
+}
+h6 {
+    font-size:  calc(1rem * var(--scale));
+    font-family: var(--paragraph-font);
+    font-weight: 400 ;
+
+}
+p {
+    font-size: calc(1rem) ;
+    font-family: var(--paragraph-font);
+    font-weight: 400 ;
+    line-height: 1.7;
+    margin:0 0 5px 0;
+ }
+h1,h2,h3,h4{
+    text-decoration: inherit;
+}
+.t-xxl{
+    font-size:  calc(1em * var(--scale) * var(--scale) * var(--scale));
+}
+.t-xl{
+    font-size:  calc(1em * var(--scale) * var(--scale));
+}
+
+.t-l{
+    font-size:  calc(1em * var(--scale));
+}
+.t-m{
+    font-size: 1em;
+}
+.t-s{
+    font-size: calc(1rem  / (var(--scale)));
+ }
+.t-xs{
+    font-size: calc(1rem  / (var(--scale) * var(--scale)));
+ }
+ 
+
+
+
+.t-bold{
+    font-weight: 700 !important;
+}
+.t-light{
+    font-weight: 300;
+}
+.t-center{    bottom:50px !important;
+  text-align: center;
+}
+.t-left{
+    text-align: left;
+}
+.t-underline{
+  text-decoration: underline;
+}
+.t-uppercase{
+    text-transform: uppercase;
+}
+.t-capital{
+    text-transform: capitalize;
+}
+.t-italic{
+    font-style: italic;
+}
+.t-ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.t-ws-nw{
+    white-space: nowrap;
+}
+
+.t-left-bottom{
+    position: absolute;
+    left:8px;
+    bottom:8px;
+}
+
+
+.brand-pixly{
+    font-family: 'Montserrat', sans-serif ;
+    /*
+    font-family: "Helvetica", sans-serif;
+    */
+    font-weight:500;
+    line-height: 1.5rem;
+    letter-spacing: 1px;
+    font-size:26px;
+    padding-right: 20px;
+    
+
+    /*
+    color:var(--brand-color-1);
+    */
+}
+
+span.brand-span-1{
+  opacity: 0.9;
+  /*
+  color:var(--brand-color-2)
+  */  
+}
+span.brand-span-2{
+  opacity: 0.80;
+  /*
+  color:var(--brand-color-3)
+  */  
+}
+span.brand-span-3{
+  opacity: 0.7;
+  /*
+  color:var(--brand-color-3)
+  */  
+}

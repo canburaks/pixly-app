@@ -1,0 +1,85 @@
+
+:root, [theme="palette-1"]{
+    --color-red:rgb(252, 26, 27);
+    --color-red-light:rgb(240, 52, 52);
+    --color-red-dark:rgb(207, 0, 15);
+
+    --color-purple-light:#9f5afd;
+    --color-purple-dark:#8c14fc;
+
+    --color-blue-light:#3498db;
+    --color-blue-dark:#2574a9;
+
+    --color-teal-light:#29f1c3;
+    --color-teal-dark:#049372; /* no contrast */
+
+    --color-green:rgb(21, 160, 69);
+    --color-green-light:#00e640;
+    --color-green-dark:#1e824c;
+
+    --color-orange:#f15a22;
+
+    --color-yellow:#f0ff00;
+
+    --color-grey-light:#6c7a89;
+    --color-grey-dark:#2e3131;
+
+    --color-light: #f1f1f1;
+    --color-dark: #181818;
+
+    --active-color-2: #f42c04;
+    --active-color-2-comp: rgba(226, 133, 110, 1);
+    --active-color-comp-1:#4c58b5;
+    --active-color-comp-2: #4b55e1;
+    --active-color-comp-3: #6c73e6f1;
+    --star-rating: #4b4deb;
+    --active-color-comp-4: #777fec;
+    --active-color:#3437c7;
+    --pinkish:#fc2f70;
+    --reddish: #F2545B;
+  /*
+  */
+}
+
+:root {
+  --color-white: #ffffff;
+  --blue-purple: #5e3dd4;
+  --lacivert: #3f51b5;
+  --silver:rgba(211, 204, 227, 0.988);
+
+  --semantic-warning: #f2c037;
+  --semantic-error: #db2829;
+  --semantic-success: #38ba45;
+
+
+  --delicate: #d3cce3;
+  --delicate-grad: linear-gradient(to top, #e9e4f0, #d3cce3);
+  --delicate--grad-webkit: -webkit-linear-gradient(to top, #e9e4f0, #d3cce3);
+
+  --midnight: #232526;
+  --midnight-grad: linear-gradient(to right, #414345, #232526);
+  --midnight-grad-webkit: -webkit-linear-gradient(to right, #414345, #232526);
+}
+
+/* GRADIENTS*/
+.orane-pink{
+    background: #FF416C;
+    background: -webkit-linear-gradient(45deg, #FF4B2B, #FF416C);
+    background: linear-gradient(45deg, #FF4B2B, #FF416C);
+}
+
+.blue-blue{
+    background: #3437c7;
+    background: -webkit-linear-gradient(45deg,#3437c7 , #4b55e1);
+    background: linear-gradient(45deg, #3437c7,  #4b55e1);
+}
+.purple-purple{
+    background: #5f3f8f;
+    background: -webkit-linear-gradient(45deg, #3e1966, #5f3f8f);
+    background: linear-gradient(45deg, #3e1966, #5f3f8f);
+}
+.purple-pinkish {
+    background:  linear-gradient(-45deg,#ed145b,#7b31f4);
+    background: -webkit-linear-gradient(-45deg,#ed145b,#7b31f4);
+
+}

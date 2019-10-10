@@ -1,0 +1,40 @@
+.tag-box-container {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  padding: 4px 6px;
+  margin: 2px;
+}
+.tag {
+  transition: 0.3s ease-out;
+  color:var(--color-dark);
+}
+.tag-genre {
+  border-color: rgba(255, 255, 255, 1);
+  color: rgba(255, 255, 255, 0.85) ;
+  font-weight: bold;
+
+}
+
+.tag-other {
+  border-color: rgba(180, 180, 180, 0.9);
+  color: rgba(255, 255, 255, 0.95) ;
+  font-weight: bold;
+
+
+}
+
+.tag-box-text {
+  font-size: 0.9rem !important;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: bold;
+}
+
+.tag-person:hover{
+  border-color:var(--active-color);
+  color:var(--active-color);
+}
+
+.tag > p {
+      font-weight: bold;
+}

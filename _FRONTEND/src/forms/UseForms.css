@@ -1,0 +1,87 @@
+.frm-form {
+    background-color: white;
+    width:80vw;
+    max-width: 400px;
+    padding: 2vw 5vw 2vw 5vw;
+    border-radius: 8px;
+    min-height:450px;
+    box-shadow: 0px 30px 29px -8px rgba(255, 255, 255, 0.17) ;
+}
+.frm-box{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	padding:4px 12px;
+	/*
+	border:1px solid black
+	*/
+}
+input, select{
+	width: 100%;
+}
+
+
+.frm-form  select.frm-select,
+.frm-form  select.frm-item,
+.frm-form  input[type=text].frm-item,
+.frm-form  input[type=password].frm-item,
+.frm-form  input[type=email].frm-item{
+	padding: 4px 0;
+	margin: 4px 0;
+	box-sizing: border-box;
+	border:0px solid transparent !important;
+	border-bottom: 3px solid grey !important;
+	background: transparent;
+	font-size:14px;
+	font-weight: 400;
+	color:rgb(69, 69, 69);
+	line-height:16.1px;
+  	transition: border-bottom-color 0.2s;
+}
+
+/*-----LABEL-----*/
+.frm-box  label.frm-label{
+	font-size:12px;
+	text-transform: capitalize;
+	color:rgb(40, 40, 40);
+	font-weight: 600;
+}
+/*-----LABEL ERROR-----*/
+.frm-box  label.frm-label-error{
+	text-transform: capitalize;
+	color:rgb(69, 69, 69);
+	font-size:12px;
+	min-height: 18px;
+	color:red;
+}
+
+
+
+/*---FOCUS----*/
+.frm-box input[type=text].frm-item:focus,
+.frm-box input[type=password].frm-item:focus,
+.frm-box input[type=email].frm-item:focus{
+  	border:0px solid transparent !important;
+	border-bottom: 3px solid rgba(76, 86, 226, 1) !important;
+	outline:none;
+	caret-color:  rgba(76, 86, 226, 1) !important;
+}
+
+
+
+/* ---STATUS--- */
+/* valid*/
+.frm-box  textarea,
+.frm-box input[type=text].frm-item,
+.frm-box input[type=password].frm-item,
+.frm-box input[type=email].frm-item{
+	border-bottom: 3px solid rgb(58, 158, 66) !important;
+}
+/* error */
+.frm-box input[type=text].frm-item.error,
+.frm-box input[type=password].frm-item.error,
+.frm-box input[type=email].frm-item.error{
+	border-bottom: 3px solid red !important;
+}
+
