@@ -11,6 +11,7 @@
     "build": "webpack --mode production",
     "deploy": "config/python upload.py",
     "fullbuild": "npm run build && npm run deploy",
+    "backend-deploy":"cd .. && git add . && git commit -m '...' && git push",
     "snap": "react-snap"
   },
   "babel": {
