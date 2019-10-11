@@ -45,9 +45,9 @@ const MainPage = (props) => {
     return(
         <PageContainer>
             <Head
-                description={"Pixly Movie Home Page. Pixly is personalized movie recommendation and social movie discovery platform"}
-                title={"Pixly Movie Platform"}
-                keywords={"pixly movies, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies"}
+                description={"Personalized movie recommendation and social movie discovering platform. You can get recommended by us or can discover similar movies."}
+                title={"Pixly Movie"}
+                keywords={"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"}
                 canonical={`https://pixly.app/`}
             >
                 <meta name="twitter:card" content="app" />
@@ -56,6 +56,15 @@ const MainPage = (props) => {
                 <meta name="twitter:app:name:iphone" content="Pixly" />
                 <meta name="twitter:app:name:ipad" content="Pixly" />
                 <meta name="twitter:app:name:googleplay" content="Pixly" />
+                <meta property="og:type" content="business.business"/>
+                <meta property="og:title" content="Pixly"/>
+                <meta property="og:url" content="https://pixly.app"/>
+                <meta property="og:image" content="https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/brand/pixly-hare-circle.png"/>
+                <meta property="business:contact_data:street_address" content="."/>
+                <meta property="business:contact_data:locality" content="Istanbul"/>
+                <meta property="business:contact_data:region" content="Europe"/>
+                <meta property="business:contact_data:postal_code" content="34430"/>
+                <meta property="business:contact_data:country_name" content="Turkey"/>
             </Head>
             {!authStatus && <JoinBanner />}
 
