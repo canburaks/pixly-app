@@ -9,6 +9,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safePostCssParser = require('postcss-safe-parser');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const CssCleanupPlugin = require('css-cleanup-webpack-plugin');
 
 
 
@@ -16,6 +17,7 @@ const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const isEnvDevelopment = process.argv.includes("development")
 const isEnvProduction = process.argv.includes("production")
 const shouldUseSourceMap = true; 
+var DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 
 
 const publicPath = isEnvProduction
@@ -39,6 +41,12 @@ const productionSettings = {
     optimization: {
 		minimize: true,
 		minimizer: [
+			new BrotliPlugin({
+				asset: '[path].br[query]',
+				test: /\.(js|css|html|svg)$/,
+				threshold: 10240,
+				minRatio: 0.8
+			  }),
 		  // This is only used in production mode
 		  new TerserPlugin({
 			test: /\.js(\?.*)?$/i,
@@ -116,6 +124,7 @@ const productionSettings = {
 	  },
 	devServer: {
 		historyApiFallback: true,
+		stats: 'normal',
 	  },
 	module: {
 		rules: [
@@ -124,11 +133,6 @@ const productionSettings = {
 				exclude: /(node_modules|bower_components)/,
 				use: {
 					loader: "babel-loader",
-					options: {
-						presets: [["@babel/preset-env", {"loose": true,  "useBuiltIns": "entry", "corejs": 3, forceAllTransforms:true }] ],
-						plugins: ["@babel/plugin-proposal-object-rest-spread", "@babel/plugin-transform-runtime"],
-						cacheDirectory: true
-					}
 				}
 			},
 			{
@@ -174,12 +178,13 @@ const productionSettings = {
 		]
 	},
 	plugins: [
-		new BrotliPlugin({
-			asset: '[path].br[query]',
-			test: /\.(js|css|html|svg)$/,
-			threshold: 10240,
-			minRatio: 0.8
-		  }),
+		//new BrotliPlugin({
+		//	asset: '[path].br[query]',
+		//	test: /\.(js|css|html|svg)$/,
+		//	threshold: 10240,
+		//	minRatio: 0.8
+		//  }),
+		new DuplicatePackageCheckerPlugin(),
 		new HtmlWebPackPlugin({
 			inject: true,
 			template: "./src/index.html",
@@ -201,7 +206,8 @@ const productionSettings = {
           // both options are optional
           filename: 'static/css/[name].css',
           chunkFilename: 'static/css/[name].chunk.css',
-		})
+		}),
+		
 	]
 };
 
