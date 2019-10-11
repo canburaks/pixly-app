@@ -587,6 +587,7 @@ class List(SEO,MainPage):
     poster = models.ImageField(blank=True, null=True, upload_to=list_image_upload_path)
     cover_poster = models.ImageField(blank=True, null=True, upload_to=list_image_upload_path)
 
+    order = JSONField(default=dict)
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank = True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank = True)
@@ -605,6 +606,7 @@ class List(SEO,MainPage):
 
 
     def save(self, *args, **kwargs):
+        from django.utils.text import slugify
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
