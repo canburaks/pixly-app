@@ -148,7 +148,7 @@ class ListSitemap(Sitemap):
 
 
 class MovieSitemap(Sitemap):
-    changefreq = "yearly"
+    changefreq = "weekly"
     #slugs = [x.split("movie/")[1] for x in movie__slugs]
     priority = 0.9
     def items(self):
