@@ -38,7 +38,6 @@ const productionSettings = {
 		filename: 'static/js/[name].js',
 		chunkFilename: 'static/js/[name].chunk.js'
 	},
-	externals: ["react-helmet"],
     optimization: {
 		minimize: true,
 		minimizer: [

@@ -14,7 +14,7 @@ export const ListCoverBox = React.memo(({ items, columns=[1,1,2,2,2,3,3], ratio=
                 text={text === true ? item.name : null}
                 key={item.slug}
                 link={`/list/${item.slug}/1`}
-                linktext={props.item.name}
+                linktext={item.name}
                 ratio={ratio} 
                 width={"100%"}
                 boxShadow="card"
@@ -87,7 +87,7 @@ export const ProfileCircleBox = React.memo(({ items, columns=[4,6,8,10,12] }) =>
                 src={item.avatar} 
                 key={item.username}
                 title={item.username}
-                link={`/user/${item.username}/`}
+                link={`/user/${item.username}`}
                 ratio={1} 
                 width={"100%"}
                 borderRadius="100%"
