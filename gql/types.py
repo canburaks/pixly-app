@@ -1624,7 +1624,8 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         return self.movie.seo_description
 
     def resolve_seo_short_description(self, info, *_):
-        return self.movie.seo_short_description
+        return f"Discover similar movies like '{self.movie.name}'. Movies that have common themes and tags with {self.movie.name}. People who like {self.movie.name} also like these films..."
+        #return self.movie.seo_short_description
 
     def resolve_seo_keywords(self, info, *_):
         if self.movie.seo_keywords == None:

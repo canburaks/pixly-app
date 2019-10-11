@@ -61,6 +61,17 @@ movie__slugs = [
     "movie/the-lord-of-the-rings-the-fellowship-of-the-ring-2001",
     "movie/amelie-2001",
     "movie/beautiful-mind-a-2001",
+    "movie/waking-life-2001",
+    "movie/eerie-2018",
+    "movie/the-legend-of-secret-pass-2010",
+    "movie/the-social-network-2010",
+    "movie/thoroughbreds-2018",
+    "movie/13-assassins-2010",
+    "movie/endless-love-2014",
+    "movie/the-da-vinci-code-2006",
+    "movie/midnight-cowboy-1969",
+    "movie/lilo-stitch-2002",
+    "movie/it-2017"
 ]
 
 #[print(f"https://pixly.app/movie/{ms}") for ms in movie__slugs]
