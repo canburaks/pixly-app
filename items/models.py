@@ -587,7 +587,7 @@ class List(SEO,MainPage):
     poster = models.ImageField(blank=True, null=True, upload_to=list_image_upload_path)
     cover_poster = models.ImageField(blank=True, null=True, upload_to=list_image_upload_path)
 
-    order = JSONField(default=dict)
+    order = JSONField(default=dict, blank=True,null=True)
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank = True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank = True)
