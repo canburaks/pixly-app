@@ -45,10 +45,10 @@ const MainPage = (props) => {
     return(
         <PageContainer>
             <Head
-                description={"Personalized movie recommendation and social movie discovering platform. You can get recommended by us or can discover similar movies."}
+                description={"Find similar movies. Get Personalized Recommendation. Discover Movie Lists and New Films."}
                 title={"Pixly Movie"}
                 keywords={"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"}
-                canonical={`https://pixly.app/`}
+                canonical={`https://pixly.app`}
             >
                 <meta name="twitter:card" content="app" />
                 <meta name="twitter:site" content="@pixlymovie" />
@@ -83,7 +83,7 @@ const MainPage = (props) => {
                     {props.data.persons.map(person => (
                         <DirectorCard item={person} key={person.slug}/>
                     ) )}
-                </GlideBox >
+                </GlideBox>
 
 
                 <h4 className="t-xl t-bold mar-t-4x asfs hover-t-underline">

@@ -39,9 +39,9 @@ const ListBoard = (props) => {
     return (
         <PageContainer>
             <Head
-                description={"Pixly collections consist of lists of movies in a variety categories like; " + 
-                            "favourite movies of famous directors, festival winner movies such as golden palm awarded movies, " + 
-                            "golden bear awarded movies, golden lion awarded movies and alsı topic related movies."
+                description={"Collections of movie lists; Cannes, Berlin, Venice Film festival winner films. " + 
+                            "Favorite film lists of Quentin Tarantino, David Fincher, Stanley Kubrick and Nuri Bilge Ceylan. " + 
+                            "Curated film lists, Imdb 250 list, Pixly selected Movies "
                         }
                 title={"Pixly Collections"}
                 canonical={`https://pixly.app/collections`}

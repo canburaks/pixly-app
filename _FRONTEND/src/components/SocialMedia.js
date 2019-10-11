@@ -31,7 +31,7 @@ export const SocialMedia = (props) => {
 
 export const ImdbIcon = ({link, rating, size, styles, className="" }) => (
 
-    <a target="_blank" rel="noopener" href={link} className="fbox-c jcfs aifs pos-r zin-5">
+    <a target="_blank" rel="noopener nofollow" href={link} className="fbox-c jcfs aifs pos-r zin-5">
         <svg aria-hidden="true" focusable="false" 
             className={"svg-inline--fa fa-imdb fa-w-14 f-icon " + className} 
             role="img" xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@ export const ImdbIcon = ({link, rating, size, styles, className="" }) => (
     </a>
 )
 export const FacebookIcon = ({link, size, className="", }) => (
-    <a target="_blank" rel="noopener" href={link} className="fbox-r jcfs aic">
+    <a target="_blank" rel="noopener nofollow" href={link} className="fbox-r jcfs aic">
         <svg
             aria-hidden="true" focusable="false" 
             className={"svg-inline--fa fa-facebook-square fa-w-14 f-icon" + className}
@@ -76,7 +76,7 @@ export const FacebookIcon = ({link, size, className="", }) => (
     </a>
 )
 export const InstagramIcon = ({link, size, className="", }) => (
-    <a target="_blank" rel="noopener" href={link} className="fbox-r jcfs aic">
+    <a target="_blank" rel="noopener nofollow" href={link} className="fbox-r jcfs aic">
         <svg
             aria-hidden="true" focusable="false" 
             className={"svg-inline--fa fa-instagram fa-w-14 f-icon" + className}
@@ -89,7 +89,7 @@ export const InstagramIcon = ({link, size, className="", }) => (
     </a>
 )
 export const TwitterIcon = ({link, size, className="", }) => (
-    <a target="_blank" rel="noopener" href={link} className="fbox-r jcfs aic">
+    <a target="_blank" rel="noopener nofollow" href={link} className="fbox-r jcfs aic">
         <svg
             aria-hidden="true" focusable="false" 
             className={"svg-inline--fa fa-twitter-square fa-w-14 f-icon" + className}
@@ -102,7 +102,7 @@ export const TwitterIcon = ({link, size, className="", }) => (
     </a>
 )
 export const HomeIcon = ({link, size, className="", }) => (
-    <a target="_blank" rel="noopener" href={link} className="fbox-r jcfs aic">
+    <a target="_blank" rel="noopener nofollow" href={link} className="fbox-r jcfs aic">
         <svg
             aria-hidden="true" focusable="false" 
             className={"svg-inline--fa fa-home fa-w-18 f-icon t-color-light" + className}

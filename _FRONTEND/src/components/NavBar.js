@@ -70,13 +70,13 @@ const NavBar = props => {
             </div>
             
             <div className="nav-pages nav-middle">
-                <Link id="nav-directors" className="nav-page nav-item" to="/directors/1">
-                    <UnderlineEffect >Directors</UnderlineEffect>
+                <Link id="nav-directors" className="nav-page nav-item" to="/directors/1" rel="nofollow" >
+                    <UnderlineEffect rel="nofollow" >Directors</UnderlineEffect>
                 </Link>
 
 
 
-                <Link id="nav-lists" className="nav-page nav-item" to="/collections" >
+                <Link id="nav-lists" className="nav-page nav-item" to="/collections" rel="nofollow" >
                     <UnderlineEffect >Collections</UnderlineEffect>
                 </Link>
 
@@ -84,7 +84,7 @@ const NavBar = props => {
 
 
                 <Link id="nav-advance-search" className="nav-page nav-item" to="/advance-search" rel="nofollow">
-                    <UnderlineEffect >Search</UnderlineEffect>
+                    <UnderlineEffect rel="nofollow">Search</UnderlineEffect>
                 </Link>
                 {/*
                 <Link id="nav-movies" className="nav-page nav-item" to="/movies/1" rel="nofollow">Movies</Link>
@@ -113,7 +113,7 @@ const NavBar = props => {
                                 </svg>
                             </Link>
 
-                            <Link to={"/"} title={"Sign Out"}  className="actions nav-item logout"
+                            <Link to={"/"} title={"Sign Out"}  className="actions nav-item logout" rel="nofollow"
                                 onClick={async () => (await mutation())} title="Sign out"
                                 >
                                 Logout

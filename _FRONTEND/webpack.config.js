@@ -11,13 +11,13 @@ const BrotliPlugin = require('brotli-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const CssCleanupPlugin = require('css-cleanup-webpack-plugin');
 
+var DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 
 
 
 const isEnvDevelopment = process.argv.includes("development")
 const isEnvProduction = process.argv.includes("production")
 const shouldUseSourceMap = true; 
-var DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 
 
 const publicPath = isEnvProduction
@@ -38,6 +38,7 @@ const productionSettings = {
 		filename: 'static/js/[name].js',
 		chunkFilename: 'static/js/[name].chunk.js'
 	},
+	externals: ["react-helmet"],
     optimization: {
 		minimize: true,
 		minimizer: [
@@ -57,11 +58,11 @@ const productionSettings = {
 				// into invalid ecma 5 code. This is why the 'compress' and 'output'
 				// sections only apply transformations that are ecma 5 safe
 				// https://github.com/facebook/create-react-app/pull/4234
-				ecma: 6,
+				ecma: 5,
 			  },
 			  compress: {
-				ecma: 6,
-				warnings: false,
+				ecma: 5,
+				warnings: true,
 				// Disabled because of an issue with Uglify breaking seemingly valid code:
 				// https://github.com/facebook/create-react-app/issues/2376
 				// Pending further investigation:
@@ -77,7 +78,7 @@ const productionSettings = {
 				safari10: true,
 			  },
 			  output: {
-				ecma: 6,
+				ecma: 5,
 				comments: false,
 				// Turned on because emoji and regex is not minified properly using default
 				// https://github.com/facebook/create-react-app/issues/2488
@@ -201,6 +202,7 @@ const productionSettings = {
 				  }
 		}),
 		new PreloadWebpackPlugin(),
+		new CssCleanupPlugin(),
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
           // both options are optional

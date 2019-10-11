@@ -75,7 +75,7 @@ const MoviePage = (props) => {
 
     //console.log(similarCover, similarNonCover)
     //console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
-    console.log(item.seoShortDescription)
+    //console.log(item.seoShortDescription)
 
     return (
         <PageContainer 
@@ -87,7 +87,7 @@ const MoviePage = (props) => {
                 richdata={item.richdata}
                 keywords={item.seoKeywords}
                 image={item.coverPoster ? item.coverPoster : item.poster}
-                canonical={`https://pixly.app/movie/${item.slug}/`}
+                canonical={`https://pixly.app/movie/${item.slug}`}
             >
             </Head>
 

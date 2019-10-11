@@ -1609,7 +1609,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
 
     def resolve_seo_title(self, info, *_):
         if self.movie.seo_title == None:
-            self.movie.seo_title = f"{self.movie.name} ({self.movie.year}) - Pixly"
+            self.movie.seo_title = f"{self.movie.name} ({self.movie.year}) and Similar Movies - Pixly "
             self.movie.save()
         return self.movie.seo_title
 
@@ -1624,7 +1624,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         return self.movie.seo_description
 
     def resolve_seo_short_description(self, info, *_):
-        return f"Discover similar movies like '{self.movie.name}'. Movies that have common themes and tags with {self.movie.name}. People who like {self.movie.name} also like these films..."
+        return f"Discover similar movies like '{self.movie.name}'. Movies with similar contents with {self.movie.name}. People who like {self.movie.name} also like these films..."
         #return self.movie.seo_short_description
 
     def resolve_seo_keywords(self, info, *_):
