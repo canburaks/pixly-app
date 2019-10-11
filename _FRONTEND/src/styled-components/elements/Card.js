@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { Text, Paragraph, 
         Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
         Box, ImageBox, AbsoluteBox, 
-        NewLink, Input, 
+        NewLink, Input, HiddenText,
 } from "../atoms"
 
 import { TextSection } from "./TextSection"
@@ -29,7 +29,7 @@ export const AspectRatioCard = (props) => (
 )
 
 
-export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, boxShadow, hoverShadow, fontSize, title}) => (
+export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, boxShadow, hoverShadow, fontSize, title, ...props}) => (
     <AspectRatioCard ratio={ratio} width={width || "100%"} src={src} 
         title={title}
         hoverShadow={hoverShadow} boxShadow={boxShadow} 
@@ -42,7 +42,9 @@ export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, bo
         >
             {text}
         </Text>
-        <NewLink to={link} position="absolute" width={"100%"} height="100%" top="0" left="0" />
+        <NewLink to={link} position="absolute" width={"100%"} height="100%" top="0" left="0">
+        {props.linktext && <HiddenText>{props.linktext}</HiddenText>}
+        </NewLink>
     </AspectRatioCard>
 )
 

@@ -2,6 +2,9 @@ import { compose,typography, color, space, shadow, layout, border, background, f
 import styled from 'styled-components'
 import { themeGet } from '@styled-system/theme-get'
 
+export const HiddenText = styled("span")`
+    display:none;
+`
 
 export const Text = styled('h4')({
     minWidth:"100% !important"

@@ -25,6 +25,7 @@ export const DirectorCard = (props) => (
         src={props.item.poster}
         text={props.item.name}
         link={`/person/${props.item.slug}`}
+        linktext={props.item.name}
         ratio={1.67} 
         borderRadius={"8px"}
         boxShadow="card"
@@ -38,6 +39,8 @@ export const CrewCard = (props) => (
         <ImageCard
             src={props.crew.person.poster} 
             link={`/person/${props.crew.person.slug}`}
+            linktext={props.crew.person.name}
+
             ratio={1.5}
             borderRadius={"8px"}
         />
@@ -58,6 +61,7 @@ export const ListCard = (props) => (
         <ImageCard
             src={props.list.coverPoster} 
             link={`/list/${props.list.slug}/1`}
+            linktext={props.item.name}
             ratio={0.41}
             borderRadius={"6px"}
         />
@@ -69,6 +73,7 @@ export const MovieCoverCard = (props) => (
         src={props.item.coverPoster || props.item.poster} 
         text={!props.notext ? props.item.name : null}
         link={`/movie/${props.item.slug}`}
+        linktext={props.item.name}
         ratio={props.ratio || 0.5625} 
         borderRadius={"8px"}
         boxShadow="card"
@@ -83,6 +88,7 @@ export const MoviePosterCard = (props) => (
         src={props.item.poster} 
         text={!props.notext ? props.item.name : null}
         link={`/movie/${props.item.slug}`}
+        linktext={props.item.name}
         ratio={props.ratio || 1.6} 
         borderRadius={"8px"}
         boxShadow="card"
@@ -95,6 +101,7 @@ export const MovieSimilarCard = (props) => (
         <ImageCard
             src={props.item.coverPoster || props.item.poster} 
             link={`/movie/${props.item.slug}`}
+            linktext={props.item.name}
             ratio={props.ratio || 0.5625} 
             borderRadius={"8px"}
         />
