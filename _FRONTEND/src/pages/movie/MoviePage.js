@@ -75,7 +75,7 @@ const MoviePage = (props) => {
 
     //console.log(similarCover, similarNonCover)
     //console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
-    //console.log(screenSize, isLargeScreen)
+    console.log(item.seoShortDescription)
 
     return (
         <PageContainer 
