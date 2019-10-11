@@ -23,6 +23,7 @@ export const DirectorLinks = React.memo(({directors, ...props}) =>(
 
 export const NewLink = styled(LinkNoFollow)`
   transition: ${themeGet("transitions.medium")};
+  color: unset;
   ${color}
   ${space}
   ${shadow}
