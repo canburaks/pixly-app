@@ -14,69 +14,79 @@ from pprint import pprint
 # CUSTOM SELECTED PAGES FOR PRE-RENDER
 
 movie__slugs = [
-    "movie/joker-2019",
-    "movie/marriage-story-2019",
-    "movie/ad-astra-2019",
-    "movie/once-upon-a-time-in-hollywood-2019",
-    "movie/midsommar-2019",
-    "movie/john-wick-chapter-3-parabellum-2019",
-    "movie/long-shot-2019",
-    "movie/portrait-of-a-lady-on-fire-2019",
-    "movie/toy-story-4-2019",
-    "movie/us-2019",
-    "movie/the-matrix-1999",
-    "movie/taxi-driver-1976",
-    "movie/ida-2013",
-    "movie/the-seventh-seal-1957",
-    "movie/life-is-beautiful-1997",
-    "movie/suspiria-2018",
-    "movie/the-favourite-2018",
-    "movie/roma-2018",
-    "movie/get-out-2017",
-    "movie/on-body-and-soul-2017",
-    "movie/ex-machina-2015",
-    "movie/the-grand-budapest-hotel-2014",
-    "movie/whiplash-2014",
-    "movie/the-wolf-of-wall-street-2013",
-    "movie/her-2013",
-    "movie/marley-2012",
-    "movie/the-white-ribbon-2009",
-    "movie/enter-the-void-2009",
-    "movie/the-dark-knight-rises-2012",
-    "movie/life-of-pi-2012",
-    "movie/the-hobbit-an-unexpected-journey-2012",
-    "movie/inception-2010",
-    "movie/black-swan-2010",
-    "movie/the-kings-speech-2010",
-    "movie/the-dark-knight-2008",
-    "movie/v-for-vendetta-2006",
-    "movie/hotel-rwanda-2004",
-    "movie/kill-bill-vol-1-2003",
-    "movie/old-boy-2003",
-    "movie/the-lord-of-the-rings-the-return-of-the-king-2003",
-    "movie/city-of-god-2002",
-    "movie/the-lord-of-the-rings-the-fellowship-of-the-ring-2001",
-    "movie/amelie-2001",
-    "movie/beautiful-mind-a-2001",
-    "movie/waking-life-2001",
-    "movie/eerie-2018",
-    "movie/the-legend-of-secret-pass-2010",
-    "movie/the-social-network-2010",
-    "movie/thoroughbreds-2018",
-    "movie/13-assassins-2010",
-    "movie/endless-love-2014",
-    "movie/the-da-vinci-code-2006",
-    "movie/midnight-cowboy-1969",
-    "movie/lilo-stitch-2002",
-    "movie/it-2017"
+      "movie/once-upon-a-time-in-hollywood-2019",
+      "movie/midsommar-2019",
+      "movie/john-wick-chapter-3-parabellum-2019",
+      "movie/long-shot-2019",
+      "movie/portrait-of-a-lady-on-fire-2019",
+      "movie/toy-story-4-2019",
+      "movie/us-2019",
+      "movie/the-matrix-1999",
+      "movie/joker-2019",
+      "movie/marriage-story-2019",
+      "movie/ad-astra-2019",
+      "movie/suspiria-2018",
+      "movie/the-favourite-2018",
+      "movie/roma-2018",
+      "movie/get-out-2017",
+      "movie/on-body-and-soul-2017",
+      "movie/ex-machina-2015",
+      "movie/the-grand-budapest-hotel-2014",
+      "movie/whiplash-2014",
+      "movie/the-wolf-of-wall-street-2013",
+      "movie/her-2013",
+      "movie/enter-the-void-2009",
+      "movie/inception-2010",
+      "movie/the-dark-knight-2008",
+      "movie/v-for-vendetta-2006",
+      "movie/hotel-rwanda-2004",
+      "movie/kill-bill-vol-1-2003",
+      "movie/old-boy-2003",
+      "movie/city-of-god-2002",
+      "movie/the-lord-of-the-rings-the-fellowship-of-the-ring-2001",
+      "movie/amelie-2001",
+      "movie/beautiful-mind-a-2001",
+      "movie/waking-life-2001",
+      "movie/eerie-2018",
+      "movie/the-legend-of-secret-pass-2010",
+      "movie/the-social-network-2010",
+      "movie/thoroughbreds-2018",
+      "movie/13-assassins-2010",
+      "movie/endless-love-2014",
+      "movie/the-da-vinci-code-2006",
+      "movie/midnight-cowboy-1969",
+      "movie/lilo-stitch-2002",
+      "movie/it-2017"
 ]
 
 #[print(f"https://pixly.app/movie/{ms}") for ms in movie__slugs]
 person__slugs = [
-    "person/brad-pitt-287",
-    "person/leonardo-dicaprio-6193",
-    "person/keanu-reeves-6384",
-    "person/tom-hanks-31",
+      "person/ingmar-bergman-6648",
+      "person/alfred-hitchcock-2636",
+      "person/stanley-kubrick-240",
+      "person/david-lynch-5602",
+      "person/martin-scorsese-1032",
+      "person/quentin-tarantino-138",
+      "person/francis-ford-coppola-1776",
+      "person/david-fincher-7467",
+      "person/jean-luc-godard-3776",
+      "person/jim-jarmusch-4429",
+      "person/paul-thomas-anderson-4762",
+      "person/michelangelo-antonioni-15189",
+      "person/sofia-coppola-1769",
+      "person/andrei-tarkovsky-8452",
+      "person/darren-aronofsky-6431",
+      "person/wes-anderson-5655",
+      "person/nuri-bilge-ceylan-56214",
+      "person/alfonso-cuaron-11218",
+      "person/michael-haneke-6011",
+      "person/yorgos-lanthimos-122423",
+      "person/christopher-nolan-525",
+      "person/wong-kar-wai-12453",
+      "person/brad-pitt-287",
+      "person/keanu-reeves-6384",
+      "person/tom-hanks-31",
+      "person/leonardo-dicaprio-619",
 ]
 liste_slugs =[
       "list/all-palme-dor-winners-cannes-film-festival/1",
@@ -110,25 +120,6 @@ custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages
 #pprint(custom_url_pages)
 
 #----------------------------------------------------------------------------
-
-
-def movie_filter(imdb_rating=8, summary_limit=settings.LIST_MIN_SUMMARY):
-    from django.db.models.functions import Length
-    mqs_ids =  Movie.objects.filter(active=True, slug__isnull=False,imdb_rating__gt=imdb_rating
-        ).order_by("-year").values_list("id", flat=True)
-    #director filter
-    cqs_ids = Crew.objects.filter(job="d").select_related("movie").values_list("movie__id", flat=True)
-    #intersection
-    movie_ids = set(list(mqs_ids)).intersection(set(list(cqs_ids)))
-    #new movies
-    for new_id in Movie.objects.filter(year__gte=2019, videos__isnull=False).values_list("id", flat=True):
-        movie_ids.add(new_id)
-    #list movies
-    for l in List.objects.prefetch_related("movies").all().only("movies__id"):
-        for m in l.movies.all():
-            movie_ids.add(m.id)
-    movie_have_long_summary = Movie.objects.annotate(text_len=Length('summary')).filter(text_len__gt=summary_limit, id__in=movie_ids, imdb_rating__gt=7).exclude(poster="").only("id", "name", "slug", "created_at", "updated_at")
-    return movie_have_long_summary
 
 
 class ListSitemap(Sitemap):
@@ -165,13 +156,9 @@ class DirectorSitemap(Sitemap):
     changefreq = "yearly"
     priority = 0.6
     def items(self):
-        active_directors_ids = Person.objects.filter(active=True).values_list("id", flat=True)
-        #print(active_directors_ids)
-        busy_persons =  Person.objects.filter(
-            slug__isnull=False).exclude(poster=""
-            ).order_by("-work_quantity").values_list("id", flat=True)[:500]
-        director_ids = [*active_directors_ids, *busy_persons]
-        return Person.objects.filter(id__in=director_ids).only("id", "slug")
+        slugs = [x.split("person/")[1] for x in person__slugs]
+        mqs_mini = Person.objects.filter(slug__in=slugs).only("id", "slug", "name")
+        return mqs_mini
     
     def location(self, item):
         return f"/person/{item.slug}"
