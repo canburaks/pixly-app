@@ -46,9 +46,9 @@ const MainPage = (props) => {
         <PageContainer>
             <Head
                 description={"Find similar movies. Get Personalized Recommendation. Discover Movie Lists and New Films."}
-                title={"Pixly Movie"}
+                title={"Pixly Movie - Find similar movies, get personalized recommendation"}
                 keywords={"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"}
-                canonical={`https://pixly.app`}
+                canonical={`https://pixly.app/`}
             >
                 <meta name="twitter:card" content="app" />
                 <meta name="twitter:site" content="@pixlymovie" />

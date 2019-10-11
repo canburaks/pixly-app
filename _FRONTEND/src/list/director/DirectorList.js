@@ -58,7 +58,7 @@ const DirectorList = (props) =>{
                             description={"Filmographies, Favourite Films of some directors like: " +directorNames.join(", ") }
                             title={"Directors Collection - Pixly"}
                             keywords={`Famous Directors List, ` + directorNames.join(", ") }
-                            canonical={`https://pixly.app/directors/1`}
+                            canonical={`https://pixly.app/directors/1/`}
                         />
                         {!authStatus &&  <JoinBanner />}
                         

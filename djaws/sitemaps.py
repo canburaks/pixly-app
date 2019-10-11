@@ -12,10 +12,7 @@ from pprint import pprint
 
 #----------------------------------------------------------------------------
 # CUSTOM SELECTED PAGES FOR PRE-RENDER
-static_slugs =[
-    "collections",
 
-]
 movie__slugs = [
     "movie/joker-2019",
     "movie/marriage-story-2019",
@@ -105,7 +102,6 @@ def page_template_generator(routes):
 
 
 
-custom_static_pages = page_template_generator( static_slugs )
 custom_movie_pages = page_template_generator( movie__slugs)
 custom_person_pages = page_template_generator(person__slugs)
 custom_list_pages = page_template_generator( liste_slugs)
@@ -144,7 +140,7 @@ class ListSitemap(Sitemap):
         return filtered_list
     
     def location(self, item):
-        return f"/list/{item.slug}/1"
+        return f"/list/{item.slug}/1/"
 
 
 class MovieSitemap(Sitemap):
@@ -161,7 +157,7 @@ class MovieSitemap(Sitemap):
         return mqs_mini  
 
     def location(self, item):
-        return f"/movie/{item.slug}"
+        return f"/movie/{item.slug}/"
 
 
 
@@ -178,7 +174,7 @@ class DirectorSitemap(Sitemap):
         return Person.objects.filter(id__in=director_ids).only("id", "slug")
     
     def location(self, item):
-        return f"/person/{item.slug}"
+        return f"/person/{item.slug}/"
 
 class ProfilePageSitemap(Sitemap):
     changefreq = "yearly"
@@ -193,10 +189,8 @@ class StaticSitemap(Sitemap):
     priority = 0.8
     def items(self):
         statics = [
-            "/","/welcome", "/directors/1"
+            "/","/welcome", "/directors/1/", "/collections/"
         ]
-        for i in range(1,5,1):
-            statics.append(f"/movies/{i}")
         return statics
 
     def location(self, item):
