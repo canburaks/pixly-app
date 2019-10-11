@@ -87,7 +87,7 @@ export const ProfileCircleBox = React.memo(({ items, columns=[4,6,8,10,12] }) =>
                 src={item.avatar} 
                 key={item.username}
                 title={item.username}
-                link={`/user/${item.username}`}
+                link={`/user/${item.username}/`}
                 ratio={1} 
                 width={"100%"}
                 borderRadius="100%"

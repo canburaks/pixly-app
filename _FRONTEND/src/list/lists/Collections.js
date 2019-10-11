@@ -44,7 +44,7 @@ const ListBoard = (props) => {
                             "Favorite film lists of Quentin Tarantino, David Fincher, Stanley Kubrick and Nuri Bilge Ceylan. " + 
                             "Curated film lists, Imdb 250 list, Pixly selected Movies "
                         }
-                canonical={`https://pixly.app/collections/`}
+                canonical={`https://pixly.app/collections`}
             />
             {!authStatus && <JoinBanner />}
 
