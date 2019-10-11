@@ -1608,10 +1608,11 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         
 
     def resolve_seo_title(self, info, *_):
-        if self.movie.seo_title == None:
-            self.movie.seo_title = f"{self.movie.name} ({self.movie.year}) and Similar Movies - Pixly "
-            self.movie.save()
-        return self.movie.seo_title
+        return f"{self.movie.name} ({self.movie.year}) and Similar Movies - Pixly "
+        #if self.movie.seo_title == None:
+        #    self.movie.seo_title = f"{self.movie.name} ({self.movie.year}) and Similar Movies - Pixly "
+        #    self.movie.save()
+        #return self.movie.seo_title
 
     def resolve_seo_description(self, info, *_):
         if self.movie.seo_description == None:
