@@ -16,7 +16,7 @@ export const Head = (props) => {
     const richdata = props.richdata ? JSON.stringify(JSON.parse(props.richdata)) : null
     const keywordsText = props.keywords 
         ? typeof props.keywords === "string" ?  props.keywords : props.keywords.join(", ")
-        : "Pixly, Cinema, Movie, Movie Recommendation, Director's Favourite Films"
+        : "Pixly, Cinema, Movie, Movie Recommendation, Director's Favourite Films, Similar Movies"
     
     const opengraph = (type, content) => (<meta property={`og:${type}`} content={`${content}`}/>)
     const twitter = (type, content) => (<meta property={`twitter:${type}`} content={`${content}`}/>)

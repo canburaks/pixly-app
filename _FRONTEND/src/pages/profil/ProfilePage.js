@@ -136,7 +136,7 @@ const ProfilePage = (props) => {
                 description={seoName +  "'s Social Cinema Profile; favourite movies, favourite directors, watchlist .. "}
                 title={seoName +  " - Pixly"}
                 keywords={`${seoName} social media, social cinema profile, watchlist, favourite directors, favourite movies`}
-                canonical={`https://pixly.app/user/${item.profile.username}/`}
+                canonical={`https://pixly.app/user/${item.profile.username}`}
             >
             </Head>
 
