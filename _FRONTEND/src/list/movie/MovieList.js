@@ -61,7 +61,7 @@ const MovieList = (props) => {
                         : liste.listType === "df" && liste.relatedPersons.length > 0 
                             ? liste.relatedPersons.poster
                             : null}
-                canonical={`https://pixly.app/list/${liste.slug}/1`}
+                canonical={`https://pixly.app/list/${liste.slug}/1/`}
             />
 
             <ListCoverPanel 

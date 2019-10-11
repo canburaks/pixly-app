@@ -104,7 +104,7 @@ const PersonPage = (props) => {
                 richdata={item.richdata}
                 keywords={item.seoKeywords}
                 image={item.coverPoster ? item.coverPoster : item.poster}
-                canonical={`https://pixly.app/person/${item.slug}`}
+                canonical={`https://pixly.app/person/${item.slug}/`}
             />
             <ContentContainer 
                 style={styles.contCon} 

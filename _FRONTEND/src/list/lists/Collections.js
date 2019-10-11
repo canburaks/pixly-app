@@ -39,12 +39,12 @@ const ListBoard = (props) => {
     return (
         <PageContainer>
             <Head
+                title={"Pixly Collections"}
                 description={"Collections of movie lists; Cannes, Berlin, Venice Film festival winner films. " + 
                             "Favorite film lists of Quentin Tarantino, David Fincher, Stanley Kubrick and Nuri Bilge Ceylan. " + 
                             "Curated film lists, Imdb 250 list, Pixly selected Movies "
                         }
-                title={"Pixly Collections"}
-                canonical={`https://pixly.app/collections`}
+                canonical={`https://pixly.app/collections/`}
             />
             {!authStatus && <JoinBanner />}
 
@@ -54,8 +54,12 @@ const ListBoard = (props) => {
                     <h2 className="primary-text">
                         Pixly Collections
                     </h2>
-                    <p className="t-m t-color-dark">Pixly collections consist of lists of movies. Some of those are
-                        curated and selected by us, and some of are collected information with a reference to its origin source.
+                    <p className="t-m t-color-dark">
+                        Pixly collections is a collected and curated lists of movies. 
+                        Pixly Selections is edited and curated by us. If you are wondering what are the favorite films of famous directors, you will find it in there. 
+                        You can also find movies that are awarded by very prestigious film festivals like Cannes, Berlin and Venice. 
+                        We are still collecting and improving our database for you. 
+                        If you have any suggestions to add or in any case, please feel free to write it from the bottom part of the page.
                     </p>
                     <hr />
                 </div>

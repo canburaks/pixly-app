@@ -14,6 +14,7 @@ export const ListCoverBox = React.memo(({ items, columns=[1,1,2,2,2,3,3], ratio=
                 text={text === true ? item.name : null}
                 key={item.slug}
                 link={`/list/${item.slug}/1`}
+                linktext={props.item.name}
                 ratio={ratio} 
                 width={"100%"}
                 boxShadow="card"
