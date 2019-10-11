@@ -105,7 +105,7 @@ def page_template_generator(routes):
 custom_movie_pages = page_template_generator( movie__slugs)
 custom_person_pages = page_template_generator(person__slugs)
 custom_list_pages = page_template_generator( liste_slugs)
-custom_url_pages = custom_static_pages + custom_movie_pages + custom_person_pages + custom_list_pages
+custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages
 
 #pprint(custom_url_pages)
 
@@ -140,7 +140,7 @@ class ListSitemap(Sitemap):
         return filtered_list
     
     def location(self, item):
-        return f"/list/{item.slug}/1/"
+        return f"/list/{item.slug}/1"
 
 
 class MovieSitemap(Sitemap):
@@ -157,7 +157,7 @@ class MovieSitemap(Sitemap):
         return mqs_mini  
 
     def location(self, item):
-        return f"/movie/{item.slug}/"
+        return f"/movie/{item.slug}"
 
 
 
@@ -174,7 +174,7 @@ class DirectorSitemap(Sitemap):
         return Person.objects.filter(id__in=director_ids).only("id", "slug")
     
     def location(self, item):
-        return f"/person/{item.slug}/"
+        return f"/person/{item.slug}"
 
 class ProfilePageSitemap(Sitemap):
     changefreq = "yearly"
@@ -182,14 +182,14 @@ class ProfilePageSitemap(Sitemap):
     def items(self):
         return Profile.objects.all().only("id", "username").order_by("id")
     def location(self, item):
-        return f"/user/{item.username}/"
+        return f"/user/{item.username}"
 
 class StaticSitemap(Sitemap):
     changefreq = "yearly"
     priority = 0.8
     def items(self):
         statics = [
-            "/","/welcome", "/directors/1/", "/collections/"
+            "","/" "/welcome", "/directors/1", "/collections"
         ]
         return statics
 
