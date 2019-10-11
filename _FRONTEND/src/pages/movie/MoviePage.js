@@ -118,6 +118,16 @@ const MoviePage = (props) => {
                 }
 
                 <MoviePageAd />
+                
+                {/* SUMMARY */}
+                <Col xs={12} md={12} lg={12} className="fbox-c jcfs pad-bt-5x mar-bt-5x" >
+                    {item.summary && item.summary.length >50 && 
+                    <article className="outer-summary">
+                        <h4 className="t-xl t-bold mar-b-2x">Summary</h4>
+                        <p >{item.summary}</p>
+                    </article>
+                        }
+                </Col>
 
                 {/*<!--CONTENT SIMILAR Section--> */}
                 {contentSimilarCover.length > 0 &&
@@ -172,15 +182,7 @@ const MoviePage = (props) => {
                     </Col>
                         }
 
-                {/* SUMMARY */}
-                <Col xs={12} md={12} lg={12} className="fbox-c jcfs pad-bt-5x mar-bt-5x" >
-                    {item.summary && item.summary.length >50 && 
-                    <article className="outer-summary">
-                        <h4 className="t-xl t-bold mar-b-2x">Summary</h4>
-                        <p >{item.summary}</p>
-                    </article>
-                        }
-                </Col>
+
                     
                 
                 {/*<!--CAST Section--> */}

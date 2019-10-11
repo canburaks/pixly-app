@@ -114,15 +114,27 @@ class Movie(SocialMedia, SEO,MainPage):
         from items.models import Tag
         from persons.models import Crew
         from archive.models import MovSim
+        from archive.models import ContentSimilarity
         description_text = ""
-        keywords = ["User Ratings", "Credits", "Poster"]
+        keywords = [self.name, self.slug, "User Ratings", "Credits", "Poster"]
         words = []
+
+        #keywords
+        csm = ContentSimilarity.objects.filter(movie=self)
+        if csm.exists():
+            keywords.append(f"similar movies like {self.name}")
+            keywords.append(f"similar of {self.name}")
+            keywords.append(f"movies like {self.name}")
+
 
         # director part
         dqs = Crew.objects.filter(job="d", movie=self).select_related("person").only("person__name")
-        if dqs.exists():
-            director_text = " A " +  ", ".join([x.person.name for x in dqs]) + " movie."
-            words.append(director_text)
+        try:
+            if dqs.exists():
+                director_text = " A " +  ", ".join([x.person.name for x in dqs]) + " movie."
+                words.append(director_text)
+        except:
+            print("try error: items.movie set_seo_desc ")
 
         # writer part
         wqs = Crew.objects.filter(job="w", movie=self).select_related("person").only("person__name")
@@ -136,7 +148,7 @@ class Movie(SocialMedia, SEO,MainPage):
             cast_text = " Stars: " +  ", ".join([x.person.name for x in aqs[:3]])  + "."
             words.append(cast_text)
         
-        if self.seo_short_description > 10 and self.seo_short_description < 200:
+        if self.seo_short_description!=None and len(self.seo_short_description) > 10 and len(self.seo_short_description) < 200:
             words.append(self.seo_short_description)
 
         description_text = "".join(words)
