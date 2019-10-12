@@ -16,6 +16,7 @@ import { MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid, PageConta
 
 import "./MainPage.css"
 
+
 const MainPage = (props) => {
     //console.log("main-page: ",props)
     const authStatus = useAuthCheck();
@@ -105,7 +106,7 @@ const MainPage = (props) => {
 }
 
 const MainPageQuery = (props) =>(
-    <Query query={MAIN_PAGE} >
+    <Query query={MAIN_PAGE}>
     {({ loading, error, data, refetch }) => {
         if (loading) return <Loading />;
             if (error) return <div className="gql-error">{JSON.stringify(error.message)}</div>;
@@ -127,54 +128,3 @@ const Loading = () => (
 
 export default MainPageQuery
 
-/*
-        <LazyImageProvider> 
-            <Carousel >
-                {props.data.lists.map(item => (
-                    
-                    <Link to={`/list/${item.slug}/1`} rel="nofollow" key={item.slug}>
-                        <LazyImage aspectRatio={[100, 45]} src={item.coverPoster}  />
-                    </Link>
-                ))}
-            </Carousel>
-        </LazyImageProvider>
-
-        <Swiper {...swiperSettings}>
-            {props.data.lists.map( item=> (
-                <div className="carousel-list"  key={item.slug}>
-                    <Link to={`/list/${item.slug}/1`} rel="nofollow">
-                        <img src={item.coverPoster} className="carousel-list-image"  />
-                    </Link>
-                </div>
-            ))}
-            </Swiper>
-const SlickCarousel = (props) =>{
-    const settings = {
-      className: "slider variable-width",
-      arrows:true,
-      dots: true,
-      infinite: true,
-      centerMode: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      variableWidth: true,
-      autoplay: true,
-      autoplaySpeed: 4000,
-      swipeToSlide: true,
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />
-    };
-    return(
-      <Slider {...settings}>
-          {props.items.map( i=> (
-              <div className="carousel-list" key={i.slug}>
-                    <img className="carousel-list-image" src={i.coverPoster} />
-                    <Link to={`/list/${i.slug}/1`}>
-                        <button className="see-button">See</button>
-                    </Link>
-              </div>
-          ))}
-      </Slider>
-    )
-}
-*/

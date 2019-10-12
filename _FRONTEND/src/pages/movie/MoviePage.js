@@ -71,12 +71,21 @@ const MoviePage = (props) => {
             .sort( (a,b) => b.commonTags.length - a.commonTags.length), [])
 
     //const contentSimilarNonCover = contentSimilarPlaceholder.filter(m => m.movie.hasCover=== false)
-
+    const setkeywords = (name, slug, year, videoNum) => {
+        const keywords = [name, `similar movies of ${name}`, `movies like ${name}`, slug, `best movies of ${year}`]
+        if (videoNum === 1) keywords.push(`${name} trailer`);
+        else if (videoNum > 1){
+            keywords.push(`${name} trailer`)
+            keywords.push(`Videos about ${name}`)
+        }
+        return keywords
+    }
+    const keywords = useMemo(() =>setkeywords(item.name, item.slug, item.year, item.videos.length))
 
     //console.log(similarCover, similarNonCover)
     //console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
     //console.log(item.seoShortDescription)
-    //console.log()
+    //console.log(keywords)
     return (
         <PageContainer 
             className={item.hasCover ? "cover-true" : "cover-false"} 
@@ -85,7 +94,7 @@ const MoviePage = (props) => {
                 title={item.seoTitle}
                 description={item.seoShortDescription ?  item.seoShortDescription : item.seoDescription}
                 richdata={item.richdata}
-                keywords={item.seoKeywords}
+                keywords={keywords ? keywords : item.seoKeywords}
                 image={item.coverPoster ? item.coverPoster : item.poster}
                 canonical={`https://pixly.app/movie/${item.slug}`}
             >
@@ -102,23 +111,6 @@ const MoviePage = (props) => {
 
             {/*<!-- Page Container --> */}
             <ContentContainer zIndex={1} mt={[4]}>
-
-                {/*<!--SIMILAR Section--> */}
-                {similarCover.length > 0 &&
-                <>
-                    <h4 className="t-xl t-bold mar-b-2x">PEOPLE ALSO LIKE</h4>
-                    <p className="t-m mar-b-2x">
-                        People who like 
-                        <span className="t-bold"> '{item.name}' </span>
-                        also like and give high ratings below movies.
-                    </p>
-                    <hr/>
-                    <MovieCoverBox items={similarPlaceholder} />
-                </>
-                }
-
-                <MoviePageAd />
-                
                 {/* SUMMARY */}
                 <Col xs={12} md={12} lg={12} className="fbox-c jcfs pad-bt-5x mar-bt-5x" >
                     {item.summary && item.summary.length >50 && 
@@ -129,12 +121,37 @@ const MoviePage = (props) => {
                         }
                 </Col>
 
+                {/*<!--SIMILAR Section--> */}
+                {similarCover.length > 0 &&
+                <>
+                    <h4 className="t-xl t-bold mar-b-2x">PEOPLE ALSO LIKE</h4>
+                    <p className="t-m mar-b-2x">
+                        People who like 
+                        <span className="t-bold"> '{item.name}' </span>
+                        also like and give high ratings below movies. 
+                        This can be a good indicator that if you like '{item.name}'  probably you will also like these movies.
+                        We have advanced algorithms and fine tuned filtering  mechanisms that choose these movies wisely. 
+                        If you have any issues please feel free to write us from the bottom part of the page.  
+                    </p>
+                    <hr/>
+                    <MovieCoverBox items={similarPlaceholder} />
+                </>
+                }
+
+                <MoviePageAd />
+                
+
+
                 {/*<!--CONTENT SIMILAR Section--> */}
                 {contentSimilarCover.length > 0 &&
                 <Col xs={12} md={12} lg={12} className="fbox-c jcfs aifs mar-t-4x">
                     <h4 className="t-xl t-bold mar-b-2x">SIMILAR MOVIES</h4>
                     <p className="t-m mar-b-2x">
-                        Movies that share some contentfull similarity with <span className="t-bold">'{item.name}'</span> and shared tags are below.
+                        Those movies have content similarities with <span className="t-bold">'{item.name}'</span>. 
+                        If you like any topic or tag under the below movies, you may also be interested them.
+                        You can also share any topic or tag to add these movies, please feel free to contact us.
+                        We are passionate about improving our recommendation mechanism.
+                        Therefore any feedback is welcome.
                     </p>
                     <hr/>
                     <MovieInfoBox items={contentSimilarCover} />
@@ -193,7 +210,8 @@ const MoviePage = (props) => {
         
                         <GlideBox s={[2]} m={[3]} l={[4]} xl={[5]}  xxl={[7]} xxxl={[10]}>
                             {allCrews.map((crew,i) => <CrewCard  crew={crew} key={crew.person.name} /> )}
-                        </GlideBox >
+                        </GlideBox>
+
                     </Col>
                 }
 

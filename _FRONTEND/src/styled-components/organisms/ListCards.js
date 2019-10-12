@@ -35,7 +35,7 @@ export const DirectorCard = (props) => (
 )
 
 export const CrewCard = (props) => (
-    <Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card" hoverShadow>
+    <Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card" hoverShadow maxWidth={"200px"}>
         <ImageCard
             src={props.crew.person.poster} 
             link={`/person/${props.crew.person.slug}`}
