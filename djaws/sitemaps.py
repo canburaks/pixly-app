@@ -58,10 +58,8 @@ movie__slugs = [
     "movie/lilo-stitch-2002",
     "movie/it-2017",
 
-    "movie/mektoub-my-love-intermezzo-2019",
     "movie/john-wick-2014",
     "movie/all-ladies-do-it-1992",
-    "movie/mektoub-my-love-2017",
     "movie/godzilla-king-of-the-monsters-2019",
     "movie/the-house-that-jack-built-2018",
     "movie/olympus-has-fallen-2013",
@@ -100,6 +98,7 @@ movie__slugs = [
     "movie/me-before-you-2016",
     "movie/interstellar-2014",
     "movie/ready-player-one-2018",
+    "movie/bohemian-rhapsody-2018",    
 ]
 
 #[print(f"https://pixly.app/movie/{ms}") for ms in movie__slugs]
@@ -132,16 +131,16 @@ person__slugs = [
     "person/leonardo-dicaprio-619",
 ]
 liste_slugs =[
-      "list/all-palme-dor-winners-cannes-film-festival/1",
-      "list/all-golden-bear-winners-berlin-film-festival/1",
-      "list/all-golden-lion-winners-venice-film-festival/1",
-      "list/our-selection/1",
-      "list/imdb-top-250/1",
-      "list/sight-sounds-legendary-list-directors-top-100/1",
-      "list/quentin-tarantinos-favourite-movies-from-1992-to-2009/1",
-      "list//stanley-kubricks-list-of-top-10-films/1",
-      "list/nuri-bilge-ceylans-top-10-favorite-films/1",
-      "list/david-finchers-26-favorite-films/1",
+    "list/all-palme-dor-winners-cannes-film-festival/1",
+    "list/all-golden-bear-winners-berlin-film-festival/1",
+    "list/all-golden-lion-winners-venice-film-festival/1",
+    "list/our-selection/1",
+    "list/imdb-top-250/1",
+    "list/sight-sounds-legendary-list-directors-top-100/1",
+    "list/quentin-tarantinos-favourite-movies-from-1992-to-2009/1",
+    "list//stanley-kubricks-list-of-top-10-films/1",
+    "list/nuri-bilge-ceylans-top-10-favorite-films/1",
+    "list/david-finchers-26-favorite-films/1",
 ]
 def page_template_generator(routes):
     new_paths = []
