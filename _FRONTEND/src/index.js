@@ -78,7 +78,7 @@ const link = authLink.concat(uploadLink)
 /*---------------------------------*/
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__APOLLO_STORE__;
-console.log("before delete", window.__APOLLO_STORE__)
+//console.log("before delete", window.__APOLLO_STORE__)
 delete window.__APOLLO_STORE__;
 
 //console.log("index preloaded state :", preloadedState)
