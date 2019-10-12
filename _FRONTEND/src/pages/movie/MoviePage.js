@@ -110,16 +110,16 @@ const MoviePage = (props) => {
             />
 
             {/*<!-- Page Container --> */}
-            <ContentContainer zIndex={1} mt={[4]}>
+
                 {/* SUMMARY */}
-                <Col xs={12} md={12} lg={12} className="fbox-c jcfs pad-bt-5x mar-bt-5x" >
-                    {item.summary && item.summary.length >50 && 
-                    <article className="outer-summary">
-                        <h4 className="t-xl t-bold mar-b-2x">Summary</h4>
-                        <p >{item.summary}</p>
-                    </article>
-                        }
-                </Col>
+            <ContentContainer zIndex={1} mt={[4]}>
+                {item.summary && item.summary.length >50 && 
+                <>
+                    <h4 className="t-xl t-bold mar-b-2x">Summary</h4>
+                    <p className="t-m mar-b-2x">{item.summary}</p>
+                </>
+                }
+
 
                 {/*<!--SIMILAR Section--> */}
                 {similarCover.length > 0 &&
