@@ -225,7 +225,7 @@ const devSettings = {
 		filename: 'static/js/bundle.js',
 		chunkFilename: 'static/js/[name].chunk.js',
 	},
-	devtool: 'eval',
+	devtool: 'inline',
 	devServer: {
 		historyApiFallback: true,
 		contentBase: './dist',

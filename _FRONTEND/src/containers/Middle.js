@@ -131,7 +131,7 @@ const HomeQuery = () => {
         </Query>
     );
 };
-const MovieQuery = React.memo((props) => {
+const MovieQuery = (props) => {
     let shouldReplaceUrl = false
     let identifier = props.match.params.slug;
     const queryVariables = {}
@@ -169,7 +169,7 @@ const MovieQuery = React.memo((props) => {
             }}
         </Query>
     );
-}, (prevProps, nextProps) => prevProps.match.params.slug === nextProps.match.params.slug )
+}
 
 const MovieQueryRedirect = (props) => {
     let shouldReplace = false
