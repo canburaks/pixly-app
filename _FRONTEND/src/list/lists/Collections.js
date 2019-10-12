@@ -16,7 +16,7 @@ import { GlobalContext } from "../../App";
 import JoinBanner from "../../components/JoinBanner.js"
 
 import { GlideCarousel, GlideBox } from "../../components2/Glide.js"
-import { ListCard, PageContainer, ContentContainer, Grid, ListCoverBox } from "../../styled-components"
+import { ListCard, PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader } from "../../styled-components"
 
 const ListBoard = (props) => {
     const item = props.liste
@@ -49,6 +49,7 @@ const ListBoard = (props) => {
             {!authStatus && <JoinBanner />}
 
             <ContentContainer>
+            <HiddenHeader>Pixly Collections</HiddenHeader>
 
                 <div className="list-type-header fbox-c pad-bt-4x ">
                     <h2 className="primary-text">

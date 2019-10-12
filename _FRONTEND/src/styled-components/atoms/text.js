@@ -5,6 +5,9 @@ import { themeGet } from '@styled-system/theme-get'
 export const HiddenText = styled("span")`
     display:none;
 `
+export const HiddenHeader = styled("h1")`
+    display:none;
+`
 
 export const Text = styled('h4')({
     minWidth:"100% !important"

@@ -106,7 +106,7 @@ const MainPage = (props) => {
 }
 
 const MainPageQuery = (props) =>(
-    <Query query={MAIN_PAGE} partialRefetch>
+    <Query query={MAIN_PAGE} partialRefetch={true}>
     {({ loading, error, data, refetch }) => {
         if (loading) return <Loading />;
             if (error) return <div className="gql-error">{JSON.stringify(error.message)}</div>;
