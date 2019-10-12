@@ -13,7 +13,7 @@ import { GlobalContext } from "../../App";
 import {  
     MovieCoverBox, ProfileCircleBox, PageContainer,
     ContentContainer, PaginationBox, ListCoverPanel,
-    TextSection,
+    TextSection,HiddenHeader
 } from "../../styled-components"
 
 
@@ -74,7 +74,7 @@ const MovieList = (props) => {
             />
             
             <ContentContainer>
-
+                <HiddenHeader>{liste.name}</HiddenHeader>
                 <TextSection 
                     header={liste.name} text={liste.summary} 
                     headerSize="xl" textSize="m" 

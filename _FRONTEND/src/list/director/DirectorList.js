@@ -11,7 +11,7 @@ import { GridBox, GridItem } from "../../components/GridBox"
 import { useAuthCheck } from "../../functions/hooks";
 import JoinBanner from "../../components/JoinBanner.js"
 //import { MaterialCard } from "../../comp-material/Card"
-import { DirectorCard } from "../../styled-components"
+import { DirectorCard,HiddenHeader } from "../../styled-components"
 
 const Loading = () => (
     <div className="page-container">
@@ -63,6 +63,7 @@ const DirectorList = (props) =>{
                         {!authStatus &&  <JoinBanner />}
                         
                         <div className="content-container pad-lr-5vw">
+                        <HiddenHeader>Directors Collection</HiddenHeader>
                             <DirectorTemplate items={items} history={props.history}/>
                             <DirectorPageAd />
                             

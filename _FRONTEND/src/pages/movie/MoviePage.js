@@ -24,7 +24,7 @@ import PosterPanel from "../elements/PosterPanel"
 import { GlideBox } from "../../components2/Glide.js"
 
 import {  CrewCard,  MovieInfoBox, PageContainer, ContentContainer,
-    MovieCoverBox,  MovieCoverPanel
+    MovieCoverBox,  MovieCoverPanel, HiddenHeader
 } from "../../styled-components"
 
 import "../pages.css";
@@ -92,13 +92,12 @@ const MoviePage = (props) => {
             >
             <Head
                 title={item.seoTitle}
-                description={item.seoShortDescription ?  item.seoShortDescription : item.seoDescription}
+                description={item.seoShortDescription}
                 richdata={item.richdata}
                 keywords={keywords ? keywords : item.seoKeywords}
                 image={item.coverPoster ? item.coverPoster : item.poster}
                 canonical={`https://pixly.app/movie/${item.slug}`}
-            >
-            </Head>
+            />
 
             <MovieCoverPanel 
                 blur={20} mb={[3]} 
@@ -113,6 +112,7 @@ const MoviePage = (props) => {
 
                 {/* SUMMARY */}
             <ContentContainer zIndex={1} mt={[4]}>
+                <HiddenHeader>{item.name}</HiddenHeader>
                 {item.summary && item.summary.length >50 && 
                 <>
                     <h4 className="t-xl t-bold mar-b-2x">Summary</h4>
