@@ -20,7 +20,7 @@ const PixlyTwitterIcon = () => {
 
     return(
     <div className="footer-twitter " >
-        <a target="_blank" rel="noopener" href="https://twitter.com/pixlymovie" className="footer-link fbox-r jcfs aic">
+        <a target="_blank" rel="noopener nofollow" href="https://twitter.com/pixlymovie" className="footer-link fbox-r jcfs aic">
             <svg 
                 aria-hidden="true" focusable="false" className="f-icon svg-inline--fa fa-twitter fa-w-16"
                 role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -31,7 +31,7 @@ const PixlyTwitterIcon = () => {
             <HiddenText>Pixly Twitter</HiddenText>
         </a>
         <a target="_blank"
-            rel="noopener"
+            rel="noopener nofollow"
             href="https://twitter.com/pixlymovie"
             className=""
         >
@@ -39,7 +39,7 @@ const PixlyTwitterIcon = () => {
         {/*
     */}
 
-        <a target="_blank" rel="noopener" href="https://facebook.com/pixlymovie" className="footer-link fbox-r jcfs aic">
+        <a target="_blank" rel="noopener nofollow" href="https://facebook.com/pixlymovie" className="footer-link fbox-r jcfs aic">
             <svg
                 aria-hidden="true" focusable="false" 
                 className="svg-inline--fa fa-facebook-square fa-w-14 f-icon"
@@ -51,7 +51,7 @@ const PixlyTwitterIcon = () => {
             </svg>
             <HiddenText>Pixly Facebook</HiddenText>
         </a>
-        <a target="_blank" rel="noopener" href="https://www.instagram.com/pixlymovie" className="footer-link fbox-r jcfs aic">
+        <a target="_blank" rel="noopener nofollow" href="https://www.instagram.com/pixlymovie" className="footer-link fbox-r jcfs aic">
             <svg aria-hidden="true" focusable="false" className="svg-inline--fa fa-instagram fa-w-14 f-icon"
                 role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                 >
