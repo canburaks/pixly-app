@@ -219,7 +219,7 @@ class StaticSitemap(Sitemap):
     priority = 0.8
     def items(self):
         statics = [
-            "","/" "/welcome", "/directors/1", "/collections"
+            "","/", "/directors/1", "/collections"
         ]
         return statics
 
