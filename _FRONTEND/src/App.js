@@ -66,7 +66,7 @@ const Store = (history) => {
 
     useEffect(() =>{
         if (screen !== screenSize){
-            console.log("screen have changed")
+            //console.log("screen have changed")
             setScreenSize(screen)
         }
     })
