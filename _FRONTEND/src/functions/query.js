@@ -4,7 +4,7 @@ export const MAIN_PAGE = gql`
 query mainPage{
     mainPage{
     movies{id, slug, name, year, poster, coverPoster }
-    lists{id, slug, name,  poster, coverPoster }
+    lists{id, slug, name,  poster, coverPoster, largeCoverPoster }
     persons{id, slug, name, poster, coverPoster }
     }
 }

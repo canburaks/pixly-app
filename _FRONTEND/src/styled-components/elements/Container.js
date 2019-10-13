@@ -26,7 +26,7 @@ export const TopPanelBackElement = (props) => (
 )
 
 export const TopPanelCoverElement = React.memo((props) => (
-    <ImageBox src={props.item.coverPoster || props.item.poster} 
+    <ImageBox src={props.item.largeCoverPoster || props.item.coverPoster || props.item.poster} 
         position={"relative"} 
         top={0} left={["2vw", "2vw", "5vw"]} right={["2vw", "2vw", "5vw"]} maxWidth={["95vw", "95vw", "88vw"]}
         height={["53vw","53vw", "45vw"]} maxHeight={"80vh"}
