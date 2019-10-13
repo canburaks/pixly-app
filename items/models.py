@@ -39,6 +39,9 @@ def list_image_upload_path(instance, filename):
 def list_cover_image_upload_path(instance, filename):
     return "lists/{0}/cover/{1}".format(instance.id, filename)
 
+def list_large_cover_image_upload_path(instance, filename):
+    return "lists/{0}/large_cover/{1}".format(instance.id, filename)
+
 def video_image_upload_path(instance, filename):
     return "videos/{0}/{1}".format(instance.id, filename)
 
@@ -586,6 +589,7 @@ class List(SEO,MainPage):
 
     poster = models.ImageField(blank=True, null=True, upload_to=list_image_upload_path)
     cover_poster = models.ImageField(blank=True, null=True, upload_to=list_image_upload_path)
+    large_cover_poster = models.ImageField(blank=True, null=True, upload_to=list_large_cover_image_upload_path)
 
     order = JSONField(default=dict, blank=True,null=True)
 

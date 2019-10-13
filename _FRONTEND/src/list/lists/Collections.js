@@ -4,7 +4,7 @@ import { withRouter, Link } from "react-router-dom";
 
 import MosaicPoster from "../../components/MosaicPoster"
 
-import { useWindowSize, useAuthCheck, useClientWidth,  } from "../../functions/hooks"
+import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../functions/hooks"
 import { authCheck, print } from "../../functions/lib"
 import {  Row, Col } from 'react-flexbox-grid';
 import { rgaPageView, Head, ListBoardAd, ListBoardAd2  } from "../../functions/analytics"
@@ -16,7 +16,7 @@ import { GlobalContext } from "../../App";
 import JoinBanner from "../../components/JoinBanner.js"
 
 import { GlideCarousel, GlideBox } from "../../components2/Glide.js"
-import { ListCard, PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader } from "../../styled-components"
+import { ListCard, PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard } from "../../styled-components"
 
 const ListBoard = (props) => {
     const item = props.liste
@@ -27,15 +27,20 @@ const ListBoard = (props) => {
     if (props.viewer){
         state.methods.updatePoints(props.viewer.points)
     }
-    const directorsFavourite = useMemo(() => item.filter( l => l.listType==="df"))
-    const festivalWinners = useMemo(() => item.filter(l => l.listType === "fw"))
-    //const genreRelated = item.filter(l => l.listType === "gr")
-    const otherLists = useMemo(() => item.filter(l => l.listType === "ms"))
+    const pixlyselection = useMemo(() => item.filter(l => l.slug === "our-selection")[0])
+    const nonpixlyselection = useMemo(() => item.filter(l => l.slug !== "our-selection"))
 
 
-    const firstPart = [...otherLists, ...festivalWinners]
-    const secondPart = directorsFavourite
-    
+    const directorsFavourite = useMemo(() => nonpixlyselection.filter( l => l.listType==="df"))
+    const festivalWinners = useMemo(() => nonpixlyselection.filter(l => l.listType === "fw"))
+    const otherLists = useMemo(() => nonpixlyselection.filter(l => l.listType === "ms"))
+
+    const firstPart = [...otherLists, ...festivalWinners, ...directorsFavourite]
+
+
+    const pixlyselectionSize = useValues([0.41, 0.43, 0.3, 0.2, 0.15])
+
+    //console.log(item)
     return (
         <PageContainer>
             <Head
@@ -64,12 +69,23 @@ const ListBoard = (props) => {
                     </p>
                     <hr />
                 </div>
-
-                <ListCoverBox columns={[1,1,2,2,2,3,3]} ratio={0.41} items={firstPart} text={false} />
+                
+                <ImageCard item={pixlyselection}
+                    src={pixlyselection.coverPoster}
+                    text={null}
+                    key={pixlyselection.slug}
+                    link={`/list/${pixlyselection.slug}/1`}
+                    linktext={pixlyselection.name}
+                    ratio={pixlyselectionSize}
+                    width={"100%"}
+                    boxShadow="card"
+                    hoverShadow
+                />
+                {/*<ListCoverBox columns={[1]} ratio={0.41} items={pixlyselection} text={false} />*/}
 
                 <ListBoardAd />
 
-                <ListCoverBox items={secondPart} />
+                <ListCoverBox columns={[1,2,2,3,3,3,4]} items={firstPart} />
                     
             </ContentContainer>
         </PageContainer>

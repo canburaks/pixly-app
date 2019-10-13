@@ -9,7 +9,9 @@ div.glide{
     background-color: rgba(40,40,40, 0.1);
 }
 
-
+@media all and (max-width: 370px) {
+    .glide__arrows {display: none !important;}
+ }
 /*
 html, body {
     margin: 0px;

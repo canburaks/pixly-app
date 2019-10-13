@@ -42,6 +42,7 @@ export const GlideCarousel = (props) => {
         focusAt:"center",
         animationTimingFunc:"ease-in-out",
         breakpoints :{
+            370: {perView: props.xs   ?  props.xs   : 2 },
             480: {perView: props.s   ?  props.s   : 2 },
             736: {perView: props.m   ?  props.m   : 2   },
             980: {perView: props.l   ?  props.l   : 3   },

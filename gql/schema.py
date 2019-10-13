@@ -302,17 +302,10 @@ class ListQuery(object):
         page = kwargs.get("page")
         list_type = kwargs.get("list_type")
         admin = kwargs.get("admin")
-        model_types = ["df", "fw", "ms"]
-        if list_type!=None and (list_type.lower() in model_types):
-            qs = List.objects.filter(list_type=list_type, public=True).only("id").values_list("id", flat=True)
-        else:
-            qs = List.objects.filter(list_type__in=model_types, public=True).only("id").values_list("id", flat=True)
-        if admin==True or admin==None:
-            qs = qs.filter(owner__username="pixly")
-        else:
-            qs = qs
+        model_types = ["df", "fw", "ms", "gr"]
+        qs = List.objects.filter(list_type__in=model_types, public=True).only("id").values_list("id", flat=True)
         return [CustomListType(id=x) for x in qs  if len(CustomListType(id=x).liste.summary) > settings.LIST_MIN_SUMMARY ]
-
+        #return [CustomListType(id=x) for x in qs]
 
 
     def resolve_list_of_topics(self, info, **kwargs):

@@ -137,6 +137,7 @@ liste_slugs =[
     "list/our-selection/1",
     "list/imdb-top-250/1",
     "list/sight-sounds-legendary-list-directors-top-100/1",
+    "list/the-guardian-best-films-of-the-21st-century/1"
     "list/quentin-tarantinos-favourite-movies-from-1992-to-2009/1",
     "list//stanley-kubricks-list-of-top-10-films/1",
     "list/nuri-bilge-ceylans-top-10-favorite-films/1",

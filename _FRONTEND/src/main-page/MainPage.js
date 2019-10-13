@@ -71,7 +71,7 @@ const MainPage = (props) => {
 
             <ContentContainer>
                 
-                <GlideBox s={1.5} m={2} l={2} xl={2.2}  xxl={3} xxxl={3} >
+                <GlideBox xs ={1} s={2} m={2} l={2} xl={2.2}  xxl={3} xxxl={3} >
                     {props.data.lists.map(item => <CarouselList  item={item} key={item.slug} /> )}
                 </GlideBox>
 
@@ -80,7 +80,7 @@ const MainPage = (props) => {
                     <Link rel="nofollow" to={`/directors/1`} title="Visit Directors Page">Directors</Link>
                 </h4>
 
-                <GlideBox s={3} m={3} l={[4]} xl={[5]}  xxl={[6]} xxxl={[7]} >
+                <GlideBox s={2} m={3} l={[4]} xl={[5]}  xxl={[6]} xxxl={[7]} >
                     {props.data.persons.map(person => (
                         <DirectorCard item={person} key={person.slug}/>
                     ) )}
@@ -109,6 +109,7 @@ const MainPageQuery = (props) =>(
     <Query query={MAIN_PAGE} partialRefetch={true}>
     {({ loading, error, data, refetch }) => {
         if (loading) return <Loading />;
+        console.log(data)
             if (error) return <div className="gql-error">{JSON.stringify(error.message)}</div>;
             return <MainPage data={data.mainPage} {...props} />
     }}
