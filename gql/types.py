@@ -1367,6 +1367,7 @@ class CustomListType(graphene.ObjectType, SocialMediaType, SEOType,StatisticsTyp
     related_persons = graphene.List(DirectorPersonMixType)
     poster = graphene.String()
     cover_poster = graphene.String()
+    large_cover_poster = graphene.String()
 
     slug = graphene.String()
 
@@ -1447,6 +1448,11 @@ class CustomListType(graphene.ObjectType, SocialMediaType, SEOType,StatisticsTyp
     def resolve_cover_poster(self,info):
         if self.liste.cover_poster!="" and self.liste.cover_poster!=None:
             return self.liste.cover_poster.url
+        return None
+
+    def resolve_large_cover_poster(self,info):
+        if self.liste.large_cover_poster!="" and self.liste.large_cover_poster!=None:
+            return self.liste.large_cover_poster.url
         return None
 
     def resolve_reference_notes(self, info, *_):
