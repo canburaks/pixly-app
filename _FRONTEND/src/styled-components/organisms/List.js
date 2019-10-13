@@ -43,7 +43,7 @@ export const MoviePosterBox = React.memo(({ items, columns=[3,4,6,8, 8, 10], rat
     </Grid>
 ))
 
-export const MovieCoverBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], ratio=0.5625, notext=false, ...props }) => (
+export const MovieCoverBox = React.memo(({ items, columns=[1,2,2,2,3,3,4], ratio=0.5625, notext=false, ...props }) => (
     <Grid 
         columns={columns} py={[4]}         
     >
