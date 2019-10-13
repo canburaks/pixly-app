@@ -47,7 +47,7 @@ const MovieList = (props) => {
     const ppi = 20
     const currentPage = parseInt(props.match.params.page)
     const isLargeScreen = screenSize.includes("L")
-    //console.log(screenSize, isLargeScreen)
+    //console.log(liste)
 
     return(
         <PageContainer>

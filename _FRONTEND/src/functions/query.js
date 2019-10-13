@@ -399,7 +399,7 @@ query liste($id:Int, $slug:String, $page:Int,$first:Int, $skip:Int ){
         referenceLink,
         listType,
         seoTitle,
-        poster, coverPoster,
+        poster, coverPoster, largeCoverPoster,
         seoDescription,
         seoShortDescription,
         seoKeywords,

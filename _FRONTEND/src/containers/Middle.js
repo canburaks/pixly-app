@@ -236,7 +236,7 @@ const PersonQuery = (props) => {
 
 const UserQuery = (props) => {
     return (
-        <Query query={PROFILE} variables={{ username: props.match.params.username }} >
+        <Query query={PROFILE} variables={{ username: props.match.params.username }}  partialRefetch={true}>
             {({ loading, data, error, refetch }) => {
                 if (loading) return <Loading />;
                 if (error) return <div className="gql-error">{JSON.stringify(error)}</div>;
