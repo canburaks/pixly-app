@@ -83,9 +83,9 @@ const ListBoard = (props) => {
                 />
                 {/*<ListCoverBox columns={[1]} ratio={0.41} items={pixlyselection} text={false} />*/}
 
-                <ListBoardAd />
 
                 <ListCoverBox columns={[1,2,2,3,3,3,4]} items={firstPart} />
+                <ListBoardAd />
                     
             </ContentContainer>
         </PageContainer>
