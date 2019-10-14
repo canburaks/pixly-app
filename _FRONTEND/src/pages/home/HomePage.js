@@ -161,11 +161,7 @@ const HomePage = (props) => {
                 {!(persona.recommendations.length > 0) && <RecommendationsInfo points={profile.points}  verified={profile.cognitoVerified} />}
 
                 <RenderElementContainer />
-
                 <br />
-                <MidPageAd />
-                <br />
-
                 <MessageBox
                     header={"Recently Added Movies"}
                     text={"The most recent movies that added. "}

@@ -440,9 +440,9 @@ class Recommendation(models.Model):
         if is_eligible or real==False:
             all_qs = cls.filter_by_prediction(profile, 3.7)
             y1960_1990 = cls.filter_by_year(all_qs, 1960, 1990).order_by("?")[:1]
-            y1990_2000 = cls.filter_by_year(all_qs, 1990, 2000).order_by("?")[:3]
-            y2000_2010 = cls.filter_by_year(all_qs, 2000, 2010).order_by("?")[:4]
-            y2010_2020 = cls.filter_by_year(all_qs, 2010, 2020).order_by("?")[:5]
+            y1990_2000 = cls.filter_by_year(all_qs, 1990, 2000).order_by("?")[:1]
+            y2000_2010 = cls.filter_by_year(all_qs, 2000, 2010).order_by("?")[:1]
+            y2010_2020 = cls.filter_by_year(all_qs, 2010, 2020).order_by("?")[:2]
             year_qs = [y1960_1990, y1990_2000, y2000_2010, y2010_2020]
             movies = set()
             for year in year_qs:
@@ -454,13 +454,13 @@ class Recommendation(models.Model):
     def get_recommendations(cls, profile, real=False):
         is_eligible = cls.passed_week(profile)
         if is_eligible or real==False:
-            all_qs = cls.filter_by_prediction(profile, 3.8)
+            all_qs = cls.filter_by_prediction(profile, 3.7)
             #print("all_qs", all_qs.count(), all_qs)
-            y1960_1990 = cls.filter_by_year(all_qs, 1960, 1990).order_by("?")[:2]
+            y1960_1990 = cls.filter_by_year(all_qs, 1960, 1990).order_by("?")[:1]
             #print("year_qs", y1960_1990, y1960_1990.count())
-            y1990_2000 = cls.filter_by_year(all_qs, 1990, 2000).order_by("?")[:2]
-            y2000_2010 = cls.filter_by_year(all_qs, 2000, 2010).order_by("?")[:2]
-            y2010_2020 = cls.filter_by_year(all_qs, 2010, 2020).order_by("?")[:6]
+            y1990_2000 = cls.filter_by_year(all_qs, 1990, 2000).order_by("?")[:1]
+            y2000_2010 = cls.filter_by_year(all_qs, 2000, 2010).order_by("?")[:1]
+            y2010_2020 = cls.filter_by_year(all_qs, 2010, 2020).order_by("?")[:2]
             #print("year_qs", y2010_2020, y2010_2020.count())
             above42 = all_qs.filter(prediction__gte = 4.2).order_by("?")[:1]
             qs_sum = [y1960_1990, y1990_2000, y2000_2010, y2010_2020, above42]
