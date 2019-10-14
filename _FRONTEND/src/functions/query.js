@@ -640,9 +640,9 @@ export const DISCOVERY_LISTS = gql`
 
 `
 export const TAG_LIST = gql`
-    query discoveryLists{
+    query listOfTags{
         listOfTags{
-            name, slug,  tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag
+            name, slug,  tagType, genreTag, subgenreTag
         }
     }
 
@@ -658,3 +658,13 @@ export function refetchFunction(query, variables){
     return { refetchQueries: [{query, variables}] }
 }
 
+/*
+export const TAG_LIST = gql`
+    query discoveryLists{
+        listOfTags{
+            name, slug,  tagType, genreTag, subgenreTag
+        }
+    }
+
+`
+*/

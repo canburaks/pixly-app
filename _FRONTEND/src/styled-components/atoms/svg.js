@@ -1,6 +1,6 @@
 import React from "react";
 import { compose,typography, color, space, shadow, layout, border, background, flexbox, position, system } from 'styled-system'
-import styled from 'styled-components'
+import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import css from '@styled-system/css'
 

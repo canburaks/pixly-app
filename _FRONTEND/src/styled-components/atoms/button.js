@@ -1,14 +1,19 @@
 import React from "react"
-import { compose, typography, color, space, shadow, layout, border, background, flexbox, position, system, grid } from 'styled-system'
-import styled from 'styled-components'
+import { compose, typography, color, space, shadow, layout, border, background, flexbox, position } from 'styled-system'
+import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 
 export const Button = styled.button`
     width: 100%;
-    padding: 8px 16px;
+    padding: 8px 8px;
     margin: 4px;
     box-sizing: border-box;
     transition:  ${themeGet("transitions.fast")};
+    :hover {
+        background-color:${props => props.hoverBg && props.hoverBg};
+        color:${props => props.hoverColor && props.hoverColor};
+        box-shadow:${props => props.hoverShadow && props.hoverShadow}
+    }
     :focus {
         outline: none;
     };
@@ -21,7 +26,6 @@ export const Button = styled.button`
     ${flexbox}
     ${position}
     ${typography}
-
 `
 
 export const BubbleButton = styled.button`

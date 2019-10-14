@@ -5,9 +5,9 @@ import { Text, Paragraph,
         Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
         Box, ImageBox, AbsoluteBox, 
         NewLink, Input, HiddenText,
-} from "../atoms"
+        TextSection, HeaderMini, 
+} from "../index"
 
-import { TextSection } from "./TextSection"
 
 
 
@@ -35,13 +35,13 @@ export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, bo
         hoverShadow={hoverShadow} boxShadow={boxShadow} 
         borderRadius={borderRadius}
     > 
-        <Text fontSize={fontSize}
+        <HeaderMini fontSize={fontSize}
             color={color} fontWeight="bold" 
             position="absolute" left="8px" 
             bottom="8px" textShadow={"dark"}
         >
             {text}
-        </Text>
+        </HeaderMini>
         <NewLink to={link} position="absolute" width={"100%"} height="100%" top="0" left="0">
         {props.linktext && <HiddenText>{props.linktext}</HiddenText>}
         </NewLink>

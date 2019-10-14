@@ -140,7 +140,8 @@ const HomePage = (props) => {
     )
     const RenderElementContainer = React.memo(() => <ElementListContainer items={activeState.items} type={activeState.type} />, [activeState.menu])
 /*----------------------------------------------------------------*/
-
+     
+    console.log(window.FB)
 
     return(
         <div className="page-container home">

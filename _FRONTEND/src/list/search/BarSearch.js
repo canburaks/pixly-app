@@ -16,6 +16,7 @@ import "../movie/MovieList.css"
 
 
 
+
 const MovieSearch = (props) => {
     const state = useContext(GlobalContext);
     const authStatus = useAuthCheck();

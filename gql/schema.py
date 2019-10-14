@@ -183,8 +183,19 @@ class ListQuery(object):
 
 
 
-    def resolve_list_of_tags(self, info, *_):
-        return Tag.objects.all().only("slug", "genre_tag","subgenre_tag", "theme_tag", "form_tag", "phenomenal_tag", "name")
+    def resolve_list_of_tags(self, info, **kwargs):
+        #genre = True if kwargs.get("genre_tag") != None else False 
+        #subgenre = True if kwargs.get("subgenre_tag") != None else False 
+        #documentary = True if kwargs.get("documentary_tag") != None else False 
+        #award_tag = True if kwargs.get("award_tag") != None else False 
+        #theme = True if kwargs.get("theme_tag") != None else False 
+        #character = True if kwargs.get("character_tag") != None else False 
+        #series = True if kwargs.get("series_tag") != None else False 
+        #base = True if kwargs.get("base_tag") != None else False 
+        #geo = True if kwargs.get("geo_tag") != None else False 
+
+        QF = Q(Q(genre_tag=True) | Q(subgenre_tag=True) | Q(base_tag=True))
+        return Tag.objects.filter(QF).only("id", "slug", "name",)
 
     def resolve_list_of_bookmarks(self, info, **kwargs):
         first = kwargs.get("first")

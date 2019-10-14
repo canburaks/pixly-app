@@ -14,14 +14,14 @@
 
 
 }
-input {
+.autocomplete input {
   border: 1px solid transparent;
   background-color: #f1f1f1;
   padding: 10px;
   font-size: 16px;
   color: #222222;
 }
-input[type=text] {
+.autocomplete input[type=text] {
   background-color: #2f2f2f00;
   width: 100%;
 }

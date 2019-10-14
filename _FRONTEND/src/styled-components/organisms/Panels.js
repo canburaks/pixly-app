@@ -4,7 +4,7 @@ import {  useWindowSize, useValues } from "../../functions"
 
 
 import { 
-    Box, Text, NewLink, TopPanelBackElement, TopPanelCoverElement,
+    Box, Text, HeaderMini, NewLink, TopPanelBackElement, TopPanelCoverElement,
     DirectorLink, DirectorLinks,FlexBox, TagText,
     LikeMutation,BookmarkMutation, RatingMutation, FollowMutation,
     UsersIcon, EyeIcon,UserIcon,
@@ -15,7 +15,7 @@ import {
 const slugComparison = (prevProps, nextProps) => prevProps.item.slug === nextProps.item.slug
 
 // in case of list is an director favorites, than director name will be link, otherwise normal name
-const ListName = ({ item }) => <Text color="lightDark1" textShadow="dark" fontSize={[15, 15, 20, 22, 24]} fontWeight="800">{item.relatedPersons.length > 0 ? <><DirectorLink mr={[0]} director={item.relatedPersons[0]} />{item.name.split(item.relatedPersons[0].name)[1]}</> : item.name}</Text>
+const ListName = ({ item }) => <HeaderMini color="lightDark1" textShadow="dark" fontSize={[15, 15, 20, 22, 24]} fontWeight="800">{item.relatedPersons.length > 0 ? <><DirectorLink mr={[0]} director={item.relatedPersons[0]} />{item.name.split(item.relatedPersons[0].name)[1]}</> : item.name}</HeaderMini>
 
 
 const MovieActions = (props) => (

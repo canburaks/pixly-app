@@ -58,10 +58,11 @@ themes.default.colors = {
 	active: '#3437c7',
 
 	green: "#30c5b1",
+	shark: "#21292d",
 
 	error:"#db2829",
 	warning: "#f2c037",
-	success: "#38ba45;",
+	success: "#38ba45",
 }
 
 
@@ -85,6 +86,7 @@ themes.default.shadows = {
 	//small:"rgba(40, 40, 40, 0.45) 0px 1px 5px, " +
 	//		"rgba(50, 50, 50, 0.05) 0px 1px 10px, " + 
 	//		"rgba(60, 0, 100, 0.08) 0px 20px 30px",
+	xxs: "0 4px 4px -4px rgba(40,40,40, 0.4)",
 	xs: "8px 10px 9px -8px rgba(0, 0, 0, 0.37)",
 
 	small: "8px 30px 29px -8px rgba(0, 0, 0, 0.37)",

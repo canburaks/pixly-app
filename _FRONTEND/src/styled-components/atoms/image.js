@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose,typography, color, space, shadow, layout, border, background, flexbox, position, system } from 'styled-system'
 
-import styled from 'styled-components'
+import {  styled } from "../"
 import { Box } from "./box"
 import { Spinner } from "../others"
 

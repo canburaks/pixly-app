@@ -32,17 +32,8 @@ const MainPage = (props) => {
         </Link>
     )
 
-//    const CarouselList2 = React.memo(({ item }) => (
-//        <Link to={`/list/${item.slug}/1`} rel="nofollow" key={item.slug} >
-//            <ImageShim 
-//                alt= {item.name + " poster"}
-//                title={item.name + " poster"}
-//                src={item.coverPoster} 
-//                style={{borderRadius:8}}
-//                />
-//        </Link>
-//    ))
     const sortedMovies = props.data.movies.sort((a,b) => b.id - a.id)
+    
     return(
         <PageContainer>
             <Head
@@ -67,6 +58,7 @@ const MainPage = (props) => {
                 <meta property="business:contact_data:postal_code" content="34430"/>
                 <meta property="business:contact_data:country_name" content="Turkey"/>
             </Head>
+            
             {!authStatus && <JoinBanner />}
 
             <ContentContainer>

@@ -38,6 +38,11 @@ const productionSettings = {
 		filename: 'static/js/[name].js',
 		chunkFilename: 'static/js/[name].chunk.js'
 	},
+	resolve: {
+	    alias: {
+	      "styled-components": path.resolve("node_modules", "styled-components"),
+	    }
+	},
     optimization: {
 		minimize: true,
 		minimizer: [
@@ -214,7 +219,7 @@ const productionSettings = {
 
 const devSettings = {
 	mode: "development",
-	entry: './src/index.js',
+	entry: './src/index.html',
     entry: {
 		app: './src/index.js',
 		print: './src/print.js',
@@ -231,18 +236,24 @@ const devSettings = {
 		contentBase: './dist',
 		stats: 'minimal',
 	  },
+	  resolve: {
+	    alias: {
+	      "styled-components": path.resolve(__dirname, "node_modules", "styled-components"),
+	    }
+	},
 	module: {
 		rules: [
 			{
 				test: /\.m?js$/,
 				exclude: /(node_modules|bower_components)/,
+				include: path.resolve(__dirname, 'src'),
 				use: {
 					loader: "babel-loader",
 					options: {
 						presets: ["@babel/preset-env"],
 						plugins: ["@babel/plugin-proposal-object-rest-spread"],
 						cacheDirectory: true
-					}
+					},
 				}
 			},
 			{

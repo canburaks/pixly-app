@@ -1,5 +1,5 @@
 import { compose,typography, color, space, shadow, layout, border, background, flexbox, position, system } from 'styled-system'
-import styled from 'styled-components'
+import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 
 export const HiddenText = styled("span")`
@@ -9,8 +9,8 @@ export const HiddenHeader = styled("h1")`
     display:none;
 `
 
-export const Text = styled('h4')({
-    minWidth:"100% !important"
+export const Text = styled('p')({
+
   },
     compose(
       typography,
@@ -36,7 +36,19 @@ export const HeaderText = styled('h1')({
       border
   )
 )
-
+export const HeaderMini = styled('h4')({
+  minWidth:"100% !important"
+},
+  compose(
+    typography,
+    color,
+    space,
+    shadow,
+    layout,
+    position,
+      border
+  )
+)
 export const Paragraph = styled('p')({
     overflowY: props => props.textHidden && "hidden",
     textOverflow: props => props.textHidden && "ellipsis",
