@@ -46,7 +46,7 @@ const MainPage = (props) => {
     return(
         <PageContainer>
             <Head
-                description={"Find similar movies. Get Personalized Recommendation. Discover Movie Lists and New Films."}
+                description={" Get Personalized Recommendation. Find similar movies. Discover Movie Lists, New Films and People with Similar Cinema Taste."}
                 title={"Pixly Movie - Find similar movies, get personalized recommendation"}
                 keywords={"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"}
                 canonical={`https://pixly.app`}
