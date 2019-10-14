@@ -179,7 +179,6 @@ const App = (props) => {
                 <NavBar />
                 <div className="main-content-container">
                     <Switch>
-                        <Route exact path="/welcome" component={MainPageQuery} />
                         <Route exact path="/" component={MainPageQuery} />
                         <Route path="/" component={Middle} />
                     </Switch>

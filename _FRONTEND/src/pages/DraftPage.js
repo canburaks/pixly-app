@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useContext, useMemo, useCallback } from "react"
-import { PageContainer, ContentContainer, ImageShim } from "../styled-components"
+import { PageContainer, ContentContainer } from "../styled-components"
 
 
 const B = (props) => <div style={{width:500, height:500, backgroundColor:"yellow"}}>{props.children.slice(0,2)}</div>
@@ -11,7 +11,6 @@ const DraftPage = (props) => {
     return(
         <PageContainer>
             <ContentContainer>
-                <ImageShim src={"https://wallpaperplay.com/w/download/178663"} ratio={0.25}/>
                 <B>
                     <C/>
                     <C/>

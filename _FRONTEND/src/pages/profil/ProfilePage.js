@@ -144,7 +144,7 @@ const ProfilePage = (props) => {
 
             <div className="content-container pad-lr-4x">
                 
-                {(authStatus && profile.ratingset && viewer.ratingset && isSelf===false) &&
+                { authStatus === true && (profile.ratingset && viewer.ratingset && isSelf===false) &&
                      <SimilarityPanel profile1={profile} profile2={viewer} />
                      }
 

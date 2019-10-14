@@ -21,7 +21,7 @@ const MainPage = (props) => {
     //console.log("main-page: ",props)
     const authStatus = useAuthCheck();
 
-    const CarouselList = React.memo(({ item }) => (
+    const CarouselList =({ item }) => (
         <Link to={`/list/${item.slug}/1`} rel="nofollow" key={item.slug} >
             <img 
                 alt= {item.name + " poster"}
@@ -30,7 +30,7 @@ const MainPage = (props) => {
                 className="bor-rad-2x w100 fg-1 box-shadow-short"
                 />
         </Link>
-    ))
+    )
 
 //    const CarouselList2 = React.memo(({ item }) => (
 //        <Link to={`/list/${item.slug}/1`} rel="nofollow" key={item.slug} >
@@ -109,9 +109,8 @@ const MainPageQuery = (props) =>(
     <Query query={MAIN_PAGE} partialRefetch={true}>
     {({ loading, error, data, refetch }) => {
         if (loading) return <Loading />;
-        console.log(data)
-            if (error) return <div className="gql-error">{JSON.stringify(error.message)}</div>;
-            return <MainPage data={data.mainPage} {...props} />
+        if (error) return <div className="gql-error">{JSON.stringify(error.message)}</div>;
+        return <MainPage data={data.mainPage} />
     }}
     </Query>
 )

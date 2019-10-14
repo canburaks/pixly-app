@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/node.js"],"names":["module","exports","transform","require"],"mappings":";;AAEAA,MAAM,CAACC,OAAP,CAAeC,SAAf,GAA2BC,OAAO,CAAC,aAAD,CAAlC","sourcesContent":["/* @flow */\n\nmodule.exports.transform = require('./transform');\n"],"file":"node.js"}
