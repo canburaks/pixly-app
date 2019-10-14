@@ -43,8 +43,9 @@ import  { rgaSetUser } from "../functions/analytics"
 import MoviePage from "../pages/movie/MoviePage"
 import PersonPage from "../pages/person/PersonPage";
 import ProfilePage from "../pages/profil/ProfilePage";
-import SearchPage from "../list/search/SearchPage";
 import DraftPage from "../pages/DraftPage"
+import SearchPage from "../list/search/SearchPage";
+//import AdvanceSearch from "../list/advance-search/AdvanceSearch";
 
 //import MovieQuery from "../pages/movie/MovieQuery.js";
 //import MoviePage from "../pages/movie/MoviePage"
@@ -262,18 +263,6 @@ const CollectionsQuery = (props) => {
 }
 
 
-const AdvanceSearchQuery = (props) => {
-    return (
-        <Query query={TAG_LIST}>
-            {({ loading, data, error, refetch }) => {
-                if (loading) return <Loading />;
-                if (error) return <div className="gql-error">{JSON.stringify(error)}</div>;
-                //console.log("data ",data)
-                return <AdvanceSearch tags={data.listOfTags} />
-            }}
-        </Query>
-    );
-}
 
 const MovieListQuery = (props) => {
     let shouldReplace = false
@@ -316,6 +305,19 @@ export default withRouter(Middle);
 
 
 /*
+const AdvanceSearchQuery = (props) => {
+    return (
+        <Query query={TAG_LIST}>
+            {({ loading, data, error, refetch }) => {
+                if (loading) return <Loading />;
+                if (error) return <div className="gql-error">{JSON.stringify(error)}</div>;
+                //console.log("data ",data)
+                return <AdvanceSearch tags={data.listOfTags} />
+            }}
+        </Query>
+    );
+}
+
 cconst MovieQuery = (props) => {
     let shouldReplaceUrl = false
     let identifier = props.match.params.slug;

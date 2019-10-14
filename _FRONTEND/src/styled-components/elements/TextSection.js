@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Text, Paragraph, NewLink, Box, FlexBox} from "../atoms"
+import { Text, Paragraph, HeaderMini, NewLink, Box, FlexBox} from "../atoms"
 
 
 export const TextSection = (props) =>(
@@ -9,11 +9,11 @@ export const TextSection = (props) =>(
         py={[3]} my={[2]}
         {...props} 
     >
-        <Text color={"dark"} textShadow="light" fontWeight="bold" fontSize={props.headerSize} 
+        <HeaderMini color={"dark"} textShadow="light" fontWeight="bold" fontSize={props.headerSize} 
             pt={"4px"}
         >
             {props.header}
-        </Text>
+        </HeaderMini>
         {props.text && 
         <Paragraph color={"dark"} fontWeight={400} fontSize={props.textSize} 
             minHeight={30}  mt={[1]} maxHeight={200} textHidden={props.textHidden}

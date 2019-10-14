@@ -1,6 +1,6 @@
 import React from "react";
 
-import styled from 'styled-components'
+import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 
 import { Box,ImageBox, GridBox, FlexBox, BlurBox, Text, HeaderText, NewLink, Paragraph } from "../atoms"

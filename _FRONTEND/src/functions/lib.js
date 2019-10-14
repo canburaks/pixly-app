@@ -3,6 +3,7 @@ if (window.location.href.includes("local")) {
     development = true
 }
 
+
 function benchmark(iterations, f) {
     var start = new Date();
     for (var i = 0; i < iterations; i++) {

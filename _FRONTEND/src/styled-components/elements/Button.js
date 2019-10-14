@@ -11,6 +11,18 @@ import { TextSection } from "./TextSection"
 import { useScrollPosition } from "../../functions/hooks"
 
 
+export const SearchButton = ({onClick, borderRadius="6px", ...props}) => (
+        <Button 
+            borderRadius={borderRadius}
+            minWidth={"40px"}
+            maxwidth={"80px"}
+            fontSize={[12,14,14,16]}
+            bg="shark"
+            color="light"
+        >
+            {props.children}
+        </Button>
+)
 
 export const ScrollButton = ({onClick, borderRadius="50%", ...props}) => (
     <Box 

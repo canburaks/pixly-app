@@ -1,3 +1,5 @@
+import styled from 'styled-components'
+export { styled }
 export * from "./atoms"
 export * from "./elements/index"
 export * from "./organisms/index"

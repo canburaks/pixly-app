@@ -17,6 +17,9 @@ export const FbookAuthButton = (props) =>{
     //print("initial auth status", status)
 
     const FB = window.FB
+    if (FB){
+
+    
     FB.getLoginStatus(function(response) {
         if (response.status === "connected" && status === false){
             setStatus(true);
@@ -25,7 +28,8 @@ export const FbookAuthButton = (props) =>{
             setStatus(false)
         }   
     });
-
+    }
+    
     function logoutHandler(){
         const FB = window.FB;
         //print("logout-cb FB", FB)
