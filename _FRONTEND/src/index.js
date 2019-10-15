@@ -49,13 +49,14 @@ const UriSwitcher = (uriType) =>{
 //try comment delete it later
 const uri = UriSwitcher(1)// 1-Remote / 2-Local / 3- Local-upload
 
-
-const errorLink = onError(({ graphQLErrors }) => {
-    if (graphQLErrors) graphQLErrors.map(({ message }) => (
-        //print("error message", {message}),
-        authError(message)
-        ))
-})
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors){
+        graphQLErrors.map(({ message, locations, path }) =>{
+            authError(message);
+            console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+        })}      
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
 
 const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem("AUTH_TOKEN")
@@ -73,6 +74,7 @@ const uploadLink = createUploadLink({
 })
 
 const link = authLink.concat(uploadLink)
+
 
 
 /*---------------------------------*/

@@ -659,7 +659,7 @@ export const TOPIC_QUERY = gql`
             minRating: $minRating, maxRating: $maxRating, 
             tags: $tags,
             ){  
-                topcResult{
+                topicResult{
                     id,
                     name,
                     poster,
@@ -668,7 +668,7 @@ export const TOPIC_QUERY = gql`
                     slug
                 }
                 topic{
-                    name, summary, slug, poster, netflix_id
+                    name, summary, slug, poster, netflixId
                 },
                 quantity
         }

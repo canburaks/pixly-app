@@ -59,7 +59,6 @@ const SearchPage = (props) =>{
     const areEquals = useCallback((first, second) => (first.min === second.min && first.max === second.max), [])
     const areEqualSize = (newmovies) => (new Set(movies.map(movie => movie.id)).size === new Set([...movies, ...newmovies].map(movie => movie.id)).size )
     const mergeVariables = () => ({page, keywords,minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max})
-    const updateFromQueryData = useCallback((data) => (setResultQuantity(data.complexSearch.quantity), setMovies(() => [...movies, ...data.complexSearch.result])), [])
     
     //handlers
     const yearSelectHandler = useCallback((e) => areEquals(e, selectedYears) ? null : setSelectedYears(e), [])

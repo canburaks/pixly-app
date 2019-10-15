@@ -74,7 +74,7 @@ export const PaginationBox = ({currentPage, totalPage, nextPage, prevPage}) => (
 export const Grid = styled(GridBox)`
     width:100%;
     position:relative;
-    grid-template-rows: minmax(50px, 300px;)
+    grid-template-rows: minmax(50px, 300px;);
     @media screen and (min-width: ${themeGet("breakpoints.xs")}){
         grid-template-columns: repeat(${props => props.columns[0]}, 1fr);
 
