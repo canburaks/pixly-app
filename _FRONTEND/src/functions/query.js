@@ -577,18 +577,27 @@ export const COMPLEX_SEARCH = gql`
             minYear: $minYear, maxYear: $maxYear,
             minRating: $minRating, maxRating: $maxRating, 
             tags: $tags,
-            ){
+            ){  
+                result{
+                    id,
+                    name,
+                    hasCover,
+                    poster,
+                    coverPoster,
+                    year,
+                    slug
+                }
                 keywordResult{
-                id,
-                name,
-                hasCover,
-                poster,
-                coverPoster,
-                year,
-                slug
-            },
-            quantity
-        }
+                    id,
+                    name,
+                    hasCover,
+                    poster,
+                    coverPoster,
+                    year,
+                    slug
+                },
+                quantity
+        },
     }
 `
 export const COMPLEX_TAG_SEARCH = gql`

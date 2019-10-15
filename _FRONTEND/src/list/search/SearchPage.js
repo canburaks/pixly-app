@@ -28,7 +28,9 @@ const AdvanceSearch = (props) =>{
     const [complexSearch, { loading, data }] = useLazyQuery(COMPLEX_SEARCH);
     
     //Variables
-    const [keywords, setKeywords ] = useState("")
+    const [ keywords, setKeywords ] = useState("")
+    const [ tags, setTags ] = useState([])
+
     const [selectedYears, setSelectedYears ] = useState({min:1950, max:2019})
     const [selectedRatings, setSelectedRatings ] = useState({min:5.0, max:9.9})
     
@@ -47,17 +49,18 @@ const AdvanceSearch = (props) =>{
     const roundedRatings = useCallback((obj) => ({min: rounder(obj.min), max: rounder(obj.max) }) ,[])
     const areEquals = useCallback((first, second) => (first.min === second.min && first.max === second.max), [])
     const areEqualSize = (newmovies) => (new Set(movies).size === new Set([...movies, ...newmovies]).size )
-    const mergeVariables = useCallback(() => ({page, keywords,minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max}),[])
+    const mergeVariables = () => ({page, keywords,minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max})
     const updateFromQueryData = useCallback((data) => (setResultQuantity(data.complexSearch.quantity), setMovies(() => [...movies, ...data.complexSearch.keywordResult])), [])
     
     //handlers
     const yearSelectHandler = useCallback((e) => areEquals(e, selectedYears) ? null : setSelectedYears(e), [])
     const ratingSelectHandler = useCallback((e) => areEquals(e, selectedRatings) ? null : setSelectedRatings(roundedRatings(e)), [])
-    const keywordsHandler = useCallback((e) => setKeywords(e.target.value), [])
+    const keywordsHandler = useCallback((e) => setKeywords(e.target.value), [keywords])
 
 
 
-    if (data && data.complexSearch) {
+    if (data) {
+        console.log("data", data)
         if (!areEqualSize(data.complexSearch.keywordResult)) setMovies([...movies, ... data.complexSearch.keywordResult])
         if (resultQuantity !==  data.complexSearch.quantity) setResultQuantity(data.complexSearch.quantity)
         }
@@ -66,14 +69,16 @@ const AdvanceSearch = (props) =>{
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (keywords.length < 3) setError("Your Search is too short")
+        if (keywords.length < 3 && tags.length === 0) setError("Your Search is too short")
         else {
             const newQv = mergeVariables()
+            newQv.tags = tags.map(tag => tag.value)
+            console.log("final query variables",newQv)
             complexSearch({variables : newQv})
         } 
     }
     //console.log("qv",mergeVariables())
-    //console.log("movies", movies)
+    console.log("keywords", data, loading, tags)
     return(
         <PageContainer>
 
@@ -88,9 +93,7 @@ const AdvanceSearch = (props) =>{
                         onChange={keywordsHandler} 
                         minHeight="60px"
                         width={"100%"}
-                        required
                         error={error}
-                        min={3}
                     />
                 </FlexBox>
 
@@ -138,7 +141,7 @@ const AdvanceSearch = (props) =>{
                         />
                     </FlexBox>
 
-                    <TagSelection />
+                    <TagSelect tags={tags} tagSetter={setTags} />
                     <SearchButton type="submit" alignSelf="center" width={["40px", "50px", "50px", "80px"]}>Search</SearchButton>
                 </FlexBox>
 
@@ -157,14 +160,6 @@ const AdvanceSearch = (props) =>{
     );
 }
 
-const TagSelection = (props) => {
-    const { loading, error, data } = useQuery(TAG_LIST);
-    if (loading) return <Loading />
-    if (data){
-        console.log(data)
-    }
-    return <TagSelect tags={[]} export={(e) => console.log("export",e)} />
-}
 
 const Loading = () => (
     <div className="page-container">

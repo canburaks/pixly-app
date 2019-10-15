@@ -35,6 +35,7 @@ BRAND_IMAGE = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/pixly
 LIST_MIN_SUMMARY = 200
 
 #HOST_SCHEME                     = "https://pixly.app"
+"""
 SECURE_REDIRECT_EXEMPT = ['ads.txt']
 SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
 CORS_REPLACE_HTTPS_REFERER      = True
@@ -50,7 +51,6 @@ SECURE_CONTENT_TYPE_NOSNIFF     = True
 SECURE_BROWSER_XSS_FILTER       = True
 X_FRAME_OPTIONS                 = 'DENY'
 
-"""
 """
 
 # SECURITY WARNING: don't run with debug turned on in production!

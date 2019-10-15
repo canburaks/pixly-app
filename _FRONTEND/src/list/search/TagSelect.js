@@ -1,42 +1,36 @@
 import React, { useState } from "react";
 import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import { useQuery } from '@apollo/react-hooks';
+import { TAG_LIST } from "../../functions/query"
 
-const TagSelect = (props) =>{
+const TagSelect = React.memo((props) =>{
+    const { loading, error, data } = useQuery(TAG_LIST);
     const [selection, setSelection ] = useState([])
-    
+    const [tags, setTags ] = useState([])
+
+    if (loading) return <Loading />
+    if (error) return <div>error</div>
+    if (data && data.listOfTags.length !== tags.length) setTags(data.listOfTags)
+
+    const animatedComponents = makeAnimated();
     const exportHandler = (tags) => {
-        tags && tags.length > 0 ? props.export(tags.map(t => t.value)) :props.export([])
+        tags && tags.length > 0 ? props.export(tags.map(t => t.value)) : props.export([])
     }
     
-    const selectHandler = (e) => {
-        setSelection(e)
-        exportHandler(e)
-    }
+    const selectHandler = (e) => props.tagSetter(e)
 
-
-    const tags = props.tags.filter(x => x.tagType === "tag")
-        .map(tag => ({value:tag.slug, label:tag.name, tagType:tag.tagType}))
-    
-    const genres = props.tags.filter(x => x.tagType === "genre")
-        .map(tag => ({value:tag.slug, label:tag.name, tagType:tag.tagType}))
-    
-    const awards = props.tags.filter(x => x.tagType === "award")
-        .map(tag => ({value:tag.slug, label:tag.name, tagType:tag.tagType}))
-    
-    const base = props.tags.filter(x => x.tagType === "base")
-        .map(tag => ({value:tag.slug, label:tag.name, tagType:tag.tagType}))
-    const phenomenal = props.tags.filter(x => x.phenomenalTag === true)
-        .map(tag => ({value:tag.slug, label:tag.name, tagType:tag.tagType}))
+    const mapper = (tagList, tagType) => tagList.map(tag => ({value:tag.slug, label:tag.name, tagType:tagType}))
+    const genres = mapper(tags.filter(x => x.genreTag === true), "Genre")
+    const subgenres = mapper(tags.filter(x => x.subgenreTag === true), "Subgenre")
+    const base = mapper(tags.filter(x => x.baseType === true), "Based")
+    //const awards = mapper(props.tags.filter(x => x.awardTag === true))
 
     const tagOptions = [
         {label:"BASED ON", options:base},
-        {label:"WINNER OF", options:awards},
         {label:"GENRES", options:genres},
-        {label:"OTHER", options:tags},
-        {label:"PHENOMENAL", options:phenomenal}
-
+        {label:"SUBGENRES", options:subgenres},
     ]
-
     //console.log("selection: ", selection)
 
     const styles={
@@ -124,15 +118,16 @@ const TagSelect = (props) =>{
             options={tagOptions}
             onChange={e => selectHandler(e)}
 
+            components={animatedComponents}
             captureMenuScroll
             className="tag-select-menu select-menu"
             classNamePrefix="tag-select-item"
             styles={styles}
-            value={selection}
+            value={props.tags}
             getValue={e => console.log("e", e)}
         />
     )
-}
+})
 
 function setTagColor(item, opacity=1){
     switch(item.tagType){
@@ -147,5 +142,13 @@ function setTagColor(item, opacity=1){
     }
 }
 
+const Loading = () => (
+    <div className="page-container">
+        {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+        <div className="loading-container">
+            <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
+        </div>
+    </div>
+)
 
 export default TagSelect;
