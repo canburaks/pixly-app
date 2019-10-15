@@ -51,7 +51,7 @@ export function logout() {
 
 export function authError(message) {
     if (message.startsWith("Authentication credentials")) {
-        console.log("True")
+        console.log("Authentication Error!!!")
         logout();
     }
 }

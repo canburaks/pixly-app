@@ -47,10 +47,8 @@ const TopicPage = (props) =>{
     const ratingSelectHandler = useCallback((e) => areEquals(e, selectedRatings) ? null : setSelectedRatings(roundedRatings(e)), [])
     const getVariables = () => ({...qv, tags:[topicSlug], minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max})
 
-
-    const nextPage = useMemo(() => (setPage(page => page + 1), setQv({...qv, page:page + 1})), [page])
-    const prevPage = useMemo(() => (setPage(page => page - 1), setQv({...qv, page:page - 1})), [page])
-
+    const nextPage = useMemo(() => setPage(page => page + 1),[])
+    const prevPage = useMemo(() => setPage(page => page - 1),[])
     
 
     const submitHandler = (e) => {
@@ -61,7 +59,8 @@ const TopicPage = (props) =>{
     useEffect(() => {
         const newQv = getVariables()
         if (!isEqualObj(qv, newQv)) setQv(newQv)
-    }, [])
+    }, [page])
+    console.log(page)
 
     console.log("topic page:", qv)
     return(
@@ -79,14 +78,14 @@ const TopicPage = (props) =>{
                 >
                     <FlexBox 
                         alignItems={"center"}
-                        m={[1]} px={[3]} py={[2]}
-                        width={"40%"}
+                        m={[1]} pl={[0]} pr={[3]} py={[2]}
+                        width={"41%"}
                         flexGrow={1,1,1, 0}
                         border="1px solid"
                         borderColor="rgba(80,80,80, 0.5)"
                         borderRadius={"8px"}
                     >
-                        <WatchIcon title="Release Year" stroke={"black"}  size={40}/>
+                        <WatchIcon title="Release Year" stroke={"black"}  size={36}/>
                         <InputRange
                             max={2020}
                             min={1900}
@@ -99,14 +98,14 @@ const TopicPage = (props) =>{
 
                     <FlexBox 
                         alignItems={"center"}
-                        m={[1]} px={[3]} py={[2]}
-                        width={"40%"}
+                        m={[1]} pl={[0]} pr={[3]} py={[2]}
+                        width={"41%"}
                         flexGrow={1,1,1, 0}
                         border="1px solid"
                         borderColor="rgba(80,80,80, 0.5)"
                         borderRadius={"8px"}
                     >
-                        <ImdbIcon title="IMDb Rating" fill="black"  size="40px !important;" imdb/>
+                        <ImdbIcon title="IMDb Rating" fill="black"  size="36px !important;" imdb/>
                         <InputRange
                             max={10.0}
                             min={1.0}
@@ -118,12 +117,12 @@ const TopicPage = (props) =>{
                     </FlexBox>
                     <Button type="submit" 
                         display="flex" justifyContent="center" alignItems="center"
-                        p={0} width={50} height={50} 
+                        p={0} width={30} height={30} 
                         hoverBg={"blue"}
                         borderRadius="50%" 
                         bg="dark"
                     >
-                        <SearchIcon  stroke="white" strokeWidth="3" size={30} />
+                        <SearchIcon  stroke="white" strokeWidth="3" size={20} />
                     </Button>
                 </FlexBox>
             </Form>
@@ -143,25 +142,25 @@ const TopicPage = (props) =>{
 }
 
 const SearchQuery = (props) =>{
+    console.log("query",props.variables)
     const { loading, data, error } = useQuery(TOPIC_QUERY, {variables:props.variables});
 
 
     console.log("topic query",data, props.variables)
     if (loading) return <Loading />
-    if (error) return <div>{error.message}</div>
     if (data) return (
         <>
-        <MovieCoverBox 
-            columns={[2,3,3,3,4,4,6]} 
-            items={data.topicResult} 
-            fontSize={[12,12,14]}
+            <MovieCoverBox 
+                columns={[2,3,3,3,4,4,6]} 
+                items={data.complexSearch.topicResult} 
+                fontSize={[12,12,14]}
 
+                />
+            <PaginationBox 
+                currentPage={props.variables.page} 
+                totalPage={Math.ceil(data.complexSearch.quantity/24)} 
+                nextPage={props.nextPage} prevPage={props.prevPage} 
             />
-        <PaginationBox 
-            currentPage={props.variables.page} 
-            totalPage={Math.ceil(data.topicRuantity/24)} 
-            nextPage={props.nextPage} prevPage={props.prevPage} 
-        />
         </>
         )
     
