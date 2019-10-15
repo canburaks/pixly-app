@@ -281,7 +281,8 @@ const devSettings = {
 					//  },
 				  // IMPORTANT => don't forget `injectType`  option  
 				  { loader: 'style-loader', options: { injectType: 'styleTag' } },
-				  "css-loader"
+				  "css-loader",
+				  'postcss-loader'
 				  //{ loader: 'sass-loader' },
 				],
 			},
