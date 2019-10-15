@@ -3,6 +3,9 @@ import { useContext, useState, useReducer, useEffect, lazy, Suspense, useRef } f
 import { Route, Switch, Link, withRouter } from "react-router-dom"
 import { MAIN_PAGE } from "../functions/query";
 import { Query } from "react-apollo";
+import { useQuery, useApolloClient, useLazyQuery } from '@apollo/react-hooks';
+import { getDataFromTree } from "@apollo/react-ssr";
+
 import { rgaPageView,  Head, MidPageAd } from "../functions/analytics"
 import { useWindowSize, useAuthCheck, useClientWidth } from "../functions/hooks"
 import {GridBox, GridItem, SpeedyGridBox } from "../components/GridBox" 
@@ -18,7 +21,7 @@ import "./MainPage.css"
 
 
 const MainPage = (props) => {
-    //console.log("main-page: ",props)
+    console.log("main-page props: ",props)
     const authStatus = useAuthCheck();
 
     const CarouselList =({ item }) => (
@@ -97,7 +100,39 @@ const MainPage = (props) => {
     )
 }
 
-const MainPageQuery = (props) =>(
+const MainPageQuery2 = (props) =>{
+    const client = useApolloClient();
+
+    const cachedata = client.readQuery({query:MAIN_PAGE})
+    const [mainPage, { loading, error, data, refetch }] = useLazyQuery(MAIN_PAGE)
+
+    const [ pageData, setPageData ] = useState(null)
+
+    if (pageData){
+        return  <MainPage data={pageData.mainPage} />
+    }
+    if (pageData === null){
+        if (cachedata && cachedata.mainPage){
+            console.log("cache data is setting")
+            setPageData(cachedata)
+        }
+        else if (data && data.mainPage){
+            console.log("lazy query data is setting")
+            setPageData(data)
+        }
+        
+        else if (!cachedata){
+            console.log("no data: querying lazily")
+            mainPage()
+        }
+    }
+    
+    //console.log("cachedata", cachedata)
+    //return <MainPage data={pageData.mainPage} />
+    //return <div></div>
+}
+
+const MainPageQuery = (props) => (
     <Query query={MAIN_PAGE} partialRefetch={true}>
     {({ loading, error, data, refetch }) => {
         if (loading) return <Loading />;

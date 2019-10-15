@@ -196,6 +196,7 @@ const productionSettings = {
 			template: "./src/index.html",
 			filename: "./webpack-html-plugin-output.html",
 			minify: {
+					collapseWhitespace: true,
 					removeComments: true,
 					removeRedundantAttributes: true,
 					useShortDoctype: true,
@@ -220,7 +221,8 @@ const productionSettings = {
 
 const devSettings = {
 	mode: "development",
-	entry: './src/index.html',
+	entry: './src/prerendered-index.html',
+	//entry: './src/prerendered-index.html',
     entry: {
 		app: './src/index.js',
 		print: './src/print.js',
@@ -292,9 +294,20 @@ const devSettings = {
 	plugins: [
 		new HtmlWebPackPlugin({
 			inject: true,
-			template: "./src/index.html",
-			filename: "./index.html"
-		}),
+			template: "./src/prerendered-index.html",
+			filename: "./index.html",
+			minify: {
+					collapseWhitespace: true,
+					removeComments: true,
+					removeRedundantAttributes: true,
+					useShortDoctype: true,
+					removeEmptyAttributes: true,
+					removeStyleLinkTypeAttributes: true,
+					keepClosingSlash: true,
+					minifyCSS: true,
+					minifyURLs: true,
+				  }
+		})
 	]
 };
 
