@@ -478,7 +478,7 @@ class Recommendation(models.Model):
         elif not is_eligible:
             result =  Recommendation.objects.filter(
                 profile = profile, is_recommended=True, is_watched=False
-                ).order_by("-recommended_at")[:12]
+                ).order_by("-recommended_at")[:6]
             #print("persona",result)
             return result
 

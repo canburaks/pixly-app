@@ -45,6 +45,35 @@ import { ScrollTopButton } from "./styled-components"
 
 export const GlobalContext = React.createContext();
 
+const App = (props) => {
+    const state = Store(props.history)
+    return (
+    <ThemeProvider theme={themes.default}>
+        <div className="App" theme="palette-1" >
+            <GlobalContext.Provider value={state}>
+                <NavBar />
+                <div className="main-content-container">
+                    <Switch>
+                        <Route exact path="/" component={MainPageQuery} />
+                        <Route path="/" component={Middle} />
+                    </Switch>
+                    
+                    <Modal isOpen={state.modal} toggle={state.methods.toggleModal}>
+                        {state.modalComponent}
+                    </Modal>
+                </div>
+                <ScrollTopButton />
+                <Footer />
+            </GlobalContext.Provider>
+        </div>
+    </ThemeProvider>
+
+    );
+};
+
+
+
+
 const Store = (history) => {
     const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN") || null
     const USERNAME = localStorage.getItem("USERNAME") || null
@@ -162,77 +191,4 @@ const Store = (history) => {
 }
 
 
-const App = (props) => {
-    //print("App", props)
-    const state = Store(props.history)
-    const authStatus = authCheck()
-    //console.log("is logged: ", authStatus)
-
-    
-    //console.log("App", state)
-    //console.log("rendertype ",props.renderType)
-    rgaStart()
-    return (
-    <ThemeProvider theme={themes.default}>
-        <div className="App" theme="palette-1" >
-            <GlobalContext.Provider value={state}>
-                <NavBar />
-                <div className="main-content-container">
-                    <Switch>
-                        <Route exact path="/" component={MainPageQuery} />
-                        <Route path="/" component={Middle} />
-                    </Switch>
-                    
-                    <Modal isOpen={state.modal} toggle={state.methods.toggleModal}>
-                        {state.modalComponent}
-                    </Modal>
-                </div>
-                <ScrollTopButton />
-                <Footer />
-            </GlobalContext.Provider>
-        </div>
-    </ThemeProvider>
-
-    );
-};
-
-
-/*
-<div className="App" theme="palette-1" >
-
-    <GlobalContext.Provider value={state}>
-        <NavBar />
-        <div className="main-content-container">
-            <Switch>
-                <Route exact path="/welcome" component={MainPageQuery} />
-                <Route exact path="/" component={MainPageQuery} />
-                <Route path="/" component={Middle} />
-            </Switch>
-            <Modal isOpen={state.modal} toggle={state.methods.toggleModal}>
-                {state.modalComponent}
-            </Modal>
-        </div>
-        <Footer />
-    </GlobalContext.Provider>
-</div>
-
-
-const isAuthenticated = () =>{
-    if (!localStorage.getItem("AUTH_TOKEN") && !window.location.href.includes("login")){
-        return <Redirect to="/login" />
-    } else if (localStorage.getItem("AUTH_TOKEN") && window.location.href.includes("login")){
-        return <Redirect to="/" />
-    }
-}
-const isAuthenticatedPush = (props) => {
-    if (!localStorage.getItem("AUTH_TOKEN") && !window.location.href.includes("login")) {
-        props.history.push("/login");
-        return <Login />
-    } else if (localStorage.getItem("AUTH_TOKEN") && window.location.href.includes("login")) {
-        props.history.push("/");
-        return <Middle />
-
-    }
-}
-*/
 export default withRouter(App);

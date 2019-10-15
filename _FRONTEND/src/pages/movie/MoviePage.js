@@ -61,8 +61,8 @@ const MoviePage = (props) => {
 
     // SIMILAR MOVIES
     const similarPlaceholder = item.similars ? item.similars : [];
-    const similarCover = similarPlaceholder.filter(m => m.hasCover===true)
-    const similarNonCover = similarPlaceholder.filter(m => m.hasCover=== false)
+    //const similarCover = similarPlaceholder.filter(m => m.hasCover===true)
+    //const similarNonCover = similarPlaceholder.filter(m => m.hasCover=== false)
 
     // CONTENT SIMILARS
     const contentSimilarPlaceholder = item.contentSimilars ? item.contentSimilars : [];
@@ -122,7 +122,7 @@ const MoviePage = (props) => {
 
 
                 {/*<!--SIMILAR Section--> */}
-                {similarCover.length > 0 &&
+                {similarPlaceholder > 0 &&
                 <>
                     <h4 className="t-xl t-bold mar-b-2x">PEOPLE ALSO LIKE</h4>
                     <p className="t-m mar-b-2x">

@@ -4,6 +4,7 @@ import { useMemo, useCallback, useState } from 'react';
 import { 
     Box, Grid, ImageCard,PaginationBox,
     MovieCoverCard, MoviePosterCard,MovieSimilarCard, CrewCard, TagText } from "../index"
+import { FlexBox } from "../atoms";
 
 
 export const ListCoverBox = React.memo(({ items, columns=[1,1,2,2,2,3,3], ratio=0.41, text=false }) => (
@@ -43,7 +44,7 @@ export const MoviePosterBox = React.memo(({ items, columns=[3,4,6,8, 8, 10], rat
     </Grid>
 ))
 
-export const MovieCoverBox = React.memo(({ items, columns=[1,2,2,2,3,3,4], ratio=0.5625, notext=false, ...props }) => (
+export const MovieCoverBox = React.memo(({ items, columns=[2,2,3,4,4,5,6], ratio=0.5625, notext=false, ...props }) => (
     <Grid 
         columns={columns} py={[4]}         
     >
@@ -62,7 +63,7 @@ export const MovieCoverBox = React.memo(({ items, columns=[1,2,2,2,3,3,4], ratio
 
 
 //For Content Similar Movies with common tags 
-export const MovieInfoBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], ratio=0.5625, ...props }) => (
+export const MovieInfoBox = React.memo(({ items, columns=[2,2,3,3,4,4,5], ratio=0.5625, ...props }) => (
     <Grid columns={columns} py={[4]}>
         {items.map( item => (
         <MovieSimilarCard 
@@ -71,9 +72,9 @@ export const MovieInfoBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], ratio=
             key={item.movie.slug}
             {...props} 
         >
-            <div className="fbox-r jcfs aife fw pad-x" >
-                {item.commonTags.map(tag => <TagText key={tag} color="dark" borderColor="dark">{tag}</TagText> )}
-            </div>
+            <FlexBox flexWrap="wrap">
+                {item.commonTags.map(tag => <TagText key={tag} color="dark" borderColor="dark" fontSize={[10,11,12,12]}>{tag}</TagText> )}
+            </FlexBox>
         </MovieSimilarCard>
         ))}
     </Grid>

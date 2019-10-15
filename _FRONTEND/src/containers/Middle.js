@@ -51,20 +51,14 @@ import PreSearchPage from "../list/search/PreSearchPage";
 
 //import MovieQuery from "../pages/movie/MovieQuery.js";
 //import MoviePage from "../pages/movie/MoviePage"
+import { Loading } from "../styled-components"
 
 import { GlobalContext } from "../App";
 //import { client, cache } from "../index"
 
 //const QueryRouter = lazy(() => import("../pages/QueryRouter.js"));
 
-const Loading = () => (
-    <div className="page-container">
-        {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
-        <div className="loading-container">
-            <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
-        </div>
-    </div>
-)
+
 
 const Middle = (props) => {
     const state = useContext(GlobalContext)
@@ -123,18 +117,14 @@ const Middle = (props) => {
         </Switch>
     );
 };
+
 const HomeQuery = () => {
-    const username = localStorage.getItem("USERNAME");
-    return (
-        <Query query={PERSONA} variables={{ username }}>
-            {({ loading, error, data, refetch }) => {
-                    if (loading) return <Loading />;
-                    if (error) return <div className="gql-error">{JSON.stringify(error.message)}</div>;
-                    return <HomePage data={data} refetch={refetch}/>
-            }}
-        </Query>
-    );
+    const { loading, error, data, refetch } = useQuery(PERSONA, { variables:{username:localStorage.getItem("USERNAME")}})
+    if (loading) return <Loading />
+    if (error) return <div>{error.message}</div>
+    if (data) return <HomePage data={data} refetch={refetch}/>
 };
+
 const MovieQuery = (props) => {
     let shouldReplaceUrl = false
     let identifier = props.match.params.slug;
@@ -149,31 +139,27 @@ const MovieQuery = (props) => {
     else {
         queryVariables.slug = identifier
     }
+    const { loading, error, data, client, refetch } = useQuery(MOVIE, { variables:queryVariables, partialRefetch:true})
+    
+    const movieCacheUpdate = (newData) => {
+        const oldData = client.readQuery({ query: MOVIE, variables:{slug:queryVariables.slug} });
+        const newMovieData = {...oldData.movie, ...newData}
+        oldData.movie = newMovieData;
+        client.writeQuery({ query: MOVIE, variables:{slug:queryVariables.slug}, data: oldData});
+        return null
+    }
 
-    return (
-        <Query query={MOVIE} variables={queryVariables} partialRefetch={true}>
-            {({ loading, data, error, refetch, client }) => {
-                    if (loading) return <Loading />;
-                    if (error) return <div className="gql-error">{JSON.stringify(error)}</div>;
-                    if (data.movie && shouldReplaceUrl){
-                        props.history.replace(`/movie/${data.movie.slug}`)
-                    }
-                    const item = data;
-
-                    const movieCacheUpdate = (newData) => {
-                        const oldData = client.readQuery({ query: MOVIE, variables:{slug:queryVariables.slug} });
-                        const newMovieData = {...oldData.movie, ...newData}
-                        oldData.movie = newMovieData;
-                        client.writeQuery({ query: MOVIE, variables:{slug:queryVariables.slug}, data: oldData});
-                        return null
-                    }
-                    //console.log("movie query data: ",data)
-                    if (item == null || item.length === 0) return <div>{(console.log("zero"), refetch())}</div>
-                    return <MoviePage item={item} viewer={data.viewer} cacheUpdate={movieCacheUpdate} />
-            }}
-        </Query>
-    );
+    if (loading) return <Loading />
+    if (error) return <div>{error.message}</div>
+    if (data) {
+        if (data.movie && shouldReplaceUrl){
+            props.history.replace(`/movie/${data.movie.slug}`)
+        }
+        if (data == null || data.length === 0) return <div>{(console.log("zero"), refetch())}</div>
+        return <MoviePage item={data} viewer={data.viewer} cacheUpdate={movieCacheUpdate} />
+    }
 }
+
 
 const MovieQueryRedirect = (props) => {
     let shouldReplace = false
@@ -250,24 +236,60 @@ const UserQuery = (props) => {
     );
 }
 
-
 const CollectionsQuery = (props) => {
-    return (
-        <Query query={LIST_BOARD} variables={{ admin: true }} partialRefetch={true}  >
-            {({ loading, data, error, refetch }) => {
-                if (loading) return <Loading />;
-                if (error) return <div className="gql-error">{JSON.stringify(error)}</div>;
-                const item = data[Object.keys(data)[0]];
-
-                return <Collections liste={item} viewer={data[Object.keys(data)[1]]} />
-            }}
-        </Query>
-    );
+    const { loading, error, data } = useQuery(LIST_BOARD, { variables:{admin:true}, partialRefetch:true})
+    if (loading) return <Loading />
+    if (error) return <div>{error.message}</div>
+    if (data) return <Collections liste={data.listOfCategoricalLists} viewer={data.viewer} />
 }
 
 
 
 const MovieListQuery = (props) => {
+    let shouldReplace = false
+    function is_numeric(str){
+        return /^\d+$/.test(str);
+    }
+    const queryVariables = { }
+    const identifier = props.match.params.slug 
+    if (identifier && identifier.length < 5 && is_numeric(identifier) ){
+        shouldReplace = true
+        queryVariables.id = parseInt(identifier)
+    }
+    else queryVariables.slug = identifier
+
+    const { loading, error, data, fetchMore } = useQuery(LISTE, 
+        { variables:{page:parseInt(props.match.params.page) ,...queryVariables}, partialRefetch:true}
+    )
+    if (loading) return <Loading />
+    if (error) return <div>{error.message}</div>
+    if (data) {
+        if (data.liste && shouldReplace){props.history.replace(`/list/${data.liste.slug}/1`)}
+        const item = data[Object.keys(data)[0]];
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+        return <MovieList liste={item} viewer={data[Object.keys(data)[1]]} fetchMore={fetchMore} />
+    }
+}
+
+
+
+export default withRouter(Middle);
+
+
+/*
+const HomeQuery2 = () => {
+    const username = localStorage.getItem("USERNAME");
+    return (
+        <Query query={PERSONA} variables={{ username }}>
+            {({ loading, error, data, refetch }) => {
+                    if (loading) return <Loading />;
+                    if (error) return <div className="gql-error">{JSON.stringify(error.message)}</div>;
+                    return <HomePage data={data} refetch={refetch}/>
+            }}
+        </Query>
+    );
+};
+const MovieListQuery2 = (props) => {
     let shouldReplace = false
     function is_numeric(str){
         return /^\d+$/.test(str);
@@ -303,11 +325,46 @@ const MovieListQuery = (props) => {
             </Query>
     );
 }
+const MovieQuery2 = (props) => {
+    let shouldReplaceUrl = false
+    let identifier = props.match.params.slug;
+    const queryVariables = {}
+    function is_numeric(str){
+        return /^\d+$/.test(str);
+    }
+    if (is_numeric(identifier) && identifier.length < 6){
+        queryVariables.id = identifier
+        shouldReplaceUrl = true
+    }
+    else {
+        queryVariables.slug = identifier
+    }
 
-export default withRouter(Middle);
+    return (
+        <Query query={MOVIE} variables={queryVariables} partialRefetch={true}>
+            {({ loading, data, error, refetch, client }) => {
+                    if (loading) return <Loading />;
+                    if (error) return <div className="gql-error">{JSON.stringify(error)}</div>;
+                    if (data.movie && shouldReplaceUrl){
+                        props.history.replace(`/movie/${data.movie.slug}`)
+                    }
+                    const item = data;
 
+                    const movieCacheUpdate = (newData) => {
+                        const oldData = client.readQuery({ query: MOVIE, variables:{slug:queryVariables.slug} });
+                        const newMovieData = {...oldData.movie, ...newData}
+                        oldData.movie = newMovieData;
+                        client.writeQuery({ query: MOVIE, variables:{slug:queryVariables.slug}, data: oldData});
+                        return null
+                    }
+                    //console.log("movie query data: ",data)
+                    if (item == null || item.length === 0) return <div>{(console.log("zero"), refetch())}</div>
+                    return <MoviePage item={item} viewer={data.viewer} cacheUpdate={movieCacheUpdate} />
+            }}
+        </Query>
+    );
+}
 
-/*
 const AdvanceSearchQuery = (props) => {
     return (
         <Query query={TAG_LIST}>

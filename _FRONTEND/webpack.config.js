@@ -309,7 +309,7 @@ const devSettings = {
 	plugins: [
 		new HtmlWebPackPlugin({
 			inject: true,
-			template: "./src/prerendered-index.html",
+			template: "./src/index.html",
 			filename: "./index.html",
 			minify: {
 					collapseWhitespace: true,

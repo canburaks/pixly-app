@@ -98,7 +98,8 @@ movie__slugs = [
     "movie/me-before-you-2016",
     "movie/interstellar-2014",
     "movie/ready-player-one-2018",
-    "movie/bohemian-rhapsody-2018",    
+    "movie/bohemian-rhapsody-2018",
+    "movie/mommy-2014"
 ]
 
 #[print(f"https://pixly.app/movie/{ms}") for ms in movie__slugs]
