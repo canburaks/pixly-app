@@ -8,7 +8,9 @@ export const Button = styled.button`
     padding: 8px 8px;
     margin: 4px;
     box-sizing: border-box;
-    transition:  ${themeGet("transitions.fast")};
+    border:0;
+    transition:  ${themeGet("transitions.medium")};
+    cursor:pointer;
     :hover {
         background-color:${props => props.hoverBg && props.hoverBg};
         color:${props => props.hoverColor && props.hoverColor};

@@ -16,7 +16,8 @@ import "react-input-range/lib/css/index.css"
 import "./SearchPage.css"
 
 import { 
-    Box, FlexBox, Text,Input,SearchInput, Form,Loading,
+    Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
+    ImdbIcon, WatchIcon, SearchIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox
 } from "../../styled-components"
@@ -104,17 +105,28 @@ const SearchPage = (props) =>{
             <Header />
             <Form flexWrap="wrap" onSubmit={submitHandler}>
 
-                <FlexBox justifyContent="center" id="s-text-input" minWidth="100%">
+                <FlexBox justifyContent="center" id="s-text-input" minWidth="100%" position="relative">
                     <SearchInput type="text"   
                         px={[2,3,4,4,4]}
                         placeholder="Search.."
                         autoFocus
                         value={keywords} 
                         onChange={keywordsHandler} 
-                        minHeight="60px"
+                        minHeight="70px"
                         width={"100%"}
                         error={error}
                     />
+                    <Button type="submit" 
+                        position="absolute" 
+                        display="flex" justifyContent="center" alignItems="center"
+                        right={40} top={12} p={0} 
+                        width={50} height={50} 
+                        hoverBg="green"
+                        borderRadius="50%" 
+                        bg="active"
+                    >
+                        <SearchIcon  stroke="white" strokeWidth="3" size={30} />
+                    </Button>
                 </FlexBox>
 
 
@@ -127,13 +139,12 @@ const SearchPage = (props) =>{
                     borderBottom="1px solid"
                 >
                     <FlexBox 
-                        flexDirection={["column", "column", "column"]} 
-                        alignItems={"flex-start"} 
+                        alignItems={"center"}
                         my={[3]} px={[3,3,3, 3]} 
                         width={"49%"}
                         flexGrow={1,1,1, 0}
                     >
-                        <Text fontSize={[14,16,16,18]} mt={[3,3,3,4]} mb={[2,2, 2,3]} fontWeight="bold">Year</Text>
+                        <WatchIcon title="Release Year" stroke={"black"}  size={32}/>
                         <InputRange
                             max={2020}
                             min={1900}
@@ -145,13 +156,12 @@ const SearchPage = (props) =>{
                     </FlexBox>
 
                     <FlexBox 
-                        flexDirection={["column", "column", "column"]} 
-                        alignItems={"flex-start"} 
+                        alignItems={"center"}
                         my={[3]} px={[3,3,3, 3]} 
                         width={"49%"}
                         flexGrow={1,1,1, 0}
                     >
-                        <Text fontSize={[14,16,16,18]} mt={[3,3,3,4]} mb={[2,2, 2,3]} fontWeight="bold">IMDb</Text>
+                        <ImdbIcon title="IMDb Rating" fill="black"  size={48} imdb/>
                         <InputRange
                             max={10.0}
                             min={1.0}
@@ -170,7 +180,6 @@ const SearchPage = (props) =>{
                         flexGrow={1,1,1, 0}
                     >
                         <TagSelect tags={tags} tagSetter={setTags} />
-                        <SearchButton type="submit" alignSelf="center" width={["70px", "70px", "70px", "80px"]} maxWidth="40%">Search</SearchButton>
                     </FlexBox>
                 </FlexBox>
 
@@ -182,7 +191,7 @@ const SearchPage = (props) =>{
                     p={[1,2,3]}
                 >
                     {loading && <Loading />}
-                    <MovieCoverBox items={movies} columns={[2,3,3,3,4,4,6]} fontSize={[12,12,14]}/>
+                    <MovieCoverBox items={movies} columns={[3,3,3,3,4,4,6]} fontSize={[12,12,14]}/>
                     <PaginationBox 
                         currentPage={resultQuantity!==null && page} 
                         totalPage={Math.ceil(resultQuantity/24)} 

@@ -65,9 +65,10 @@ export const SearchInput = styled("input")`
     -webkit-appearance: none;
     outline: none;
     transition:0.25s ease-in-out;
+    border-radius:32px;
+    margin:8px 16px;
     caret-color: ${themeGet("colors.light")};
     border:2px solid;
-    border-bottom-color: ${props => props.error && "red"};
     box-sizing:border-box;
     :focus {
         background-color: rgba(40,40,40, 0.6);

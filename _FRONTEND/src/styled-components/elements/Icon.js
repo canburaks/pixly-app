@@ -35,6 +35,8 @@ export const EyeIcon = (props) => <Eye {...props} />
 
 export const LogoutIcon = (props) => <Logout {...props} />
 export const CloseIcon = (props) => <Close {...props} />
+export const WatchIcon = (props) => <Watch {...props} />
+export const SearchIcon = (props) => <Search {...props} />
 
 
 const Heart = (props) => (
@@ -272,4 +274,30 @@ const FollowSuccessAnimate = (props) => (
         <line className="unf" x1="15" y1="9" x2="9" y2="15"></line>
         <line className="unf" x1="9" y1="9" x2="15" y2="15"></line>
     </UnFollowAnimatedSvg>
+)
+
+const Watch = (props) => (
+<Svg xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" fill="none"  
+    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    {...props}
+>
+    {props.title && <title>{props.title}</title>}
+    <circle cx="12" cy="12" r="7"></circle>
+    <polyline points="12 9 12 12 13.5 13.5"></polyline>
+    <path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83">
+</path>
+</Svg>
+)
+
+const Search = (props) => (
+<Svg xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24" fill="none" 
+    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    {...props}
+>
+    {props.title && <title>{props.title}</title>}
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+</Svg>
 )

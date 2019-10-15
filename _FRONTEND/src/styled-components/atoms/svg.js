@@ -50,9 +50,11 @@ export const MovieSvg = styled(Svg)`
 export const SocialMediaSvg = styled(Svg)`
     stroke: ${themeGet("colors.light")};
     fill: light;
+    width:  ${props => props.size || "36px"};
+    height: ${props => props.size || "36px"};
     cursor: pointer;
     :hover {
-        transform: scale(1.1, 1.1);
+        transform: ${ props => props.hoverScale ? scale(1.1, 1.1) : null};
         fill:${props => 
              props.imdb ? "#fac539" : 
             (props.facebook ? "#3a67af" : 

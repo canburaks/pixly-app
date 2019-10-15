@@ -216,7 +216,7 @@ class ProfilePageSitemap(Sitemap):
         return f"/user/{item.username}"
 
 class StaticSitemap(Sitemap):
-    changefreq = "yearly"
+    changefreq = "monthly"
     priority = 0.8
     def items(self):
         statics = [
