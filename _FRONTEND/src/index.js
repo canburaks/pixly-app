@@ -122,7 +122,7 @@ const rootElement = document.getElementById("root");
 
 
 
-if (!development){
+if (development){
     ReactDOM.render(<Pixly />, rootElement)
 }
 else{
