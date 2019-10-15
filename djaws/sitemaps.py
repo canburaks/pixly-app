@@ -129,6 +129,7 @@ person__slugs = [
     "person/keanu-reeves-6384",
     "person/tom-hanks-31",
     "person/leonardo-dicaprio-619",
+    "person/liam-neeson-3896"
 ]
 liste_slugs =[
     "list/all-palme-dor-winners-cannes-film-festival/1",
