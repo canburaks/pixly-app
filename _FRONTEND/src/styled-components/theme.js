@@ -73,7 +73,9 @@ themes.default.sizes  = [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48,52]
 themes.default.breakpoints  = breakpoints
 themes.default.transitions  = {
 	fast:"all 0.15s ease-in-out",
-	medium:"all 0.95s ease-in-out"
+	medium:"all 0.35s ease-in-out",
+	slow:"all 0.95s ease-in-out"
+
 }
 
 

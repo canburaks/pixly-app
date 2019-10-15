@@ -12,6 +12,7 @@ const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const CssCleanupPlugin = require('css-cleanup-webpack-plugin');
 
 var DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
+const postcssPresetEnv = require('postcss-preset-env');
 
 
 
@@ -177,7 +178,22 @@ const productionSettings = {
 						  hmr: false, //isEnvDevelopment,
 						},
 					  },
-				  "css-loader"
+				  "css-loader",
+				  { loader: 'postcss-loader', options: {
+					ident: 'postcss',
+					plugins: () => [
+					  postcssPresetEnv({
+						"browsers":[
+						  "safari > 5",
+						  "ie >= 11",
+						  "iOS >= 9",
+						  "ChromeAndroid > 50",
+						  "last 20 versions"
+						],
+						"autoprefixer": { "grid": true }
+					  })
+					]
+				  } }
 				],
 			},
 		]

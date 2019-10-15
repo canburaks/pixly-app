@@ -41,7 +41,6 @@
   },
   "browserslist": [
     "> 0.25%",
-    "not dead",
     "safari > 5",
     "ie >= 11",
     "iOS >= 9",
@@ -49,8 +48,15 @@
   ],
   "postcss": {
     "plugins": {
-      "postcss-preset-env": {},
-      "autoprefixer": { "grid": true }
+      "postcss-preset-env": {
+        "browsers":[
+          "safari > 5",
+          "ie >= 11",
+          "iOS >= 9",
+          "last 20 versions"
+        ],
+        "autoprefixer": { "grid": true }
+      }
     }
   },
   "dependencies": {
