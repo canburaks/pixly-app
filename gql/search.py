@@ -321,7 +321,7 @@ class ComplexSearchType(graphene.ObjectType):
             return None
 
         topic = Tag.objects.filter(slug=self.tags[0]).first()
-        qs = topic.related_movies.all().only("id", "slug", "name", "poster", "cover_poster", "has_cover", "year")
+        qs = topic.related_movies.all().only("id", "slug", "name", "poster", "cover_poster", "year")
         #print(tags, keywords)
 
 
