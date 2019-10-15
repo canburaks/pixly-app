@@ -50,8 +50,8 @@ export const MovieSvg = styled(Svg)`
 export const SocialMediaSvg = styled(Svg)`
     stroke: ${themeGet("colors.light")};
     fill: light;
-    width:  ${props => props.size || "36px"};
-    height: ${props => props.size || "36px"};
+    width:  ${props => props.size || "36px"} !important;
+    height: ${props => props.size || "36px"} !important;
     cursor: pointer;
     :hover {
         transform: ${ props => props.hoverScale ? scale(1.1, 1.1) : null};

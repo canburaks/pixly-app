@@ -45,10 +45,7 @@ export const MoviePosterBox = React.memo(({ items, columns=[3,4,6,8, 8, 10], rat
 ))
 
 export const MovieCoverBox = React.memo(({ items, columns=[2,2,3,4,4,5,6], ratio=0.5625, notext=false, ...props }) => (
-    <Grid 
-        columns={columns} py={[4]}         
-    >
-
+    <Grid columns={columns} py={[4]}>
         {items.map( item => (
         <MovieCoverCard 
             notext={notext}
