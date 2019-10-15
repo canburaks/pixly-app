@@ -29,7 +29,7 @@ const TopicPage = (props) =>{
     const [page, setPage] = useState(1)
     const [selectedYears, setSelectedYears ] = useState({min:1950, max:2019})
     const [selectedRatings, setSelectedRatings ] = useState({min:5.0, max:9.9})
-    const [qv, setQv] = useState({page, tags:[topicSlug]})
+    const [qv, setQv] = useState({page:page, tags:[topicSlug]})
 
     
     //const [qv, setQv ] = useState({minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max})
@@ -63,7 +63,7 @@ const TopicPage = (props) =>{
         if (!isEqualObj(qv, newQv)) setQv(newQv)
     }, [])
 
-    console.log("topic page:", qv, topicSlug)
+    console.log("topic page:", qv)
     return(
         <PageContainer>
 
@@ -143,11 +143,12 @@ const TopicPage = (props) =>{
 }
 
 const SearchQuery = (props) =>{
-    const { loading, data, variables } = useQuery(TOPIC_QUERY, {variables:props.variables});
+    const { loading, data, error } = useQuery(TOPIC_QUERY, {variables:props.variables});
 
 
     console.log("topic query",data, props.variables)
     if (loading) return <Loading />
+    if (error) return <div>{error.message}</div>
     if (data) return (
         <>
         <MovieCoverBox 

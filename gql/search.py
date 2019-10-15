@@ -316,7 +316,7 @@ class ComplexSearchType(graphene.ObjectType):
         if self.tags.length == 1:
             return Tag.objects.filter(slug=self.tags[0]).first()
 
-    def resolve_topic_result(self):
+    def resolve_topic_result(self, info):
         if self.tags.length != 1:
             return None
 
