@@ -105,7 +105,7 @@ class ComplexSearchType(graphene.ObjectType):
     def result_query(self):
         keywords = self.keywords.strip() if self.keywords != None else None
         tags = self.tags
-        print(tags, keywords)
+        #print(tags, keywords)
 
         #MAIN QUERY
         qs = Movie.objects.all().only("id", "name", "poster","slug", "cover_poster", "year", "imdb_rating").order_by("id")
@@ -118,28 +118,28 @@ class ComplexSearchType(graphene.ObjectType):
                     for movie_id in t.movie_ids:
                         tag_movie_ids.add(movie_id)
         if len(tag_movie_ids) > 0:
-            print("before quantity: ", qs.count())
+            #print("before quantity: ", qs.count())
             qs = qs.filter(id__in=tag_movie_ids)
-            print("after quantity: ", qs.count())   
+            #print("after quantity: ", qs.count())   
 
         #YEAR FILTERING
         min_year = self.min_year if self.min_year!=None else 1800
         max_year = self.max_year if self.max_year!=None else 2025
         qs = qs.filter(year__gte=min_year, year__lte=max_year)
-        print("0", qs.count())   
+        #print("0", qs.count())   
 
 
         #IMDB RATING FILTER
         min_rating = self.min_rating if self.min_rating!=None else 1
         max_rating = self.max_rating if self.max_rating!=None else 10
         qs = qs.filter(imdb_rating__gte=min_rating, imdb_rating__lte=max_rating)
-        print("1", qs.count())   
+        #print("1", qs.count())   
 
         
         #FIRST KEYWORDS
         keywords_ids = set()
         if keywords and len(keywords) > 0:
-            print("asd")
+            #print("asd")
             words = multi_word_search(keywords)
 
             #check for full keywords
@@ -156,20 +156,20 @@ class ComplexSearchType(graphene.ObjectType):
                     for movie_id in partial_name_query_ids:
                         keywords_ids.add(movie_id)
         if len(keywords_ids) > 0:
-            print("asd2")
-            #print("before quantity: ", qs.count())
+            #print("asd2")
+            ##print("before quantity: ", qs.count())
             qs = qs.filter(id__in=keywords_ids)
-            #print("after quantity: ", qs.count())
+            ##print("after quantity: ", qs.count())
 
 
 
        
             
-        print(qs.count())
+        #print(qs.count())
         self.quantity = qs.count()
 
-        print(qs.count())
         qs = qs[self.skip : self.skip + self.first]
+        #print(qs.count())
         return qs
 
 

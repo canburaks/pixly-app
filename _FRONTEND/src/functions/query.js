@@ -581,21 +581,11 @@ export const COMPLEX_SEARCH = gql`
                 result{
                     id,
                     name,
-                    hasCover,
                     poster,
                     coverPoster,
                     year,
                     slug
                 }
-                keywordResult{
-                    id,
-                    name,
-                    hasCover,
-                    poster,
-                    coverPoster,
-                    year,
-                    slug
-                },
                 quantity
         },
     }

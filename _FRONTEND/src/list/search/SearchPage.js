@@ -50,7 +50,7 @@ const AdvanceSearch = (props) =>{
     const areEquals = useCallback((first, second) => (first.min === second.min && first.max === second.max), [])
     const areEqualSize = (newmovies) => (new Set(movies).size === new Set([...movies, ...newmovies]).size )
     const mergeVariables = () => ({page, keywords,minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max})
-    const updateFromQueryData = useCallback((data) => (setResultQuantity(data.complexSearch.quantity), setMovies(() => [...movies, ...data.complexSearch.keywordResult])), [])
+    const updateFromQueryData = useCallback((data) => (setResultQuantity(data.complexSearch.quantity), setMovies(() => [...movies, ...data.complexSearch.result])), [])
     
     //handlers
     const yearSelectHandler = useCallback((e) => areEquals(e, selectedYears) ? null : setSelectedYears(e), [])
@@ -61,7 +61,7 @@ const AdvanceSearch = (props) =>{
 
     if (data) {
         console.log("data", data)
-        if (!areEqualSize(data.complexSearch.keywordResult)) setMovies([...movies, ... data.complexSearch.keywordResult])
+        if (!areEqualSize(data.complexSearch.result)) setMovies([...movies, ... data.complexSearch.result])
         if (resultQuantity !==  data.complexSearch.quantity) setResultQuantity(data.complexSearch.quantity)
         }
     
@@ -153,7 +153,7 @@ const AdvanceSearch = (props) =>{
                     p={[1,2,3]}
                 >
                     {loading && <Loading />}
-                    <MovieCoverBox items={movies} columns={[2,3,4,4,6,6,8]} fontSize={[12,12,14]}/>
+                    <MovieCoverBox items={movies} columns={[2,3,3,3,4,4,6]} fontSize={[12,12,14]}/>
                 </Box>
             </Form>
         </PageContainer>

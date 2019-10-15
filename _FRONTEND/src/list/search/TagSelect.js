@@ -38,6 +38,7 @@ const TagSelect = React.memo((props) =>{
             ...base,
             minHeight:50,
             padding: 5,
+            zIndex:5
         }),
         control: base => ({...base,
             border:"1px solid rgba(40, 40, 40, 0.3)", 
