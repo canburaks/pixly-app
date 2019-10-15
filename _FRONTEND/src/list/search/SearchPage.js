@@ -121,9 +121,9 @@ const SearchPage = (props) =>{
                         display="flex" justifyContent="center" alignItems="center"
                         right={40} top={12} p={0} 
                         width={50} height={50} 
-                        hoverBg="green"
+                        hoverBg={"blue"}
                         borderRadius="50%" 
-                        bg="active"
+                        bg="dark"
                     >
                         <SearchIcon  stroke="white" strokeWidth="3" size={30} />
                     </Button>
@@ -134,17 +134,21 @@ const SearchPage = (props) =>{
                     flexDirection={["row", "row"]} 
                     width={["100%", "100%", "100%"]}  
                     minHeight={["80px", "80px", "80px", "100%"]}
+                    justifyContent="space-around"
                     flexWrap="wrap"
                     px={[3]}
                     borderBottom="1px solid"
                 >
                     <FlexBox 
                         alignItems={"center"}
-                        my={[3]} px={[3,3,3, 3]} 
-                        width={"49%"}
+                        m={[1]} px={[3]} py={[2]}
+                        width={"45%"}
                         flexGrow={1,1,1, 0}
+                        border="1px solid"
+                        borderColor="rgba(80,80,80, 0.5)"
+                        borderRadius={"8px"}
                     >
-                        <WatchIcon title="Release Year" stroke={"black"}  size={32}/>
+                        <WatchIcon title="Release Year" stroke={"black"}  size={40}/>
                         <InputRange
                             max={2020}
                             min={1900}
@@ -157,11 +161,14 @@ const SearchPage = (props) =>{
 
                     <FlexBox 
                         alignItems={"center"}
-                        my={[3]} px={[3,3,3, 3]} 
-                        width={"49%"}
+                        m={[1]} px={[3]} py={[2]}
+                        width={"45%"}
                         flexGrow={1,1,1, 0}
+                        border="1px solid"
+                        borderColor="rgba(80,80,80, 0.5)"
+                        borderRadius={"8px"}
                     >
-                        <ImdbIcon title="IMDb Rating" fill="black"  size={48} imdb/>
+                        <ImdbIcon title="IMDb Rating" fill="black"  size="40px !important;" imdb/>
                         <InputRange
                             max={10.0}
                             min={1.0}
@@ -187,11 +194,11 @@ const SearchPage = (props) =>{
                 <Box id="search-rresult-box"  
                     borderLeft="2px solid" 
                     borderColor="rgba(40,40,40, 0.3)"
-                    minWidth={["100%", "100%", "100%", "69%", "74%"]} minHeight={["100vw"]}
+                    minWidth={["100%"]} minHeight={["60vw"]}
                     p={[1,2,3]}
                 >
                     {loading && <Loading />}
-                    <MovieCoverBox items={movies} columns={[3,3,3,3,4,4,6]} fontSize={[12,12,14]}/>
+                    <MovieCoverBox items={movies} columns={[2,2,3,3,4,4,6]} fontSize={[12,12,14]}/>
                     <PaginationBox 
                         currentPage={resultQuantity!==null && page} 
                         totalPage={Math.ceil(resultQuantity/24)} 

@@ -81,7 +81,9 @@ class ComplexSearchType(graphene.ObjectType):
 
     result = graphene.List(MovieType)
     keyword_result = graphene.List(MovieType)
+
     topic = graphene.Field(TagType)
+    topic_result = graphene.List(MovieType)
 
     def __init__(self,kwargs):
         print(kwargs)
@@ -313,5 +315,36 @@ class ComplexSearchType(graphene.ObjectType):
     def resolve_topic(self, info):
         if self.tags.length == 1:
             return Tag.objects.filter(slug=self.tags[0]).first()
+
+    def resolve_topic_result(self):
+        if self.tags.length != 1:
+            return None
+
+        topic = Tag.objects.filter(slug=self.tags[0]).first()
+        qs = topic.related_movies.all().only("id", "slug", "name", "poster", "cover_poster", "has_cover", "year")
+        #print(tags, keywords)
+
+
+        #YEAR FILTERING
+        min_year = self.min_year if self.min_year!=None else 1800
+        max_year = self.max_year if self.max_year!=None else 2025
+        qs = qs.filter(year__gte=min_year, year__lte=max_year)
+        #print("0", qs.count())   
+
+
+        #IMDB RATING FILTER
+        min_rating = self.min_rating if self.min_rating!=None else 1
+        max_rating = self.max_rating if self.max_rating!=None else 10
+        qs = qs.filter(imdb_rating__gte=min_rating, imdb_rating__lte=max_rating)
+        #print("1", qs.count())   
+
+        #print(qs.count())
+        self.quantity = qs.count()
+
+        qs = qs[self.skip : self.skip + self.first]
+        #print(qs.count())
+        return qs
+
+    
 
 ###     FILTERS     ####
