@@ -166,11 +166,27 @@ const productionSettings = {
 					//  },
 				  // IMPORTANT => don't forget `injectType`  option  
 				  { loader: 'style-loader', options: { injectType: 'styleTag' } },
+				  "css-loader",
+				  { loader: 'postcss-loader', options: {
+					ident: 'postcss',
+					plugins: () => [
+					  postcssPresetEnv({
+						"browsers":[
+						  "safari > 5",
+						  "ie >= 11",
+						  "iOS >= 9",
+						  "ChromeAndroid > 50",
+						  "last 20 versions"
+						],
+						"autoprefixer": { "grid": true }
+					  })
+					]
+				  } }
 				  //"css-loader"
 				  //{ loader: 'sass-loader' },
 				],
 			},
-			{
+			/*{
 				test: /\.css$/i,
 				use: [
 					{loader: MiniCssExtractPlugin.loader, options: {
@@ -195,7 +211,7 @@ const productionSettings = {
 					]
 				  } }
 				],
-			},
+			},*/
 		]
 	},
 	plugins: [
@@ -221,8 +237,6 @@ const productionSettings = {
 					minifyURLs: true,
 				  }
 		}),
-		new PreloadWebpackPlugin(),
-		new CssCleanupPlugin(),
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
           // both options are optional
