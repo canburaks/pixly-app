@@ -646,7 +646,34 @@ export const TAG_LIST = gql`
     }
 
 `
-
+export const TOPIC_QUERY = gql`
+    query complexSearch(
+        $page: Int, 
+        $minYear: Int, $maxYear: Int, 
+        $minRating: Float, $maxRating: Float, 
+        $tags: [String],
+        ){
+        complexSearch( 
+            page: $page, 
+            minYear: $minYear, maxYear: $maxYear,
+            minRating: $minRating, maxRating: $maxRating, 
+            tags: $tags,
+            ){  
+                topcResult{
+                    id,
+                    name,
+                    poster,
+                    coverPoster,
+                    year,
+                    slug
+                }
+                topic{
+                    name, summary, slug, poster, netflix_id
+                },
+                quantity
+        }
+}
+`
 
 
 export const refetchList = { refetchQueries: [{query:MYSELF}] }
