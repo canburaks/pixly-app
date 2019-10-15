@@ -153,7 +153,7 @@ class TagAdmin(admin.ModelAdmin):
         "genre_tag", "geo_tag","phenomenal_tag",
         "series_tag", "subgenre_tag","theme_tag", "video_tag",)
 
-    fields = ("custom_id",'movielens_id',"tmdb_id","tmdb_id_2","netflix_id","name", "tag_type",
+    fields = ("custom_id",'movielens_id',"tmdb_id","tmdb_id_2","netflix_id","name","summary", "tag_type",
         "discipline_type","object_type","slug","related_movies",
         "award_tag", "base_tag","character_tag", "documentary_tag", "era_tag",
         "form_tag","genre_tag", "geo_tag","historical_person_tag",  

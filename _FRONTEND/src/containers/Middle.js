@@ -45,6 +45,8 @@ import PersonPage from "../pages/person/PersonPage";
 import ProfilePage from "../pages/profil/ProfilePage";
 import DraftPage from "../pages/DraftPage"
 import SearchPage from "../list/search/SearchPage";
+import PreSearchPage from "../list/search/PreSearchPage";
+
 //import AdvanceSearch from "../list/advance-search/AdvanceSearch";
 
 //import MovieQuery from "../pages/movie/MovieQuery.js";
@@ -81,6 +83,7 @@ const Middle = (props) => {
             <Route exact path="/advance-search" component={AdvanceSearchQuery} />
         */}
 
+            <Route exact path="/advance-search/:tag" component={PreSearchPage} />
             <Route exact path="/advance-search" component={SearchPage} />
 
             <Route exact path="/list/:slug/:page/" component={MovieListQuery} />

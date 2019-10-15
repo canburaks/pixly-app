@@ -4,9 +4,10 @@ import makeAnimated from 'react-select/animated';
 import { useQuery } from '@apollo/react-hooks';
 import { TAG_LIST } from "../../functions/query"
 
+import { Loading } from "../../styled-components"
+
 const TagSelect = React.memo((props) =>{
     const { loading, error, data } = useQuery(TAG_LIST);
-    const [selection, setSelection ] = useState([])
     const [tags, setTags ] = useState([])
 
     if (loading) return <Loading />
@@ -107,7 +108,9 @@ const TagSelect = React.memo((props) =>{
         dropdownIndicator: base => ({...base,
             color:"rgba(40,40,40, 0.6)"
         }),
-
+        placeholder: base => ({...base,
+            color:"rgba(40,40,40, 0.8)"
+        })
     }
 
 
@@ -119,6 +122,7 @@ const TagSelect = React.memo((props) =>{
             options={tagOptions}
             onChange={e => selectHandler(e)}
 
+            placeholder="Choose genre"
             components={animatedComponents}
             captureMenuScroll
             className="tag-select-menu select-menu"
@@ -143,13 +147,6 @@ function setTagColor(item, opacity=1){
     }
 }
 
-const Loading = () => (
-    <div className="page-container">
-        {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
-        <div className="loading-container">
-            <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
-        </div>
-    </div>
-)
+
 
 export default TagSelect;
