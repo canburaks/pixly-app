@@ -72,7 +72,14 @@ export const ListCoverPanel = React.memo(( props ) =>(
 ), (prevProps, nextProps) => (prevProps.item.slug === nextProps.item.slug  && prevProps.isLargeScreen === nextProps.isLargeScreen ))
 
 
-
+export const Loading = React.memo(() => (
+    <div className="page-container">
+        {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+        <div className="loading-container">
+            <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
+        </div>
+    </div>
+))
 
 
 

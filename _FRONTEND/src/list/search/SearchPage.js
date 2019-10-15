@@ -9,23 +9,23 @@ import BackButton from "../../components/buttons/BackButton"
 //import { Checkbox, Form, List, Dimmer, Loader, Image, Segment, Button, Dropdown, Breadcrumb, Pagination  } from 'semantic-ui-react'
 import JoinBanner from "../../components/JoinBanner.js"
 import TagSelect from "./TagSelect"
-import { useWindowSize, useAuthCheck, useKeyPress } from "../../functions"
+import { useWindowSize, useAuthCheck} from "../../functions"
 
 import "react-input-range/lib/css/index.css"
 import "./SearchPage.css"
 
 import { 
-    Box, FlexBox, Text,Input,SearchInput, Form,
+    Box, FlexBox, Text,Input,SearchInput, Form,Loading,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
-    PageContainer, ContentContainer, InputRange, SearchButton
+    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox
 } from "../../styled-components"
 
 
 
 
-const AdvanceSearch = (props) =>{
+const SearchPage = (props) =>{
 
-    const [complexSearch, { loading, data }] = useLazyQuery(COMPLEX_SEARCH);
+    const [complexSearch, { loading, data, variables }] = useLazyQuery(COMPLEX_SEARCH);
     
     //Variables
     const [ keywords, setKeywords ] = useState("")
@@ -48,7 +48,7 @@ const AdvanceSearch = (props) =>{
     const rounder = useCallback((number) => Math.round(number*10)/10, [])
     const roundedRatings = useCallback((obj) => ({min: rounder(obj.min), max: rounder(obj.max) }) ,[])
     const areEquals = useCallback((first, second) => (first.min === second.min && first.max === second.max), [])
-    const areEqualSize = (newmovies) => (new Set(movies).size === new Set([...movies, ...newmovies]).size )
+    const areEqualSize = (newmovies) => (new Set(movies.map(movie => movie.id)).size === new Set([...movies, ...newmovies].map(movie => movie.id)).size )
     const mergeVariables = () => ({page, keywords,minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max})
     const updateFromQueryData = useCallback((data) => (setResultQuantity(data.complexSearch.quantity), setMovies(() => [...movies, ...data.complexSearch.result])), [])
     
@@ -57,11 +57,24 @@ const AdvanceSearch = (props) =>{
     const ratingSelectHandler = useCallback((e) => areEquals(e, selectedRatings) ? null : setSelectedRatings(roundedRatings(e)), [])
     const keywordsHandler = useCallback((e) => setKeywords(e.target.value), [keywords])
 
+    const prevPage = useCallback(() => (setPage(page => page - 1), complexSearch({ variables: { ...variables, page: page - 1 } })))
+    const nextPage = useCallback(() => (setPage(page => page + 1), complexSearch({ variables: { ...variables, page: page + 1 } })))
 
 
     if (data) {
         console.log("data", data)
-        if (!areEqualSize(data.complexSearch.result)) setMovies([...movies, ... data.complexSearch.result])
+        if (!areEqualSize(data.complexSearch.result)){
+            //console.log("not equal size; state will be updated");
+            //const allmovies = [...movies, ... data.complexSearch.result]
+            //const uniqueMovieIds = new Set([...movies, ... data.complexSearch.result].map(movie => movie.id))
+            //const uniqueMovies = []
+            //uniqueMovieIds.forEach(id => {
+            //    const firstPaired = allmovies.filter(movie => movie.id === id)[0]
+            //    uniqueMovies.push(firstPaired)
+            //})
+            //setMovies(uniqueMovies)
+            setMovies(data.complexSearch.result)
+        }
         if (resultQuantity !==  data.complexSearch.quantity) setResultQuantity(data.complexSearch.quantity)
         }
     
@@ -73,12 +86,11 @@ const AdvanceSearch = (props) =>{
         else {
             const newQv = mergeVariables()
             newQv.tags = tags.map(tag => tag.value)
-            console.log("final query variables",newQv)
+            //console.log("final query variables",newQv)
             complexSearch({variables : newQv})
         } 
     }
-    //console.log("qv",mergeVariables())
-    console.log("keywords", data, loading, tags)
+    console.log("qv",variables)
     return(
         <PageContainer>
 
@@ -87,7 +99,7 @@ const AdvanceSearch = (props) =>{
                 <FlexBox justifyContent="center" id="s-text-input" minWidth="100%">
                     <SearchInput type="text"   
                         px={[2,3,4,4,4]}
-                        placeholder="Matrix.."
+                        placeholder="Search.."
                         autoFocus
                         value={keywords} 
                         onChange={keywordsHandler} 
@@ -99,17 +111,18 @@ const AdvanceSearch = (props) =>{
 
 
                 <FlexBox id="search-settings-box" 
-                    flexDirection={["row", "row", "row", "column"]} 
-                    width={["100%", "100%", "100%", "30%", "25%"]}  
+                    flexDirection={["row", "row"]} 
+                    width={["100%", "100%", "100%"]}  
                     minHeight={["80px", "80px", "80px", "100%"]}
+                    flexWrap="wrap"
                     px={[3]}
-                    borderBottom="1px solid "
+                    borderBottom="1px solid"
                 >
                     <FlexBox 
                         flexDirection={["column", "column", "column"]} 
                         alignItems={"flex-start"} 
-                        my={[3]} mx={[3,3,3, 1]} 
-                        width={"100%"}
+                        my={[3]} px={[3,3,3, 3]} 
+                        width={"49%"}
                         flexGrow={1,1,1, 0}
                     >
                         <Text fontSize={[14,16,16,18]} mt={[3,3,3,4]} mb={[2,2, 2,3]} fontWeight="bold">Year</Text>
@@ -126,8 +139,8 @@ const AdvanceSearch = (props) =>{
                     <FlexBox 
                         flexDirection={["column", "column", "column"]} 
                         alignItems={"flex-start"} 
-                        my={[3]} mx={[3,3,3, 1]} 
-                        width={"100%"}
+                        my={[3]} px={[3,3,3, 3]} 
+                        width={"49%"}
                         flexGrow={1,1,1, 0}
                     >
                         <Text fontSize={[14,16,16,18]} mt={[3,3,3,4]} mb={[2,2, 2,3]} fontWeight="bold">IMDb</Text>
@@ -141,8 +154,16 @@ const AdvanceSearch = (props) =>{
                         />
                     </FlexBox>
 
-                    <TagSelect tags={tags} tagSetter={setTags} />
-                    <SearchButton type="submit" alignSelf="center" width={["40px", "50px", "50px", "80px"]}>Search</SearchButton>
+                    <FlexBox 
+                        flexDirection={["row"]} 
+                        alignItems={"flex-start"} 
+                        my={[3]} px={[3,3,3, 3]} 
+                        width={"100%"}
+                        flexGrow={1,1,1, 0}
+                    >
+                        <TagSelect tags={tags} tagSetter={setTags} />
+                        <SearchButton type="submit" alignSelf="center" width={["70px", "70px", "70px", "80px"]} maxWidth="40%">Search</SearchButton>
+                    </FlexBox>
                 </FlexBox>
 
 
@@ -154,6 +175,11 @@ const AdvanceSearch = (props) =>{
                 >
                     {loading && <Loading />}
                     <MovieCoverBox items={movies} columns={[2,3,3,3,4,4,6]} fontSize={[12,12,14]}/>
+                    <PaginationBox 
+                        currentPage={resultQuantity!==null && page} 
+                        totalPage={Math.ceil(resultQuantity/24)} 
+                        nextPage={nextPage} prevPage={prevPage} 
+                    />
                 </Box>
             </Form>
         </PageContainer>
@@ -161,16 +187,9 @@ const AdvanceSearch = (props) =>{
 }
 
 
-const Loading = () => (
-    <div className="page-container">
-        {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
-        <div className="loading-container">
-            <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
-        </div>
-    </div>
-)
 
-export default withRouter(AdvanceSearch);
+
+export default withRouter(SearchPage);
 
 /*
 

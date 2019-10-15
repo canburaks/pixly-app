@@ -19,6 +19,7 @@ export const SearchButton = ({onClick, borderRadius="6px", ...props}) => (
             fontSize={[12,14,14,16]}
             bg="shark"
             color="light"
+            {...props}
         >
             {props.children}
         </Button>

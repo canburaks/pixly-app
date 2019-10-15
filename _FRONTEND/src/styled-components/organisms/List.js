@@ -60,6 +60,7 @@ export const MovieCoverBox = React.memo(({ items, columns=[1,2,2,2,3,3,4], ratio
     </Grid>
 ))
 
+
 //For Content Similar Movies with common tags 
 export const MovieInfoBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], ratio=0.5625, ...props }) => (
     <Grid columns={columns} py={[4]}>
@@ -77,6 +78,7 @@ export const MovieInfoBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], ratio=
         ))}
     </Grid>
 ))
+
 
 export const ProfileCircleBox = React.memo(({ items, columns=[4,6,8,10,12] }) => (
     <Grid
