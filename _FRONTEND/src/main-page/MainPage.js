@@ -6,23 +6,23 @@ import { Query } from "react-apollo";
 import { useQuery, useApolloClient, useLazyQuery } from '@apollo/react-hooks';
 import { getDataFromTree } from "@apollo/react-ssr";
 
-import { rgaPageView,  Head, MidPageAd } from "../functions/analytics"
+import { rgaPageView, rgaStart, Head, MidPageAd } from "../functions/analytics"
 import { useWindowSize, useAuthCheck, useClientWidth } from "../functions/hooks"
-import {GridBox, GridItem, SpeedyGridBox } from "../components/GridBox" 
 
 import JoinBanner from "../components/JoinBanner.js"
 
 
 import { GlideBox } from "../components2/Glide.js"
 //import { motion, useViewportScroll } from "framer-motion"
-import { MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid, PageContainer, ContentContainer } from "../styled-components"
+import { MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid, PageContainer, ContentContainer, Loading } from "../styled-components"
 
 import "./MainPage.css"
 
 
 const MainPage = (props) => {
-    console.log("main-page props: ",props)
+    //console.log("main-page props: ",props)
     const authStatus = useAuthCheck();
+    rgaStart()
 
     const CarouselList =({ item }) => (
         <Link to={`/list/${item.slug}/1`} rel="nofollow" key={item.slug} >
@@ -104,30 +104,9 @@ const MainPageQuery = (props) => {
     const { loading, error, data } = useQuery(MAIN_PAGE, {partialRefetch:true})
     if (loading) return <Loading />
     if (error) return <div>{error.message}</div>
-    if (data) return <MainPage data={data.mainPage} />
+    if (data) return <MainPage data={data.mainPage} {...props} />
 }
 
-
-
-const MainPageQuery2 = (props) => (
-    <Query query={MAIN_PAGE} partialRefetch={true}>
-    {({ loading, error, data, refetch }) => {
-        if (loading) return <Loading />;
-        if (error) return <div className="gql-error">{JSON.stringify(error.message)}</div>;
-        return <MainPage data={data.mainPage} />
-    }}
-    </Query>
-)
-
-
-const Loading = () => (
-    <div className="page-container">
-        {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
-        <div className="loading-container">
-            <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
-        </div>
-    </div>
-)
 
 
 export default MainPageQuery

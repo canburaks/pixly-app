@@ -81,6 +81,7 @@ class ComplexSearchType(graphene.ObjectType):
 
     result = graphene.List(MovieType)
     keyword_result = graphene.List(MovieType)
+    topic = graphene.Field(TagType)
 
     def __init__(self,kwargs):
         print(kwargs)
@@ -175,12 +176,6 @@ class ComplexSearchType(graphene.ObjectType):
 
     def resolve_result(self, info):
         query = self.result_query()
-        #print("query", query.count())
-        #PAGINATE
-        #if self.first!=None and self.skip!=None:
-        #    return query[self.skip : self.first + self.skip]
-
-        #FIRST PAGE
         return query
 
 
@@ -314,6 +309,9 @@ class ComplexSearchType(graphene.ObjectType):
             
         return qs.count()
 
-
+    #If only one tag is querying (Change Later: create new query)
+    def resolve_topic(self, info):
+        if self.tags.length == 1:
+            return Tag.objects.filter(slug=self.tags[0]).first()
 
 ###     FILTERS     ####

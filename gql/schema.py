@@ -194,7 +194,7 @@ class ListQuery(object):
         #base = True if kwargs.get("base_tag") != None else False 
         #geo = True if kwargs.get("geo_tag") != None else False 
 
-        QF = Q(Q(genre_tag=True) | Q(subgenre_tag=True) | Q(base_tag=True))
+        QF = Q(Q(genre_tag=True) | Q(base_tag=True))
         return Tag.objects.filter(QF).only("id", "slug", "name",)
 
     def resolve_list_of_bookmarks(self, info, **kwargs):
