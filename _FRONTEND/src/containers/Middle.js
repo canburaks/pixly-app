@@ -39,13 +39,13 @@ import BarSearch from "../list/search/BarSearch";
 
 import  { print, authCheck } from "../functions/lib"
 import  { rgaSetUser } from "../functions/analytics"
+import TopicPage from "../pages/topic/TopicPage"
 
 import MoviePage from "../pages/movie/MoviePage"
 import PersonPage from "../pages/person/PersonPage";
 import ProfilePage from "../pages/profil/ProfilePage";
 import DraftPage from "../pages/DraftPage"
 import SearchPage from "../list/search/SearchPage";
-import PreSearchPage from "../list/search/PreSearchPage";
 
 //import AdvanceSearch from "../list/advance-search/AdvanceSearch";
 
@@ -77,8 +77,11 @@ const Middle = (props) => {
             <Route exact path="/advance-search" component={AdvanceSearchQuery} />
         */}
 
-            <Route exact path="/advance-search/:tag" component={PreSearchPage} />
             <Route exact path="/advance-search" component={SearchPage} />
+
+
+            <Route exact path="/topic/:slug" component={TopicPage} />
+
 
             <Route exact path="/list/:slug/:page/" component={MovieListQuery} />
 
