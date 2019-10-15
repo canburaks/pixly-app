@@ -313,11 +313,11 @@ class ComplexSearchType(graphene.ObjectType):
 
     #If only one tag is querying (Change Later: create new query)
     def resolve_topic(self, info):
-        if self.tags.length == 1:
+        if len(self.tags) == 1:
             return Tag.objects.filter(slug=self.tags[0]).first()
 
     def resolve_topic_result(self, info):
-        if self.tags.length != 1:
+        if len(self.tags) != 1:
             return None
 
         topic = Tag.objects.filter(slug=self.tags[0]).first()
