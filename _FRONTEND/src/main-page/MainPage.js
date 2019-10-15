@@ -100,6 +100,39 @@ const MainPage = (props) => {
     )
 }
 
+const MainPageQuery = (props) => {
+    const { loading, error, data } = useQuery(MAIN_PAGE, {partialRefetch:true})
+    if (loading) return <Loading />
+    if (error) return <div>{error.message}</div>
+    if (data) return <MainPage data={data.mainPage} />
+}
+
+
+
+const MainPageQuery2 = (props) => (
+    <Query query={MAIN_PAGE} partialRefetch={true}>
+    {({ loading, error, data, refetch }) => {
+        if (loading) return <Loading />;
+        if (error) return <div className="gql-error">{JSON.stringify(error.message)}</div>;
+        return <MainPage data={data.mainPage} />
+    }}
+    </Query>
+)
+
+
+const Loading = () => (
+    <div className="page-container">
+        {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
+        <div className="loading-container">
+            <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
+        </div>
+    </div>
+)
+
+
+export default MainPageQuery
+
+/*
 const MainPageQuery2 = (props) =>{
     const client = useApolloClient();
 
@@ -126,32 +159,4 @@ const MainPageQuery2 = (props) =>{
             mainPage()
         }
     }
-    
-    //console.log("cachedata", cachedata)
-    //return <MainPage data={pageData.mainPage} />
-    //return <div></div>
-}
-
-const MainPageQuery = (props) => (
-    <Query query={MAIN_PAGE} partialRefetch={true}>
-    {({ loading, error, data, refetch }) => {
-        if (loading) return <Loading />;
-        if (error) return <div className="gql-error">{JSON.stringify(error.message)}</div>;
-        return <MainPage data={data.mainPage} />
-    }}
-    </Query>
-)
-
-
-const Loading = () => (
-    <div className="page-container">
-        {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
-        <div className="loading-container">
-            <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
-        </div>
-    </div>
-)
-
-
-export default MainPageQuery
-
+*/
