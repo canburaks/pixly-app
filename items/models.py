@@ -62,9 +62,9 @@ class Movie(SocialMedia, SEO,MainPage):
     active = models.BooleanField(default=False)
 
     name = models.CharField(max_length=100)
-    year = models.IntegerField(null=True, db_index=True)
+    year = models.IntegerField(null=True)
     summary = models.TextField(max_length=5000,null=True)
-    slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
+    slug = models.SlugField(db_index=True, max_length=100, null=True, blank=True, unique=True, )
 
     imdb_rating = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
     imdb_votes = models.IntegerField(null=True, blank=True)
