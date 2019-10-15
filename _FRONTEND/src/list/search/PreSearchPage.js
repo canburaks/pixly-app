@@ -17,7 +17,7 @@ import "./SearchPage.css"
 import { 
     Box, FlexBox, Text,Input,SearchInput, Form,Loading,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
-    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox
+    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, TextSection
 } from "../../styled-components"
 
 

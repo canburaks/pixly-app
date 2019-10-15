@@ -8,6 +8,7 @@ import BackButton from "../../components/buttons/BackButton"
 //import Slider from "../../components/Slider"
 //import { Checkbox, Form, List, Dimmer, Loader, Image, Segment, Button, Dropdown, Breadcrumb, Pagination  } from 'semantic-ui-react'
 import JoinBanner from "../../components/JoinBanner.js"
+import { Head, MidPageAd } from "../../functions/analytics"
 import TagSelect from "./TagSelect"
 import { useWindowSize, useAuthCheck} from "../../functions"
 
@@ -21,7 +22,14 @@ import {
 } from "../../styled-components"
 
 
-
+const Header = () => (
+    <Head
+        title={"Pixly Search - Search Movies by Genre, Tag, IMDb Rating and Release Year"}
+        description={"Pixly Search is a free service that you can search and filter movies with respect to their genres, tags, IMDb Ratings and release date"}
+        keywords={["Movie Search", "Advance Movie Search", "Search by IMDb Rating", "Movie with Release Year"]}
+        canonical={`https://pixly.app/movie/advance-search`}
+    />
+)
 
 const SearchPage = (props) =>{
 
@@ -93,7 +101,7 @@ const SearchPage = (props) =>{
     console.log("qv",variables)
     return(
         <PageContainer>
-
+            <Header />
             <Form flexWrap="wrap" onSubmit={submitHandler}>
 
                 <FlexBox justifyContent="center" id="s-text-input" minWidth="100%">
