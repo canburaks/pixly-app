@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, createContext, useMemo } from 'react'
-import "@glidejs/glide/dist/css/glide.core.min.css";
-import "@glidejs/glide/dist/css/glide.theme.min.css";
+
 
 import "./Glide.css"
  // Add the import

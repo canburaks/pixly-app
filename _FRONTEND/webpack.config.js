@@ -159,20 +159,6 @@ const productionSettings = {
 			{
 				test: /\.css$/i,
 				use: [
-					//{loader: MiniCssExtractPlugin.loader, options: {
-					//	  //your styles extracted in a file for production builds.
-					//	  //hmr: isEnvDevelopment,
-					//	},
-					//  },
-				  // IMPORTANT => don't forget `injectType`  option  
-				  { loader: 'style-loader', options: { injectType: 'styleTag' } },
-				  //"css-loader"
-				  //{ loader: 'sass-loader' },
-				],
-			},
-			{
-				test: /\.css$/i,
-				use: [
 					{loader: MiniCssExtractPlugin.loader, options: {
 						  //your styles extracted in a file for production builds.
 						  hmr: false, //isEnvDevelopment,
