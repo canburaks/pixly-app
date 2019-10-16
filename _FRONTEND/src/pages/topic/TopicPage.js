@@ -1,14 +1,14 @@
 import React, { useState, useRef,useEffect, useCallback, useMemo } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { useLazyQuery, useQuery } from '@apollo/react-hooks';
-import { TOPIC_SEARCH_QUERY } from "../../functions/query"
+import { TOPIC_QUERY } from "../../functions/query"
 
 //import { Query } from "react-apollo";
 import BackButton from "../../components/buttons/BackButton"
 //import Slider from "../../components/Slider"
 //import { Checkbox, Form, List, Dimmer, Loader, Image, Segment, Button, Dropdown, Breadcrumb, Pagination  } from 'semantic-ui-react'
 import JoinBanner from "../../components/JoinBanner.js"
-import { useWindowSize, useAuthCheck, isEqualObj, Head} from "../../functions"
+import { useWindowSize, useAuthCheck, isEqualObj} from "../../functions"
 
 
 import { 
@@ -19,72 +19,61 @@ import {
 } from "../../styled-components"
 import { forEach } from "async";
 
-const topicInfo = (name) => `Pixly topics are kind of collections that are more specific than genre based search.` + 
-        `Topic Movies treat specific subjects like ${name}. You can also filter your search based on IMDb ratings or release year of the movies`
 
 
-const TopicPage = React.memo(({ topic, items, quantity, fetchMore, variables, refetch, page }) =>{
-    //console.log("topic ", { topic, items, quantity, fetchMore, variables, refetch, page })
+const TopicPage = (props) =>{
+    const topicSlug = [props.match.params.slug]
+    const tags = topicSlug //for shorhand
 
-    const [selectedYears, setSelectedYears ] = useState({min:variables.minYear, max:variables.maxYear})
-    const [selectedRatings, setSelectedRatings ] = useState({min:variables.minRating, max:variables.maxRating})
+    const [page, setPage] = useState(1)
+    const [selectedYears, setSelectedYears ] = useState({min:1950, max:2019})
+    const [selectedRatings, setSelectedRatings ] = useState({min:5.0, max:9.9})
+    const [ qv, setQv ] = useState({page, tags,minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max})
+    //const lazyvariables = {page, tags, minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max}
+    
 
     //local functions
     const rounder = useCallback((number) => Math.round(number*10)/10, [])
     const roundedRatings = useCallback((obj) => ({min: rounder(obj.min), max: rounder(obj.max) }) ,[])
+    const areEquals = useCallback((first, second) => (first.min === second.min && first.max === second.max), [])
+    const getLazyVariables = useCallback(() => ({minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max}))
 
-    const yearSelectHandler = useCallback((e) => setSelectedYears(e), [])
-    const ratingSelectHandler = useCallback((e) => setSelectedRatings(roundedRatings(e)), [])
+    var lazyvariables = {}
+    //handlers
+    //const yearSelectHandler = useCallback((e) => setSelectedYears(e), [])
+    //const ratingSelectHandler = useCallback((e) => setSelectedRatings(roundedRatings(e)), [])
+
+    const yearSelectHandler = useCallback((e) => lazyvariables = {...lazyvariables, ...e}, [])
+    const ratingSelectHandler = useCallback((e) => lazyvariables = {...lazyvariables, ...roundedRatings(e) }, [])
+    console.log("lazy", lazyvariables)
 
 
-    const getLazyVariables = useCallback(() => ({page:1, minYear:selectedYears.min, maxYear:selectedYears.max, minRating:selectedRatings.min, maxRating:selectedRatings.max}),[selectedYears, selectedRatings])
-    const lazyvariables = getLazyVariables(selectedYears, selectedRatings)
-
-
-    //console.log("lazy", lazyvariables)
-
-    const nextPage = useCallback(() => refetch({...variables,  page:variables.page + 1}))
-    const prevPage = useCallback(() => refetch({...variables,  page:variables.page - 1}))
+    const nextPage = useCallback(() => (setPage(page => page + 1), setQv({...qv, page:page + 1})),[page])
+    const prevPage = useCallback(() => (setPage(page => page - 1), setQv({...qv, page:page - 1})),[page])
     
-    const topicinfotext = topic.summary ? topic.summary + " " + topicInfo(topic.name) : topicInfo(topic.name)
+    const { loading, error, data, variables:prevVariables } = useQuery(TOPIC_QUERY,{variables:qv })
+
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (!isEqualObj(variables, lazyvariables)) refetch({page:1, ...lazyvariables})
+        //const newQv = {page, tags, ...getLazyVariables()}
+        const newQv = {page, tags, ...lazyvariables}
+
+        if (!isEqualObj(qv, newQv)) setQv(newQv)
     }
-    const title = `Pixly Topics: ${topic.name} - Best ${topic.name} Movies`.replace(/\b\w/g, l => l.toUpperCase())
-
-    const description = `Discover ${topic.name} films, filter them with their IMDb rating and release year.` +
-                        `Find best movies of ${topic.name}` 
-
-    const keywords = [`Best ${topic.name} films`, `Best ${topic.name} movies`, `${topic.name} like movies`, `${topic.name} cinema`]
-    
+    console.log("topic page", qv)
     return(
-        <PageContainer px={[2,3,3,4]}>
-            <Head
-                title={topic.title || title}
-                description={topic.seoShortDescription || description}
-                keywords={keywords}
-                image={topic.coverPoster ? topic.coverPoster : topic.poster ? topic.poster : null}
-                canonical={`https://pixly.app/topic/${topic.slug}`}
-            />
-            <TextSection 
-                headerSize={[24]}
-                textSize={[14,16]}
-                header={topic.name} 
-                text={topicinfotext}
-            />
+        <PageContainer>
 
             <Form flexWrap="wrap" onSubmit={submitHandler}>
                 <FlexBox id="search-settings-box" 
                     flexDirection={["row", "row"]} 
-                    width={["100vw", "100vw", "100vw"]}  
+                    width={["100%", "100%", "100%"]}  
                     minHeight={["80px", "80px", "80px", "100%"]}
                     justifyContent="space-around"
                     flexWrap="wrap"
                     px={[3]}
                     borderBottom="1px solid"
-                    borderTop="1px solid"
                 >
                     <FlexBox 
                         alignItems={"center"}
@@ -92,7 +81,7 @@ const TopicPage = React.memo(({ topic, items, quantity, fetchMore, variables, re
                         width={"41%"}
                         flexGrow={1,1,1, 0}
                         border="1px solid"
-                        borderColor="rgba(80,80,80, 0.0)"
+                        borderColor="rgba(80,80,80, 0.5)"
                         borderRadius={"8px"}
                     >
                         <WatchIcon title="Release Year" stroke={"black"}  size={36}/>
@@ -111,7 +100,7 @@ const TopicPage = React.memo(({ topic, items, quantity, fetchMore, variables, re
                         width={"41%"}
                         flexGrow={1,1,1, 0}
                         border="1px solid"
-                        borderColor="rgba(80,80,80, 0.0)"
+                        borderColor="rgba(80,80,80, 0.5)"
                         borderRadius={"8px"}
                     >
                         <ImdbIcon title="IMDb Rating" fill="black"  size="36px !important;" imdb/>
@@ -136,63 +125,54 @@ const TopicPage = React.memo(({ topic, items, quantity, fetchMore, variables, re
             </Form>
 
             <Box id="search-rresult-box"  
+                    borderLeft="2px solid" 
                     borderColor="rgba(40,40,40, 0.3)"
                     minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
                     p={[1,2,3]}
                 >
+            {console.log("parent inline")}
+            {data &&
+                <>
+                <TextSection 
+                    headerSize={[24]}
+                    textSize={[14,16]}
+                    header={data.complexSearch.topic.name} 
+                    text={data.complexSearch.topic.summary}
+                />
                 <MovieCoverBox 
                     columns={[2,3,3,3,4,4,6]} 
-                    items={items} 
+                    items={data.complexSearch.topicResult} 
                     fontSize={[12,12,14]}
                     />
                 <PaginationBox 
                     currentPage={page} 
-                    totalPage={quantity} 
+                    totalPage={data.complexSearch.quantity} 
                     nextPage={nextPage} prevPage={prevPage} 
                 />
-
+                </>
+            }
                 </Box>
         </PageContainer>
     );
-})
+}
 
-const TopicQuery = React.memo(({ match }) =>{
-    var { loading, error, data, variables, fetchMore, refetch } = useQuery(TOPIC_SEARCH_QUERY,{
-                fetchPolicy: "cache-and-network",
-                variables:{
-                    page:1, topicSlug:match.params.slug, 
-                    minYear:1950, maxYear:2019,
-                    minRating:5.0, maxRating:9.9
-                }})
+const SearchQuery = React.memo(({tags, page, minYear, maxYear, minRating, maxRating, quantityHandler}) =>{
 
-    const fetcher = (newVars) => fetchMore({variables: newVars, updateQuery: (prev, { fetchMoreResult }) => {
-                //console.log("fetcher",prev, fetchMoreResult)
-                if (!fetchMoreResult) return prev;
-                variables = {...variables, ...newVars}
-                return Object.assign({}, prev, {
-                    complexSearch: {...prev.complexSearch, ...fetchMoreResult.complexSearch}
-                });
-            }
-        })
+
+    console.log("topic query", loading, data, prevVariables)
+
 
     if (loading) return <Loading />
-    if (data && data.complexSearch){
-        console.log("data", data)
+    if (data && data.complexSearch) {
+        quantityHandler(data.complexSearch.quantity)
         return (
-            <TopicPage 
-                variables={variables}
-                data={data}
-                page={variables.page}
-                topic={data.complexSearch.topic} 
-                items={data.complexSearch.topicResult} 
-                quantity={data.complexSearch.quantity} 
-                refetch={refetch}
+            <>
 
-            />
-        )
-    }
-})
+            {console.log("inline")}
+            </>
+        )}
+}, (p,n) => isEqualObj(p,n))
 
 
 
-export default withRouter(TopicQuery);
+export default withRouter(TopicPage);
