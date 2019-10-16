@@ -174,7 +174,15 @@ custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages 
 #pprint(custom_url_pages)
 
 #----------------------------------------------------------------------------
-
+class TopicSitemap(Sitemap):
+    changefreq = "weekly"
+    priority = 0.9
+    def items(self):
+        topics =  List.objects.all().only("id", "name", "slug", "summary").order_by("id")
+        return filtered_list
+    
+    def location(self, item):
+        return f"/list/{item.slug}/1"
 
 class ListSitemap(Sitemap):
     changefreq = "monthly"
