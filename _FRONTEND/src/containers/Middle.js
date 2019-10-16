@@ -13,6 +13,7 @@ import { PERSONA, MOVIE, DIRECTOR_PERSON_MIX, PROFILE, LIST_BOARD, LISTE, MOVIE_
 //import MovieListQuery from "../list/movie/MovieListQuery";
 
 import DirectorList from "../list/director/DirectorList";
+import TopicList from "../list/topic/TopicList";
 
 //import DiscoverQuery from "../list/filter/DiscoverQuery";
 import AdvanceSearch from "../list/advance-search/AdvanceSearch";
@@ -79,6 +80,7 @@ const Middle = (props) => {
 
             <Route exact path="/advance-search" component={SearchPage} />
 
+            <Route exact path="/topics" component={TopicList} />
 
             <Route exact path="/topic/:slug" component={TopicPage} />
 

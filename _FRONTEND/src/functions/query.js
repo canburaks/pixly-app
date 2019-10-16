@@ -646,7 +646,7 @@ export const TAG_LIST = gql`
     }
 
 `
-export const TOPIC_QUERY = gql`
+export const TOPIC_SEARCH_QUERY = gql`
     query complexSearch(
         $page: Int, 
         $minYear: Int, $maxYear: Int, 
@@ -673,6 +673,21 @@ export const TOPIC_QUERY = gql`
                 quantity
         }
 }
+`
+export const TOPIC_LIST_QUERY = gql`
+    query{
+        listOfTopics{
+            id,name, slug
+        }
+    }
+`
+
+export const TOPIC_QUERY = gql`
+    query topic($slug:String){
+        topic(slug:$slug){
+            id,name, slug, coverPoster
+        }
+    }
 `
 
 
