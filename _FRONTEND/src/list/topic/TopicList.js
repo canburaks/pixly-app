@@ -15,7 +15,7 @@ import JoinBanner from "../../components/JoinBanner.js"
 
 import {
      ListCard, PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,
-     MovieCoverCard,
+     TopicCoverCard,
      Loading
  } from "../../styled-components"
 
@@ -48,7 +48,7 @@ const TopicList = React.memo((props) => {
                     <hr />
                 </div>
                 <Grid columns={[1,2,2,3,3,3,4]}  >
-                    {topics.map(topic => <MovieCoverCard item={topic} key={topic.slug} />)}
+                    {topics.map(topic => <TopicCoverCard item={topic} key={topic.slug} />)}
                 </Grid>
 
                 <ListBoardAd />

@@ -744,6 +744,7 @@ class ListType(DjangoObjectType, SocialMediaType, SEOType):
 
 class TopicType(DjangoObjectType, SEOType):
     id = graphene.Int()
+    netflix_id = graphene.Int()
     slug = graphene.String()
     name = graphene.String()
     summary = graphene.String()
@@ -757,6 +758,9 @@ class TopicType(DjangoObjectType, SEOType):
 
     class Meta:
         model = Topic
+
+    def resolve_netflix_id(self, info, *_):
+        return self.netflix_id
 
     def resolve_richdata(self, info, *_):
         return self.richdata
