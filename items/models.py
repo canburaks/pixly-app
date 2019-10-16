@@ -713,7 +713,7 @@ class Video(DateRecords):
     thumbnail = models.URLField(null=True, blank=True, help_text="Thumbnail url if exists.")
     youtube_id = models.CharField(max_length=50, null=True, blank=True,unique=True, help_text="Youtube video id, if video is on TouTube.")
     
-    data = JSONField(default=dict)
+    data = JSONField(default=dict, null=True, blank=True)
 
     channel_url = models.URLField(null=True, blank=True, help_text="Youtube channel's main page link")
     channel_name = models.CharField(max_length=150, null=True, blank=True, help_text="Name of the Youtube channel")
