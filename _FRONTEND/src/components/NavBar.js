@@ -67,7 +67,7 @@ const NavBar = props => {
             <UnderlineEffect rel="nofollow" >Topic</UnderlineEffect>
         </NewLink>
     )
-    console.log(development)
+    //console.log(development)
     return (
         <nav id="new-nav">
             <div className="nav-blurbox" style={navbarcolor}/>

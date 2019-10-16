@@ -160,7 +160,7 @@ const TopicQuery = React.memo(({ match }) =>{
     var { loading, error, data, variables, fetchMore, refetch } = useQuery(TOPIC_SEARCH_QUERY,{
                 fetchPolicy: "cache-and-network",
                 variables:{
-                    page:1, tags:[match.params.slug], 
+                    page:1, topicSlug:[match.params.slug], 
                     minYear:1950, maxYear:2019,
                     minRating:5.0, maxRating:9.9
                 }})
@@ -177,7 +177,7 @@ const TopicQuery = React.memo(({ match }) =>{
 
     if (loading) return <Loading />
     if (data && data.complexSearch){
-        //console.log("data", data)
+        console.log("data", data)
         return (
             <TopicPage 
                 variables={variables}

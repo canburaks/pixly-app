@@ -651,26 +651,17 @@ export const TOPIC_SEARCH_QUERY = gql`
         $page: Int, 
         $minYear: Int, $maxYear: Int, 
         $minRating: Float, $maxRating: Float, 
-        $tags: [String],
+        $tags: [String], $topicSlug:String
         ){
         complexSearch( 
             page: $page, 
             minYear: $minYear, maxYear: $maxYear,
             minRating: $minRating, maxRating: $maxRating, 
-            tags: $tags,
+            tags: $tags, topicSlug:$topicSlug
             ){  
-                topicResult{
-                    id,
-                    name,
-                    poster,
-                    coverPoster,
-                    year,
-                    slug
-                }
                 topic{
                     name, summary, slug, poster, netflixId
                 },
-                quantity
         }
 }
 `
