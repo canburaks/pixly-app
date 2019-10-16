@@ -1,5 +1,5 @@
 from django.contrib.sitemaps import Sitemap
-from items.models import Movie, List, Video
+from items.models import Movie, List, Video, Tag
 from persons.models import Person, Director, Crew
 from persons.profile import Profile
 from django.urls import reverse
