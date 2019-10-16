@@ -1,5 +1,5 @@
 from django.contrib.sitemaps import Sitemap
-from items.models import Movie, List, Video, Tag
+from items.models import Movie, List, Video, Tag, Topic
 from persons.models import Person, Director, Crew
 from persons.profile import Profile
 from django.urls import reverse
@@ -102,8 +102,6 @@ movie__slugs = [
     "movie/mommy-2014"
 ]
 
-
-#[print(f"https://pixly.app/movie/{ms}") for ms in movie__slugs]
 person__slugs = [
     "person/ingmar-bergman-6648",
     "person/alfred-hitchcock-2636",
@@ -147,9 +145,7 @@ liste_slugs =[
     "list/david-finchers-26-favorite-films/1",
 ]
 topic__slugs = [
-    "topic/soviet-union",
     "topic/art-house",
-    "topic/sadism"
 ]
 
 def page_template_generator(routes):
@@ -167,9 +163,9 @@ def page_template_generator(routes):
 custom_movie_pages =  page_template_generator(movie__slugs)
 custom_person_pages = page_template_generator(person__slugs)
 custom_list_pages =   page_template_generator(liste_slugs)
-custom_slug_pages =   page_template_generator(topic__slugs)
+custom_topic_pages =   page_template_generator(topic__slugs)
 
-custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages + custom_slug_pages
+custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages + custom_topic_pages
 
 #pprint(custom_url_pages)
 
@@ -178,11 +174,12 @@ class TopicSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.9
     def items(self):
-        topics =  Tag.objects.filter(topic_tag=True).only("id", "name", "slug").order_by("id")
+        topics =  Topic.objects.filter(main_page=True).only("id", "name", "slug").order_by("id")
         return topics
     
     def location(self, item):
         return f"/topic/{item.slug}"
+
 
 class ListSitemap(Sitemap):
     changefreq = "monthly"
