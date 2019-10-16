@@ -178,11 +178,11 @@ class TopicSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.9
     def items(self):
-        topics =  List.objects.all().only("id", "name", "slug", "summary").order_by("id")
-        return filtered_list
+        topics =  Tag.objects.filter(topic_tag=True).only("id", "name", "slug").order_by("id")
+        return topics
     
     def location(self, item):
-        return f"/list/{item.slug}/1"
+        return f"/topic/{item.slug}"
 
 class ListSitemap(Sitemap):
     changefreq = "monthly"

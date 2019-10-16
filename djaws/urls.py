@@ -36,7 +36,7 @@ from graphene_file_upload.django import FileUploadGraphQLView
 from django.http import HttpResponse
 from django.contrib.sitemaps.views import sitemap
 from djaws.sitemaps import (MovieSitemap, DirectorSitemap, StaticSitemap, ProfilePageSitemap,
-    ListSitemap, custom_url_pages)
+    ListSitemap,TopicSitemap, custom_url_pages)
 
 from django.contrib.sitemaps import views
 from django.contrib.sitemaps import ping_google
@@ -58,7 +58,8 @@ sitemaps = {
     #'user': ProfilePageSitemap(),
     "lists":ListSitemap(),
     'movie': MovieSitemap(),
-    'person': DirectorSitemap()
+    'person': DirectorSitemap(),
+    "topic": TopicSitemap()
 }
 
 urlpatterns = [
