@@ -45,7 +45,10 @@ class ComplexSearchQuery(object):
             max_rating=graphene.Float(default_value=None),
 
             #TAGS
-            tags=graphene.List(graphene.String, default_value=[])
+            tags=graphene.List(graphene.String, default_value=[]),
+
+            topic_slug= graphene.String(default_value=None)
+
             )
 
     def resolve_tag_search(self, info, **kwargs):
@@ -82,7 +85,7 @@ class ComplexSearchType(graphene.ObjectType):
     result = graphene.List(MovieType)
     keyword_result = graphene.List(MovieType)
 
-    topic = graphene.Field(TagType)
+    topic = graphene.Field(TopicType)
     topic_result = graphene.List(MovieType)
 
     def __init__(self,kwargs):
@@ -96,8 +99,9 @@ class ComplexSearchType(graphene.ObjectType):
         self.max_rating = kwargs.get("max_rating")
 
         self.tags = kwargs.get("tags")
-        
-        self.page = kwargs.get("page")
+        self.topic_slug = kwargs.get("topic_slug")
+
+        self.page = kwargs.get("page") if kwargs.get("page") else 1
         self.first = settings.PER_PAGE_ITEM
         self.skip = (self.page - 1 ) * settings.PER_PAGE_ITEM
         #self.first = 40
@@ -311,17 +315,20 @@ class ComplexSearchType(graphene.ObjectType):
             
         return qs.count()
 
-    #If only one tag is querying (Change Later: create new query)
+
+
     def resolve_topic(self, info):
-        if len(self.tags) == 1:
-            return Tag.objects.filter(slug=self.tags[0]).first()
+        print("0")
+        if self.topic_slug:
+            print("0")
+            return Topic.objects.filter(slug=self.topic_slug).first()
 
     def resolve_topic_result(self, info):
-        if len(self.tags) != 1:
+        if not self.topic_slug:
             return None
 
-        topic = Tag.objects.filter(slug=self.tags[0]).first()
-        qs = topic.related_movies.all().only("id", "slug", "name", "poster", "cover_poster", "year").order_by("-id")
+        topic = Topic.objects.filter(slug=self.topic_slug).first()
+        qs = topic.movies.all().only("id", "slug", "name", "poster", "cover_poster", "year").order_by("-id")
         #print(tags, keywords)
 
 

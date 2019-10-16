@@ -144,10 +144,6 @@ class ListQuery(object):
             first=graphene.Int(default_value=None),
             skip=graphene.Int(default_value=None))
 
-    list_of_topics = graphene.List(TopicType,
-            first=graphene.Int(default_value=None),
-            skip=graphene.Int(default_value=None))
-
     list_of_movies = graphene.List(MovieType, 
             id=graphene.Int(default_value=None),
             name=graphene.String(default_value=None),
@@ -166,6 +162,7 @@ class ListQuery(object):
 
 
     list_of_tags = graphene.List(TagType)
+    list_of_topics = graphene.List(TopicType)
 
     list_of_recent_movies = graphene.List(CustomMovieType,
                     first=graphene.Int(default_value=None),
@@ -181,20 +178,11 @@ class ListQuery(object):
         custom_movies = [CustomMovieType(x.id) for x in movie_qs if len(x.videos.all())>0 ]
         return custom_movies
 
-
+    def resolve_list_of_topics(self, info, **kwargs):
+        return Topic.objects.filter(main_page=True).only("id", "slug", "name", "summary", "cover_poster")
 
     def resolve_list_of_tags(self, info, **kwargs):
-        #genre = True if kwargs.get("genre_tag") != None else False 
-        #subgenre = True if kwargs.get("subgenre_tag") != None else False 
-        #documentary = True if kwargs.get("documentary_tag") != None else False 
-        #award_tag = True if kwargs.get("award_tag") != None else False 
-        #theme = True if kwargs.get("theme_tag") != None else False 
-        #character = True if kwargs.get("character_tag") != None else False 
-        #series = True if kwargs.get("series_tag") != None else False 
-        #base = True if kwargs.get("base_tag") != None else False 
-        #geo = True if kwargs.get("geo_tag") != None else False 
-
-        QF = Q(Q(genre_tag=True) | Q(base_tag=True))
+        QF = Q(Q(genre_tag=True) | Q(base_tag=True | Q(award_tag=True)))
         return Tag.objects.filter(QF).only("id", "slug", "name",)
 
     def resolve_list_of_bookmarks(self, info, **kwargs):
@@ -319,13 +307,6 @@ class ListQuery(object):
         #return [CustomListType(id=x) for x in qs]
 
 
-    def resolve_list_of_topics(self, info, **kwargs):
-        first = kwargs.get("first")
-        skip = kwargs.get("skip")
-        qs = Topic.objects.all()
-        if first:
-            return paginate(qs, first, skip)
-        return qs
 
     def resolve_list_of_movies(self, info, **kwargs):
         id = kwargs.get("id")
@@ -634,8 +615,6 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
 
     rating = graphene.Field(RatingType,id=graphene.Int())
 
-    topic = graphene.Field(TopicType,id=graphene.Int())
-
     prediction = graphene.Float(movieId=graphene.Int(default_value=None), id=graphene.Int(default_value=None))
 
     person = graphene.Field(PersonType,id=graphene.String(default_value=None))
@@ -682,6 +661,22 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
                 slug=graphene.String(default_value=None))
 
     main_page = graphene.Field(MainPageType)
+
+    topic = graphene.Field(TopicType,
+                id=graphene.Int(default_value = None),
+                slug=graphene.String(default_value = None))
+
+    def resolve_topic(self, info, **kwargs):
+        id = kwargs.get("id")
+        slug = kwargs.get("slug")
+        #ip = info.context.META.get('REMOTE_ADDR')
+        if id:
+            return Topic.objects.filter(id=id).first()
+        elif slug:
+            return Topic.objects.filter(slug=slug).first()
+        else:
+            return None
+
 
     def resolve_main_page(self, info, *_):
         return MainPageType

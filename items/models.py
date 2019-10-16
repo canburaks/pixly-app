@@ -875,6 +875,8 @@ class Prediction(models.Model):
 
 class Topic(SEO, MainPage):
     id = models.IntegerField(primary_key=True)
+    slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
+    tag = models.OneToOneField("items.Tag", null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=400)
     summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic")
     content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
@@ -893,11 +895,39 @@ class Topic(SEO, MainPage):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def create_tag_topic(cls, tag):
+        last_pk = Topic.objects.all().last().pk
+        topic = cls(id=last_pk + 1, name=tag.name, slug=tag.slug, summary=tag.summary, tag=tag)
+        topic.save()
+        for m in tag.related_movies.all().only("id", "slug"):
+            topic.movies.add(m)
+        topic.main_page = tag.main_page
+        topic.tags.add(tag)
+        topic.save()
+
+
+    def add_slug(self):
+        from django.utils.text import slugify
+        self.slug = slugify(self.name)
+        self.save()
+
+    def pair_tag(self, tag_object):
+        if self.tag:
+            self.slug = tag_object.slug
+            self.main_page = tag_object.main_page
+            for m in tag_object.related_movies.all().only("id", "slug"):
+                self.movies.add(m)
+            self.save()
+            
+
     def save(self, *args, **kwargs):
-        #self.quantity = self.related_movies.all().only("id").count()
-        if not self.id:
-            last_pk = Topic.objects.all().last().id 
+        if not self.pk or not self.id:
+            last_pk = Topic.objects.all().last().pk
+            print("last pk id:", last_pk)
             self.id = last_pk + 1
+        if not self.slug:
+            self.add_slug()
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
 
@@ -924,7 +954,7 @@ TAG_OBJECT_TYPE = (
     ("article", "Article/Blog Post Tags"),
 )
 
-class Tag(SEO):
+class Tag( SEO, MainPage):
     name = models.CharField(max_length=400)
     summary = models.TextField(max_length=5000,null=True, blank=True)
     slug = models.SlugField(max_length=100, null=True, blank=True, unique=True, db_index=True)
