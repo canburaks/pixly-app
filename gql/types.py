@@ -787,7 +787,7 @@ class TopicType(DjangoObjectType, SEOType):
         return self.tag
 
     def resolve_movies(self, info, *_):
-        mid = self.movies.all().only("id", "slug")
+        mid = self.movies.all().values_list("id", flat=True)
         return [CustomMovieType(id=x) for x in mid ]
 
 
