@@ -873,7 +873,7 @@ class Prediction(models.Model):
 
 
 
-class Topic(SEO):
+class Topic(SEO, MainPage):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=400)
     summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic")
@@ -924,7 +924,7 @@ TAG_OBJECT_TYPE = (
     ("article", "Article/Blog Post Tags"),
 )
 
-class Tag(models.Model):
+class Tag(SEO):
     name = models.CharField(max_length=400)
     summary = models.TextField(max_length=5000,null=True, blank=True)
     slug = models.SlugField(max_length=100, null=True, blank=True, unique=True, db_index=True)
