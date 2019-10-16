@@ -182,8 +182,8 @@ class ListQuery(object):
         return Topic.objects.filter(main_page=True).only("id", "slug", "name", "summary", "cover_poster")
 
     def resolve_list_of_tags(self, info, **kwargs):
-        QF = Q(Q(genre_tag=True) | Q(base_tag=True | Q(award_tag=True)))
-        return Tag.objects.filter(QF).only("id", "slug", "name",)
+        QF = (Q(genre_tag=True) | Q(base_tag=True) | Q(award_tag=True)) & Q(topic_tag=False)
+        return Tag.objects.filter((Q(genre_tag=True) | Q(base_tag=True) | Q(award_tag=True)) & Q(topic_tag=False)).only("id", "slug", "name",)
 
     def resolve_list_of_bookmarks(self, info, **kwargs):
         first = kwargs.get("first")
