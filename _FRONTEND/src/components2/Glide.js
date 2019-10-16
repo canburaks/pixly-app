@@ -7,6 +7,7 @@ import "./Glide.css"
 import Glide from '@glidejs/glide'
 import { useWindowSize,useClientWidth } from "../functions/hooks"
 //import  { Breakpoints } from '@glidejs/glide/dist/glide.modular.esm'
+import { MovieCoverBox, DirectorCard, Grid, Loading } from "../styled-components"
 
 
 export const GlideBox = (props) => {
@@ -92,10 +93,26 @@ export const GlideCarousel = (props) => {
     )
 }
 
-
-
-
 const FlexBox = (props) => {
+    const childWidth = `${94 / props.quantity}%`
+    const childMargin = `${10 / (props.quantity * 2)}%`
+    const styles={
+        child:{
+            width: childWidth,
+            maxWidth:props.maxWidth ? props.maxWidth : childWidth,
+            height:"100%",
+            margin:childMargin
+        }
+    }
+    return (
+        <Grid columns={[5]} m={[2]}>
+            {props.children}
+        </Grid>
+    )
+}
+
+
+const FlexBox2 = (props) => {
     const childWidth = `${94 / props.quantity}%`
     const childMargin = `${10 / (props.quantity * 2)}%`
     const styles={
