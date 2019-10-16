@@ -19,6 +19,19 @@ export const MosaicListCard = (props) => (
     </Card>
 )
 
+export const TopicCoverCard = (props) => (
+    <ImageCard
+        src={props.item.coverPoster || props.item.poster} 
+        text={!props.notext ? props.item.name : null}
+        link={`/topic/${props.item.slug}`}
+        linktext={props.item.name}
+        ratio={props.ratio || 0.5625} 
+        borderRadius={"8px"}
+        boxShadow="card"
+        hoverShadow
+        {...props}
+    />
+)
 
 export const DirectorCard = (props) => (
     <ImageCard 
