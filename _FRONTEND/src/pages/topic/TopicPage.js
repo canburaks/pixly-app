@@ -1,7 +1,7 @@
 import React, { useState, useRef,useEffect, useCallback, useMemo } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { useLazyQuery, useQuery } from '@apollo/react-hooks';
-import { TOPIC_QUERY } from "../../functions/query"
+import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 //import { Query } from "react-apollo";
 import BackButton from "../../components/buttons/BackButton"
@@ -157,7 +157,7 @@ const TopicPage = React.memo(({ topic, items, quantity, fetchMore, variables, re
 })
 
 const TopicQuery = React.memo(({ match }) =>{
-    var { loading, error, data, variables, fetchMore, refetch } = useQuery(TOPIC_QUERY,{
+    var { loading, error, data, variables, fetchMore, refetch } = useQuery(TOPIC_SEARCH_QUERY,{
                 fetchPolicy: "cache-and-network",
                 variables:{
                     page:1, tags:[match.params.slug], 

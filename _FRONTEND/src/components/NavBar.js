@@ -18,7 +18,8 @@ import "./NavBar.css";
 import { movieAutoComplete } from "../functions/grec";
 import { GlobalContext } from "../App";
 import { AuthForm, ForgetForm } from "../forms/AuthForm"
-import { UnderlineEffect } from "../styled-components"
+import { UnderlineEffect, NewLink } from "../styled-components"
+import { development } from "../index"
 
 const BgTexture = React.memo(() => <div style={{backgroundImage:`url(https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/background/navbar-bg.jpg)`, backgroundSize:"cover", width:"100%", height:60, position:"absolute", top:-2, left:-2, zIndex:-1}}></div>)
 
@@ -61,24 +62,31 @@ const NavBar = props => {
     const navbartexture = {backgroundImage:`url(https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/background/navbar-bg.jpg)`, backgroundSize:"cover", width:"100%", zIndex:-1}
     const navbarcolor = (window.location.href.includes("/movie/") || window.location.href.includes("/list/"))  ? {opacity:0.3} : {opacity:1, ...navbartexture}
     //console.log("nav", window.screenTop)
-
+    const HiddenLink = () => development && (
+        <NewLink id="nav-directors" className="nav-page nav-item" to="/topics" rel="nofollow" >
+            <UnderlineEffect rel="nofollow" >Topic</UnderlineEffect>
+        </NewLink>
+    )
+    console.log(development)
     return (
         <nav id="new-nav">
             <div className="nav-blurbox" style={navbarcolor}/>
             <div className="brand-box nav-left pad-l-4x">
-                <Link to="/" rel="nofollow" ><Brand /></Link>
+                <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
             </div>
             
             <div className="nav-pages nav-middle">
-                <Link id="nav-directors" className="nav-page nav-item" to="/directors/1" rel="nofollow" >
+
+                <HiddenLink />
+
+                <NewLink id="nav-directors" className="nav-page nav-item" to="/directors/1" rel="nofollow" >
                     <UnderlineEffect rel="nofollow" >Directors</UnderlineEffect>
-                </Link>
+                </NewLink>
 
 
-
-                <Link id="nav-lists" className="nav-page nav-item" to="/collections" rel="nofollow" >
+                <NewLink id="nav-lists" className="nav-page nav-item" to="/collections" rel="nofollow" >
                     <UnderlineEffect >Collections</UnderlineEffect>
-                </Link>
+                </NewLink>
 
 
 

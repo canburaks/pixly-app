@@ -748,6 +748,8 @@ class TopicType(DjangoObjectType, SEOType):
     name = graphene.String()
     summary = graphene.String()
     content = graphene.String()
+    poster = graphene.String()
+    cover_poster = graphene.String()
 
     movies = graphene.List("gql.types.CustomMovieType")
     tag = graphene.Field("gql.types.TagType")
