@@ -183,7 +183,7 @@ class ListQuery(object):
 
     def resolve_list_of_tags(self, info, **kwargs):
         QF = (Q(genre_tag=True) | Q(base_tag=True) | Q(award_tag=True)) & Q(topic_tag=False)
-        return Tag.objects.filter((Q(genre_tag=True) | Q(base_tag=True) | Q(award_tag=True)) & Q(topic_tag=False)).only("id", "slug", "name",)
+        return Tag.objects.filter(QF).only("id", "slug", "name",)
 
     def resolve_list_of_bookmarks(self, info, **kwargs):
         first = kwargs.get("first")
