@@ -113,7 +113,6 @@ const SearchPage = (props) =>{
                         onChange={keywordsHandler} 
                         minHeight="70px"
                         width={"100%"}
-                        error={error}
                     />
                     <Button type="submit" 
                         position="absolute" 
