@@ -149,20 +149,20 @@ class PredictionAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ("pk","custom_id",'movielens_id',"tmdb_id","slug",
-        "award_tag", "base_tag","character_tag",
+        "award_tag", "base_tag","character_tag","topic_tag",
         "genre_tag", "geo_tag","phenomenal_tag",
         "series_tag", "subgenre_tag","theme_tag", "video_tag",)
 
-    fields = ("custom_id",'movielens_id',"tmdb_id","tmdb_id_2","netflix_id","name","summary", "tag_type",
+    fields = ("custom_id",'movielens_id',"tmdb_id","tmdb_id_2","netflix_id","name","summary", "tag_type","topic_tag",
         "discipline_type","object_type","slug","related_movies",
         "award_tag", "base_tag","character_tag", "documentary_tag", "era_tag",
         "form_tag","genre_tag", "geo_tag","historical_person_tag",  
         "phenomenal_tag","series_tag", "subgenre_tag","theme_tag", "video_tag","parent_genres","adult_tag",)
 
     readonly_fields = ("pk","related_movies")
-    search_fields = ('name', )
+    search_fields = ('name',"slug")
     raw_id_fields = ['related_movies',]
-    list_filter = ('tag_type',"object_type",
+    list_filter = ('tag_type',"object_type","topic_tag",
         "award_tag", "base_tag","character_tag", "documentary_tag", "era_tag",
         "form_tag","genre_tag", "geo_tag","historical_person_tag",  "phenomenal_tag",
         "series_tag", "subgenre_tag","theme_tag", "video_tag",)

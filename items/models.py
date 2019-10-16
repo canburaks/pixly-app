@@ -951,6 +951,7 @@ class Tag(models.Model):
     documentary_tag = models.BooleanField(default=False)
     form_tag = models.BooleanField(default=False, help_text="About form of movie; no-dialogue, dialogue, 70mm, nonlinear, multiple-storylines, etc..")
     adult_tag = models.BooleanField(default=False)
+    topic_tag = models.BooleanField(default=False)
 
 
 
