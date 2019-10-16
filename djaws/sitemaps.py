@@ -173,7 +173,6 @@ custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages 
 class TopicSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.9
-    protocol = "https"
     def items(self):
         topics =  Topic.objects.filter(main_page=True).only("id", "name", "slug").order_by("id")
         return topics
@@ -185,7 +184,6 @@ class TopicSitemap(Sitemap):
 class ListSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.9
-    protocol = "https"
     def items(self):
         lists =  List.objects.all().only("id", "name", "slug", "summary").order_by("id")
         filtered_list = [x for x in lists if len(x.summary) > settings.LIST_MIN_SUMMARY]
@@ -199,7 +197,6 @@ class MovieSitemap(Sitemap):
     changefreq = "weekly"
     #slugs = [x.split("movie/")[1] for x in movie__slugs]
     priority = 0.9
-    protocol = "https"
     def items(self):
         #print(movie__slugs)
         slugs = [x.split("movie/")[1] for x in movie__slugs]
@@ -217,7 +214,6 @@ class MovieSitemap(Sitemap):
 class DirectorSitemap(Sitemap):
     changefreq = "yearly"
     priority = 0.6
-    protocol = "https"
     def items(self):
         slugs = [x.split("person/")[1] for x in person__slugs]
         mqs_mini = Person.objects.filter(slug__in=slugs).only("id", "slug", "name")
@@ -229,7 +225,6 @@ class DirectorSitemap(Sitemap):
 class ProfilePageSitemap(Sitemap):
     changefreq = "yearly"
     priority = 0.2
-    protocol = "https"
     def items(self):
         return Profile.objects.all().only("id", "username").order_by("id")
     def location(self, item):
@@ -238,7 +233,6 @@ class ProfilePageSitemap(Sitemap):
 class StaticSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.8
-    protocol = "https"
     def items(self):
         statics = [
             "","/", "/directors/1", "/collections", "/advance-search"
