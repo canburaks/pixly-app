@@ -7,7 +7,7 @@ import { useQuery, useApolloClient, useLazyQuery } from '@apollo/react-hooks';
 import { getDataFromTree } from "@apollo/react-ssr";
 
 import { rgaPageView, rgaStart, Head, MidPageAd } from "../functions/analytics"
-import { useWindowSize, useAuthCheck, useClientWidth } from "../functions/hooks"
+import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../functions/hooks"
 
 import JoinBanner from "../components/JoinBanner.js"
 
@@ -36,7 +36,7 @@ const MainPage = (props) => {
     )
 
     const sortedMovies = props.data.movies.sort((a,b) => b.id - a.id)
-    
+    const directorShow = useValues(3,3,4,5,5,6)
     return(
         <PageContainer>
             <Head
@@ -74,9 +74,9 @@ const MainPage = (props) => {
                 <h4 className="t-xl t-bold mar-t-4x asfs hover-t-underline t-color-dark">
                     <Link rel="nofollow" to={`/directors/1`} title="Visit Directors Page">Directors</Link>
                 </h4>
-                
-                <Grid columns={[5]} m={[2]}>
-                    {props.data.persons.map(person => (
+
+                <Grid columns={[3,3,4,5,5,6]} m={[2]}>
+                    {props.data.persons.slice(0, directorShow).map(person => (
                         <DirectorCard item={person} key={person.slug}/>
                     ) )}
                 </Grid>
