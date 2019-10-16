@@ -70,7 +70,7 @@ const SearchPage = (props) =>{
 
 
     if (data) {
-        console.log("data", data)
+        //console.log("data", data)
         if (!areEqualSize(data.complexSearch.result)){
             //console.log("not equal size; state will be updated");
             //const allmovies = [...movies, ... data.complexSearch.result]
@@ -98,7 +98,7 @@ const SearchPage = (props) =>{
             complexSearch({variables : newQv})
         } 
     }
-    console.log("qv",variables)
+    //console.log("qv",variables)
     return(
         <PageContainer>
             <Header />

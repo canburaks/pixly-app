@@ -102,6 +102,7 @@ movie__slugs = [
     "movie/mommy-2014"
 ]
 
+
 #[print(f"https://pixly.app/movie/{ms}") for ms in movie__slugs]
 person__slugs = [
     "person/ingmar-bergman-6648",
@@ -145,6 +146,12 @@ liste_slugs =[
     "list/nuri-bilge-ceylans-top-10-favorite-films/1",
     "list/david-finchers-26-favorite-films/1",
 ]
+topic__slugs = [
+    "topic/soviet-union",
+    "topic/art-house",
+    "topic/sadism"
+]
+
 def page_template_generator(routes):
     new_paths = []
     for route in routes:
@@ -157,10 +164,12 @@ def page_template_generator(routes):
 
 
 
-custom_movie_pages = page_template_generator( movie__slugs)
+custom_movie_pages =  page_template_generator(movie__slugs)
 custom_person_pages = page_template_generator(person__slugs)
-custom_list_pages = page_template_generator( liste_slugs)
-custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages
+custom_list_pages =   page_template_generator(liste_slugs)
+custom_slug_pages =   page_template_generator(topic__slugs)
+
+custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages + custom_slug_pages
 
 #pprint(custom_url_pages)
 
