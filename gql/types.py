@@ -742,11 +742,67 @@ class ListType(DjangoObjectType, SocialMediaType, SEOType):
         return 0
 
 
-class TopicType(DjangoObjectType):
+class TopicType(DjangoObjectType, SEOType):
+    id = graphene.Int()
+    slug = graphene.String()
     name = graphene.String()
+    summary = graphene.String()
+    content = graphene.String()
+
+    movies = graphene.List("gql.types.CustomMovieType")
+    tag = graphene.Field("gql.types.TagType")
+    tags = graphene.List("gql.types.TagType")
+
     class Meta:
         model = Topic
 
+    def resolve_richdata(self, info, *_):
+        return self.richdata
+
+    def resolve_seo_title(self, info, *_):
+        return self.seo_title
+
+    def resolve_seo_description(self, info, *_):
+        return self.seo_description
+
+    def resolve_seo_short_description(self, info, *_):
+        return self.seo_short_description if self.seo_short_description else self.summary
+         
+
+    def resolve_seo_keywords(self, info, *_):
+        return self.seo_keywords
+    def resolve_slug(self, info, *_):
+        return self.slug
+
+    def resolve_tags(self, info, *_):
+        return self.tags.all().defer("related_movies", "related_videos", "related_lists")
+
+    def resolve_tag(self, info, *_):
+        return self.tag
+
+    def resolve_movies(self, info, *_):
+        mid = self.movies.all().only("id", "slug")
+        return [CustomMovieType(id=x) for x in mid ]
+
+
+    def resolve_cover_poster(self, info, *_):
+        if self.cover_poster:
+            return self.cover_poster.url
+        return None
+
+    def resolve_poster(self, info, *_):
+        if self.poster:
+            return self.poster.url
+        return None
+
+    def resolve_name(self, info, *_):
+        return self.name
+
+    def resolve_content(self, info, *_):
+        return self.content
+
+    def resolve_summary(self, info, *_):
+        return self.summary
 
 class DirectorPersonMixType(DjangoObjectType, SocialMediaType, SEOType, StatisticsType):
     filtered_data = graphene.types.json.JSONString()
