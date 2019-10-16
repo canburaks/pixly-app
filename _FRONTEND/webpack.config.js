@@ -223,7 +223,7 @@ const productionSettings = {
 				  }
 		}),
 		new PreloadWebpackPlugin(),
-		new CssCleanupPlugin(),
+		//new CssCleanupPlugin(),
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
           // both options are optional
