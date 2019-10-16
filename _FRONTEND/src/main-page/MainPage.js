@@ -74,12 +74,12 @@ const MainPage = (props) => {
                 <h4 className="t-xl t-bold mar-t-4x asfs hover-t-underline t-color-dark">
                     <Link rel="nofollow" to={`/directors/1`} title="Visit Directors Page">Directors</Link>
                 </h4>
-
-                <GlideBox s={2} m={3} l={[4]} xl={[5]}  xxl={[6]} xxxl={[7]} >
+                
+                <Grid columns={[5]} m={[2]}>
                     {props.data.persons.map(person => (
                         <DirectorCard item={person} key={person.slug}/>
                     ) )}
-                </GlideBox>
+                </Grid>
 
 
                 <h4 className="t-xl t-bold mar-t-4x asfs hover-t-underline">
