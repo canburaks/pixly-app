@@ -22,21 +22,7 @@
     "plugins": [
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-transform-runtime",
-      "babel-plugin-graphql-tag",
-      [
-        "module:fast-async",
-        {
-          "env": {
-            "log": false
-          },
-          "compiler": {
-            "promises": true,
-            "generators": false
-          },
-          "runtimePattern": null,
-          "useRuntimeModule": false
-        }
-      ]
+      "babel-plugin-graphql-tag"
     ]
   },
   "browserslist": [
@@ -49,13 +35,15 @@
   "postcss": {
     "plugins": {
       "postcss-preset-env": {
-        "browsers":[
+        "browsers": [
           "safari > 5",
           "ie >= 11",
           "iOS >= 9",
           "last 20 versions"
         ],
-        "autoprefixer": { "grid": true }
+        "autoprefixer": {
+          "grid": true
+        }
       }
     }
   },
@@ -73,7 +61,6 @@
     "cbs-react-components": "^0.13.14",
     "cbs-web-components": "^0.4.0",
     "core-js": "3",
-    "fast-async": "^6.3.8",
     "framer": "^1.1.3",
     "framer-motion": "^1.6.7",
     "graphql": "^14.0.2",
@@ -124,7 +111,6 @@
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "eslint-plugin-react-hooks": "^2.1.2",
     "extract-loader": "^3.1.0",
-    "faster.js": "^1.1.1",
     "file-loader": "^4.2.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",

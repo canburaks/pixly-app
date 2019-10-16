@@ -68,12 +68,13 @@ export const CrewCard = (props) => (
 
 
 export const ListCard = (props) => (
-    <Card width={"100%"} p={"0px"}  height={"100%"} boxShadow="card" bg="white" hoverShadow borderRadius={"8px"} 
+    <Card width={props.width || "100%"} p={"0px"}  height={props.height || "100%"} boxShadow="card" bg="white" hoverShadow borderRadius={"8px"} 
         justifyContent="space-between"
+
     >
         <ImageCard
-            src={props.list.coverPoster} 
-            link={`/list/${props.list.slug}/1`}
+            src={props.item.coverPoster} 
+            link={`/list/${props.item.slug}/1`}
             linktext={props.item.name}
             ratio={0.41}
             borderRadius={"6px"}

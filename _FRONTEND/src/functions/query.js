@@ -659,9 +659,18 @@ export const TOPIC_SEARCH_QUERY = gql`
             minRating: $minRating, maxRating: $maxRating, 
             tags: $tags, topicSlug:$topicSlug
             ){  
+                topicResult{
+                    id,
+                    name,
+                    poster,
+                    coverPoster,
+                    year,
+                    slug
+                }
                 topic{
-                    name, summary, slug, poster, netflixId
+                    name, summary, slug, poster
                 },
+                quantity
         }
 }
 `

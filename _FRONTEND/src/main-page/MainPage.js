@@ -16,6 +16,7 @@ import { GlideBox } from "../components2/Glide.js"
 //import { motion, useViewportScroll } from "framer-motion"
 import { MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid, PageContainer, ContentContainer, Loading } from "../styled-components"
 
+
 import "./MainPage.css"
 
 
