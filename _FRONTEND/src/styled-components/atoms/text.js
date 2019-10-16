@@ -24,7 +24,8 @@ export const Text = styled('p')({
 )
 
 export const HeaderText = styled('h1')({
-  minWidth:"100% !important"
+  minWidth:"100% !important",
+  textTransform:"capitalize"
 },
   compose(
     typography,
@@ -37,7 +38,8 @@ export const HeaderText = styled('h1')({
   )
 )
 export const HeaderMini = styled('h4')({
-  minWidth:"100% !important"
+  minWidth:"100% !important",
+  textTransform:"capitalize"
 },
   compose(
     typography,

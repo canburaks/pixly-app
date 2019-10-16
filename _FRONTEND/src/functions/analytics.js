@@ -27,7 +27,6 @@ export const Head = (props) => {
         
         {/* TITLE */}
         <title>{titleText}</title>
-        <meta name="title" content={titleText} />
 
         {/* DESCRIPTION */}
         <meta name="description" content={descriptionText} />
