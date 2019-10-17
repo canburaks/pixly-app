@@ -4,7 +4,6 @@ import { Route, Switch, Link, withRouter } from "react-router-dom"
 import { MAIN_PAGE } from "../functions/query";
 import { Query } from "react-apollo";
 import { useQuery, useApolloClient, useLazyQuery } from '@apollo/react-hooks';
-import { getDataFromTree } from "@apollo/react-ssr";
 
 import { rgaPageView, rgaStart, Head, MidPageAd } from "../functions/analytics"
 import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../functions/hooks"
@@ -67,7 +66,7 @@ const MainPage = (props) => {
 
             <ContentContainer>
                 
-                <GlideBox xs ={1} s={1} m={2} l={2} xl={3}  xxl={3} xxxl={3} >
+                <GlideBox xs ={1} s={2} m={2} l={2} xl={3}  xxl={3} xxxl={3} >
                     {props.data.lists.map(item => <CarouselList  item={item} key={item.slug} /> )}
                 </GlideBox>
 
@@ -76,9 +75,9 @@ const MainPage = (props) => {
                     <Link rel="nofollow" to={`/directors/1`} title="Visit Directors Page">Directors</Link>
                 </h4>
 
-                <Grid columns={[2,2,4]} m={[2]}>
+                <Grid columns={[2,2,4,4,4]} >
                     {props.data.persons.slice(0,4).map(person => (
-                        <DirectorCard item={person} key={person.slug} fontSize={["14px"]} notext={true} />
+                        <DirectorCard item={person} key={person.slug} fontSize={["14px"]} notext={true} maxWidth={"80%"}/>
                     ) )}
                 </Grid>
 

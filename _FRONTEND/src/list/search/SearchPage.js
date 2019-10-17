@@ -12,8 +12,7 @@ import { Head, MidPageAd } from "../../functions/analytics"
 import TagSelect from "./TagSelect"
 import { useWindowSize, useAuthCheck} from "../../functions"
 
-import "react-input-range/lib/css/index.css"
-import "./SearchPage.css"
+//import "react-input-range/lib/css/index.css"
 
 import { 
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
@@ -48,7 +47,7 @@ const SearchPage = (props) =>{
 
 
     const [ movies, setMovies ] = useState([])
-    const [ error, setError ] = useState(null)
+    const [ message, setMessage ] = useState(null)
 
     //Error and internal states
     const authStatus = useAuthCheck();
@@ -70,25 +69,26 @@ const SearchPage = (props) =>{
     const nextPage = useCallback(() => (setPage(page => page + 1), complexSearch({ variables: { ...variables, page: page + 1 } })))
 
     const areEqualSize = (prev, next) => {
-        console.log("asds")
+        //console.log("asds")
         const oldIds = new Set(prev.map(obj => obj.id));
         const newIds = new Set(next.map(obj => obj.id));
-        console.log("array of object checker:", oldIds, newIds);
-        console.log("array of object checker sizes: ", oldIds.size, newIds.size)
+        //console.log("array of object checker:", oldIds, newIds);
+        //console.log("array of object checker sizes: ", oldIds.size, newIds.size)
         if (oldIds.size == newIds.size) return true
         else return false
     }
 
     if (data) {
-        if (movies.length === 0 && data.complexSearch.result.length !== 0) setMovies(data.complexSearch.result)
+        if (movies.length === 0 && data.complexSearch && data.complexSearch.result.length !== 0) setMovies(data.complexSearch.result)
         else if (movies && movies.length > 0) {
-            console.log("new result",data.complexSearch.result ,data)
+            //console.log("new result",data.complexSearch.result ,data)
             const areEquals = areEqualSize(movies, data.complexSearch.result)
-            console.log("are equal",areEquals)
+            //console.log("are equal",areEquals)
 
             if (!areEquals){
                 setMovies(data.complexSearch.result)
                 setResultQuantity(data.complexSearch.quantity)
+                setMessage(`${data.complexSearch.quantity} ${data.complexSearch.quantity.length > 1 ? "movies" : "movie"} found.`)
                 }
         }
     }
@@ -96,12 +96,12 @@ const SearchPage = (props) =>{
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (keywords.length < 3 && tags.length === 0) setError("Your Search is too short")
+        if (keywords.length < 3 && tags.length === 0) setMessage("Your should provide search keywords or choose a genre please")
         else {
             complexSearch({variables: {...mergeVariables()} })
             //const newQv = mergeVariables()
             //newQv.tags = tags.map(tag => tag.value)
-            ////console.log("final query variables",newQv)
+            //////console.log("final query variables",newQv)
             //complexSearch({variables : newQv})
         } 
     }
@@ -141,7 +141,7 @@ const SearchPage = (props) =>{
                     minHeight={["80px", "80px", "80px", "100%"]}
                     justifyContent="space-around"
                     flexWrap="wrap"
-                    px={[3]}
+                    px={[3]} mt={[3,3,3]}
                     borderBottom="1px solid"
                 >
                 
@@ -167,6 +167,7 @@ const SearchPage = (props) =>{
                     p={[1,2,3]}
                 >
                     {loading && <Loading />}
+                    <Text fontSize={[14,14,16]} minHeight={16} fontWeight={"bold"}>{message}</Text>
                     <MovieCoverBox items={movies} columns={[2,2,3,3,4,4,6]} fontSize={[12,12,14]}/>
                     
                     {resultQuantity > 24 &&

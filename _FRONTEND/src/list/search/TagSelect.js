@@ -72,12 +72,13 @@ const TagSelect = React.memo((props) =>{
             justifyContent:"center",
             alignItems:"center",
             //border:"2px solid rgba(255, 255, 255, 0.7)", 
-            borderRadius:12,
+            borderRadius:8,
+            border:"1px solid rgba(40,40,40, 0.3)",
             backgroundColor:"rgba(255,255,255, 0.7)",
             fontWeight:600,
             padding:"0px 4px",
             margin:"2px 2px",
-            boxShadow:"0 10px 29px -8px rgba(255, 255, 255, 0.17)"
+            boxShadow:"0 10px 29px -8px rgba(40, 40, 40, 0.17)"
         }),
         multiValueLabel: (base, { data }) => ({...base,
            color:setTagColor(data, 1),
@@ -140,7 +141,7 @@ function setTagColor(item, opacity=1){
             return `rgba(46, 49, 49, ${opacity})` 
         case "award":
             return `rgba(3, 166, 120, ${opacity})`
-        case "genre":
+        case "Genre":
             return `rgba(57, 61, 204, ${opacity})`
         case "tag":
             return `rgba(102, 51, 153, ${opacity})`

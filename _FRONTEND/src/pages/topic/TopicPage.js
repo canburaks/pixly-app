@@ -19,9 +19,6 @@ import {
     YearSlider,RatingSlider,
 } from "../../styled-components"
 
-const topicInfo = (name) => `Pixly topics are kind of collections that are more specific than genre based search.` + 
-        `Topic Movies treat specific subjects like ${name}. You can also filter your search based on IMDb ratings or release year of the movies`
-
 
 const TopicPage = (props) =>{
     const topicSlug = props.match.params.slug 
@@ -56,7 +53,6 @@ const TopicPage = (props) =>{
             setPage(1);
         }
     }
-    const topicpageinfo = useMemo(() => (queryData && queryData.topic) ? topicInfo(queryData.topic.name) : null, [queryData])
     return(
         <PageContainer>
             {queryData && queryData.topic &&
@@ -69,19 +65,15 @@ const TopicPage = (props) =>{
                 />
             }
 
-            <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"200px"}>
+            <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"}>
                 {queryData && queryData.topic &&
-                    <>
                     <TextSection 
                         headerSize={[24, 26, 28]}
                         textSize={[14,16]}
                         mt={[3]} mb={[0]} py={[0]}
                         header={queryData.topic.name} 
                         text={queryData.topic.summary}
-                    />
-                    <Text>{topicpageinfo}</Text>
-                    </>
-                    }   
+                    />}   
             </FlexBox>
             <Form flexWrap="wrap" onSubmit={submitHandler}>
                 <FlexBox id="search-settings-box" 

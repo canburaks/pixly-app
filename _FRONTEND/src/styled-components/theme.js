@@ -84,7 +84,8 @@ themes.default.shadows = {
 	dark: "-1px 2px 1px rgba(20, 20, 20, 0.87)",
 	textDark:"-2px 1px 1px rgba(0, 0, 0, 0.57)",
 	textLight:"-2px 1px 1px rgba(255, 255, 255, 0.57)",
-
+	mini2: "2px 2px 4px -2px rgba(40,40,40, 0.45);",
+	mini: "0px 2px 6px rgba(6, 28, 63, 0.15);",
 	//small:"rgba(40, 40, 40, 0.45) 0px 1px 5px, " +
 	//		"rgba(50, 50, 50, 0.05) 0px 1px 10px, " + 
 	//		"rgba(60, 0, 100, 0.08) 0px 20px 30px",
@@ -112,7 +113,12 @@ themes.default.shadows = {
 	diffuse2:"0 1px 1px rgba(0,0,0,0.08), " +
 			"0 2px 2px rgba(0,0,0,0.12), " +
 			"0 4px 4px rgba(0,0,0,0.16), " +
-			"0 8px 8px rgba(0,0,0,0.20) " ,
+			"0 6px 6px rgba(0,0,0,0.20) " ,
+	
+	diffuse3:"0 1px 1px rgba(0,0,0,0.18), " +
+			"0 2px 2px -4px rgba(0,0,0,0.20), " +
+			"0 3px 4px -4px rgba(0,0,0,0.24), " +
+			"0 4px 6px -4px rgba(0,0,0,0.26) " ,
 			 
 	hover:  "0 1px 1px   rgba(0, 0, 0,   0.22), " +
 			"0 2px 2px   rgba(0, 0, 0,   0.22), " + 

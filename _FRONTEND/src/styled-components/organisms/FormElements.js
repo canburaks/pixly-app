@@ -27,16 +27,16 @@ export const YearSlider = (props) => {
     }
 
     return(
-        <FlexBox 
+        <FlexBox boxShadow={"mini"}
             alignItems={"center"}
-            m={[1]} pl={[0]} pr={[3]} py={[2]}
-            width={"41%"}
+            m={[1]} pl={[1]} pr={[3,3,3,4]} py={[2]}
+            width={"43%"}
             flexGrow={1,1,1, 0}
-            border="1px solid"
+            border="0.5px solid"
             borderColor="rgba(80,80,80, 0.5)"
             borderRadius={"8px"}
         >
-            <WatchIcon title="Release Year" stroke={"black"}  size={36}/>
+            <WatchIcon title="Release Year" stroke={"black"}  size={30}/>
             <InputRange
                 max={2020}
                 min={1900}
@@ -66,16 +66,16 @@ export const RatingSlider = (props) => {
     }
     
     return(
-        <FlexBox 
+        <FlexBox boxShadow={"mini"}
             alignItems={"center"}
-            m={[1]} pl={[0]} pr={[3]} py={[2]}
-            width={"41%"}
+            m={[1]} pl={[1]} pr={[3,3,3,4]} py={[2]}
+            width={"43%"}
             flexGrow={1,1,1, 0}
-            border="1px solid"
-            borderColor="rgba(80,80,80, 0.5)"
+            border="0.5px solid"
+            borderColor="rgba(80,80,80, 0.4)"
             borderRadius={"8px"}
         >
-        <ImdbIcon title="IMDb Rating" fill="black"  size="36px !important;" imdb/>
+        <ImdbIcon title="IMDb Rating" fill="black"  size="30px !important;" imdb/>
         <InputRange
             max={10.0}
             min={1.0}
