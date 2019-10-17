@@ -1,70 +1,88 @@
 import React, { useState, useRef,useEffect, useCallback, useMemo } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { useLazyQuery, useQuery } from '@apollo/react-hooks';
-import { TOPIC_QUERY } from "../../functions/query"
+import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 //import { Query } from "react-apollo";
 import BackButton from "../../components/buttons/BackButton"
 //import Slider from "../../components/Slider"
 //import { Checkbox, Form, List, Dimmer, Loader, Image, Segment, Button, Dropdown, Breadcrumb, Pagination  } from 'semantic-ui-react'
 import JoinBanner from "../../components/JoinBanner.js"
-import { useWindowSize, useAuthCheck, isEqualObj} from "../../functions"
+import { useWindowSize, useAuthCheck, isEqualObj, Head} from "../../functions"
 
 
 import { 
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
     ImdbIcon, WatchIcon, SearchIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
-    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, TextSection
+    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, TextSection,
+    YearSlider,RatingSlider,
 } from "../../styled-components"
-import { forEach } from "async";
 
+const topicInfo = (name) => `Pixly topics are kind of collections that are more specific than genre based search.` + 
+        `Topic Movies treat specific subjects like ${name}. You can also filter your search based on IMDb ratings or release year of the movies`
 
 
 const TopicPage = (props) =>{
-    const topicSlug = [props.match.params.slug]
-    const tags = topicSlug //for shorhand
+    const topicSlug = props.match.params.slug 
 
     const [page, setPage] = useState(1)
-    const [selectedYears, setSelectedYears ] = useState({min:1950, max:2019})
-    const [selectedRatings, setSelectedRatings ] = useState({min:5.0, max:9.9})
-    const [ qv, setQv ] = useState({page, tags,minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max})
-    //const lazyvariables = {page, tags, minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max}
+
+    const [yearData, setYearData ] = useState({minYear:1950, maxYear:2019})
+    const [ratingData, setRatingData ] = useState({minRating:5.0, maxRating:9.9})
+
+    const [lazyvariables,setLazyVariables] = useState(null)
+    const [queryData, setQueryData] = useState(null)
+
     
-
-    //local functions
-    const rounder = useCallback((number) => Math.round(number*10)/10, [])
-    const roundedRatings = useCallback((obj) => ({min: rounder(obj.min), max: rounder(obj.max) }) ,[])
-    const areEquals = useCallback((first, second) => (first.min === second.min && first.max === second.max), [])
-    const getLazyVariables = useCallback(() => ({minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max}))
-
-    var lazyvariables = {}
     //handlers
-    //const yearSelectHandler = useCallback((e) => setSelectedYears(e), [])
-    //const ratingSelectHandler = useCallback((e) => setSelectedRatings(roundedRatings(e)), [])
+    const dataDispatcher = useCallback((data) => queryData===null && setQueryData(data), [queryData])
+    const yearDispatcher = useCallback((data) => setYearData(data), [yearData])
+    const ratingDispatcher = useCallback((data) => setRatingData(data), [ratingData])
 
-    const yearSelectHandler = useCallback((e) => lazyvariables = {...lazyvariables, ...e}, [])
-    const ratingSelectHandler = useCallback((e) => lazyvariables = {...lazyvariables, ...roundedRatings(e) }, [])
-    console.log("lazy", lazyvariables)
-
-
-    const nextPage = useCallback(() => (setPage(page => page + 1), setQv({...qv, page:page + 1})),[page])
-    const prevPage = useCallback(() => (setPage(page => page - 1), setQv({...qv, page:page - 1})),[page])
+    const nextPage = () => setPage(page => page + 1)
+    const prevPage = () => setPage(page => page - 1)
     
-    const { loading, error, data, variables:prevVariables } = useQuery(TOPIC_QUERY,{variables:qv })
+    if ( lazyvariables === null) setLazyVariables({...yearData, ...ratingData})
 
+    console.log("yearData",yearData)
+    console.log("ratingData",ratingData)
 
     const submitHandler = (e) => {
         e.preventDefault()
-        //const newQv = {page, tags, ...getLazyVariables()}
-        const newQv = {page, tags, ...lazyvariables}
-
-        if (!isEqualObj(qv, newQv)) setQv(newQv)
+        const newLazyVars = {...yearData, ...ratingData}
+        if (!isEqualObj(lazyvariables, newLazyVars)){
+            setLazyVariables(newLazyVars);
+            setPage(1);
+        }
     }
-    console.log("topic page", qv)
+    const topicpageinfo = useMemo(() => (queryData && queryData.topic) ? topicInfo(queryData.topic.name) : null, [queryData])
     return(
         <PageContainer>
+            {queryData && queryData.topic &&
+                <Head
+                    title={queryData.topic.seoTitle}
+                    description={queryData.topic.seoShortDescription}
+                    keywords={queryData.topic.keywords}
+                    image={queryData.topic.coverPoster ? queryData.topic.coverPoster : queryData.topic.poster ? queryData.topic.poster : null}
+                    canonical={`https://pixly.app/topic/${queryData.topic.slug}`}
+                />
+            }
 
+            <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"200px"}>
+                {queryData && queryData.topic &&
+                    <>
+                    <TextSection 
+                        headerSize={[24, 26, 28]}
+                        textSize={[14,16]}
+                        mt={[3]} mb={[0]} py={[0]}
+                        header={queryData.topic.name} 
+                        text={queryData.topic.summary}
+                    />
+                    <Text>{topicpageinfo}</Text>
+                    </>
+                    }   
+            </FlexBox>
             <Form flexWrap="wrap" onSubmit={submitHandler}>
                 <FlexBox id="search-settings-box" 
                     flexDirection={["row", "row"]} 
@@ -74,44 +92,13 @@ const TopicPage = (props) =>{
                     flexWrap="wrap"
                     px={[3]}
                     borderBottom="1px solid"
+                    borderTop="1px solid"
                 >
-                    <FlexBox 
-                        alignItems={"center"}
-                        m={[1]} pl={[0]} pr={[3]} py={[2]}
-                        width={"41%"}
-                        flexGrow={1,1,1, 0}
-                        border="1px solid"
-                        borderColor="rgba(80,80,80, 0.5)"
-                        borderRadius={"8px"}
-                    >
-                        <WatchIcon title="Release Year" stroke={"black"}  size={36}/>
-                        <InputRange
-                            max={2020}
-                            min={1900}
-                            step={1}
-                            value={selectedYears}
-                            onChange={yearSelectHandler}
-                        />
-                    </FlexBox>
 
-                    <FlexBox 
-                        alignItems={"center"}
-                        m={[1]} pl={[0]} pr={[3]} py={[2]}
-                        width={"41%"}
-                        flexGrow={1,1,1, 0}
-                        border="1px solid"
-                        borderColor="rgba(80,80,80, 0.5)"
-                        borderRadius={"8px"}
-                    >
-                        <ImdbIcon title="IMDb Rating" fill="black"  size="36px !important;" imdb/>
-                        <InputRange
-                            max={10.0}
-                            min={1.0}
-                            step={0.1}
-                            value={selectedRatings}
-                            onChange={ratingSelectHandler}
-                        />
-                    </FlexBox>
+                <YearSlider dispatcher={yearDispatcher}  />
+                <RatingSlider dispatcher={ratingDispatcher} />
+
+
                     <Button type="submit" 
                         display="flex" justifyContent="center" alignItems="center"
                         p={0} width={[30, 35, 40,45]} height={[30, 35, 40,45]} 
@@ -131,47 +118,48 @@ const TopicPage = (props) =>{
                     p={[1,2,3]}
                 >
             {console.log("parent inline")}
-            {data &&
-                <>
-                <TextSection 
-                    headerSize={[24]}
-                    textSize={[14,16]}
-                    header={data.complexSearch.topic.name} 
-                    text={data.complexSearch.topic.summary}
+
+                <SearchQueryBox 
+                    topicSlug={topicSlug} 
+                    page={page} 
+                    lazyvariables={lazyvariables} 
+                    dispatcher={dataDispatcher} 
                 />
-                <MovieCoverBox 
-                    columns={[2,3,3,3,4,4,6]} 
-                    items={data.complexSearch.topicResult} 
-                    fontSize={[12,12,14]}
-                    />
+                
                 <PaginationBox 
                     currentPage={page} 
-                    totalPage={data.complexSearch.quantity} 
+                    totalPage={queryData && queryData.quantity} 
                     nextPage={nextPage} prevPage={prevPage} 
                 />
-                </>
-            }
                 </Box>
         </PageContainer>
     );
 }
 
-const SearchQuery = React.memo(({tags, page, minYear, maxYear, minRating, maxRating, quantityHandler}) =>{
+const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher}) =>{
+
+    const { loading, data, } = useQuery(TOPIC_SEARCH_QUERY,{variables:{
+        topicSlug, page, ...lazyvariables
+    }})
 
 
-    console.log("topic query", loading, data, prevVariables)
+    console.log("topic query")
 
 
     if (loading) return <Loading />
     if (data && data.complexSearch) {
-        quantityHandler(data.complexSearch.quantity)
+        const willBeDispatched = {topic:data.complexSearch.topic, quantity:data.complexSearch.quantity}
+        //console.log("data", data, willBeDispatched)
+        dispatcher(willBeDispatched)
         return (
-            <>
+            <MovieCoverBox 
+                columns={[2,3,3,3,4,4,6]} 
+                items={data.complexSearch.topicResult} 
+                fontSize={[12,12,14]}
+                />
 
-            {console.log("inline")}
-            </>
         )}
-}, (p,n) => isEqualObj(p,n))
+}, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.page === n.page) )
 
 
 

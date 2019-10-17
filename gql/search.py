@@ -115,34 +115,7 @@ class ComplexSearchType(graphene.ObjectType):
         #print(tags, keywords)
 
         #MAIN QUERY
-        qs = Movie.objects.all().only("id", "name", "poster","slug", "cover_poster", "year", "imdb_rating").order_by("id")
-        #SECOND TAG MOVIES
-        tag_movie_ids = set()
-        if len(tags)>0:
-            tag_qs = Tag.objects.filter(slug__in=tags).only("slug")
-            if tag_qs.exists():
-                for t in tag_qs:
-                    for movie_id in t.movie_ids:
-                        tag_movie_ids.add(movie_id)
-        if len(tag_movie_ids) > 0:
-            #print("before quantity: ", qs.count())
-            qs = qs.filter(id__in=tag_movie_ids)
-            #print("after quantity: ", qs.count())   
 
-        #YEAR FILTERING
-        min_year = self.min_year if self.min_year!=None else 1800
-        max_year = self.max_year if self.max_year!=None else 2025
-        qs = qs.filter(year__gte=min_year, year__lte=max_year)
-        #print("0", qs.count())   
-
-
-        #IMDB RATING FILTER
-        min_rating = self.min_rating if self.min_rating!=None else 1
-        max_rating = self.max_rating if self.max_rating!=None else 10
-        qs = qs.filter(imdb_rating__gte=min_rating, imdb_rating__lte=max_rating)
-        #print("1", qs.count())   
-
-        
         #FIRST KEYWORDS
         keywords_ids = set()
         if keywords and len(keywords) > 0:
@@ -165,8 +138,45 @@ class ComplexSearchType(graphene.ObjectType):
         if len(keywords_ids) > 0:
             #print("asd2")
             ##print("before quantity: ", qs.count())
-            qs = qs.filter(id__in=keywords_ids)
+            qs = Movie.objects.filter(id__in=keywords_ids)
             ##print("after quantity: ", qs.count())
+        elif len(keywords_ids) == 0 and len(keywords) > 2:
+            qs = Movie.objects.none()
+
+
+        #qs = Movie.objects.all().only("id", "name", "poster","slug", "cover_poster", "year", "imdb_rating").order_by("id")
+        #SECOND TAG MOVIES
+        tag_movie_ids = set()
+        if len(tags)>0:
+            tag_qs = Tag.objects.filter(slug__in=tags).only("slug")
+            if tag_qs.exists():
+                for t in tag_qs:
+                    for movie_id in t.movie_ids:
+                        tag_movie_ids.add(movie_id)
+        if len(tag_movie_ids) > 0:
+            #print("before quantity: ", qs.count())
+            if qs:
+                qs = qs.filter(id__in=tag_movie_ids)
+            else:
+                qs = Movie.object.filter(id__in=tag_movie_ids)
+            #print("after quantity: ", qs.count())  
+        elif not qs and len(tag_movie_ids)===0 and len(tags) > 0:
+            qs = Movie.objects.none()
+
+        #YEAR FILTERING
+        min_year = self.min_year if self.min_year!=None else 1800
+        max_year = self.max_year if self.max_year!=None else 2025
+        qs = qs.filter(year__gte=min_year, year__lte=max_year)
+        #print("0", qs.count())   
+
+
+        #IMDB RATING FILTER
+        min_rating = self.min_rating if self.min_rating!=None else 1
+        max_rating = self.max_rating if self.max_rating!=None else 10
+        qs = qs.filter(imdb_rating__gte=min_rating, imdb_rating__lte=max_rating)
+        #print("1", qs.count())   
+
+        
 
 
 

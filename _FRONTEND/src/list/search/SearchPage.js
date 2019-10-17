@@ -19,7 +19,8 @@ import {
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
     ImdbIcon, WatchIcon, SearchIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
-    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox
+    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox,
+    RatingSlider, YearSlider,
 } from "../../styled-components"
 
 
@@ -37,11 +38,12 @@ const SearchPage = (props) =>{
     const [complexSearch, { loading, data, variables }] = useLazyQuery(COMPLEX_SEARCH);
     
     //Variables
+    const [page, setPage] = useState(1)
     const [ keywords, setKeywords ] = useState("")
     const [ tags, setTags ] = useState([])
+    const [yearData, setYearData ] = useState({minYear:1950, maxYear:2019})
+    const [ratingData, setRatingData ] = useState({minRating:5.0, maxRating:9.9})
 
-    const [selectedYears, setSelectedYears ] = useState({min:1950, max:2019})
-    const [selectedRatings, setSelectedRatings ] = useState({min:5.0, max:9.9})
     
 
 
@@ -50,20 +52,19 @@ const SearchPage = (props) =>{
 
     //Error and internal states
     const authStatus = useAuthCheck();
-    const [page, setPage] = useState(1)
     const [ resultQuantity, setResultQuantity] = useState(null)
 
-    //local functions
-    const rounder = useCallback((number) => Math.round(number*10)/10, [])
-    const roundedRatings = useCallback((obj) => ({min: rounder(obj.min), max: rounder(obj.max) }) ,[])
     const areEquals = useCallback((first, second) => (first.min === second.min && first.max === second.max), [])
     const areEqualSize = (newmovies) => (new Set(movies.map(movie => movie.id)).size === new Set([...movies, ...newmovies].map(movie => movie.id)).size )
-    const mergeVariables = () => ({page, keywords,minYear:selectedYears.min, maxYear:selectedYears.max,minRating:selectedRatings.min, maxRating:selectedRatings.max})
+    const mergeVariables = () => ({page, keywords, ...yearData, ...ratingData})
+
+    
+    
     
     //handlers
-    const yearSelectHandler = useCallback((e) => areEquals(e, selectedYears) ? null : setSelectedYears(e), [])
-    const ratingSelectHandler = useCallback((e) => areEquals(e, selectedRatings) ? null : setSelectedRatings(roundedRatings(e)), [])
     const keywordsHandler = useCallback((e) => setKeywords(e.target.value), [keywords])
+    const yearDispatcher = useCallback((data) => setYearData(data), [yearData])
+    const ratingDispatcher = useCallback((data) => setRatingData(data), [ratingData])
 
     const prevPage = useCallback(() => (setPage(page => page - 1), complexSearch({ variables: { ...variables, page: page - 1 } })))
     const nextPage = useCallback(() => (setPage(page => page + 1), complexSearch({ variables: { ...variables, page: page + 1 } })))
@@ -137,45 +138,9 @@ const SearchPage = (props) =>{
                     px={[3]}
                     borderBottom="1px solid"
                 >
-                    <FlexBox 
-                        alignItems={"center"}
-                        m={[1]} px={[3]} py={[2]}
-                        width={"45%"}
-                        flexGrow={1,1,1, 0}
-                        border="1px solid"
-                        borderColor="rgba(80,80,80, 0.5)"
-                        borderRadius={"8px"}
-                    >
-                        <WatchIcon title="Release Year" stroke={"black"}  size={40}/>
-                        <InputRange
-                            max={2020}
-                            min={1900}
-                            step={1}
-                            formatLabel={value => `${value}`}
-                            value={selectedYears}
-                            onChange={yearSelectHandler}
-                        />
-                    </FlexBox>
-
-                    <FlexBox 
-                        alignItems={"center"}
-                        m={[1]} px={[3]} py={[2]}
-                        width={"45%"}
-                        flexGrow={1,1,1, 0}
-                        border="1px solid"
-                        borderColor="rgba(80,80,80, 0.5)"
-                        borderRadius={"8px"}
-                    >
-                        <ImdbIcon title="IMDb Rating" fill="black"  size="40px !important;" imdb/>
-                        <InputRange
-                            max={10.0}
-                            min={1.0}
-                            step={0.1}
-                            formatLabel={value => `${value}`}
-                            value={selectedRatings}
-                            onChange={ratingSelectHandler}
-                        />
-                    </FlexBox>
+                
+                <YearSlider dispatcher={yearDispatcher}  />
+                <RatingSlider dispatcher={ratingDispatcher} />
 
                     <FlexBox 
                         flexDirection={["row"]} 
@@ -213,78 +178,3 @@ const SearchPage = (props) =>{
 
 export default withRouter(SearchPage);
 
-/*
-
-const SearchQuery = ({ qv }) =>{
-    console.log("Search Query", qv)
-    const [ movies, setMovies ] = useState([])
-    const [complexSearch, { loading, data }] = useLazyQuery(COMPLEX_SEARCH);
-    if (qv.query === true) complexSearch({ variables: qv})
-
-    if (loading) return <Loading />;
-    if (data && data.complexSearch ){
-        console.log("query",data);
-        setMovies(() => [...movies, ...data.complexSearch.keywordResult]);
-    }
-    return(
-        <SearchButton type="submit" alignSelf="center" width={["40px", "50px", "50px", "80px"]}>Search</SearchButton>
-    )
-}
-
-
-const SearchQuery2 = (props) =>{
-    const [currentPage, setCurrentPage] = useState(1)
-    const qv = props.variables
-    //console.log("qv", qv)
-
-    return (
-    <Query query={COMPLEX_SEARCH} variables={{page:currentPage, ...qv}}>
-    {({data, loading, error})=>{
-        if (loading) return <Loading />
-        if (error) return <div>{error.message}</div>
-        const result = data.complexSearch.keywordResult;
-        const quantity = data.complexSearch.quantity
-        const ppi = 24;
-
-
-        //console.log("query: ",data, result, quantity)
-        return (
-            <section className="content-container search-result-container fbox-fc jcfs aifs">
-                <h4 className="t-xl t-bold mar-b-2x"> found: {quantity} movies </h4>
-                <SpeedyGridBox movies ={result} />
-
-                {quantity > ppi &&
-                    <div className="fbox-r jcc aic pag mar-t-5x">
-                        {currentPage > 1 &&
-                            <div className="pag-item click t-bold  t-color-dark t-center click hover-t-underline" onClick={() => setCurrentPage(currentPage - 1)}>
-                               {"< Previous"}
-                            </div>
-                        }
-                        <div className="pag-item t-bold  t-color-dark t-center t-underline" >
-                            {currentPage}
-                        </div>
-
-                        <div className="pag-item t-bold  t-color-dark t-center click hover-t-underline" onClick={() => setCurrentPage(currentPage + 1)}>
-                            Next >
-                        </div>
-                    </div>}
-            </section>
-        )}}
-    </Query>
-    )
-}
-
-        <PageContainer>
-            <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gridGap="10px">
-
-                {!authStatus && <JoinBanner />}
-                <Box></Box>
-                <div className="search-menu-container">
-                    <SelectPanel {...props} export={e => variableHandler(e)} />      
-                </div>
-                <div className="search-query-container">
-                    {shouldSearch && <SearchQuery variables={queryVariables} shouldSearch={shouldSearch} />}
-                </div>
-            </Box>
-        </PageContainer>
-*/
