@@ -37,7 +37,7 @@ const MainPage = (props) => {
     )
 
     const sortedMovies = props.data.movies.sort((a,b) => b.id - a.id)
-    const directorShow = useValues(3,3,4,5,5,6)
+    //const directorShow = useValues(3,3,4,5,5,6)
     return(
         <PageContainer>
             <Head
@@ -67,7 +67,7 @@ const MainPage = (props) => {
 
             <ContentContainer>
                 
-                <GlideBox xs ={1} s={2} m={2} l={2} xl={2.2}  xxl={3} xxxl={3} >
+                <GlideBox xs ={1} s={1} m={2} l={2} xl={2.2}  xxl={3} xxxl={3} >
                     {props.data.lists.map(item => <CarouselList  item={item} key={item.slug} /> )}
                 </GlideBox>
 
@@ -76,9 +76,9 @@ const MainPage = (props) => {
                     <Link rel="nofollow" to={`/directors/1`} title="Visit Directors Page">Directors</Link>
                 </h4>
 
-                <Grid columns={[3,3,4,5,5,6]} m={[2]}>
-                    {props.data.persons.slice(0, directorShow).map(person => (
-                        <DirectorCard item={person} key={person.slug}/>
+                <Grid columns={[2,2,4]} m={[2]}>
+                    {props.data.persons.slice(0,4).map(person => (
+                        <DirectorCard item={person} key={person.slug} fontSize={["14px"]} notext={true} />
                     ) )}
                 </Grid>
 
@@ -89,7 +89,7 @@ const MainPage = (props) => {
                     </Link>
                 </h4>
                 
-                <MovieCoverBox items={sortedMovies} columns={[1,2, 2, 3,3, 4]} />
+                <MovieCoverBox items={sortedMovies} columns={[2,2, 2, 3,3, 4]}  fontSize={["14px", "14px", "14px"]} />
                 
                 <MidPageAd />
 

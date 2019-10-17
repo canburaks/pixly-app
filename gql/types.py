@@ -766,17 +766,30 @@ class TopicType(DjangoObjectType, SEOType):
         return self.richdata
 
     def resolve_seo_title(self, info, *_):
-        return self.seo_title
+        return f"Pixly Topics: {self.name} - Best {self.name} Movies"
 
     def resolve_seo_description(self, info, *_):
-        return self.seo_description
+        return self.seo_description if self.seo_description else self.summary
+
 
     def resolve_seo_short_description(self, info, *_):
-        return self.seo_short_description if self.seo_short_description else self.summary
-         
+        highest_movie_names = self.movies.order_by("-imdb_rating").values_list("name", flat=True)[:4]
+        text = f"Discover best {self.name} films "
+        if highest_movie_names.count() > 0:
+            text = text + "like " + ", ".join([x for x in highest_movie_names]) + "."
+        else:
+            text = text + " filter them with their IMDb rating and release year."
+        text += " Find similar movies, filter them and discover new worlds."
+        return text
 
     def resolve_seo_keywords(self, info, *_):
-        return self.seo_keywords
+        highest_movie_names = self.movies.order_by("-imdb_rating").values_list("name", flat=True)[:4]
+        movie_names = ", ".join([x for x in highest_movie_names])
+        keywords = [f"Best ${self.name} movies", f"{self.name} films", f"films like {movie_names}", "IMDb rating search"]
+        keywords = keywords + ["movies search", "similar movies"]
+        return keywords
+
+
     def resolve_slug(self, info, *_):
         return self.slug
 
