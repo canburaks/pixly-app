@@ -890,8 +890,6 @@ class Topic(SEO, MainPage):
     poster = models.ImageField(blank=True, upload_to=topic_image_upload_path)
     cover_poster = models.ImageField(blank=True, upload_to=topic_cover_poster_upload_path)
 
-    active = models.BooleanField(default=False)
-
 
     def __str__(self):
         return self.name
