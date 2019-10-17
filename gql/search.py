@@ -117,52 +117,51 @@ class ComplexSearchType(graphene.ObjectType):
         #MAIN QUERY
 
         #FIRST KEYWORDS
-        keywords_ids = set()
         if keywords and len(keywords) > 0:
-            #print("asd")
-            words = multi_word_search(keywords)
+            keywords_ids = set()
+            if keywords and len(keywords) > 0:
+                #print("asd")
+                words = multi_word_search(keywords)
 
-            #check for full keywords
-            full_name_query_ids = qs.filter(name__icontains=keywords).values_list("id", flat=True)
-            #append ids to set
-            for movie_id in full_name_query_ids:
-                keywords_ids.add(movie_id) 
-            
-            #check for partial keywords
-            if len(words) > 1:
-                for word in words:
-                    partial_name_query_ids = qs.filter(name__icontains=keywords).values_list("id", flat=True)
-                    #append ids to set
-                    for movie_id in partial_name_query_ids:
-                        keywords_ids.add(movie_id)
-        if len(keywords_ids) > 0:
-            #print("asd2")
-            ##print("before quantity: ", qs.count())
-            qs = Movie.objects.filter(id__in=keywords_ids)
-            ##print("after quantity: ", qs.count())
-        elif len(keywords_ids) == 0 and len(keywords) > 2:
-            qs = Movie.objects.none()
+                #check for full keywords
+                full_name_query_ids = qs.filter(name__icontains=keywords).values_list("id", flat=True)
+                #append ids to set
+                for movie_id in full_name_query_ids:
+                    keywords_ids.add(movie_id) 
+
+                #check for partial keywords
+                if len(words) > 1:
+                    for word in words:
+                        partial_name_query_ids = qs.filter(name__icontains=keywords).values_list("id", flat=True)
+                        #append ids to set
+                        for movie_id in partial_name_query_ids:
+                            keywords_ids.add(movie_id)
+            if len(keywords_ids) > 0:
+                #print("asd2")
+                ##print("before quantity: ", qs.count())
+                qs = Movie.objects.filter(id__in=keywords_ids)
+                ##print("after quantity: ", qs.count())
+            else:
+                qs = Movie.objects.none()
 
 
         #qs = Movie.objects.all().only("id", "name", "poster","slug", "cover_poster", "year", "imdb_rating").order_by("id")
         #SECOND TAG MOVIES
-        tag_movie_ids = set()
-        if len(tags)>0:
-            tag_qs = Tag.objects.filter(slug__in=tags).only("slug")
-            if tag_qs.exists():
-                for t in tag_qs:
-                    for movie_id in t.movie_ids:
-                        tag_movie_ids.add(movie_id)
-        if len(tag_movie_ids) > 0:
-            #print("before quantity: ", qs.count())
-            if qs:
-                qs = qs.filter(id__in=tag_movie_ids)
-            else:
-                qs = Movie.object.filter(id__in=tag_movie_ids)
-            #print("after quantity: ", qs.count())  
-        elif not qs and len(tag_movie_ids)===0 and len(tags) > 0:
-            qs = Movie.objects.none()
-
+        if tags and len(tags) > 0:
+            tag_movie_ids = set()
+            if len(tags)>0:
+                tag_qs = Tag.objects.filter(slug__in=tags).only("slug")
+                if tag_qs.exists():
+                    for t in tag_qs:
+                        for movie_id in t.movie_ids:
+                            tag_movie_ids.add(movie_id)
+            if len(tag_movie_ids) > 0:
+                if keywords and len(keywords) > 0:
+                    qs = qs.filter(id__in=tag_movie_ids)
+                else:
+                    qs = Movie.objects.filter(id__in=tag_movie_ids)
+        if (not keywords or len(keywords) == 0) and ( not tags or len(tags) == 0):
+            qs = Movie.objects.all().only("id", "name", "poster","slug", "cover_poster", "year", "imdb_rating").order_by("id")
         #YEAR FILTERING
         min_year = self.min_year if self.min_year!=None else 1800
         max_year = self.max_year if self.max_year!=None else 2025
