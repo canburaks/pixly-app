@@ -776,13 +776,13 @@ class TopicType(DjangoObjectType, SEOType):
 
 
     def resolve_seo_short_description(self, info, *_):
-        highest_movie_names = self.movies.order_by("-imdb_rating").values_list("name", flat=True)[:4]
+        highest_movie_names = self.movies.order_by("-imdb_rating").values_list("name", flat=True)[:5]
         text = f"Discover best {self.name} films "
         if highest_movie_names.count() > 0:
             text = text + "like " + ", ".join([x for x in highest_movie_names]) + "."
         else:
             text = text + " filter them with their IMDb rating and release year."
-        text += " Find similar movies, filter them and discover new worlds."
+        text += " Find similar movies. Search, filter and discover new films."
         return text
 
     def resolve_seo_keywords(self, info, *_):
