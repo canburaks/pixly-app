@@ -11,8 +11,6 @@ from django.contrib.sitemaps import ping_google
 from gql.bs4 import parse_imdb_movie
 from django.db.models import Q
 
-from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 def item_image_upload_path(instance, filename):
@@ -834,6 +832,7 @@ class Article(models.Model):
     
     def __str__(self):
         return self.title
+
     @staticmethod
     def autocomplete_search_fields():
         return ("id__iexact", "name__icontains",)
