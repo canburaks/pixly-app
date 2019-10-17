@@ -162,6 +162,7 @@ class ComplexSearchType(graphene.ObjectType):
                     qs = Movie.objects.filter(id__in=tag_movie_ids)
         if (not keywords or len(keywords) == 0) and ( not tags or len(tags) == 0):
             qs = Movie.objects.all().only("id", "name", "poster","slug", "cover_poster", "year", "imdb_rating").order_by("id")
+        
         #YEAR FILTERING
         min_year = self.min_year if self.min_year!=None else 1800
         max_year = self.max_year if self.max_year!=None else 2025
