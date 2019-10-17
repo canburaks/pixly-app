@@ -178,7 +178,7 @@ class TagAdmin(admin.ModelAdmin):
 class QuoteAdmin(admin.ModelAdmin):
     list_display = ("id","text","owner_name", "person", "movie",)
 
-    fields =  ("id","text","owner_name", "person", "movie",)
+    fields =  ("id","text","owner_name", "person", "movie","reference_notes", "reference_link")
 
     search_fields = ('text','movie',"owner_name", "person" )
     raw_id_fields = ['movie',"person", "topics"]
