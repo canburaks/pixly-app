@@ -11,6 +11,7 @@ from django.contrib.sitemaps import ping_google
 from gql.bs4 import parse_imdb_movie
 from django.db.models import Q
 
+from imagekit.processors import ResizeToFill
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 def item_image_upload_path(instance, filename):
