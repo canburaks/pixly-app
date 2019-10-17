@@ -73,14 +73,16 @@ urlpatterns = [
     re_path(r'^robots.txt', lambda x: HttpResponse("User-Agent: *\nSitemap: https://pixly.app/sitemap.xml\nDisallow:",
             content_type="text/plain"), name="robots_file"),
             
+    path("ads.txt", TemplateView.as_view(template_name="others/ads.txt")),
     re_path(r'^.well-known/brave-rewards-verification.txt', lambda x: HttpResponse("This is a Brave Rewards publisher verification file.\n\nDomain: pixly.app\nToken: b8b10bb0d60345f4f49ec7839609e9c92a9799ed95004ce17065b097604f0161",
             content_type="text/plain"), name="robots_file"),
 
-    path("ads.txt", TemplateView.as_view(template_name="others/ads.txt")),
 
     path('admin/filebrowser/', site.urls),
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
+
     path('admin/', admin.site.urls),
+
 
     re_path(r'^graphql', csrf_exempt(FileUploadGraphQLView.as_view(graphiql=True))),
     re_path(r'^gql', csrf_exempt(GraphQLView.as_view(graphiql=True))),

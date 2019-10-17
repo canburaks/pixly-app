@@ -766,6 +766,8 @@ class TopicType(DjangoObjectType, SEOType):
         return self.richdata
 
     def resolve_seo_title(self, info, *_):
+        if self.seo_title:
+            return self.seo_title
         name = " ".join([x.capitalize() for x in self.name.split(" ")])
         return f"Pixly Topics: {name} - Best {name} Movies"
 
