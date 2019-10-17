@@ -72,7 +72,7 @@ class ArticleMovieInline(admin.TabularInline):
 class TopicAdmin(admin.ModelAdmin):
     list_display = ("id", "slug",'name', "summary", "content")
     inlines = [TagTopicInline,]
-    raw_id_fields = ['movies', 'persons', 'lists',"tags",]
+    raw_id_fields = ['movies', 'persons', 'lists',"tags", "quotes"]
 
 
 
@@ -176,11 +176,11 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Quote)
 class QuoteAdmin(admin.ModelAdmin):
-    list_display = ("id","text","owner", "movie",)
+    list_display = ("id","text","owner_name", "person", "movie",)
 
-    fields =  ("id","text","owner", "movie",)
+    fields =  ("id","text","owner_name", "person", "movie",)
 
-    search_fields = ('text','movie',"owner", )
-    raw_id_fields = ['movie',"owner",]
+    search_fields = ('text','movie',"owner_name", "person" )
+    raw_id_fields = ['movie',"person", "topics"]
     #resource_class = TagResource
     

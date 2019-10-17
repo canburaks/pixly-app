@@ -1,4 +1,4 @@
-from items.models import Rating,Movie, List,  Video, Topic, Prediction, Tag
+from items.models import Rating,Movie, List,  Video, Topic, Prediction, Tag, Quote
 from persons.models import Person, Director, Crew
 from persons.profile import Profile, Follow, Activity
 from archive.models import MovSim, TmdbMovie, ContentSimilarity
@@ -82,6 +82,41 @@ class ContentSimilarityType(graphene.ObjectType):
         return list(Movie.common_content_tags_of_movies(self.base, self.target))
 
 #-----------------------------------------#
+
+class QuoteType(DjangoObjectType):
+    text = graphene.String()
+
+    owner_name = graphene.String()
+    person = graphene.Field("gql.types.DirectorPersonMixType")
+    movie = graphene.Field("gql.types.MovieType")
+
+    reference_notes = graphene.String()
+    reference_link = graphene.String()
+
+    class Meta:
+        model = Quote
+    
+    def resolve_text(self,info, *_):
+        return self.text
+
+    def resolve_owner_name(self,info, *_):
+        if self.owner_name:
+            return self.owner_name
+        elif self.person and not self.owner_name:
+            return self.person.name
+
+    def resolve_movie(self,info, *_):
+        return self.movie
+
+    def resolve_owner(self,info, *_):
+        return self.person
+
+    def resolve_reference_notes(self,info, *_):
+        return self.reference_notes
+
+    def resolve_reference_link(self,info, *_):
+        return self.reference_link
+
 
 class TagType(DjangoObjectType, StatisticsType):
     movielens_id  = graphene.Int()
@@ -749,15 +784,21 @@ class TopicType(DjangoObjectType, SEOType):
     name = graphene.String()
     summary = graphene.String()
     content = graphene.String()
+    
     poster = graphene.String()
     cover_poster = graphene.String()
 
-    movies = graphene.List("gql.types.CustomMovieType")
     tag = graphene.Field("gql.types.TagType")
+
+    movies = graphene.List("gql.types.CustomMovieType")
     tags = graphene.List("gql.types.TagType")
+    quotes = graphene.List(QuoteType)
 
     class Meta:
         model = Topic
+
+    def resolve_quotes(self, info, *_):
+        return self.quotes.all()
 
     def resolve_netflix_id(self, info, *_):
         return self.netflix_id

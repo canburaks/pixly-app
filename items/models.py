@@ -885,6 +885,7 @@ class Topic(SEO, MainPage):
     lists = models.ManyToManyField(List,null=True, blank=True, related_name="topics")
     tags = models.ManyToManyField("items.Tag",null=True, blank=True, related_name="topics")
     persons = models.ManyToManyField(Person,null=True, blank=True, related_name="topics")
+    quotes = models.ManyToManyField("items.Quote",null=True, blank=True, related_name="topics")
 
     poster = models.ImageField(blank=True, upload_to=topic_image_upload_path)
     cover_poster = models.ImageField(blank=True, upload_to=topic_cover_poster_upload_path)
@@ -1089,9 +1090,14 @@ class Quote(models.Model):
     id = models.IntegerField(primary_key=True)
     text = models.TextField(max_length=2000)
 
-    owner = models.ForeignKey(Person, null=True, blank=True, related_name="quotes", on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, null=True, blank=True, related_name="quotes", on_delete=models.CASCADE)
+    owner_name = models.TextField(max_length=100, null=True, blank=True)
+
+    #person who said that
+    person = models.ForeignKey(Person, null=True, blank=True, related_name="quotes", on_delete=models.CASCADE)
     
+    #movie that includes the quote
+    movie = models.ForeignKey(Movie, null=True, blank=True, related_name="quotes", on_delete=models.CASCADE)
+
     reference_notes = models.CharField(max_length=400, null=True, blank=True, help_text="Notes about reference.")
     reference_link = models.URLField(null=True, blank=True, help_text="Reference of relation with person. Enter link of url")
 
