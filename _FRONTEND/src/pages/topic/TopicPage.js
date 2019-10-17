@@ -33,7 +33,7 @@ const TopicPage = (props) =>{
 
     
     //handlers
-    const dataDispatcher = useCallback((data) => queryData===null && setQueryData(data), [queryData])
+    const dataDispatcher = useCallback((data) => (queryData===null || queryData===undefined) && setQueryData(data), [queryData])
     const yearDispatcher = useCallback((data) => setYearData(data), [yearData])
     const ratingDispatcher = useCallback((data) => setRatingData(data), [ratingData])
 

@@ -42,7 +42,7 @@ const TopicList = React.memo((props) => {
             <HiddenHeader>Pixly Topics</HiddenHeader>
             
                 <TextSection
-                headerSize={["18px", "18px", "22px", "26px"]}
+                headerSize={["20px", "20px", "24px", "28px"]}
                 textSize={["14px", "14px", "16px"]}
                 header={"Pixly Topics"}
                 text={`Pixly topics are kind of collections that are more specific than genre based collections.` + 
@@ -56,7 +56,7 @@ const TopicList = React.memo((props) => {
                     borderTop="1px solid" borderColor="rgba(40,40,40, 0.6)"
                     pt={[2,2,3]}
                 >
-                    {topics.map(topic => <TopicCoverCard item={topic} key={topic.slug} fontSize={"22px"}/>)}
+                    {topics.map(topic => <TopicCoverCard item={topic} key={topic.slug} fontSize={"85px"}/>)}
                 </Grid>
 
                 <ListBoardAd />
@@ -68,7 +68,7 @@ const TopicList = React.memo((props) => {
 
 const Query = (props) =>{
     const { loading, error, data } = useQuery(TOPIC_LIST_QUERY)
-    console.log(loading, error)
+    console.log(data, loading, error)
     if (loading) return <Loading />
     if (data) return <TopicList topics={data.listOfTopics} />
     else return <div></div>

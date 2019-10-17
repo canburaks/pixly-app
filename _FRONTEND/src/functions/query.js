@@ -668,7 +668,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                     slug
                 }
                 topic{
-                    name, summary, slug, poster, seoTitle, seoShortDescription, seoKeywords
+                    name, summary, slug, poster, seoTitle, seoShortDescription, seoKeywords,coverPoster
                 },
                 quantity
         }
@@ -677,7 +677,7 @@ export const TOPIC_SEARCH_QUERY = gql`
 export const TOPIC_LIST_QUERY = gql`
     query{
         listOfTopics{
-            id,name, slug
+            id,name, slug, coverPoster
         }
     }
 `
