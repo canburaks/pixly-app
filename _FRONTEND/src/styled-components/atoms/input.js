@@ -70,6 +70,7 @@ export const SearchInput = styled("input")`
     caret-color: ${themeGet("colors.light")};
     border:2px solid;
     box-sizing:border-box;
+    box-shadow: 0px 2px 6px rgba(6, 28, 63, 0.3);
     :focus {
         background-color: rgba(40,40,40, 0.6);
     }

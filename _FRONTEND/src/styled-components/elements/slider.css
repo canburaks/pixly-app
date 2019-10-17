@@ -1,0 +1,52 @@
+
+/* Slider back line*/
+.input-range__track.input-range__track--background {
+    color:white;
+    height:6px;
+    border:1px solid rgba(0, 0, 0, 0.85);
+    border-radius: 8px;
+    box-shadow: 2px 3px 3px -2px rgba(0, 0, 0, 0.55);
+}
+/* Label Texts */
+.input-range__label-container{
+    
+    font-weight: bold;
+    font-size:15px;
+}
+
+/* Hidden min max labels*/
+.input-range__label.input-range__label--min,
+.input-range__label.input-range__label--max {
+    display: none;
+}
+
+div.input-range * {
+    font-family: Nunito, serif;
+    color:rgba(0, 0, 0, 0.85);
+
+}
+div.input-range__slider {
+    appearance: none;
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    height: 1rem;
+    width: 1rem; 
+    background: #ffffff;
+    border: 1px solid #050505;
+    border-radius: 100%;
+    margin-left: -0.5rem;
+    margin-top: -0.65rem;
+    outline: none;
+    top: 50%;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.25);
+}
+
+
+.input-range__slider:active {
+    transform: scale(1.3); 
+}
+  .input-range__slider:focus {
+    box-shadow: 0 0 0 5px rgba(63, 81, 181, 0.2); 
+}

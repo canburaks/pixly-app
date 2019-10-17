@@ -15,9 +15,11 @@ import JoinBanner from "../../components/JoinBanner.js"
 
 import {
      ListCard, PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,
-     TopicCoverCard,
+     TopicCoverCard, TextSection,
      Loading
  } from "../../styled-components"
+
+
 
 
 const TopicList = React.memo((props) => {
@@ -38,17 +40,23 @@ const TopicList = React.memo((props) => {
 
             <ContentContainer>
             <HiddenHeader>Pixly Topics</HiddenHeader>
+            
+                <TextSection
+                headerSize={["18px", "18px", "22px", "26px"]}
+                textSize={["14px", "14px", "16px"]}
+                header={"Pixly Topics"}
+                text={`Pixly topics are kind of collections that are more specific than genre based collections.` + 
+                        `Topic pages treat specific subjects like 'Art House', 'Terrorism'. You can also filter your search based` + 
+                        `on IMDb ratings or release year of the movies`}
+                mb={[2,2,3]}
+                />
 
-                <div className="list-type-header fbox-c pad-bt-4x ">
-                    <h2 className="primary-text">
-                        Pixly Topics
-                    </h2>
-                    <p className="t-m t-color-dark">
-                    </p>
-                    <hr />
-                </div>
-                <Grid columns={[1,2,2,3,3,3,4]}  >
-                    {topics.map(topic => <TopicCoverCard item={topic} key={topic.slug} />)}
+                <Grid 
+                    columns={[1,2]}  
+                    borderTop="1px solid" borderColor="rgba(40,40,40, 0.6)"
+                    pt={[2,2,3]}
+                >
+                    {topics.map(topic => <TopicCoverCard item={topic} key={topic.slug} fontSize={"22px"}/>)}
                 </Grid>
 
                 <ListBoardAd />

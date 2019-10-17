@@ -10,7 +10,7 @@ export const TextSection = (props) =>(
         {...props} 
     >
         <HeaderMini color={"dark"} textShadow="light" fontWeight="bold" fontSize={props.headerSize} 
-            pt={"4px"}
+            pt={"4px"} 
         >
             {props.header}
         </HeaderMini>

@@ -74,33 +74,37 @@ export const PaginationBox = ({currentPage, totalPage, nextPage, prevPage}) => (
 export const Grid = styled(GridBox)`
     width:100%;
     position:relative;
-    grid-template-rows: minmax(50px, 300px;);
-    @media screen and (min-width: ${themeGet("breakpoints.xs")}){
-        grid-template-columns: repeat(${props => props.columns[0]}, 1fr);
+    grid-template-rows: minmax(50px, 400px;);
 
+    @media screen and (min-width: 200px){
+        grid-template-columns: repeat(${props => props.columns[0]}, 1fr);
     }
-    @media screen and (min-width: ${themeGet("breakpoints.sm")}){
+    @media screen and (min-width: ${themeGet("breakpoints.xs")}){
         grid-template-columns: repeat(${props => props.columns[1]}, 1fr);
 
     }
-    @media screen and (min-width: ${themeGet("breakpoints.md")}){
+    @media screen and (min-width: ${themeGet("breakpoints.sm")}){
         grid-template-columns: repeat(${props => props.columns[2]}, 1fr);
 
     }
-    @media screen and (min-width: ${themeGet("breakpoints.lg")}){
+    @media screen and (min-width: ${themeGet("breakpoints.md")}){
         grid-template-columns: repeat(${props => props.columns[3]}, 1fr);
 
     }
-    @media screen and (min-width: ${themeGet("breakpoints.xl")}){
+    @media screen and (min-width: ${themeGet("breakpoints.lg")}){
         grid-template-columns: repeat(${props => props.columns[4]}, 1fr);
 
     }
-    @media screen and (min-width: ${themeGet("breakpoints.xxl")}){
+    @media screen and (min-width: ${themeGet("breakpoints.xl")}){
         grid-template-columns: repeat(${props => props.columns[5]}, 1fr);
 
     }
-    @media screen and (min-width: ${themeGet("breakpoints.xxxl")}){
+    @media screen and (min-width: ${themeGet("breakpoints.xxl")}){
         grid-template-columns: repeat(${props => props.columns[6]}, 1fr);
+
+    }
+    @media screen and (min-width: ${themeGet("breakpoints.xxxl")}){
+        grid-template-columns: repeat(${props => props.columns[7]}, 1fr);
 
     }
     transition: ${themeGet("transitions.medium")};

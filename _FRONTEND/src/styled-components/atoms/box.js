@@ -37,7 +37,7 @@ export const MotionBox = styled(motion.div)`
     box-sizing: border-box;
     position: relative;
     :hover { 
-        box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
+        box-shadow: ${props => props.hoverShadow && themeGet('shadows.diffuse3')};
         border: ${props => props.hoverBorder && '3px solid #3633CC' };
         text-decoration: ${props => props.hoverUnderline && "underline"};
         }
