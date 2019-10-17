@@ -37,6 +37,7 @@ export const DirectorCard = (props) => (
     <ImageCard 
         src={props.item.poster}
         text={props.item.name}
+        text={!props.notext ? props.item.name : null}
         link={`/person/${props.item.slug}`}
         linktext={props.item.name}
         ratio={1.67} 
