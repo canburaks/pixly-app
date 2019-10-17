@@ -67,7 +67,7 @@ const MainPage = (props) => {
 
             <ContentContainer>
                 
-                <GlideBox xs ={1} s={1} m={2} l={2} xl={2.2}  xxl={3} xxxl={3} >
+                <GlideBox xs ={1} s={1} m={2} l={2} xl={3}  xxl={3} xxxl={3} >
                     {props.data.lists.map(item => <CarouselList  item={item} key={item.slug} /> )}
                 </GlideBox>
 

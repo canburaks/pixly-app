@@ -120,11 +120,11 @@ class ComplexSearchType(graphene.ObjectType):
         if keywords and len(keywords) > 0:
             keywords_ids = set()
             if keywords and len(keywords) > 0:
-                #print("asd")
+                print("asd")
                 words = multi_word_search(keywords)
 
                 #check for full keywords
-                full_name_query_ids = qs.filter(name__icontains=keywords).values_list("id", flat=True)
+                full_name_query_ids = Movie.objects.filter(name__icontains=keywords).values_list("id", flat=True)
                 #append ids to set
                 for movie_id in full_name_query_ids:
                     keywords_ids.add(movie_id) 
@@ -132,15 +132,15 @@ class ComplexSearchType(graphene.ObjectType):
                 #check for partial keywords
                 if len(words) > 1:
                     for word in words:
-                        partial_name_query_ids = qs.filter(name__icontains=keywords).values_list("id", flat=True)
+                        partial_name_query_ids = Movie.objects.filter(name__icontains=keywords).values_list("id", flat=True)
                         #append ids to set
                         for movie_id in partial_name_query_ids:
                             keywords_ids.add(movie_id)
             if len(keywords_ids) > 0:
-                #print("asd2")
-                ##print("before quantity: ", qs.count())
+                print("asd2")
+                #print("before quantity: ", qs.count())
                 qs = Movie.objects.filter(id__in=keywords_ids)
-                ##print("after quantity: ", qs.count())
+                #print("after quantity: ", qs.count())
             else:
                 qs = Movie.objects.none()
 
@@ -162,19 +162,21 @@ class ComplexSearchType(graphene.ObjectType):
                     qs = Movie.objects.filter(id__in=tag_movie_ids)
         if (not keywords or len(keywords) == 0) and ( not tags or len(tags) == 0):
             qs = Movie.objects.all().only("id", "name", "poster","slug", "cover_poster", "year", "imdb_rating").order_by("id")
-        
+
+        print("before year and rating filter", qs.count())
         #YEAR FILTERING
         min_year = self.min_year if self.min_year!=None else 1800
         max_year = self.max_year if self.max_year!=None else 2025
+        
         qs = qs.filter(year__gte=min_year, year__lte=max_year)
-        #print("0", qs.count())   
+        print("after year filter",min_year, max_year, qs.count())   
 
 
         #IMDB RATING FILTER
         min_rating = self.min_rating if self.min_rating!=None else 1
         max_rating = self.max_rating if self.max_rating!=None else 10
         qs = qs.filter(imdb_rating__gte=min_rating, imdb_rating__lte=max_rating)
-        #print("1", qs.count())   
+        print("after rating",min_rating, max_rating, qs.count())   
 
         
 

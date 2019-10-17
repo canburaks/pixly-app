@@ -54,9 +54,9 @@ const SearchPage = (props) =>{
     const authStatus = useAuthCheck();
     const [ resultQuantity, setResultQuantity] = useState(null)
 
-    const areEquals = useCallback((first, second) => (first.min === second.min && first.max === second.max), [])
-    const areEqualSize = (newmovies) => (new Set(movies.map(movie => movie.id)).size === new Set([...movies, ...newmovies].map(movie => movie.id)).size )
-    const mergeVariables = () => ({page, keywords, ...yearData, ...ratingData})
+    //const areEquals = useCallback((first, second) => (first.min === second.min && first.max === second.max), [])
+    //const areEqualSize = (newmovies) => (new Set(movies.map(movie => movie.id)).size === new Set([...movies, ...newmovies].map(movie => movie.id)).size )
+    const mergeVariables = () => ({page,tags:tags.map(tag=>tag.value), keywords, ...yearData, ...ratingData})
 
     
     
@@ -69,34 +69,40 @@ const SearchPage = (props) =>{
     const prevPage = useCallback(() => (setPage(page => page - 1), complexSearch({ variables: { ...variables, page: page - 1 } })))
     const nextPage = useCallback(() => (setPage(page => page + 1), complexSearch({ variables: { ...variables, page: page + 1 } })))
 
+    const areEqualSize = (prev, next) => {
+        console.log("asds")
+        const oldIds = new Set(prev.map(obj => obj.id));
+        const newIds = new Set(next.map(obj => obj.id));
+        console.log("array of object checker:", oldIds, newIds);
+        console.log("array of object checker sizes: ", oldIds.size, newIds.size)
+        if (oldIds.size == newIds.size) return true
+        else return false
+    }
 
     if (data) {
-        //console.log("data", data)
-        if (!areEqualSize(data.complexSearch.result)){
-            //console.log("not equal size; state will be updated");
-            //const allmovies = [...movies, ... data.complexSearch.result]
-            //const uniqueMovieIds = new Set([...movies, ... data.complexSearch.result].map(movie => movie.id))
-            //const uniqueMovies = []
-            //uniqueMovieIds.forEach(id => {
-            //    const firstPaired = allmovies.filter(movie => movie.id === id)[0]
-            //    uniqueMovies.push(firstPaired)
-            //})
-            //setMovies(uniqueMovies)
-            setMovies(data.complexSearch.result)
-        }
-        if (resultQuantity !==  data.complexSearch.quantity) setResultQuantity(data.complexSearch.quantity)
-        }
-    
+        if (movies.length === 0 && data.complexSearch.result.length !== 0) setMovies(data.complexSearch.result)
+        else if (movies && movies.length > 0) {
+            console.log("new result",data.complexSearch.result ,data)
+            const areEquals = areEqualSize(movies, data.complexSearch.result)
+            console.log("are equal",areEquals)
 
+            if (!areEquals){
+                setMovies(data.complexSearch.result)
+                setResultQuantity(data.complexSearch.quantity)
+                }
+        }
+    }
+    
 
     const submitHandler = (e) => {
         e.preventDefault()
         if (keywords.length < 3 && tags.length === 0) setError("Your Search is too short")
         else {
-            const newQv = mergeVariables()
-            newQv.tags = tags.map(tag => tag.value)
-            //console.log("final query variables",newQv)
-            complexSearch({variables : newQv})
+            complexSearch({variables: {...mergeVariables()} })
+            //const newQv = mergeVariables()
+            //newQv.tags = tags.map(tag => tag.value)
+            ////console.log("final query variables",newQv)
+            //complexSearch({variables : newQv})
         } 
     }
     //console.log("qv",variables)
@@ -162,11 +168,13 @@ const SearchPage = (props) =>{
                 >
                     {loading && <Loading />}
                     <MovieCoverBox items={movies} columns={[2,2,3,3,4,4,6]} fontSize={[12,12,14]}/>
-                    <PaginationBox 
-                        currentPage={resultQuantity!==null && page} 
-                        totalPage={Math.ceil(resultQuantity/24)} 
-                        nextPage={nextPage} prevPage={prevPage} 
-                    />
+                    
+                    {resultQuantity > 24 &&
+                        <PaginationBox 
+                            currentPage={resultQuantity!==null && page} 
+                            totalPage={Math.ceil(resultQuantity/24)} 
+                            nextPage={nextPage} prevPage={prevPage} 
+                        />}
                 </Box>
             </Form>
         </PageContainer>
