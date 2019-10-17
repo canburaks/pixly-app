@@ -79,7 +79,6 @@ movie__slugs = [
     "movie/robocop-2014",
     "movie/the-lincoln-lawyer-2011",
     "movie/alice-in-wonderland-2010",
-    "movie/boro-the-caterpillar-2018",
     "movie/beats-2019",
     "movie/493141-beats-2019",
     "movie/teorema-1968",
