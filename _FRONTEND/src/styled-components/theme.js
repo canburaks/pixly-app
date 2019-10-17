@@ -82,8 +82,10 @@ themes.default.transitions  = {
 themes.default.shadows = {
 	light:"0px 2px 4px rgba(255, 255, 255, 1)",
 	dark: "-1px 2px 1px rgba(20, 20, 20, 0.87)",
-	textDark:"-2px 1px 1px rgba(0, 0, 0, 0.57)",
-	textLight:"-2px 1px 1px rgba(255, 255, 255, 0.57)",
+
+	textDark: "-1px 2px 2px rgba(0, 0, 0, 0.8);",
+	textLight:"-1px 2px 2px rgba(255, 255, 255, 0.8);",
+
 	mini2: "2px 2px 4px -2px rgba(40,40,40, 0.45);",
 	mini: "0px 2px 6px rgba(6, 28, 63, 0.15);",
 	//small:"rgba(40, 40, 40, 0.45) 0px 1px 5px, " +

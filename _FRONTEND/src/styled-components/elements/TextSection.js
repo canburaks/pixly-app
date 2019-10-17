@@ -9,7 +9,7 @@ export const TextSection = (props) =>(
         py={[3]} my={[2]}
         {...props} 
     >
-        <HeaderMini color={"dark"} textShadow="light" fontWeight="bold" fontSize={props.headerSize} 
+        <HeaderMini color={"dark"} textShadow={props.textShadow || "textLight"} fontWeight="bold" fontSize={props.headerSize} 
             pt={"4px"} 
         >
             {props.header}

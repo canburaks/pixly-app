@@ -9,6 +9,7 @@ export const HiddenHeader = styled("h1")`
     display:none;
 `
 
+
 export const Text = styled('p')({
 
   },

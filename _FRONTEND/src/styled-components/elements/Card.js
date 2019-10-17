@@ -5,7 +5,7 @@ import { Text, Paragraph,
         Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
         Box, ImageBox, AbsoluteBox, 
         NewLink, Input, HiddenText,
-        TextSection, HeaderMini, 
+        TextSection, HeaderMini, FlexBox
 } from "../index"
 
 
@@ -38,7 +38,7 @@ export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, bo
         <HeaderMini fontSize={fontSize}
             color={color} fontWeight="bold" 
             position="absolute" left="8px" 
-            bottom="8px" textShadow={"dark"}
+            bottom="8px" textShadow={props.textShadow}
         >
             {text}
         </HeaderMini>
@@ -47,6 +47,8 @@ export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, bo
         </NewLink>
     </AspectRatioCard>
 )
+
+
 
 ImageCard.defaultProps = {
     color: "light",
