@@ -149,7 +149,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         dispatcher(willBeDispatched)
         return (
             <MovieCoverBox 
-                columns={[2,3,3,3,4,4,6]} 
+                columns={[2,3,3,3,4,4,4,6]} 
                 items={data.complexSearch.topicResult} 
                 fontSize={[12,12,14]}
                 />
