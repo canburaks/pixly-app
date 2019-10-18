@@ -13,7 +13,7 @@ import { GlobalContext } from "../../App";
 import {  
     MovieCoverBox, ProfileCircleBox, PageContainer,
     ContentContainer, PaginationBox, ListCoverPanel,
-    TextSection,HiddenHeader
+    TextSection,HiddenHeader, MovieInformationBox,
 } from "../../styled-components"
 
 
@@ -83,7 +83,7 @@ const MovieList = (props) => {
 
                 
 
-                <MovieCoverBox items={liste.movies} columns={[1,2,2,3,3,3, 4,4]} />
+                <MovieInformationBox items={liste.movies} />
                     
                 <MidPageAd />
                 

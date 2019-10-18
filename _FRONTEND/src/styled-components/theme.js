@@ -84,6 +84,7 @@ themes.default.shadows = {
 	dark: "-1px 2px 1px rgba(20, 20, 20, 0.87)",
 
 	textDark: "-1px 2px 2px rgba(0, 0, 0, 0.8);",
+	textGray:"-1px 2px 2px rgba(120, 120, 120, 0.8);",
 	textLight:"-1px 2px 2px rgba(255, 255, 255, 0.8);",
 
 	mini2: "2px 2px 4px -2px rgba(40,40,40, 0.45);",
@@ -121,13 +122,14 @@ themes.default.shadows = {
 			"0 2px 2px -4px rgba(0,0,0,0.20), " +
 			"0 3px 4px -4px rgba(0,0,0,0.24), " +
 			"0 4px 6px -4px rgba(0,0,0,0.26) " ,
-			 
-	hover:  "0 1px 1px   rgba(0, 0, 0,   0.22), " +
-			"0 2px 2px   rgba(0, 0, 0,   0.22), " + 
-			"0 4px 4px   rgba(0, 0, 0,   0.22), " + 
-			"0 8px 8px   rgba(0, 0, 0, 0.22), " + 
-			"0 16px 16px rgba(0, 0, 0, 0.22), " + 
-			"0 32px 32px rgba(0, 0, 255, 0.12)" 
+
+	hover: "8px 30px 20px -8px rgba(0, 0, 0, 0.57)"
+	//hover:  "0 1px 1px   rgba(0, 0, 0,   0.22), " +
+	//		"0 2px 2px   rgba(0, 0, 0,   0.22), " + 
+	//		"0 4px 4px   rgba(0, 0, 0,   0.22), " + 
+	//		"0 8px 8px   rgba(0, 0, 0, 0.22), " + 
+	//		"0 16px 16px rgba(0, 0, 0, 0.22), " + 
+	//		"0 32px 32px rgba(0, 0, 255, 0.12)" 
 }
 themes.default.shadows.card = themes.default.shadows.diffuse2
 

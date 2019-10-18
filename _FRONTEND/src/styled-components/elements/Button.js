@@ -11,6 +11,25 @@ import { TextSection } from "./TextSection"
 import { useScrollPosition } from "../../functions/hooks"
 
 
+export const LinkButton = (props) => (
+    <BubbleButton type="button"
+        fontSize={[12,14]} fontWeight="bold"
+        bg="transparent" color={"light"}
+        alignSelf="center"
+        px={[4,4,5]} py={[2]} 
+        my={[2]} mt={"auto"}
+        //hoverBorderColor="transparent"
+        border={"1px solid"} borderColor="light" 
+        borderRadius={"8px"}
+        {...props}
+    >
+        <NewLink to={props.link}>
+            {props.text}
+        </NewLink>
+    </BubbleButton>
+)
+
+
 export const SearchButton = ({onClick, borderRadius="6px", ...props}) => (
         <Button 
             borderRadius={borderRadius}
@@ -27,7 +46,7 @@ export const SearchButton = ({onClick, borderRadius="6px", ...props}) => (
 
 export const ScrollButton = ({onClick, borderRadius="50%", ...props}) => (
     <Box 
-        position="fixed" right={["30px", "40px", "50px"]} bottom="40px" 
+        position="fixed" right={["30px", "40px", "50px"]} bottom="20px" 
         width={[60,60,70, 80]}
         height={[60,60,70, 80]}
         onClick={onClick}

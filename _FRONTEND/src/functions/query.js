@@ -66,7 +66,7 @@ query persona($username:String!){
         recommendations{
             prediction,
             movie{
-                id, name, year, slug, poster, coverPoster,
+                id, name, year, slug, poster, coverPoster, summary,imdbRating, imdb,
                 director{id, name, poster}
             }
         },
@@ -411,7 +411,8 @@ query liste($id:Int, $slug:String, $page:Int,$first:Int, $skip:Int ){
             username, id
             },
         movies{
-            id, name,slug, year, hasCover, poster,isBookmarked, isFaved, viewerRating, coverPoster
+            id, name,slug, year, hasCover, poster,isBookmarked, isFaved, viewerRating, coverPoster, summary,
+            imdbRating
         },
         followers{
             username, avatar
@@ -668,7 +669,12 @@ export const TOPIC_SEARCH_QUERY = gql`
                     slug
                 }
                 topic{
-                    name, summary, slug, poster, seoTitle, seoShortDescription, seoKeywords,coverPoster
+                    name, summary,content, slug, poster, 
+                    seoTitle, seoShortDescription, seoKeywords,
+                    coverPoster,
+                    quotes{
+                        ownerName, text
+                    }
                 },
                 quantity
         }
@@ -677,7 +683,7 @@ export const TOPIC_SEARCH_QUERY = gql`
 export const TOPIC_LIST_QUERY = gql`
     query{
         listOfTopics{
-            id,name, slug, coverPoster
+            id,name, slug, coverPoster, summary
         }
     }
 `

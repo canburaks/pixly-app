@@ -5,11 +5,42 @@ import { Text, Paragraph,
         Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
         Box, ImageBox, AbsoluteBox, 
         NewLink, Input, HiddenText,
-        TextSection, HeaderMini, FlexBox
+        TextSection, HeaderMini, FlexBox,LinkButton
 } from "../index"
 
 
 
+export const DarkCard = props => (
+    <FlexBox 
+        flexDirection="column" justifyContent="flex-start" 
+        width={"100%"} height={"100%"} 
+        bg="dark" borderRadius={"8px"}
+        boxShadow="card"
+        hoverShadow={"hover"}
+    >
+        <ImageCard
+            src={props.src} 
+            link={props.link}
+            ratio={props.ratio || 0.5625} 
+            borderRadius={0}
+            borderTopLeftRadius={"8px"}
+            borderTopRightRadius={"8px"}
+            boxShadow="card"
+            textShadow="textLight"
+        />
+        <FlexBox 
+            flexDirection="column" justifyContent="flex-start" 
+            width={"100%"} height="auto" 
+            flexGrow={1}
+            px={[2,2,2,2,3]} pt={[3]} pb={[1]}  
+        >
+            {props.header && <HeaderMini fontWeight="bold" m={0} my={[2]} color="light" fontSize={["18px", "18px", "22px"]}>{props.header}</HeaderMini> }
+            {props.text && <Text color="light" my={[2,2,3]} fontSize={props.textSize}>{props.text}</Text>}
+            {props.children}
+            {props.buttonText && <LinkButton link={props.link} text={props.buttonText} mt="auto" ></LinkButton>}
+        </FlexBox>
+    </FlexBox>
+)
 
 
 export const Card = (props) =>(
@@ -33,7 +64,8 @@ export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, bo
     <AspectRatioCard ratio={ratio} width={width || "100%"} src={src} 
         title={title}
         hoverShadow={hoverShadow} boxShadow={boxShadow} 
-        borderRadius={borderRadius}
+        borderRadius={borderRadius || 0}
+        {...props}
     > 
         <HeaderMini fontSize={fontSize}
             color={color} fontWeight="bold" 

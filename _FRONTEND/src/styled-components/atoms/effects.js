@@ -8,7 +8,7 @@ import css from '@styled-system/css'
 
 export const UnderlineEffect = styled.span`
     position: relative;
-
+    color:${themeGet("colors.light")};
     ::before {
         content: '';
         position: absolute;

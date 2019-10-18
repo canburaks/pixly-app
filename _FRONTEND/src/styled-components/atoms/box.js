@@ -84,7 +84,7 @@ export const MotionGridBox = styled(MotionBox)`
     width: 100%;
 `
 
-export const FlexBox = props => <Box position="relative" display="flex" flexDirection="row" justifyContent="flex-start" alignItems="center" {...props} />
+export const FlexBox = props => <Box position="relative" display="flex" flexDirection="row" justifyContent="flex-start" alignItems="flex-start" {...props} />
 export const AbsoluteBox = props => <Box position="absolute" {...props} />
 
 

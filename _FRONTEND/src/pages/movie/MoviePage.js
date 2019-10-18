@@ -23,8 +23,8 @@ import PosterPanel from "../elements/PosterPanel"
 //import { SimilarityCard, Tag } from "../elements/Elements"
 import { GlideBox } from "../../components2/Glide.js"
 
-import {  CrewCard,  MovieInfoBox, PageContainer, ContentContainer,
-    MovieCoverBox,  MovieCoverPanel, HiddenHeader
+import {  CrewCard,  MovieSimilarBox, PageContainer, ContentContainer,
+    MovieCoverBox,  MovieCoverPanel, HiddenHeader, HeaderMini
 } from "../../styled-components"
 
 import "../pages.css";
@@ -115,7 +115,7 @@ const MoviePage = (props) => {
                 <HiddenHeader>{item.name}</HiddenHeader>
                 {item.summary && item.summary.length >50 && 
                 <>
-                    <h4 className="t-xl t-bold mar-b-2x">Summary</h4>
+                    <HeaderMini>Summary</HeaderMini>
                     <p className="t-m mar-b-2x">{item.summary}</p>
                 </>
                 }
@@ -124,7 +124,7 @@ const MoviePage = (props) => {
                 {/*<!--SIMILAR Section--> */}
                 {similarPlaceholder > 0 &&
                 <>
-                    <h4 className="t-xl t-bold mar-b-2x">PEOPLE ALSO LIKE</h4>
+                    <HeaderMini>People Also Like</HeaderMini>
                     <p className="t-m mar-b-2x">
                         People who like 
                         <span className="t-bold"> '{item.name}' </span>
@@ -145,7 +145,7 @@ const MoviePage = (props) => {
                 {/*<!--CONTENT SIMILAR Section--> */}
                 {contentSimilarCover.length > 0 &&
                 <Col xs={12} md={12} lg={12} className="fbox-c jcfs aifs mar-t-4x">
-                    <h4 className="t-xl t-bold mar-b-2x">SIMILAR MOVIES</h4>
+                    <HeaderMini>Similar Movies</HeaderMini>
                     <p className="t-m mar-b-2x">
                         Those movies have content similarities with <span className="t-bold">'{item.name}'</span>. 
                         If you like any topic or tag under the below movies, you may also be interested them.
@@ -154,7 +154,7 @@ const MoviePage = (props) => {
                         Therefore any feedback is welcome.
                     </p>
                     <hr/>
-                    <MovieInfoBox items={contentSimilarCover} />
+                    <MovieSimilarBox items={contentSimilarCover} />
 
                 </Col>}
 

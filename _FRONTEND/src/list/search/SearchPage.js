@@ -99,6 +99,7 @@ const SearchPage = (props) =>{
         if (keywords.length < 3 && tags.length === 0) setMessage("Your should provide search keywords or choose a genre please")
         else {
             complexSearch({variables: {...mergeVariables()} })
+            if (message.length > 0) setMessage("")
             //const newQv = mergeVariables()
             //newQv.tags = tags.map(tag => tag.value)
             //////console.log("final query variables",newQv)

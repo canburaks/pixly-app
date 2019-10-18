@@ -409,7 +409,7 @@ class Movie(SocialMedia, SEO,MainPage):
 
 
 
-    def save_cover_from_url(self):
+    def update_cover_poster(self):
         from gql.functions import url_image
         cover_url = self.tmdb.poster_links().get("tmdb_cover_path")
         if cover_url:
@@ -420,7 +420,7 @@ class Movie(SocialMedia, SEO,MainPage):
             print("cover url could not found")
 
 
-    def save_poster_from_url(self, force=False):
+    def update_poster(self, force=False):
         from gql.functions import url_image, get_poster_url
         if force==False:
             try:

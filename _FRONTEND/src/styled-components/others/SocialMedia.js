@@ -1,5 +1,8 @@
 import React from "react";
-import { Box, OuterLink, FacebookIcon, TwitterIcon, InstagramIcon, HomeIcon, ImdbIcon, HiddenText } from "../"
+import { 
+    Box, OuterLink, FacebookIcon, TwitterIcon, InstagramIcon,
+    HomeIcon, ImdbIcon,ImdbRatingIcon, HiddenText 
+} from "../"
 
 
 export const SocialBox = ({ item, size, styles, ...props}) => (
@@ -15,7 +18,7 @@ export const SocialBox = ({ item, size, styles, ...props}) => (
 
 export const SocialMedia = (props) => {
     if (props.homepage) return  <HomeLink link={props.homepage} size={props.size} styles={props.styles} name={props.name} />
-    else if (props.imdb) return  <ImdbLink link={props.imdb} size={props.size} rating={props.rating} styles={props.styles} name={props.name} />
+    else if (props.imdb) return  <ImdbRatingIcon link={props.imdb} size={props.size} rating={props.rating} styles={props.styles} name={props.name} />
     else if (props.facebook) return  <FacebookLink link={props.facebook} size={props.size} styles={props.styles} name={props.name} />
     else if (props.twitter) return  <TwitterLink link={props.twitter} size={props.size} styles={props.styles} name={props.name} />
     else if (props.instagram) return  <InstagramLink link={props.instagram} size={props.size} styles={props.styles} name={props.name} />
