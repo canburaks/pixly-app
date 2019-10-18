@@ -4,6 +4,7 @@ import { compose,typography, color, space, shadow, layout, border, background, f
 import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import { UnderlineEffect, Box } from "../index"
+import { hideText } from 'polished'
 
 
 const LinkNoFollow = ({ to, className, children }) => <Link rel="nofollow" className={className} to={to} >{children}</Link>
@@ -30,6 +31,8 @@ export const NewLink = styled(LinkNoFollow)`
       box-shadow:${props => props.hoverShadow && props.hoverShadow}
   };
   transition: ${themeGet("transitions.medium")};
+  ${props => props.hidden && hideText()}
+
   ${color}
   ${space}
   ${shadow}

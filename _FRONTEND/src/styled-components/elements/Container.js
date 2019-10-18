@@ -4,7 +4,7 @@ import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 
 import { 
-    Box,ImageBox, GridBox, FlexBox, BlurBox, Text, HeaderText, NewLink, Paragraph,
+    Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, NewLink, Paragraph,
     TagText,
 } from "../index"
 import { SocialBox } from "../others"
@@ -29,7 +29,7 @@ export const TopPanelBackElement = (props) => (
 )
 
 export const TopPanelCoverElement = React.memo((props) => (
-    <ImageBox src={props.item.largeCoverPoster || props.item.coverPoster || props.item.poster} 
+    <SuperBox src={props.item.largeCoverPoster || props.item.coverPoster || props.item.poster} 
         position={"relative"} 
         top={0} left={["1vw", "1vw", "5vw"]} right={["1vw", "1vw", "5vw"]} maxWidth={["94vw", "95vw", "88vw"]}
         height={["53vw","53vw", "45vw"]} maxHeight={"80vh"}
@@ -52,7 +52,7 @@ export const TopPanelCoverElement = React.memo((props) => (
             {props.children}
         </Box>
 
-    </ImageBox>
+    </SuperBox>
 ), (prevProps, nextProps) => (prevProps.isLargeScreen === nextProps.isLargeScreen))
 
 

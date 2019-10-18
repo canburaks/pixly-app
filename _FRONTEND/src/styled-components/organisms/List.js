@@ -17,7 +17,7 @@ export const ListCoverBox = React.memo(({ items, columns=[1,1,2,2,2,3,3], ratio=
                 text={text === true ? item.name : null}
                 key={item.slug}
                 link={`/list/${item.slug}/1`}
-                linktext={item.name}
+                hiddentext={item.name}
                 ratio={ratio} 
                 width={"100%"}
                 boxShadow="card"
@@ -46,7 +46,7 @@ export const MoviePosterBox = React.memo(({ items, columns=[3,4,6,8, 8, 10], rat
     </Grid>
 ))
 
-export const MovieCoverBox = React.memo(({ items, columns=[2,2,3,4,4,5,6], ratio=0.5625, notext=false, ...props }) => (
+export const MovieCoverBox = React.memo(({ items, columns=[2,2,3,4,4,4,5], ratio=0.5625, notext=false, ...props }) => (
     <Grid columns={columns } py={[4]}>
         {items.map( item => (
         <MovieCoverCard 

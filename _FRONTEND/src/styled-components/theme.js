@@ -133,4 +133,76 @@ themes.default.shadows = {
 }
 themes.default.shadows.card = themes.default.shadows.diffuse2
 
+themes.default.gradients = {
+	blue:{
+		colors: ["rgba(0,116,217,1) 0%", "rgba(0,65,122,1) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(0,116,217,1)",
+	},
+	navy:{
+		colors: ["rgba(0,32,63,1) 0%", "rgba(0,10,20,1) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(0,32,63,1)",
+	},
+	teal:{
+		colors: ["rgba(57,204,204,1) 0%", "rgba(34,122,122,1) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(57,204,204,1)",
+	},
+	lime:{
+		colors: ["rgba(1,255,111,1) 0%", "rgba(2,163,72,1) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(1,255,111,1)",
+	},
+	yellow:{
+		colors: ["rgba(255,221,0,1) 0%", "rgba(184,147,0,1) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(255,221,0,1)",
+	},
+	orange:{
+		colors: ["rgba(255,133,27,1) 0%", "rgba(255,80,27,1) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(255,133,27,1)",
+	},
+	red:{
+		colors: ["rgba(246,46,36,1) 0%", "rgba(255,54,121,1) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(246,46,36,1)",
+	},
+	fuschia:{
+		colors: ["rgba(240,18,188,1) 0%", "rgba(163,11,128,1) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(240,18,188,1)",
+	},
+	purple:{
+		colors: ["rgba(176,13,201,1) 0%", "rgba(107,7,122,1) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(176,13,201,1)",
+	},
+	maroon:{
+		colors: ["rgba(204,31,115,1) 0%", "rgba(133,20,75,1) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(204,31,115,1)",
+	},
+	pinkish:{
+		colors: ["#FF4B2B 0%", "#FF416C 100%"],
+		direction: "to bottom",
+		fallback: "#FF416C",
+	},
+	blueish:{
+		colors: ["#3437c7 0%", "#4b55e1 100%"],
+		direction: "to bottom",
+		fallback: "#3437c7",
+	},
+	purplish:{
+		colors: ["#ed145b 0%", "#7b31f4 100%"],
+		direction: "to bottom",
+		fallback: "#7b31f4",
+	},
+	sun:{
+		colors: ["#FCCF31 10%", "#F55555 100%"],
+		direction: "to bottom",
+		fallback: "#F55555",
+	},
+}
 export default themes

@@ -6,7 +6,7 @@ import {
 
 
 export const SocialBox = ({ item, size, styles, ...props}) => (
-    <Box display="flex" flexDirection="row" justifyContent="flex-start" alignItems="center" my={[0]} {...props}>
+    <Box display="flex" flexDirection="row" justifyContent="flex-start" alignItems="center" overflow="hidden" my={[0]} {...props}>
         {item.homepage && <SocialMedia homepage={item.homepage} size={size} name={item.name} />}
         {item.facebook && <SocialMedia facebook={item.facebook} size={size} name={item.name} />}
         {item.twitter && <SocialMedia twitter={item.twitter} size={size} name={item.name} />}
@@ -18,7 +18,7 @@ export const SocialBox = ({ item, size, styles, ...props}) => (
 
 export const SocialMedia = (props) => {
     if (props.homepage) return  <HomeLink link={props.homepage} size={props.size} styles={props.styles} name={props.name} />
-    else if (props.imdb) return  <ImdbRatingIcon link={props.imdb} size={props.size} rating={props.rating} styles={props.styles} name={props.name} />
+    else if (props.imdb) return  <ImdbRatingIcon link={props.imdb} size={props.size + 2} rating={props.rating}  name={props.name} />
     else if (props.facebook) return  <FacebookLink link={props.facebook} size={props.size} styles={props.styles} name={props.name} />
     else if (props.twitter) return  <TwitterLink link={props.twitter} size={props.size} styles={props.styles} name={props.name} />
     else if (props.instagram) return  <InstagramLink link={props.instagram} size={props.size} styles={props.styles} name={props.name} />
@@ -27,49 +27,27 @@ export const SocialMedia = (props) => {
 }
 
 
-export const ImdbLink = ({link, rating, size, styles, className="" }) => (
-    <OuterLink href={link} mr={[1]} display="flex" flexDirection="row">
-        <ImdbIcon imdb/>
-        {rating && 
-            <p className="mar-l-x  t-bold imdb-rating" 
-                style={{
-                    ...styles,
-                    fontWeight:"900", 
-                    fontSize:14,
-                    color:"rgba(255,255,255, 0.9)",
-                    textShadow:"0px 1px 1px rgba(0,0,0, 0.8)",
-                    position:"relative", 
-                    /* 
-                    border:"1px solid black",
-                    padding:"1px 2px",
-                    borderRadius:"100%", 
-                    bottom:0, right:-25, 
-                   */
-                }}
-                >{rating}/10</p>}
-    </OuterLink>
-)
 export const FacebookLink = ({link, name, size, className="", }) => (
     <OuterLink href={link} mr={[1]}>
         <FacebookIcon facebook />
-        <HiddenText>{name + " Facebook Page"} </HiddenText>
+        <HiddenText>{name + "'s Facebook"} </HiddenText>
     </OuterLink>
 )
 export const InstagramLink = ({link, name, size, className="", }) => (
     <OuterLink href={link} mr={[1]}>
         <InstagramIcon instagram/>
-        <HiddenText>{name + " Instagram Page"} </HiddenText>
+        <HiddenText>{name + "'s Instagram"} </HiddenText>
     </OuterLink>
 )
 export const TwitterLink = ({link, name, size, className="", }) => (
     <OuterLink  href={link} mr={[1]}>
         <TwitterIcon twitter/>
-        <HiddenText>{name + " Twitter Page"} </HiddenText>
+        <HiddenText>{name + "'s Twitter"} </HiddenText>
     </OuterLink>
 )
 export const HomeLink = ({link, name, size, className="", }) => (
     <OuterLink  href={link} mr={[1]}>
         <HomeIcon />
-        <HiddenText>{name + " Home Page"} </HiddenText>
+        <HiddenText>{name + "'s Home Page"} </HiddenText>
     </OuterLink>
 )

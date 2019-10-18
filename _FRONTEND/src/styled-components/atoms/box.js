@@ -5,8 +5,11 @@ import { themeGet } from '@styled-system/theme-get'
 import { Image } from "./image"
 import { Spinner } from "../others"
 import { motion } from "framer-motion"
+import { linearGradient, backgrounds, backgroundImages, setLightness } from 'polished'
 
 const hoverShadow = `:hover { box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')}}`
+
+
 
 
 export const Box = styled.div`
@@ -20,7 +23,6 @@ export const Box = styled.div`
     transition: ${themeGet("transitions.fast")};
     border: ${props => props.hoverBorder && "3px solid transparent"};
     cursor: ${props => props.clickable ? "pointer" : "inherit"};
-    background: ${props => props.darken && "linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.40379901960784315) 50%, rgba(0,0,0,0) 100%)"};
     ${color}
     ${space}
     ${shadow}
@@ -32,6 +34,49 @@ export const Box = styled.div`
     ${grid}
     ${typography}
 `
+// ImageBox, AspectRatioBox and GradientBox
+// NOTE: When using ratio use width=100%
+export const SuperBox = styled.div`
+    box-sizing: border-box !important;
+    display:flex;
+    position:relative;
+    height:auto;
+    padding-bottom:${props => `${props.ratio * 100}%`};
+
+    ${props => props.src && backgroundImages(`url(${props.src})`)};
+    background-size: cover;
+    background-position: center;
+
+    ${props => props.gradient && themeGet(`gradients.${props.gradient}.colors`)(props) 
+        && linearGradient({
+        colorStops: themeGet(`gradients.${props.gradient}.colors`)(props),
+        toDirection: themeGet(`gradients.${props.gradient}.direction`)(props),
+        fallback: themeGet(`gradients.${props.gradient}.fallback`)(props),
+    })}
+
+    border: ${props => props.hoverBorder && "3px solid transparent"};
+    cursor: ${props => props.clickable ? "pointer" : "inherit"};
+    overflow: hidden;
+    z-index:1;
+    transition: background-image 5s ease-in-out !important;
+    :hover { 
+        box-shadow: ${props => props.hoverShadow && themeGet('shadows.diffuse3')};
+        border: ${props => props.hoverBorder && '3px solid #3633CC' };
+        text-decoration: ${props => props.hoverUnderline && "underline"};
+        background:${props => props.hoverLight && setLightness('0.45', 'rgba(204,205,100,0.7)')}
+    }
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
+
 
 export const MotionBox = styled(motion.div)`
     box-sizing: border-box;
@@ -56,16 +101,7 @@ export const MotionBox = styled(motion.div)`
     ${grid}
     ${typography}
 `
-
-export const ImageBox = styled(Box)`
-    box-sizing: border-box !important;
-    background-image: url(${props => props.src});
-    background-size: cover;
-    background-position: center;
-    height:${props => props.auto && "auto"};
-    transition: background-image 5s ease-in-out !important;
-`
-export const BlurBox = styled(ImageBox)`
+export const BlurBox = styled(SuperBox)`
     -webkit-filter: ${props => props.blur && `blur(${props.blur}px)`};
     -moz-filter: ${props => props.blur && `blur(${props.blur}px)`};
     -o-filter: ${props => props.blur && `blur(${props.blur}px)`};
@@ -88,16 +124,88 @@ export const FlexBox = props => <Box position="relative" display="flex" flexDire
 export const AbsoluteBox = props => <Box position="absolute" {...props} />
 
 
-export const GradientBox = styled(Box)`
-    box-sizing: border-box !important;
-    background:${background => background};
-    height:auto;
-`
-
 
 
 // Allow overflow
 /*
+
+export const ImageBox = styled.div`
+    box-sizing: border-box !important;
+    display:flex;
+    position:relative;
+    height:auto;
+    padding-bottom:${props => `${props.ratio * 100}%`};
+
+    ${props => props.src && backgroundImages(`url(${props.src})`)};
+    background-size: cover;
+    background-position: center;
+
+    border: ${props => props.hoverBorder && "3px solid transparent"};
+    cursor: ${props => props.clickable ? "pointer" : "inherit"};
+    overflow: hidden;
+    z-index:1;
+    transition: background-image 5s ease-in-out !important;
+    :hover { 
+        box-shadow: ${props => props.hoverShadow && themeGet('shadows.diffuse3')};
+        border: ${props => props.hoverBorder && '3px solid #3633CC' };
+        text-decoration: ${props => props.hoverUnderline && "underline"};
+    }
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
+
+
+export const GradientBox = styled.div`
+    box-sizing: border-box !important;
+    display:flex;
+    position:relative;
+    height:auto;
+    :hover { 
+        box-shadow: ${props => props.hoverShadow && themeGet('shadows.diffuse3')};
+        border: ${props => props.hoverBorder && '3px solid #3633CC' };
+        text-decoration: ${props => props.hoverUnderline && "underline"};
+        }
+    transition: ${themeGet("transitions.fast")};
+    border: ${props => props.hoverBorder && "3px solid transparent"};
+    cursor: ${props => props.clickable ? "pointer" : "inherit"};
+    overflow: hidden;
+    background:${props => props.gradient && linearGradient({
+        colorStops: themeGet(`gradients.${props.gradient}.colors`)(props),
+        toDirection: themeGet(`gradients.${props.gradient}.direction`)(props),
+        fallback: themeGet(`gradients.${props.gradient}.fallback`)(props),
+    })}
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
+
+
+export const ImageBox2 = styled(Box)`
+    box-sizing: border-box !important;
+    background-image: url(${props => props.src});
+    background-size: cover;
+    background-position: center;
+    height:${props => props.auto && "auto"};
+    transition: background-image 5s ease-in-out !important;
+`
+
+
+
 export const AspectRatioFlexibleBox = styled(Box)`
     ::before {
         content: "";

@@ -83,7 +83,7 @@ const MovieList = (props) => {
 
                 
 
-                <MovieInformationBox items={liste.movies} />
+                <MovieInformationBox items={liste.movies}  columns={[1,1,2,2,3,3,3,4]}/>
                     
                 <MidPageAd />
                 
