@@ -77,7 +77,6 @@ const NavBar = props => {
             
             <div className="nav-pages nav-middle">
 
-                <HiddenLink />
 
                 <NewLink id="nav-directors" className="nav-page nav-item" to="/directors/1" rel="nofollow" >
                     <UnderlineEffect rel="nofollow" >Directors</UnderlineEffect>
