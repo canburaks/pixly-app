@@ -3,9 +3,9 @@ import { useMemo } from 'react';
 
 import { Text, Paragraph, HeaderMini,
         Image, ImageShim, //AspectRatioImage, 
-        Box, ImageBox, AspectRatioBox,  AspectRatioImageBox,FlexBox,
+        Box, FlexBox,
         TextSection, Card, ImageCard, AspectRatioCard, MosaicCard,DarkCard,
-        NewLink, Input, LinkButton, ImdbRatingIcon, YearIcon
+        NewLink, Input, LinkButton, ImdbRatingIcon, YearClockIcon
 } from "../index"
 
 export const MovieInformationCard = (props) => (
@@ -24,7 +24,7 @@ export const MovieInformationCard = (props) => (
                     fill="#fac539"
                 />}
             {props.item.year && 
-                <YearIcon 
+                <YearClockIcon fill="white"
                     year={props.item.year} 
                     size={["18px", "18px", "24px"]} 
                     ml={[2,2,2,2,3]}
@@ -55,7 +55,7 @@ export const RecommendationCard = (props) => (
     >
         <FlexBox justifyContent="space-between" alignItems={"center"} mb={[1]} mt={[2]} width="100%">
             <ImdbRatingIcon rating={props.item.imdbRating} size={["18px", "18px", "24px"]} fill="#fac539"/>
-            <YearIcon year={props.item.year} size={["18px", "18px", "24px"]} ml={[2,2,2,2,3]}/>
+            <YearClockIcon year={props.item.year} size={["18px", "18px", "24px"]} ml={[2,2,2,2,3]}/>
         </FlexBox>
         <Text
             fontSize={["13px", "13px", "13px","14px", "14px", "16px"]}
@@ -96,7 +96,7 @@ export const DirectorCard = (props) => (
         text={props.item.name}
         text={!props.notext ? props.item.name : null}
         link={`/person/${props.item.slug}`}
-        linktext={props.item.name}
+        hiddentext={props.item.name}
         ratio={1.67} 
         borderRadius={"8px"}
         boxShadow="card"
@@ -110,7 +110,7 @@ export const CrewCard = (props) => (
         <ImageCard
             src={props.crew.person.poster} 
             link={`/person/${props.crew.person.slug}`}
-            linktext={props.crew.person.name}
+            hiddentext={props.crew.person.name}
 
             ratio={1.5}
             borderRadius={"8px"}
@@ -133,7 +133,7 @@ export const ListCard = (props) => (
         <ImageCard
             src={props.item.coverPoster} 
             link={`/list/${props.item.slug}/1`}
-            linktext={props.item.name}
+            hiddentext={props.item.name}
             ratio={0.41}
             borderRadius={"6px"}
         />
@@ -145,7 +145,7 @@ export const MovieCoverCard = (props) => (
         src={props.item.coverPoster || props.item.poster} 
         text={!props.notext ? props.item.name : null}
         link={`/movie/${props.item.slug}`}
-        linktext={props.item.name}
+        hiddentext={props.item.name}
         ratio={props.ratio || 0.5625} 
         borderRadius={"8px"}
         boxShadow="card"
@@ -160,7 +160,7 @@ export const MoviePosterCard = (props) => (
         src={props.item.poster} 
         text={!props.notext ? props.item.name : null}
         link={`/movie/${props.item.slug}`}
-        linktext={props.item.name}
+        hiddentext={props.item.name}
         ratio={props.ratio || 1.6} 
         borderRadius={"8px"}
         boxShadow="card"
@@ -192,7 +192,7 @@ export const MovieSimilarCard2 = (props) => (
         <ImageCard
             src={props.item.coverPoster || props.item.poster} 
             link={`/movie/${props.item.slug}`}
-            linktext={props.item.name}
+            hiddentext={props.item.name}
             ratio={props.ratio || 0.5625} 
             borderRadius={0}
             borderTopLeftRadius={"8px"}
@@ -213,7 +213,7 @@ export const MovieSimilarCard2 = (props) => (
         <ImageCard
             src={props.item.coverPoster || props.item.poster} 
             link={`/movie/${props.item.slug}`}
-            linktext={props.item.name}
+            hiddentext={props.item.name}
             ratio={props.ratio || 0.5625} 
             borderRadius={"8px"}
         />

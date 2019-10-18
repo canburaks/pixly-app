@@ -4,7 +4,7 @@ import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import css from '@styled-system/css'
 
-import { Svg, MovieSvg, SocialMediaSvg, UnFollowAnimatedSvg,OuterLink, LockSvg, Text, FlexBox } from "../"
+import { Svg, MovieSvg, SocialMediaSvg, UnFollowAnimatedSvg,OuterLink, LockSvg, Text, FlexBox, HiddenText } from "../"
 
 
 const iconchecker = (prevProps, nextProps) => prevProps.id === nextProps.id
@@ -37,15 +37,18 @@ export const LogoutIcon = (props) => <Logout {...props} />
 export const CloseIcon = (props) => <Close {...props} />
 export const WatchIcon = (props) => <Watch {...props} />
 export const SearchIcon = (props) => <Search {...props} />
+export const ClockIcon = (props) => <Clock {...props} />
+
+export const YearIcon = (props) => <ClockYear title="Release Year" {...props} />
+
+//export const YearIcon = (props) => <WatchYear title="Release Year" {...props} />
+//export const HourGlassIcon = (props) => <HourGlass title="Release Year" {...props} />
+//export const YearGlassIcon = (props) => <HourGlassYear title="Release Year" {...props} />
 
 
-export const ImdbRatingIcon = (props) => <ImdbRating title="See IMDb Page" {...props} />
-export const YearIcon = (props) => <WatchYear title="Release Year" {...props} />
-
-
-const ImdbRating = (props) => (
-    <OuterLink href={props.link} mr={[1]} display="flex" alignItems="center">
-        <ImdbIcon imdb {...props}/>
+export const ImdbRatingIcon = (props) => (
+    <OuterLink href={props.link} mr={[1]} display="flex" alignItems="flex-end">
+        <ImdbIcon imdb title="See IMDb Page" fill="#f1f1f1" {...props}/>
         {props.rating && 
         <Text 
             fontWeight="bold"
@@ -53,15 +56,18 @@ const ImdbRating = (props) => (
             color="light"
             textShadow="textDark"
             position="relative"
+            m={[0]} p={[0]}
             ml={[1]}
         >
             {props.rating}/10
         </Text>}
+        <HiddenText>IMDb Page</HiddenText>
     </OuterLink>
 )
-const WatchYear = (props) => (
+
+export const YearClockIcon = (props) => (
     <FlexBox  mr={[1]} display="flex" alignItems="center">
-        <WatchIcon imdb {...props}/>
+        <ClockIcon title="Release Year"  {...props}/>
         {props.year && 
         <Text 
             fontWeight="bold"
@@ -75,6 +81,7 @@ const WatchYear = (props) => (
         </Text>}
     </FlexBox>
 )
+
 
 const Heart = (props) => (
 	<MovieSvg xmlns="http://www.w3.org/2000/svg" 
@@ -135,7 +142,7 @@ const Instagram = (props) => (
         <path d="M16.98 0a6.9 6.9 0 0 1 5.08 1.98A6.94 6.94 0 0 1 24 7.02v9.96c0 2.08-.68 3.87-1.98 5.13A7.14 7.14 0 0 1 16.94 24H7.06a7.06 7.06 0 0 1-5.03-1.89A6.96 6.96 0 0 1 0 16.94V7.02C0 2.8 2.8 0 7.02 0h9.96zm.05 2.23H7.06c-1.45 0-2.7.43-3.53 1.25a4.82 4.82 0 0 0-1.3 3.54v9.92c0 1.5.43 2.7 1.3 3.58a5 5 0 0 0 3.53 1.25h9.88a5 5 0 0 0 3.53-1.25 4.73 4.73 0 0 0 1.4-3.54V7.02a5 5 0 0 0-1.3-3.49 4.82 4.82 0 0 0-3.54-1.3zM12 5.76c3.39 0 6.2 2.8 6.2 6.2a6.2 6.2 0 0 1-12.4 0 6.2 6.2 0 0 1 6.2-6.2zm0 2.22a3.99 3.99 0 0 0-3.97 3.97A3.99 3.99 0 0 0 12 15.92a3.99 3.99 0 0 0 3.97-3.97A3.99 3.99 0 0 0 12 7.98zm6.44-3.77a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8z"/>
     </SocialMediaSvg>
 )
-const Imdb = props => (
+const Imdb2 = props => (
     <SocialMediaSvg  xmlns="http://www.w3.org/2000/svg" 
         viewBox="0 0 24 24" fill="#f1f1f1"
         {...props}
@@ -145,7 +152,18 @@ const Imdb = props => (
     <path d="M19.64.062L4.444.102C1.405.102.143 1.493.143 3.941L.142 20.339c-.039 2.168.696 3.559 3.376 3.559l16.845.04c2.72-.08 3.416-1.671 3.416-3.719l.158-16.439C23.897 1.812 22.723.062 19.64.062zM4.983 15.615H3.145V8.492h1.838v7.123zm6.321 0H9.7l-.007-4.809-.642 4.809H7.903l-.678-4.704-.005 4.704H5.612V8.492h2.385c.067.432.138.937.217 1.518l.263 1.808.425-3.326h2.402v7.123zm4.802-2.113c0 .638-.035 1.065-.094 1.279a.958.958 0 01-.311.506 1.3 1.3 0 01-.554.254c-.218.05-.547.074-.988.074h-2.226V8.492h1.37c.891 0 1.404.04 1.717.123.314.081.553.215.714.403.164.188.268.396.307.626.041.23.066.681.066 1.355v2.503h-.001zm4.791.476c0 .429-.031.747-.086.954-.06.211-.191.392-.406.547-.21.152-.459.229-.75.229-.207 0-.479-.046-.659-.137a1.507 1.507 0 01-.494-.413l-.114.456h-1.655V8.492h1.769v2.316c.146-.171.311-.299.492-.382a1.71 1.71 0 01.661-.127c.244 0 .456.039.634.116.18.076.312.182.408.32.094.138.15.272.169.405.021.131.031.413.031.84v1.998z" />
     </SocialMediaSvg>
 )
-
+const Imdb = props => (
+    <SocialMediaSvg
+      aria-hidden="true"
+      viewBox="0 0 448 512"
+      {...props}
+    >
+      <path
+        d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM21.3 229.2H21c.1-.1.2-.3.3-.4zM97 319.8H64V192h33zm113.2 0h-28.7v-86.4l-11.6 86.4h-20.6l-12.2-84.5v84.5h-29V192h42.8c3.3 19.8 6 39.9 8.7 59.9l7.6-59.9h43zm11.4 0V192h24.6c17.6 0 44.7-1.6 49 20.9 1.7 7.6 1.4 16.3 1.4 24.4 0 88.5 11.1 82.6-75 82.5zm160.9-29.2c0 15.7-2.4 30.9-22.2 30.9-9 0-15.2-3-20.9-9.8l-1.9 8.1h-29.8V192h31.7v41.7c6-6.5 12-9.2 20.9-9.2 21.4 0 22.2 12.8 22.2 30.1zM265 229.9c0-9.7 1.6-16-10.3-16v83.7c12.2.3 10.3-8.7 10.3-18.4zm85.5 26.1c0-5.4 1.1-12.7-6.2-12.7-6 0-4.9 8.9-4.9 12.7 0 .6-1.1 39.6 1.1 44.7.8 1.6 2.2 2.4 3.8 2.4 7.8 0 6.2-9 6.2-14.4z"
+      />
+    </SocialMediaSvg>
+  )
+  
 const Youtube = (props) => (
     <SocialMediaSvg xmlns="http://www.w3.org/2000/svg" 
         viewBox="0 0 24 24" fill="#f1f1f1"
@@ -338,3 +356,59 @@ const Search = (props) => (
     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
 </Svg>
 )
+const HourGlass = props => (
+    <Svg
+      aria-hidden="true"
+      viewBox="0 0 384 512"
+      {...props}
+    >
+    {props.title && <title>{props.title}</title>}
+      <path fill={props.fill}
+        d="M368 48h4c6.627 0 12-5.373 12-12V12c0-6.627-5.373-12-12-12H12C5.373 0 0 5.373 0 12v24c0 6.627 5.373 12 12 12h4c0 80.564 32.188 165.807 97.18 208C47.899 298.381 16 383.9 16 464h-4c-6.627 0-12 5.373-12 12v24c0 6.627 5.373 12 12 12h360c6.627 0 12-5.373 12-12v-24c0-6.627-5.373-12-12-12h-4c0-80.564-32.188-165.807-97.18-208C336.102 213.619 368 128.1 368 48zM64 48h256c0 101.62-57.307 184-128 184S64 149.621 64 48zm256 416H64c0-101.62 57.308-184 128-184s128 82.38 128 184z"
+      />
+    </Svg>
+  )
+
+  const Clock = props => (
+    <Svg viewBox="0 0 24 24" {...props}>
+      <path d="M11 2a10 10 0 1010 10A10 10 0 0011 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zm3.1-7.37L12 11.42V7a1 1 0 00-2 0v5.12a.65.65 0 00.05.2.89.89 0 00.08.17.86.86 0 00.1.16l.16.13.09.09 2.6 1.5a1 1 0 00.5.13 1 1 0 00.5-1.87z" />
+    </Svg>
+  )
+
+  /*
+
+
+const WatchYear = (props) => (
+    <FlexBox  mr={[1]} display="flex" alignItems="center">
+        <WatchIcon imdb {...props}/>
+        {props.year && 
+        <Text 
+            fontWeight="bold"
+            fontSize={["14px"]}
+            color="light"
+            textShadow="textDark"
+            position="relative"
+            ml={[1]}
+        >
+            {props.year}
+        </Text>}
+    </FlexBox>
+)
+
+const HourGlassYear = (props) => (
+    <FlexBox  mr={[1]} display="flex" alignItems="center">
+        <HourGlassIcon {...props}/>
+        {props.year && 
+        <Text 
+            fontWeight="bold"
+            fontSize={["14px"]}
+            color="light"
+            textShadow="textDark"
+            position="relative"
+            ml={[1]}
+        >
+            {props.year}
+        </Text>}
+    </FlexBox>
+)
+*/

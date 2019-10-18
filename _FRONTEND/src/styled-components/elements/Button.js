@@ -3,7 +3,7 @@ import { useMemo, useCallback } from 'react';
 
 import { Text, Paragraph, 
         Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
-        Box, ImageBox, AbsoluteBox, 
+        Box, AbsoluteBox, 
         NewLink, Input, Button, BubbleButton
 } from "../atoms"
 

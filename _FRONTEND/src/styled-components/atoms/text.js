@@ -1,12 +1,17 @@
 import { compose,typography, color, space, shadow, layout, border, background, flexbox, position, system } from 'styled-system'
 import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
+import { hideText } from 'polished'
 
 export const HiddenText = styled("span")`
-    display:none;
+    max-width:1px !important;
+    max-height:1px!important;
+    visibility:hidden;
 `
 export const HiddenHeader = styled("h1")`
-    display:none;
+    max-width:1px !important;
+    max-height:1px!important;
+    visibility:hidden;
 `
 
 

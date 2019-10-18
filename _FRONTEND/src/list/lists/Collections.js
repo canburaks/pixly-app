@@ -75,7 +75,7 @@ const ListBoard = (props) => {
                     text={null}
                     key={pixlyselection.slug}
                     link={`/list/${pixlyselection.slug}/1`}
-                    linktext={pixlyselection.name}
+                    hiddentext={pixlyselection.name}
                     ratio={pixlyselectionSize}
                     width={"100%"}
                     boxShadow="card"
