@@ -22,8 +22,14 @@ export const DirectorLinks = React.memo(({directors, ...props}) =>(
 
 
 export const NewLink = styled(LinkNoFollow)`
+  color: unset !important;
+  color:${themeGet("colors.light")};
+  :hover {
+      background-color:${props => props.hoverBg && props.hoverBg};
+      color:${props => props.hoverColor && props.hoverColor};
+      box-shadow:${props => props.hoverShadow && props.hoverShadow}
+  };
   transition: ${themeGet("transitions.medium")};
-  color: unset;
   ${color}
   ${space}
   ${shadow}

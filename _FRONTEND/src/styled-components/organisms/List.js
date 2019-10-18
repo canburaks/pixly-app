@@ -3,8 +3,10 @@ import { useMemo, useCallback, useState } from 'react';
 
 import { 
     Box, Grid, ImageCard,PaginationBox,
-    MovieCoverCard, MoviePosterCard,MovieSimilarCard, CrewCard, TagText } from "../index"
-import { FlexBox } from "../atoms";
+    MovieCoverCard, MoviePosterCard,MovieSimilarCard, CrewCard,
+    RecommendationCard,MovieInformationCard,
+    TagBox,FlexBox
+} from "../index"
 
 
 export const ListCoverBox = React.memo(({ items, columns=[1,1,2,2,2,3,3], ratio=0.41, text=false }) => (
@@ -60,7 +62,17 @@ export const MovieCoverBox = React.memo(({ items, columns=[2,2,3,4,4,5,6], ratio
 
 
 //For Content Similar Movies with common tags 
-export const MovieInfoBox = React.memo(({ items, columns=[2,2,3,3,4,4,5], ratio=0.5625, ...props }) => (
+
+//For Content Similar Movies with common tags 
+export const MovieInformationBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], ratio=0.5625, ...props }) => (
+    <Grid columns={columns} py={[4]}>
+        {items.map( item => (
+            <MovieInformationCard item={item} key={"rec" + item.id}/>
+        ))}
+    </Grid>
+))
+
+export const MovieSimilarBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], ratio=0.5625, ...props }) => (
     <Grid columns={columns} py={[4]}>
         {items.map( item => (
         <MovieSimilarCard 
@@ -69,14 +81,11 @@ export const MovieInfoBox = React.memo(({ items, columns=[2,2,3,3,4,4,5], ratio=
             key={item.movie.slug}
             {...props} 
         >
-            <FlexBox flexWrap="wrap">
-                {item.commonTags.map(tag => <TagText key={tag} color="dark" borderColor="dark" fontSize={[10,11,12,12]}>{tag}</TagText> )}
-            </FlexBox>
+            <TagBox tags={item.commonTags} />
         </MovieSimilarCard>
         ))}
     </Grid>
 ))
-
 
 export const ProfileCircleBox = React.memo(({ items, columns=[4,6,8,10,12] }) => (
     <Grid
@@ -100,6 +109,13 @@ export const ProfileCircleBox = React.memo(({ items, columns=[4,6,8,10,12] }) =>
 
 
 
+export const RecommendationBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], ratio=0.5625, ...props }) => (
+    <Grid columns={columns} py={[4]}>
+        {items.map( item => (
+        <MovieInformationCard item={item} key={"rec" + item.id}/>
+        ))}
+    </Grid>
+))
 
 
 
@@ -117,7 +133,10 @@ export const ElementListContainer = (props) => {
     const [ listStart, listEnd ] = useMemo(() => [((currentPage - 1) * perPageItems), (currentPage * perPageItems)], [currentPage])
     const slicedItems = items.slice(listStart, listEnd)
 
-    const RenderElement = useMemo(() => type==="poster" ? MoviePosterBox : (type==="cover" ? MovieCoverBox : ProfileCircleBox))
+    const RenderElement = type==="poster" 
+        ? MoviePosterBox : (type==="cover" 
+            ? MovieCoverBox : (type==="recommendation"
+                ? RecommendationBox : ProfileCircleBox))
 
     //const RenderElement = <RenderElementSelector type={type} />
 

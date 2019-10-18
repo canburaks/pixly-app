@@ -145,6 +145,7 @@ liste_slugs =[
 ]
 topic__slugs = [
     "topic/art-house",
+    "topic/cyberpunk"
 ]
 
 def page_template_generator(routes):

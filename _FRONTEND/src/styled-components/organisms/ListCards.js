@@ -1,37 +1,94 @@
 import React from "react";
 import { useMemo } from 'react';
 
-import { Text, Paragraph, 
+import { Text, Paragraph, HeaderMini,
         Image, ImageShim, //AspectRatioImage, 
-        Box, ImageBox, AspectRatioBox,  AspectRatioImageBox,
-        NewLink, Input, 
-} from "../atoms"
+        Box, ImageBox, AspectRatioBox,  AspectRatioImageBox,FlexBox,
+        TextSection, Card, ImageCard, AspectRatioCard, MosaicCard,DarkCard,
+        NewLink, Input, LinkButton, ImdbRatingIcon, YearIcon
+} from "../index"
 
-import { TextSection, Card, ImageCard, AspectRatioCard, MosaicCard } from "../elements"
+export const MovieInformationCard = (props) => (
+    <DarkCard 
+        src={props.item.coverPoster}
+        link={`/movie/${props.item.slug}`}
+        header={props.item.name}
+        textSize={["13px", "13px", "13px","14px", "14px", "16px"]}
+        buttonText={"Show More"}
+    >
+        <FlexBox justifyContent="space-between" alignItems={"center"} mb={[1]} mt={[2]} width="100%">
+            {props.item.imdbRating && 
+                <ImdbRatingIcon 
+                    rating={props.item.imdbRating} 
+                    size={["18px", "18px", "24px"]} 
+                    fill="#fac539"
+                />}
+            {props.item.year && 
+                <YearIcon 
+                    year={props.item.year} 
+                    size={["18px", "18px", "24px"]} 
+                    ml={[2,2,2,2,3]}
+                />}
+        </FlexBox>
+
+        <Text
+            fontSize={["13px", "13px", "13px","14px", "14px", "16px"]}
+            color="light"
+            my={[2]}
+            >
+            {props.item.summary.length > 100 ? props.item.summary.slice(0,100) + "..." : props.item.summary}
+        </Text>
+
+    </DarkCard>
+
+)
 
 
+export const RecommendationCard = (props) => (
+    <DarkCard 
+        src={props.item.coverPoster}
+        link={`/movie/${props.item.slug}`}
+        header={props.item.name}
+        headerSize={[]}
+        textSize={["13px", "13px", "13px","14px", "14px", "16px"]}
+        buttonText={"Show More"}
+    >
+        <FlexBox justifyContent="space-between" alignItems={"center"} mb={[1]} mt={[2]} width="100%">
+            <ImdbRatingIcon rating={props.item.imdbRating} size={["18px", "18px", "24px"]} fill="#fac539"/>
+            <YearIcon year={props.item.year} size={["18px", "18px", "24px"]} ml={[2,2,2,2,3]}/>
+        </FlexBox>
+        <Text
+            fontSize={["13px", "13px", "13px","14px", "14px", "16px"]}
+            color="light"
+            my={[2]} mb={[3]}
+            >
+            {props.item.summary.length > 100 ? props.item.summary.slice(0,100) + "..." : props.item.summary}
+        </Text>
 
-export const MosaicListCard = (props) => (
-    <Card width={"100%"} p={"1px"}  height={"100%"} boxShadow="card" hoverShadow borderRadius={"8px"}>
-        <MosaicCard images={props.list.image} />
-        <TextSection minHeight={40} header={props.list.name}  />
-        <NewLink to={`/list/${props.list.slug}/1`} position="absolute" width={"100%"} height="100%" top="0" left="0" zIndex={6} />
-    </Card>
+    </DarkCard>
+
+)
+export const MovieSimilarCard = (props) => (
+    <DarkCard
+        src={props.item.coverPoster || props.item.poster}
+        link={`/movie/${props.item.slug}`}
+        header={props.item.name}
+    >
+        {props.children}
+    </DarkCard>
 )
 
 export const TopicCoverCard = (props) => (
-    <ImageCard
-        src={props.item.coverPoster || props.item.poster} 
+    <DarkCard 
+        src={props.item.coverPoster}
         link={`/topic/${props.item.slug}`}
-        linktext={props.item.name}
-        ratio={props.ratio || 0.5625} 
-        borderRadius={"8px"}
-        boxShadow="card"
-        hoverShadow
-        textShadow="textLight"
-        {...props}
+        text={props.item.summary}
+        textSize={["13px", "13px", "13px","14px", "14px", "16px"]}
+        buttonText={"Show Me"}
     />
 )
+
+
 
 export const DirectorCard = (props) => (
     <ImageCard 
@@ -111,7 +168,47 @@ export const MoviePosterCard = (props) => (
         {...props}
     />
 )
-export const MovieSimilarCard = (props) => (
+
+
+export const MosaicListCard = (props) => (
+    <Card width={"100%"} p={"1px"}  height={"100%"} boxShadow="card" hoverShadow borderRadius={"8px"}>
+        <MosaicCard images={props.list.image} />
+        <TextSection minHeight={40} header={props.list.name}  />
+        <NewLink to={`/list/${props.list.slug}/1`} position="absolute" width={"100%"} height="100%" top="0" left="0" zIndex={6} />
+    </Card>
+)
+// Original
+/*
+
+
+export const MovieSimilarCard2 = (props) => (
+    <FlexBox 
+        flexDirection="column" justifyContent="flex-start" 
+        width={"100%"} height={"auto"} 
+        bg="dark" borderRadius={"8px"}
+        boxShadow="card"
+        hoverShadow={"hover"}
+    >
+        <ImageCard
+            src={props.item.coverPoster || props.item.poster} 
+            link={`/movie/${props.item.slug}`}
+            linktext={props.item.name}
+            ratio={props.ratio || 0.5625} 
+            borderRadius={0}
+            borderTopLeftRadius={"8px"}
+            borderTopRightRadius={"8px"}
+            boxShadow="card"
+            textShadow="textLight"
+            {...props}
+        />
+        <FlexBox p={[2,2,3]} pb={[1]} flexDirection="column" justifyContent="flex-start" width={"100%"}>
+            <Text color="light" fontWeight="bold">{props.item.name}</Text>
+            {props.children}
+        </FlexBox>
+
+    </FlexBox>
+)
+
     <Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card" hoverShadow>
         <ImageCard
             src={props.item.coverPoster || props.item.poster} 
@@ -126,10 +223,8 @@ export const MovieSimilarCard = (props) => (
             />
         {props.children}
     </Card>
-)
 
-// Original
-/*
+
 export const DirectorCard2 = React.memo((props) => (
     <NewLink rel="nofollow" to={`/person/${props.person.slug}`}>
         <ImageBox src={props.person.poster} borderRadius={8} 

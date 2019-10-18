@@ -5,7 +5,7 @@ import {  useWindowSize, useValues } from "../../functions"
 
 import { 
     Box, Text, HeaderMini, NewLink, TopPanelBackElement, TopPanelCoverElement,
-    DirectorLink, DirectorLinks,FlexBox, TagText,
+    DirectorLink, DirectorLinks,FlexBox, TagBox,
     LikeMutation,BookmarkMutation, RatingMutation, FollowMutation,
     UsersIcon, EyeIcon,UserIcon,
 } from "../index"
@@ -35,9 +35,7 @@ export const MovieCoverPanel = (props) => (
             {...props}
         >
             <DirectorLinks directors={props.item.director}  color="lightDark1" fontSize="m" mb={[1,1,1,2]}/>
-            <FlexBox flexWrap="wrap">
-                {props.item.tags.filter(tag => tag.genreTag === true).map( tag => <TagText key={tag.slug + tag.name}>{tag.name}</TagText>)}
-            </FlexBox>
+            <TagBox tags= {props.item.tags.filter(tag => tag.genreTag === true)} />
             {/*console.log("movie cover")*/}
             <RatingMutation id={props.item.id} viewerRating={props.item.viewerRating} cacheUpdate={props.cacheUpdate} authStatus={props.authStatus}/>
         </TopPanelCoverElement>

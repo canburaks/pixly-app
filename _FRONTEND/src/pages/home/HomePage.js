@@ -48,10 +48,10 @@ const HomePage = (props) => {
     //const screenSize = useWindowSize()
     state.methods.updatePoints(profile.points)
     const authStatus = useAuthCheck()
-    const [activeState, setActiveState] = useState({menu:"home", items:recommendationmovies, type:"cover"})
+    const [activeState, setActiveState] = useState({menu:"home", items:recommendationmovies, type:"recommendation"})
 
     // MENU-ITEM HANDLE
-    const homeMenuHandler = () => (activeState.menu !== "home" && setActiveState(() => ({menu:"home", items:recommendationmovies, type:"cover"})))
+    const homeMenuHandler = () => (activeState.menu !== "home" && setActiveState(() => ({menu:"home", items:recommendationmovies, type:"recommendation"})))
 
     const bookmarkMenuHandler = () => (activeState.menu !== "bookmarks" && setActiveState(() => ({menu:"bookmarks", items:bookmarks })))
     const ratingMenuHandler = () => (activeState.menu !== "ratings" && setActiveState(() => ({menu:"ratings", items:ratingmovies })))
@@ -141,7 +141,7 @@ const HomePage = (props) => {
     const RenderElementContainer = React.memo(() => <ElementListContainer items={activeState.items} type={activeState.type} />, [activeState.menu])
 /*----------------------------------------------------------------*/
      
-    console.log(window.FB)
+    //console.log(recommendationmovies)
 
     return(
         <div className="page-container home">

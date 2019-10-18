@@ -24,15 +24,16 @@ import {
 
 const TopicList = React.memo((props) => {
     const topics = props.topics
+    console.log("topics", topics)
+    const topicnames = topics.map(topic => topic.name).join(", ")
     const authStatus = useAuthCheck()
     rgaPageView()
     return (
         <PageContainer>
             <Head
                 title={"Pixly Topics"}
-                description={"Collections of movie lists; Cannes, Berlin, Venice Film festival winner films. " + 
-                            "Favorite film lists of Quentin Tarantino, David Fincher, Stanley Kubrick and Nuri Bilge Ceylan. " + 
-                            "Curated film lists, Imdb 250 list, Pixly selected Movies "
+                description={`Pixly topics are a collection of movies that have common subgenre or topic like ${topicnames}.` + 
+                            ` You can find the best ${topicnames} films, by filtering your criteria like IMDb rating or release year.`
                         }
                 canonical={`https://pixly.app/topics`}
             />
@@ -42,21 +43,23 @@ const TopicList = React.memo((props) => {
             <HiddenHeader>Pixly Topics</HiddenHeader>
             
                 <TextSection
-                headerSize={["20px", "20px", "24px", "28px"]}
+                headerSize={["20px", "20px", "24px", "28px", "32px", "36px"]}
                 textSize={["14px", "14px", "16px"]}
                 header={"Pixly Topics"}
                 text={`Pixly topics are kind of collections that are more specific than genre based collections.` + 
-                        `Topic pages treat specific subjects like 'Art House', 'Terrorism'. You can also filter your search based` + 
-                        `on IMDb ratings or release year of the movies`}
+                        `Topic movies can focus on some specific issue, or can include the topic as an element of the narrative.` +
+                        `We added a filter mechanism which you can filter the topic movies by IMDb rating or release year ` + 
+                        `in order to find the most suitable films for yourself.`
+                        }
                 mb={[2,2,3]}
                 />
 
                 <Grid 
-                    columns={[1,2]}  
+                    columns={[1,1,2, 2,2,2,3]}  
                     borderTop="1px solid" borderColor="rgba(40,40,40, 0.6)"
                     pt={[2,2,3]}
                 >
-                    {topics.map(topic => <TopicCoverCard item={topic} key={topic.slug} fontSize={"85px"}/>)}
+                    {topics.map(topic => <TopicCoverCard item={topic} key={topic.slug} fontSize={["12px", "12px", "14px"]}/>)}
                 </Grid>
 
                 <ListBoardAd />

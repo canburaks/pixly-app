@@ -26,6 +26,8 @@
 }
 html, body {
     width:100vw !important;
+    overflow-x: hidden !important;
+
 }
 .main-content-container {
     margin-top: var(--navbar-height);

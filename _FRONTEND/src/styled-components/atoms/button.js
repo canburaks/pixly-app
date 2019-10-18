@@ -4,7 +4,6 @@ import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 
 export const Button = styled.button`
-    width: 100%;
     padding: 8px 8px;
     margin: 4px;
     box-sizing: border-box;
@@ -14,7 +13,8 @@ export const Button = styled.button`
     :hover {
         background-color:${props => props.hoverBg && props.hoverBg};
         color:${props => props.hoverColor && props.hoverColor};
-        box-shadow:${props => props.hoverShadow && props.hoverShadow}
+        box-shadow:${props => props.hoverShadow && props.hoverShadow};
+        border-color:${props => props.hoverBorderColor && props.hoverBorderColor}
     }
     :focus {
         outline: none;
@@ -41,7 +41,7 @@ export const BubbleButton = styled.button`
     border: none;
     background-color: rgba(45, 47, 87, 0.8);
     overflow: hidden;
-    transition: color 0.4s ease-in-out;
+    transition: all 0.45s ease-in-out;
     box-shadow:${themeGet("shadows.xs")};
 
     ::before {
@@ -56,11 +56,12 @@ export const BubbleButton = styled.button`
         background-color: ${themeGet("colors.accent1")};
         transform-origin: center;
         transform: translate3d(50%, 50%, 0) scale3d(0, 0, 0);
-        transition: transform 0.45s ease-in-out;
+        transition: all 0.45s ease-in-out;
       }
     :hover {
         cursor: pointer;
         color: ${themeGet("colors.white")};
+        border-color:${themeGet("colors.accent1")}
       }
 
       :hover::before {

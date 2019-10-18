@@ -4,7 +4,7 @@ import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import css from '@styled-system/css'
 
-import { Svg, MovieSvg, SocialMediaSvg, UnFollowAnimatedSvg, LockSvg } from "../"
+import { Svg, MovieSvg, SocialMediaSvg, UnFollowAnimatedSvg,OuterLink, LockSvg, Text, FlexBox } from "../"
 
 
 const iconchecker = (prevProps, nextProps) => prevProps.id === nextProps.id
@@ -38,6 +38,43 @@ export const CloseIcon = (props) => <Close {...props} />
 export const WatchIcon = (props) => <Watch {...props} />
 export const SearchIcon = (props) => <Search {...props} />
 
+
+export const ImdbRatingIcon = (props) => <ImdbRating title="See IMDb Page" {...props} />
+export const YearIcon = (props) => <WatchYear title="Release Year" {...props} />
+
+
+const ImdbRating = (props) => (
+    <OuterLink href={props.link} mr={[1]} display="flex" alignItems="center">
+        <ImdbIcon imdb {...props}/>
+        {props.rating && 
+        <Text 
+            fontWeight="bold"
+            fontSize={["14px"]}
+            color="light"
+            textShadow="textDark"
+            position="relative"
+            ml={[1]}
+        >
+            {props.rating}/10
+        </Text>}
+    </OuterLink>
+)
+const WatchYear = (props) => (
+    <FlexBox  mr={[1]} display="flex" alignItems="center">
+        <WatchIcon imdb {...props}/>
+        {props.year && 
+        <Text 
+            fontWeight="bold"
+            fontSize={["14px"]}
+            color="light"
+            textShadow="textDark"
+            position="relative"
+            ml={[1]}
+        >
+            {props.year}
+        </Text>}
+    </FlexBox>
+)
 
 const Heart = (props) => (
 	<MovieSvg xmlns="http://www.w3.org/2000/svg" 

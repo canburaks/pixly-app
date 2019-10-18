@@ -3,7 +3,10 @@ import React from "react";
 import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 
-import { Box,ImageBox, GridBox, FlexBox, BlurBox, Text, HeaderText, NewLink, Paragraph } from "../atoms"
+import { 
+    Box,ImageBox, GridBox, FlexBox, BlurBox, Text, HeaderText, NewLink, Paragraph,
+    TagText,
+} from "../index"
 import { SocialBox } from "../others"
 
 //import { ColorExtractor } from 'react-color-extractor'
@@ -28,7 +31,7 @@ export const TopPanelBackElement = (props) => (
 export const TopPanelCoverElement = React.memo((props) => (
     <ImageBox src={props.item.largeCoverPoster || props.item.coverPoster || props.item.poster} 
         position={"relative"} 
-        top={0} left={["2vw", "2vw", "5vw"]} right={["2vw", "2vw", "5vw"]} maxWidth={["95vw", "95vw", "88vw"]}
+        top={0} left={["1vw", "1vw", "5vw"]} right={["1vw", "1vw", "5vw"]} maxWidth={["94vw", "95vw", "88vw"]}
         height={["53vw","53vw", "45vw"]} maxHeight={"80vh"}
         boxShadow="duo" 
         zIndex={3}
@@ -110,10 +113,23 @@ export const Grid = styled(GridBox)`
     transition: ${themeGet("transitions.medium")};
 `
 Grid.defaultProps = {
-    gridColumnGap: "16px",
+    gridColumnGap: ["8px", "8px", "16px"],
     gridRowGap: "32px"
 }
 
+export const TagBox = (props) => (
+    <FlexBox flexWrap="wrap" py={[2]}>
+        {props.tags.map(tag => (
+            <TagText key={tag.name ? "tbox"+ tag.name : "tbox" + tag}  
+                fontSize={["10px","12px","12px", "12px", "12px", "14px"]}
+                fontFamily="header"
+            >
+                {tag.name ? tag.name : tag}
+            </TagText>
+            ) )}
+    </FlexBox>
+)
+ 
 const Container = (props) => (
     <Box  
         display="flex" position="relative" 
@@ -126,7 +142,7 @@ const Container = (props) => (
 
 export const PageContainer = (props) => (
     <Container  id={"page-container"}
-        minWidth={"100vw"} minHeight={"110vh"} bg={"light"} pb={"10vw"}
+        minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"110vh"} bg={"light"} pb={"10vw"}
         {...props}
     />
 )

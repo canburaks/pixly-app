@@ -15,7 +15,8 @@ import {
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
     ImdbIcon, WatchIcon, SearchIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
-    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, TextSection,
+    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
+    TextSection,ArticleSection,Quote,
     YearSlider,RatingSlider,
 } from "../../styled-components"
 
@@ -42,8 +43,9 @@ const TopicPage = (props) =>{
     
     if ( lazyvariables === null) setLazyVariables({...yearData, ...ratingData})
 
-    console.log("yearData",yearData)
-    console.log("ratingData",ratingData)
+    //console.log("yearData",yearData)
+    //console.log("ratingData",ratingData)
+    console.log("topic data", queryData)
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -67,12 +69,14 @@ const TopicPage = (props) =>{
 
             <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"}>
                 {queryData && queryData.topic &&
-                    <TextSection 
-                        headerSize={[24, 26, 28]}
+                    <ArticleSection 
+                        headerSize={[24, 26, 28, 32, 36]}
                         textSize={[14,16]}
                         mt={[3]} mb={[0]} py={[0]}
-                        header={queryData.topic.name} 
+                        header={queryData.topic.name}
+                        quote={queryData.topic.quotes.length > 0 && queryData.topic.quotes[0]}
                         text={queryData.topic.summary}
+                        secondText={queryData.topic.content}
                     />}   
             </FlexBox>
             <Form flexWrap="wrap" onSubmit={submitHandler}>
@@ -135,7 +139,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
     }})
 
 
-    console.log("topic query")
+    //console.log("topic query")
 
 
     if (loading) return <Loading />
