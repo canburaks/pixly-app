@@ -13,7 +13,12 @@ import JoinBanner from "../components/JoinBanner.js"
 
 import { GlideBox } from "../components2/Glide.js"
 //import { motion, useViewportScroll } from "framer-motion"
-import { MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid, PageContainer, ContentContainer, Loading } from "../styled-components"
+import { 
+    MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard,
+    Grid, PageContainer, ContentContainer, Loading, SuperBox,
+    HiddenText, HiddenHeader, HiddenSubHeader, HeaderText, HeaderMini, Text,
+    NewLink, CoverLink,
+} from "../styled-components"
 
 
 import "./MainPage.css"
@@ -34,6 +39,57 @@ const MainPage = (props) => {
                 />
         </Link>
     )
+    const baseurl = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/"
+
+    const CollectionsFeature = React.memo(() => (
+        <SuperBox src={baseurl + "collections.jpg"} 
+            hoverShadow
+            ratio={0.5625} 
+            borderRadius={"6px"} 
+            boxShadow="card"
+        >
+            <HiddenHeader>Collections</HiddenHeader>
+            <HiddenSubHeader>Curated and Collected Best Movie Lists</HiddenSubHeader>
+            <CoverLink link={"/collections"} text={"Visit Collections"} />
+        </SuperBox>
+    ))
+    const DirectorsFeature = React.memo(() => (
+        <SuperBox src={baseurl + "directors.jpg"} 
+            hoverShadow
+            ratio={0.5625} 
+            borderRadius={"6px"} 
+            boxShadow="card"
+        >
+            <HiddenHeader>Directors</HiddenHeader>
+            <HiddenSubHeader>Famous Directors Favorite Film Lists and Directors Filmographies</HiddenSubHeader>
+            <CoverLink link={"/directors/1"} text={"Visit Famous Directors"} />
+        </SuperBox>
+    ))
+    const SearchFeature = React.memo(() => (
+        <SuperBox src={baseurl + "search.jpg"} 
+            hoverShadow
+            ratio={0.5625} 
+            borderRadius={"6px"} 
+            boxShadow="card"
+        >
+            <HiddenHeader>Search</HiddenHeader>
+            <HiddenSubHeader>Search Movies with IMDb Rating and Release Year.</HiddenSubHeader>
+            <CoverLink link={"/advance-search"} text={"Visit Advance Movie Search Page and Search Movies by IMDb Rating"} />
+        </SuperBox>
+    ))
+    const TopicsFeature = React.memo(() => (
+        <SuperBox src={baseurl + "topics.jpg"} 
+            hoverShadow
+            ratio={0.5625} 
+            borderRadius={"6px"} 
+            boxShadow="card"
+        >
+            <HiddenHeader>Topics</HiddenHeader>
+            <HiddenSubHeader>Explore Movies by their specific subjects</HiddenSubHeader>
+            <CoverLink link={"/topics"} text={"Visit Topic Page and Explore Movies with topics"} />
+        </SuperBox>
+    ))
+
 
     const sortedMovies = props.data.movies.sort((a,b) => b.id - a.id)
     //const directorShow = useValues(3,3,4,5,5,6)
@@ -62,40 +118,21 @@ const MainPage = (props) => {
                 <meta property="business:contact_data:country_name" content="Turkey"/>
             </Head>
             
-            {!authStatus && <JoinBanner />}
 
-            <ContentContainer>
-                
-                <GlideBox xs ={1} s={2} m={2} l={2} xl={3}  xxl={3} xxxl={3} >
-                    {props.data.lists.map(item => <CarouselList  item={item} key={item.slug} /> )}
-                </GlideBox>
+            <ContentContainer alignItems="center" mb={"100px"}>
+                <HiddenHeader>Pixly Movie</HiddenHeader>
+                {/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
+                <HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>
 
-
-                <h4 className="t-xl t-bold mar-t-4x asfs hover-t-underline t-color-dark">
-                    <Link rel="nofollow" to={`/directors/1`} title="Visit Directors Page">Directors</Link>
-                </h4>
-
-                <Grid columns={[2,2,4,4,4]} >
-                    {props.data.persons.slice(0,4).map(person => (
-                        <DirectorCard item={person} key={person.slug} fontSize={["14px"]} notext={true} maxWidth={"80%"}/>
-                    ) )}
+                <Grid columns={[1,1,2]} width={"100%"} my={[3]}>
+                    <DirectorsFeature />
+                    <CollectionsFeature />
+                    <TopicsFeature />
+                    <SearchFeature />
                 </Grid>
-
-
-                <h4 className="t-xl t-bold mar-t-4x asfs hover-t-underline">
-                    <Link rel="nofollow" to={`/advance-search`} title="Search Movies">
-                        Up-To-Date
-                    </Link>
-                </h4>
-                
-                <MovieCoverBox items={sortedMovies} columns={[2,2, 2, 3,3, 4]}  fontSize={["14px", "14px", "14px"]} />
-                
-                <MidPageAd />
-
-
             </ContentContainer>
             
-
+            {!authStatus && <JoinBanner />}
         </PageContainer>
     )
 }

@@ -51,9 +51,8 @@ const ListBoard = (props) => {
                         }
                 canonical={`https://pixly.app/collections`}
             />
-            {!authStatus && <JoinBanner />}
 
-            <ContentContainer>
+            <ContentContainer mb={[3,3,3,3,4]}>
             <HiddenHeader>Pixly Collections</HiddenHeader>
 
                 <div className="list-type-header fbox-c pad-bt-4x ">
@@ -85,9 +84,13 @@ const ListBoard = (props) => {
 
 
                 <ListCoverBox columns={[1,2,2,3,3,3,4]} items={firstPart} />
+
                 <ListBoardAd />
-                    
+
+
             </ContentContainer>
+            {!authStatus && <JoinBanner />}
+            
         </PageContainer>
 
     );

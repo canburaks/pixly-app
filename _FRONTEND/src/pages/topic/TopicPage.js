@@ -8,7 +8,7 @@ import BackButton from "../../components/buttons/BackButton"
 //import Slider from "../../components/Slider"
 //import { Checkbox, Form, List, Dimmer, Loader, Image, Segment, Button, Dropdown, Breadcrumb, Pagination  } from 'semantic-ui-react'
 import JoinBanner from "../../components/JoinBanner.js"
-import { useWindowSize, useAuthCheck, isEqualObj, Head} from "../../functions"
+import { useWindowSize, useAuthCheck, isEqualObj, Head, MidPageAd} from "../../functions"
 
 
 import { 
@@ -79,6 +79,7 @@ const TopicPage = (props) =>{
                         secondText={queryData.topic.content}
                     />}   
             </FlexBox>
+
             <Form flexWrap="wrap" onSubmit={submitHandler}>
                 <FlexBox id="search-settings-box" 
                     flexDirection={["row", "row"]} 
@@ -121,12 +122,14 @@ const TopicPage = (props) =>{
                     lazyvariables={lazyvariables} 
                     dispatcher={dataDispatcher} 
                 />
-                
-                <PaginationBox 
-                    currentPage={page} 
-                    totalPage={queryData && queryData.quantity} 
-                    nextPage={nextPage} prevPage={prevPage} 
-                />
+
+                <MidPageAd />
+
+                    <PaginationBox 
+                        currentPage={page} 
+                        totalPage={queryData && queryData.quantity} 
+                        nextPage={nextPage} prevPage={prevPage} 
+                    />
                 </Box>
         </PageContainer>
     );
@@ -149,9 +152,10 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         dispatcher(willBeDispatched)
         return (
             <MovieCoverBox 
-                columns={[2,3,3,3,4,4,4,6]} 
+                columns={[2,2,3,3,3,3,4,4,6]} 
                 items={data.complexSearch.topicResult} 
                 fontSize={[12,12,14]}
+                
                 />
 
         )}

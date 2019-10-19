@@ -7,7 +7,7 @@ import { TOPIC_LIST_QUERY } from "../../functions/query"
 
 import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../functions/hooks"
 
-import { rgaPageView, Head, ListBoardAd, ListBoardAd2  } from "../../functions/analytics"
+import { rgaPageView, Head, ListBoardAd } from "../../functions/analytics"
 
 
 import { GlobalContext } from "../../App";
@@ -37,10 +37,9 @@ const TopicList = React.memo((props) => {
                         }
                 canonical={`https://pixly.app/topics`}
             />
-            {!authStatus && <JoinBanner />}
 
-            <ContentContainer>
-            <HiddenHeader>Pixly Topics</HiddenHeader>
+            <ContentContainer pb={"100px"}>
+                <HiddenHeader>Pixly Topics</HiddenHeader>
             
                 <TextSection
                 headerSize={["20px", "20px", "24px", "28px", "32px", "36px"]}
@@ -65,6 +64,9 @@ const TopicList = React.memo((props) => {
                 <ListBoardAd />
                     
             </ContentContainer>
+
+            {!authStatus && <JoinBanner />}
+
         </PageContainer>
     );
 })

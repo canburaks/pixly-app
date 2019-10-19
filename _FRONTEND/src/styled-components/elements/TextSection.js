@@ -39,6 +39,7 @@ export const ArticleSection = (props) =>(
                 quote={props.quote}
                 alignSelf="center"
                 maxWidth={["100%", "90%", "90%", "80%"]}
+                my={[3,3,3,4]}
             />   
             }
 

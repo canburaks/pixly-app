@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { compose,typography, color, space, shadow, layout, border, background, flexbox, position, system } from 'styled-system'
 import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
-import { UnderlineEffect, Box } from "../index"
+import { UnderlineEffect, Box, HiddenSpan } from "../index"
 import { hideText } from 'polished'
 
 
@@ -11,6 +11,7 @@ const LinkNoFollow = ({ to, className, children }) => <Link rel="nofollow" class
 
 
 export const DirectorLink = ({director, ...props}) => <NewLink to={`/person/${director.slug}`}  mr={[0]} textShadow={"textDark"} {...props}><UnderlineEffect>{director.name}</UnderlineEffect>{props.extra}</NewLink>
+
 
 export const DirectorLinks = React.memo(({directors, ...props}) =>(
     <Box display="flex" flexDirection="row" justifyContent="flex-start" alignItems="center" {...props}>
@@ -20,7 +21,17 @@ export const DirectorLinks = React.memo(({directors, ...props}) =>(
     </Box>
 ))
 
-
+export const CoverLink = (props) => (
+    <NewLink 
+        to={props.link || props.to}  
+        position={"absolute"}
+        top={0} left={0} right={0} bottom={0}
+        zIndex={3}
+        {...props} 
+    >
+      <HiddenSpan>{props.text}</HiddenSpan>
+    </NewLink>
+)
 
 export const NewLink = styled(LinkNoFollow)`
   color: unset !important;
@@ -41,7 +52,6 @@ export const NewLink = styled(LinkNoFollow)`
   ${position}
   ${typography}
 `
-
 export const OuterLink = styled.a.attrs(() => ({rel:"nofollow noopener", target:"_blank"}))`
   :hover { 
     text-decoration: ${props => props.hoverUnderline && "underline"}

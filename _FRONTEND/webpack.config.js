@@ -13,6 +13,7 @@ const CssCleanupPlugin = require('css-cleanup-webpack-plugin');
 
 var DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 const postcssPresetEnv = require('postcss-preset-env');
+var Visualizer = require('webpack-visualizer-plugin');
 
 
 
@@ -230,7 +231,9 @@ const productionSettings = {
           filename: 'static/css/[name].css',
           chunkFilename: 'static/css/[name].chunk.css',
 		}),
-		
+		new Visualizer({
+			filename: '../../statistics.html'
+		  })
 	]
 };
 
@@ -322,7 +325,7 @@ const devSettings = {
 					minifyCSS: true,
 					minifyURLs: true,
 				  }
-		})
+		}),
 	]
 };
 
