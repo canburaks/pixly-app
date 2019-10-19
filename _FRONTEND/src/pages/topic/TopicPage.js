@@ -16,7 +16,7 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
-    TextSection,ArticleSection,Quote,
+    TextSection,SchemaArticle,
     YearSlider,RatingSlider,
 } from "../../styled-components"
 
@@ -69,7 +69,7 @@ const TopicPage = (props) =>{
 
             <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"}>
                 {queryData && queryData.topic &&
-                    <ArticleSection 
+                    <SchemaArticle 
                         headerSize={[24, 26, 28, 32, 36]}
                         textSize={[14,16]}
                         mt={[3]} mb={[0]} py={[0]}
@@ -122,9 +122,7 @@ const TopicPage = (props) =>{
                     lazyvariables={lazyvariables} 
                     dispatcher={dataDispatcher} 
                 />
-
                 <MidPageAd />
-
                     <PaginationBox 
                         currentPage={page} 
                         totalPage={queryData && queryData.quantity} 
