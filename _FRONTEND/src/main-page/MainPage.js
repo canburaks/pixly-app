@@ -143,7 +143,7 @@ const MainPage = props => {
 					"Personalized Movie Recommendations. Find similar movies. Discover Movie Lists, New Films and People with Similar Cinema Taste."
 				}
 				title={
-					"Pixly - Movie Recommendations, Similar Movies, AI Based Movie Recommendation."
+					"Pixly - Movie Recommendations, Similar Movies, Personal Cinema History, AI Based Movie Recommendation."
 				}
 				keywords={
 					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"
@@ -160,7 +160,6 @@ const MainPage = props => {
 				<meta name="twitter:app:name:ipad" content="Pixly" />
 				<meta name="twitter:app:name:googleplay" content="Pixly" />
 				<meta property="og:type" content="business.business" />
-				<meta property="og:title" content="Pixly" />
 				<meta property="og:url" content="https://pixly.app" />
 				<meta
 					property="og:image"
