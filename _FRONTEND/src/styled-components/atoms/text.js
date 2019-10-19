@@ -4,24 +4,52 @@ import { themeGet } from '@styled-system/theme-get'
 import { hideText } from 'polished'
 
 export const HiddenSpan = styled("span")`
+    position:"absolute";
+    z-index:-1;
+    display:none;
+    text-indent: 101%;
+    overflow: hidden;
+    whitespace: nowrap;
+    /*
     max-width:10px !important;
     max-height:1px!important;
-    visibility:hidden;
+    */
 `
 export const HiddenText = styled("p")`
+    position:"absolute";
+    z-index:-1;
+    display:none;
+    text-indent: 101%;
+    overflow: hidden;
+    whitespace: nowrap;
+    /*
     max-width:100% !important;
     max-height:1px!important;
-    visibility:hidden;
+    */
 `
 export const HiddenHeader = styled("h2")`
+    position:"absolute";
+    z-index:-1;
+    display:none;
+    text-indent: 101%;
+    overflow: hidden;
+    whitespace: nowrap;
+    /*
     max-width:1px !important;
     max-height:1px!important;
-    visibility:hidden;
+    */
 `
 export const HiddenSubHeader = styled("h4")`
+    position:"absolute";
+    z-index:-1;
+    display:none;
+    text-indent: 101%;
+    overflow: hidden;
+    whitespace: nowrap;
+    /*
     max-width:1px !important;
     max-height:1px!important;
-    visibility:hidden;
+    */
 `
 
 export const Text = styled('p')({
