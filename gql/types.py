@@ -794,20 +794,26 @@ class TopicType(DjangoObjectType, SEOType):
     tags = graphene.List("gql.types.TagType")
     quotes = graphene.List(QuoteType)
 
-    published_at = graphene.String()
+    created_at = graphene.String()
+    updated_at = graphene.String()
 
     class Meta:
         model = Topic
 
-    def resolve_published_at(self, info, *_):
-        if self.updated_at:
-            str_date = self.updated_at.__str__()
+    def resolve_created_at(self, info, *_):
         str_date = self.created_at.__str__()
         try:
             return str_date.split(" ")[0]
         except:
             return str_date
-            
+
+    def resolve_updated_at(self, info, *_):
+        str_date = self.updated_at.__str__()
+        try:
+            return str_date.split(" ")[0]
+        except:
+            return str_date
+
     def resolve_quotes(self, info, *_):
         return self.quotes.all()
 

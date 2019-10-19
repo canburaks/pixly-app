@@ -880,6 +880,7 @@ class Topic(SEO, MainPage):
     name = models.CharField(max_length=400)
     summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic")
     content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
+    wiki = models.URLField(blank=True, null=True)
     
     movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="topics")
     lists = models.ManyToManyField(List,null=True, blank=True, related_name="topics")

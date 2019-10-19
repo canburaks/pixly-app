@@ -77,6 +77,7 @@ const TopicPage = (props) =>{
                         quote={queryData.topic.quotes.length > 0 && queryData.topic.quotes[0]}
                         text={queryData.topic.summary}
                         secondText={queryData.topic.content}
+                        publishedAt={queryData.topic.publishedAt}
                     />}   
             </FlexBox>
 
