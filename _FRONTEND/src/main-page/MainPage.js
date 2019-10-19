@@ -62,77 +62,6 @@ const MainPage = props => {
 			/>
 		</Link>
 	);
-	const baseurl =
-		"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/";
-
-	const CollectionsFeature = React.memo(() => (
-		<SuperBox
-			src={baseurl + "collections.jpg"}
-			hoverShadow
-			ratio={0.5625}
-			borderRadius={"6px"}
-			boxShadow="card"
-		>
-			<HiddenHeader>Collections</HiddenHeader>
-			<HiddenSubHeader>
-				Curated and Collected Best Movie Lists
-			</HiddenSubHeader>
-			<CoverLink link={"/collections"} text={"Visit Collections"} />
-		</SuperBox>
-	));
-	const DirectorsFeature = React.memo(() => (
-		<SuperBox
-			src={baseurl + "directors.jpg"}
-			hoverShadow
-			ratio={0.5625}
-			borderRadius={"6px"}
-			boxShadow="card"
-		>
-			<HiddenHeader>Directors</HiddenHeader>
-			<HiddenSubHeader>
-				Famous Directors Favorite Film Lists and Directors Filmographies
-			</HiddenSubHeader>
-			<CoverLink link={"/directors/1"} text={"Visit Famous Directors"} />
-		</SuperBox>
-	));
-	const SearchFeature = React.memo(() => (
-		<SuperBox
-			src={baseurl + "search.jpg"}
-			hoverShadow
-			ratio={0.5625}
-			borderRadius={"6px"}
-			boxShadow="card"
-		>
-			<HiddenHeader>Search</HiddenHeader>
-			<HiddenSubHeader>
-				Search Movies with IMDb Rating and Release Year.
-			</HiddenSubHeader>
-			<CoverLink
-				link={"/advance-search"}
-				text={
-					"Visit Advance Movie Search Page and Search Movies by IMDb Rating"
-				}
-			/>
-		</SuperBox>
-	));
-	const TopicsFeature = React.memo(() => (
-		<SuperBox
-			src={baseurl + "topics.jpg"}
-			hoverShadow
-			ratio={0.5625}
-			borderRadius={"6px"}
-			boxShadow="card"
-		>
-			<HiddenHeader>Topics</HiddenHeader>
-			<HiddenSubHeader>
-				Explore Movies by their specific subjects
-			</HiddenSubHeader>
-			<CoverLink
-				link={"/topics"}
-				text={"Visit Topic Page and Explore Movies with topics"}
-			/>
-		</SuperBox>
-	));
 
 	const sortedMovies = props.data.movies.sort((a, b) => b.id - a.id);
 	//const directorShow = useValues(3,3,4,5,5,6)
@@ -188,16 +117,17 @@ const MainPage = props => {
 			</Head>
 
 			<ContentContainer alignItems="center" mb={"100"}>
-				<HiddenHeader>Pixly Movie</HiddenHeader>
+				<HiddenHeader>Pixly Movies</HiddenHeader>
 				{/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
 				<HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>
 
-				<Grid columns={[1, 1, 2]} width={"100%"} my={[3]}>
+				<Grid columns={[1, 1, 2]} width={"100%"} my={[3]} mb={[5,5,5,6]} maxWidth={"900px"}>
 					<DirectorsFeature />
 					<CollectionsFeature />
 					<TopicsFeature />
 					<SearchFeature />
 				</Grid>
+
 			</ContentContainer>
 
 			{!authStatus && <JoinBanner />}
@@ -213,6 +143,77 @@ const MainPageQuery = props => {
 	if (error) return <div>{error.message}</div>;
 	if (data) return <MainPage data={data.mainPage} {...props} />;
 };
+
+
+const CollectionsFeature = React.memo(() => (
+	<SuperBox
+		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/collections.jpg"}
+		hoverShadow
+		ratio={0.5625}
+		borderRadius={"6px"}
+		boxShadow="card"
+	>
+		<HiddenHeader>Collections</HiddenHeader>
+		<HiddenSubHeader>
+			Curated and Collected Best Movie Lists
+		</HiddenSubHeader>
+		<CoverLink link={"/collections"} text={"Visit Collections"} />
+	</SuperBox>
+));
+const DirectorsFeature = React.memo(() => (
+	<SuperBox
+		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/directors.jpg"}
+		hoverShadow
+		ratio={0.5625}
+		borderRadius={"6px"}
+		boxShadow="card"
+	>
+		<HiddenHeader>Directors</HiddenHeader>
+		<HiddenSubHeader>
+			Famous Directors Favorite Film Lists and Directors Filmographies
+		</HiddenSubHeader>
+		<CoverLink link={"/directors/1"} text={"Visit Famous Directors"} />
+	</SuperBox>
+));
+const SearchFeature = React.memo(() => (
+	<SuperBox
+		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/search.jpg"}
+		hoverShadow
+		ratio={0.5625}
+		borderRadius={"6px"}
+		boxShadow="card"
+	>
+		<HiddenHeader>Search</HiddenHeader>
+		<HiddenSubHeader>
+			Search Movies with IMDb Rating and Release Year.
+		</HiddenSubHeader>
+		<CoverLink
+			link={"/advance-search"}
+			text={
+				"Visit Advance Movie Search Page and Search Movies by IMDb Rating"
+			}
+		/>
+	</SuperBox>
+));
+const TopicsFeature = React.memo(() => (
+	<SuperBox
+		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/topics.jpg"}
+		hoverShadow
+		ratio={0.5625}
+		borderRadius={"6px"}
+		boxShadow="card"
+	>
+		<HiddenHeader>Topics</HiddenHeader>
+		<HiddenSubHeader>
+			Explore Movies by their specific subjects
+		</HiddenSubHeader>
+		<CoverLink
+			link={"/topics"}
+			text={"Visit Topic Page and Explore Movies with topics"}
+		/>
+	</SuperBox>
+));
+
 
 export default MainPageQuery;
 

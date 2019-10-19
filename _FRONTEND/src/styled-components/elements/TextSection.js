@@ -19,13 +19,13 @@ Quote.defaultProps = {
 }
 
 export const ArticleSection = (props) =>(
-    <Box display="flex" 
-        flexDirection="column" justifyContent="flex-start"
+    <Box 
+        display="flex" flexDirection="column" justifyContent="flex-start"
         py={[3]} my={[3,3,4]}
         {...props} 
     >
-        <HeaderText 
-            fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px", "36px"]} 
+        {/* Schema headline*/}
+        <HeaderText fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px", "36px"]} 
             fontWeight="bold" 
             color={"dark"} textShadow={props.textShadow || "textGray"}
             pt={"4px"} 
@@ -40,8 +40,9 @@ export const ArticleSection = (props) =>(
                 alignSelf="center"
                 maxWidth={["100%", "90%", "90%", "80%"]}
                 my={[3,3,3,4]}
-            />   
-            }
+            />}
+
+
 
         {props.subheader && 
             <HeaderMini 
@@ -51,23 +52,20 @@ export const ArticleSection = (props) =>(
             >
                 {props.subheader}
             </HeaderMini>}
-
-        <Text 
-            fontWeight={400} fontSize={props.textSize} 
-            mt={[1]} maxHeight={200} 
-            color={"dark"} textHidden={props.textHidden}
-        >
-            {props.text}
-        </Text>
-        {props.secondText && 
-            <Text 
-                fontWeight={400} fontSize={props.textSize} 
-                mt={[1]} maxHeight={200} 
-                color={"dark"} textHidden={props.textHidden}
-            >
-                {props.secondText}
+        
+        {/* Article Body*/}
+        <Box width={"100%"} height="auto">
+            <Text fontSize={props.textSize} mt={[1]}>
+                {props.summary}
             </Text>
-        }
+            
+            <Text 
+                 fontSize={props.textSize} mt={[1]}>
+                {props.content}
+            </Text>
+        
+        </Box>
+
     </Box>
 )
 

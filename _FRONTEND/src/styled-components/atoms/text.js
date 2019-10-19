@@ -55,7 +55,7 @@ export const Span = styled("span")`
     font-size:12px;
     color: ${themeGet("colors.dark")};
     opacity:0.75;
-
+    visibility: ${props => props.invisible ? "hidden" : "visible"}
     ${typography}
     ${color}
     ${space}
@@ -66,7 +66,9 @@ export const Span = styled("span")`
 `
 
 export const Text = styled('p')({
-  wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
+  wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal",
+  color:themeGet("dark"),
+  fontWeight:400
   },
     compose(
       typography,

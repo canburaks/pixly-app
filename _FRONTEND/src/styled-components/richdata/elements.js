@@ -1,9 +1,10 @@
 import React from "react";
 import { 
     Text, Image, HeaderMini,HeaderText, NewLink,
-    Box, FlexBox,Quote, Blockquote, Cite, Span, Meta
+    Box, FlexBox,Quote, OuterLink, Cite, Span, Meta
 } from "../index"
 
+const capitalize = (text) => text.replace(/\b\w/g, l => l.toUpperCase())
 
 export const SchemaArticle = (props) =>(
     <Box itemScope itemType="http://schema.org/NewsArticle"
@@ -24,12 +25,18 @@ export const SchemaArticle = (props) =>(
         </Box>
 
         {/* Schema author*/}
+        <Meta itemProp="mainEntityOfPage" content={props.wiki}/>
+
         <Meta itemProp="author" content="Can Burak S." />
+        <Meta itemProp="dateModified" content={props.updatedAt} />
+        <Meta itemProp="datePublished" content={props.createdAt} />
+        <Meta itemProp="description" content={capitalize(props.header) + " in cinema: " + props.summary} />
 
         {/* Schema Publisher*/}
         <SchemaPublisher />
 
         {/* Schema headline*/}
+
         <HeaderText itemProp="headline"
             fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px", "36px"]} 
             fontWeight="bold" 
@@ -37,6 +44,7 @@ export const SchemaArticle = (props) =>(
             pt={"4px"} 
         >
             {props.header}
+            <Span invisible>{` and ${capitalize(props.header)} Movies`}</Span>
         </HeaderText>
 
         {props.quote && 
@@ -48,9 +56,7 @@ export const SchemaArticle = (props) =>(
                 my={[3,3,3,4]}
             />}
 
-        {/* Schema datapublished*/}
-        <Span itemProp="datePublished" content={props.publishedAt}>{props.publishedAt}</Span>
-        
+
 
         {props.subheader && 
             <HeaderMini 
@@ -63,21 +69,15 @@ export const SchemaArticle = (props) =>(
         
         {/* Article Body*/}
         <Box width={"100%"} height="auto" itemProp="articleBody">
-            <Text itemProp="description" 
-                fontWeight={400} fontSize={props.textSize} 
-                mt={[1]} maxHeight={200} 
-                color={"dark"} textHidden={props.textHidden}
-            >
-                {props.text}
+            <Text fontSize={props.textSize} mt={[1]}>
+                {props.summary}
             </Text>
-            {props.secondText && 
-                <Text 
-                    fontWeight={400} fontSize={props.textSize} 
-                    mt={[1]} maxHeight={200} 
-                    color={"dark"} textHidden={props.textHidden}
-                >
-                    {props.secondText}
-                </Text>}
+            
+            <Text 
+                 fontSize={props.textSize} mt={[1]}>
+                {props.content}
+            </Text>
+        
         </Box>
 
     </Box>
