@@ -784,7 +784,8 @@ class TopicType(DjangoObjectType, SEOType):
     name = graphene.String()
     summary = graphene.String()
     content = graphene.String()
-    
+    wiki = graphene.String()
+
     poster = graphene.String()
     cover_poster = graphene.String()
 
@@ -799,6 +800,9 @@ class TopicType(DjangoObjectType, SEOType):
 
     class Meta:
         model = Topic
+
+    def resolve_wiki(self, info, *_):
+        return self.wiki
 
     def resolve_created_at(self, info, *_):
         str_date = self.created_at.__str__()
