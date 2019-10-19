@@ -801,9 +801,13 @@ class TopicType(DjangoObjectType, SEOType):
 
     def resolve_published_at(self, info, *_):
         if self.updated_at:
-            return self.updated_at.__str__()
-        return self.created_at.__str__()
-
+            str_date = self.updated_at.__str__()
+        str_date = self.created_at.__str__()
+        try:
+            return str_date.split(" ")[0]
+        except:
+            return str_date
+            
     def resolve_quotes(self, info, *_):
         return self.quotes.all()
 

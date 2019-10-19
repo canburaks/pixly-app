@@ -45,7 +45,7 @@ const TopicPage = (props) =>{
 
     //console.log("yearData",yearData)
     //console.log("ratingData",ratingData)
-    //console.log("topic data", queryData)
+    console.log("topic data", queryData)
 
     const submitHandler = (e) => {
         e.preventDefault()
