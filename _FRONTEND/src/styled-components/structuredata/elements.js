@@ -3,12 +3,12 @@ import { Text, Paragraph, HeaderMini,HeaderText, NewLink, Box, FlexBox,Quote, Bl
 
 
 export const SchemaArticle = (props) =>(
-    <Box display="flex" 
-        flexDirection="column" justifyContent="flex-start"
+    <Box itemscope itemtype="http://schema.org/NewsArticle"
+        display="flex" flexDirection="column" justifyContent="flex-start"
         py={[3]} my={[3,3,4]}
         {...props} 
     >
-        <HeaderText 
+        <HeaderText itemprop="headline"
             fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px", "36px"]} 
             fontWeight="bold" 
             color={"dark"} textShadow={props.textShadow || "textGray"}

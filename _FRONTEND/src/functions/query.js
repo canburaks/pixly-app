@@ -671,7 +671,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                 topic{
                     name, summary,content, slug, poster, 
                     seoTitle, seoShortDescription, seoKeywords,
-                    coverPoster,
+                    coverPoster, publishedAt,
                     quotes{
                         ownerName, text
                     }

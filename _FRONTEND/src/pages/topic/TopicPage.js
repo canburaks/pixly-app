@@ -45,7 +45,7 @@ const TopicPage = (props) =>{
 
     //console.log("yearData",yearData)
     //console.log("ratingData",ratingData)
-    console.log("topic data", queryData)
+    //console.log("topic data", queryData)
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -114,8 +114,6 @@ const TopicPage = (props) =>{
                     minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
                     p={[1,2,3]}
                 >
-            {console.log("parent inline")}
-
                 <SearchQueryBox 
                     topicSlug={topicSlug} 
                     page={page} 

@@ -794,6 +794,8 @@ class TopicType(DjangoObjectType, SEOType):
     tags = graphene.List("gql.types.TagType")
     quotes = graphene.List(QuoteType)
 
+    published_at = graphene.String()
+
     class Meta:
         model = Topic
 
