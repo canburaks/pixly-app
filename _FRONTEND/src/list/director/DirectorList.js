@@ -60,13 +60,13 @@ const DirectorList = (props) =>{
                             keywords={`Famous Directors List, ` + directorNames.join(", ") }
                             canonical={`https://pixly.app/directors/1`}
                         />
-                        {!authStatus &&  <JoinBanner />}
                         
                         <div className="content-container pad-lr-5vw">
                         <HiddenHeader>Directors Collection</HiddenHeader>
                             <DirectorTemplate items={items} history={props.history}/>
                             <DirectorPageAd />
-                            
+                            {!authStatus &&  <JoinBanner />}
+
                         </div>
                     </div>
                 )

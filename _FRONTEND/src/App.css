@@ -27,6 +27,8 @@
 html, body {
     width:100vw !important;
     overflow-x: hidden !important;
+    height:auto;
+    min-height: 100vh;
 
 }
 .main-content-container {
@@ -57,7 +59,7 @@ html, body {
 
 .main-content-container {
     position: relative;
-    min-height: 100vh;
+    min-height: 80vh;
     /*margin-right:5%;
     margin-left:5%;
     */

@@ -3,17 +3,26 @@ import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import { hideText } from 'polished'
 
-export const HiddenText = styled("span")`
+export const HiddenSpan = styled("span")`
     max-width:1px !important;
     max-height:1px!important;
     visibility:hidden;
 `
-export const HiddenHeader = styled("h1")`
+export const HiddenText = styled("p")`
     max-width:1px !important;
     max-height:1px!important;
     visibility:hidden;
 `
-
+export const HiddenHeader = styled("h2")`
+    max-width:1px !important;
+    max-height:1px!important;
+    visibility:hidden;
+`
+export const HiddenSubHeader = styled("h4")`
+    max-width:1px !important;
+    max-height:1px!important;
+    visibility:hidden;
+`
 
 export const Text = styled('p')({
   wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
@@ -32,6 +41,10 @@ export const Text = styled('p')({
 export const HeaderText = styled('h1')({
   minWidth:"100% !important",
   textTransform:"capitalize",
+  fontWeight:"bold",
+  color:"dark",
+  marginTop:"8px",
+  textShadow:props => props.textShadow || themeGet("shadows.lightGray"),
   wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
 
 },
@@ -48,7 +61,10 @@ export const HeaderText = styled('h1')({
 export const HeaderMini = styled('h4')({
   minWidth:"100% !important",
   textTransform:"capitalize",
+  textTransform:"capitalize",
   fontWeight:"bold",
+  color:"dark",
+  textShadow:props => props.textShadow || themeGet("shadows.lightGray"),
   wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
 
 },

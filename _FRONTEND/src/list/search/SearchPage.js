@@ -169,14 +169,15 @@ const SearchPage = (props) =>{
                 >
                     {loading && <Loading />}
                     <Text fontSize={[14,14,16]} minHeight={16} fontWeight={"bold"}>{message}</Text>
-                    <MovieCoverBox items={movies} columns={[2,2,3,3,4,4,6]} fontSize={[12,12,14]}/>
+                    <MovieCoverBox items={movies} columns={[2,2,3,3,4,4,6]} fontSize={[12,12,14]} my={[3,3,3,3,4]} />
                     
                     {resultQuantity > 24 &&
-                        <PaginationBox 
+                        <PaginationBox mb={[2]}
                             currentPage={resultQuantity!==null && page} 
                             totalPage={Math.ceil(resultQuantity/24)} 
                             nextPage={nextPage} prevPage={prevPage} 
                         />}
+                    <MidPageAd />
                 </Box>
             </Form>
         </PageContainer>

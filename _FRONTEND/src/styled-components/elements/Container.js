@@ -134,6 +134,7 @@ const Container = (props) => (
     <Box  
         display="flex" position="relative" 
         flexDirection="column" justifyContent="flex-start"
+        pt={[2]}
         height={"auto"} 
         {...props} 
     
@@ -142,14 +143,14 @@ const Container = (props) => (
 
 export const PageContainer = (props) => (
     <Container  id={"page-container"}
-        minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"110vh"} bg={"light"} pb={"10vw"}
+        minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"70vh"} bg={"light"} 
         {...props}
     />
 )
 
 export const ContentContainer = (props) => (
-    <Container  id="content-container"
-        width={"100%"}
+    <Container  id="content-container" display="flex"
+        width={"100%"} minHeight={"70vh"}
         px={"5vw"}
         {...props}
     />

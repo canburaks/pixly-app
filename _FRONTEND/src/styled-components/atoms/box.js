@@ -4,7 +4,7 @@ import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import { Image } from "./image"
 import { Spinner } from "../others"
-import { motion } from "framer-motion"
+//import { motion } from "framer-motion"
 import { linearGradient, backgrounds, backgroundImages, setLightness } from 'polished'
 
 const hoverShadow = `:hover { box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')}}`
@@ -60,7 +60,7 @@ export const SuperBox = styled.div`
     z-index:1;
     transition: background-image 5s ease-in-out !important;
     :hover { 
-        box-shadow: ${props => props.hoverShadow && themeGet('shadows.diffuse3')};
+        box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
         border: ${props => props.hoverBorder && '3px solid #3633CC' };
         text-decoration: ${props => props.hoverUnderline && "underline"};
         background:${props => props.hoverLight && setLightness('0.45', 'rgba(204,205,100,0.7)')}
@@ -78,6 +78,34 @@ export const SuperBox = styled.div`
 `
 
 
+export const BlurBox = styled(SuperBox)`
+    -webkit-filter: ${props => props.blur && `blur(${props.blur}px)`};
+    -moz-filter: ${props => props.blur && `blur(${props.blur}px)`};
+    -o-filter: ${props => props.blur && `blur(${props.blur}px)`};
+    -ms-filter: ${props => props.blur && `blur(${props.blur}px)`};
+    filter: ${props => props.blur && `blur(${props.blur}px)`};
+    z-index:2;
+    overflow: hidden;
+`
+
+export const GridBox = styled(Box)`
+    display: grid;
+    width: 100%;
+`
+
+
+export const FlexBox = props => <Box position="relative" display="flex" flexDirection="row" justifyContent="flex-start" alignItems="flex-start" {...props} />
+export const AbsoluteBox = props => <Box position="absolute" {...props} />
+
+
+
+
+// Allow overflow
+/*
+export const MotionGridBox = styled(MotionBox)`
+    display: grid;
+    width: 100%;
+`
 export const MotionBox = styled(motion.div)`
     box-sizing: border-box;
     position: relative;
@@ -101,34 +129,6 @@ export const MotionBox = styled(motion.div)`
     ${grid}
     ${typography}
 `
-export const BlurBox = styled(SuperBox)`
-    -webkit-filter: ${props => props.blur && `blur(${props.blur}px)`};
-    -moz-filter: ${props => props.blur && `blur(${props.blur}px)`};
-    -o-filter: ${props => props.blur && `blur(${props.blur}px)`};
-    -ms-filter: ${props => props.blur && `blur(${props.blur}px)`};
-    filter: ${props => props.blur && `blur(${props.blur}px)`};
-    z-index:2;
-    overflow: hidden;
-`
-
-export const GridBox = styled(Box)`
-    display: grid;
-    width: 100%;
-`
-export const MotionGridBox = styled(MotionBox)`
-    display: grid;
-    width: 100%;
-`
-
-export const FlexBox = props => <Box position="relative" display="flex" flexDirection="row" justifyContent="flex-start" alignItems="flex-start" {...props} />
-export const AbsoluteBox = props => <Box position="absolute" {...props} />
-
-
-
-
-// Allow overflow
-/*
-
 export const ImageBox = styled.div`
     box-sizing: border-box !important;
     display:flex;
