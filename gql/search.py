@@ -330,16 +330,18 @@ class ComplexSearchType(graphene.ObjectType):
 
 
     def resolve_topic(self, info):
-        print("0")
-        if self.topic_slug:
-            print("0")
-            return Topic.objects.filter(slug=self.topic_slug).first()
+        qs = Topic.objects.filter(slug=self.topic_slug, main_page=True)
+        if qs.exists():
+            return qs.first()
+        return None
 
     def resolve_topic_result(self, info):
         if not self.topic_slug:
-            return None
-
-        topic = Topic.objects.filter(slug=self.topic_slug).first()
+            return []
+        qs = Topic.objects.filter(slug=self.topic_slug, main_page=True)
+        if not qs.exists():
+            return []
+        topic = qs.first()
         qs = topic.movies.all().only("id", "slug", "name", "poster", "cover_poster", "year").order_by("-id")
         #print(tags, keywords)
 

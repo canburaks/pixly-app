@@ -75,9 +75,11 @@ const TopicPage = (props) =>{
                         mt={[3]} mb={[0]} py={[0]}
                         header={queryData.topic.name}
                         quote={queryData.topic.quotes.length > 0 && queryData.topic.quotes[0]}
-                        text={queryData.topic.summary}
-                        secondText={queryData.topic.content}
-                        publishedAt={queryData.topic.publishedAt}
+                        summary={queryData.topic.summary}
+                        content={queryData.topic.content}
+                        createdAt={queryData.topic.createdAt}
+                        updatedAt={queryData.topic.updatedAt}
+                        wiki={queryData.topic.wiki}
                     />}   
             </FlexBox>
 
