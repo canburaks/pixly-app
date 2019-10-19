@@ -51,6 +51,19 @@ export const HiddenSubHeader = styled("h4")`
     max-height:1px!important;
     */
 `
+export const Span = styled("span")`
+    font-size:12px;
+    color: ${themeGet("colors.dark")};
+    opacity:0.75;
+
+    ${typography}
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${position}
+    ${border}
+`
 
 export const Text = styled('p')({
   wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
