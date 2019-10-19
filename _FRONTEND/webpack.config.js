@@ -232,7 +232,7 @@ const productionSettings = {
           chunkFilename: 'static/css/[name].chunk.css',
 		}),
 		new Visualizer({
-			filename: '../../statistics.html'
+			filename: '../../../statistics.html'
 		  })
 	]
 };
