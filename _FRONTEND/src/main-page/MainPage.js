@@ -1,152 +1,221 @@
 import React from "react";
-import { useContext, useState, useReducer, useEffect, lazy, Suspense, useRef } from 'react';
-import { Route, Switch, Link, withRouter } from "react-router-dom"
+import {
+	useContext,
+	useState,
+	useReducer,
+	useEffect,
+	lazy,
+	Suspense,
+	useRef
+} from "react";
+import { Route, Switch, Link, withRouter } from "react-router-dom";
 import { MAIN_PAGE } from "../functions/query";
 import { Query } from "react-apollo";
-import { useQuery, useApolloClient, useLazyQuery } from '@apollo/react-hooks';
+import { useQuery, useApolloClient, useLazyQuery } from "@apollo/react-hooks";
 
-import { rgaPageView, rgaStart, Head, MidPageAd } from "../functions/analytics"
-import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../functions/hooks"
+import { rgaPageView, rgaStart, Head, MidPageAd } from "../functions/analytics";
+import {
+	useWindowSize,
+	useAuthCheck,
+	useClientWidth,
+	useValues
+} from "../functions/hooks";
 
-import JoinBanner from "../components/JoinBanner.js"
+import JoinBanner from "../components/JoinBanner.js";
 
-
-import { GlideBox } from "../components2/Glide.js"
+import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
-import { 
-    MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard,
-    Grid, PageContainer, ContentContainer, Loading, SuperBox,
-    HiddenText, HiddenHeader, HiddenSubHeader, HeaderText, HeaderMini, Text,
-    NewLink, CoverLink,
-} from "../styled-components"
+import {
+	MovieCoverBox,
+	DirectorCard,
+	MovieCoverCard,
+	ImageCard,
+	Grid,
+	PageContainer,
+	ContentContainer,
+	Loading,
+	SuperBox,
+	HiddenText,
+	HiddenHeader,
+	HiddenSubHeader,
+	HeaderText,
+	HeaderMini,
+	Text,
+	NewLink,
+	CoverLink
+} from "../styled-components";
 
+import "./MainPage.css";
 
-import "./MainPage.css"
+const MainPage = props => {
+	//console.log("main-page props: ",props)
+	const authStatus = useAuthCheck();
+	rgaStart();
 
+	const CarouselList = ({ item }) => (
+		<Link to={`/list/${item.slug}/1`} rel="nofollow" key={item.slug}>
+			<img
+				alt={item.name + " poster"}
+				title={item.name + " poster"}
+				src={item.coverPoster}
+				className="bor-rad-2x w100 fg-1 box-shadow-short"
+			/>
+		</Link>
+	);
+	const baseurl =
+		"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/";
 
-const MainPage = (props) => {
-    //console.log("main-page props: ",props)
-    const authStatus = useAuthCheck();
-    rgaStart()
+	const CollectionsFeature = React.memo(() => (
+		<SuperBox
+			src={baseurl + "collections.jpg"}
+			hoverShadow
+			ratio={0.5625}
+			borderRadius={"6px"}
+			boxShadow="card"
+		>
+			<HiddenHeader>Collections</HiddenHeader>
+			<HiddenSubHeader>
+				Curated and Collected Best Movie Lists
+			</HiddenSubHeader>
+			<CoverLink link={"/collections"} text={"Visit Collections"} />
+		</SuperBox>
+	));
+	const DirectorsFeature = React.memo(() => (
+		<SuperBox
+			src={baseurl + "directors.jpg"}
+			hoverShadow
+			ratio={0.5625}
+			borderRadius={"6px"}
+			boxShadow="card"
+		>
+			<HiddenHeader>Directors</HiddenHeader>
+			<HiddenSubHeader>
+				Famous Directors Favorite Film Lists and Directors Filmographies
+			</HiddenSubHeader>
+			<CoverLink link={"/directors/1"} text={"Visit Famous Directors"} />
+		</SuperBox>
+	));
+	const SearchFeature = React.memo(() => (
+		<SuperBox
+			src={baseurl + "search.jpg"}
+			hoverShadow
+			ratio={0.5625}
+			borderRadius={"6px"}
+			boxShadow="card"
+		>
+			<HiddenHeader>Search</HiddenHeader>
+			<HiddenSubHeader>
+				Search Movies with IMDb Rating and Release Year.
+			</HiddenSubHeader>
+			<CoverLink
+				link={"/advance-search"}
+				text={
+					"Visit Advance Movie Search Page and Search Movies by IMDb Rating"
+				}
+			/>
+		</SuperBox>
+	));
+	const TopicsFeature = React.memo(() => (
+		<SuperBox
+			src={baseurl + "topics.jpg"}
+			hoverShadow
+			ratio={0.5625}
+			borderRadius={"6px"}
+			boxShadow="card"
+		>
+			<HiddenHeader>Topics</HiddenHeader>
+			<HiddenSubHeader>
+				Explore Movies by their specific subjects
+			</HiddenSubHeader>
+			<CoverLink
+				link={"/topics"}
+				text={"Visit Topic Page and Explore Movies with topics"}
+			/>
+		</SuperBox>
+	));
 
-    const CarouselList =({ item }) => (
-        <Link to={`/list/${item.slug}/1`} rel="nofollow" key={item.slug} >
-            <img 
-                alt= {item.name + " poster"}
-                title={item.name + " poster"}
-                src={item.coverPoster} 
-                className="bor-rad-2x w100 fg-1 box-shadow-short"
-                />
-        </Link>
-    )
-    const baseurl = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/"
+	const sortedMovies = props.data.movies.sort((a, b) => b.id - a.id);
+	//const directorShow = useValues(3,3,4,5,5,6)
+	return (
+		<PageContainer>
+			<Head
+				description={
+					"Personalized Movie Recommendations. Find similar movies. Discover Movie Lists, New Films and People with Similar Cinema Taste."
+				}
+				title={
+					"Pixly - Movie Recommendations, Similar Movies, AI Based Movie Recommendation."
+				}
+				keywords={
+					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"
+				}
+				canonical={`https://pixly.app`}
+			>
+				<meta name="twitter:card" content="app" />
+				<meta name="twitter:site" content="@pixlymovie" />
+				<meta
+					name="twitter:description"
+					content="Personal Movie Recommendation and Social Movie Discovering Platform"
+				/>
+				<meta name="twitter:app:name:iphone" content="Pixly" />
+				<meta name="twitter:app:name:ipad" content="Pixly" />
+				<meta name="twitter:app:name:googleplay" content="Pixly" />
+				<meta property="og:type" content="business.business" />
+				<meta property="og:title" content="Pixly" />
+				<meta property="og:url" content="https://pixly.app" />
+				<meta
+					property="og:image"
+					content="https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/brand/pixly-hare-circle.png"
+				/>
+				<meta
+					property="business:contact_data:street_address"
+					content="."
+				/>
+				<meta
+					property="business:contact_data:locality"
+					content="Istanbul"
+				/>
+				<meta
+					property="business:contact_data:region"
+					content="Europe"
+				/>
+				<meta
+					property="business:contact_data:postal_code"
+					content="34430"
+				/>
+				<meta
+					property="business:contact_data:country_name"
+					content="Turkey"
+				/>
+			</Head>
 
-    const CollectionsFeature = React.memo(() => (
-        <SuperBox src={baseurl + "collections.jpg"} 
-            hoverShadow
-            ratio={0.5625} 
-            borderRadius={"6px"} 
-            boxShadow="card"
-        >
-            <HiddenHeader>Collections</HiddenHeader>
-            <HiddenSubHeader>Curated and Collected Best Movie Lists</HiddenSubHeader>
-            <CoverLink link={"/collections"} text={"Visit Collections"} />
-        </SuperBox>
-    ))
-    const DirectorsFeature = React.memo(() => (
-        <SuperBox src={baseurl + "directors.jpg"} 
-            hoverShadow
-            ratio={0.5625} 
-            borderRadius={"6px"} 
-            boxShadow="card"
-        >
-            <HiddenHeader>Directors</HiddenHeader>
-            <HiddenSubHeader>Famous Directors Favorite Film Lists and Directors Filmographies</HiddenSubHeader>
-            <CoverLink link={"/directors/1"} text={"Visit Famous Directors"} />
-        </SuperBox>
-    ))
-    const SearchFeature = React.memo(() => (
-        <SuperBox src={baseurl + "search.jpg"} 
-            hoverShadow
-            ratio={0.5625} 
-            borderRadius={"6px"} 
-            boxShadow="card"
-        >
-            <HiddenHeader>Search</HiddenHeader>
-            <HiddenSubHeader>Search Movies with IMDb Rating and Release Year.</HiddenSubHeader>
-            <CoverLink link={"/advance-search"} text={"Visit Advance Movie Search Page and Search Movies by IMDb Rating"} />
-        </SuperBox>
-    ))
-    const TopicsFeature = React.memo(() => (
-        <SuperBox src={baseurl + "topics.jpg"} 
-            hoverShadow
-            ratio={0.5625} 
-            borderRadius={"6px"} 
-            boxShadow="card"
-        >
-            <HiddenHeader>Topics</HiddenHeader>
-            <HiddenSubHeader>Explore Movies by their specific subjects</HiddenSubHeader>
-            <CoverLink link={"/topics"} text={"Visit Topic Page and Explore Movies with topics"} />
-        </SuperBox>
-    ))
+			<ContentContainer alignItems="center" mb={"100"}>
+				<HiddenHeader>Pixly Movie</HiddenHeader>
+				{/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
+				<HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>
 
+				<Grid columns={[1, 1, 2]} width={"100%"} my={[3]}>
+					<DirectorsFeature />
+					<CollectionsFeature />
+					<TopicsFeature />
+					<SearchFeature />
+				</Grid>
+			</ContentContainer>
 
-    const sortedMovies = props.data.movies.sort((a,b) => b.id - a.id)
-    //const directorShow = useValues(3,3,4,5,5,6)
-    return(
-        <PageContainer>
-            <Head
-                description={" Get Personalized Recommendation. Find similar movies. Discover Movie Lists, New Films and People with Similar Cinema Taste."}
-                title={"Pixly Movie - Find similar movies, get personalized recommendation"}
-                keywords={"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"}
-                canonical={`https://pixly.app`}
-            >
-                <meta name="twitter:card" content="app" />
-                <meta name="twitter:site" content="@pixlymovie" />
-                <meta name="twitter:description" content="Personal Movie Recommendation and Social Movie Discovering Platform" />
-                <meta name="twitter:app:name:iphone" content="Pixly" />
-                <meta name="twitter:app:name:ipad" content="Pixly" />
-                <meta name="twitter:app:name:googleplay" content="Pixly" />
-                <meta property="og:type" content="business.business"/>
-                <meta property="og:title" content="Pixly"/>
-                <meta property="og:url" content="https://pixly.app"/>
-                <meta property="og:image" content="https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/brand/pixly-hare-circle.png"/>
-                <meta property="business:contact_data:street_address" content="."/>
-                <meta property="business:contact_data:locality" content="Istanbul"/>
-                <meta property="business:contact_data:region" content="Europe"/>
-                <meta property="business:contact_data:postal_code" content="34430"/>
-                <meta property="business:contact_data:country_name" content="Turkey"/>
-            </Head>
-            
+			{!authStatus && <JoinBanner />}
+		</PageContainer>
+	);
+};
 
-            <ContentContainer alignItems="center" mb={"100px"}>
-                <HiddenHeader>Pixly Movie</HiddenHeader>
-                {/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
-                <HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>
+const MainPageQuery = props => {
+	const { loading, error, data } = useQuery(MAIN_PAGE, {
+		partialRefetch: true
+	});
+	if (loading) return <Loading />;
+	if (error) return <div>{error.message}</div>;
+	if (data) return <MainPage data={data.mainPage} {...props} />;
+};
 
-                <Grid columns={[1,1,2]} width={"100%"} my={[3]}>
-                    <DirectorsFeature />
-                    <CollectionsFeature />
-                    <TopicsFeature />
-                    <SearchFeature />
-                </Grid>
-            </ContentContainer>
-            
-            {!authStatus && <JoinBanner />}
-        </PageContainer>
-    )
-}
-
-const MainPageQuery = (props) => {
-    const { loading, error, data } = useQuery(MAIN_PAGE, {partialRefetch:true})
-    if (loading) return <Loading />
-    if (error) return <div>{error.message}</div>
-    if (data) return <MainPage data={data.mainPage} {...props} />
-}
-
-
-
-export default MainPageQuery
+export default MainPageQuery;
 
 /*
 const MainPageQuery2 = (props) =>{

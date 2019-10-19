@@ -4,12 +4,12 @@ import { themeGet } from '@styled-system/theme-get'
 import { hideText } from 'polished'
 
 export const HiddenSpan = styled("span")`
-    max-width:1px !important;
+    max-width:10px !important;
     max-height:1px!important;
     visibility:hidden;
 `
 export const HiddenText = styled("p")`
-    max-width:1px !important;
+    max-width:100% !important;
     max-height:1px!important;
     visibility:hidden;
 `
