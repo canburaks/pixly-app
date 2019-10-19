@@ -797,6 +797,11 @@ class TopicType(DjangoObjectType, SEOType):
     class Meta:
         model = Topic
 
+    def resolve_published_at(self, info, *_):
+        if self.updated_at:
+            return self.updated_at.__str__()
+        return self.created_at.__str__()
+
     def resolve_quotes(self, info, *_):
         return self.quotes.all()
 
