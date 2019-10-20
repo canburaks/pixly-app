@@ -5,5 +5,6 @@ export * from "./elements/index"
 export * from "./organisms/index"
 export * from "./others"
 export * from "./richdata"
+export * from "./motions"
 
 

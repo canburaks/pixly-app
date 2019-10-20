@@ -60,29 +60,32 @@ export const Head = React.memo((props) => {
 
 
 export const rgaPageView = () => {
-    const [pathname, setPathname] = useState(null)
-    const location = useLocation()
+    if (production){
+        const [pathname, setPathname] = useState(null)
+        const location = useLocation()
 
-    // Only sent when url changes
-    if (location !== pathname){
-        //console.log("Analytics path has changed", pathname, location)
-        setPathname(location)
-        ReactGA.pageview(location)
+        // Only sent when url changes
+        if (location !== pathname){
+            //console.log("Analytics path has changed", pathname, location)
+            setPathname(location)
+            ReactGA.pageview(location)
+        }
     }
 }
 
 export function rgaStart(){
-    const userId = localStorage.getItem("USERNAME")
-    ReactGA.initialize('UA-141617385-1', {
-        debug: false,
-        gaOptions: { 
-            'siteSpeedSampleRate': 50, 
-            'optimize_id': 'GTM-K82HMLS',
-            testMode: !production
-        }
-    })
-    if (userId) ReactGA.set({userId})
-
+    if (production){
+        const userId = localStorage.getItem("USERNAME")
+        ReactGA.initialize('UA-141617385-1', {
+            debug: false,
+            gaOptions: { 
+                'siteSpeedSampleRate': 50, 
+                'optimize_id': 'GTM-K82HMLS',
+                testMode: !production
+            }
+        })
+        if (userId) ReactGA.set({userId})
+    }
 }
 
 
