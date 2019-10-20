@@ -16,7 +16,7 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
-    TextSection,SchemaArticle,
+    TextSection,SchemaArticle,MovieRichCardBox,
     YearSlider,RatingSlider,
 } from "../../styled-components"
 
@@ -45,7 +45,7 @@ const TopicPage = (props) =>{
 
     //console.log("yearData",yearData)
     //console.log("ratingData",ratingData)
-    console.log("topic data", queryData)
+    //console.log("topic data", queryData)
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -150,12 +150,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         //console.log("data", data, willBeDispatched)
         dispatcher(willBeDispatched)
         return (
-            <MovieCoverBox 
-                columns={[2,2,3,3,3,3,4,4,6]} 
-                items={data.complexSearch.topicResult} 
-                fontSize={[12,12,14]}
-                
-                />
+            <MovieRichCardBox items={data.complexSearch.topicResult}  />
 
         )}
 }, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.page === n.page) )
