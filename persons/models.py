@@ -224,7 +224,7 @@ class Person(SocialMedia, SEO, MainPage):
             print("poster saved")
         return new_person
 
-    #in order to bulk update, does not save
+    #in order to do bulk update, does not save
     def set_seo_description_keywords(self, save=True):
         from items.models import Tag
         # KEYWORDS

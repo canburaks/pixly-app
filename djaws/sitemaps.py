@@ -142,7 +142,8 @@ person__slugs = [
     "person/leonardo-dicaprio-619",
     "person/liam-neeson-3896",
     "person/patrick-stewart-2387",
-    "person/john-malkovich-6949"
+    "person/john-malkovich-6949",
+    "person/zach-braff"
 ]
 liste_slugs =[
     "list/all-palme-dor-winners-cannes-film-festival/1",
