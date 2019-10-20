@@ -427,8 +427,7 @@ class MovieType(DjangoObjectType):
         return new_data
 
     def resolve_tags(self, info, *_):
-        Q_TAG = Q(genre_tag=True) | (Q(subgenre_tag=True)
-        return self.tags.filter(Q_TAG)
+        return self.tags.all()
 
     def resolve_isFaved(self,info, *_):
         if info.context.user.is_authenticated:
