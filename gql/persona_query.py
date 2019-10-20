@@ -132,7 +132,7 @@ class CustomPersonaType(graphene.ObjectType, SocialMediaType, SEOType):
         #    key=lambda x:x.prediction, reverse=True
         #)
         #print("records", records)
-        return records[:6]
+        return records
 
 
     def resolve_feed(self, info):
