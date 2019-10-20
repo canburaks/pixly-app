@@ -43,7 +43,7 @@ export const MovieMotionCard = (props) => {
             <BookmarkMutation id={props.item.id} active={props.item.isBookmarked} size={"28px"}/>
         </FlexBox>
         <TagBox tags={props.item.tags} num={8} />
-        <Text
+        <Text mt="auto"
             fontSize={["13px", "13px", "13px","14px", "14px", "16px"]}
             color="light"
             my={[2]}

@@ -664,12 +664,11 @@ export const TOPIC_SEARCH_QUERY = gql`
             tags: $tags, topicSlug:$topicSlug
             ){  
                 topicResult{
-                    id,
-                    name,
-                    poster,
-                    coverPoster,
-                    year,
-                    slug
+                        id, name,slug, year, hasCover, poster,isBookmarked, isFaved,
+                        viewerRating, coverPoster, summary,imdbRating
+                        tags{
+                            name, slug, genreTag, subgenreTag
+                    },
                 }
                 topic{
                     name, summary,content, slug, poster, 

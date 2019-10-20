@@ -13,8 +13,8 @@ import { GlobalContext } from "../../App";
 import {  
     MovieCoverBox, ProfileCircleBox, PageContainer,
     ContentContainer, PaginationBox, ListCoverPanel,
-    TextSection,HiddenHeader, MovieInformationBox,
-    MovieMotionCard, Grid
+    TextSection,HiddenHeader, MovieRichCardBox,
+    MovieRichCard, Grid
 } from "../../styled-components"
 
 
@@ -81,12 +81,7 @@ const MovieList = (props) => {
                     display={screenSize.includes("L") ? "none" : null}
                     />
 
-                
-                <Grid columns={[1,1,1,2,2,2,3,3,4]} py={[4]}>
-                    {liste.movies.map( item => (
-                        <MovieMotionCard item={item} key={"rec" + item.id}/>
-                    ))}
-                </Grid>
+                <MovieRichCardBox items={liste.movies} />
                     
                 <MidPageAd />
                 

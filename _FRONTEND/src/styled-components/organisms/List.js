@@ -4,9 +4,18 @@ import { useMemo, useCallback, useState } from 'react';
 import { 
     Box, Grid, ImageCard,PaginationBox,
     MovieCoverCard, MoviePosterCard,MovieSimilarCard, CrewCard,
-    RecommendationCard,MovieInformationCard,
+    RecommendationCard,MovieInformationCard,MovieRichCard,
     TagBox,FlexBox
 } from "../index"
+
+export const MovieRichCardBox = React.memo((props) => (
+    <Grid columns={[1,1,1,2,2,2,3,3,4]} py={[4]}>
+        {props.items.map( item => (
+            <MovieRichCard item={item} key={"rec" + item.id}/>
+        ))}
+    </Grid>
+))
+
 
 
 export const ListCoverBox = React.memo(({ items, columns=[1,1,2,2,2,3,3], ratio=0.41, text=false }) => (
