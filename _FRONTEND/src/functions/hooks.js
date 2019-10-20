@@ -147,11 +147,13 @@ export function useAuthCheck() {
 export function useLocation(){
     const [ location, setLocation ] = useState(window.location.pathname)
     function locListener(){
-        if(location!==window.location.pathname){
+        const isSamePage = location==window.location.pathname
+        //console.log("isSamePage", isSamePage)
+
+        if(!isSamePage){
             setLocation(window.location.pathname)
         }
     }
-
     useEffect(() =>{
         locListener()
         window.addEventListener("location", locListener);
@@ -159,7 +161,9 @@ export function useLocation(){
         return () =>{
             window.removeEventListener("location", locListener);
         }
-    })
+    },[window.location.pathname])
+    //console.log("hook", location)
+
     return location
 }
 

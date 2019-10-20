@@ -27,7 +27,6 @@ const TopicList = React.memo((props) => {
     console.log("topics", topics)
     const topicnames = topics.map(topic => topic.name).join(", ")
     const authStatus = useAuthCheck()
-    rgaPageView()
     return (
         <PageContainer>
             <Head

@@ -7,7 +7,6 @@ import { useContext, useState, useReducer, useEffect, lazy, Suspense } from 'rea
 
 import { Route, Switch, Redirect, withRouter } from "react-router-dom"
 
-import { rgaPageView, rgaStart } from "./functions/analytics"
 //import { Helmet } from "react-helmet";
 import { print, authCheck } from "./functions/lib"
 
@@ -29,7 +28,7 @@ import { AuthForm, ForgetForm } from "./forms/AuthForm"
 import ContactForm from "./forms/ContactForm"
 
 import { client, cache } from "./index"
-import { useWindowSize, useScrollPosition} from "./functions"
+import { useWindowSize,  rgaPageView,rgaStart} from "./functions"
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
@@ -46,7 +45,14 @@ import { ScrollTopButton } from "./styled-components"
 export const GlobalContext = React.createContext();
 
 const App = (props) => {
+    
+    rgaPageView()
     const state = Store(props.history)
+    
+    useEffect(() => {
+        rgaStart()
+        console.log("Google Analytics initialized")
+    },[])
     return (
     <ThemeProvider theme={themes.default}>
         <div className="App" theme="palette-1" >
@@ -77,8 +83,8 @@ const App = (props) => {
 const Store = (history) => {
     const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN") || null
     const USERNAME = localStorage.getItem("USERNAME") || null
-
     const screen = useWindowSize()
+
     const [screenSize, setScreenSize ] = useState(screen)
     const [token, setToken] = useState(AUTH_TOKEN)
     const [username, setUsername] = useState(USERNAME)
@@ -92,6 +98,9 @@ const Store = (history) => {
     const [modalComponent, setModalComponent] = useState(null)
 
     const { isOpen, toggle } = useModal();
+    //console.log("store lcoation: ", url)
+    //console.log("actual lcoation: ", location)
+
 
     useEffect(() =>{
         if (screen !== screenSize){

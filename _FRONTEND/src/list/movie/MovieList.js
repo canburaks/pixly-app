@@ -47,7 +47,6 @@ const MovieList = (props) => {
     const ppi = 20
     const currentPage = parseInt(props.match.params.page)
     const isLargeScreen = screenSize.includes("L")
-    //console.log(liste)
 
     return(
         <PageContainer>
@@ -61,7 +60,7 @@ const MovieList = (props) => {
                         : liste.listType === "df" && liste.relatedPersons.length > 0 
                             ? liste.relatedPersons.poster
                             : null}
-                canonical={`https://pixly.app/list/${liste.slug}/1`}
+                canonical={`https://pixly.app${window.location.pathname}`}
             />
 
             <ListCoverPanel 
@@ -124,7 +123,7 @@ const MovieList = (props) => {
 }
 
 
-export default withRouter(React.memo(MovieList))
+export default withRouter(MovieList)
 
 
 

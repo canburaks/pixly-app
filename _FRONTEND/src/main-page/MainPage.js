@@ -50,8 +50,6 @@ import "./MainPage.css";
 const MainPage = props => {
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
-	rgaStart();
-
 	const CarouselList = ({ item }) => (
 		<Link to={`/list/${item.slug}/1`} rel="nofollow" key={item.slug}>
 			<img

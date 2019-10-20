@@ -63,8 +63,6 @@ import { GlobalContext } from "../App";
 
 const Middle = (props) => {
     const state = useContext(GlobalContext)
-    //console.log("middle ", props)
-    rgaSetUser()
     return (
         <Switch>
             <Route exact path="/draft" component={DraftPage} />
