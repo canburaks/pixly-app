@@ -476,9 +476,9 @@ class Recommendation(models.Model):
             #print("persona records", records)
             return records
         elif not is_eligible:
-            result =  Recommendation.objects.filter(
+            result =  Recommendation.objects.select_related("movie", "profile").filter(
                 profile = profile, is_recommended=True, is_watched=False
-                ).order_by("-recommended_at")[:6]
+                ).order_by("-recommended_at")[:6].only("is_recommended", "is_watched")
             #print("persona",result)
             return result
 

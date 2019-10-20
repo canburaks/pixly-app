@@ -82,7 +82,7 @@ const MovieList = (props) => {
                     />
 
                 
-                <Grid columns={[1,1,2,2,2,2,3,3,4]} py={[4]}>
+                <Grid columns={[1,1,1,2,2,2,3,3,4]} py={[4]}>
                     {liste.movies.map( item => (
                         <MovieMotionCard item={item} key={"rec" + item.id}/>
                     ))}

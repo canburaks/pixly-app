@@ -13,7 +13,7 @@ import { Text, Paragraph, HeaderMini,
 
 
 export const MovieMotionCard = (props) => {
-    
+
     return (
     <DarkCard 
         src={props.item.coverPoster}
@@ -37,6 +37,11 @@ export const MovieMotionCard = (props) => {
                 />}
         </FlexBox>
 
+        {/* MUTATIONS */}
+        <FlexBox justifyContent="space-between" alignItems={"center"} mb={[1]} mt={[2]} width="100%">
+            <RatingMutation  item={props.item} />
+            <BookmarkMutation id={props.item.id} active={props.item.isBookmarked} />
+        </FlexBox>
         <Text
             fontSize={["13px", "13px", "13px","14px", "14px", "16px"]}
             color="light"

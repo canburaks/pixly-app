@@ -20,8 +20,8 @@ const ListName = ({ item }) => <HeaderMini color="lightDark1" textShadow="dark" 
 
 const MovieActions = (props) => (
 <FlexBox position="absolute" top="20px" left={[1,1,2,2]} height="auto" minWidth="28px" flexDirection="column">
-    <LikeMutation id={props.item.id} active={props.item.isFaved} authStatus={props.authStatus}/>
-    <BookmarkMutation id={props.item.id} active={props.item.isBookmarked} authStatus={props.authStatus}/>
+    <LikeMutation id={props.item.id} active={props.item.isFaved}/>
+    <BookmarkMutation id={props.item.id} active={props.item.isBookmarked}/>
 </FlexBox>
 )
 
@@ -37,7 +37,7 @@ export const MovieCoverPanel = (props) => (
             <DirectorLinks directors={props.item.director}  color="lightDark1" fontSize="m" mb={[1,1,1,2]}/>
             <TagBox tags= {props.item.tags.filter(tag => tag.genreTag === true)} />
             {/*console.log("movie cover")*/}
-            <RatingMutation id={props.item.id} viewerRating={props.item.viewerRating} cacheUpdate={props.cacheUpdate} authStatus={props.authStatus}/>
+            <RatingMutation  item={props.item}  />
         </TopPanelCoverElement>
     </TopPanelBackElement>
 )
