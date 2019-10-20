@@ -8,7 +8,7 @@ import BackButton from "../../components/buttons/BackButton"
 //import Slider from "../../components/Slider"
 //import { Checkbox, Form, List, Dimmer, Loader, Image, Segment, Button, Dropdown, Breadcrumb, Pagination  } from 'semantic-ui-react'
 import JoinBanner from "../../components/JoinBanner.js"
-import { Head, MidPageAd } from "../../functions/analytics"
+import { Head, MidPageAd, rgaSetEvent } from "../../functions/analytics"
 import TagSelect from "./TagSelect"
 import { useWindowSize, useAuthCheck} from "../../functions"
 
@@ -98,12 +98,14 @@ const SearchPage = (props) =>{
         e.preventDefault()
         if (keywords.length < 3 && tags.length === 0) setMessage("Your should provide search keywords or choose a genre please")
         else {
-            complexSearch({variables: {...mergeVariables()} })
-            if (message.length > 0) setMessage("")
-            //const newQv = mergeVariables()
-            //newQv.tags = tags.map(tag => tag.value)
-            //////console.log("final query variables",newQv)
-            //complexSearch({variables : newQv})
+            const vars = mergeVariables()
+            complexSearch({variables: vars })
+
+            //GA Search Keyword
+            if (vars.keywords.length > 3){
+                rgaSetEvent("Search", "Keywords",vars.keywords.trim().toLowerCase())
+            }
+            if (message && message.length > 0) setMessage("")
         } 
     }
     //console.log("qv",variables)

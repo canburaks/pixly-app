@@ -1,14 +1,14 @@
 import React from "react";
-import { useEffect,useRef } from "react"
+import { useEffect, useState} from "react"
 import ReactGA from 'react-ga';
 import AdSense from 'react-adsense';
 import { Helmet } from "react-helmet";
 import { production } from "../index"
+import { useLocation } from "./hooks"
 
 //console.log("produciton: ", production)
 
-export const Head = (props) => {
-
+export const Head = React.memo((props) => {
     const titleText = props.title ? props.title :"Pixly - Movie Recommendation and Social Cinema Platform "
     const descriptionText = props.description ? props.description : "Personalized Movie Recommendation, Social Cinema Platform, Movie Discovery, and Cultural Content"
     const url = props.canonical ? props.canonical : "https://pixly.app" + window.location.pathname 
@@ -20,11 +20,11 @@ export const Head = (props) => {
     
     const opengraph = (type, content) => (<meta property={`og:${type}`} content={`${content}`}/>)
     const twitter = (type, content) => (<meta property={`twitter:${type}`} content={`${content}`}/>)
-
+    //Analytics()
+    //console.log("can",props.canonical)
     return (
     <Helmet>
-        {rgaPageView()}
-        
+        {/*rgaPageView()*/}
         {/* TITLE */}
         <title>{titleText}</title>
 
@@ -56,40 +56,57 @@ export const Head = (props) => {
         {props.children}
     </Helmet>
     )
-}
+}, (p,n) => p.canonical === n.canonical )
 
+
+export const rgaPageView = () => {
+    const [pathname, setPathname] = useState(null)
+    const location = useLocation()
+
+    // Only sent when url changes
+    if (location !== pathname){
+        //console.log("Analytics path has changed", pathname, location)
+        setPathname(location)
+        ReactGA.pageview(location)
+    }
+}
 
 export function rgaStart(){
-    if (production){
-    const userId = localStorage.getItem("USER_ID")
-    ReactGA.initialize('UA-141617385-1',{
-    debug: false,
-    gaOptions: { 
-        'siteSpeedSampleRate': 30, 
-        'optimize_id': 'GTM-K82HMLS',
-        userId,
+    const userId = localStorage.getItem("USERNAME")
+    ReactGA.initialize('UA-141617385-1', {
+        debug: false,
+        gaOptions: { 
+            'siteSpeedSampleRate': 50, 
+            'optimize_id': 'GTM-K82HMLS',
+            testMode: !production
         }
-    }
-)}
+    })
+    if (userId) ReactGA.set({userId})
+
 }
 
+
 export function rgaSetUser(){
-    if (production){
-        const userId = localStorage.getItem("USER_ID")
-    if (production && userId){
+    const userId = localStorage.getItem("USERNAME")
+    if (userId){
         ReactGA.set({
             userId
         })
     }
-}}
-
-export function rgaPageView(){
-    
-    if (production){
-        const pathname = window.location.pathname;
-        ReactGA.pageview(pathname);
-    }
 }
+
+export const rgaSetEvent = (category, action, label) => {
+    ReactGA.event({
+      category: category,
+      action: action,
+      label: label
+    });
+  };
+
+
+
+
+
 
 export const DirectorPageAd = () => {
     useEffect(() => {
