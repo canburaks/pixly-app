@@ -127,12 +127,12 @@ class CustomPersonaType(graphene.ObjectType, SocialMediaType, SEOType):
     def resolve_recommendations(self, info, *_):
         records = Recommendation.get_recommendations(profile=self.user.profile, real=True)
         #print("records", records)
-        records = sorted(
-            filter(lambda x: (x.movie.cover_poster != "" and x.movie.cover_poster != None), records),
-            key=lambda x:x.prediction, reverse=True
-        )
+        #records = sorted(
+        #    filter(lambda x: (x.movie.cover_poster != "" and x.movie.cover_poster != None), records),
+        #    key=lambda x:x.prediction, reverse=True
+        #)
         #print("records", records)
-        return records[:12]
+        return records[:6]
 
 
     def resolve_feed(self, info):

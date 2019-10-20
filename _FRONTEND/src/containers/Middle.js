@@ -83,7 +83,10 @@ const Middle = (props) => {
             <Route exact path="/topic/:slug" component={TopicPage} />
 
 
-            <Route exact path="/list/:slug/:page/" component={MovieListQuery} />
+            <Route exact path="/list/:slug/:page/" component={MovieListQuery} 
+
+                
+            />
 
 
             
@@ -249,6 +252,7 @@ const CollectionsQuery = (props) => {
 
 
 const MovieListQuery = (props) => {
+    //console.log(props)
     let shouldReplace = false
     function is_numeric(str){
         return /^\d+$/.test(str);
@@ -269,7 +273,7 @@ const MovieListQuery = (props) => {
     if (data) {
         if (data.liste && shouldReplace){props.history.replace(`/list/${data.liste.slug}/1`)}
         const item = data[Object.keys(data)[0]];
-        window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+        //window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
         return <MovieList liste={item} viewer={data[Object.keys(data)[1]]} fetchMore={fetchMore} />
     }
 }
