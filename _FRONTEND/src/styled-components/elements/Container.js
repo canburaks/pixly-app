@@ -117,9 +117,9 @@ Grid.defaultProps = {
     gridRowGap: "32px"
 }
 
-export const TagBox = (props) => (
-    <FlexBox flexWrap="wrap" py={[2]}>
-        {props.tags.map(tag => (
+export const TagBox = ({tags, num=100}) => (
+    <FlexBox flexWrap="wrap" py={[2]} color="light">
+        {tags.slice(0, num).map(tag => (
             <TagText key={tag.name ? "tbox"+ tag.name : "tbox" + tag}  
                 fontSize={["10px","12px","12px", "12px", "12px", "14px"]}
                 fontFamily="header"

@@ -45,8 +45,8 @@ export const BookmarkMutation = (props) => {
 		<BookmarkIcon   
             onClick={authStatus ? mutation : null}  
             active={data ? data.bookmark.movie.isBookmarked : props.active}
-            className={!authStatus && "anonymous"}
-            title={!authStatus && "Please Login to Continue"}
+            title={authStatus ? "Add/Remove Watchlist" : "Please Login to Continue"}
+			size={props.size}
         />
 	)
 }
