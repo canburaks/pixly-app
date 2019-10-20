@@ -14,6 +14,7 @@ import {
     MovieCoverBox, ProfileCircleBox, PageContainer,
     ContentContainer, PaginationBox, ListCoverPanel,
     TextSection,HiddenHeader, MovieInformationBox,
+    MovieMotionCard, Grid
 } from "../../styled-components"
 
 
@@ -81,8 +82,11 @@ const MovieList = (props) => {
                     />
 
                 
-
-                <MovieInformationBox items={liste.movies}  columns={[1,1,2,2,3,3,3,4]}/>
+                <Grid columns={[1,1,2,2,2,2,3,3,4]} py={[4]}>
+                    {liste.movies.map( item => (
+                        <MovieMotionCard item={item} key={"rec" + item.id}/>
+                    ))}
+                </Grid>
                     
                 <MidPageAd />
                 

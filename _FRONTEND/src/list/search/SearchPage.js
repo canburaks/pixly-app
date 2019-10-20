@@ -103,7 +103,7 @@ const SearchPage = (props) =>{
 
             //GA Search Keyword
             if (vars.keywords.length > 3){
-                rgaSetEvent("Search", "Keywords",vars.keywords.trim().toLowerCase())
+                rgaSetEvent("Search", vars.keywords.trim().toLowerCase())
             }
             if (message && message.length > 0) setMessage("")
         } 

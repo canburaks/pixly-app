@@ -50,19 +50,6 @@ import "./MainPage.css";
 const MainPage = props => {
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
-	const CarouselList = ({ item }) => (
-		<Link to={`/list/${item.slug}/1`} rel="nofollow" key={item.slug}>
-			<img
-				alt={item.name + " poster"}
-				title={item.name + " poster"}
-				src={item.coverPoster}
-				className="bor-rad-2x w100 fg-1 box-shadow-short"
-			/>
-		</Link>
-	);
-
-	const sortedMovies = props.data.movies.sort((a, b) => b.id - a.id);
-	//const directorShow = useValues(3,3,4,5,5,6)
 	return (
 		<PageContainer>
 			<Head
@@ -119,12 +106,8 @@ const MainPage = props => {
 				{/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
 				<HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>
 
-				<Grid columns={[1, 1, 2]} width={"100%"} my={[3]} mb={[5,5,5,6]} maxWidth={"900px"}>
-					<DirectorsFeature />
-					<CollectionsFeature />
-					<TopicsFeature />
-					<SearchFeature />
-				</Grid>
+				<FeatureBox />
+
 
 			</ContentContainer>
 
@@ -142,9 +125,17 @@ const MainPageQuery = props => {
 	if (data) return <MainPage data={data.mainPage} {...props} />;
 };
 
+const FeatureBox = () => (
+	<Grid columns={[1, 1, 2, 2 ,2,]} width={"100%"} my={[3]} mb={[5,5,5,6]} maxWidth={"900px"}>
+		<DirectorsFeature />
+		<CollectionsFeature />
+		<TopicsFeature />
+		<SearchFeature />
+	</Grid>
+)
 
 const CollectionsFeature = React.memo(() => (
-	<SuperBox
+	<SuperBox maxHeight={"255px"}
 		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/collections.jpg"}
 		hoverShadow
 		ratio={0.5625}
@@ -159,7 +150,7 @@ const CollectionsFeature = React.memo(() => (
 	</SuperBox>
 ));
 const DirectorsFeature = React.memo(() => (
-	<SuperBox
+	<SuperBox maxHeight={"255px"}
 		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/directors.jpg"}
 		hoverShadow
 		ratio={0.5625}
@@ -174,7 +165,7 @@ const DirectorsFeature = React.memo(() => (
 	</SuperBox>
 ));
 const SearchFeature = React.memo(() => (
-	<SuperBox
+	<SuperBox maxHeight={"255px"}
 		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/search.jpg"}
 		hoverShadow
 		ratio={0.5625}
@@ -194,7 +185,7 @@ const SearchFeature = React.memo(() => (
 	</SuperBox>
 ));
 const TopicsFeature = React.memo(() => (
-	<SuperBox
+	<SuperBox maxHeight={"255px"}
 		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/topics.jpg"}
 		hoverShadow
 		ratio={0.5625}
