@@ -45,7 +45,6 @@ export const MovieSvg = styled(Svg)`
         fill: ${props => props.active ? "rgba(255, 255, 255, 0.4)" : "rgba(255,0, 0, 0.4)" };
         stroke-width:${props => props.active ? 1 : 0.5};
     }
-    ${movieResponsives};
 `
 export const SocialMediaSvg = styled(Svg)`
     stroke: ${themeGet("colors.light")};

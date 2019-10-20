@@ -12,7 +12,7 @@ const movieiconchecker = (prevProps, nextProps) => (prevProps.id === nextProps.i
 
 
 export const LikeIcon = (props) => <Heart   {...props} title={!props.authStatus && "Like/Dislike"}/>
-export const BookmarkIcon = (props) => <Bookmark  {...props} title={!props.authStatus && "Add/Remove Watchlist"} />
+export const BookmarkIcon = (props) => <Bookmark   title={!props.authStatus && "Add/Remove Watchlist"} {...props}/>
 
 export const FacebookIcon = (props) => <Facebook title="See Facebook Page" {...props} />
 export const TwitterIcon = (props) => <Twitter title="See Twitter Page" {...props} />
@@ -98,7 +98,7 @@ const Bookmark = (props) => (
 		viewBox="0 0 24 24" 
 		strokeLinecap="square" strokeLinejoin="arcs"
 		{...props}
-	>
+	>  
         {props.title && <title>{props.title}</title>}
 		<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
 	</MovieSvg>
