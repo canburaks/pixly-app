@@ -7,10 +7,21 @@ import { UnderlineEffect, Box, HiddenSpan } from "../index"
 import { hideText } from 'polished'
 
 
-const LinkNoFollow = ({ to, className, children }) => <Link rel="nofollow" className={className} to={to} >{children}</Link>
+const LinkNoFollow = ({ to,link, className, children }) => <Link rel="nofollow" className={className} to={link || to} >{children}</Link>
 
 
 export const DirectorLink = ({director, ...props}) => <NewLink to={`/person/${director.slug}`}  mr={[0]} textShadow={"textDark"} {...props}><UnderlineEffect>{director.name}</UnderlineEffect>{props.extra}</NewLink>
+
+const StateLink = (props) => <Link  {...props} to={{pathname:props.link, state:{...props.state}}}  />
+export const StatefullLink = styled(StateLink)`
+  ${color}
+  ${space}
+  ${shadow}
+  ${layout}
+  ${border}
+  ${position}
+  ${typography}
+`
 
 
 export const DirectorLinks = React.memo(({directors, ...props}) =>(
@@ -29,13 +40,13 @@ export const CoverLink = (props) => (
         zIndex={3}
         {...props} 
     >
-      <HiddenSpan>{props.text}</HiddenSpan>
+      {props.text && <HiddenSpan>{props.text}</HiddenSpan>}
     </NewLink>
 )
 
 export const NewLink = styled(LinkNoFollow)`
   color: unset !important;
-  color:${themeGet("colors.light")};
+  color:${props => props.color ? props.color : themeGet("colors.light")};
   :hover {
       background-color:${props => props.hoverBg && props.hoverBg};
       color:${props => props.hoverColor && props.hoverColor};

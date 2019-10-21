@@ -91,7 +91,8 @@ def get_json(file_dir):
     with open(file_dir, "r") as f:
         file = json.load(f)
     return file
-
+def jsonn(t):
+    return {"name":t["name"], "slug":t["slug"], "subgenreTag":t["subgenre_tag"], "genreTag":t["genre_tag"]}
 
 def dict_to_bytes(d):
     import json

@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { useQuery } from '@apollo/react-hooks';
 import { TAG_LIST } from "../../functions/query"
 
 import { Loading } from "../../styled-components"
+import staticTags from "./tags.json" 
 
-const TagSelect = React.memo((props) =>{
-    const { loading, error, data } = useQuery(TAG_LIST);
-    const [tags, setTags ] = useState([])
 
-    if (loading) return <Loading />
-    if (error) return <div>error</div>
-    if (data && data.listOfTags.length !== tags.length) setTags(data.listOfTags)
+const TagSelectStatic = React.memo((props) =>{    
+    const [tags, setTags ] = useState(staticTags)
 
     const animatedComponents = makeAnimated();
     const exportHandler = (tags) => {
@@ -22,9 +19,9 @@ const TagSelect = React.memo((props) =>{
     const selectHandler = (e) => props.tagSetter(e)
 
     const mapper = (tagList, tagType) => tagList.map(tag => ({value:tag.slug, label:tag.name, tagType:tagType}))
-    const genres = mapper(tags.filter(x => x.genreTag === true), "Genre")
-    const subgenres = mapper(tags.filter(x => x.subgenreTag === true), "Subgenre")
-    const base = mapper(tags.filter(x => x.baseType === true), "Based")
+    const genres = useMemo( () => mapper(tags.filter(x => x.genreTag === true), "Genre"))
+    const subgenres = useMemo( () => mapper(tags.filter(x => x.subgenreTag === true), "Subgenre"))
+    const base = useMemo( () => mapper(tags.filter(x => x.baseType === true), "Based"))
     //const awards = mapper(props.tags.filter(x => x.awardTag === true))
 
     const tagOptions = [
@@ -32,7 +29,6 @@ const TagSelect = React.memo((props) =>{
         {label:"GENRES", options:genres},
         {label:"SUBGENRES", options:subgenres},
     ]
-
 
     const styles={
         container: base => ({
@@ -149,5 +145,4 @@ function setTagColor(item, opacity=1){
 }
 
 
-
-export default TagSelect;
+export default TagSelectStatic;

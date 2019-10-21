@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { Text, Paragraph, 
         Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
         Box, SuperBox, AbsoluteBox, 
-        NewLink, Input, HiddenText,
+        NewLink, StatefullLink, Input, HiddenText,
         TextSection, HeaderMini, FlexBox,LinkButton,
         BookmarkMutation, RatingMutation,TagBox,
         ImdbRatingIcon, YearClockIcon, 
@@ -85,12 +85,6 @@ export const DarkCard = props => (
 )
 
 
-export const Card = (props) =>(
-    <Box  display="flex" position="relative"
-        flexDirection="column" justifyContent="flex-start" alignItems="stretch" 
-        boxShadow="small" m={[0]}  borderRadius={props.borderRadius} {...props} 
-    />
-)
 
 
 export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, boxShadow, hoverShadow, fontSize, title, ...props}) => (
@@ -122,6 +116,29 @@ ImageCard.defaultProps = {
     borderRadius: "8px",
     fontSize: "m",
 }
+export const PlaceHolderCard = (props) => (
+    <SuperBox width={"100%"} {...props} height="auto" ratio={1.6} bg="black">
+        <StatefullLink 
+            link={props.link}
+            state={props.state}
+            position="absolute" 
+            top={0} left={0} right={0} bottom={0}
+        >
+            <Text color="light">
+                {props.text}
+            </Text>
+        </StatefullLink>
+    </SuperBox>
+)
+
+export const Card = (props) =>(
+    <Box  display="flex" position="relative"
+        flexDirection="column" justifyContent="flex-start" alignItems="stretch" 
+        boxShadow="small" m={[0]}  borderRadius={props.borderRadius} {...props} 
+    />
+)
+
+
 
 export const MosaicCard = ({ images }) => (
     <SuperBox

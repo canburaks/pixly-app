@@ -18,7 +18,7 @@ export const FacebookIcon = (props) => <Facebook title="See Facebook Page" {...p
 export const TwitterIcon = (props) => <Twitter title="See Twitter Page" {...props} />
 export const InstagramIcon = (props) => <Instagram title="See Instagram Page" {...props} />
 export const ImdbIcon = (props) => <Imdb title="See Internet Movie Database Page" {...props} />
-export const HomeIcon = (props) => <Home title="See Home Page" {...props} />
+export const HomeIcon = (props) => <Home title="See Home Page" {...props}/>
 
 export const YoutubeIcon = (props) => <Youtube {...props} />
 
@@ -33,19 +33,20 @@ export const UserIcon = (props) => <User {...props} />
 export const UsersIcon = (props) => <Users {...props} />
 export const EyeIcon = (props) => <Eye {...props} />
 
-export const LogoutIcon = (props) => <Logout {...props} />
+export const LogoutIcon = (props) => <Logout size={props.size || 24} {...props} />
 export const CloseIcon = (props) => <Close {...props} />
 export const WatchIcon = (props) => <Watch {...props} />
 export const SearchIcon = (props) => <Search {...props} />
 export const ClockIcon = (props) => <Clock {...props} />
 
 export const YearIcon = (props) => <ClockYear title="Release Year" {...props} />
+export const ProfileIcon = (props) => <Profile size={props.size || 24} clickable {...props} />
 
 //export const YearIcon = (props) => <WatchYear title="Release Year" {...props} />
 //export const HourGlassIcon = (props) => <HourGlass title="Release Year" {...props} />
 //export const YearGlassIcon = (props) => <HourGlassYear title="Release Year" {...props} />
 
-
+//More Complex Icons
 export const ImdbRatingIcon = (props) => (
     <OuterLink href={props.link} mr={[1]} display="flex" alignItems="flex-end">
         <ImdbIcon imdb title="See IMDb Page" fill="#f1f1f1" {...props}/>
@@ -83,6 +84,35 @@ export const YearClockIcon = (props) => (
 )
 
 
+
+
+
+//Only SVG Icons
+export const ListIcon = (props) =>(
+    <Svg viewBox="0 0 24 24" 
+        viewBox="0 0 24 24" fill="none" 
+        strokeWidth="2" 
+        strokeLinecap="round" strokeLinejoin="round"
+        clickable
+        {...props}
+    >
+        {props.title && <title>{props.title}</title>}
+        <line x1="8" y1="6" x2="21" y2="6"></line>
+        <line x1="8" y1="12" x2="21" y2="12"></line>
+        <line x1="8" y1="18" x2="21" y2="18"></line>
+        <line x1="3" y1="6" x2="3" y2="6"></line>
+        <line x1="3" y1="12" x2="3" y2="12"></line>
+        <line x1="3" y1="18" x2="3" y2="18"></line>
+    </Svg>
+)
+
+
+const Profile = (props) =>(
+    <Svg viewBox="0 0 24 24" {...props}>
+        <rect width={props.size} height={props.size} fill="none" rx="0" ry="0"/>
+        <path fillRule="evenodd" clipRule="evenodd" d="M17 7C17 9.76142 14.7614 12 12 12C9.23858 12 7 9.76142 7 7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7ZM11 13C6.58172 13 3 16.5817 3 21C3 21 6 22 12 22C18 22 21 21 21 21C21 16.5817 17.4183 13 13 13H11Z" fill="#ffffff"/>
+    </Svg>
+)
 const Heart = (props) => (
 	<MovieSvg xmlns="http://www.w3.org/2000/svg" 
 		viewBox="0 0 24 24"
@@ -249,17 +279,18 @@ const Notification = (props) => (
 )
 const Home = props => (
     <Svg
-        viewBox="0 0 24 24"
-        fill="none"
-        strokeLinecap="square"
-        strokeLinejoin="arcs"
+        viewBox="0 0 24 24"  stroke="#f1f1f1"
+        strokeWidth="2"
+        strokeLinecap="round" strokeLinejoin="round"
         {...props}
     >
         {props.title && <title>{props.title}</title>}
-        <path d="M20 9v11a2 2 0 01-2 2H6a2 2 0 01-2-2V9" />
-        <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6" />
+        <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/>
+        <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6"/>
     </Svg>
 )
+
+
 const Close = Unfollow;
 const Logout = Power;
 
@@ -374,6 +405,35 @@ const HourGlass = props => (
       <path d="M11 2a10 10 0 1010 10A10 10 0 0011 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zm3.1-7.37L12 11.42V7a1 1 0 00-2 0v5.12a.65.65 0 00.05.2.89.89 0 00.08.17.86.86 0 00.1.16l.16.13.09.09 2.6 1.5a1 1 0 00.5.13 1 1 0 00.5-1.87z" />
     </Svg>
   )
+
+  const BrandSvg = props => (
+    <svg width={44} height={44} fill="none" {...props}>
+    <circle cx={22} cy={22} r={22} fill="url(#prefix__paint0_angular)" />
+    <circle cx={22} cy={22} r={20} fill="#000" />
+    <path
+      d="M10.92 17.52c.79 0 1.504.181 2.144.544.64.352 1.141.853 1.504 1.504.363.65.544 1.392.544 2.224 0 .843-.181 1.59-.544 2.24a3.888 3.888 0 01-1.504 1.52c-.63.352-1.344.528-2.144.528a4.092 4.092 0 01-1.856-.416 3.582 3.582 0 01-1.344-1.248v4.688H6.584v-11.52h1.088v1.664c.341-.555.79-.981 1.344-1.28.565-.299 1.2-.448 1.904-.448zm-.08 7.552c.587 0 1.12-.133 1.6-.4.48-.277.853-.667 1.12-1.168.277-.501.416-1.072.416-1.712 0-.64-.139-1.205-.416-1.696a2.883 2.883 0 00-1.12-1.168 3.14 3.14 0 00-1.6-.416c-.597 0-1.136.139-1.616.416-.47.277-.843.667-1.12 1.168-.267.49-.4 1.056-.4 1.696 0 .64.133 1.21.4 1.712.277.501.65.89 1.12 1.168.48.267 1.019.4 1.616.4zm6.028-7.488h1.136V26h-1.136v-8.416zm.576-1.84a.804.804 0 01-.592-.24.786.786 0 01-.24-.576c0-.213.08-.4.24-.56.16-.16.357-.24.592-.24.234 0 .432.08.592.24.16.15.24.33.24.544 0 .235-.08.432-.24.592a.804.804 0 01-.592.24zM25.964 26l-2.671-3.52L20.605 26h-1.28l3.328-4.32-3.168-4.096h1.28l2.528 3.296 2.528-3.296h1.248L23.9 21.68 27.26 26h-1.296zm2.628-11.872h1.136V26H28.59V14.128zM39.4 17.584l-4.208 9.424c-.341.79-.736 1.35-1.184 1.68-.448.33-.986.496-1.616.496-.405 0-.784-.064-1.136-.192a2.462 2.462 0 01-.912-.576l.528-.848c.427.427.939.64 1.536.64.384 0 .71-.107.976-.32.278-.213.534-.576.768-1.088l.368-.816-3.76-8.4h1.184l3.168 7.152 3.168-7.152h1.12z"
+      fill="#fff"
+    />
+    <defs>
+      <radialGradient
+        id="prefix__paint0_angular"
+        cx={0}
+        cy={0}
+        r={1}
+        gradientUnits="userSpaceOnUse"
+        gradientTransform="matrix(0 22 -22 0 22 22)"
+      >
+        <stop offset={0.104} stopColor="#3437C7" />
+        <stop offset={0.24} stopColor="#3D33CC" />
+        <stop offset={0.389} stopColor="#5606FF" />
+        <stop offset={0.537} stopColor="#4900C0" />
+        <stop offset={0.758} stopColor="#3B04AD" />
+        <stop offset={0.93} stopColor="#0025A8" />
+      </radialGradient>
+    </defs>
+  </svg>
+  )
+  
 
   /*
 

@@ -148,7 +148,7 @@ export const MovieCoverCard = (props) => (
         link={`/movie/${props.item.slug}`}
         hiddentext={props.item.name}
         ratio={props.ratio || 0.5625} 
-        borderRadius={"8px"}
+        borderRadius={"6px"}
         boxShadow="card"
         hoverShadow
         {...props}
@@ -163,9 +163,8 @@ export const MoviePosterCard = (props) => (
         link={`/movie/${props.item.slug}`}
         hiddentext={props.item.name}
         ratio={props.ratio || 1.6} 
-        borderRadius={"8px"}
+        borderRadius={"6px"}
         boxShadow="card"
-        hoverShadow
         {...props}
     />
 )

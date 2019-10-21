@@ -571,6 +571,7 @@ export const COMPLEX_SEARCH = gql`
     query complexSearch(
         $keywords: String, 
         $page: Int, 
+        $first: Int,
         $minYear: Int, $maxYear: Int, 
         $minRating: Float, $maxRating: Float, 
         $tags: [String],

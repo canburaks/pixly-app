@@ -19,6 +19,7 @@ export const Box = styled.div`
         box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
         border: ${props => props.hoverBorder && '3px solid #3633CC' };
         text-decoration: ${props => props.hoverUnderline && "underline"};
+        background:${props => props.hoverLight && setLightness('0.15', `${props.hoverLight}`)};
         }
     transition: ${themeGet("transitions.fast")};
     border: ${props => props.hoverBorder && "3px solid transparent"};
@@ -63,7 +64,7 @@ export const SuperBox = styled.div`
         box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
         border: ${props => props.hoverBorder && '3px solid #3633CC' };
         text-decoration: ${props => props.hoverUnderline && "underline"};
-        background:${props => props.hoverLight && setLightness('0.45', 'rgba(204,205,100,0.7)')}
+        background:${props => props.hoverLight && setLightness('0.45', 'rgba(204,205,100,0.7)')};
     }
     ${color}
     ${space}
@@ -78,6 +79,55 @@ export const SuperBox = styled.div`
 `
 
 
+
+export const GridBox = styled(Box)`
+    display: grid;
+    width: 100%;
+`
+export const NavBarBox = styled.nav`
+    position: absolute;
+    width: 100vw;
+    display: flex;
+    justifyContent:flex-start;
+    align-items: center;
+    padding: 4px 8px ;
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+
+    transition: all 0.3s ease-in-out;
+    transition: background-color 1.5s ease-in-out;
+    overflow-y: visible;
+    z-index: 1500;
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
+
+export const FlexBox = props => <Box position="relative" display="flex" flexDirection="row" justifyContent="flex-start" alignItems="flex-start" {...props} />
+export const AbsoluteBox = props => <Box position="absolute" {...props} />
+
+export const ListBox = styled(Box)`
+    :first-child {
+        border-top-left-radius:8px;
+        border-top-right-radius:8px
+    }
+    :last-child {
+        border-bottom-left-radius:8px;
+        border-bottom-right-radius:8px
+    }
+    div:not(:last-child) {
+        border-bottom:1px solid rgba(180,180,180, 0.25)
+    }
+    
+`
+
+
 export const BlurBox = styled(SuperBox)`
     -webkit-filter: ${props => props.blur && `blur(${props.blur}px)`};
     -moz-filter: ${props => props.blur && `blur(${props.blur}px)`};
@@ -87,17 +137,6 @@ export const BlurBox = styled(SuperBox)`
     z-index:2;
     overflow: hidden;
 `
-
-export const GridBox = styled(Box)`
-    display: grid;
-    width: 100%;
-`
-
-
-export const FlexBox = props => <Box position="relative" display="flex" flexDirection="row" justifyContent="flex-start" alignItems="flex-start" {...props} />
-export const AbsoluteBox = props => <Box position="absolute" {...props} />
-
-
 
 
 // Allow overflow

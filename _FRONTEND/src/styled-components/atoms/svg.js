@@ -18,10 +18,12 @@ const itemSocialResponsives = css({
 })
 
 export const Svg = styled("svg")`
+    fill: ${props => props.fill || "none"};
     stroke: ${props => props.stroke || "#f1f1f1"};
     stroke-width:${props => props.strokeWidth || 0};
-    width:  ${props => props.size || "36px"};
-    height: ${props => props.size || "36px"};
+    width:  ${props => props.size || "24px"};
+    height: ${props => props.size || "24px"};
+    cursor: ${props => props.clickable && "pointer"};
     margin:4px;
     transition: all 0.2s cubic-bezier(.51,.17,.46,.88);
     transform-origin: center;

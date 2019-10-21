@@ -11,6 +11,8 @@ import { SocialBox } from "../others"
 
 //import { ColorExtractor } from 'react-color-extractor'
 
+
+
 export const TopPanelBackElement = (props) => (
     <Box display="flex"
         flexDirection="column"

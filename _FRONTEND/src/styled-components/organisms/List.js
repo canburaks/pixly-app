@@ -37,7 +37,7 @@ export const ListCoverBox = React.memo(({ items, columns=[1,1,2,2,2,3,3], ratio=
 ))
 
 
-export const MoviePosterBox = React.memo(({ items, columns=[3,4,6,8, 8, 10], ratio=1.6, notext=false, ...props }) => (
+export const MoviePosterBox = React.memo(({ items, columns=[2,3,4,5,6,6, 8], ratio=1.6, notext=false, ...props }) => (
     <Grid 
         columns={columns} py={[4]}         
     >
