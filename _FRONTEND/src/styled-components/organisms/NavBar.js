@@ -36,6 +36,7 @@ const NB = props => {
     const isSearchPage = window.location.pathname.includes("advance-search")
     const isTransparentBg = (window.location.pathname.includes("/list/") 
         || window.location.pathname.includes("/movie/") )
+
     return (
         <NavBarBox bg={isTransparentBg ? "rgba(40,40,40, 0.4)" : "dark"}>
             <Box width={"15%"}>
@@ -46,9 +47,9 @@ const NB = props => {
             {isSearchPage ? <Box height={"40px"} minWidth={"100%"} ></Box> : <SearchPanel />}
             </Box>
 
-            <FlexBox width={"15vw"} justifyContent="flex-end">
+            <FlexBox width={"15vw"} justifyContent={"flex-end"} maxWidth={"20vw"}>
                 {authStatus 
-                ?   <FlexBox flexDirection="row" justifyContent="center">
+                ?   <FlexBox display={"flex"} flexDirection={"row"} justifyContent={"center"} width={"100%"}>
                         <HomeDropdown username={state.username} />
                         <ProfileDropdown username={state.username}/>
                     </FlexBox>

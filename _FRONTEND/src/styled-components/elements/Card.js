@@ -42,7 +42,7 @@ export const MovieRichCard = (props) => {
         <TagBox tags={props.item.tags} num={8} />
         <Text mt="auto"
             fontSize={["13px", "13px", "13px","14px", "14px", "16px"]}
-            color="light"
+            color="rgb(210, 210, 210)"
             my={[2]}
             >
             {props.item.summary.length > 250 ? props.item.summary.slice(0,250) + "..." : props.item.summary}
