@@ -101,7 +101,7 @@ const MainPage = props => {
 				/>
 			</Head>
 
-			<ContentContainer alignItems="center" mb={"100"}>
+			<ContentContainer alignItems="center" mb={"100px"} pt={"80px"}>
 				<HiddenHeader>Pixly Movies</HiddenHeader>
 				{/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
 				<HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>

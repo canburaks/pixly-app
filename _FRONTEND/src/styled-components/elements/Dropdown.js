@@ -21,7 +21,7 @@ export const HomeDropdown = (props) => {
     useOnClickOutside(ref, () => setOpen(false));
     const toggle = () => setOpen(!isOpen) 
     return(
-        <Box minWidth="30px" minHeight="30px" position="relative" mr={[3,3,3,4]}>   
+        <Box minWidth="30px" minHeight="30px" position="relative" mr={[2,2,2,2,3]}>   
             <ListIcon onClick={toggle} />
                 
             {isOpen && (
@@ -69,7 +69,7 @@ export const ProfileDropdown = (props) => {
     useOnClickOutside(ref, () => setOpen(false));
     const toggle = () => setOpen(!isOpen) 
     return(
-        <Box minWidth="30px" minHeight="30px" position="relative" mr={[3,3,3,4]}>   
+        <Box minWidth="30px" minHeight="30px" position="relative" mr={[2,2,2,2,3]}>   
             <ProfileIcon onClick={toggle}/>
                 
             {isOpen && (
