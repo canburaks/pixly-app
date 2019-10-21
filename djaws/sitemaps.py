@@ -89,7 +89,6 @@ movie__slugs = [
     "movie/dead-leaves-2004",
     "movie/shortbus-2006",
     "movie/zodiac-2007",
-    "movie/instant-family-2018",
     "movie/american-pie-1999",
     "movie/about-cherry-2012",
     "movie/eat-pray-love-2010",

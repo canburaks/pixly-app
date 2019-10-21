@@ -42,13 +42,13 @@ const NB = props => {
                 <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
             </Box>
             
-            <Box width={"65%"} flexGrow={1}>
-            {isSearchPage ? <Box height={"40px"} minWidth={"100%"} maxWidth={"62vw"}></Box> : <SearchPanel />}
+            <Box width={"65%"} flexGrow={1} maxWidth={"70vw"}>
+            {isSearchPage ? <Box height={"40px"} minWidth={"100%"} ></Box> : <SearchPanel />}
             </Box>
 
-            <Box width={"20%"} justifyContent="flex-end">
+            <FlexBox width={"15vw"} justifyContent="flex-end">
                 {authStatus 
-                ?   <FlexBox justifyContent="center">
+                ?   <FlexBox flexDirection="row" justifyContent="center">
                         <HomeDropdown username={state.username} />
                         <ProfileDropdown username={state.username}/>
                     </FlexBox>
@@ -56,12 +56,14 @@ const NB = props => {
                 :   <Box onClick={() => state.methods.insertAuthForm("login")} 
                         rel="nofollow" 
                         color="light"
+                        mr={[4]}
+                        clickable
                     >
                         Sign In
                     </Box>
                     }
 
-            </Box>
+            </FlexBox>
 
 
 

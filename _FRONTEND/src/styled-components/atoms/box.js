@@ -88,7 +88,7 @@ export const NavBarBox = styled.nav`
     position: absolute;
     width: 100vw;
     display: flex;
-    justifyContent:flex-start;
+    justifyContent:space-between;
     align-items: center;
     padding: 4px 8px ;
     border-top: 2px solid rgba(0, 0, 0, 0.2);

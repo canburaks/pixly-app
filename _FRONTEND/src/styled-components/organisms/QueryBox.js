@@ -115,7 +115,7 @@ export const SearchPanel = (props) =>{
 const SearchQueryBox = React.memo(({keywords, cleaner}) => {
     const [location, setLocation] = useState(window.location.pathname)
     const values = useValues([4,6,8,10,12])
-    const { loading, data, error } = useQuery(COMPLEX_SEARCH, {variables:{page:1, keywords, first:(values*6 )- 1} });
+    const { loading, data, error } = useQuery(COMPLEX_SEARCH, {variables:{page:1, keywords, first:(values*3 )- 1} });
 
     //console.log(loading, error, data)
     const locationhook = useLocation()
