@@ -46,7 +46,7 @@ class ComplexSearchQuery(object):
 
             #TAGS
             tags=graphene.List(graphene.String, default_value=[]),
-
+            first=graphene.Int(default_value=None),
             topic_slug= graphene.String(default_value=None)
 
             )
