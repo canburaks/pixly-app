@@ -147,7 +147,6 @@ const SearchPage = (props) =>{
                     <SearchQueryBox lazyvariables={lazyvariables} skip={skip} />
                     
 
-                    <MidPageAd />
                 </Box>
             </Form>
         </PageContainer>
@@ -166,6 +165,9 @@ const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
         return (
             <>
             <MovieCoverBox items={data.complexSearch.result} columns={[2,2,3,3,4,4,6]} fontSize={[12,12,14]} my={[3,3,3,3,4]} />
+            
+            <MidPageAd />
+
             {data.complexSearch.quantity >= 18 &&
                     <PaginationBox mb={[2]}
                         currentPage={data.complexSearch.quantity!==null && page} 

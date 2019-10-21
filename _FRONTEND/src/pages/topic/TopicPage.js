@@ -123,12 +123,13 @@ const TopicPage = (props) =>{
                     lazyvariables={lazyvariables} 
                     dispatcher={dataDispatcher} 
                 />
-                <MidPageAd />
-                    <PaginationBox 
-                        currentPage={page} 
-                        totalPage={queryData && queryData.quantity} 
-                        nextPage={nextPage} prevPage={prevPage} 
-                    />
+
+                { queryData && queryData.quantity > 18&&
+                 <PaginationBox 
+                    currentPage={page} 
+                    totalPage={Math.ceil(queryData.quantity/18)} 
+                    nextPage={nextPage} prevPage={prevPage} 
+                />}
                 </Box>
         </PageContainer>
     );
@@ -150,7 +151,10 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         //console.log("data", data, willBeDispatched)
         dispatcher(willBeDispatched)
         return (
+            <>
             <MovieRichCardBox items={data.complexSearch.topicResult}  />
+            <MidPageAd />
+            </>
 
         )}
 }, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.page === n.page) )

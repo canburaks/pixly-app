@@ -19,7 +19,7 @@ import { GridBox, GridItem } from "../../components/GridBox";
 import CoverPanel from "../elements/CoverPanel";
 import PosterPanel from "../elements/PosterPanel";
 //import { SimilarityCard, Tag } from "../elements/Elements"
-import { GlideBox } from "../../components2/Glide.js";
+//import { GlideBox } from "../../components2/Glide.js";
 
 import {
 	CrewCard,
