@@ -79,11 +79,6 @@ const SearchPage = (props) =>{
             if (message && message.length > 0) setMessage("")
         } 
     }
-    useEffect(() =>{
-        //console.log("outer", document.body.style.position, document.body.style.overflowY)
-        document.body.style.position = 'block';
-        document.body.style.overflowY = "auto";
-    }, [])
 
     //console.log("qv",variables)
     return(

@@ -111,12 +111,6 @@ const MoviePage = props => {
 	//console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
 	//console.log(item.seoShortDescription)
 	//console.log(keywords)
-    useEffect(() =>{
-        //console.log("outer", document.body.style.position, document.body.style.overflowY)
-        document.body.style.position = 'block';
-        document.body.style.overflowY = "auto";
-    }, [])
-
 	return (
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
 			<Head
