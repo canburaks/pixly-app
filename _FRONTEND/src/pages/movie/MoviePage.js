@@ -30,6 +30,7 @@ import {
 	MovieCoverPanel,
 	HiddenHeader,
 	HeaderMini,
+	Grid,
 	HiddenSpan
 } from "../../styled-components";
 
@@ -259,28 +260,11 @@ const MoviePage = props => {
 
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
-					<Col
-						xs={12}
-						md={12}
-						lg={12}
-						className="fbox-c jcfs aifs mar-bt-5x w100"
-					>
-						<h4 className="t-xl t-bold mar-b-2x">CAST</h4>
-						<hr />
-
-						<GlideBox
-							s={[2]}
-							m={[3]}
-							l={[4]}
-							xl={[5]}
-							xxl={[7]}
-							xxxl={[10]}
-						>
-							{allCrews.map((crew, i) => (
-								<CrewCard crew={crew} key={crew.person.name} />
-							))}
-						</GlideBox>
-					</Col>
+					<Grid columns={[3,4,6,6,6,6,8]}>
+						{allCrews.map((crew, i) => (
+							<CrewCard crew={crew} key={crew.person.name} />
+								))}
+					</Grid>
 				)}
 			</ContentContainer>
 		</PageContainer>

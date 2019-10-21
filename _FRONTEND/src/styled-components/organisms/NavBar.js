@@ -43,7 +43,7 @@ const NB = props => {
             </Box>
             
             <Box width={"65%"} flexGrow={1}>
-            {isSearchPage ? <Box height={"40px"} minWidth={"100%"}></Box> : <SearchPanel />}
+            {isSearchPage ? <Box height={"40px"} minWidth={"100%"} maxWidth={"62vw"}></Box> : <SearchPanel />}
             </Box>
 
             <Box width={"20%"} justifyContent="flex-end">

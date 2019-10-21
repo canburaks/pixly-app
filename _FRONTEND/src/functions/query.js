@@ -579,6 +579,7 @@ export const COMPLEX_SEARCH = gql`
         complexSearch( 
             keywords: $keywords,
             page: $page, 
+            first:$first,
             minYear: $minYear, maxYear: $maxYear,
             minRating: $minRating, maxRating: $maxRating, 
             tags: $tags,
