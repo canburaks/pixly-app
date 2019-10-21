@@ -2,7 +2,7 @@
 import React from "react";
 import { useState, useContext, useMemo, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
-import { rgaPageView, Head, MoviePageAd } from "../../functions/analytics";
+import { rgaPageView, Head, MoviePageAd, MidPageAd } from "../../functions/analytics";
 
 //import { TagBox, Tag } from "../../components/TagBox"
 
@@ -168,8 +168,8 @@ const MoviePage = props => {
 					</>
 				)}
 
-				<MoviePageAd />
-
+				
+				<MidPageAd />
 				{/*<!--CONTENT SIMILAR Section--> */}
 				{contentSimilarCover.length > 0 && (
 					<Col
@@ -257,7 +257,7 @@ const MoviePage = props => {
 						/>
 					</Col>
 				)}
-
+				<MoviePageAd />
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
 					<Grid columns={[3,4,6,6,6,6,8]}>
