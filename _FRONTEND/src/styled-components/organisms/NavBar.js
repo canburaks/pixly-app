@@ -53,7 +53,13 @@ const NB = props => {
                         <ProfileDropdown username={state.username}/>
                     </FlexBox>
 
-                :   <Box rel="nofollow" onClick={() => state.methods.insertAuthForm("login")}>Sign In</Box>}
+                :   <Box onClick={() => state.methods.insertAuthForm("login")} 
+                        rel="nofollow" 
+                        color="light"
+                    >
+                        Sign In
+                    </Box>
+                    }
 
             </Box>
 
