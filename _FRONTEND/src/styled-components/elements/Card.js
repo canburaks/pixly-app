@@ -89,7 +89,7 @@ export const DarkCard = props => (
 
 export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, boxShadow, hoverShadow, fontSize, title, ...props}) => (
     <SuperBox ratio={ratio} width={width || "100%"} src={src} 
-        title={title}
+        title={title || text}
         hoverShadow={hoverShadow} boxShadow={boxShadow} 
         borderRadius={borderRadius || 0}
         {...props}
@@ -117,16 +117,22 @@ ImageCard.defaultProps = {
     fontSize: "m",
 }
 export const PlaceHolderCard = (props) => (
-    <SuperBox width={"100%"} {...props} height="auto" ratio={1.6} bg="black">
+    <SuperBox width={"100%"} {...props} height="auto" ratio={1.6} bg="black" border="2px solid" color="active">
         <StatefullLink 
             link={props.link}
             state={props.state}
             position="absolute" 
+            title={props.title}
             top={0} left={0} right={0} bottom={0}
         >
-            <Text color="light">
+            <FlexBox color="light" 
+                flexDirection="column" justifyContent="center" alignItems="center" 
+                height="100%"
+                fontWeight="bold" 
+            
+            >
                 {props.text}
-            </Text>
+            </FlexBox>
         </StatefullLink>
     </SuperBox>
 )
