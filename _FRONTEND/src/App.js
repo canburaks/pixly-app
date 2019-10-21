@@ -16,7 +16,8 @@ import Footer from "./components/Footer"
 import { useModal, Modal } from "cbs-react-components";
 //import ProfileUpdateForm from "./components/forms/ProfileUpdateForm"
 
-import NavBar from "./components/NavBar"
+//import NavBar from "./components/NavBar"
+import {NavBar} from "./styled-components"
 
 
 //import { NavBar, SideBar } from "./components2/navbar/NavBar.js"
@@ -32,8 +33,8 @@ import { useWindowSize,  rgaPageView,rgaStart} from "./functions"
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
-import themes from './styled-components/theme'
 import { ScrollTopButton } from "./styled-components"
+import themes from './styled-components/theme'
 //import 'semantic-ui-css/semantic.min.css'
 
 
@@ -51,7 +52,7 @@ const App = (props) => {
     
     useEffect(() => {
         rgaStart()
-        console.log("Google Analytics initialized")
+        //console.log("Google Analytics initialized")
     },[])
     return (
     <ThemeProvider theme={themes.default}>
@@ -181,7 +182,7 @@ const Store = (history) => {
                     else return localStorage.getItem("USERNAME")
                 }
             },
-            logout: function logout() {
+            logout: async function logout() {
                 cache.reset()
                 client.resetStore();
                 localStorage.removeItem("USERNAME")

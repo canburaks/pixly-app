@@ -14,6 +14,7 @@ import {
 
 import "./slider.css"
 
+
 export const InputRange = (props) => (
     <IR
         minValue={props.min} 

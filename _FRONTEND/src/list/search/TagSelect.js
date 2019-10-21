@@ -32,7 +32,7 @@ const TagSelect = React.memo((props) =>{
         {label:"GENRES", options:genres},
         {label:"SUBGENRES", options:subgenres},
     ]
-    //console.log("selection: ", selection)
+
 
     const styles={
         container: base => ({

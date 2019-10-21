@@ -102,7 +102,7 @@ class ComplexSearchType(graphene.ObjectType):
         self.topic_slug = kwargs.get("topic_slug")
 
         self.page = kwargs.get("page") if kwargs.get("page") else 1
-        self.first = settings.PER_PAGE_ITEM
+        self.first = kwargs.get("first") if kwargs.get("first") else settings.PER_PAGE_ITEM
         self.skip = (self.page - 1 ) * settings.PER_PAGE_ITEM
         #self.first = 40
         #self.skip = (self.page - 1 ) * 40

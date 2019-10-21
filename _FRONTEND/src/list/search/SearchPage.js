@@ -9,8 +9,8 @@ import BackButton from "../../components/buttons/BackButton"
 //import { Checkbox, Form, List, Dimmer, Loader, Image, Segment, Button, Dropdown, Breadcrumb, Pagination  } from 'semantic-ui-react'
 import JoinBanner from "../../components/JoinBanner.js"
 import { Head, MidPageAd, rgaSetEvent } from "../../functions/analytics"
-import TagSelect from "./TagSelect"
-import { useWindowSize, useAuthCheck} from "../../functions"
+import TagSelectStatic from "./TagSelectStatic"
+import { useWindowSize, useAuthCheck, useDebounce, isEqualObj} from "../../functions"
 
 //import "react-input-range/lib/css/index.css"
 
@@ -33,30 +33,27 @@ const Header = () => (
 )
 
 const SearchPage = (props) =>{
-
-    const [complexSearch, { loading, data, variables }] = useLazyQuery(COMPLEX_SEARCH);
+    const linkstate = props.location.state
+    const initialKeywords = (linkstate && linkstate.keywords) ? linkstate.keywords : ""
+    const initialSkip = !initialKeywords.length > 2
+    //console.log("search",props)
     
     //Variables
-    const [page, setPage] = useState(1)
-    const [ keywords, setKeywords ] = useState("")
+    const [ keywords, setKeywords ] = useState(initialKeywords)
+    const [ skip, setSkip ] = useState(initialSkip)
     const [ tags, setTags ] = useState([])
     const [yearData, setYearData ] = useState({minYear:1950, maxYear:2019})
     const [ratingData, setRatingData ] = useState({minRating:5.0, maxRating:9.9})
-
-    
-
-
-    const [ movies, setMovies ] = useState([])
+    const [lazyvariables, setLazyVariables ] = useState({keywords})
     const [ message, setMessage ] = useState(null)
 
-    //Error and internal states
-    const authStatus = useAuthCheck();
-    const [ resultQuantity, setResultQuantity] = useState(null)
+
 
     //const areEquals = useCallback((first, second) => (first.min === second.min && first.max === second.max), [])
     //const areEqualSize = (newmovies) => (new Set(movies.map(movie => movie.id)).size === new Set([...movies, ...newmovies].map(movie => movie.id)).size )
-    const mergeVariables = () => ({page,tags:tags.map(tag=>tag.value), keywords, ...yearData, ...ratingData})
-
+    //const mergeVariables = () => ({tags:tags.map(tag=>tag.value), keywords, ...yearData, ...ratingData})
+    //const lazy = mergeVariables()
+    //const lazyvariables = useDebounce(lazy, 2000);
     
     
     
@@ -65,41 +62,15 @@ const SearchPage = (props) =>{
     const yearDispatcher = useCallback((data) => setYearData(data), [yearData])
     const ratingDispatcher = useCallback((data) => setRatingData(data), [ratingData])
 
-    const prevPage = useCallback(() => (setPage(page => page - 1), complexSearch({ variables: { ...variables, page: page - 1 } })))
-    const nextPage = useCallback(() => (setPage(page => page + 1), complexSearch({ variables: { ...variables, page: page + 1 } })))
 
-    const areEqualSize = (prev, next) => {
-        //console.log("asds")
-        const oldIds = new Set(prev.map(obj => obj.id));
-        const newIds = new Set(next.map(obj => obj.id));
-        //console.log("array of object checker:", oldIds, newIds);
-        //console.log("array of object checker sizes: ", oldIds.size, newIds.size)
-        if (oldIds.size == newIds.size) return true
-        else return false
-    }
-
-    if (data) {
-        if (movies.length === 0 && data.complexSearch && data.complexSearch.result.length !== 0) setMovies(data.complexSearch.result)
-        else if (movies && movies.length > 0) {
-            //console.log("new result",data.complexSearch.result ,data)
-            const areEquals = areEqualSize(movies, data.complexSearch.result)
-            //console.log("are equal",areEquals)
-
-            if (!areEquals){
-                setMovies(data.complexSearch.result)
-                setResultQuantity(data.complexSearch.quantity)
-                setMessage(`${data.complexSearch.quantity} ${data.complexSearch.quantity.length > 1 ? "movies" : "movie"} found.`)
-                }
-        }
-    }
-    
 
     const submitHandler = (e) => {
         e.preventDefault()
         if (keywords.length < 3 && tags.length === 0) setMessage("Your should provide search keywords or choose a genre please")
         else {
-            const vars = mergeVariables()
-            complexSearch({variables: vars })
+            const vars = {tags:tags.map(tag=>tag.value), keywords, ...yearData, ...ratingData}
+            if (skip === true ) setSkip(false)
+            setLazyVariables(vars)
 
             //GA Search Keyword
             if (vars.keywords.length > 3){
@@ -147,19 +118,20 @@ const SearchPage = (props) =>{
                     px={[3]} mt={[3,3,3]}
                     borderBottom="1px solid"
                 >
-                
+                <FlexBox 
+                    flexDirection={["row"]} 
+                    alignItems={"flex-start"} 
+                    my={[3]} px={[3,3,3, 3]} 
+                    width={"100%"}
+                    flexGrow={1,1,1, 0}
+                >
+                    <TagSelectStatic tags={tags} tagSetter={setTags} />
+                </FlexBox>
+
                 <YearSlider dispatcher={yearDispatcher}  />
                 <RatingSlider dispatcher={ratingDispatcher} />
 
-                    <FlexBox 
-                        flexDirection={["row"]} 
-                        alignItems={"flex-start"} 
-                        my={[3]} px={[3,3,3, 3]} 
-                        width={"100%"}
-                        flexGrow={1,1,1, 0}
-                    >
-                        <TagSelect tags={tags} tagSetter={setTags} />
-                    </FlexBox>
+              
                 </FlexBox>
 
 
@@ -169,16 +141,11 @@ const SearchPage = (props) =>{
                     minWidth={["100%"]} minHeight={["60vw"]}
                     p={[1,2,3]}
                 >
-                    {loading && <Loading />}
                     <Text fontSize={[14,14,16]} minHeight={16} fontWeight={"bold"}>{message}</Text>
-                    <MovieCoverBox items={movies} columns={[2,2,3,3,4,4,6]} fontSize={[12,12,14]} my={[3,3,3,3,4]} />
                     
-                    {resultQuantity > 24 &&
-                        <PaginationBox mb={[2]}
-                            currentPage={resultQuantity!==null && page} 
-                            totalPage={Math.ceil(resultQuantity/24)} 
-                            nextPage={nextPage} prevPage={prevPage} 
-                        />}
+                    <SearchQueryBox lazyvariables={lazyvariables} skip={skip} />
+                    
+
                     <MidPageAd />
                 </Box>
             </Form>
@@ -186,7 +153,28 @@ const SearchPage = (props) =>{
     );
 }
 
+const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
+    const [page, setPage] = useState(1)
+    const { loading, data, error } = useQuery(COMPLEX_SEARCH, {variables:{page:page, ...lazyvariables}, skip:skip});
 
+    const prevPage = useCallback(() => setPage(page - 1), [page])
+    const nextPage = useCallback(() => setPage(page + 1), [page])
+    //console.log(loading, error, data)
+    if (loading) return <Loading />
+    if (data) {
+        return (
+            <>
+            <MovieCoverBox items={data.complexSearch.result} columns={[2,2,3,3,4,4,6]} fontSize={[12,12,14]} my={[3,3,3,3,4]} />
+            {data.complexSearch.quantity >= 18 &&
+                    <PaginationBox mb={[2]}
+                        currentPage={data.complexSearch.quantity!==null && page} 
+                        totalPage={Math.ceil(data.complexSearch.quantity/18)} 
+                        nextPage={nextPage} prevPage={prevPage} 
+                    />}
+            </>
+    )}
+    else return <div></div>
+}, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.skip === n.skip))  
 
 
 export default withRouter(SearchPage);

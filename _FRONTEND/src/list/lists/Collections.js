@@ -11,7 +11,6 @@ import { rgaPageView, Head, ListBoardAd, ListBoardAd2  } from "../../functions/a
 import { Menu, Segment } from 'semantic-ui-react'
 import { GridBox, GridItem } from "../../components/GridBox" 
 
-import "./Collections.css"
 import { GlobalContext } from "../../App";
 import JoinBanner from "../../components/JoinBanner.js"
 
@@ -35,7 +34,7 @@ const ListBoard = (props) => {
     const festivalWinners = useMemo(() => nonpixlyselection.filter(l => l.listType === "fw"))
     const otherLists = useMemo(() => nonpixlyselection.filter(l => l.listType === "ms"))
 
-    const firstPart = [...otherLists, ...festivalWinners, ...directorsFavourite]
+    const firstPart = [pixlyselection,...otherLists, ...festivalWinners, ...directorsFavourite]
 
 
     const pixlyselectionSize = useValues([0.41, 0.43, 0.3, 0.2, 0.15])
@@ -69,7 +68,7 @@ const ListBoard = (props) => {
                     <hr />
                 </div>
                 
-                <ImageCard item={pixlyselection}
+                {/*<ImageCard item={pixlyselection}
                     src={pixlyselection.coverPoster}
                     text={null}
                     key={pixlyselection.slug}
@@ -79,11 +78,11 @@ const ListBoard = (props) => {
                     width={"100%"}
                     boxShadow="card"
                     hoverShadow
-                />
+                />}
                 {/*<ListCoverBox columns={[1]} ratio={0.41} items={pixlyselection} text={false} />*/}
 
 
-                <ListCoverBox columns={[1,2,2,3,3,3,4]} items={firstPart} />
+                <ListCoverBox columns={[1,2,2,2,3,3,3,4]} items={firstPart} />
 
                 <ListBoardAd />
 

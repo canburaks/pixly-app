@@ -52,7 +52,7 @@ export const Form = styled("form")`
 `
 
 export const SearchInput = styled("input")`
-    background-color: rgba(180, 180, 180, 0.8);
+    background-color: rgba(40,40,40, 0.6);
     height:70%;
     min-height:60px;
     padding:8px 16px;
@@ -72,10 +72,10 @@ export const SearchInput = styled("input")`
     box-sizing:border-box;
     box-shadow: 0px 2px 6px rgba(6, 28, 63, 0.3);
     :focus {
-        background-color: rgba(40,40,40, 0.6);
+        background-color: rgba(180, 180, 180, 0.8);
     }
     :focus  ::placeholder {
-        color: ${themeGet("colors.active")};
+        color: ${themeGet("colors.active")} ;
         border-color:white;
     }
     ${color}

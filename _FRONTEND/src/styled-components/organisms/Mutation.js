@@ -1,5 +1,5 @@
 import React from "react";
-import { useMemo, useCallback, useState, useEffect } from 'react';
+import { useMemo, useCallback, useState, useEffect, useContext } from 'react';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
@@ -9,12 +9,26 @@ import {
     LikeIcon, BookmarkIcon , FollowIcon, FollowSuccessIcon, UnfollowIcon, FollowSuccessAnimateIcon,
   } from "../index"
 
-import { useDebounce, useHover, useValues, MOVIE,LISTE, useAuthCheck } from "../../functions" 
+import { useDebounce, useHover, useValues, MOVIE,LISTE,LOGOUT_MUTATION, useAuthCheck } from "../../functions" 
 import ReactStars from 'react-stars'
 
 const mutationchecker = (prevProps, nextProps) => prevProps.id === nextProps.id
+import { GlobalContext } from "../../App";
 
 
+export const LogoutMutation = (props) => {
+	const state = useContext(GlobalContext)
+	const [logout, { data, loading, error }] = useMutation(LOGOUT_MUTATION, {onCompleted:(data) => state.methods.logout() });
+
+	const completeHandler = async (data) => state.methods.logout()
+
+	const logoutHandler = () => logout()
+
+	return (
+		<Box width={"100%"} height="auto" onClick={logoutHandler} {...props}>
+			{props.children}
+		</Box>
+)}
 
 
 
