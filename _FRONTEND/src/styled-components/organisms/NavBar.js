@@ -48,11 +48,9 @@ const NB = props => {
             </Box>
 
             <FlexBox width={"15vw"} justifyContent={"flex-end"} maxWidth={"20vw"}>
+                <HomeDropdown username={state.username} />
                 {authStatus 
-                ?   <FlexBox display={"flex"} flexDirection={"row"} justifyContent={"center"} width={"100%"}>
-                        <HomeDropdown username={state.username} />
-                        <ProfileDropdown username={state.username}/>
-                    </FlexBox>
+                ?   <ProfileDropdown username={state.username}/>
 
                 :   <Box onClick={() => state.methods.insertAuthForm("login")} 
                         rel="nofollow" 

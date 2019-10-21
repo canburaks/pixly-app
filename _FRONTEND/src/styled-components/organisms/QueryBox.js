@@ -50,22 +50,23 @@ export const SearchPanel = (props) =>{
 
     //console.log("outer keywords", keywords)
     //console.log("outer debounced keywords", debouncedkeywords)
-    
-    
-    function bodychecker(keywords){
-        if (keywords.length >2){
-            document.body.style.position = 'fixed';
-            document.body.style.overflowY = "hidden";
-        }
-        else {
-            document.body.style.position = 'block';
-            document.body.style.overflowY = "auto";
-        }
+    function lockbody(){
+        document.body.style.position = 'fixed';
+        document.body.style.overflowY = "hidden";
     }
-    useEffect(() =>{
-        //console.log("outer", document.body.style.position, document.body.style.overflowY)
-        bodychecker(keywords)
-    }, [keywords])
+
+    function unlockbody(){
+        document.body.style.position = 'block';
+        document.body.style.scrollBehavior = 'smooth'
+        document.body.style.overflowY = "auto";
+    }
+    
+    useEffect(() => {
+        if (keywords.length > 2){
+            lockbody()
+        }
+        return () => unlockbody()
+    })
 
     return(
             <Box width={"100%"}>
@@ -120,6 +121,22 @@ const SearchQueryBox = React.memo(({keywords, cleaner}) => {
     //console.log(loading, error, data)
     const locationhook = useLocation()
 
+    function lockbody(){
+            document.body.style.position = 'fixed';
+            document.body.style.overflowY = "hidden";
+        }
+
+    function unlockbody(){
+        document.body.style.position = 'block';
+        document.body.style.scrollBehavior = 'smooth'
+        document.body.style.overflowY = "auto";
+    }
+    
+    useEffect(() =>{
+        //console.log("outer", document.body.style.position, document.body.style.overflowY)
+        lockbody()
+        return () => unlockbody()
+    }, [])
 
 
     const MoreCard = () => <PlaceHolderCard text="Get More" link={"/advance-search"} state={{keywords}} title="Bring More" />
