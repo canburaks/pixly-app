@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useMemo } from "react";
+import React, { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 
@@ -79,6 +79,12 @@ const SearchPage = (props) =>{
             if (message && message.length > 0) setMessage("")
         } 
     }
+    useEffect(() =>{
+        //console.log("outer", document.body.style.position, document.body.style.overflowY)
+        document.body.style.position = 'block';
+        document.body.style.overflowY = "auto";
+    }, [])
+
     //console.log("qv",variables)
     return(
         <PageContainer>
