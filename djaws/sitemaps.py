@@ -110,6 +110,10 @@ movie__slugs = [
     "movie/the-colour-out-of-space-2010",
     "movie/dave-chappelle-sticks-stones-2019",
     "movie/schoolgirl-report-part-2-what-keeps-parents-awake-at-night-1971",
+    "movie/mindwalk-1990",
+    "movie/darby-ogill-and-the-little-people-1959",
+    "movie/his-secret-life-2001",
+    "movie/the-brken-2008"
 ]
 
 person__slugs = [
@@ -143,7 +147,12 @@ person__slugs = [
     "person/patrick-stewart-2387",
     "person/john-malkovich-6949",
     "person/zach-braff",
-    "person/mitchell-lichtenstein-57055"
+    "person/mitchell-lichtenstein-57055",
+    "person/bryan-cranston-17419",
+    "person/daryl-hannah-589",
+    "person/will-ferrell-23659",
+    "person/anthony-hopkins-4173",
+    "person/gabrielle-union-17773"
 ]
 liste_slugs =[
     "list/all-palme-dor-winners-cannes-film-festival/1",
