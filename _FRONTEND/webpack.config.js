@@ -180,6 +180,7 @@ const productionSettings = {
 						},
 					  },
 					  "css-loader",
+					  /*
 					  { loader: 'postcss-loader', options: {
 						ident: 'postcss',
 						plugins: () => [
@@ -194,7 +195,9 @@ const productionSettings = {
 							"autoprefixer": { "grid": true }
 						  })
 						]
-					  } }
+					}}
+					*/
+					//"postcss-loader"
 				],
 			},
 		]

@@ -22,7 +22,20 @@
     "plugins": [
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-transform-runtime",
-      "babel-plugin-graphql-tag"
+      [
+        "module:fast-async",
+        {
+          "env": {
+            "log": false
+          },
+          "compiler": {
+            "promises": true,
+            "generators": false
+          },
+          "runtimePattern": null,
+          "useRuntimeModule": false
+        }
+      ]
     ]
   },
   "browserslist": [
@@ -32,21 +45,6 @@
     "iOS >= 9",
     "last 20 versions"
   ],
-  "postcss": {
-    "plugins": {
-      "postcss-preset-env": {
-        "browsers": [
-          "safari > 5",
-          "ie >= 11",
-          "iOS >= 9",
-          "last 20 versions"
-        ],
-        "autoprefixer": {
-          "grid": true
-        }
-      }
-    }
-  },
   "dependencies": {
     "@apollo/react-hooks": "^3.0.1",
     "@babel/runtime": "^7.6.3",
@@ -149,15 +147,6 @@
     "source": "build",
     "concurrency": 3,
     "include": [
-      "/movie/mindwalk-1990",
-      "/movie/darby-ogill-and-the-little-people-1959",
-      "/movie/his-secret-life-2001",
-      "/movie/the-brken-2008",
-      "/person/bryan-cranston-17419",
-      "/person/daryl-hannah-589",
-      "/person/will-ferrell-23659",
-      "/person/anthony-hopkins-4173",
-      "/person/gabrielle-union-17773",
       "",
       "/",
       "/collections",
@@ -206,6 +195,11 @@
       "/person/john-malkovich-6949",
       "/person/zach-braff",
       "/person/mitchell-lichtenstein-57055",
+      "/person/bryan-cranston-17419",
+      "/person/daryl-hannah-589",
+      "/person/will-ferrell-23659",
+      "/person/anthony-hopkins-4173",
+      "/person/gabrielle-union-17773",
       "/movie/once-upon-a-time-in-hollywood-2019",
       "/movie/midsommar-2019",
       "/movie/john-wick-chapter-3-parabellum-2019",
@@ -301,7 +295,11 @@
       "/movie/eurotrip-2004",
       "/movie/the-colour-out-of-space-2010",
       "/movie/dave-chappelle-sticks-stones-2019",
-      "/movie/schoolgirl-report-part-2-what-keeps-parents-awake-at-night-1971"
+      "/movie/schoolgirl-report-part-2-what-keeps-parents-awake-at-night-1971",
+      "/movie/mindwalk-1990",
+      "/movie/darby-ogill-and-the-little-people-1959",
+      "/movie/his-secret-life-2001",
+      "/movie/the-brken-2008"
     ],
     "minifyHtml": {
       "collapseWhitespace": false,
