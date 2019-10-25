@@ -15,20 +15,6 @@ export const MovieRichCardBox = React.memo((props) => (
         ))}
     </Grid>
 ))
-export const CoverBox = React.memo(({ items, columns=[2,2,3,4,4,4,5], ratio=0.5625, notext=false, ...props }) => (
-    <Grid columns={columns } py={[4]}>
-        {items.map( item => (
-        <CoverCard 
-            notext={notext}
-            title={props.title}
-            link={props.link}
-            item={item}
-            ratio={ratio}
-            key={item.slug}
-            {...props} 
-        />))}
-    </Grid>
-))
 
 
 
