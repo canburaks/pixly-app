@@ -48,8 +48,11 @@ import {
 import "./MainPage.css";
 
 const MainPage = props => {
-	//console.log("main-page props: ",props)
+	const { movies, lists, topics} = props.data
+	console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
+
+	//const listAndTopics = [...topics, ...lists]
 	return (
 		<PageContainer>
 			<Head
@@ -106,7 +109,12 @@ const MainPage = props => {
 				{/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
 				<HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>
 
-				<FeatureBox />
+				<MovieCoverBox items={topics} columns={[1,1, 2, 2,2,2,3]} notext  />
+				<MovieCoverBox items={lists} ratio={0.41} columns={[1,1, 2, 2,2,2,3]} notext  />
+
+				{/*<FeatureBox />*/}
+				<HeaderMini>Latest Update</HeaderMini>
+				<MovieCoverBox items={movies} columns={[1,2, 2, 3,3,3,4]} fontSize={["12px", "14px", "14px"]}  />
 
 
 			</ContentContainer>

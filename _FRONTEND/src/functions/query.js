@@ -5,7 +5,8 @@ query mainPage{
     mainPage{
     movies{id, slug, name, year, poster, coverPoster }
     lists{id, slug, name,  poster, coverPoster, largeCoverPoster }
-    persons{id, slug, name, poster, coverPoster }
+    persons{id, slug, name, poster, coverPoster },
+    topics { id, slug, name, coverPoster}
     }
 }
 `
