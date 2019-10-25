@@ -45,6 +45,21 @@
     "iOS >= 9",
     "last 20 versions"
   ],
+  "postcss": {
+    "plugins": {
+      "postcss-preset-env": {
+        "browsers": [
+          "safari > 5",
+          "ie >= 11",
+          "iOS >= 9",
+          "last 20 versions"
+        ],
+        "autoprefixer": {
+          "grid": true
+        }
+      }
+    }
+  },
   "dependencies": {
     "@apollo/react-hooks": "^3.0.1",
     "@babel/runtime": "^7.6.3",

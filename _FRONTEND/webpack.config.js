@@ -179,7 +179,7 @@ const productionSettings = {
 						  hmr: false, //isEnvDevelopment,
 						},
 					  },
-					  "css-loader",
+					  "css-loader", "postcss-loader"
 					  /*
 					  { loader: 'postcss-loader', options: {
 						ident: 'postcss',
