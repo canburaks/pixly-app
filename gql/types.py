@@ -2020,6 +2020,7 @@ class MainPageType(graphene.ObjectType, SEOType):
     movies = graphene.List(CustomMovieType)
     lists = graphene.List(CustomListType)
     persons = graphene.List(DirectorPersonMixType)
+    topics = graphene.List(TopicType)
 
 
     def resolve_movies(self, info, *_):
@@ -2038,7 +2039,9 @@ class MainPageType(graphene.ObjectType, SEOType):
         pqs = Person.objects.filter(main_page=True).values_list("slug", flat=True)
         return Person.objects.filter(slug__in=pqs)
 
-
+    def resolve_topics(self, info, *_):
+        pqs = Topic.objects.filter(main_page=True).values_list("slug", flat=True)
+        return Topic.objects.filter(slug__in=pqs)
 
 
 class AdvanceSearchType(graphene.ObjectType):

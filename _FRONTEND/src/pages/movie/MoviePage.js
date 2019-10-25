@@ -172,12 +172,7 @@ const MoviePage = props => {
 				<MidPageAd />
 				{/*<!--CONTENT SIMILAR Section--> */}
 				{contentSimilarCover.length > 0 && (
-					<Col
-						xs={12}
-						md={12}
-						lg={12}
-						className="fbox-c jcfs aifs mar-t-4x"
-					>
+					<>
 						<HeaderMini>Similar Movies</HeaderMini>
 						<p className="t-m mar-b-2x">
 							Those movies have content similarities with{" "}
@@ -192,17 +187,12 @@ const MoviePage = props => {
 						<p>{vistext}</p>
 						<hr />
 						<MovieSimilarBox items={contentSimilarCover} />
-					</Col>
+					</>
 				)}
 
 				{/*<!--APPEARS IN  LIST Section--> */}
 				{item.appears.length > 0 && (
-					<Col
-						xs={12}
-						md={12}
-						lg={12}
-						className="fbox-c jcfs aifs mar-bt-5x"
-					>
+					<>
 						<h4 className="t-xl t-bold mar-b-2x">
 							LISTS THAT INVOLVED
 						</h4>
@@ -240,32 +230,31 @@ const MoviePage = props => {
 								</GridItem>
 							))}
 						</GridBox>
-					</Col>
+					</>
 				)}
 
-				{/* VIDEO */}
-				{hasVideos > 0 && (
-					<Col
-						xs={12}
-						md={12}
-						lg={12}
-						className="fbox-c jcfs aifs mar-bt-5x"
-					>
-						<YoutubePlayer
-							videos={item.videos.reverse()}
-							title={item.name + " Videos"}
-						/>
-					</Col>
-				)}
+
+
 				<MoviePageAd />
+				<br/>
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
-					<Grid columns={[3,4,6,6,6,6,8]}>
+					<Grid columns={[3,4,6,6,6,6,8]} width={"100%"}>
 						{allCrews.map((crew, i) => (
 							<CrewCard crew={crew} key={crew.person.name} />
 								))}
 					</Grid>
 				)}
+				
+				<br/>
+
+				{/* VIDEO */}
+				{hasVideos > 0 && <YoutubePlayer
+						videos={item.videos.reverse()}
+						title={item.name + " Videos"}
+					/>
+				}
+
 			</ContentContainer>
 		</PageContainer>
 	);

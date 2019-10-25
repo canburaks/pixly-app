@@ -146,7 +146,19 @@
     "crawl": false,
     "destination": "../templates/prerendered",
     "source": "build",
-    "concurrency": 3,
+    "concurrency": 1,
+    "minifyHtml": {
+      "collapseBooleanAttributes": true,
+      "collapseWhitespace": true,
+      "decodeEntities": true,
+      "keepClosingSlash": true,
+      "sortAttributes": true,
+      "sortClassName": false
+    },
+    "viewport": {
+      "height": 600,
+      "width": 1280
+    },
     "include": [
       "",
       "/",
@@ -302,11 +314,6 @@
       "/movie/his-secret-life-2001",
       "/movie/the-brken-2008"
     ],
-    "minifyHtml": {
-      "collapseWhitespace": false,
-      "removeComments": true,
-      "sortClassName": false
-    },
     "publicPath": "/"
   }
 }
