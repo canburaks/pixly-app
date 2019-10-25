@@ -111,7 +111,7 @@ const MainPage = props => {
 				<HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>
 
 
-				<Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
+				<Grid columns={[1,1, 2, 2,2,3]} py={[4]}>
 					{topics.map(topic => (
 						<CoverCard 
 							key={topic.slug}
