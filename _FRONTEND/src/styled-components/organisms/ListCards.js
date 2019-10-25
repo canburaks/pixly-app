@@ -8,7 +8,19 @@ import { Text, Paragraph, HeaderMini,
 } from "../index"
 
 
-
+export const CoverCard = (props) => (
+    <ImageCard
+        src={props.item.coverPoster || props.item.poster} 
+        text={!props.notext ? props.item.name : null}
+        link={props.link}
+        hiddentext={props.item.name}
+        ratio={props.ratio || 0.5625} 
+        borderRadius={"6px"}
+        boxShadow="card"
+        hoverShadow
+        {...props}
+    />
+)
 
 export const MovieInformationCard = (props) => (
     <DarkCard 

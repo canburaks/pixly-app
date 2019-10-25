@@ -169,7 +169,8 @@ liste_slugs =[
 ]
 topic__slugs = [
     "topic/art-house",
-    "topic/cyberpunk"
+    "topic/cyberpunk",
+    "topic/based-on-true-story"
 ]
 
 def page_template_generator(routes):

@@ -42,7 +42,8 @@ import {
 	HeaderMini,
 	Text,
 	NewLink,
-	CoverLink
+	CoverLink,
+	CoverCard
 } from "../styled-components";
 
 import "./MainPage.css";
@@ -109,8 +110,30 @@ const MainPage = props => {
 				{/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
 				<HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>
 
-				<MovieCoverBox items={topics} columns={[1,1, 2, 2,2,2,3]} notext  />
-				<MovieCoverBox items={lists} ratio={0.41} columns={[1,1, 2, 2,2,2,3]} notext  />
+
+				<Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
+					{topics.map(topic => (
+						<CoverCard 
+							key={topic.slug}
+							item={topic}
+							notext
+							link={"/topic/" + topic.slug}
+						/>
+					))}
+				</Grid>
+
+				<Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
+					{lists.map(list => (
+						<CoverCard 
+							key={list.slug}
+							notext
+							ratio={0.41}
+							item={list}
+							link={"/list/" + list.slug}
+						/>
+					))}
+				</Grid>
+
 
 				{/*<FeatureBox />*/}
 				<HeaderMini>Latest Update</HeaderMini>
