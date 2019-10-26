@@ -48,9 +48,9 @@ import {
 
 import "./MainPage.css";
 
-const MainPage = props => {
+const MainPage = React.memo(props => {
 	const { movies, lists, topics} = props.data
-	console.log("main-page props: ",props)
+	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
 
 	//const listAndTopics = [...topics, ...lists]
@@ -129,7 +129,7 @@ const MainPage = props => {
 							notext
 							ratio={0.41}
 							item={list}
-							link={"/list/" + list.slug}
+							link={"/list/" + list.slug + "/1"}
 						/>
 					))}
 				</Grid>
@@ -145,7 +145,7 @@ const MainPage = props => {
 			{!authStatus && <JoinBanner />}
 		</PageContainer>
 	);
-};
+}, () => true)
 
 const MainPageQuery = props => {
 	const { loading, error, data } = useQuery(MAIN_PAGE, {
