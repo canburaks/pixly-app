@@ -49,6 +49,7 @@ import {
 import "./MainPage.css";
 
 const MainPage = React.memo(props => {
+	rgaPageView()
 	const { movies, lists, topics} = props.data
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();

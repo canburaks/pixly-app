@@ -63,7 +63,6 @@ export const rgaPageView = () => {
     if (production){
         const [pathname, setPathname] = useState(null)
         const location = useLocation()
-
         // Only sent when url changes
         if (location !== pathname){
             //console.log("Analytics path has changed", pathname, location)

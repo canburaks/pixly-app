@@ -40,7 +40,6 @@ const MoviePage = props => {
 	rgaPageView();
 	const { movie: item, viewer } = props.item;
 	const { cacheUpdate } = props;
-	//console.log("movie page props: ",client)
 
 	//up()
 
@@ -164,7 +163,7 @@ const MoviePage = props => {
 						</p>
 						<p>{invtext}</p>
 						<hr />
-						<MovieCoverBox items={similarPlaceholder} />
+						<MovieCoverBox items={similarPlaceholder} key={item.slug}/>
 					</>
 				)}
 
@@ -186,7 +185,7 @@ const MoviePage = props => {
 						</p>
 						<p>{vistext}</p>
 						<hr />
-						<MovieSimilarBox items={contentSimilarCover} />
+						<MovieSimilarBox items={contentSimilarCover} key={item.slug} />
 					</>
 				)}
 
@@ -258,8 +257,12 @@ const MoviePage = props => {
 			</ContentContainer>
 		</PageContainer>
 	);
-};
+}
 
+
+export default withRouter(MoviePage);
+
+/*
 const TopPanel = React.memo(({ item, authStatus, screenSize }) =>
 	item.hasCover ? (
 		<CoverPanel
@@ -282,4 +285,4 @@ const TopPanel = React.memo(({ item, authStatus, screenSize }) =>
 	)
 );
 
-export default withRouter(React.memo(MoviePage));
+*/
