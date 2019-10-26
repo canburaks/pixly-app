@@ -63,11 +63,11 @@ export const MovieCoverBox = React.memo(({ items, columns=[2,2,3,4,4,4,5], ratio
             title={item.name + ` - ${item.year}`}
             item={item}
             ratio={ratio}
-            key={item.slug}
+            key={props.key ? props.key + item.slug : item.slug}
             {...props} 
         />))}
     </Grid>
-))
+), (p,n) => (p.key ? (p.key === n.key) : (p.items.length === n.items.length)) )
 
 
 //For Content Similar Movies with common tags 
@@ -87,14 +87,14 @@ export const MovieSimilarBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], rat
         <MovieSimilarCard 
             item={item.movie}
             ratio={ratio}
-            key={item.movie.slug}
+            key={"sim" + item.movie.slug}
             {...props} 
         >
             <TagBox tags={item.commonTags} />
         </MovieSimilarCard>
         ))}
     </Grid>
-))
+), (p,n) => (p.key ? (p.key === n.key) : (p.items.length === n.items.length)))
 
 export const ProfileCircleBox = React.memo(({ items, columns=[4,6,8,10,12] }) => (
     <Grid
