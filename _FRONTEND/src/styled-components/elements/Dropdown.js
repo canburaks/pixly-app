@@ -34,12 +34,17 @@ export const HomeDropdown = (props) => {
                     boxShadow="card"
                     onClick={toggle}
                 >
+                    <NewLink color="#f1f1f1 !important" link={"/explore"}>
+                        <DropItem onClick={toggle} minWidth={"160px"} p={[2]}>
+                            Explore 
+                        </DropItem>
+                    </NewLink>
                     <NewLink color="#f1f1f1 !important" link={"/advance-search"}>
                         <DropItem onClick={toggle} minWidth={"160px"} p={[2]}>
                             Advance Search 
                         </DropItem>
                     </NewLink>
-                    <NewLink  color="#f1f1f1 !important" link={"/topics"}>
+                    {/*<NewLink  color="#f1f1f1 !important" link={"/topics"}>
                         <DropItem onClick={toggle} minWidth={"160px"} p={[2]}>
                             Topics
                         </DropItem>
@@ -48,7 +53,7 @@ export const HomeDropdown = (props) => {
                         <DropItem onClick={toggle} minWidth={"160px"} p={[2]}>
                             Collections
                         </DropItem>
-                    </NewLink>
+                    </NewLink>*/}
                     <NewLink  color="#f1f1f1 !important" link={"/directors/1"}>
                         <DropItem onClick={toggle} minWidth={"160px"} p={[2]}>
                             Directors
@@ -82,6 +87,22 @@ export const ProfileDropdown = (props) => {
                     boxShadow="card"
                 >
                     <ProfileTextIcon onClick={toggle} username={props.username} />
+                    <NewLink color="#f1f1f1 !important" link={"/explore"}>
+                        <DropItem onClick={toggle} minWidth={"160px"} p={[2]}>
+                            Explore 
+                        </DropItem>
+                    </NewLink>
+                    <NewLink color="#f1f1f1 !important" link={"/advance-search"}>
+                        <DropItem onClick={toggle} minWidth={"160px"} p={[2]}>
+                            Advance Search 
+                        </DropItem>
+                    </NewLink>
+                    <NewLink  color="#f1f1f1 !important" link={"/directors/1"}>
+                        <DropItem onClick={toggle} minWidth={"160px"} p={[2]}>
+                            Directors
+                        </DropItem>
+                    </NewLink>
+
                     <LogoutTextIcon   />
                 </ListBox>
                 )}

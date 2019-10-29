@@ -68,7 +68,8 @@ export const Span = styled("span")`
 export const Text = styled('p')({
   wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal",
   color:themeGet("dark"),
-  fontWeight:400
+  fontWeight:400,
+  cursor:props => props.clickable ? "pointer" : "inherit",
   },
     compose(
       typography,
@@ -87,6 +88,7 @@ export const HeaderText = styled('h1')({
   fontWeight:"bold",
   color:"dark",
   marginTop:"8px",
+  cursor:props => props.clickable ? "pointer" : "inherit",
   textShadow:props => props.textShadow || themeGet("shadows.lightGray"),
   wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
 
@@ -107,6 +109,7 @@ export const HeaderMini = styled('h4')({
   textTransform:"capitalize",
   fontWeight:"bold",
   color:"dark",
+  cursor:props => props.clickable ? "pointer" : "inherit",
   textShadow:props => props.textShadow || themeGet("shadows.lightGray"),
   wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
 

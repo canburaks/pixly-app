@@ -56,23 +56,23 @@ export const SearchInput = styled("input")`
     height:70%;
     min-height:60px;
     padding:8px 16px;
+    margin:2px 16px;
     font-size:26px;
     font-weight: bold;
     font-style: italic;
-    color:${themeGet("colors.light")};
+    color:rgba(180,180,180, 0.4);
+    caret-color: ${themeGet("colors.light")};
     letter-spacing: 1.5px;
-    border-radius: 0px;
     -webkit-appearance: none;
     outline: none;
     transition:0.25s ease-in-out;
     border-radius:32px;
-    margin:8px 16px;
-    caret-color: ${themeGet("colors.light")};
     border:2px solid;
     box-sizing:border-box;
     box-shadow: 0px 2px 6px rgba(6, 28, 63, 0.3);
     :focus {
-        background-color: rgba(180, 180, 180, 0.8);
+        background-color: rgba(20, 20, 20, 0.8);
+        color:white;
     }
     :focus  ::placeholder {
         color: ${themeGet("colors.active")} ;

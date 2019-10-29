@@ -35,6 +35,8 @@ import { ThemeProvider } from 'styled-components'
 
 import { ScrollTopButton } from "./styled-components"
 import themes from './styled-components/theme'
+import { Clippy } from './styled-components'
+
 //import 'semantic-ui-css/semantic.min.css'
 
 
@@ -54,11 +56,13 @@ const App = (props) => {
         rgaStart()
         //console.log("Google Analytics initialized")
     },[])
+    
     return (
     <ThemeProvider theme={themes.default}>
         <div className="App" theme="palette-1" >
             <GlobalContext.Provider value={state}>
                 <NavBar />
+                    <Clippy />
                 <div className="main-content-container">
                     <Switch>
                         <Route exact path="/" component={MainPageQuery} />

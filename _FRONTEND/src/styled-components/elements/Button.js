@@ -23,8 +23,9 @@ export const LinkButton = (props) => (
         borderRadius={"8px"}
         {...props}
     >
-        <NewLink to={props.link}>
+        <NewLink link={props.link}>
             {props.text}
+            {props.children}
         </NewLink>
     </BubbleButton>
 )

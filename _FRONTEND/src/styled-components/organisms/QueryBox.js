@@ -24,12 +24,13 @@ import {
 
 
 
-export const SearchPanel = (props) =>{
-
+export const SearchQueryBox = (props) =>{
+    const [ isSearcBarOpen, setOpen ] = useState(false)
     const [ skip, setSkip ] = useState(true)
     const [ keywords, setKeywords ] = useState("")
     const ref = useRef()
-    useOnClickOutside(ref, () => setOpen(false));
+
+    useOnClickOutside(ref, () => setKeywords(""));
 
     const debouncedkeywords = useDebounce(keywords, 500);
     
@@ -69,11 +70,10 @@ export const SearchPanel = (props) =>{
     })
 
     return(
-            <Box width={"100%"}>
-
+            <Box width={"auto"}>
+        
                 <FlexBox justifyContent="center" id="s-text-input" minWidth="100%" position="relative">
                     <SearchInput type="text"   
-                        px={[2,3,4,4,4]}
                         placeholder="Search.."
                         autoFocus
                         value={keywords} 
@@ -96,24 +96,25 @@ export const SearchPanel = (props) =>{
                 </FlexBox>
 
                 {debouncedkeywords.length >2 && 
-                    <Box 
+                    <Box ref={ref}
                         position="fixed"
-                        top={"63px"} left={0}
+                        top={"100px"} left={"40px"} right={"40px"}
                         bg={"rgba(40,40,40, 0.7)"}
-                        width={"100vw"} height={"calc(100vh - 63px)"}
-                        borderLeft="2px solid" 
+                        width={"auto"} height={"calc(100vh - 63px)"}
+                        borderRadius="16px"
+                        border="2px solid" 
                         bg="rgba(40,40,40, 0.7)"
                         overflowY="scroll"
-                        p={"5vw"}
+                        p={"15px"}
                     >
-                        <SearchQueryBox keywords={debouncedkeywords} cleaner={keywordsCleaner} />
+                        <SearchQueryResult keywords={debouncedkeywords} cleaner={keywordsCleaner} />
                     </Box>}
             </Box>
     );
 }
 
 
-const SearchQueryBox = React.memo(({keywords, cleaner}) => {
+const SearchQueryResult = React.memo(({keywords, cleaner}) => {
     const [location, setLocation] = useState(window.location.pathname)
     const values = useValues([4,6,8,10,12])
     const { loading, data, error } = useQuery(COMPLEX_SEARCH, {variables:{page:1, keywords, first:(values*3 )- 1} });
@@ -145,15 +146,16 @@ const SearchQueryBox = React.memo(({keywords, cleaner}) => {
         
         return (
             <Box  width={"100%"}   position="relative" overflowY="auto">
+            <Text 
+                textAlign="center" fontSize={["18px"]}
+                hoverUnderline fontWeight="bold"
+                onClick={cleaner} clickable 
+                color="light" zIndex={11}
+            >
+                Close
+            </Text>
 
-            <CloseIcon 
-                position="absolute" top={"-50px"} right={"20px"}
-                stroke="white" strokeWidth="3" size={40} 
-                onClick={cleaner} clickable
-                zIndex={11}
-            />
-
-            <Grid columns={[3,4,5,6,6,6, 8]} pt={[4]} overflowY="scroll" >
+            <Grid columns={[3,4,5,6,6,6, 8]} pt={"10px"} overflowY="scroll" >
                 {data.complexSearch.result.map( item => (
                     <MoviePosterCard
                         item={item}

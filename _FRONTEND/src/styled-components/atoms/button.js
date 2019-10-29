@@ -1,6 +1,6 @@
 import React from "react"
 import { compose, typography, color, space, shadow, layout, border, background, flexbox, position } from 'styled-system'
-import {  styled } from "../"
+import {  styled, keyframes } from "../"
 import { themeGet } from '@styled-system/theme-get'
 
 export const Button = styled.button`

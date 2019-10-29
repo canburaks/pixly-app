@@ -7,7 +7,7 @@ import {
     Box, Text, HeaderMini, NewLink, TopPanelBackElement, TopPanelCoverElement,
     DirectorLink, DirectorLinks,FlexBox, TagBox,
     LikeMutation,BookmarkMutation, RatingMutation, FollowMutation,
-    UsersIcon, EyeIcon,UserIcon,
+    UsersIcon, EyeIcon,UserIcon,PageContainer
 } from "../index"
 
 //import { ColorExtractor } from 'react-color-extractor'
@@ -71,12 +71,12 @@ export const ListCoverPanel = React.memo(( props ) =>(
 
 
 export const Loading = React.memo(() => (
-    <div className="page-container">
+    <PageContainer bg="transparent">
         {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
         <div className="loading-container">
             <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
         </div>
-    </div>
+    </PageContainer>
 ))
 
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 
-import { useAuthCheck } from "../../functions/hooks";
+import { useAuthCheck, useValues } from "../../functions/hooks";
 
 import {  SearchBox} from "cbs-react-components"
 
@@ -21,7 +21,7 @@ import {
     BookmarkMutation, RatingMutation,TagBox,
     ImdbRatingIcon, YearClockIcon, ProfileIcon, LogoutIcon,
     HomeIcon,ListIcon,
-    LogoutMutation,SearchPanel
+    LogoutMutation,SearchQueryBox
 
 } from "../"
 
@@ -37,18 +37,46 @@ const NB = props => {
     const isTransparentBg = (window.location.pathname.includes("/list/") 
         || window.location.pathname.includes("/movie/") )
 
+
+    const MiddleBar = () => (
+		<FlexBox height={"auto"} minWidth={"100%"} justifyContent="space-around" alignItems="center" py={[1]}>
+			{window.innerWidth > 480 
+			? 	<>
+					<NewLink  color="#f1f1f1 !important" link={"/directors/1"}>
+						<UnderlineEffect>Directors</UnderlineEffect>
+					</NewLink>
+					<NewLink color="#f1f1f1 !important" link={"/explore"} fontSize={["16px"]} fontWeight="bold">
+						<UnderlineEffect>Explore</UnderlineEffect>
+					</NewLink>
+					<NewLink color="#f1f1f1 !important" link={"/advance-search"}>
+						<UnderlineEffect>Advance Search</UnderlineEffect>
+					</NewLink>
+					<SearchQueryBox />
+				</>
+			: <SearchQueryBox />
+			}
+		</FlexBox>
+	)
+	
+	const SearchAndLinkBar = () => (
+	<FlexBox flexDirection="column" justifyContent="flex-start">
+		<SearchQueryBox />
+		<LinkBar />
+	</FlexBox>
+	)
+
     return (
-        <NavBarBox bg={isTransparentBg ? "rgba(40,40,40, 0.4)" : "dark"}>
-            <Box width={"15%"}>
+        <NavBarBox bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"}>
+            <Box width={"10vw"}>
                 <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
             </Box>
             
-            <Box width={"65%"} flexGrow={1} maxWidth={"70vw"}>
-            {isSearchPage ? <Box height={"40px"} minWidth={"100%"} ></Box> : <SearchPanel />}
+            <Box width={"80vw"} flexGrow={1} maxWidth={"80vw"}>
+				      <MiddleBar />
+            {/*isSearchPage ? <LinkBar /> : <SearchAndLinkBar />*/}
             </Box>
 
-            <FlexBox width={"15vw"} justifyContent={"flex-end"} maxWidth={"20vw"}>
-                <HomeDropdown username={state.username} />
+            <FlexBox width={"10vw"} justifyContent={"center"} maxWidth={"20vw"}>
                 {authStatus 
                 ?   <ProfileDropdown username={state.username}/>
 

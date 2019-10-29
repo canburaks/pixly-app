@@ -172,7 +172,11 @@ topic__slugs = [
     "topic/cyberpunk",
     "topic/based-on-true-story"
 ]
-
+static__slugs = [
+    "explore",
+    "advance-search",
+    "directors/1"
+]
 def page_template_generator(routes):
     new_paths = []
     for route in routes:
@@ -189,8 +193,9 @@ custom_movie_pages =  page_template_generator(movie__slugs)
 custom_person_pages = page_template_generator(person__slugs)
 custom_list_pages =   page_template_generator(liste_slugs)
 custom_topic_pages =   page_template_generator(topic__slugs)
+custom_static_pages =   page_template_generator(static__slugs)
 
-custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages + custom_topic_pages
+custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages + custom_topic_pages + custom_static_pages
 
 #pprint(custom_url_pages)
 
@@ -260,7 +265,7 @@ class StaticSitemap(Sitemap):
     priority = 0.8
     def items(self):
         statics = [
-            "","/", "/directors/1", "/collections", "/advance-search"
+            "","/", "/directors/1", "/explore", "/advance-search"
         ]
         return statics
 
