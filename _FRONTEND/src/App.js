@@ -49,7 +49,6 @@ export const GlobalContext = React.createContext();
 
 const App = (props) => {
     
-    rgaPageView()
     const state = Store(props.history)
     
     useEffect(() => {
@@ -57,6 +56,7 @@ const App = (props) => {
         //console.log("Google Analytics initialized")
     },[])
     
+    rgaPageView()
     return (
     <ThemeProvider theme={themes.default}>
         <div className="App" theme="palette-1" >

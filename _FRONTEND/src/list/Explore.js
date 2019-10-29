@@ -67,7 +67,7 @@ const ExplorePage = React.memo(props => {
 				keywords={
 					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"
 				}
-				canonical={`https://pixly.app`}
+				canonical={`https://pixly.app/explore`}
 			>
 				<meta name="twitter:card" content="app" />
 				<meta name="twitter:site" content="@pixlymovie" />
