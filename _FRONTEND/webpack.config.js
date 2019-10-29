@@ -14,6 +14,7 @@ const CssCleanupPlugin = require('css-cleanup-webpack-plugin');
 var DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 const postcssPresetEnv = require('postcss-preset-env');
 var Visualizer = require('webpack-visualizer-plugin');
+const Jarvis = require("webpack-jarvis");
 
 
 
@@ -209,6 +210,9 @@ const productionSettings = {
 		//	threshold: 10240,
 		//	minRatio: 0.8
 		//  }),
+		new Jarvis({
+			port: 1337 // optional: set a port
+		}),
 		new DuplicatePackageCheckerPlugin(),
 		new HtmlWebPackPlugin({
 			inject: true,
@@ -313,6 +317,9 @@ const devSettings = {
 		]
 	},
 	plugins: [
+		new Jarvis({
+			port: 1337 // optional: set a port
+		}),
 		new HtmlWebPackPlugin({
 			inject: true,
 			template: "./src/index.html",
