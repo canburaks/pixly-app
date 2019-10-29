@@ -139,6 +139,7 @@
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2",
     "webpack-dotenv-plugin": "^2.1.0",
+    "webpack-jarvis": "^0.3.2",
     "webpack-s3-plugin": "^1.0.3",
     "webpack-visualizer-plugin": "^0.1.11"
   },
