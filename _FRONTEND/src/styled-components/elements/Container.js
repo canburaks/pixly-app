@@ -132,6 +132,7 @@ export const TagBox = ({tags, num=100}) => (
     </FlexBox>
 )
  
+
 const Container = (props) => (
     <Box  
         display="flex" position="relative" 
@@ -142,10 +143,44 @@ const Container = (props) => (
     
     />
 ) 
+export const Clippy = styled(Container)`
+    position: absolute;
+    top:0;
+    left:0;
+    width:100vw;
+    height: 80px;
+    background: #242830;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 10, 10, 0.7) 0%,
+        rgba(36, 40, 48, 0.2) 80%,
+        rgba(36, 40, 48, 0) 100%
+    );
+`
+const SpecialBox = styled(Container)`
+    ::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -60px;
+        width: 100%;
+        height: 700px;
+        background: #242830;
+        background: linear-gradient(
+            80deg,
+            rgba(36, 40, 48, 0.5) 0%,
+            rgba(36, 40, 48, 0.4) 100%
+        );
+        -webkit-transform-origin: 0;
+        transform-origin: 0;
+        -webkit-transform: skewY(-12deg);
+        transform: skewY(-12deg);
+    }
+`
 
 export const PageContainer = (props) => (
     <Container  id={"page-container"}
-        minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"70vh"} bg={"light"} 
+        minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"70vh"} 
         {...props}
     />
 )

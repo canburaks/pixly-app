@@ -1,71 +1,56 @@
 import React from "react";
-import {
-	useContext,
-	useState,
-	useReducer,
-	useEffect,
-	lazy,
-	Suspense,
-	useRef
-} from "react";
+import { useContext, useState, useReducer, useEffect, lazy, Suspense, useRef} from "react";
 import { Route, Switch, Link, withRouter } from "react-router-dom";
 import { MAIN_PAGE } from "../functions/query";
 import { Query } from "react-apollo";
 import { useQuery, useApolloClient, useLazyQuery } from "@apollo/react-hooks";
 
 import { rgaPageView, rgaStart, Head, MidPageAd } from "../functions/analytics";
+import { useScript } from "../functions/hooks";
+
 import {
 	useWindowSize,
 	useAuthCheck,
 	useClientWidth,
 	useValues
 } from "../functions/hooks";
+import { GlobalContext } from "../App";
 
 import JoinBanner from "../components/JoinBanner.js";
 
 import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
-import {
-	MovieCoverBox,
-	DirectorCard,
-	MovieCoverCard,
-	ImageCard,
-	Grid,
-	PageContainer,
-	ContentContainer,
-	Loading,
-	SuperBox,
-	HiddenText,
-	HiddenHeader,
-	HiddenSubHeader,
-	HeaderText,
-	HeaderMini,
-	Text,
-	NewLink,
-	CoverLink,
-	CoverCard
+import {Box,Span,FlexBox,MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
+	PageContainer,ContentContainer,Loading,
+	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text,NewLink,
+	LinkButton,CoverLink,CoverCard, BubbleButton, Button,
 } from "../styled-components";
 
+
 import "./MainPage.css";
+import "./dist/css/style.css"
 
 const MainPage = React.memo(props => {
 	rgaPageView()
-	const { movies, lists, topics} = props.data
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
+    const state = useContext(GlobalContext)
+
 
 	//const listAndTopics = [...topics, ...lists]
+	const heroHeaderText = "A Place to Discover Your Next Movie"
+	const heroSubheaderText = "Deciding on which movie to watch can be painfull. We will deal it."
 	return (
 		<PageContainer>
 			<Head
 				description={
-					"Personalized Movie Recommendations. Find similar movies. Discover Movie Lists, New Films and People with Similar Cinema Taste."
+					"Personalized Movie Recommendations. Find similar movies. Discover Curated Movie Lists and Topic Lists, New Films and People with Similar Cinema Taste. Must seen movies"
 				}
 				title={
 					"Pixly - Movie Recommendations, Similar Movies, Personal Cinema History, AI Based Movie Recommendation."
 				}
 				keywords={
-					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"
+					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
 				}
 				canonical={`https://pixly.app`}
 			>
@@ -106,137 +91,161 @@ const MainPage = React.memo(props => {
 				/>
 			</Head>
 
-			<ContentContainer alignItems="center" mb={"100px"} pt={"80px"}>
-				<HiddenHeader>Pixly Movies</HiddenHeader>
-				{/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
-				<HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>
+			<div className="body-wrap">
+				<header className="site-header">
+					<div className="container">
+						<div className="site-header-inner">
+							<div className="brand header-brand">
+								<h1 className="m-0">
+								</h1>
+							</div>
+						</div>
+					</div>
+				</header>
+
+				<main>
+					<section className="hero">
+						<div className="container">
+							<div className="hero-inner">
+								<FlexBox flexDirection="column" zIndex={1} >
+									<HeaderText fontSize={["40px", "40px"]} textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
+									<Text mt={[2,2,2,3]} fontWeight="bold">{heroSubheaderText}</Text>
+									<div className="hero-cta">
+										<Button borderRadius={"6px"} className="button button-primary" onClick={() => state.methods.insertAuthForm("signup")} >Join</Button>
+										<BubbleButton borderRadius={"6px"} className="button" onClick={() => state.methods.insertAuthForm("login")} >Login</BubbleButton>
+									</div>
+								</FlexBox>
+								<div className="hero-figure anime-element">
+									<svg className="placeholder" width={528} height={396} viewBox="0 0 528 396">
+										<rect width={528} height={396} style={{fill:"transparent"}} />
+									</svg>
+									<div className="hero-figure-box hero-figure-box-01" data-rotation="45deg"></div>
+									<div className="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
+									<div className="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
+									<div className="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
+									<div className="hero-figure-box hero-figure-box-05"><MiniMovies /></div>
+									<div className="hero-figure-box hero-figure-box-06"><SpaceOddysey /></div>
+									<div className="hero-figure-box hero-figure-box-07"></div>
+									<div className="hero-figure-box hero-figure-box-08" data-rotation="-22deg"><SkinILive /></div>
+									<div className="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
+									<div className="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<section className="features section">
+						<div className="container">
+							<div className="features-inner section-inner has-bottom-divider">
+								<div className="features-wrap">
+									<Feature1 />
+									<Feature2 />
+									<Feature4 />
+									<Feature3 />
+									<Feature5 />
+									<Feature6 />
+
+								</div>
+							</div>
+						</div>
+					</section>
 
 
-				<Grid columns={[1,1, 2, 2,2,3]} py={[4]}>
-					{topics.map(topic => (
-						<CoverCard 
-							key={topic.slug}
-							item={topic}
-							notext
-							link={"/topic/" + topic.slug}
-						/>
-					))}
-				</Grid>
+					<section className="cta section">
+						<div className="cta-inner section-inner">
+							<HeaderMini textAlign="center" my={[2,3,3,3,3,4]}>Let me Show</HeaderMini>
+							<LinkButton link="/explore" color="light" bg="dark" borderRadius="4px" >Explore</LinkButton>
+						</div>
+					</section>
+				</main>
+			</div>
 
-				<Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
-					{lists.map(list => (
-						<CoverCard 
-							key={list.slug}
-							notext
-							ratio={0.41}
-							item={list}
-							link={"/list/" + list.slug + "/1"}
-						/>
-					))}
-				</Grid>
-
-
-				{/*<FeatureBox />*/}
-				<HeaderMini>Latest Update</HeaderMini>
-				<MovieCoverBox items={movies} columns={[1,2, 2, 3,3,3,4]} fontSize={["12px", "14px", "14px"]}  />
-
-
-			</ContentContainer>
-
-			{!authStatus && <JoinBanner />}
 		</PageContainer>
 	);
 }, () => true)
 
-const MainPageQuery = props => {
-	const { loading, error, data } = useQuery(MAIN_PAGE, {
-		partialRefetch: true
-	});
-	if (loading) return <Loading />;
-	if (error) return <div>{error.message}</div>;
-	if (data) return <MainPage data={data.mainPage} {...props} />;
-};
 
-const FeatureBox = () => (
-	<Grid columns={[1, 1, 2, 2 ,2,]} width={"100%"} my={[3]} mb={[5,5,5,6]} maxWidth={"900px"}>
-		<DirectorsFeature />
-		<CollectionsFeature />
-		<TopicsFeature />
-		<SearchFeature />
-	</Grid>
+
+
+
+const MiniMovies = () => <img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/movies.jpg"} style={{width:"100%", height:"100%", boxShadow:"-2px 2px 4px 1px rgba(40,40,40, 0.6)"}} />
+
+const SpaceOddysey = () => <img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/space-oddysey.png"} style={{width:"100%", height:"auto"}} />
+
+const SkinILive = () => <img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/skin.png"} style={{width:"100%", height:"auto"}} />
+
+
+const Feature1 = () => (
+	<div className="feature text-center is-revealing">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-01.svg"} alt="Feature 01" />
+			</div>
+			<HeaderMini>Personal Recommendations - <Span fontSize={["14px"]} fontWeight="bold">BETA</Span></HeaderMini>
+			<Text>After rating 40 movies, we can analyze your cinema taste with artifical intelligence then we will make very personalized movie recommendations every week.</Text>
+		</div>
+	</div>
+)
+const Feature2 = () => (
+	<div className="feature text-center is-revealing">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-02.svg"} alt="Feature 01" />
+			</div>
+			<HeaderMini>Curated Collections</HeaderMini>
+			<Text>Handpicked selected lists of movies by Pixly Editors, beside well known collected movie lists all around the world including favorite film lists of directors and festival awarded movies. Special lists that we call topics that find movies that treat specific topics or subjects.</Text>
+		</div>
+	</div>
+)
+const Feature3 = () => (
+	<div className="feature text-center is-revealing">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-03.svg"} alt="Feature 01" />
+			</div>
+			<HeaderMini>Search & Filter</HeaderMini>
+			<Text>Advance Search and Filter mechanism with respect to IMDb rating and release year of movies.</Text>
+		</div>
+	</div>
+)
+const Feature4 = () => (
+	<div className="feature text-center is-revealing">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-04.svg"} alt="Feature 01" />
+			</div>
+			<HeaderMini>Personal Records</HeaderMini>
+			<Text>Keep and track your personal cinema history by adding movies to watchlist, liking them and giving ratings. </Text>
+		</div>
+	</div>
+)
+const Feature5 = () => (
+	<div className="feature text-center is-revealing">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-05.svg"} alt="Feature 01" />
+			</div>
+			<HeaderMini>Social Discovery</HeaderMini>
+			<Text>Find people whose cinema taste is similar to you. See which movies are currently watched by your friends, and also check your cinema taste similarity with your friends. </Text>
+		</div>
+	</div>
 )
 
-const CollectionsFeature = React.memo(() => (
-	<SuperBox maxHeight={"255px"}
-		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/collections.jpg"}
-		hoverShadow
-		ratio={0.5625}
-		borderRadius={"6px"}
-		boxShadow="card"
-	>
-		<HiddenHeader>Collections</HiddenHeader>
-		<HiddenSubHeader>
-			Curated and Collected Best Movie Lists
-		</HiddenSubHeader>
-		<CoverLink link={"/collections"} text={"Visit Collections"} />
-	</SuperBox>
-));
-const DirectorsFeature = React.memo(() => (
-	<SuperBox maxHeight={"255px"}
-		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/directors.jpg"}
-		hoverShadow
-		ratio={0.5625}
-		borderRadius={"6px"}
-		boxShadow="card"
-	>
-		<HiddenHeader>Directors</HiddenHeader>
-		<HiddenSubHeader>
-			Famous Directors Favorite Film Lists and Directors Filmographies
-		</HiddenSubHeader>
-		<CoverLink link={"/directors/1"} text={"Visit Famous Directors"} />
-	</SuperBox>
-));
-const SearchFeature = React.memo(() => (
-	<SuperBox maxHeight={"255px"}
-		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/search.jpg"}
-		hoverShadow
-		ratio={0.5625}
-		borderRadius={"6px"}
-		boxShadow="card"
-	>
-		<HiddenHeader>Search</HiddenHeader>
-		<HiddenSubHeader>
-			Search Movies with IMDb Rating and Release Year.
-		</HiddenSubHeader>
-		<CoverLink
-			link={"/advance-search"}
-			text={
-				"Visit Advance Movie Search Page and Search Movies by IMDb Rating"
-			}
-		/>
-	</SuperBox>
-));
-const TopicsFeature = React.memo(() => (
-	<SuperBox maxHeight={"255px"}
-		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/topics.jpg"}
-		hoverShadow
-		ratio={0.5625}
-		borderRadius={"6px"}
-		boxShadow="card"
-	>
-		<HiddenHeader>Topics</HiddenHeader>
-		<HiddenSubHeader>
-			Explore Movies by their specific subjects
-		</HiddenSubHeader>
-		<CoverLink
-			link={"/topics"}
-			text={"Visit Topic Page and Explore Movies with topics"}
-		/>
-	</SuperBox>
-));
+const Feature6 = () => (
+	<div className="feature text-center is-revealing">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-06.svg"} alt="Feature 01" />
+			</div>
+			<HeaderMini>Filmography & Content</HeaderMini>
+			<Text>Filmographies of the directors, actors, and actress'. The favorite film lists of the famous directors that impressed them. Conversations, interviews and movie essays about directors</Text>
+		</div>
+	</div>
+)
 
 
-export default MainPageQuery;
+
+export default MainPage;
 
 /*
 const MainPageQuery2 = (props) =>{

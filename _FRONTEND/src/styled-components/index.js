@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-export { styled }
+import styled, { keyframes } from 'styled-components'
+export { styled, keyframes }
 export * from "./atoms"
 export * from "./elements/index"
 export * from "./organisms/index"

@@ -11,12 +11,7 @@ const DraftPage = (props) => {
     return(
         <PageContainer>
             <ContentContainer>
-                <B>
-                    <C/>
-                    <C/>
-                    <C/>
-                    <C/>
-                </B>
+
             </ContentContainer>
         </PageContainer>
     )

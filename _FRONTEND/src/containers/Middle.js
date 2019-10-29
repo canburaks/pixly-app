@@ -47,6 +47,7 @@ import PersonPage from "../pages/person/PersonPage";
 import ProfilePage from "../pages/profil/ProfilePage";
 import DraftPage from "../pages/DraftPage"
 import SearchPage from "../list/search/SearchPage";
+import ExploreQuery from "../list/Explore";
 
 //import AdvanceSearch from "../list/advance-search/AdvanceSearch";
 
@@ -75,6 +76,7 @@ const Middle = (props) => {
 
             <Route exact path="/advance-search" component={AdvanceSearchQuery} />
         */}
+            <Route exact path="/explore" component={ExploreQuery} />
 
             <Route exact path="/advance-search" component={SearchPage} />
 
