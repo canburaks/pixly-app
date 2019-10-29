@@ -84,7 +84,7 @@ export const Text = styled('p')({
 
 export const HeaderText = styled('h1')({
   minWidth:"100% !important",
-  textTransform:"capitalize",
+  textTransform:props => props.uncapitalize ? "none" : "capitalize",
   fontWeight:"bold",
   color:"dark",
   marginTop:"8px",
@@ -105,7 +105,6 @@ export const HeaderText = styled('h1')({
 )
 export const HeaderMini = styled('h4')({
   minWidth:"100% !important",
-  textTransform:"capitalize",
   textTransform:"capitalize",
   fontWeight:"bold",
   color:"dark",

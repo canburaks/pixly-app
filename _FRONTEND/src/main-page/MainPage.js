@@ -30,7 +30,7 @@ import {Box,Span,FlexBox,MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Gri
 import "./MainPage.css";
 import "./dist/css/style.css"
 
-const MainPage = React.memo(props => {
+const MainPage = React.memo(() => {
 	rgaPageView()
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
@@ -38,8 +38,10 @@ const MainPage = React.memo(props => {
 
 
 	//const listAndTopics = [...topics, ...lists]
-	const heroHeaderText = "A Place to Discover Your Next Movie"
-	const heroSubheaderText = "Deciding on which movie to watch can be painfull. We will deal it."
+	const heroHeaderText = "Improve your experience in discovering movies"
+	const heroSubheaderText = "Don't waste your time by browsing endless cycles. " + 
+		"With our AI-based personalized recommendation systems, we are guiding you through multiple universes " + 
+		"of the art of film."
 	return (
 		<PageContainer>
 			<Head
@@ -108,8 +110,8 @@ const MainPage = React.memo(props => {
 						<div className="container">
 							<div className="hero-inner">
 								<FlexBox flexDirection="column" zIndex={1} >
-									<HeaderText fontSize={["40px", "40px"]} textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
-									<Text mt={[2,2,2,3]} fontWeight="bold">{heroSubheaderText}</Text>
+									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
+									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
 									<div className="hero-cta">
 										<Button borderRadius={"6px"} className="button button-primary" onClick={() => state.methods.insertAuthForm("signup")} >Join</Button>
 										<BubbleButton borderRadius={"6px"} className="button" onClick={() => state.methods.insertAuthForm("login")} >Login</BubbleButton>
@@ -162,7 +164,7 @@ const MainPage = React.memo(props => {
 
 		</PageContainer>
 	);
-}, () => true)
+})
 
 
 
