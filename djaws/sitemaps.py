@@ -100,7 +100,6 @@ movie__slugs = [
     "movie/mindwalk-1990",
     "movie/avengers-endgame-2019",
     "movie/forrest-gump-1994",
-    "movie/the-peanut-butter-falcon-2019",
     "movie/15-minutes-of-war-2019",
     "movie/the-invisible-guest-2016",
     "movie/time-to-love-1965",
@@ -113,7 +112,7 @@ movie__slugs = [
     "movie/mindwalk-1990",
     "movie/darby-ogill-and-the-little-people-1959",
     "movie/his-secret-life-2001",
-    "movie/the-brken-2008"
+    "movie/sometimes-happiness-sometimes-sorrow-2001"
 ]
 
 person__slugs = [
@@ -152,7 +151,9 @@ person__slugs = [
     "person/daryl-hannah-589",
     "person/will-ferrell-23659",
     "person/anthony-hopkins-4173",
-    "person/gabrielle-union-17773"
+    "person/gabrielle-union-17773",
+    "person/jared-leto-7499",
+    "person/virginia-madsen-12519",
 ]
 liste_slugs =[
     "list/all-palme-dor-winners-cannes-film-festival/1",

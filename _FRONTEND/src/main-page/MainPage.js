@@ -46,10 +46,10 @@ const MainPage = React.memo(() => {
 		<PageContainer>
 			<Head
 				description={
-					"Personalized Movie Recommendations. Find similar movies. Discover Curated Movie Lists and Topic Lists, New Films and People with Similar Cinema Taste. Must seen movies"
+					"Pixly is a movie recommendation app. Get personalized movie recommendations, find similar movies, discover curated movie lists lists, new films and must seen movies. "
 				}
 				title={
-					"Pixly - Movie Recommendations, Similar Movies, Personal Cinema History, AI Based Movie Recommendation."
+					"Pixly - Movie Recommendation, Similar Movies, Personal Cinema History, AI Based Movie Recommendation App."
 				}
 				keywords={
 					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
@@ -100,6 +100,7 @@ const MainPage = React.memo(() => {
 							<div className="brand header-brand">
 								<h1 className="m-0">
 								</h1>
+								<HiddenText>Pixly is a movie recommendation app.</HiddenText>
 							</div>
 						</div>
 					</div>
