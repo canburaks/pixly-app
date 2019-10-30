@@ -112,7 +112,15 @@ movie__slugs = [
     "movie/mindwalk-1990",
     "movie/darby-ogill-and-the-little-people-1959",
     "movie/his-secret-life-2001",
-    "movie/sometimes-happiness-sometimes-sorrow-2001"
+    "movie/sometimes-happiness-sometimes-sorrow-2001",
+    "movie/vice-2015",
+    "movie/shazam-2019",
+    "movie/green-book-2018",
+    "movie/ted-bundy-2002",
+    "movie/mary-queen-of-scots-2018",
+    "movie/aquaman-2018",
+    "movie/how-to-train-your-dragon-2010",
+    "movie/how-to-train-your-dragon-2-2014"
 ]
 
 person__slugs = [
