@@ -67,11 +67,12 @@ export function p2p(raw1, raw2){
         if(p1.keyset.length>1 && p2.keyset.length>1){
             info.quantity = p1.intersection(p2).length;
             info.similarity = p1.similarity(p2);
+            info.valid = true
             return info;
         }
-        return { quantity:-1, similarity:-1}
+        return { quantity:-1, similarity:-1, valid:false}
     }
-    return { quantity:-1, similarity:-1}    
+    return { quantity:-1, similarity:-1, valid:false}    
 }
 
 
@@ -85,4 +86,16 @@ export function preprocess(input){
         output = input;
     }
     return output;
+}
+
+export const calculateSimilarity = (ratingset1, ratingset2) => {
+    const info = p2p(ratingset1, ratingset2)
+    info.percent = Math.round((0.5 + info.similarity/2)*100)
+    info.valid = info.quantity > 4
+    info.message = message(info)
+    return info
+}
+const message = (info)=>{
+    if(info.quantity<5) return `Similarity calculation at least need 5 common movies. You both watched ${info.quantity} movies`
+    else return `You both has ${info.percent} percent similar cinema taste. You both watched ${info.quantity} same movies.`
 }

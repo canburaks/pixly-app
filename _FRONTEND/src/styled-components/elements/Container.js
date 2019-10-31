@@ -11,8 +11,6 @@ import { SocialBox } from "../others"
 
 //import { ColorExtractor } from 'react-color-extractor'
 
-
-
 export const TopPanelBackElement = (props) => (
     <Box display="flex"
         flexDirection="column"
@@ -157,30 +155,10 @@ export const Clippy = styled(Container)`
         rgba(36, 40, 48, 0) 100%
     );
 `
-const SpecialBox = styled(Container)`
-    ::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -60px;
-        width: 100%;
-        height: 700px;
-        background: #242830;
-        background: linear-gradient(
-            80deg,
-            rgba(36, 40, 48, 0.5) 0%,
-            rgba(36, 40, 48, 0.4) 100%
-        );
-        -webkit-transform-origin: 0;
-        transform-origin: 0;
-        -webkit-transform: skewY(-12deg);
-        transform: skewY(-12deg);
-    }
-`
 
 export const PageContainer = (props) => (
     <Container  id={"page-container"}
-        minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"70vh"} 
+        minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"70vh"} pt={0}
         {...props}
     />
 )

@@ -11,7 +11,6 @@ const SimilarityPanel = ({profile1, profile2, cls }) => {
     const ratingset2 = profile2.ratingset
     const quantity2 = Object.keys( preprocess(ratingset2))
     const info = p2p(ratingset1, ratingset2)
-
     const message = ()=>{
         if(quantity1.length<40 || quantity2.length<40) return `You or ${profile1.username} should at least rate 40 movies`
         else if(info.quantity<10) return `Similarity calculation at least need 10 common movies. You and ${profile1.username} both watched ${info.quantity} movies`
@@ -21,20 +20,7 @@ const SimilarityPanel = ({profile1, profile2, cls }) => {
         if(quantity1.length<40 || quantity2.length<40 || info.quantity<10) return 0
         else return Math.round((0.5 + info.similarity/2)*100)
     }
-    const color = () =>{
-        const similarity = similarityPercent();
-        if (similarity===0) return "var(--silver)"
-        if (similarity<40)return "var(--semantic-warning)"
-        else if (similarity>=40 && similarity<60) return { success: false, warning: true, error:false }
-        else if (similarity >= 60) return { success: true, warning: false, error: false }
-    }
 
-    const status = () => {
-        const similarity = similarityPercent();
-        if (similarity < 40) return " error"
-        else if (similarity >= 40 && similarity < 60) return " warning" 
-        else if (similarity >= 60) return " success"
-    }
     //console.log(" color",color())
     if (quantity1.length < 40 || quantity2.length < 40 || info.quantity < 10){return <div></div>}
     //console.log("s-percent", similarityPercent())

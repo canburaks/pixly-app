@@ -4,22 +4,17 @@ import { useState, useContext, useMemo, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { rgaPageView, Head, MoviePageAd, MidPageAd } from "../../functions/analytics";
 
-//import { TagBox, Tag } from "../../components/TagBox"
 
 import { useAuthCheck } from "../../functions/hooks";
 import { Col } from "react-flexbox-grid";
-//import WP from "../../components/VideoPlayer";
-//import "cbs-web-components"sfd
+
 import { YoutubePlayer } from "cbs-react-components";
 import { GlobalContext } from "../../App";
 import { GridBox, GridItem } from "../../components/GridBox";
-//import { SocialMedia } from "../../components/SocialMedia"
 
-//import TopPanel  from "../elements/TopPanel"
 import CoverPanel from "../elements/CoverPanel";
 import PosterPanel from "../elements/PosterPanel";
-//import { SimilarityCard, Tag } from "../elements/Elements"
-//import { GlideBox } from "../../components2/Glide.js";
+
 
 import {
 	CrewCard,

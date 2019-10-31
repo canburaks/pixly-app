@@ -12,7 +12,6 @@ import { rgaPageView, Head } from "../../functions/analytics"
 import { GlobalContext } from "../../App";
 import { GridBox, GridItem, SpeedyGridBox } from "../../components/GridBox"
 
-import "../movie/MovieList.css"
 
 
 

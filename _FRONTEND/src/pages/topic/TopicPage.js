@@ -1,20 +1,15 @@
 import React, { useState, useRef,useEffect, useCallback, useMemo } from "react";
-import { withRouter, Link } from "react-router-dom";
-import { useLazyQuery, useQuery } from '@apollo/react-hooks';
+import { withRouter } from "react-router-dom";
+import { useQuery } from '@apollo/react-hooks';
 import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
-//import { Query } from "react-apollo";
-import BackButton from "../../components/buttons/BackButton"
-//import Slider from "../../components/Slider"
-//import { Checkbox, Form, List, Dimmer, Loader, Image, Segment, Button, Dropdown, Breadcrumb, Pagination  } from 'semantic-ui-react'
-import JoinBanner from "../../components/JoinBanner.js"
-import { useWindowSize, useAuthCheck, isEqualObj, Head, MidPageAd} from "../../functions"
+
+import { isEqualObj, Head, MidPageAd} from "../../functions"
 
 
 import { 
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
     ImdbIcon, WatchIcon, SearchIcon,
-    MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,
     YearSlider,RatingSlider,

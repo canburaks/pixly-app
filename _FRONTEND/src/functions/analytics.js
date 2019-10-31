@@ -3,7 +3,7 @@ import { useEffect, useState} from "react"
 import ReactGA from 'react-ga';
 import AdSense from 'react-adsense';
 import { Helmet } from "react-helmet";
-import { production } from "../index"
+import { production } from "../styled-components"
 import { useLocation } from "./hooks"
 
 //console.log("produciton: ", production)

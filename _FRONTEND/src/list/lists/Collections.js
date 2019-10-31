@@ -2,20 +2,15 @@ import React  from "react";
 import { useState, useContext, useMemo, useCallback } from "react"
 import { withRouter, Link } from "react-router-dom";
 
-import MosaicPoster from "../../components/MosaicPoster"
 
 import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../functions/hooks"
-import { authCheck, print } from "../../functions/lib"
-import {  Row, Col } from 'react-flexbox-grid';
+
 import { rgaPageView, Head, ListBoardAd, ListBoardAd2  } from "../../functions/analytics"
-import { Menu, Segment } from 'semantic-ui-react'
-import { GridBox, GridItem } from "../../components/GridBox" 
 
 import { GlobalContext } from "../../App";
 import JoinBanner from "../../components/JoinBanner.js"
 
-import { GlideCarousel, GlideBox } from "../../components2/Glide.js"
-import { ListCard, PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard } from "../../styled-components"
+import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard } from "../../styled-components"
 
 const ListBoard = (props) => {
     const item = props.liste

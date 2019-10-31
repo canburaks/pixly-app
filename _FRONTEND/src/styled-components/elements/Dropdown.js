@@ -1,5 +1,5 @@
 import React from "react";
-import { useMemo, useCallback, useState, useRef } from 'react';
+import { useMemo, useCallback, useState, useRef, useEffect } from 'react';
 
 import { Text, Paragraph, 
     Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
@@ -11,7 +11,7 @@ import { Text, Paragraph,
     HomeIcon,ListIcon,PlaceHolderCard,
     LogoutMutation
 } from "../index"
-import { useOnClickOutside } from '../../functions';
+import { useOnClickOutside, useHover } from '../../functions';
 
 
 
@@ -69,16 +69,26 @@ export const HomeDropdown = (props) => {
 
 
 export const ProfileDropdown = (props) => {
+    const [hoverRef, isHovered] = useHover();
     const [isOpen, setOpen] = useState(false)
-    const ref = useRef();
-    useOnClickOutside(ref, () => setOpen(false));
+    //useOnClickOutside(ref, () => setOpen(false));
+
+
     const toggle = () => setOpen(!isOpen) 
+
+    useEffect(() => {
+        if (isHovered !== isOpen) {
+            //console.log(isHovered, isOpen)
+            setOpen(isHovered)
+        }
+            return () => setOpen(isHovered)
+    }, [isHovered, toggle])
     return(
-        <Box minWidth="30px" minHeight="30px" position="relative" mr={[2,2,2,2,3]}>   
+        <Box minWidth="30px" minHeight="30px" position="relative" mr={[2,2,2,2,3]} ref={hoverRef}>   
             <ProfileIcon onClick={toggle}/>
                 
             {isOpen && (
-                <ListBox ref={ref} position="absolute" top={"40px"} left={"-60px"}
+                <ListBox position="absolute" top={"40px"} left={"-80px"}
                     bg="dark" borderRadius="6px"
                     border="1px solid" borderColor="black"
                     minWidth={"60px"} minHeight={"40px"}

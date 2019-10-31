@@ -23,11 +23,11 @@ export const HomeIcon = (props) => <Home title="See Home Page" {...props}/>
 export const YoutubeIcon = (props) => <Youtube {...props} />
 
 
-export const FollowIcon = (props) => <Follow {...props} />
+export const FollowIcon = (props) => <Follow {...props}  clickable/>
 export const FollowSuccessIcon = (props) => <FollowSuccess {...props} />
 export const UnfollowIcon = (props) => <Unfollow {...props} />
-export const FollowAnimateIcon = (props) => <FollowAnimate {...props} title={!props.authStatus && "Follow/Unfollow"} />
-export const FollowSuccessAnimateIcon = (props) => <FollowSuccessAnimate {...props} title={!props.authStatus && "Follow/Unfollow"} />
+export const FollowAnimateIcon = (props) => <FollowAnimate {...props} title={!props.authStatus && "Follow/Unfollow"} clickable/>
+export const FollowSuccessAnimateIcon = (props) => <FollowSuccessAnimate {...props} title={!props.authStatus && "Follow/Unfollow"} clickable/>
 
 export const UserIcon = (props) => <User {...props} />
 export const UsersIcon = (props) => <Users {...props} />
@@ -83,11 +83,39 @@ export const YearClockIcon = (props) => (
     </FlexBox>
 )
 
-
+export const PlaceIcon = (props) => (
+<FlexBox  mx={[1]} display="flex" alignItems="center">
+	<Svg xmlns="http://www.w3.org/2000/svg" 
+		viewBox="0 0 24 24" fill="none"
+		strokeWidth="2" strokeLinecap="round" 
+		strokeLinejoin="round"
+		{...props}
+	>
+		<path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+		<circle cx="12" cy="10" r="3"/>
+	</Svg>
+	{props.text && <Text fontWeight="bold" fontSize={["14px"]} color="light" {...props}>{props.text}</Text>}
+</FlexBox>
+)
 
 
 
 //Only SVG Icons
+
+export const SettingsIcon = (props) => (
+<Svg 
+	viewBox="0 0 24 24" 
+	fill="none" strokeWidth="2" 
+	strokeLinecap="round" strokeLinejoin="round"
+	clickable
+	{...props}
+>
+    <title>Settings</title>
+	<circle cx="12" cy="12" r="3"></circle>
+	<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+</Svg>
+)
+
 export const ListIcon = (props) =>(
     <Svg viewBox="0 0 24 24" 
         viewBox="0 0 24 24" fill="none" 
@@ -278,15 +306,14 @@ const Notification = (props) => (
     </Svg>
 )
 const Home = props => (
-    <Svg
-        viewBox="0 0 24 24"  stroke="#f1f1f1"
+    <Svg 
+		viewBox="0 0 576 512" fill="#f1f1f1"
         strokeWidth="2"
-        strokeLinecap="round" strokeLinejoin="round"
-        {...props}
+        xmlns="http://www.w3.org/2000/svg" 
+		{...props}
     >
         {props.title && <title>{props.title}</title>}
-        <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9"/>
-        <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6"/>
+        <path  d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path>
     </Svg>
 )
 

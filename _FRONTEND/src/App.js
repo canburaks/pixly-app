@@ -1,26 +1,19 @@
 import React from "react";
 import { useContext, useState, useReducer, useEffect, lazy, Suspense } from 'react';
 
-//import ErrorBoundary from "./auth/ErrorBoundary";
-//import LoginForm from "./auth/forms/LoginForm"
-//import SignupForm from "./auth/forms/SignupForm"
+
 
 import { Route, Switch, Redirect, withRouter } from "react-router-dom"
 
-//import { Helmet } from "react-helmet";
-import { print, authCheck } from "./functions/lib"
 
-//import NavBar from "./components/NavBar"
+
 
 import Footer from "./components/Footer"
 import { useModal, Modal } from "cbs-react-components";
-//import ProfileUpdateForm from "./components/forms/ProfileUpdateForm"
 
-//import NavBar from "./components/NavBar"
 import {NavBar} from "./styled-components"
 
 
-//import { NavBar, SideBar } from "./components2/navbar/NavBar.js"
 import Middle from "./containers/Middle"
 import LandingPage from "./auth/LandingPage"
 import MainPageQuery from "./main-page/MainPage";
@@ -33,7 +26,7 @@ import { useWindowSize,  rgaPageView,rgaStart} from "./functions"
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
-import { ScrollTopButton } from "./styled-components"
+import { Box, ScrollTopButton, navbarheight } from "./styled-components"
 import themes from './styled-components/theme'
 import { Clippy } from './styled-components'
 
@@ -63,7 +56,7 @@ const App = (props) => {
             <GlobalContext.Provider value={state}>
                 <NavBar />
                     <Clippy />
-                <div className="main-content-container">
+                <Box minHeight="80vh" mt={navbarheight}>
                     <Switch>
                         <Route exact path="/" component={MainPageQuery} />
                         <Route path="/" component={Middle} />
@@ -72,7 +65,7 @@ const App = (props) => {
                     <Modal isOpen={state.modal} toggle={state.methods.toggleModal}>
                         {state.modalComponent}
                     </Modal>
-                </div>
+                </Box>
                 <ScrollTopButton />
                 <Footer />
             </GlobalContext.Provider>

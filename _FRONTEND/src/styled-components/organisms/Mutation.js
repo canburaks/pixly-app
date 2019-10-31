@@ -89,31 +89,6 @@ export const RatingMutation = (props) => {
 			client.writeQuery({ query: MOVIE, variables:{slug:props.item.slug}, data: oldData});
 			return null
 		}
-		/*
-		else if (window.location.pathname.includes("/list/")) {
-			//read query params
-			const pathname = window.location.pathname.split("/list/")[1]
-			const listeslug = pathname.split("/")[0]
-			const page = parseInt(pathname.split("/")[1])
-
-			// read from cache
-			var oldData = client.readQuery({ query: LISTE, variables:{slug:listeslug, page} });
-			console.log("oldListe",oldListe)
-			var oldListe = oldData.liste 
-			const oldMovie = oldListe.movies.filter(m => m.slug === props.item.slug)[0]
-			const oldMoviesWithoutMovie = oldListe.movies.filter(m => m.slug !== props.item.slug)
-			if (oldMovie){
-				oldMovie.viewerRating = 
-			}
-			console.log("oldMovie",oldMovie)
-			
-
-			const newListe = {...oldListe.movie, ...newData}
-			oldListe.movie = newMovieData;
-			client.writeQuery({ query: LISTE, variables:{listeslug, page}, data: oldListe});
-			return null
-		}
-		*/
 	}
 
 	//console.log("rating mutation", props.viewerRating, currentRating, debouncedRating, data)
@@ -150,24 +125,28 @@ export const RatingMutation = (props) => {
 }
 
 export const FollowMutation = (props) => {
-    const [active, setActive ] = useState(props.active)
+	const [active, setActive ] = useState(props.active)
+	const authStatus = useAuthCheck()
     const [follow, { data }] = useMutation(FOLLOW_MUTATION, {onCompleted(data){ completedCallback(data)}} );
 
-    //console.log("follow mutation data", data, props)
-    const mutation = useCallback(() => follow({ variables:{ id:props.id.toString(), obj:"liste" } }),[props.id])
+	const listmutation = useCallback(() => follow({ variables:{ id:props.id.toString(), obj:"liste" } }),[props.id])
+	const usermutation = useCallback(() => follow({ variables:{ username:props.username, obj:"user" } }),[props.username])
+    //check if following a user or list ?
+	const mutation = props.username ? usermutation : listmutation
+
 	const completedCallback = (data) => {
-		var response = data.follow.liste.isFollowed
+		var response = props.id ? data.follow.liste.isFollowed : data.follow.targetProfile.isFollowed
 		if (active !== response) setActive(response)
 	}
 
-	const title = !props.authStatus ?  "Please Login to Continue" : (active ? "Unfollow" : "Follow")
+	const title = !authStatus ?  "Please Login to Continue" : (active ? "Unfollow" : "Follow")
 	
-	//const Icon = (props) => ((data && data.follow.liste.isFollowed===true) || props.active===true) 
+	//const Icon = (props) => ((data && data.follow.liste.isFollowed===true) || active===true) 
     //    ? <FollowSuccessAnimateIcon {...props}  title={title} />
 	//	    : <FollowIcon {...props}  title={title} />
 
 	const Icon = active ? FollowSuccessAnimateIcon : FollowIcon
-    return <Icon onClick={props.authStatus ? mutation : null} title={title} className="click" />
+    return <Icon onClick={authStatus ? mutation : null} title={title} {...props} />
 }
 
 const BOOKMARK_MUTATION = gql`

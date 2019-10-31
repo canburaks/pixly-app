@@ -4,7 +4,6 @@ import { withRouter, Link } from "react-router-dom";
 import { Query } from "react-apollo";
 //import  { useWindowSize } from "../../functions/hooks"
 import { MOVIE_BOARD } from "../../functions/query"
-import "./MovieList.css"
 
 
 import { useAuthCheck } from "../../functions/hooks";

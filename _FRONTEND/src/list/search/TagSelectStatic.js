@@ -1,10 +1,7 @@
 import React, { useState, useMemo } from "react";
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { useQuery } from '@apollo/react-hooks';
-import { TAG_LIST } from "../../functions/query"
 
-import { Loading } from "../../styled-components"
 import staticTags from "./tags.json" 
 
 

@@ -1,16 +1,8 @@
 import React, { useState, useRef, useMemo } from "react";
 import { withRouter, Link } from "react-router-dom";
 
-import { Grid, Row, Col } from 'react-flexbox-grid';
 import { Query } from "react-apollo";
 import { COMPLEX_TAG_SEARCH } from "../../functions/query"
-import BackButton from "../../components/buttons/BackButton"
-//import Slider from "../../components/Slider"
-//import { Checkbox, Form, List, Dimmer, Loader, Image, Segment, Button, Dropdown, Breadcrumb, Pagination  } from 'semantic-ui-react'
-
-import InputRange from 'react-input-range';
-import {GridBox, GridItem, SpeedyGridBox } from "../../components/GridBox" 
-import { MessageBox } from "../../components/MessageBox"
 
 import TagSelect from "./TagSelect"
 import YearSelect from "./YearSelect"
