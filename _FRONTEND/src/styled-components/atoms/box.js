@@ -86,9 +86,11 @@ export const GridBox = styled(Box)`
 `
 export const NavBarBox = styled.nav`
     position: absolute;
+    top:0;
+    left:0;
     width: 100vw;
     display: flex;
-    justifyContent:space-between;
+    justify-content:space-between;
     align-items: center;
     padding: 4px 8px ;
     border-top: 2px solid rgba(0, 0, 0, 0.2);

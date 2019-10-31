@@ -69,7 +69,11 @@ export const Text = styled('p')({
   wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal",
   color:themeGet("dark"),
   fontWeight:400,
+  margin:0,
   cursor:props => props.clickable ? "pointer" : "inherit",
+  whiteSpace:props => props.truncate && "nowrap",
+  overflow:props => props.truncate && "hidden",
+  textOverflow:props => props.truncate && "ellipsis"
   },
     compose(
       typography,
@@ -100,7 +104,7 @@ export const HeaderText = styled('h1')({
     shadow,
     layout,
     position,
-      border
+    border
   )
 )
 export const HeaderMini = styled('h4')({

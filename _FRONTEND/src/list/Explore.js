@@ -8,10 +8,8 @@ import {
 	Suspense,
 	useRef
 } from "react";
-import { Route, Switch, Link, withRouter } from "react-router-dom";
 import { MAIN_PAGE } from "../functions/query";
-import { Query } from "react-apollo";
-import { useQuery, useApolloClient, useLazyQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 
 import { rgaPageView, rgaStart, Head, MidPageAd } from "../functions/analytics";
 import {

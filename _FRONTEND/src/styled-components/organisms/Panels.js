@@ -44,7 +44,7 @@ export const MovieCoverPanel = (props) => (
 
 const ListActions = (props) => (
 <FlexBox position="absolute" top="20px" left={[1,1,2,2]} height="auto" minWidth="28px" flexDirection="column">
-    <FollowMutation id={props.item.id} active={props.item.isFollowed} authStatus={props.authStatus} />
+    <FollowMutation id={props.item.id} active={props.item.isFollowed}  />
     <UsersIcon hoverScale className="click"
         style={{width:30, height:30}} 
         onClick={() => (props.item.numFollowers > 0 ? window.scrollBy(0, 8000) : null)} 

@@ -210,9 +210,7 @@ const productionSettings = {
 		//	threshold: 10240,
 		//	minRatio: 0.8
 		//  }),
-		new Jarvis({
-			port: 1337 // optional: set a port
-		}),
+
 		new DuplicatePackageCheckerPlugin(),
 		new HtmlWebPackPlugin({
 			inject: true,
@@ -249,8 +247,8 @@ const devSettings = {
 	entry: './src/index.html',
 	//entry: './src/prerendered-index.html',
     entry: {
+	    vendor: ["styled-components"],
 		app: './src/index.js',
-		print: './src/print.js',
 	  },
 	output: {
 		path: path.resolve(__dirname, './build'),
@@ -258,17 +256,26 @@ const devSettings = {
 		filename: 'static/js/bundle.js',
 		chunkFilename: 'static/js/[name].chunk.js',
 	},
+	optimization: {
+		runtimeChunk: {
+		   name: "vendors"
+		},
+		splitChunks: {
+		  cacheGroups: {
+			commons: {
+			  test: /[\\/]node_modules[\\/]/,
+			  name: "vendors",
+			  chunks: "all"
+			}
+		  }
+		}
+	  },
 	devtool: 'inline',
 	devServer: {
 		historyApiFallback: true,
 		contentBase: './dist',
 		stats: 'minimal',
 	  },
-	  resolve: {
-	    alias: {
-	      "styled-components": path.resolve(__dirname, "node_modules", "styled-components"),
-	    }
-	},
 	module: {
 		rules: [
 			{
@@ -317,25 +324,10 @@ const devSettings = {
 		]
 	},
 	plugins: [
-		new Jarvis({
-			port: 1337 // optional: set a port
-		}),
 		new HtmlWebPackPlugin({
-			inject: true,
 			template: "./src/index.html",
-			filename: "./index.html",
-			minify: {
-					collapseWhitespace: true,
-					removeComments: true,
-					removeRedundantAttributes: true,
-					useShortDoctype: true,
-					removeEmptyAttributes: true,
-					removeStyleLinkTypeAttributes: true,
-					keepClosingSlash: true,
-					minifyCSS: true,
-					minifyURLs: true,
-				  }
-		}),
+			filename: "./index.html"
+		})
 	]
 };
 

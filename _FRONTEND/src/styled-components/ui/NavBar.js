@@ -21,7 +21,8 @@ import {
     BookmarkMutation, RatingMutation,TagBox,
     ImdbRatingIcon, YearClockIcon, ProfileIcon, LogoutIcon,
     HomeIcon,ListIcon,
-    LogoutMutation,SearchQueryBox
+    LogoutMutation,SearchQueryBox,
+    navbarheight
 
 } from "../"
 
@@ -66,7 +67,7 @@ const NB = props => {
 	)
 
     return (
-        <NavBarBox bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"}>
+        <NavBarBox bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"} height={navbarheight}>
             <Box width={"10vw"}>
                 <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
             </Box>

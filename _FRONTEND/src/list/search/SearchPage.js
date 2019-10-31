@@ -5,12 +5,10 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 //import { Query } from "react-apollo";
 import { COMPLEX_SEARCH,TAG_LIST } from "../../functions/query"
 import BackButton from "../../components/buttons/BackButton"
-//import Slider from "../../components/Slider"
-//import { Checkbox, Form, List, Dimmer, Loader, Image, Segment, Button, Dropdown, Breadcrumb, Pagination  } from 'semantic-ui-react'
 import JoinBanner from "../../components/JoinBanner.js"
 import { Head, MidPageAd, rgaSetEvent } from "../../functions/analytics"
 import TagSelectStatic from "./TagSelectStatic"
-import { useWindowSize, useAuthCheck, useDebounce, isEqualObj} from "../../functions"
+import {  isEqualObj} from "../../functions"
 
 //import "react-input-range/lib/css/index.css"
 

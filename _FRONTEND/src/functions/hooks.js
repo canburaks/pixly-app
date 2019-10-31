@@ -141,10 +141,10 @@ export const useScrollPosition = () => {
   }
   
 
-
+//const [hoverRef, isHovered] = useHover();
 export function useHover() {
     const [value, setValue] = useState(false);
-
+    const debouncedValue = useDebounce(value, 100)
     const ref = useRef(null);
 
     const handleMouseOver = () => setValue(true);
@@ -166,7 +166,7 @@ export function useHover() {
          // Recall only if ref changes
     );
 
-    return [ref, value];
+    return [ref, debouncedValue];
 }
 
 export function useAuthCheck() {

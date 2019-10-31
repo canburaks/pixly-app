@@ -1,18 +1,14 @@
 import React from "react";
-import { useState, useContext, useMemo } from "react"
-import { Menu } from "semantic-ui-react"
-import { Mutation } from "react-apollo";
-import { FOLLOW_MUTATION } from "../../functions/mutations";
-import { useWindowSize, } from "../../functions/hooks"
+import { useState, useContext, useMemo, useCallback } from "react"
 
 import SimilarityPanel from "../../components/SimilarityPanel"
-import { rgaPageView, Head, ProfilePageAd } from "../../functions/analytics"
+import { rgaPageView, Head, ProfilePageAd, calculateSimilarity } from "../../functions"
 import { useAuthCheck } from "../../functions/hooks";
 import { GlobalContext } from "../../App";
 import { GlobeIcon, UserCheckIcon, UserPlusIcon } from "../../assets/f-icons"
 
 import "../pages.css"
-import { ElementListContainer } from "../../styled-components"
+import { ElementListContainer, ProfileCoverPanel, PageContainer, ContentContainer } from "../../styled-components"
 
 
 
@@ -29,107 +25,42 @@ const ProfilePage = (props) => {
     
     const ratingmovies = useMemo(() => ratings.map(m => m.movie))
 
-    const state = useContext(GlobalContext)
-    const [activeState, setActiveState] = useState({menu:"ratings", items:ratingmovies, type:"poster"})
-    const [follow, setFollow] = useState(profile.isFollowed);
+    const globalstate = useContext(GlobalContext)
+
     //const screenSize = useWindowSize()
     const authStatus = useAuthCheck()
 
-    state.methods.updatePoints(item.viewer.points)
+    authStatus && globalstate.methods.updatePoints(item.viewer.points)
+    //const screenSize = useWindowSize()
+    const [state, setState ] = useState("ratings")
+    
+    const stateHandler = useCallback((menu) => setState(menu.name), [state])
 
-    //console.log("Profile Page Item", item)
-
-    // MENU-ITEM HANDLE
-    const bookmarkMenuHandler = () => (activeState.menu !== "bookmarks" && setActiveState(() => ({menu:"bookmarks", items:bookmarks })))
-    const ratingMenuHandler = () => (activeState.menu !== "ratings" && setActiveState(() => ({menu:"ratings", items:ratingmovies })))
-    const likeMenuHandler = () => (activeState.menu !== "likes" && setActiveState(() => ({menu:"likes", items:likes })))
-
-    const followersMenuHandler = () => (activeState.menu !== "followers" && setActiveState(() => ({menu:"followers", items:followers, type:"profile"})))
-    const followingsMenuHandler = () => (activeState.menu !== "followings" && setActiveState(() => ({menu:"followings", items:followings, type:"profile"})))
-
-
-    const ProfileMenuPanel = () => (
-        <Menu pointing secondary inverted className="stat home-menu" widths={6} fluid>            
-        <Menu.Item
-                disabled={ratings.length === 0}
-                active={activeState.menu === 'ratings'}
-                onClick={ratingMenuHandler}
-            >
-                <div className="stat click">
-                    <span className="label t-xs ">RATINGS</span>
-                    <span className="value ">{profile.points}</span>
-                </div>
-            </Menu.Item>
-            <Menu.Item
-                disabled={likes.length === 0}
-                active={activeState.menu === 'likes'}
-                onClick={likeMenuHandler}
-            >
-                <div className="stat click">
-                    <span className="label t-xs ">LIKES</span>
-                    <span className="value ">{likes.length}</span>
-                </div>
-            </Menu.Item>
-            <Menu.Item
-                disabled={bookmarks.length === 0}
-                active={activeState.menu === 'bookmarks'}
-                onClick={bookmarkMenuHandler}
-            >
-                <div className="stat click">
-                    <span className="label t-xs ">BOOKMARKS</span>
-                    <span className="value ">{bookmarks.length}</span>
-                </div>
-            </Menu.Item>
-            <Menu.Item
-                name='followers'
-                disabled={followers.length === 0}
-                active={activeState.menu === 'followers'}
-                onClick={followersMenuHandler}
-            >
-                <div className="stat click">
-                    <span className="label t-xs ">FOLLOWERS</span>
-                    <span className="value ">{followers.length}</span>
-                </div>
-            </Menu.Item>
-            <Menu.Item
-                name='followings'
-                disabled={followings.length === 0}
-                active={activeState.menu === 'followings'}
-                onClick={followingsMenuHandler}
-            >
-                <div className="stat click">
-                    <span className="label t-xs ">FOLLOWINGS</span>
-                    <span className="value ">{followings.length}</span>
-                </div>
-            </Menu.Item>
-
-            {profile.isSelf===false && 
-            <Mutation mutation={FOLLOW_MUTATION} variables={{ obj: "u", username: profile.username }}
-                onCompleted={data => setFollow(data.follow.targetProfile.isFollowed)}>
-                {mutation => (
-                    <Menu.Item
-                        name='follow-mutation'
-                        className="follow-mut"
-                        title={authStatus ? (follow ? "Unfollow" : "Follow") : "Please login to follow list"}
-                        disabled={followings.length === 0}
-                        onClick={() => (authStatus ? mutation() : null)}
-                    >
-                        {follow ? <UserCheckIcon  /> : <UserPlusIcon  />}
-                    </Menu.Item>
-                )}
-            </Mutation>
+    const renderitems = useMemo(() => {
+        switch (state){
+            case "bookmarks":
+                return {items:bookmarks, type:"poster" }
+            case "ratings":
+                return {items:ratingmovies, type:"poster" }
+            case "likes":
+                return {items:likes, type:"poster" }
+            case "followers":
+                return {items:followers, type:"profile"}
+            case "followings":
+                return {items:followings, type:"profile"}
         }
+    }, [state])
 
+    
+    const similarity = useMemo(() => (authStatus && profile.ratingset && viewer) ? calculateSimilarity(profile.ratingset, viewer.ratingset) : null,[authStatus, profile.username])
 
-        </Menu>
-    )
-
+    //console.log("simscore", similarity)
 
     const seoName = useMemo(() => item.profile.name ? item.profile.name : item.profile.username)
-    const RenderElementContainer = React.memo(() => <ElementListContainer items={activeState.items} type={activeState.type} />, [activeState.menu])
+    const RenderElementContainer = React.memo(() => <ElementListContainer items={renderitems.items} type={renderitems.type} />, [state])
 
     return (
-        <div className="page-container profile">
+        <PageContainer>
             {/*<!-- Page Container -->*/}
             {/*<!-- The Grid -->*/}
             <Head
@@ -139,10 +70,14 @@ const ProfilePage = (props) => {
                 canonical={`https://pixly.app/user/${item.profile.username}`}
             >
             </Head>
+            <ProfileCoverPanel 
+                profile={profile} 
+                state={state} 
+                onClick={stateHandler} 
+                similarity={similarity}
+            />
 
-            <CoverPanel profile={profile} ProfileMenuPanel={ProfileMenuPanel} />
-
-            <div className="content-container pad-lr-4x">
+            <ContentContainer>
                 
                 { authStatus === true && (profile.ratingset && viewer.ratingset && isSelf===false) &&
                      <SimilarityPanel profile1={profile} profile2={viewer} />
@@ -151,30 +86,11 @@ const ProfilePage = (props) => {
                 <RenderElementContainer />
 
                 <ProfilePageAd />
-            </div>
-        </div>
+            </ContentContainer>
+        </PageContainer>
     );
 }
 
-const CoverPanel = React.memo(({profile, ProfileMenuPanel}) => (
-    <div className="cover-panel-small home">
-        <div className="avatar-box">
-            <img src={profile.avatar} className="avatar" />
-        </div>
-
-        <div className="personal-info-box">
-            <h1 className="t-xl mar-t-x" itemProp="name">{profile.name ? profile.name : profile.username}</h1>
-            <div className="fbox-r jcfs aic">
-                {profile.name && <p className="t-s op90 mar-r-2x">@{profile.username}</p>}
-                {profile.country && <div className="fbox-r jcfs aic op80 t-s"><GlobeIcon className="mar-r-x t-xs no-click" />{profile.country[1]}</div>}
-            </div>
-            {(profile.bio && profile.bio.length > 5) && <p className="t-s op80 mar-t-x">{profile.bio}</p>}
-        </div>
-        <div className="menu-box">
-            <ProfileMenuPanel />
-        </div>
-    </div>
-))
 
 
 export default React.memo(ProfilePage);

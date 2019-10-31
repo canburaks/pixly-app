@@ -81,7 +81,7 @@ themes.default.transitions  = {
 
 themes.default.shadows = {
 	light:"0px 2px 4px rgba(255, 255, 255, 1)",
-	dark: "-1px 2px 1px rgba(20, 20, 20, 0.87)",
+	dark: "-1px 1px 1px rgba(20, 20, 20, 0.87)",
 
 	textDark: "-1px 2px 2px rgba(0, 0, 0, 0.8);",
 	textGray:"-1px 2px 2px rgba(120, 120, 120, 0.8);",

@@ -2,6 +2,13 @@ import React from "react";
 
 import { Text, Paragraph, HeaderMini,HeaderText, NewLink, Box, FlexBox, Blockquote, Cite} from "../atoms"
 
+export const Stats = (props) => (
+    <FlexBox flexDirection="column" alignItems="center" {...props}>
+        <Text  color={props.color} fontSize={["xxxs", "xxs", "xs", "xs", "s"]}>{props.text}</Text>
+        <Text color={props.color} fontSize={["s", "m"]} fontWeight={"bold"}>{props.value}</Text>
+    </FlexBox>
+)
+
 export const Quote = (props) =>(
         <Blockquote cite={props.quote.ownerName}
             fontFamily="quote"

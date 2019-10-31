@@ -1,21 +1,9 @@
 import React from "react";
-import { useState, useContext } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { useState } from "react";
+import {  Link } from "react-router-dom";
 import { FAV_MUTATION, BOOKMARK_MUTATION, FOLLOW_MUTATION } from "../../functions/mutations";
 import { Mutation } from "react-apollo";
-import { print } from "../../functions/lib"
-import { rgaPageView, Head, MoviePageAd} from "../../functions/analytics"
-import { useWindowSize } from "../../functions/hooks"
 
-import StarRating from "../../components/StarRating"
-
-import { useAuthCheck } from "../../functions/hooks";
-import {  Row, Col } from 'react-flexbox-grid';
-//import WP from "../../components/VideoPlayer";
-//import "cbs-web-components"sfd
-import { YoutubePlayer, TextCollapse} from "cbs-react-components";
-import { GlobalContext } from "../../App";
-import { GridBox, GridItem } from "../../components/GridBox" 
 import { BookmarkIcon, FavIcon, PlusIcon } from "../../assets/f-icons/index"
 
 

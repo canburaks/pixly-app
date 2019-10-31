@@ -52,6 +52,7 @@ export const NewLink = styled(LinkNoFollow)`
       color:${props => props.hoverColor && props.hoverColor};
       box-shadow:${props => props.hoverShadow && props.hoverShadow}
   };
+  text-decoration:initial;
   transition: ${themeGet("transitions.medium")};
   ${props => props.hidden && hideText()}
 
@@ -67,6 +68,7 @@ export const OuterLink = styled.a.attrs(() => ({rel:"nofollow noopener", target:
   :hover { 
     text-decoration: ${props => props.hoverUnderline && "underline"}
   };
+  text-decoration:initial;
   text-align:center;
   display:flex;
   flex-direction:row;

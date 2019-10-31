@@ -3611,10 +3611,10 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-cbs-react-components@^0.13.14:
-  version "0.13.14"
-  resolved "https://registry.yarnpkg.com/cbs-react-components/-/cbs-react-components-0.13.14.tgz#d9dfdf556b973bf787e3849706f9425ce2775402"
-  integrity sha512-zAjwwEhe8wnixt6jEBzbSVKOhh4TdMRdbDzeMiqWKhEpwF6jN/HEbV+EVl9yr1yhyobJAuoTMNGCNhk7kmzS9w==
+cbs-react-components@^0.13.15:
+  version "0.13.15"
+  resolved "https://registry.yarnpkg.com/cbs-react-components/-/cbs-react-components-0.13.15.tgz#6fab1c0ea2a6c03016022c1ed5603cdbaf90601e"
+  integrity sha512-2Fjjl2ALBGvUsSPj/dtH3KD618DeiyUL74HRiha79vNmjSEN4LgZpbS1aMJpqCt6Sfw2uNfCl/hLyRQuCiHb+w==
 
 cbs-web-components@^0.4.0:
   version "0.4.0"
@@ -5749,11 +5749,6 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
-
-faster.js@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/faster.js/-/faster.js-1.1.1.tgz#8bbd7eefdb8f03faac26ad5025b059f94c5cfb4d"
-  integrity sha512-vPThNSLL/E1f7cLHd9yuayxZR82o/Iic4S5ZY45iY5AgBLNIlr3b3c+VpDjoYqjY9a9C/FQVUQy9oTILVP7X0g==
 
 fastparse@^1.1.1:
   version "1.1.2"

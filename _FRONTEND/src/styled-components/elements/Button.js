@@ -48,8 +48,8 @@ export const SearchButton = ({onClick, borderRadius="6px", ...props}) => (
 export const ScrollButton = ({onClick, borderRadius="50%", ...props}) => (
     <Box 
         position="fixed" right={["30px", "40px", "50px"]} bottom="20px" 
-        width={[60,60,70, 80]}
-        height={[60,60,70, 80]}
+        width={[50,50,60,70]}
+        height={[50,50,60,70]}
         onClick={onClick}
         borderRadius={borderRadius}
         zIndex={2}
@@ -61,9 +61,9 @@ export const ScrollButton = ({onClick, borderRadius="50%", ...props}) => (
 
 export const ScrollTopButton = React.memo(() => {
     const scrollPosition = useScrollPosition()
-    const show = scrollPosition < 200 ? false : true
+    const show = scrollPosition < 300 ? false : true
     const handleScroll = useCallback(() => window.scrollTo({top:0, left:0, behavior:"smooth"}, []))
     const visibility = {visibility: show ? "visible" : "hidden"}
-
+    
     return <ScrollButton onClick={handleScroll} style={visibility}>Top</ScrollButton>
 })

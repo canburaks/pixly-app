@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useContext, useCallback } from "react"
 import { withRouter } from "react-router-dom";
 
-import "./MovieList.css"
 
 
 import { useAuthCheck } from "../../functions/hooks";

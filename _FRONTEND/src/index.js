@@ -21,7 +21,7 @@ import fetch from 'unfetch';
 
 import { hydrate, render } from "react-dom";
 import "core-js";
-
+import { development, production } from "./styled-components"
 
 //import { GET_DIRECTOR_LIST } from "./functions/gql"
 
@@ -34,12 +34,6 @@ import "core-js";
 
 //import "./modernscale.css"
 
-export var development = true;
-export var production = false;
-if (window.location.href.includes("pixly.app")){
-    production = true
-    development= false
-}
 
 const UriSwitcher = (uriType) =>{
     if(uriType===1) return 'https://pixly.app/graphql'
@@ -90,8 +84,8 @@ export const cache = new InMemoryCache().restore(preloadedState)
 //
 
 export const client = new ApolloClient({
-    initialState:cache,
-    ssrMode:true,
+    initialState:production ? cache : new InMemoryCache(),
+    ssrMode:production,
     //cache: new InMemoryCache(),
     link: ApolloLink.from([errorLink,  link]),
     ssrForceFetchDelay: 100,
@@ -129,9 +123,9 @@ if (development){
 }
 else{
     if (rootElement.hasChildNodes()) {
-        ReactDOM.hydrate(<Pixly renderType={"hydrate"}/>, rootElement);
+        ReactDOM.hydrate(<Pixly />, rootElement);
     } else {
-        render(<Pixly renderType={"render"}/>, rootElement);
+        render(<Pixly />, rootElement);
     }
     
 }

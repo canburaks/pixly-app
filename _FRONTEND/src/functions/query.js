@@ -36,6 +36,7 @@ query persona($username:String!){
             points,
             active,
             avatar,
+            isSelf,
             cognitoVerified,
             cognitoRegistered,
             shouldChangePassword,
