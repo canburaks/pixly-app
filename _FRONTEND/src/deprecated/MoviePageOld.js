@@ -19,7 +19,7 @@ import {  Row, Col } from 'react-flexbox-grid';
 //import "cbs-web-components"sfd
 import { YoutubePlayer, TextCollapse} from "cbs-react-components";
 import "../pages.css";
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 import { GridBox, GridItem } from "../../components/GridBox" 
 import { SocialMedia } from "../../components/SocialMedia" 
 import { useApolloClient } from 'apollo-boost'

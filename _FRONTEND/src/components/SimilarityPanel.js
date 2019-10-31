@@ -1,5 +1,4 @@
 import React from "react";
-import { Progress } from "semantic-ui-react"
 import  { p2p, preprocess } from "../functions/persona"
 import { ProgressBar,Popup } from "cbs-react-components";
 import { MessageBox } from "./MessageBox"

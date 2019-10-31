@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useContext } from "react"
 import {  Link } from "react-router-dom";
 import "./GridBox.css"
-import { GlobalContext } from "../App";
+import { GlobalContext } from "../";
 
 
 export const GridBox = (props) => {

@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom"
 import { print, authCheck } from "../functions/lib"
 
 import { rgaPageView, Head } from "../functions/analytics"
-import { GlobalContext } from "../App";
+import { GlobalContext } from "../";
 import { AuthForm, ForgetForm } from "../forms/AuthForm"
 import JoinBanner from "../components/JoinBanner";
 

@@ -6,7 +6,7 @@ import { emailValidator, passwordValidator, usernameValidator } from "../functio
 import { EnvelopeIcon, WarningIcon, InfoIcon, SuccessIcon } from "../assets/f-icons"
 import { Input } from "../styled-components"
 
-import { GlobalContext } from "../App";
+import { GlobalContext } from "../";
 
 const ContactForm = (props) =>{
     const elements = {

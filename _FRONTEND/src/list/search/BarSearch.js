@@ -9,7 +9,7 @@ import { SEARCH } from "../../functions/query"
 import { useAuthCheck } from "../../functions/hooks";
 import { rgaPageView, Head } from "../../functions/analytics"
 
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 import { GridBox, GridItem, SpeedyGridBox } from "../../components/GridBox"
 
 

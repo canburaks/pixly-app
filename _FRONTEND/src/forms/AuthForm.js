@@ -10,7 +10,7 @@ import { withRouter } from "react-router-dom"
 import { SIGNUP_MUTATION, LOGIN_MUTATION, FORGET_PASSWORD, CONFIRM_FORGET_PASSWORD  } from "../functions/mutations"
 import { Modal, useModal } from "cbs-react-components"
 import { Input} from "cbs-react-components"
-import { GlobalContext } from "../App";
+import { GlobalContext } from "../";
 import { emailValidator, passwordValidator, usernameValidator } from "../functions/form"
 import { EnvelopeIcon, WarningIcon, InfoIcon, SuccessIcon } from "../assets/f-icons"
 

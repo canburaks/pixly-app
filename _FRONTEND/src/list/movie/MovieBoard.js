@@ -9,7 +9,7 @@ import { MOVIE_BOARD } from "../../functions/query"
 import { useAuthCheck } from "../../functions/hooks";
 import { rgaPageView, Head, MidPageAd } from "../../functions/analytics"
 
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 import { GridBox, GridItem, SpeedyGridBox } from "../../components/GridBox" 
 import JoinBanner from "../../components/JoinBanner.js"
 import { movieAutoComplete } from "../../functions/grec";

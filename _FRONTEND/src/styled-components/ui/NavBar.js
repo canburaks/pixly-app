@@ -7,7 +7,7 @@ import {  SearchBox} from "cbs-react-components"
 
 
 import { movieAutoComplete } from "../../functions/grec";
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 import { AuthForm, ForgetForm } from "../../forms/AuthForm"
 import { development } from "../../index"
 

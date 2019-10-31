@@ -2,6 +2,31 @@ import React, { useState, useEffect, useRef } from "react";
 import { useGraphQL } from "./grec"
 
 
+export const useBeforeUnload = (enabled = true, message, action) => {
+  useEffect(() => {
+    if (!enabled) {
+      return;
+    }
+
+    const handler = (event) => {
+      event.preventDefault();
+
+      if (message) {
+        event.returnValue = message;
+      }
+      if (action) action()
+
+      return message;
+    };
+
+    window.addEventListener('beforeunload', handler);
+
+    return () => window.removeEventListener('beforeunload', handler);
+  }, [message, enabled]);
+};
+
+
+
 export const useFocus = (ref, defaultState = false) => {
   const [state, setState] = useState(defaultState);
 

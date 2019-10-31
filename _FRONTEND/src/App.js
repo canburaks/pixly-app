@@ -1,9 +1,10 @@
 import React from "react";
-import { useContext, useState, useReducer, useEffect, lazy, Suspense } from 'react';
+import { useContext, useState, useReducer, useEffect } from 'react';
 
 
 
-import { Route, Switch, Redirect, withRouter } from "react-router-dom"
+import ReactGA from 'react-ga';
+import { Route, Switch, Redirect, withRouter, useHistory } from "react-router-dom"
 
 
 
@@ -11,7 +12,7 @@ import { Route, Switch, Redirect, withRouter } from "react-router-dom"
 import Footer from "./components/Footer"
 import { useModal, Modal } from "cbs-react-components";
 
-import {NavBar} from "./styled-components"
+import { NavBar } from "./styled-components"
 
 
 import Middle from "./containers/Middle"
@@ -22,53 +23,41 @@ import { AuthForm, ForgetForm } from "./forms/AuthForm"
 import ContactForm from "./forms/ContactForm"
 
 import { client, cache } from "./index"
-import { useWindowSize,  rgaPageView,rgaStart} from "./functions"
+import { useWindowSize,  usePageViews} from "./functions"
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
 import { Box, ScrollTopButton, navbarheight } from "./styled-components"
 import themes from './styled-components/theme'
 import { Clippy } from './styled-components'
+import { GlobalContext } from "./";
 
-//import 'semantic-ui-css/semantic.min.css'
-
-
-//const Middle = lazy(() => import(/* webpackMode: "lazy" */ /* webpackChunkName: "middle" */ "./containers/Middle"))
-//const Lp = lazy(() => import(/* webpackMode: "lazy" */ /* webpackChunkName: "middle" */ "./containers/Middle"))
-//import MicroModal from 'micromodal';  
-//import MiniModal from './components/MiniModal';  
-
-export const GlobalContext = React.createContext();
 
 const App = (props) => {
-    
-    const state = Store(props.history)
-    
-    useEffect(() => {
-        rgaStart()
-        //console.log("Google Analytics initialized")
-    },[])
-    
-    rgaPageView()
+    const globalstate = useContext(GlobalContext)
+    //var cookie = document.cookie;
+    //console.log("cookie", cookie)
+    usePageViews()
+
+
+
     return (
     <ThemeProvider theme={themes.default}>
         <div className="App" theme="palette-1" >
-            <GlobalContext.Provider value={state}>
-                <NavBar />
-                    <Clippy />
-                <Box minHeight="80vh" mt={navbarheight}>
-                    <Switch>
-                        <Route exact path="/" component={MainPageQuery} />
-                        <Route path="/" component={Middle} />
-                    </Switch>
-                    
-                    <Modal isOpen={state.modal} toggle={state.methods.toggleModal}>
-                        {state.modalComponent}
-                    </Modal>
-                </Box>
-                <ScrollTopButton />
-                <Footer />
-            </GlobalContext.Provider>
+            <NavBar />
+            <Clippy />
+            <Box minHeight="80vh" mt={navbarheight}>
+                <Switch>
+                    <Route exact path="/" component={MainPageQuery} />
+                    <Route path="/" component={Middle} />
+                </Switch>
+                
+                <Modal isOpen={globalstate.modal} toggle={globalstate.methods.toggleModal}>
+                    {globalstate.modalComponent}
+                </Modal>
+            </Box>
+            <ScrollTopButton />
+            <Footer />
         </div>
     </ThemeProvider>
 

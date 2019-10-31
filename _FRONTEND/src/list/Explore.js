@@ -47,7 +47,7 @@ import {
 import "./Explore.css";
 
 const ExplorePage = React.memo(props => {
-	rgaPageView()
+	//rgaPageView()
 	const { movies, lists, topics} = props.data
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();

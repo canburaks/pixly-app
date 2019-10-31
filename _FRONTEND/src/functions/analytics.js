@@ -4,7 +4,7 @@ import ReactGA from 'react-ga';
 import AdSense from 'react-adsense';
 import { Helmet } from "react-helmet";
 import { production } from "../styled-components"
-import { useLocation } from "./hooks"
+import { useLocation, } from "react-router-dom";
 
 //console.log("produciton: ", production)
 
@@ -59,6 +59,57 @@ export const Head = React.memo((props) => {
 }, (p,n) => p.canonical === n.canonical )
 
 
+
+export function usePageViews() {
+    var timeZero = performance.now()
+    const [time, setTime] = useState(timeZero)
+
+    let location = useLocation();
+    const [locationZero, setLocationZero] = useState(location)
+
+    function timeHandler(){
+        const currentTime = performance.now()
+        const passed = currentTime - time
+        //console.log("passed", passed)
+        setTime(currentTime)
+        return passed
+    }
+    function navTextHandler(){
+        if (locationZero.pathname === location.pathname) return null
+        var navtext = locationZero.pathname + " --> " + location.pathname
+        setLocationZero(location)
+        return navtext
+    }
+
+    useEffect(() => {
+        //console.log("location change: ",location)
+        ReactGA.set({ page: location.pathname });
+        ReactGA.pageview(location.pathname)
+
+        // calculate miliseconds between page navigation
+        const passed = timeHandler()
+        const navtext = navTextHandler()
+        if (navtext) {
+            rgaSetNavTime(Math.round(passed),navtext)
+        }
+    }, [location]);
+  }
+
+export function rgaStart(){
+        //const userId = localStorage.getItem("USERNAME")
+        ReactGA.initialize('UA-141617385-1', {
+            debug: false,
+            testMode: !production,
+            gaOptions: { 
+                'siteSpeedSampleRate': 50, 
+                //'optimizeId': 'GTM-K82HMLS',
+                'alwaysSendReferrer': true,
+            }
+        })
+        //if (userId) ReactGA.set({userId})
+}
+
+
 export const rgaPageView = () => {
     if (production){
         const [pathname, setPathname] = useState(null)
@@ -72,22 +123,6 @@ export const rgaPageView = () => {
     }
 }
 
-export function rgaStart(){
-    if (production){
-        const userId = localStorage.getItem("USERNAME")
-        ReactGA.initialize('UA-141617385-1', {
-            debug: false,
-            gaOptions: { 
-                'siteSpeedSampleRate': 50, 
-                'optimize_id': 'GTM-K82HMLS',
-                testMode: !production
-            }
-        })
-        if (userId) ReactGA.set({userId})
-    }
-}
-
-
 export function rgaSetUser(){
     const userId = localStorage.getItem("USERNAME")
     if (userId){
@@ -97,19 +132,56 @@ export function rgaSetUser(){
     }
 }
 
-export const rgaSetEvent = (category, action, label) => {
-    ReactGA.event({
-      category: category,
-      action: action,
-      label: label
+
+const rgaSetNavTime = (value, label) => rgaSetTiming("Timing", "navigation", value, label)
+
+
+export const rgaSetCloseTime = (label) => {
+    var timeZero = performance.now()
+    const [time, setTime] = useState(timeZero)
+
+    function timeHandler(){
+        const currentTime = performance.now()
+        const passed = currentTime - time
+        //console.log("passed", passed)
+        setTime(currentTime)
+        return passed
+    }
+
+    useEffect(() => {
+        const handler = (event) => {
+        event.preventDefault();
+        const passed = Math.round(timeHandler())
+        //console.log("passed",passed)
+        rgaSetTiming("Timing", "close/reload", passed,label)
+        rgaSetEvent("User", "Close/Reload Timing", passed, label)
+      };
+  
+      window.addEventListener('beforeunload', handler);
+  
+      return () => window.removeEventListener('beforeunload', handler);
     });
   };
+  
+export const rgaSetEvent = (category, action, value, label) => {
+ReactGA.event({
+    category: category,
+    action: action,
+    label: label,
+    value:value
+});
+};
+export const rgaSetTiming = (category, variable, value, label) => {
+ReactGA.timing({
+    category: category, //'JS Libraries',
+    variable: variable, //'load'
+    value: value, // in milliseconds
+    label: label,//'CDN libs'
+    });
+};
 
 
-
-
-
-
+//--------------ADS------------------------------
 export const DirectorPageAd = () => {
     useEffect(() => {
         if (production && window) {

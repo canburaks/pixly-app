@@ -1,7 +1,5 @@
 /* eslint-disable */
 import React, { useState } from 'react'
-import { Card, Menu } from 'semantic-ui-react'
-import { withRouter, Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { GET_DIRECTOR_LIST } from "../../functions/gql"
 

@@ -12,11 +12,13 @@ import {
 	useWindowSize,
 	useAuthCheck,
 	useClientWidth,
+	rgaSetCloseTime,
 	useValues
-} from "../functions/hooks";
-import { GlobalContext } from "../App";
+} from "../functions";
+import { GlobalContext } from "../";
 
 import JoinBanner from "../components/JoinBanner.js";
+
 
 import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
@@ -31,10 +33,13 @@ import "./MainPage.css";
 import "./dist/css/style.css"
 
 const MainPage = React.memo(() => {
-	rgaPageView()
+	//rgaPageView()
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
-    const state = useContext(GlobalContext)
+	const state = useContext(GlobalContext)
+	rgaSetCloseTime("Landing Page")
+	
+
 
 
 	//const listAndTopics = [...topics, ...lists]
