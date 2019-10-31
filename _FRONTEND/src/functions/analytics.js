@@ -83,15 +83,22 @@ export function usePageViews() {
 
     useEffect(() => {
         //console.log("location change: ",location)
-        ReactGA.set({ page: location.pathname });
+        const willSet = {page: location.pathname}
+        if (localStorage.getItem("USERNAME")){
+            const userIds = localStorage.getItem("USERNAME").split("").map((letter,i) => letter + i*20)
+            willSet.userId = userIds.join("")
+        }
+        ReactGA.set(willSet);
         ReactGA.pageview(location.pathname)
 
         // calculate miliseconds between page navigation
-        const passed = timeHandler()
+        const passed = Math.round(timeHandler())
         const navtext = navTextHandler()
         if (navtext) {
-            rgaSetNavTime(Math.round(passed),navtext)
+            rgaSetNavTime(passed,navtext)
         }
+        rgaSetEvent("App Close", passed.toString(), passed, passed.toString())
+
     }, [location]);
   }
 
@@ -154,7 +161,7 @@ export const rgaSetCloseTime = (label) => {
         const passed = Math.round(timeHandler())
         //console.log("passed",passed)
         rgaSetTiming("Timing", "close/reload", passed,label)
-        rgaSetEvent("User", "Close/Reload Timing", passed, label)
+        rgaSetEvent("App Close", passed.toString(), passed, label)
       };
   
       window.addEventListener('beforeunload', handler);
