@@ -54,7 +54,6 @@
     "@glidejs/glide": "^3.3.0",
     "@styled-system/css": "^5.0.23",
     "@styled-system/theme-get": "^5.1.2",
-    "@welldone-software/why-did-you-render": "^3.3.8",
     "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.3.12",
     "apollo-client": "^2.5.1",
@@ -160,7 +159,7 @@
     "include": [
       "",
       "/"
- 
+  
     ],
     "publicPath": "/"
   }

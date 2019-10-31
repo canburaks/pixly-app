@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Person, Director,Actor,  Crew, SocialMedia
-from .profile import Profile, Follow, Activity, LogEntry
+from .profile import Profile, Follow, Activity, LogEntry, Info
 from items.models import Video, Movie
 # Register your models here.
 
@@ -80,3 +80,10 @@ class LogEntryAdmin(admin.ModelAdmin):
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
     list_display = ("profile", "action","target_profile_username", "movie_id", "person_id","liste_id", "created_at")
+
+
+@admin.register(Info)
+class InfoAdmin(admin.ModelAdmin):
+    list_display = ("profile", "facebook_name","facebook_id", "facebook_email")
+    fields = ["profile", "facebook_name","facebook_id", "facebook_email", "twitter_data",
+            "facebook_data", "facebook_token"]

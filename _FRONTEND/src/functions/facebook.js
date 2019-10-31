@@ -29,7 +29,7 @@ export const FbookAuthButton = (props) =>{
         }   
     });
     }
-    
+    console.log("fbook status", status)
     function logoutHandler(){
         const FB = window.FB;
         //print("logout-cb FB", FB)
@@ -54,7 +54,7 @@ const FbookLoginButton = ({onlogin}) =>{
             if (response.status === 'connected') {
                 // Logged into your webpage and Facebook.
                 const data = JSON.stringify(response.authResponse)
-                console.log("response ", response)
+                //console.log("response ", response)
                 mutation({variables:{data}})
                 onlogin()
             } else {
