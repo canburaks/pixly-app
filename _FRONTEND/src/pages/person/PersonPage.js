@@ -35,7 +35,7 @@ const PersonPage = (props) => {
     const initialActive = activeVideoParse()
     const [activeVideo, setActiveVideo] = useState(initialActive)
     const authStatus = useAuthCheck()
-    rgaPageView();
+    //rgaPageView();
     //print("person page", props)
     //const [follow, setFollow] = useState(item.isFollowed);
     

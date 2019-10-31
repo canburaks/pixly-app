@@ -23,7 +23,7 @@ import { AuthForm, ForgetForm } from "./forms/AuthForm"
 import ContactForm from "./forms/ContactForm"
 
 import { client, cache } from "./index"
-import { useWindowSize,  usePageViews} from "./functions"
+import { useWindowSize,  usePageViews, rgaStart} from "./functions"
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
@@ -37,9 +37,13 @@ const App = (props) => {
     const globalstate = useContext(GlobalContext)
     //var cookie = document.cookie;
     //console.log("cookie", cookie)
+
+
+    useEffect(() => {
+        rgaStart()
+        //console.log("Google Analytics initialized")
+    },[])
     usePageViews()
-
-
 
     return (
     <ThemeProvider theme={themes.default}>

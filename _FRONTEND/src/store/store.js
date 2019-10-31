@@ -3,6 +3,7 @@ import { useContext, useState, useReducer, useEffect, lazy, Suspense } from 'rea
 import { useModal } from "cbs-react-components";
 
 import { useWindowSize } from "../functions"
+import { client, cache } from "../index"
 
 
 
