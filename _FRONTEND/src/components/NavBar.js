@@ -16,7 +16,7 @@ import {  SearchBox} from "cbs-react-components"
 import "./NavBar.css";
 
 import { movieAutoComplete } from "../functions/grec";
-import { GlobalContext } from "../App";
+import { GlobalContext } from "../";
 import { AuthForm, ForgetForm } from "../forms/AuthForm"
 import { UnderlineEffect, NewLink,Box, HomeDropdown, ProfileDropdown } from "../styled-components"
 import { development } from "../index"

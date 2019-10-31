@@ -5,7 +5,7 @@ import AOS from 'aos';
 import { print, authCheck } from "../functions/lib"
 
 import { rgaPageView, Head } from "../functions/analytics"
-import { GlobalContext } from "../App";
+import { GlobalContext } from "../";
 
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import "./LandingPage2.css"

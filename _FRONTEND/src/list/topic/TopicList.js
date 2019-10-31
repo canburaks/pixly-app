@@ -10,7 +10,7 @@ import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../fu
 import { rgaPageView, Head, ListBoardAd } from "../../functions/analytics"
 
 
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 import JoinBanner from "../../components/JoinBanner.js"
 
 import {

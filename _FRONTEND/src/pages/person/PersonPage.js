@@ -7,7 +7,7 @@ import { rgaPageView, Head, DirectorPageAd } from "../../functions/analytics"
 
 
 import { YoutubePlayer, TextCollapse } from "cbs-react-components";
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 
 import {  Col, Row } from 'react-flexbox-grid';
 

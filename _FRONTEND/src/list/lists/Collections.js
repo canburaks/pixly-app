@@ -7,7 +7,7 @@ import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../fu
 
 import { rgaPageView, Head, ListBoardAd, ListBoardAd2  } from "../../functions/analytics"
 
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard } from "../../styled-components"

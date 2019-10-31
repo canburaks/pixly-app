@@ -7,7 +7,7 @@ import { RESEND_REGISTRATION_MAIL } from "../../functions/mutations";
 import { Mutation } from 'react-apollo'
 
 import { rgaPageView, Head, HomePageFeedAd } from "../../functions/analytics"
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 import { GlobeIcon, HomeIcon, SettingsIcon } from "../../assets/f-icons"
 //import {UncompletedTask, BackGroundSvg } from "../../assets/illustrations"
 
@@ -36,7 +36,7 @@ const UpdateForm = React.memo(({profile, refetch}) => (
 
 
 const HomePage = (props) => {
-    rgaPageView()
+    //rgaPageView()
     //window.scrollTo({top:-20, left:0, behavior:"smooth"})
     const globalstate = useContext(GlobalContext)
     

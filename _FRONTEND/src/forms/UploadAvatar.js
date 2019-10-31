@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import { Mutation } from "react-apollo";
 import  { IMAGE_UPLOAD } from "../functions/mutations"
-import { Icon, Message } from 'semantic-ui-react'
 
+const Message = (props) =>(
+    <div>{props.content}</div>
+)
 
 const UploadAvatar = ({refetch}) =>{
     const [errorMessage, setErrorMessage] = useState(null)
@@ -15,7 +17,7 @@ const UploadAvatar = ({refetch}) =>{
 
     const MessageSetter = (loading)=>{
         if (loading){
-            return <Message icon={<Icon name='circle notched' loading />} content={"Just one second"} size="mini"/>
+            return <Message  content={"Just one second"} size="mini"/>
         }
         else if(errorMessage && !successMessage){
             return <Message error content={errorMessage} size="mini"/>

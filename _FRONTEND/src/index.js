@@ -1,7 +1,8 @@
 import React from 'react';
+import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { BrowserRouter, Redirect} from "react-router-dom";
+import { BrowserRouter, Redirect, useHistory} from "react-router-dom";
 
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient, ApolloLink } from 'apollo-boost'
@@ -22,6 +23,8 @@ import fetch from 'unfetch';
 import { hydrate, render } from "react-dom";
 import "core-js";
 import { development, production } from "./styled-components"
+import { Store } from "./store/store"
+import { rgaStart , usePageViews} from "./functions"
 
 //import { GET_DIRECTOR_LIST } from "./functions/gql"
 
@@ -104,15 +107,26 @@ window.snapSaveState = () => ({
 
 /*----------------------------------------------------------------*/
 
+export const GlobalContext = React.createContext();
 
+const Pixly = (props) =>{
+    //let history = useHistory();
+    const state = Store()
+    rgaStart()
 
-const Pixly = (props) =>(
+//    useEffect(() => {
+//        rgaStart()
+//        //console.log("Google Analytics initialized")
+//    },[])
+    return (
     <ApolloProvider client={client}>
             <BrowserRouter>
-                <App renderType={props.renderType} />
+                <GlobalContext.Provider value={state}>
+                    <App renderType={props.renderType} />
+                </GlobalContext.Provider>
             </BrowserRouter>
     </ApolloProvider>
-)
+)}
 
 const rootElement = document.getElementById("root");
 

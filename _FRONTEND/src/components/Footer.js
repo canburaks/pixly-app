@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Footer.css"
-import { GlobalContext } from "../App";
+import { GlobalContext } from "../";
 import {  HiddenText } from "../styled-components"
 
 const Footer = (props) =>{

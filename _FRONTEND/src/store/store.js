@@ -1,73 +1,12 @@
 import React from "react";
-import { useContext, useState, useReducer, useEffect } from 'react';
+import { useContext, useState, useReducer, useEffect, lazy, Suspense } from 'react';
+import { useModal } from "cbs-react-components";
+
+import { useWindowSize } from "../functions"
 
 
 
-import ReactGA from 'react-ga';
-import { Route, Switch, Redirect, withRouter, useHistory } from "react-router-dom"
-
-
-
-
-import Footer from "./components/Footer"
-import { useModal, Modal } from "cbs-react-components";
-
-import { NavBar } from "./styled-components"
-
-
-import Middle from "./containers/Middle"
-import LandingPage from "./auth/LandingPage"
-import MainPageQuery from "./main-page/MainPage";
-
-import { AuthForm, ForgetForm } from "./forms/AuthForm"
-import ContactForm from "./forms/ContactForm"
-
-import { client, cache } from "./index"
-import { useWindowSize,  usePageViews} from "./functions"
-//import { ThemeProvider } from 'styled-components'
-import { ThemeProvider } from 'styled-components'
-
-import { Box, ScrollTopButton, navbarheight } from "./styled-components"
-import themes from './styled-components/theme'
-import { Clippy } from './styled-components'
-import { GlobalContext } from "./";
-
-
-const App = (props) => {
-    const globalstate = useContext(GlobalContext)
-    //var cookie = document.cookie;
-    //console.log("cookie", cookie)
-    usePageViews()
-
-
-
-    return (
-    <ThemeProvider theme={themes.default}>
-        <div className="App" theme="palette-1" >
-            <NavBar />
-            <Clippy />
-            <Box minHeight="80vh" mt={navbarheight}>
-                <Switch>
-                    <Route exact path="/" component={MainPageQuery} />
-                    <Route path="/" component={Middle} />
-                </Switch>
-                
-                <Modal isOpen={globalstate.modal} toggle={globalstate.methods.toggleModal}>
-                    {globalstate.modalComponent}
-                </Modal>
-            </Box>
-            <ScrollTopButton />
-            <Footer />
-        </div>
-    </ThemeProvider>
-
-    );
-};
-
-
-
-
-const Store = (history) => {
+export const Store = (history) => {
     const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN") || null
     const USERNAME = localStorage.getItem("USERNAME") || null
     const screen = useWindowSize()
@@ -178,13 +117,10 @@ const Store = (history) => {
                 localStorage.removeItem("LISTS");
                 setUsername(null);
                 setToken(null);
-                history.push("/")
+                history ? history.push("/") : null
             }
         }
     }
 
     return state
 }
-
-
-export default withRouter(App);

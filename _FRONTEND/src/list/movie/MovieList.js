@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import { useAuthCheck } from "../../functions/hooks";
 import {   Head, MidPageAd } from "../../functions/analytics"
 
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 
 import {  
     MovieCoverBox, ProfileCircleBox, PageContainer,

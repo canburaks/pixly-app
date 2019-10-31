@@ -13,7 +13,7 @@ import { useDebounce, useHover, useValues, MOVIE,LISTE,LOGOUT_MUTATION, useAuthC
 import ReactStars from 'react-stars'
 
 const mutationchecker = (prevProps, nextProps) => prevProps.id === nextProps.id
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 
 
 export const LogoutMutation = (props) => {

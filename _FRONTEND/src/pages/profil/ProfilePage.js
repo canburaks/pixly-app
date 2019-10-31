@@ -4,7 +4,7 @@ import { useState, useContext, useMemo, useCallback } from "react"
 import SimilarityPanel from "../../components/SimilarityPanel"
 import { rgaPageView, Head, ProfilePageAd, calculateSimilarity } from "../../functions"
 import { useAuthCheck } from "../../functions/hooks";
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 import { GlobeIcon, UserCheckIcon, UserPlusIcon } from "../../assets/f-icons"
 
 import "../pages.css"
@@ -15,7 +15,7 @@ import { ElementListContainer, ProfileCoverPanel, PageContainer, ContentContaine
 const ProfilePage = (props) => {
     //print(props)
     
-    rgaPageView()
+    //rgaPageView()
     const { item, refetch, parentProps } = props;
     const { profile, viewer } = item;
 

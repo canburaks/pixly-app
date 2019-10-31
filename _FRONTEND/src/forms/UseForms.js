@@ -5,7 +5,7 @@ import { Mutation } from "react-apollo";
 import { PROFILE_MUTATION } from "../functions/mutations";
 import UploadAvatar from "./UploadAvatar";
 import { FbookAuthButton } from "../functions/facebook";
-import { GlobalContext } from "../App";
+import { GlobalContext } from "../";
 //import { Input } from "../styled-components"
 import { Input } from "../styled-components";
 

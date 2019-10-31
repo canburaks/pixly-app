@@ -9,7 +9,7 @@ import { useAuthCheck } from "../../functions/hooks";
 import { Col } from "react-flexbox-grid";
 
 import { YoutubePlayer } from "cbs-react-components";
-import { GlobalContext } from "../../App";
+import { GlobalContext } from "../../";
 import { GridBox, GridItem } from "../../components/GridBox";
 
 import CoverPanel from "../elements/CoverPanel";
@@ -32,7 +32,7 @@ import {
 import "../pages.css";
 
 const MoviePage = props => {
-	rgaPageView();
+	//rgaPageView();
 	const { movie: item, viewer } = props.item;
 	const { cacheUpdate } = props;
 

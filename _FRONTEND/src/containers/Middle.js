@@ -55,7 +55,7 @@ import ExploreQuery from "../list/Explore";
 //import MoviePage from "../pages/movie/MoviePage"
 import { Loading } from "../styled-components"
 
-import { GlobalContext } from "../App";
+import { GlobalContext } from "../";
 //import { client, cache } from "../index"
 
 //const QueryRouter = lazy(() => import("../pages/QueryRouter.js"));
