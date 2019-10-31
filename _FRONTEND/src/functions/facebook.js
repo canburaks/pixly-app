@@ -54,7 +54,7 @@ const FbookLoginButton = ({onlogin}) =>{
             if (response.status === 'connected') {
                 // Logged into your webpage and Facebook.
                 const data = JSON.stringify(response.authResponse)
-                //print("stringified data", data)
+                console.log("response ", response)
                 mutation({variables:{data}})
                 onlogin()
             } else {

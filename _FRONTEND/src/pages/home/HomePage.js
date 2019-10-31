@@ -129,31 +129,6 @@ const HomePage = (props) => {
     )
 }
 
-const CoverPanel = React.memo(({profile, settingsHandler, ProfileMenuPanel}) => (
-    <div className="cover-panel-small home">
-            <div className="avatar-box">
-                <img src={profile.avatar} className="avatar"/>
-            </div>
-
-            <div className="personal-info-box">
-                <h1 className="t-xl mar-t-x" itemProp="name">{profile.name ? profile.name : profile.username}</h1>
-                <div className="fbox-r jcfs aic">
-                    {profile.name && <p className="t-s op90 mar-r-2x">@{profile.username}</p>}
-                    {profile.country && 
-                        <div className="fbox-r jcfs aic op80 t-s">
-                            <PlaceIcon className="mar-r-x t-xs no-click" text={profile.country[1]} />{profile.country[1]}</div>}
-                </div>
-                {(profile.bio && profile.bio.length > 5) && <p className="t-s op80 mar-t-x">{profile.bio}</p>}
-            </div>
-
-            <div className="menu-box">
-                <ProfileMenuPanel />
-            </div>
-            
-        <SettingsIcon onClick={settingsHandler} className="home-settings-icon" />
-    </div>
-))
-
 
 
 

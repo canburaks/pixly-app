@@ -272,6 +272,7 @@ const devSettings = {
 	  },
 	devtool: 'inline',
 	devServer: {
+	    https: true,
 		historyApiFallback: true,
 		contentBase: './dist',
 		stats: 'minimal',

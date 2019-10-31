@@ -175,7 +175,6 @@ const MainPage = React.memo(() => {
 
 
 
-
 const MiniMovies = () => <img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/movies.jpg"} style={{width:"100%", height:"100%", boxShadow:"-2px 2px 4px 1px rgba(40,40,40, 0.6)"}} />
 
 const SpaceOddysey = () => <img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/space-oddysey.png"} style={{width:"100%", height:"auto"}} />
