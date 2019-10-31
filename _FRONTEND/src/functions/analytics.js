@@ -96,8 +96,8 @@ export function usePageViews() {
         const navtext = navTextHandler()
         if (navtext) {
             rgaSetNavTime(passed,navtext)
+            rgaSetEvent("Nav", navtext, passed, passed.toString())
         }
-        rgaSetEvent("App Close", passed.toString(), passed, passed.toString())
 
     }, [location]);
   }
