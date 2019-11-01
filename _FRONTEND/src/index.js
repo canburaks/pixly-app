@@ -108,8 +108,8 @@ window.snapSaveState = () => ({
 /*----------------------------------------------------------------*/
 
 export const GlobalContext = React.createContext();
-const whyDidYouRender = require('@welldone-software/why-did-you-render');
-whyDidYouRender(React);
+//const whyDidYouRender = require('@welldone-software/why-did-you-render');
+//whyDidYouRender(React);
 
 const Pixly = (props) =>{
     //let history = useHistory();

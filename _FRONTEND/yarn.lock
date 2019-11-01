@@ -1048,64 +1048,6 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
-"@egjs/axes@^2.5.13":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@egjs/axes/-/axes-2.6.0.tgz#9e49206bb7f371bb0ad6c6071d0a3829bb29964a"
-  integrity sha512-Zt7MyZHlOsXGMODbJXDUEsAHTfEHzpzmmUtCl0FFASkiQE7PxYWbZ9xv7gj6m1AhdPbD3G6LCHh3RHEw8EXfhw==
-  dependencies:
-    "@egjs/component" "^2.1.2"
-    "@egjs/hammerjs" "^2.0.15"
-
-"@egjs/children-differ@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@egjs/children-differ/-/children-differ-1.0.0.tgz#7f74d2aa47e9ae342cdc8e1e50c440391de1ec53"
-  integrity sha512-NxaJx+dzLUVqLb6iPcu7Mt5m2HDH55VqqZUxGKZ74DKAsL1jxbXSv0jeql0ShN6ZuocULLgr+fztz2bsaBBLkQ==
-  dependencies:
-    "@egjs/list-differ" "^1.0.0"
-
-"@egjs/component@^2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@egjs/component/-/component-2.1.2.tgz#c466a0a6fc6ba2d479814dcbe6ee4643c25a2e5b"
-  integrity sha512-7tnPiqxbSZ0porzlm0+/O3qZdanMj0zOq0sb17wQXuaRG49XKKKJaO+SacGnZDqf308N5hzJ0m9fZ4+j+VBvXA==
-
-"@egjs/flicking@^3.4.2":
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/@egjs/flicking/-/flicking-3.4.2.tgz#7402e866a57e21c385356cdb7c877995dbc53656"
-  integrity sha512-hi2hUZ6XCRNB6zeo6PWR+9x0qAg9KsB6uH7DgffNzXHEGB++PaHQvvwb58NMyRtZAo7VV1iM94f2HFRH23dkfA==
-  dependencies:
-    "@egjs/axes" "^2.5.13"
-    "@egjs/component" "^2.1.2"
-    "@egjs/list-differ" "^1.0.0"
-
-"@egjs/hammerjs@^2.0.15":
-  version "2.0.15"
-  resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.15.tgz#b6ef675540d275f7445647a64413af425b97bb9a"
-  integrity sha512-BysW5KdNiJ1Qq4JRILaX/Lx2eJGyVPsFSwKA3aJbY+SKv57lS5ZFbEdlgj5shfYPLeJGEnK1WjfleDT+y4s1aQ==
-  dependencies:
-    "@types/hammerjs" "^2.0.36"
-
-"@egjs/list-differ@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@egjs/list-differ/-/list-differ-1.0.0.tgz#2277aff52e3e4bd9318d5c30ffc3ba3b6216f05e"
-  integrity sha512-HsbMKc0ZAQH+EUeCmI/2PvTYSybmkaWwakU8QGDYYgMVIg9BQ5sM0A0Nnombjxo2+JzXHxmH+jw//yGX+y6GYw==
-
-"@egjs/react-children-differ@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@egjs/react-children-differ/-/react-children-differ-1.0.0.tgz#646e90d15c51fce42b8746d1b1cae7bdab433536"
-  integrity sha512-ZWD0DQYvHs429Igo3eRsOK1Db5P+ldPwVWU2VHEAEZC7yVa1dCfp+NtxEOgmQGF/S2KQjsrJbVwBddG1PDbKhg==
-  dependencies:
-    "@egjs/children-differ" "^1.0.0"
-
-"@egjs/react-flicking@^3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@egjs/react-flicking/-/react-flicking-3.1.1.tgz#942e0c565a928f52c48cd27f4bbd557ab2efb3fd"
-  integrity sha512-Y7bcFQeD5iFl55faUmDc54Uejfl8MuXhBUr98wXhKse0NIJ/EWAR6erAXwllwXjJHScqkI4O271LZGH9zuZ+Hw==
-  dependencies:
-    "@egjs/children-differ" "^1.0.0"
-    "@egjs/flicking" "^3.4.2"
-    "@egjs/list-differ" "^1.0.0"
-    "@egjs/react-children-differ" "^1.0.0"
-
 "@emotion/cache@^10.0.17", "@emotion/cache@^10.0.9":
   version "10.0.19"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.19.tgz#d258d94d9c707dcadaf1558def968b86bb87ad71"
@@ -1936,11 +1878,6 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/hammerjs@^2.0.36":
-  version "2.0.36"
-  resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.36.tgz#17ce0a235e9ffbcdcdf5095646b374c2bf615a4c"
-  integrity sha512-7TUK/k2/QGpEAv/BCwSHlYu3NXZhQ9ZwBYpzr9tjlPIL2C5BeGhH3DmVavRx3ZNyELX5TLC91JTz/cen6AAtIQ==
-
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.1.tgz#42995b446db9a48a11a07ec083499a860e9138ff"
@@ -2198,13 +2135,6 @@
     "@webassemblyjs/ast" "1.8.5"
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
-
-"@welldone-software/why-did-you-render@^3.3.8":
-  version "3.3.8"
-  resolved "https://registry.yarnpkg.com/@welldone-software/why-did-you-render/-/why-did-you-render-3.3.8.tgz#a8b69e6d64e36bab676c03ca4630032bdf6ea5b1"
-  integrity sha512-DtmXat8vPJuQlSG9BD0dW9baViZUzFtHMMTHAGnQpRosq7U0kOkEoPXoLY/mRKEfI3SJkxX9R/dwIVh2CQ+rKw==
-  dependencies:
-    lodash "^4"
 
 "@wry/context@^0.4.0":
   version "0.4.4"
@@ -3537,6 +3467,11 @@ camelize@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
   integrity sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
+
+can-use-dom@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/can-use-dom/-/can-use-dom-0.1.0.tgz#22cc4a34a0abc43950f42c6411024a3f6366b45a"
+  integrity sha1-IsxKNKCrxDlQ9CxkEQJKP2NmtFo=
 
 caniuse-api@^3.0.0:
   version "3.0.0"
@@ -8259,7 +8194,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5:
+"lodash@>=3.5 <5", lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -10888,6 +10823,15 @@ react-error-overlay@^6.0.3:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.3.tgz#c378c4b0a21e88b2e159a3e62b2f531fd63bf60d"
   integrity sha512-bOUvMWFQVk5oz8Ded9Xb7WVdEi3QGLC8tH7HmYP0Fdp4Bn3qw0tRFmr5TW6mvahzvmrK4a6bqWGfCevBflP+Xw==
 
+react-facebook@^8.0.4:
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/react-facebook/-/react-facebook-8.0.4.tgz#751e3014cc3a90131400ff24b1c4673bd042722e"
+  integrity sha512-Uka4acqxPTBUeH6NGx9ReJyi2WTkyN9vqURH5766tBLyP8h98fCneE43/S8Kd2uupNCgWHn3yse9MTw1udRNdw==
+  dependencies:
+    "@babel/runtime" "^7.4.2"
+    can-use-dom "^0.1.0"
+    react-spinner-children "^1.0.8"
+
 react-fast-compare@^2.0.2:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
@@ -11130,6 +11074,14 @@ react-snap@^1.23.0:
     puppeteer "^1.8.0"
     serve-static "1.13.2"
     sourcemapped-stacktrace-node "2.1.8"
+
+react-spinner-children@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/react-spinner-children/-/react-spinner-children-1.0.8.tgz#6fdd6a89593c5f233bb56f4deccb812382e6ca74"
+  integrity sha1-b91qiVk8XyM7tW9N7MuBI4LmynQ=
+  dependencies:
+    prop-types "^15.6.0"
+    spin.js "^2.3.2"
 
 react-stars@^2.2.5:
   version "2.2.5"
@@ -12203,6 +12155,11 @@ speed-measure-webpack-plugin@^1.3.1:
   integrity sha512-qVIkJvbtS9j/UeZumbdfz0vg+QfG/zxonAjzefZrqzkr7xOncLVXkeGbTpzd1gjCBM4PmVNkWlkeTVhgskAGSQ==
   dependencies:
     chalk "^2.0.1"
+
+spin.js@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/spin.js/-/spin.js-2.3.2.tgz#6caa56d520673450fd5cfbc6971e6d0772c37a1a"
+  integrity sha1-bKpW1SBnNFD9XPvGlx5tB3LDeho=
 
 split-on-first@^1.0.0:
   version "1.1.0"
