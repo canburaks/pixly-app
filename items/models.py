@@ -446,7 +446,10 @@ class Movie(SocialMedia, SEO,MainPage):
         from archive.models import TmdbMovie
         tmovie, created = TmdbMovie.objects.update_or_create(movielens_id=self.id, tmdb_id=self.tmdb_id, registered=True)
         tmovie.save_data()
-        tmovie.set_omdb_data()
+        try:
+            tmovie.set_omdb_data()
+        except:
+            print("no omdb update_from_tmdb_movie")
         #tmovie.create_cast()
         #tmovie.create_crew()
         #tmovie.create_videos()
@@ -545,12 +548,15 @@ class Movie(SocialMedia, SEO,MainPage):
 
     def full_update(self):
         self.update_from_tmdb_movie()
+        #print("1")
         self.update_tags_from_data_keywords()
+        #print("2")
         self.set_seo_description_keywords()
-        try:
-            self.set_summary_from_omdb()
-        except:
-            print("no omdb")
+        #print("3")
+        #try:
+        #    self.set_summary_from_omdb()
+        #except:
+        #    #print("no omdb")
         self.set_seo_short_description()
         self.set_richdata()
 
