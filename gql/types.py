@@ -1758,7 +1758,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         
 
     def resolve_seo_title(self, info, *_):
-        return f"{self.movie.name.capitalize()} ({self.movie.year}), similar movies like {self.movie.name}"
+        return f"{self.movie.name.capitalize()} ({self.movie.year}), Discover Similar Movies Like {self.movie.name.lower()}"
         #if self.movie.seo_title == None:
         #    self.movie.seo_title = f"{self.movie.name} ({self.movie.year}) and Similar Movies - Pixly "
         #    self.movie.save()
@@ -1776,7 +1776,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
 
     def resolve_seo_short_description(self, info, *_):
         dsc = f"{self.movie.summary[:80]}..."
-        dsc =  f"Discover similar movies like '{self.movie.name}'. Movies with similar contents with {self.movie.name}."
+        dsc =  f"Discover similar movies like '{self.movie.name}'. films like {self.movie.name}, Movies with similar contents with {self.movie.name}."
         dsc = dsc + f" People who like {self.movie.name} also like these films... "
         dsc = dsc + f"{self.movie.name} "
         if self.movie.videos.all().count()> 0:
