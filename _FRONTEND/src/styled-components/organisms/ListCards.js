@@ -86,6 +86,8 @@ export const MovieSimilarCard = (props) => (
         src={props.item.coverPoster || props.item.poster}
         link={`/movie/${props.item.slug}`}
         header={props.item.name}
+        year={props.item.year}
+        imdbRating={props.item.imdbRating}
     >
         {props.children}
     </DarkCard>
@@ -128,12 +130,8 @@ export const CrewCard = (props) => (
             ratio={1.5}
             borderRadius={"8px"}
         />
-        <TextSection minHeight={20} 
-            header={props.crew.person.name}
-            headerSize="s"
-            text={props.crew.character}
-            textSize="xs" 
-            />
+        <Text fontSize={["xs", "xs", "s"]} fontWeight="bold">{props.crew.person.name}</Text>
+        <Text fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"}>{props.crew.character}</Text>
     </Card>
 )
 

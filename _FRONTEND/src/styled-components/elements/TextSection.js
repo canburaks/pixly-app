@@ -85,26 +85,26 @@ ArticleSection.defaultProps = {
 
 export const TextSection = (props) =>(
     <Box display="flex" 
-        flexDirection="column" justifyContent="flex-start" alignItems="center"
-        py={[3]} my={[2]}
+        flexDirection="column" justifyContent="flex-start" alignItems="flex-start"
+         my={[2]} mt={5}
         {...props} 
     >
-        <HeaderMini color={"dark"} textShadow={props.textShadow || "textLight"} fontWeight="bold" fontSize={props.headerSize} 
+        <HeaderMini color={"dark"} textShadow={props.textShadow || "textLight"} fontWeight="bold" fontSize={props.headerSize || ["l", "l", "xl", "xxl"]} 
             pt={"4px"} 
         >
             {props.header}
         </HeaderMini>
         {props.text && 
-        <Paragraph color={"dark"} fontWeight={400} fontSize={props.textSize} 
+        <Text color={"dark"} fontWeight={400} fontSize={props.textSize} 
             minHeight={30}  mt={[1]} maxHeight={200} textHidden={props.textHidden}
         >
             {props.text}
-        </Paragraph>}
+        </Text>}
+        {props.children}
     </Box>
 )
 
 TextSection.defaultProps = {
-    headerSize:"m",
     textSize:"s"
 }
 

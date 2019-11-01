@@ -213,10 +213,10 @@ export const MOVIE = gql`
             }
         },
         similars{
-          id, name, slug, poster, coverPoster, hasCover
+          id, name,year,imdbRating slug, poster, coverPoster, hasCover, tags{slug, name}
         },
         contentSimilars{
-            commonTags, movie{id, name, slug, poster, coverPoster, hasCover}
+            commonTags, movie{id, name, year,imdbRating  slug, poster, coverPoster, hasCover tags{slug, name}}
         },
         tags{
             name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag

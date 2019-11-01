@@ -26,7 +26,11 @@ import {
 	HiddenHeader,
 	HeaderMini,
 	Grid,
-	HiddenSpan
+	HiddenSpan,
+	HeaderText,Text,
+	Span,
+	TextSection,
+	MovieRichCardBox
 } from "../../styled-components";
 
 import "../pages.css";
@@ -99,9 +103,20 @@ const MoviePage = props => {
 			.slice(0, 10)
 			.map(item => item.movie.name.trim())
 			.join(", ") + ".";
+
 	const invtext = `Some of the movies like '${item.name} - ${item.year}' are  ${similarnames}`;
 	const vistext = `Some similar movies  of '${item.name} - ${item.year}' are  ${similarnames}`;
-	//console.log(similarCover, similarNonCover)
+
+	const listsThatInvolveText = useMemo(() => {
+		if(item.appears.length > 0){
+			const directornames = item.appears.map(list => list.relatedPersons[0].name).join(", ")
+			const text = `${item.name} is the favorite movie of ${directornames}. You can check these great film lists that includes ${item.name}`
+			return text
+		}
+		return null
+	},[item.slug] )
+
+	//console.log(item.appears, isFavOfDirectors)
 	//console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
 	//console.log(item.seoShortDescription)
 	//console.log(keywords)
@@ -136,29 +151,31 @@ const MoviePage = props => {
 				</HiddenHeader>
 				{item.summary && item.summary.length > 50 && (
 					<>
-						<HeaderMini>Summary</HeaderMini>
+						<HeaderText fontSize={["xxl", "xxl", "xxxl", "large"]} mt={[3]}>{item.name}</HeaderText>
 						<p className="t-m mar-b-2x">{item.summary}</p>
 					</>
 				)}
 
 				{/*<!--SIMILAR Section--> */}
-				{similarPlaceholder > 0 && (
+				{similarPlaceholder.length > 0 && (
 					<>
-						<HeaderMini>People Also Like</HeaderMini>
-						<p className="t-m mar-b-2x">
-							People who like
-							<span className="t-bold"> '{item.name}' </span>
-							also like and give high ratings below movies. This
-							can be a good indicator that if you like '
-							{item.name}' probably you will also like these
-							movies. We have advanced algorithms and fine tuned
-							filtering mechanisms that choose these movies
-							wisely. If you have any issues please feel free to
-							write us from the bottom part of the page.
-						</p>
-						<p>{invtext}</p>
+						<TextSection header={"People Also Like"}>
+							<Text mt={[2]}>
+								People who like
+								<Span fontWeight="bold" opacity={1}> {item.name} </Span>
+								also like and give high ratings below movies. This
+								can be a good indicator that if you like '
+								{item.name}' probably you will also like these
+								movies. We have advanced algorithms and fine tuned
+								filtering mechanisms that choose these movies
+								wisely. If you have any issues please feel free to
+								write us from the bottom part of the page.
+							</Text>
+							<Text>{invtext}</Text>
+						</TextSection>
+
+						<MovieRichCardBox items={similarPlaceholder} />
 						<hr />
-						<MovieCoverBox items={similarPlaceholder} key={item.slug}/>
 					</>
 				)}
 
@@ -167,30 +184,27 @@ const MoviePage = props => {
 				{/*<!--CONTENT SIMILAR Section--> */}
 				{contentSimilarCover.length > 0 && (
 					<>
-						<HeaderMini>Similar Movies</HeaderMini>
-						<p className="t-m mar-b-2x">
+						<HeaderMini mt={[5]}>Similar Movies <Span fontSize={["14px", "16px"]} opacity={0.8} color="dark"> like {item.name}</Span></HeaderMini>
+						<Text mt={[2]}>
 							Those movies have content similarities with{" "}
-							<span className="t-bold">'{item.name}'</span>. If
+							<Span fontWeight="bold" opacity={1}> {item.name} </Span>. If
 							you like any topic or tag under the below movies,
 							you may also be interested them. You can also share
 							any topic or tag to add these movies, please feel
 							free to contact us. We are passionate about
 							improving our recommendation mechanism. Therefore
 							any feedback is welcome.
-						</p>
-						<p>{vistext}</p>
+						</Text>
+						<Text>{vistext}</Text>
+						<MovieSimilarBox items={contentSimilarCover}  />
 						<hr />
-						<MovieSimilarBox items={contentSimilarCover} key={item.slug} />
 					</>
 				)}
 
 				{/*<!--APPEARS IN  LIST Section--> */}
 				{item.appears.length > 0 && (
 					<>
-						<h4 className="t-xl t-bold mar-b-2x">
-							LISTS THAT INVOLVED
-						</h4>
-						<hr />
+						<TextSection header={"Movie Lists"} text={listsThatInvolveText} />
 
 						<GridBox size="m">
 							{item.appears.map((list, index) => (
@@ -233,20 +247,27 @@ const MoviePage = props => {
 				<br/>
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
-					<Grid columns={[3,4,6,6,6,6,8]} width={"100%"}>
+					<>
+					<HeaderMini my={[2]} mt={[5]}>Cast & Crew</HeaderMini>
+					<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>
 						{allCrews.map((crew, i) => (
 							<CrewCard crew={crew} key={crew.person.name} />
 								))}
 					</Grid>
+					</>
 				)}
 				
 				<br/>
 
 				{/* VIDEO */}
-				{hasVideos > 0 && <YoutubePlayer
+				{hasVideos > 0 && 
+					<>
+					<HeaderMini my={[2]} mt={[5]}>{item.name} Videos</HeaderMini>
+					<YoutubePlayer
 						videos={item.videos.reverse()}
 						title={item.name + " Videos"}
 					/>
+					</>
 				}
 
 			</ContentContainer>
