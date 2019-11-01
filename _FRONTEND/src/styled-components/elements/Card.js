@@ -15,37 +15,26 @@ export const MovieRichCard = (props) => {
     <DarkCard 
         src={props.item.coverPoster || props.item.poster}
         link={`/movie/${props.item.slug}`}
+        year={props.item.year}
+        imdbRating={props.item.imdbRating}
         header={props.item.name}
         textSize={["13px", "13px", "13px","14px", "14px", "16px"]}
         buttonText={"Show More"}
     >
-        <FlexBox justifyContent="space-between" alignItems={"center"} mb={[1]} mt={[2]} width="100%">
-            {props.item.imdbRating && 
-                <ImdbRatingIcon 
-                    rating={props.item.imdbRating} 
-                    size={"22px"} 
-                    fill="#fac539"
-                />}
-            {props.item.year && 
-                <YearClockIcon fill="white"
-                    year={props.item.year} 
-                    size={"22px"} 
-                    ml={[2,2,2,2,3]}
-                />}
-        </FlexBox>
 
         {/* MUTATIONS */}
         <FlexBox justifyContent="space-between" alignItems={"center"} mb={[1]} mt={[2]} width="100%">
             <RatingMutation  item={props.item} />
             <BookmarkMutation id={props.item.id} active={props.item.isBookmarked} size={"28px"}/>
         </FlexBox>
-        <TagBox tags={props.item.tags} num={8} />
+
+        <TagBox tags={props.item.tags || []} num={8} />
         <Text mt="auto"
             fontSize={["13px", "13px", "13px","14px", "14px", "16px"]}
             color="rgb(210, 210, 210)"
             my={[2]}
             >
-            {props.item.summary.length > 250 ? props.item.summary.slice(0,250) + "..." : props.item.summary}
+            {(props.item.summary && props.item.summary.length > 250) ? props.item.summary.slice(0,250) + "..." : props.item.summary}
         </Text>
 
     </DarkCard>
@@ -70,6 +59,20 @@ export const DarkCard = props => (
             boxShadow="card"
             textShadow="textLight"
         />
+        <FlexBox justifyContent="space-between" alignItems={"center"} mb={[1]} mt={[2]} px={[1]} width="100%">
+            {props.imdbRating && 
+                <ImdbRatingIcon 
+                    rating={props.imdbRating} 
+                    size={"22px"} 
+                    fill="#fac539"
+                />}
+            {props.year && 
+                <YearClockIcon fill="white"
+                    year={props.year} 
+                    size={"22px"} 
+                    ml={[2,2,2,2,3]}
+                />}
+        </FlexBox>
         <FlexBox 
             flexDirection="column" justifyContent="flex-start" 
             width={"100%"} height="auto" 

@@ -52,7 +52,6 @@ export const HiddenSubHeader = styled("h4")`
     */
 `
 export const Span = styled("span")`
-    font-size:12px;
     color: ${themeGet("colors.dark")};
     opacity:0.75;
     visibility: ${props => props.invisible ? "hidden" : "visible"}
