@@ -158,10 +158,24 @@
     "include": [
       "",
       "/",
-
       "/movie/samsara-2001",
       "/movie/gladiator-1992",
-      "/movie/the-hills-have-eyes-1977"
+      "/movie/the-hills-have-eyes-1977",
+      "/movie/metisse-1993",
+      "/movie/the-aeronauts-2019",
+      "/movie/daniel-isnt-real-2019",
+      "/movie/kill-chain-2019",
+      "/movie/vision-portraits-2019",
+      "/movie/seventeen-2019",
+      "/movie/pariyerum-perumal-2018",
+      "/movie/an-officer-and-a-spy-2019",
+      "/movie/silicon-valley-2013",
+      "/movie/65-toman-per-meter-2019",
+      "/movie/homeward-2019",
+      "/movie/the-secret-of-a-leader-2019",
+      "/movie/now-something-is-slowly-changing-2019",
+      "/movie/hard-paint-2019",
+      "/movie/in-this-gray-place-2019"
     ],
     "publicPath": "/"
   }
