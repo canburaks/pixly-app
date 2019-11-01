@@ -120,7 +120,19 @@ movie__slugs = [
     "movie/mary-queen-of-scots-2018",
     "movie/aquaman-2018",
     "movie/how-to-train-your-dragon-2010",
-    "movie/how-to-train-your-dragon-2-2014"
+    "movie/how-to-train-your-dragon-2-2014",
+    "movie/adults-in-the-room-2019",
+    "movie/papicha-2019",
+    "movie/the-irishman-2019",
+    "movie/matthias-maxime-2019",
+    "movie/the-death-and-return-of-superman-2019",
+    "movie/knives-out-2019",
+    "movie/the-rising-hawk-2019",
+    "movie/doctor-sleep-2019",
+    "movie/terminator-dark-fate-2019",
+    "movie/the-true-don-quixote-2019",
+    "movie/devils-revenge-2019",
+    "movie/wonder-woman-bloodlines-2019",
 ]
 
 person__slugs = [
@@ -458,6 +470,18 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/mary-queen-of-scots-2018",
       "/movie/aquaman-2018",
       "/movie/how-to-train-your-dragon-2010",
-      "/movie/how-to-train-your-dragon-2-2014"
+      "/movie/how-to-train-your-dragon-2-2014",
+      "/movie/adults-in-the-room-2019",
+      "/movie/papicha-2019",
+      "/movie/the-irishman-2019",
+      "/movie/matthias-maxime-2019",
+      "/movie/the-death-and-return-of-superman-2019",
+      "/movie/knives-out-2019",
+      "/movie/the-rising-hawk-2019",
+      "/movie/doctor-sleep-2019",
+      "/movie/terminator-dark-fate-2019",
+      "/movie/the-true-don-quixote-2019",
+      "/movie/devils-revenge-2019",
+      "/movie/wonder-woman-bloodlines-2019"
     ],
 """
