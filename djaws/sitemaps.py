@@ -136,7 +136,8 @@ movie__slugs = [
 
     "movie/samsara-2001",
     "movie/gladiator-1992",
-    "movie/the-hills-have-eyes-1977"
+    "movie/the-hills-have-eyes-1977",
+    "movie/metisse-1993"
 ]
 
 person__slugs = [
