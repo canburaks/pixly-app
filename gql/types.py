@@ -1775,19 +1775,27 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         return self.movie.seo_description
 
     def resolve_seo_short_description(self, info, *_):
-        dsc = f"{self.movie.summary[:80]}..."
-        dsc =  f"Discover similar movies like '{self.movie.name}'. films like {self.movie.name}, Movies with similar contents with {self.movie.name}."
-        dsc = dsc + f" People who like {self.movie.name} also like these films... "
-        dsc = dsc + f"{self.movie.name} "
-        if self.movie.videos.all().count()> 0:
-            dsc = dsc + f" trailer, "
-        if self.movie.facebook:
-            dsc = dsc + f"facebook, "
-        if self.movie.facebook:
-            dsc = dsc + f"instagram, "
-        if self.movie.facebook:
-            dsc = dsc + f"twitter, "
-        dsc += "and more."
+        dsc = f"{self.movie.summary[:50]}..."
+        qs = self.movie.content_similar_object.all()
+        if qs.exists():
+            dsc += f"The Most similar movies to {self.movie.name}: "
+            content_object = qs.first()
+            similars = content_object.similars.order_by("-imdb_rating")[:8].values_list("name", "year")
+            for m in similars:
+                dsc += f"{m[0]} ({m[1]})"
+        else:
+            dsc =  f"Discover similar movies like '{self.movie.name}'. films like {self.movie.name}, Movies with similar contents with {self.movie.name}."
+            dsc = dsc + f" People who like {self.movie.name} also like these films... "
+            dsc = dsc + f"{self.movie.name} "
+            if self.movie.videos.all().count()> 0:
+                dsc = dsc + f" trailer, "
+            if self.movie.facebook:
+                dsc = dsc + f"facebook, "
+            if self.movie.facebook:
+                dsc = dsc + f"instagram, "
+            if self.movie.facebook:
+                dsc = dsc + f"twitter, "
+            dsc += "and more."
         return dsc
         #return self.movie.seo_short_description
 
