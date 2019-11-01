@@ -133,6 +133,10 @@ movie__slugs = [
     "movie/the-true-don-quixote-2019",
     "movie/devils-revenge-2019",
     "movie/wonder-woman-bloodlines-2019",
+
+    "movie/samsara-2001",
+    "movie/gladiator-1992",
+    "movie/the-hills-have-eyes-1977"
 ]
 
 person__slugs = [
