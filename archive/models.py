@@ -372,8 +372,11 @@ class TmdbMovie(models.Model):
         except:
             print("crew error")
         tm.create_videos()
-        tm.set_omdb_data(force=True)
-        movie.set_imdb_rating_and_votes()
+        try:
+            movie.set_imdb_rating_and_votes()
+            tm.set_omdb_data(force=True)
+        except:
+            print("no omdb")
         movie.full_update()
 
 

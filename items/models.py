@@ -547,7 +547,10 @@ class Movie(SocialMedia, SEO,MainPage):
         self.update_from_tmdb_movie()
         self.update_tags_from_data_keywords()
         self.set_seo_description_keywords()
-        self.set_summary_from_omdb()
+        try:
+            self.set_summary_from_omdb()
+        except:
+            print("no omdb")
         self.set_seo_short_description()
         self.set_richdata()
 
