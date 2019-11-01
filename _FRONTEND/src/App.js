@@ -31,6 +31,7 @@ import { Box, ScrollTopButton, navbarheight } from "./styled-components"
 import themes from './styled-components/theme'
 import { Clippy } from './styled-components'
 import { GlobalContext } from "./";
+import { FacebookProvider } from 'react-facebook';
 
 
 const App = (props) => {
@@ -47,6 +48,7 @@ const App = (props) => {
 
     return (
     <ThemeProvider theme={themes.default}>
+        <FacebookProvider appId="371976677063927">
         <div className="App" theme="palette-1" >
             <NavBar />
             <Clippy />
@@ -63,6 +65,7 @@ const App = (props) => {
             <ScrollTopButton />
             <Footer />
         </div>
+        </FacebookProvider>
     </ThemeProvider>
 
     );

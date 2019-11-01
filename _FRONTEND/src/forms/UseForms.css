@@ -85,3 +85,25 @@ input, select{
 	border-bottom: 3px solid red !important;
 }
 
+/* FACEBOOK LOGIN BUTTON OVERRIDE */
+div.fb-cont-box > button {
+	margin-top:20px;
+	width:100%;
+	height:30px;
+	background-color: transparent;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	border: unset;
+}
+.fbook-svg-login {
+	border: unset;
+	width:100%;
+	height:30px;
+}
+
+svg.fbook-svg-logout {
+	border: unset;
+	width:100%;
+	height:30px;
+}

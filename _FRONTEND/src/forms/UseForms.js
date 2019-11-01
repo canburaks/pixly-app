@@ -4,10 +4,10 @@ import useForm from "react-hook-form";
 import { Mutation } from "react-apollo";
 import { PROFILE_MUTATION } from "../functions/mutations";
 import UploadAvatar from "./UploadAvatar";
-import { FbookAuthButton } from "../functions/facebook";
+import { FbookAuthButton } from "../functions/react-facebook";
 import { GlobalContext } from "../";
 //import { Input } from "../styled-components"
-import { Input } from "../styled-components";
+import { Input, FlexBox } from "../styled-components";
 
 import "./UseForms.css";
 import "./ProfileInfoForm.css";
@@ -192,9 +192,9 @@ const ProfileForm = props => {
 			</div>
 			<Input className="frm-item info-submit" type="submit" />
 
-			<div className="fbox-r jcfs aic w100">
+			<FlexBox justifyContent="center" alignItems="center" className="fb-cont-box">
 				<FbookAuthButton />
-			</div>
+			</FlexBox>
 		</form>
 	);
 };

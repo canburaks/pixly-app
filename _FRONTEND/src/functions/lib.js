@@ -118,8 +118,8 @@ export function authCheck(){
     return false
 }
 
-export function print(text, object=null, log=development){
-    if (log){console.log(text, object)}
+export function print(...props){
+    if (development){console.log(...props)}
 }
 
 export function RouteParams(props, offset){
