@@ -82,7 +82,7 @@ class MovieAdmin(admin.ModelAdmin):
     raw_id_fields = ['tags',]
     readony_fields = ("homepage", "twitter","facebook", "instagram", "imdb",)
     exclude = ('data', "director")
-
+    list_filter = ("main_page")
     inlines = [TagInline,CrewStackInline,]
     search_fields = ('name', "tmdb_id", 'id', )
 

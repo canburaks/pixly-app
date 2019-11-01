@@ -174,6 +174,7 @@ person__slugs = [
     "person/gabrielle-union-17773",
     "person/jared-leto-7499",
     "person/virginia-madsen-12519",
+    "person/john-cassini-12055"
 ]
 liste_slugs =[
     "list/all-palme-dor-winners-cannes-film-festival/1",
