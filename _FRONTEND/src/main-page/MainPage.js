@@ -123,8 +123,8 @@ const MainPage = React.memo(() => {
 									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
 									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
 									<Box  my={[3]}>
-										<Button borderRadius={"6px"} className="button button-primary" onClick={insertJoinForm} width={"120px"} height={"60px"}>Join</Button>
-										<BubbleButton borderRadius={"6px"} className="button" onClick={insertLoginForm} width={"120px"} height={"60px"}>Login</BubbleButton>
+										<Button borderRadius={"6px"} className="button button-primary" onClick={insertJoinForm} width={"120px"} height={"40px"}>Join</Button>
+										<BubbleButton borderRadius={"6px"} className="button" onClick={insertLoginForm} width={"120px"} height={"40px"}>Login</BubbleButton>
 									</Box>
 									<FlexBox>
 										{/*<Fb.Logout />
