@@ -31,6 +31,7 @@ django-imagekit==4.0.2
 django-mysql==2.4.1
 django-redis==4.9.0
 django-rest-knox==3.1.5
+django-sslserver==0.21
 django-storages==1.7.1
 django-warrant==0.1.0
 django-webpack-loader==0.6.0

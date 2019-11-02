@@ -27,90 +27,6 @@ from .search import ComplexSearchType, ComplexSearchQuery
 from .persona_query import CustomPersonaType
 
 
-def paginate(query, first, skip):
-    return query[int(skip) : int(skip) + int(first)]
-
-def multi_word_search(text):
-    text = text.replace("'" , " ")
-    text = text.replace("," , " ")
-    text_filtered = text.split(" ")
-    word_list = list(filter(lambda x: len(x)>1 and (x.lower() !="the"), text_filtered))
-    word_list = list(map( lambda x: x.lower(), word_list ))
-    return word_list
-
-
-
-def is_owner(self, info):
-    user = info.context.user
-    if user.username == self.username:
-        return True
-    return False
-
-def year_filter(year, min_year, max_year):
-    if year!=None:
-        return Q(year=year)
-    elif min_year!=None and max_year!=None:
-        return Q(Q(year__gte=min_year) & Q(year__lte=max_year))
-    
-def rating_filter(min_rating, max_rating):
-    if min_rating!=None and max_rating!=None:
-        return Q(Q(imdb_rating__gte=min_rating) & Q(imdb_rating__lte=max_rating))
-
-def filter_page_function(kwargs):
-    min_year = kwargs.get("min_year") if kwargs.get("min_year")!=None else 1800
-    max_year = kwargs.get("max_year") if kwargs.get("max_year")!=None else 2025
-    year = kwargs.get("year") 
-    min_rating = kwargs.get("min_rating") if kwargs.get("min_rating")!=None else 1
-    max_rating = kwargs.get("max_rating") if kwargs.get("max_rating")!=None else 10
-
-    movielens_ids = kwargs.get("movielens_ids")
-    custom_ids = kwargs.get("custom_ids")
-
-
-    first = kwargs.get("first")
-    skip = kwargs.get("skip")
-        
-    print(year, min_year, max_year, min_rating, max_rating, first, skip)
-    # OPENING PAGE
-    if year==None and min_year==None and max_year==None and min_rating==None and max_rating==None and len(movielens_ids)==0 and len(custom_ids)==0:
-        return Movie.objects.filter(year__gte=2019).defer("summary", "director", "data").order_by("?")[:50]
-
-
-    #FIRST TAG MOVIES
-    if len(movielens_ids)>0 or len(custom_ids)>0:
-        q1 = Q(movielens_id__in=movielens_ids)
-        q2 = Q(custom_id__in=custom_ids)
-        q3 = Q(q1 | q2)
-
-        tag_qs = Tag.objects.prefetch_related("related_movies").filter(q3)
-        if tag_qs.exists():
-            movie_ids = []
-            for t in tag_qs:
-                tmid = [x.id for x in t.related_movies.all().only("id")]
-                movie_ids = movie_ids + tmid
-            qs = Movie.objects.filter(id__in=movie_ids).defer("summary", "director", "data")
-            print("tqs",qs.count())
-            
-    else:
-        qs = Movie.objects.all().defer("summary", "director", "data")
-
-
-    if year!=None:
-        qs = qs.filter(year=year)
-
-    #MIN-MAX YEAR FILTER
-    qs = qs.filter(year__gte=min_year, year__lte=max_year)
-
-    #IMDB RATING FILTER
-    qs = qs.filter(imdb_rating__gte=min_rating, imdb_rating__lte=max_rating)
-    quantity = qs.count()
-
-    #PAGINATE
-    if first!=None and skip!=None:
-        return qs.order_by("-year")[skip : first + skip], quantity
-    #FIRST PAGE
-    return qs.order_by("-year")[:50], quantity
-
 
 class ListQuery(object):
     list_of_movie_search = graphene.List(MovieType,
@@ -859,7 +775,7 @@ from .twitter import TwitterMutation
 class Mutation(graphene.ObjectType):
     contact_mutation = ContactMutation.Field()
 
-    facebook_mutation = FacebookMutation.Field()
+    facebook_connect = FacebookMutation.Field()
     twitter_mutation = TwitterMutation.Field()
 
     valid_username = UsernameValidation.Field()
@@ -903,6 +819,94 @@ class Mutation(graphene.ObjectType):
     change_forget_password = ChangeForgetPassword.Field() #change with verification code
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
+
+
+
+
+def paginate(query, first, skip):
+    return query[int(skip) : int(skip) + int(first)]
+
+def multi_word_search(text):
+    text = text.replace("'" , " ")
+    text = text.replace("," , " ")
+    text_filtered = text.split(" ")
+    word_list = list(filter(lambda x: len(x)>1 and (x.lower() !="the"), text_filtered))
+    word_list = list(map( lambda x: x.lower(), word_list ))
+    return word_list
+
+
+
+def is_owner(self, info):
+    user = info.context.user
+    if user.username == self.username:
+        return True
+    return False
+
+def year_filter(year, min_year, max_year):
+    if year!=None:
+        return Q(year=year)
+    elif min_year!=None and max_year!=None:
+        return Q(Q(year__gte=min_year) & Q(year__lte=max_year))
+    
+def rating_filter(min_rating, max_rating):
+    if min_rating!=None and max_rating!=None:
+        return Q(Q(imdb_rating__gte=min_rating) & Q(imdb_rating__lte=max_rating))
+
+def filter_page_function(kwargs):
+    min_year = kwargs.get("min_year") if kwargs.get("min_year")!=None else 1800
+    max_year = kwargs.get("max_year") if kwargs.get("max_year")!=None else 2025
+    year = kwargs.get("year") 
+    min_rating = kwargs.get("min_rating") if kwargs.get("min_rating")!=None else 1
+    max_rating = kwargs.get("max_rating") if kwargs.get("max_rating")!=None else 10
+
+    movielens_ids = kwargs.get("movielens_ids")
+    custom_ids = kwargs.get("custom_ids")
+
+
+    first = kwargs.get("first")
+    skip = kwargs.get("skip")
+        
+    print(year, min_year, max_year, min_rating, max_rating, first, skip)
+    # OPENING PAGE
+    if year==None and min_year==None and max_year==None and min_rating==None and max_rating==None and len(movielens_ids)==0 and len(custom_ids)==0:
+        return Movie.objects.filter(year__gte=2019).defer("summary", "director", "data").order_by("?")[:50]
+
+
+    #FIRST TAG MOVIES
+    if len(movielens_ids)>0 or len(custom_ids)>0:
+        q1 = Q(movielens_id__in=movielens_ids)
+        q2 = Q(custom_id__in=custom_ids)
+        q3 = Q(q1 | q2)
+
+        tag_qs = Tag.objects.prefetch_related("related_movies").filter(q3)
+        if tag_qs.exists():
+            movie_ids = []
+            for t in tag_qs:
+                tmid = [x.id for x in t.related_movies.all().only("id")]
+                movie_ids = movie_ids + tmid
+            qs = Movie.objects.filter(id__in=movie_ids).defer("summary", "director", "data")
+            print("tqs",qs.count())
+            
+    else:
+        qs = Movie.objects.all().defer("summary", "director", "data")
+
+
+    if year!=None:
+        qs = qs.filter(year=year)
+
+    #MIN-MAX YEAR FILTER
+    qs = qs.filter(year__gte=min_year, year__lte=max_year)
+
+    #IMDB RATING FILTER
+    qs = qs.filter(imdb_rating__gte=min_rating, imdb_rating__lte=max_rating)
+    quantity = qs.count()
+
+    #PAGINATE
+    if first!=None and skip!=None:
+        return qs.order_by("-year")[skip : first + skip], quantity
+    #FIRST PAGE
+    return qs.order_by("-year")[:50], quantity
+
 
 """
 mutation TokenAuth($username: String!, $password: String!) {

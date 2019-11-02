@@ -1,90 +1,110 @@
 import React, { useState } from "react";
-import { useMutation } from '@apollo/react-hooks';
-
-import { FACEBOOK_MUTATION } from "./mutations";
+import { Mutation } from 'react-apollo'
+import { FACEBOOK_CONNECT } from "./mutations";
 import { print } from "./lib"
-import { LoginButton, Status, Initialize } from 'react-facebook';
+//import {FbookLoginIcon, FbookLogoutIcon } from "../assets/f-icons/fbook"
 
 
-function isConnected(){
-    const FB = window.FB;
-    if (FB) FB.getLoginStatus(function(response) {
-        //console.log("fbook auth check", response)
-        return response.status === "connected"
-    });
-    return false
+
+function loginStatus(callback){
+    const FB = window.FB
+    FB.getLoginStatus(response => callback(response));
 }
 
 
 export const FbookAuthButton = (props) =>{
-    const initialStatus = isConnected()
-    const [localstatus, setStatus] = useState(initialStatus)
-    const [facebookMutation, { data }] = useMutation(FACEBOOK_MUTATION, {
-        onError:() => print("fbook mutation error"),
-        onCompleted: (data) => (print("fbook mutation success", data), setStatus(true))
-    });
-
+    const [status, setStatus] = useState(false)
     //print("initial auth status", status)
 
+    const FB = window.FB
+    if (FB){
+
     
-    print("fbook status", localstatus)
-
+    FB.getLoginStatus(function(response) {
+        console.log("resp",response)
+        if (response.status === "connected" && status === false){
+            setStatus(true);
+        }
+        else if (response.status !== "connected" && status === true){
+            setStatus(false)
+        }   
+    });
+    }
+    console.log("fbook status", status)
     function logoutHandler(){
+        const FB = window.FB;
+        //print("logout-cb FB", FB)
+        if (FB){
+            FB.logout(() => setStatus(false))
+            //print("logged out")
+        }
+    }
+    function loginCallback(){
         const FB = window.FB
-        FB.logout((e) => {
-                console.log("logout response", e)
-                setStatus(false)
+        setStatus(true)
+        FB.api('/me', function(response) {
+            console.log(JSON.stringify(response));
+        });
+        FB.getAuthResponse(e => console.log("sync response", e))
+    }
+
+    const Button = () => status===false 
+        ? <FbookLoginButton loginCallback={loginCallback}/>
+        : <LogoutButton clickHandler={logoutHandler} />
+
+    return <Button />
+}
+
+const FbookLoginButton = ({loginCallback}) =>{
+
+    const loginHandler = (mutation) => {
+        const FB = window.FB
+        FB.login(function(response) {
+            if (response.status === 'connected') {
+                // Logged into your webpage and Facebook.
+                const data = JSON.stringify(response.authResponse)
+                console.log("login response ", response, FB)
+                //mutation({variables:{data}})
+                loginCallback()
+            } else {
+                print("failed login")
+                // The person is not logged into your webpage or we are unable to tell. 
             }
-        )
-        setStatus(false)
+        }, { 
+            scope: "email,public_profile",
+            info_fields: "email,name",
+            return_scopes: true
+        });
     }
-
-
-    const handleSuccess = (rawdata) => {
-        print("rawdata", rawdata.profile)
-        const data = JSON.stringify(rawdata)
-        facebookMutation({variables:{data}})
-    }
-    const handleError = (error) => {
-        console.log("error", error)
-        if (localstatus === true) setStatus(false)
-    }
-
-    const Login = () => (
-        <LoginButton 
-            scope="email"
-            onCompleted={handleSuccess}
-            onError={handleError}
-        >
-            <CustomLoginButton />
-        </LoginButton>
-    )
-
-    const Logout = () => (
-        <Initialize>
-          {({ isReady, api }) => {
-            //api.ui(...) our custom async/await api
-            // original FB api is available via window.FB
-            if (isReady){
-                return <CustomLogoutButton clickHandler={logoutHandler} />
-            }
-          }}
-        </Initialize>
-    )
-
     return (
-        <Status>
-          {({ loading, status }) => (
-            (status === "unknown" || localstatus===false ) ? <Login  /> : (status === "connected" && <Logout />)
-          )}
-        </Status>
+    <Mutation 
+        mutation={FACEBOOK_MUTATION} 
+        onCompleted={d => print("mutation completed: ", d)}
+        onError={e => print("mutation error:", e)}
+        >
+        {mutation =>(<FbLoginButton clickHandler={() => loginHandler(mutation)} />)}
+    </Mutation>
     )
 }
 
 
-const CustomLoginButton = (props) => (
-    <svg width="202" className="click fbook-svg-login" height="38" viewBox="0 0 202 38" fill="none" xmlns="http://www.w3.org/2000/svg" 
-        style={{height:25}} {...props}
+const FbLoginButton = ({clickHandler}) => (
+<div className="fb-login-button" 
+    data-width="80" 
+    data-size="small" 
+    data-button-type="continue_with" 
+    data-auto-logout-link="false" 
+    data-use-continue-as="true"
+    data-scope="public_profile,email"
+    onClick={clickHandler}
+>
+<LoginButton/>
+</div>
+)
+
+const LoginButton = ({clickHandler}) => (
+    <svg width="202" className="click fbook-svg fbook-login" height="38" viewBox="0 0 202 38" fill="none" xmlns="http://www.w3.org/2000/svg" 
+        onClick={clickHandler} style={{height:25}}
         >
         <rect x="23" y="5" width="177.137" height="28" rx="7" fill="white" stroke="#2A426E" strokeWidth="2"/>
         <g filter="url(#filter0_d)">
@@ -105,8 +125,8 @@ const CustomLoginButton = (props) => (
         </defs>
     </svg>
 )
-const CustomLogoutButton = ({clickHandler}) => (
-    <svg width="114" className="click fbook-svg-logout" height="38" viewBox="0 0 114 38" fill="none" xmlns="http://www.w3.org/2000/svg" 
+const LogoutButton = ({clickHandler}) => (
+    <svg width="114" className="click fbook-svg fbook-logout" height="38" viewBox="0 0 114 38" fill="none" xmlns="http://www.w3.org/2000/svg" 
         onClick={clickHandler} style={{height:25}}
         >
         <rect x="23" y="5" width="90" height="28" rx="7" fill="white" stroke="#2A426E" strokeWidth="2"/>
@@ -127,39 +147,153 @@ const CustomLogoutButton = ({clickHandler}) => (
         </filter>
         </defs>
     </svg>
+
 )
+function fbookAuthStatus(callback){
+    const FB = window.FB;
+    FB.getLoginStatus(function(response) {
+        callback(response);
+    });
+}
+
+/*
+export const FbookAuthButton = () =>{
+    const [status, setStatus] = useState(null)
+    const [error, setError] = useState("")
+
+    print("FbookAuth component state;",  error, status)
+
+    function logoutHandler(){
+        const FB = window.FB;
+        print("logout-cb FB", FB)
+        if (FB){
+            FB.logout(() => setStatus(false))
+            print("logged out")
+        }
+    }
+    return(
+        <Initialize>
+            {({ isReady, api }) => {
+                if (!isReady) return <p>Not Ready</p>
+                const fbook = window.FB
+                fbook.getLoginStatus(response => {
+                    print("response", response);
+                    if (response.status === "connected" && status !== true){
+                        print("Logged in")
+                        setStatus(true)
+                    }
+                })
 
 
+                if (status !== true) return (
+                    <FbookLogin 
+                        successHandler={(resp) =>  setStatus(resp)} 
+                        errorHandler={(type, e) => {type === "fbook" ? setError(e) : print(e)}} 
+                    />)
+                else return (
+                    <button  onClick={logoutHandler}>
+
+                    <div className="fbox-r jcfs aic" style={styles.box}>
+                        <svg style={styles.icon}
+                            aria-hidden="true" focusable="false" 
+                            className="svg-inline--fa fa-facebook-square fa-w-14 fbook-icon"
+                            role="img" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512" 
+                        >
+                            <title>Logour</title>
+                            <path fill="currentColor" d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path>
+                        </svg>
+                        <span className="fbook-button fbook-login t-xs" id="fbook-login">Logout</span>
+                        {window.FB && window.FB.XFBML.parse(document.getElementById('fbook-logout'), () => console.log("xfbml render logout"))}
+                    </div>
+                    </button>
+                    )
+            }}
+
+        </Initialize>
+    )
+}
+
+export const FbookLogin = ({successHandler, errorHandler}) => {
+
+    return(
+        <Mutation 
+            mutation={FACEBOOK_MUTATION} 
+            onCompleted={d => print("mutation completed: ", d)}
+            onError={e => (print("mutation error:", e), errorHandler("mutation", e))}
+        >
+        {mutation =>(
+            <LoginButton
+                scope="public_profile,email"
+                onCompleted={(data) => (print("fbook login success"), mutation({variables:{data:JSON.stringify(data)}}), successHandler(true)) }
+                onError={e => (print("fbook login error:", e), errorHandler("fbook", e))}
+            >
+                <div className="fbox-r jcfs aic" style={styles.box}>
+                    <svg style={styles.icon}
+                        aria-hidden="true" focusable="false" 
+                        className="svg-inline--fa fa-facebook-square fa-w-14 fbook-icon"
+                        role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512" 
+                    >
+                        <title>Connect Your Facebook Account</title>
+                        <path fill="currentColor" d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path>
+                    </svg>
+                    <span className="fbook-button fbook-login t-xs" id="fbook-login">Connect Facebook</span>
+                </div>
+            {window.FB && window.FB.XFBML.parse(document.getElementById('fbook-login'), () => console.log("xfbml render login"))}
+            </LoginButton>
+        )}
+    </Mutation>
+    )
+}
 
 
+export const FbookStatus = (props) => {
+    return(
+        <Status>
+          {({ loading, status }) => (
+            <div>
+              status: {status}
+            </div>
+          )}
+        </Status>
+    )
+}
+export const FbookProfile = (props) => {
+    return(
+        <Profile>
+          {({ loading, profile }) => (
+            <div>
+                {profile && print("profile", profile)}
+            </div>
+          )}
+        </Profile>
+    )
+}
+*/
 
 /*
 
-const SB = (props) => (
-    <CustomLoginButton onClick={props.triggerLogin} {...props} />
-) 
-export const SocialButton = SocialLogin(SB)
+export const FB = () =>{
 
-export const FbookAuthButton2 = (props) => {
-
-    const handleResponse = (rawdata) => {
-        console.log("rawdata", rawdata)
-        //const data = JSON.stringify(rawdata)
-        //loginCallback()
-        //mutation({variables:{data}})
-    }
-    
-    const handleError = (error) => {
-        console.log("error", error)
-      }
     return(
-        <SocialButton
-            provider='facebook'
-            appId='371976677063927'
-            onLoginSuccess={handleResponse}
-            onLoginFailure={handleError}
-        />
+    <Initialize>
+          {({ isReady, api }) => {
+              if (!isReady) return <p>Not Ready</p>
+              let status;
+              const fbook = window.FB
+              fbook.getLoginStatus(response => {
+                  print("response", response);
+                })
+              print("fbook", fbook)
+              //(async function(){
+              //    let fb = await api.ui({method:"getLoginStatus"}, response => print("response", response))
+              //    print("api",api, fb)
+              //}())
+              return <p>Ready</p>
+          }}
+    </Initialize>
     )
-} 
+}
 
 */

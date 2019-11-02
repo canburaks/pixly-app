@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState, useReducer, useEffect, lazy, Suspense, useRef} from "react";
+import { useContext, useState, useReducer, useEffect, useMemo, useCallback, useRef} from "react";
 import { Route, Switch, Link, withRouter } from "react-router-dom";
 import { MAIN_PAGE } from "../functions/query";
 import { Query } from "react-apollo";
@@ -18,6 +18,7 @@ import {
 import { GlobalContext } from "../";
 
 import JoinBanner from "../components/JoinBanner.js";
+import { facebook } from "../functions"
 
 
 import { GlideBox } from "../components2/Glide.js";
@@ -37,11 +38,14 @@ const MainPage = React.memo(() => {
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
 	const state = useContext(GlobalContext)
+	const insertLoginForm = useCallback(() => state.methods.insertAuthForm("login"),[])
+	const insertJoinForm = useCallback(() => state.methods.insertAuthForm("signup"),[])
+
 	rgaSetCloseTime("Landing Page")
 	
 
-
-
+	//const Fb = facebook()
+	//console.log("main")
 	//const listAndTopics = [...topics, ...lists]
 	const heroHeaderText = "Improve your experience in discovering movies"
 	const heroSubheaderText = "Don't waste your time by browsing endless cycles. " + 
@@ -118,11 +122,17 @@ const MainPage = React.memo(() => {
 								<FlexBox flexDirection="column" zIndex={1} >
 									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
 									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
-									<div className="hero-cta">
-										<Button borderRadius={"6px"} className="button button-primary" onClick={() => state.methods.insertAuthForm("signup")} >Join</Button>
-										<BubbleButton borderRadius={"6px"} className="button" onClick={() => state.methods.insertAuthForm("login")} >Login</BubbleButton>
-									</div>
+									<Box  my={[3]}>
+										<Button borderRadius={"6px"} className="button button-primary" onClick={insertJoinForm} >Join</Button>
+										<BubbleButton borderRadius={"6px"} className="button" onClick={insertLoginForm} >Login</BubbleButton>
+									</Box>
+									<FlexBox>
+										{/*<Fb.Logout />
+										<Fb.Connect />
+										<Fb.Status />*/}
+									</FlexBox>
 								</FlexBox>
+								
 								<div className="hero-figure anime-element">
 									<svg className="placeholder" width={528} height={396} viewBox="0 0 528 396">
 										<rect width={528} height={396} style={{fill:"transparent"}} />
@@ -170,8 +180,7 @@ const MainPage = React.memo(() => {
 
 		</PageContainer>
 	);
-})
-
+}, () => true)
 
 
 
