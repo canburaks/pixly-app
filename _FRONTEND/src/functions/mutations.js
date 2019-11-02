@@ -1,13 +1,21 @@
 import gql from "graphql-tag";
 import { request, GraphQLClient } from 'graphql-request'
 
-export const FACEBOOK_MUTATION = gql`
+export const FACEBOOK_CONNECT = gql`
+  mutation facebookConnect($data: String!) {
+    facebookConnect(data:$data) {
+      profile{username}
+    }
+  }
+`;
+export const FACEBOOK_AUTH = gql`
   mutation facebookMutation($data: String!) {
     facebookMutation(data:$data) {
       profile{username}
     }
   }
 `;
+
 
 export const FORGET_PASSWORD = gql`
   mutation forgetPassword($username: String!) {

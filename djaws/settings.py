@@ -108,6 +108,7 @@ INSTALLED_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     'django_filters',
+    "sslserver",
 ]
 SITE_ID=2
 

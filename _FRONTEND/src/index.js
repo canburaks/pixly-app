@@ -40,8 +40,9 @@ import { rgaStart , usePageViews} from "./functions"
 
 const UriSwitcher = (uriType) =>{
     if(uriType===1) return 'https://pixly.app/graphql'
-    else if(uriType===2) return 'http://127.0.0.1:8000/graphql/'
-    //else if(uriType===3)return 'http://127.0.0.1:8000/graphql-upload/'
+    else if(uriType===2) return 'https://127.0.0.1:8000/graphql/'
+    //local https
+    //else if(uriType===3)return 'https://localhost:8000/graphql/'
 }
 //try comment delete it later
 const uri = UriSwitcher(1)// 1-Remote / 2-Local / 3- Local-upload
@@ -108,8 +109,10 @@ window.snapSaveState = () => ({
 /*----------------------------------------------------------------*/
 
 export const GlobalContext = React.createContext();
-//const whyDidYouRender = require('@welldone-software/why-did-you-render');
-//whyDidYouRender(React);
+export const SocialContext = React.createContext();
+
+const whyDidYouRender = require('@welldone-software/why-did-you-render');
+whyDidYouRender(React);
 
 const Pixly = (props) =>{
     //let history = useHistory();
