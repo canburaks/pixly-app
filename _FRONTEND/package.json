@@ -160,8 +160,8 @@
       "",
       "/",
       "/directors/1",
-      "/explore"
-
+      "/explore",
+      "/advance-search"
     ],
     "publicPath": "/"
   }
