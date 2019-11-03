@@ -31,9 +31,8 @@ export const Head = React.memo((props) => {
         {/* DESCRIPTION */}
         <meta name="description" content={descriptionText} />
 
-        {/* KEYWORDS 
+        {/* KEYWORDS */}
         <meta name="keywords" content={keywordsText} />
-        */}
 
 
         {/* FACEBOOK */}

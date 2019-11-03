@@ -54,18 +54,9 @@ const ListActions = (props) => (
 )
     
 export const ListCoverPanel = React.memo(( props ) =>(
-    <TopPanelBackElement src={props.item.coverPoster || props.item.poster}>
-        <TopPanelCoverElement 
-            item={props.item}  
-            Header={ListName}
-            text={props.item.summary}
-            Actions={ListActions}
-            darken={true}
-            isLargeScreen={props.isLargeScreen}
-            {...props}
-        >
-            {/*console.log("list cover", props)*/}
-        </TopPanelCoverElement>
+    <TopPanelBackElement src={props.item.coverPoster || props.item.poster} maxHeight={"80px"}>
+    
+
     </TopPanelBackElement>
 ), (prevProps, nextProps) => (prevProps.item.slug === nextProps.item.slug  && prevProps.isLargeScreen === nextProps.isLargeScreen ))
 

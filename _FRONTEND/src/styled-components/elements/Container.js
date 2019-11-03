@@ -15,6 +15,7 @@ export const TopPanelBackElement = (props) => (
     <Box display="flex"
         flexDirection="column"
         width={"105vw"} maxHeight={"100vh"} position={"relative"} py={[4,4,4]} mb={[3]} zIndex={2}
+        {...props}
     >
         <BlurBox 
             src={props.src} //will be either coverPoster or poster for blurry background  
