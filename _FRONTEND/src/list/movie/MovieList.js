@@ -13,7 +13,7 @@ import {
     MovieCoverBox, ProfileCircleBox, PageContainer,
     ContentContainer, PaginationBox, ListCoverPanel,
     TextSection,HiddenHeader, MovieRichCardBox,
-    MovieRichCard, Grid
+    MovieRichCard, Grid, HeaderText, Text, Span
 } from "../../styled-components"
 
 
@@ -47,7 +47,10 @@ const MovieList = (props) => {
     const ppi = 20
     const currentPage = parseInt(props.match.params.page)
     const isLargeScreen = screenSize.includes("L")
-
+    const LıstHeader = liste.slug==="our-selection" 
+        ? () => <HeaderText>A Curated Movie List: <em>{liste.name}</em></HeaderText> 
+        : () => <HeaderText>{liste.name}</HeaderText> 
+    console.log(liste.summary)
     return(
         <PageContainer>
             <Head
@@ -62,7 +65,6 @@ const MovieList = (props) => {
                             : null}
                 canonical={`https://pixly.app${window.location.pathname}`}
             />
-
             <ListCoverPanel 
                 blur={20} mb={[3]} 
                 width={"100vw"} height={"56vw"} 
@@ -73,7 +75,8 @@ const MovieList = (props) => {
             />
             
             <ContentContainer>
-                <HiddenHeader>{liste.name}</HiddenHeader>
+                <LıstHeader />
+                <Text>{liste.summary}</Text>
                 <TextSection 
                     header={liste.name} text={liste.summary} 
                     headerSize="xl" textSize="m" 
