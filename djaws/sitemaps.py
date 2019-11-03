@@ -217,7 +217,8 @@ topic__slugs = [
 static__slugs = [
     "explore",
     "advance-search",
-    "directors/1"
+    "directors/1",
+    "404"
 ]
 def page_template_generator(routes):
     new_paths = []

@@ -9,7 +9,7 @@ import { themeGet } from '@styled-system/theme-get'
 
 import ImgShim from 'react-shimmer'
 
-export const Image = styled('img').attrs((props) =>( props.info && {alt:props.info, title:props.info} ))`
+export const Image = styled('img').attrs((props) =>( props.info ? {alt:props.info, title:props.info} : {alt:"pixly pictures", title: "pixly pictures"} ))`
     ${space}
     ${shadow}
     ${layout}

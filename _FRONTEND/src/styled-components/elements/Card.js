@@ -93,6 +93,7 @@ export const DarkCard = props => (
 export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, boxShadow, hoverShadow, fontSize, title, ...props}) => (
     <SuperBox ratio={ratio} width={width || "100%"} src={src} 
         title={title || text}
+        alt={title || text}
         hoverShadow={hoverShadow} boxShadow={boxShadow} 
         borderRadius={borderRadius || 0}
         {...props}

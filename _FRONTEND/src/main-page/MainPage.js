@@ -26,7 +26,7 @@ import { GlideBox } from "../components2/Glide.js";
 import {Box,Span,FlexBox,MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
 	PageContainer,ContentContainer,Loading,
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text,NewLink,
-	LinkButton,CoverLink,CoverCard, BubbleButton, Button,
+	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image
 } from "../styled-components";
 
 
@@ -196,11 +196,11 @@ const MainPage = React.memo(() => {
 
 
 
-const MiniMovies = () => <img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/movies.jpg"} style={{width:"100%", height:"100%", boxShadow:"-2px 2px 4px 1px rgba(40,40,40, 0.6)"}} />
+const MiniMovies = () => <Image info="pixly main page posters" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/movies.jpg"} style={{width:"100%", height:"100%", boxShadow:"-2px 2px 4px 1px rgba(40,40,40, 0.6)"}} />
 
-const SpaceOddysey = () => <img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/space-oddysey.png"} style={{width:"100%", height:"auto"}} />
+const SpaceOddysey = () => <Image info="pixly main page posters" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/space-oddysey.png"} style={{width:"100%", height:"auto"}} />
 
-const SkinILive = () => <img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/skin.png"} style={{width:"100%", height:"auto"}} />
+const SkinILive = () => <Image info="pixly main page posters" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/skin.png"} style={{width:"100%", height:"auto"}} />
 
 
 const Feature1 = () => (
