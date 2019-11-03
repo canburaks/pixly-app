@@ -45,9 +45,13 @@ from django.urls import path, include, re_path
 from pprint import pprint
 
 from django.http import HttpResponseRedirect
+from django.conf.urls import handler400, handler403, handler404, handler500
 
 
-
+handler400 = 'common.views.bad_request'
+handler403 = 'common.views.permission_denied'
+handler404 = 'common.views.page_not_found'
+handler500 = 'common.views.server_error'
 
 def logout_view(request):
   auth.logout(request)
@@ -62,6 +66,10 @@ sitemaps = {
     'person': DirectorSitemap(),
     "topic": TopicSitemap()
 }
+
+def page_not_found(request):
+    context = {}
+    return render(request, '404/index.html', context, status=404)
 
 urlpatterns = [
     path(f'termsofservice', TemplateView.as_view(template_name=f"others/terms_of_service.html")),
@@ -91,7 +99,7 @@ urlpatterns = [
 ]
 
 urlpatterns = urlpatterns + custom_url_pages + [
-
+    path("/404", page_not_found, name='404'),
     path("/", TemplateView.as_view(template_name="prerendered/index.html")),
     path("", TemplateView.as_view(template_name="prerendered/index.html")),
     re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")),  
