@@ -20,6 +20,7 @@ export const MovieRichCard = (props) => {
         header={props.item.name}
         textSize={["13px", "13px", "13px","14px", "14px", "16px"]}
         buttonText={"Show More"}
+        follow={props.follow}
     >
 
         {/* MUTATIONS */}
@@ -53,6 +54,7 @@ export const DarkCard = props => (
             src={props.src} 
             link={props.link}
             ratio={props.ratio || 0.5625} 
+            follow={props.follow}
             borderRadius={0}
             borderTopLeftRadius={"8px"}
             borderTopRightRadius={"8px"}
@@ -82,7 +84,7 @@ export const DarkCard = props => (
             {props.header && <HeaderMini fontWeight="bold" m={0} my={[2]} color="light" fontSize={["18px", "18px", "22px"]}>{props.header}</HeaderMini> }
             {props.text && <Text color="light" my={[2,2,3]} fontSize={props.textSize}>{props.text}</Text>}
             {props.children}
-            {props.buttonText && <LinkButton link={props.link} text={props.buttonText} mt="auto" ></LinkButton>}
+            {props.buttonText && <LinkButton link={props.link} text={props.buttonText} mt="auto" follow={props.follow}></LinkButton>}
         </FlexBox>
     </FlexBox>
 )
@@ -90,7 +92,7 @@ export const DarkCard = props => (
 
 
 
-export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, boxShadow, hoverShadow, fontSize, title, ...props}) => (
+export const ImageCard = ({src, text,follow, link, ratio, width,borderRadius, color, boxShadow, hoverShadow, fontSize, title, ...props}) => (
     <SuperBox ratio={ratio} width={width || "100%"} src={src} 
         title={title || text}
         alt={title || text}
@@ -105,7 +107,7 @@ export const ImageCard = ({src, text, link, ratio, width,borderRadius, color, bo
         >
             {text}
         </HeaderMini>
-        <NewLink to={link} hidden position="absolute" width={"100%"} height="100%" top="0" left="0">
+        <NewLink to={link} follow={follow} hidden position="absolute" width={"100%"} height="100%" top="0" left="0">
         {props.hiddentext ? props.hiddentext : text}
         {/*props.hiddentext && <HiddenText>{props.hiddentext}</HiddenText>*/}
         </NewLink>

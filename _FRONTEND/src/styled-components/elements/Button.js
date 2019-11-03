@@ -23,7 +23,7 @@ export const LinkButton = (props) => (
         borderRadius={"8px"}
         {...props}
     >
-        <NewLink link={props.link}>
+        <NewLink link={props.link} follow={props.follow}>
             {props.text}
             {props.children}
         </NewLink>

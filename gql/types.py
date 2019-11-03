@@ -1806,7 +1806,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
             if self.movie.facebook:
                 dsc = dsc + f"twitter, "
             dsc += "and more."
-        return dsc
+        return dsc[:159]
         #return self.movie.seo_short_description
 
     def resolve_seo_keywords(self, info, *_):

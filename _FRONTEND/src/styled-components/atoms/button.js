@@ -2,6 +2,7 @@ import React from "react"
 import { compose, typography, color, space, shadow, layout, border, background, flexbox, position } from 'styled-system'
 import {  styled, keyframes } from "../"
 import { themeGet } from '@styled-system/theme-get'
+import { linearGradient } from 'polished'
 
 export const Button = styled.button`
     padding: 8px 8px;
@@ -11,6 +12,12 @@ export const Button = styled.button`
     transition:  ${themeGet("transitions.medium")};
     cursor:pointer;
     background:transparent;
+    ${props => props.gradient && themeGet(`gradients.${props.gradient}.colors`)(props) 
+        && linearGradient({
+        colorStops: themeGet(`gradients.${props.gradient}.colors`)(props),
+        toDirection: themeGet(`gradients.${props.gradient}.direction`)(props),
+        fallback: themeGet(`gradients.${props.gradient}.fallback`)(props),
+    })}
     :hover {
         background-color:${props => props.hoverBg && props.hoverBg};
         color:${props => props.hoverColor && props.hoverColor};
@@ -70,7 +77,12 @@ export const BubbleButton = styled.button`
     overflow: hidden;
     transition: all 0.45s ease-in-out;
     box-shadow:${themeGet("shadows.xs")};
-
+    ${props => props.gradient && themeGet(`gradients.${props.gradient}.colors`)(props) 
+        && linearGradient({
+        colorStops: themeGet(`gradients.${props.gradient}.colors`)(props),
+        toDirection: themeGet(`gradients.${props.gradient}.direction`)(props),
+        fallback: themeGet(`gradients.${props.gradient}.fallback`)(props),
+    })}
     ::before {
         content: '';
         z-index: -1;
@@ -88,7 +100,8 @@ export const BubbleButton = styled.button`
     :hover {
         cursor: pointer;
         color: ${themeGet("colors.white")};
-        border-color:${themeGet("colors.accent1")}
+        border-color:${themeGet("colors.accent1")};
+        box-shadow:${props => props.hoverShadow && props.hoverShadow};
       }
 
       :hover::before {

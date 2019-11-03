@@ -80,7 +80,7 @@ const MovieList = (props) => {
                     display={screenSize.includes("L") ? "none" : null}
                     />
 
-                <MovieRichCardBox items={liste.movies} />
+                <MovieRichCardBox items={liste.movies} follow={true}/>
                     
                 <MidPageAd />
                 

@@ -147,8 +147,6 @@ movie__slugs = [
     "movie/pariyerum-perumal-2018"
     "movie/an-officer-and-a-spy-2019"
     "movie/silicon-valley-2013",
-    "movie/65-toman-per-meter-2019"
-    "movie/homeward-2019",
     "movie/the-secret-of-a-leader-2019",
     "movie/now-something-is-slowly-changing-2019",
     "movie/hard-paint-2019",

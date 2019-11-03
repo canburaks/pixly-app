@@ -19,7 +19,7 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,MoviePosterBox, CloseIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox,
-    RatingSlider, YearSlider,MoviePosterCard, PlaceHolderCard
+    RatingSlider, YearSlider,MoviePosterCard, PlaceHolderCard, Label
 } from "../../styled-components"
 
 
@@ -81,7 +81,7 @@ export const SearchQueryBox = (props) =>{
                         minHeight="40px"
                         width={"100%"}
                         maxWidth={["80vw", "80vw", "30vw"]}
-                    />
+                    /><Label position="absolute" color="transparent">Search</Label>
                     {debouncedkeywords.length > 2 && 
                     <Button type="submit" 
                         position="absolute" 
