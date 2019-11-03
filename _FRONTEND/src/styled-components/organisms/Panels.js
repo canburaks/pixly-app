@@ -5,7 +5,7 @@ import {  useWindowSize, useValues } from "../../functions"
 
 import { 
     Box, Text, HeaderMini, NewLink, TopPanelBackElement, TopPanelCoverElement,
-    DirectorLink, DirectorLinks,FlexBox, TagBox,
+    DirectorLink, DirectorLinks,FlexBox, TagBox,Image,
     LikeMutation,BookmarkMutation, RatingMutation, FollowMutation,
     UsersIcon, EyeIcon,UserIcon,PageContainer
 } from "../index"
@@ -70,17 +70,25 @@ export const ListCoverPanel = React.memo(( props ) =>(
 ), (prevProps, nextProps) => (prevProps.item.slug === nextProps.item.slug  && prevProps.isLargeScreen === nextProps.isLargeScreen ))
 
 
-export const Loading = React.memo(() => (
+export const Loading = () => (
     <PageContainer bg="transparent">
         {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
         <div className="loading-container">
             <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
         </div>
     </PageContainer>
-))
+)
 
-
-
+export const NotFoundPage = () => (
+    <PageContainer>
+        <Image 
+        width={"100vw"} height="auto" 
+        info="404 Not Found Image" 
+        src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/404.jpg"}
+        />
+    </PageContainer>
+)
+export const Error = NotFoundPage
 
 /*
 

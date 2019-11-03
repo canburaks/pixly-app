@@ -53,7 +53,7 @@ import ExploreQuery from "../list/Explore";
 
 //import MovieQuery from "../pages/movie/MovieQuery.js";
 //import MoviePage from "../pages/movie/MoviePage"
-import { Loading } from "../styled-components"
+import { Loading,Error, PageContainer, Image } from "../styled-components"
 
 import { GlobalContext } from "../";
 //import { client, cache } from "../index"
@@ -109,6 +109,7 @@ const Middle = (props) => {
             <Route exact path="/movies/:page" component={MovieBoard} />
 
             <Route exact path="/movies/search/:query/:page" component={BarSearch} />
+            <Route exact path="/404" component={Error} />
             {/*
             <Route exact path="/lists/:slug/:page" component={MovieListQuery} />
             <Route exact path="/movie/:id/:slug" component={MovieQuery} />
@@ -116,8 +117,9 @@ const Middle = (props) => {
             */}
 
             <Route exact path={`/${state.methods.getUsername()}/dashboard`} component={HomeQuery} />
-            {authCheck() ? <Redirect to={`/${state.methods.getUsername()}/dashboard`} /> : <Redirect to="/" />}
+            <Redirect to="/404" />
             {/* 
+            {authCheck() ? <Redirect to={`/${state.methods.getUsername()}/dashboard`} /> : <Redirect to="/" />}
             <Redirect to="/" />
             <Route exact path="/" component={authCheck() ? HomeQuery : Login } />
             */}
@@ -125,6 +127,12 @@ const Middle = (props) => {
         </Switch>
     );
 };
+
+const NotFoundPage = () => (
+    <PageContainer>
+        <Image width={"100vw"} height="auto" info="404 Not Found Image" />
+    </PageContainer>
+)
 
 const HomeQuery = () => {
     const { loading, error, data, refetch } = useQuery(PERSONA, { variables:{username:localStorage.getItem("USERNAME")}})
@@ -158,7 +166,7 @@ const MovieQuery = (props) => {
     }
 
     if (loading) return <Loading />
-    if (error) return <div>{error.message}</div>
+    if (error) return <Error>{console.log("error",error.message)}</Error>
     if (data) {
         if (data.movie && shouldReplaceUrl){
             props.history.replace(`/movie/${data.movie.slug}`)
