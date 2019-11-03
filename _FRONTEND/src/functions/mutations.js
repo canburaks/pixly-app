@@ -4,14 +4,33 @@ import { request, GraphQLClient } from 'graphql-request'
 export const FACEBOOK_CONNECT = gql`
   mutation facebookConnect($data: String!) {
     facebookConnect(data:$data) {
-      profile{username}
+      user{
+        profile{
+          username,
+        }
+      },
+      success,
+      message
     }
   }
 `;
-export const FACEBOOK_AUTH = gql`
-  mutation facebookMutation($data: String!) {
-    facebookMutation(data:$data) {
-      profile{username}
+export const FACEBOOK_AUTHENTICATE = gql`
+  mutation facebookAuthenticate($data: String!) {
+    facebookAuthenticate(data:$data) {
+      success,
+      message,
+      user{
+        profile{
+          id,
+          token,
+          username,
+          points,
+          ratingset,
+          numBookmarks,
+          cognitoRegistered,
+          cognitoVerified
+        }
+      }
     }
   }
 `;
@@ -214,9 +233,6 @@ export const LOGIN_MUTATION = gql`
           numBookmarks,
           cognitoRegistered,
           cognitoVerified,
-          lists{
-            id, name, numMovies, image, owner{id, username}
-          }
         }
       }
     }

@@ -24,6 +24,7 @@ django-extensions==2.1.2
 django-filebrowser==3.11.1
 django-filter==2.1.0
 django-grappelli==2.12.1
+django-graphql-social-auth==0.1.4
 django-hosts==3.0
 django-graphql-jwt==0.1.13
 django-import-export==1.1.0
@@ -77,6 +78,8 @@ Rx==1.6.1
 s3transfer==0.1.13
 semantic-version==2.5.0
 singledispatch==3.4.0.3
+social-auth-app-django==3.1.0
+social-auth-core==3.2.0
 six==1.11.0
 termcolor==1.1.0
 texttable==0.9.1

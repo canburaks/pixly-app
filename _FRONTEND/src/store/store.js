@@ -8,7 +8,7 @@ import { client, cache } from "../index"
 
 
 
-export const Store = (history) => {
+export const Store = () => {
     const AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN") || null
     const USERNAME = localStorage.getItem("USERNAME") || null
     const screen = useWindowSize()
@@ -26,7 +26,6 @@ export const Store = (history) => {
     const [modalComponent, setModalComponent] = useState(null)
 
     const { isOpen, toggle } = useModal();
-    //console.log("store lcoation: ", url)
     //console.log("actual lcoation: ", location)
 
 
@@ -109,6 +108,19 @@ export const Store = (history) => {
                     else return localStorage.getItem("USERNAME")
                 }
             },
+            login: async function(profile){
+                console.log("store profile mutation data:", profile)
+                localStorage.setItem("AUTH_TOKEN", profile.token);
+                localStorage.setItem("USERNAME", profile.username);
+                localStorage.setItem("USER_ID", profile.id);
+                await state.methods.updateToken(profile.token);
+                await state.methods.updateUsername(profile.username);
+                setTimeout(() =>{
+                    window.location = window.location.origin + `/${profile.username}/dashboard`
+                    //history.push(`/${result.username}/dashboard`);
+                },1000)
+                console.log("end of store login function ",state.token, state.username)
+            },
             logout: async function logout() {
                 cache.reset()
                 client.resetStore();
@@ -119,7 +131,7 @@ export const Store = (history) => {
                 localStorage.removeItem("LISTS");
                 setUsername(null);
                 setToken(null);
-                history ? history.push("/") : null
+                window.location = window.location.origin + "/"
             }
         }
     }

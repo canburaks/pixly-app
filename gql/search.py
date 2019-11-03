@@ -9,7 +9,7 @@ from graphene_django.converter import convert_django_field
 from django.db.models import Q
 import django_filters
 from django.conf import settings
-
+from .cache_functions import Cache
 from .types import (VideoType, MovieType, MovieListType, RatingType, ProfileType, PersonType,
         CustomListType, CustomMovieType, DirectorPersonMixType, TagType,
         DirectorType, TopicType, ListType, UserType, CrewType, movie_defer)
@@ -336,6 +336,24 @@ class ComplexSearchType(graphene.ObjectType):
         return None
 
     def resolve_topic_result(self, info):
+        cached_qs = Cache.complex_search_topic_result(
+            self.topic_slug, 
+            self.min_year, self.max_year,
+            self.min_rating, self.max_rating
+        )
+
+        #print(qs.count())
+        self.quantity = cached_qs.count()
+
+        cached_qs = cached_qs[self.skip : self.skip + self.first]
+        #print(cached_qs.count())
+        return cached_qs
+
+    
+
+###     FILTERS     ####
+"""
+    def resolve_topic_result(self, info):
         if not self.topic_slug:
             return []
         qs = Topic.objects.filter(slug=self.topic_slug, main_page=True)
@@ -365,7 +383,4 @@ class ComplexSearchType(graphene.ObjectType):
         qs = qs[self.skip : self.skip + self.first]
         #print(qs.count())
         return qs
-
-    
-
-###     FILTERS     ####
+"""

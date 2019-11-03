@@ -3,7 +3,6 @@ import { compose, typography, color, space, shadow, layout, border, background, 
 import {  styled, keyframes } from "../"
 import { themeGet } from '@styled-system/theme-get'
 
-
 export const Button = styled.button`
     padding: 8px 8px;
     margin: 4px;
@@ -11,8 +10,35 @@ export const Button = styled.button`
     border:0;
     transition:  ${themeGet("transitions.medium")};
     cursor:pointer;
+    background:transparent;
     :hover {
         background-color:${props => props.hoverBg && props.hoverBg};
+        color:${props => props.hoverColor && props.hoverColor};
+        box-shadow:${props => props.hoverShadow && props.hoverShadow};
+        border-color:${props => props.hoverBorderColor && props.hoverBorderColor}
+    }
+    :focus {
+        outline: none;
+    };
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
+`
+export const ImageButton = styled.button`
+    margin: 0;
+    border:0;
+    padding:0;
+    cursor:pointer;
+    background: ${props => `url(${props.src})`};
+    background-size: cover;
+    background-position: center;
+    :hover {
         color:${props => props.hoverColor && props.hoverColor};
         box-shadow:${props => props.hoverShadow && props.hoverShadow};
         border-color:${props => props.hoverBorderColor && props.hoverBorderColor}
@@ -37,7 +63,7 @@ export const BubbleButton = styled.button`
     font-size: inherit;
     font-family: inherit;
     color: white;
-    padding: 20px 20px;
+    padding: 12px 12px;
     outline: none;
     border: none;
     background-color: rgba(45, 47, 87, 0.8);

@@ -1,7 +1,7 @@
 from persons.profile import Profile, Follow
 from items.models import Movie, List,  Video, Rating, Topic, Article
 from persons.models import Director, Person
-from persons.profile import Profile, Info
+from persons.profile import Profile, Social
 
 from django.contrib.auth import get_user_model
 from django_mysql.models import JSONField
@@ -12,7 +12,7 @@ import graphene
 import graphql_jwt
 from graphene_file_upload.scalars import Upload
 
-from .types import (VideoType, MovieType, ProfileType, PersonType,CustomListType,
+from gql.types import (VideoType, MovieType, ProfileType, PersonType,CustomListType,
         DirectorType, TopicType, ListType, UserType, RatingType)
 
 
@@ -26,10 +26,10 @@ class TwitterMutation(graphene.Mutation):
         if info.context.user.is_authenticated:
             user = info.context.user
             #print("twitter mutation:",user, data)
-            info_object = user.profile.get_info_object()
+            social_account = user.profile.get_or_create_social_account()
             tw_data = json.loads(data)
-            info_object.twitter_data = converted_data
+            social_account.twitter_data = converted_data
 
-            info_object.save()
+            social_account.save()
             return TwitterMutation(profile=user.profile)
 
