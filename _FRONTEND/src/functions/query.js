@@ -616,7 +616,6 @@ export const COMPLEX_TAG_SEARCH = gql`
                 result{
                 id,
                 name,
-                hasCover,
                 poster,
                 coverPoster,
                 year,

@@ -21,11 +21,10 @@ FOLLOW_TYPE = (
     ('t', 'Topic'),
 )
 
-
-
-
 def avatar_upload_path(instance, filename):
     return "avatars/{0}/{1}".format(instance.id,filename)
+
+
 
 class Profile(SocialMedia, SEO):
 
@@ -82,12 +81,14 @@ class Profile(SocialMedia, SEO):
         self.seo_keywords = ", ".join(keywords)
         self.save()
 
-    def get_info_object(self):
-        from persons.profile import Info
-        if not Info.objects.filter(profile=self).exists():
-            info_obj = Info.objects.create(profile=self)
+    #for authenticated users only
+    def get_or_create_social_account(self):
+        from persons.profile import Social
+        if not Social.objects.filter(profile=self).exists():
+            info_obj = Social.objects.create(profile=self)
+            print(f"new social accounts created for existing user: {self.username}")
             return info_obj
-        return Info.objects.filter(profile=self).first()
+        return Social.objects.filter(profile=self).first()
         
     def get_statistics_object(self, force=False):
         from persons.profile import Statistics
@@ -488,9 +489,9 @@ class Profile(SocialMedia, SEO):
         rec_qs.delete()
 
 
-class Info(models.Model):
+class Social(models.Model):
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, null=True,
-        blank=True, related_name="info", db_index=True)
+        blank=True, related_name="social", db_index=True)
     tutorial = models.BooleanField(default=True)
 
     facebook_data = JSONField(default=dict, blank=True, null=True)
@@ -503,13 +504,22 @@ class Info(models.Model):
     twitter_data = JSONField(default=dict, blank=True, null=True)
     twitter_username = models.CharField(max_length=40, null=True, blank=True, unique=True)
 
+    #for email clashes notes { facebook:False, twitter: True}
+    email_clash = JSONField(default=dict, blank=True, null=True)
 
 
     def __str__(self):
         return self.profile.username
 
-
-
+    @classmethod
+    def check_with_facebook_email(cls, email):
+        return cls.objects.filter(facebook_email=email).exists()
+    
+    @classmethod
+    def get_with_facebook_email(cls, email):
+        if cls.objects.filter(facebook_email=email).exists():
+            return cls.objects.filter(facebook_email=email).first()
+        return False
 
 
 class Statistics(models.Model):

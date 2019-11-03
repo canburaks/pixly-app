@@ -44,7 +44,7 @@ const MainPage = React.memo(() => {
 	rgaSetCloseTime("Landing Page")
 	
 
-	//const Fb = facebook()
+	const Fb = facebook()
 	//console.log("main")
 	//const listAndTopics = [...topics, ...lists]
 	const heroHeaderText = "Improve your experience in discovering movies"
@@ -123,13 +123,25 @@ const MainPage = React.memo(() => {
 									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
 									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
 									<Box  my={[3]}>
-										<Button borderRadius={"6px"} className="button button-primary" onClick={insertJoinForm} width={"120px"} height={"50px"}>Join</Button>
-										<BubbleButton borderRadius={"6px"} className="button" onClick={insertLoginForm} width={"120px"} height={"50px"}>Login</BubbleButton>
+										<Button borderRadius={"6px"} className="button button-primary" 
+											onClick={insertJoinForm} 
+											width={"120px"} height={"50px"}
+										>
+											Join
+										</Button>
+										<BubbleButton borderRadius={"6px"}  
+											onClick={insertLoginForm} 
+											width={"120px"} height={"50px"} 
+											border="3px solid" borderColor="rgba(40,40,40, 0.7)"
+										>
+											Login
+										</BubbleButton>
 									</Box>
-									<FlexBox>
-										{/*<Fb.Logout />
-										<Fb.Connect />
-										<Fb.Status />*/}
+									<FlexBox flexDirection="column" alignItems="flex-start" width="100%">
+										{/*
+										<Fb.Logout />
+										<Fb.Auth />
+										*/}
 									</FlexBox>
 								</FlexBox>
 								

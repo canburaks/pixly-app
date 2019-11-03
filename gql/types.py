@@ -15,7 +15,7 @@ from django_countries import countries
 import itertools
 from pprint import pprint
 from django.conf import settings
-
+from functools import lru_cache
 
 @convert_django_field.register(JSONField)
 def convert_json_field_to_string(field, registry=None):
@@ -1758,7 +1758,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         
 
     def resolve_seo_title(self, info, *_):
-        return f"{self.movie.name.capitalize()} ({self.movie.year}), Discover Similar Movies Like {self.movie.name.lower()}"
+        return f"{self.movie.name} ({self.movie.year}), Discover Similar Movies Like {self.movie.name.lower()}"
         #if self.movie.seo_title == None:
         #    self.movie.seo_title = f"{self.movie.name} ({self.movie.year}) and Similar Movies - Pixly "
         #    self.movie.save()
@@ -2040,26 +2040,21 @@ class MainPageType(graphene.ObjectType, SEOType):
     persons = graphene.List(DirectorPersonMixType)
     topics = graphene.List(TopicType)
 
-
     def resolve_movies(self, info, *_):
-        mqs = Movie.objects.filter(main_page=True).values_list("slug", flat=True)
-        return [CustomMovieType(slug=x) for x in mqs]
+        from .cache_functions import Cache
+        return Cache.main_page_movies()
         
-
-
     def resolve_lists(self, info, *_):
-        lqs =  List.objects.filter(main_page=True).values_list("slug", flat=True)
-        return [CustomListType(slug=x) for x in lqs]
-
-
+        from .cache_functions import Cache
+        return Cache.main_page_lists()
 
     def resolve_persons(self, info, *_):
-        pqs = Person.objects.filter(main_page=True).values_list("slug", flat=True)
-        return Person.objects.filter(slug__in=pqs)
+        from .cache_functions import Cache
+        return Cache.main_page_persons()
 
     def resolve_topics(self, info, *_):
-        pqs = Topic.objects.filter(main_page=True).values_list("slug", flat=True)
-        return Topic.objects.filter(slug__in=pqs)
+        from .cache_functions import Cache
+        return Cache.main_page_topics()
 
 
 class AdvanceSearchType(graphene.ObjectType):

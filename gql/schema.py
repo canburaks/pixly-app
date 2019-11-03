@@ -25,8 +25,8 @@ from .types import (VideoType, MovieType, MovieListType, RatingType, ProfileType
         CustomSearchType, AdvanceSearchType, PostType, MainPageType)
 from .search import ComplexSearchType, ComplexSearchQuery
 from .persona_query import CustomPersonaType
-
-
+from functools import lru_cache
+from .cache_functions import Cache
 
 class ListQuery(object):
     list_of_movie_search = graphene.List(MovieType,
@@ -197,9 +197,17 @@ class ListQuery(object):
     def resolve_list_of_directors(self, info, **kwargs):
         first = kwargs.get("first")
         skip = kwargs.get("skip")
+        result = ListQuery.get_directors()
+        #print( ListQuery.get_directors.cache_info())
+        return result
+        #qs =  Director.objects.filter(active=True)
+        #if first:
+        #    return paginate(qs, first, skip)
+        #return qs
+    
+    @lru_cache(maxsize=32)
+    def get_directors():
         qs =  Director.objects.filter(active=True)
-        if first:
-            return paginate(qs, first, skip)
         return qs
 
     def resolve_list_of_lists(self, info, **kwargs):
@@ -667,15 +675,12 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
         page = kwargs.get("page")
         first = kwargs.get("first")
         skip = kwargs.get("skip")
-
-        print(id, slug, first, skip)
-        if info.context.user.is_authenticated:
-            user = info.context.user
-            return CustomListType(id, slug, page=page, viewer=user.profile)
-
-        return CustomListType(id, slug, page=page)
-
-
+        
+        user = info.context.user
+        if user.is_authenticated:
+            return Cache.get_custom_list_auth_user(id, slug, page=page, username=user.username)
+        
+        return Cache.get_custom_list_anonymous_user(id, slug, page)
 
 
     def resolve_profile(self, info, **kwargs):
@@ -769,13 +774,15 @@ from .profile_mutations import (CreateList,UpdateList, DeleteList,
 from .auth import (Login, ResendRegisterationMail, CheckVerificationMutation,
             Logout, CreateUser, ChangePassword, ForgetPassword, ChangeForgetPassword)
 
-from .facebook import FacebookMutation
-from .twitter import TwitterMutation
+from .social.facebook import FacebookConnect, FacebookAuthentication
+from .social.twitter import TwitterMutation
 
 class Mutation(graphene.ObjectType):
     contact_mutation = ContactMutation.Field()
 
-    facebook_connect = FacebookMutation.Field()
+    facebook_connect = FacebookConnect.Field()
+    facebook_authenticate = FacebookAuthentication.Field()
+    
     twitter_mutation = TwitterMutation.Field()
 
     valid_username = UsernameValidation.Field()
@@ -819,7 +826,6 @@ class Mutation(graphene.ObjectType):
     change_forget_password = ChangeForgetPassword.Field() #change with verification code
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
-
 
 
 
@@ -908,7 +914,21 @@ def filter_page_function(kwargs):
     return qs.order_by("-year")[:50], quantity
 
 
+
+
 """
+import functools
+from gql.schema import schema
+
+@functools.lru_cache(maxsize=32)
+def cacher():
+    qs = "{ listOfDirectors{id,name} }"
+    #qs = "{ listOfDirectors{id,name, born, tmdb_id} }"
+    result = schema.execute(qs)
+    print("result", result.data["listOfDirectors"])
+    return result.data["listOfDirectors"]
+
+cacher.cache_info()
 mutation TokenAuth($username: String!, $password: String!) {
   tokenAuth(username: $username, password: $password) {
     token

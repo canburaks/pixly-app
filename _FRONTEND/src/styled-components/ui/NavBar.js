@@ -43,14 +43,14 @@ const NB = props => {
 		<FlexBox height={"auto"} minWidth={"100%"} justifyContent="space-around" alignItems="center" py={[1]}>
 			{window.innerWidth > 480 
 			? 	<>
-					<NewLink  color="#f1f1f1 !important" link={"/directors/1"}>
-						<UnderlineEffect>Directors</UnderlineEffect>
+					<NewLink  color="#f1f1f1 !important" link={"/directors/1"} fontSize={["12px", "12px", "12px", "16px"]}>
+						<UnderlineEffect >Directors</UnderlineEffect>
 					</NewLink>
-					<NewLink color="#f1f1f1 !important" link={"/explore"} fontSize={["16px"]} fontWeight="bold">
-						<UnderlineEffect>Explore</UnderlineEffect>
+					<NewLink color="#f1f1f1 !important" link={"/explore"} fontSize={["12px", "12px", "12px", "16px"]}>
+						<UnderlineEffect >Explore</UnderlineEffect>
 					</NewLink>
-					<NewLink color="#f1f1f1 !important" link={"/advance-search"}>
-						<UnderlineEffect>Advance Search</UnderlineEffect>
+					<NewLink color="#f1f1f1 !important" link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]}>
+						<UnderlineEffect >Advance Search</UnderlineEffect>
 					</NewLink>
 					<SearchQueryBox />
 				</>

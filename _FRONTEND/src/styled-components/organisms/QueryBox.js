@@ -80,6 +80,7 @@ export const SearchQueryBox = (props) =>{
                         onChange={keywordsHandler} 
                         minHeight="40px"
                         width={"100%"}
+                        maxWidth={["80vw", "80vw", "30vw"]}
                     />
                     {debouncedkeywords.length > 2 && 
                     <Button type="submit" 

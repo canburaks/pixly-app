@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Person, Director,Actor,  Crew, SocialMedia
-from .profile import Profile, Follow, Activity, LogEntry, Info
+from .profile import Profile, Follow, Activity, LogEntry, Social
 from items.models import Video, Movie
 # Register your models here.
 
@@ -82,8 +82,9 @@ class ActivityAdmin(admin.ModelAdmin):
     list_display = ("profile", "action","target_profile_username", "movie_id", "person_id","liste_id", "created_at")
 
 
-@admin.register(Info)
-class InfoAdmin(admin.ModelAdmin):
-    list_display = ("profile", "facebook_name","facebook_id", "facebook_email")
+@admin.register(Social)
+class SocialAccounts(admin.ModelAdmin):
+    list_display = ("profile", "facebook_name", "facebook_email" , "email_clash")
+    list_filter = ('email_clash',)
     fields = ["profile", "facebook_name","facebook_id", "facebook_email", "twitter_data",
-            "facebook_data", "facebook_token"]
+            "facebook_data", "facebook_token", 'email_clash']
