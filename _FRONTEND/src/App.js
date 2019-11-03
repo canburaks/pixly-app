@@ -4,7 +4,7 @@ import { useContext, useState, useReducer, useEffect } from 'react';
 
 
 import ReactGA from 'react-ga';
-import { Route, Switch, Redirect, withRouter, useHistory } from "react-router-dom"
+import { Route, Switch, Redirect, withRouter, useHistory,StaticRouter } from "react-router-dom"
 
 
 
@@ -27,11 +27,12 @@ import { useWindowSize,  usePageViews, rgaStart} from "./functions"
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
-import { Box, ScrollTopButton, navbarheight } from "./styled-components"
+import { Box, ScrollTopButton, navbarheight, PageContainer, Image } from "./styled-components"
 import themes from './styled-components/theme'
 import { Clippy } from './styled-components'
 import { GlobalContext } from "./";
 import { FacebookProvider } from 'react-facebook';
+
 
 const App = (props) => {
     const globalstate = useContext(GlobalContext)

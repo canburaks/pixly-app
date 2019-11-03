@@ -1,6 +1,7 @@
 import React from "react";
 import { useMemo, useState } from 'react';
 import {  useWindowSize, useValues } from "../../functions" 
+import { Redirect } from "react-router-dom";
 
 
 import { 
@@ -70,16 +71,8 @@ export const Loading = () => (
     </PageContainer>
 )
 
-export const NotFoundPage = () => (
-    <PageContainer>
-        <Image 
-        width={"100vw"} height="auto" 
-        info="404 Not Found Image" 
-        src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/404.jpg"}
-        />
-    </PageContainer>
-)
-export const Error = NotFoundPage
+
+export const Error = () => <Redirect to="/404" />
 
 /*
 
