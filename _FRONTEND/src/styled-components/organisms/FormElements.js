@@ -85,3 +85,4 @@ export const RatingSlider = (props) => {
     </FlexBox>
     )
 }
+

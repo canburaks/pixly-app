@@ -11,7 +11,7 @@ import {
 export const MovieRichCardBox = React.memo((props) => (
     <Grid columns={[1,1,1,2,2,2,3,3,4]} py={[4]}>
         {props.items.map( item => (
-            <MovieRichCard item={item} key={"rec" + item.id}/>
+            <MovieRichCard item={item} key={"rec" + item.id} follow={props} />
         ))}
     </Grid>
 ))
@@ -63,6 +63,7 @@ export const MovieCoverBox = React.memo(({ items, columns=[2,2,3,4,4,4,5], ratio
             title={item.name + ` - ${item.year}`}
             item={item}
             ratio={ratio}
+            follow={props.follow}
             key={props.key ? props.key + item.slug : item.slug}
             {...props} 
         />))}

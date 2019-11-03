@@ -121,7 +121,7 @@ const ExplorePage = React.memo(props => {
 
 				<Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
 					{lists.map(list => (
-						<CoverCard 
+						<CoverCard follow={true}
 							key={list.slug}
 							notext
 							ratio={0.41}
@@ -134,7 +134,7 @@ const ExplorePage = React.memo(props => {
 
 				{/*<FeatureBox />*/}
 				<HeaderMini>Populars & Upcomings</HeaderMini>
-				<MovieCoverBox items={movies} columns={[1,2, 2, 3,3,3,3,4]} fontSize={["12px", "14px", "14px"]}  />
+				<MovieCoverBox items={movies} follow={true} columns={[1,2, 2, 3,3,3,3,4]} fontSize={["12px", "14px", "14px"]}  />
 
 
 			</ContentContainer>

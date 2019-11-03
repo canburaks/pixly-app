@@ -117,7 +117,7 @@ const Middle = (props) => {
             */}
 
             <Route exact path={`/${state.methods.getUsername()}/dashboard`} component={HomeQuery} />
-            <Redirect to="/404" />
+            <Route component={Error} />
             {/* 
             {authCheck() ? <Redirect to={`/${state.methods.getUsername()}/dashboard`} /> : <Redirect to="/" />}
             <Redirect to="/" />

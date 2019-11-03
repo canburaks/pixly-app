@@ -89,3 +89,14 @@ export const SearchInput = styled("input")`
     ${typography}
 
 `
+export const Label = styled("label")`
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
+`

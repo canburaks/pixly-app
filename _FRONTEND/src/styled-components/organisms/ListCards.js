@@ -18,6 +18,7 @@ export const CoverCard = (props) => (
         borderRadius={"6px"}
         boxShadow="card"
         hoverShadow
+        follow={props.follow}
         {...props}
     />
 )
@@ -158,6 +159,7 @@ export const MovieCoverCard = (props) => (
         link={`/movie/${props.item.slug}`}
         hiddentext={props.item.name}
         ratio={props.ratio || 0.6} 
+        follow={props.follow}
         borderRadius={"6px"}
         boxShadow="card"
         hoverShadow

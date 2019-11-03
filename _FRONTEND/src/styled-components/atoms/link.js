@@ -7,7 +7,7 @@ import { UnderlineEffect, Box, HiddenSpan } from "../index"
 import { hideText } from 'polished'
 
 
-const LinkNoFollow = ({ to,link, className, children }) => <Link rel="nofollow" className={className} to={link || to} >{children}</Link>
+const LinkNoFollow = ({ to,link, className, children, follow }) => <Link rel={!follow ? "nofollow" : ""}  className={className} to={link || to} >{children}</Link>
 
 
 export const DirectorLink = ({director, ...props}) => <NewLink to={`/person/${director.slug}`}  mr={[0]} textShadow={"textDark"} {...props}><UnderlineEffect>{director.name}</UnderlineEffect>{props.extra}</NewLink>

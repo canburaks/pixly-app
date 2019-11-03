@@ -18,7 +18,7 @@ import {
 import { GlobalContext } from "../";
 
 import JoinBanner from "../components/JoinBanner.js";
-import { facebook } from "../functions"
+//import { facebook } from "../functions"
 
 
 import { GlideBox } from "../components2/Glide.js";
@@ -44,7 +44,7 @@ const MainPage = React.memo(() => {
 	rgaSetCloseTime("Landing Page")
 	
 
-	const Fb = facebook()
+	//const Fb = facebook()
 	//console.log("main")
 	//const listAndTopics = [...topics, ...lists]
 	const heroHeaderText = "Improve your experience in discovering movies"
@@ -58,7 +58,7 @@ const MainPage = React.memo(() => {
 					"Pixly is a movie recommendation app. Get personalized movie recommendations, find similar movies, discover curated movie lists lists, new films and must seen movies. "
 				}
 				title={
-					"Pixly - Movie Recommendation, Similar Movies, Personal Cinema History, AI Based Movie Recommendation App."
+					"Pixly - Movie Recommendation, Similar Movies, AI Based Movie Recommendation App"
 				}
 				keywords={
 					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
@@ -74,7 +74,6 @@ const MainPage = React.memo(() => {
 				<meta name="twitter:app:name:iphone" content="Pixly" />
 				<meta name="twitter:app:name:ipad" content="Pixly" />
 				<meta name="twitter:app:name:googleplay" content="Pixly" />
-				<meta property="og:type" content="business.business" />
 				<meta property="og:url" content="https://pixly.app" />
 				<meta
 					property="og:image"
@@ -123,16 +122,23 @@ const MainPage = React.memo(() => {
 									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
 									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
 									<Box  my={[3]}>
-										<Button borderRadius={"6px"} className="button button-primary" 
+										<BubbleButton px={[2]} mx={[2]}
 											onClick={insertJoinForm} 
 											width={"120px"} height={"50px"}
-										>
+											color="light" 
+											borderRadius="4px" 
+											link="/explore" gradient="lime"
+											fontWeight="bold"
+											>
 											Join
-										</Button>
-										<BubbleButton borderRadius={"6px"}  
+										</BubbleButton>
+
+										<BubbleButton borderRadius={"6px"}   mx={[2]}
 											onClick={insertLoginForm} 
 											width={"120px"} height={"50px"} 
-											border="3px solid" borderColor="rgba(40,40,40, 0.7)"
+											gradient="blueish"
+											fontWeight="bold"
+											hoverShadow
 										>
 											Login
 										</BubbleButton>
