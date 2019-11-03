@@ -2,7 +2,7 @@
 import React, {  useContext  }  from "react";
 
 //import { connect } from "react-redux";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom"
+import { Route, Switch, Redirect, withRouter,StaticRouter } from "react-router-dom"
 import { Query } from "react-apollo";
 import { useQuery } from '@apollo/react-hooks';
 
@@ -109,7 +109,7 @@ const Middle = (props) => {
             <Route exact path="/movies/:page" component={MovieBoard} />
 
             <Route exact path="/movies/search/:query/:page" component={BarSearch} />
-            <Route exact path="/404" component={Error} />
+            <Route path="/404" component={StaticRoute} />
             {/*
             <Route exact path="/lists/:slug/:page" component={MovieListQuery} />
             <Route exact path="/movie/:id/:slug" component={MovieQuery} />
@@ -117,7 +117,7 @@ const Middle = (props) => {
             */}
 
             <Route exact path={`/${state.methods.getUsername()}/dashboard`} component={HomeQuery} />
-            <Route component={Error} />
+            <Route component={StaticRoute} />
             {/* 
             {authCheck() ? <Redirect to={`/${state.methods.getUsername()}/dashboard`} /> : <Redirect to="/" />}
             <Redirect to="/" />
@@ -127,12 +127,15 @@ const Middle = (props) => {
         </Switch>
     );
 };
+const StaticRoute = () => (<StaticRouter context={{status:"404"}}><Route path="*" component={NotFoundPage} />}</StaticRouter>)
 
-const NotFoundPage = () => (
+const NotFoundPage = (props) => (
     <PageContainer>
-        <Image width={"100vw"} height="auto" info="404 Not Found Image" />
+    {console.log(props)}
+        <Image width={"100vw"} height="auto" info="404 Not Found Image" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/404.jpg"} />
     </PageContainer>
 )
+
 
 const HomeQuery = () => {
     const { loading, error, data, refetch } = useQuery(PERSONA, { variables:{username:localStorage.getItem("USERNAME")}})
