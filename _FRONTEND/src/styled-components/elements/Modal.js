@@ -22,6 +22,6 @@ export const Modal = (props) =>{
 
 
 
-    return <Button onClick={SweetAlert}>asd</Button>
+    return <Button onClick={SweetAlert} bg="accent2">asd</Button>
 }
 
