@@ -131,7 +131,6 @@ const StaticRoute = () => (<StaticRouter context={{status:"404"}}><Route path="*
 
 const NotFoundPage = (props) => (
     <PageContainer>
-    {console.log(props)}
         <Image width={"100vw"} height="auto" info="404 Not Found Image" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/404.jpg"} />
     </PageContainer>
 )
