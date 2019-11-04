@@ -158,10 +158,8 @@
       "width": 1280
     },
     "include": [
-      "/topic/art-house",
-      "/topic/cyberpunk",
-      "/topic/based-on-true-story"
-  
+      "",
+      "/"
     ],
     "publicPath": "/"
   }
