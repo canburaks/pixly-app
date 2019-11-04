@@ -122,7 +122,7 @@ class CustomPersonaType(graphene.ObjectType, SocialMediaType, SEOType):
         return self.user.profile
 
     def resolve_recent_movies(self, info):
-        return Movie.objects.filter(year=2019).defer("director", "data").order_by("-updated_at")[:10]
+        return Movie.objects.filter(year=2019, imdb_rating__gte=6.5).defer("director", "data").order_by("-updated_at")[:20]
 
     def resolve_recommendations(self, info, *_):
         records = Recommendation.get_recommendations(profile=self.user.profile, real=True)

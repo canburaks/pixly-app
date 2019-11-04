@@ -18,7 +18,7 @@ import {
 import { GlobalContext } from "../";
 
 import JoinBanner from "../components/JoinBanner.js";
-//import { facebook } from "../functions"
+import { facebook } from "../functions"
 
 
 import { GlideBox } from "../components2/Glide.js";
@@ -26,7 +26,7 @@ import { GlideBox } from "../components2/Glide.js";
 import {Box,Span,FlexBox,MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
 	PageContainer,ContentContainer,Loading,
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text,NewLink,
-	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image
+	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, Modal
 } from "../styled-components";
 
 
@@ -44,7 +44,7 @@ const MainPage = React.memo(() => {
 	rgaSetCloseTime("Landing Page")
 	
 
-	//const Fb = facebook()
+	const Fb = facebook()
 	//console.log("main")
 	//const listAndTopics = [...topics, ...lists]
 	const heroHeaderText = "Improve your experience in discovering movies"
@@ -121,6 +121,7 @@ const MainPage = React.memo(() => {
 								<FlexBox flexDirection="column" zIndex={1} >
 									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
 									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
+									<Modal />
 									<Box  my={[3]}>
 										<BubbleButton px={[2]} mx={[2]}
 											onClick={insertJoinForm} 
@@ -133,21 +134,24 @@ const MainPage = React.memo(() => {
 											Join
 										</BubbleButton>
 
-										<BubbleButton borderRadius={"6px"}   mx={[2]}
+										<Button borderRadius={"6px"}   mx={[2]}
 											onClick={insertLoginForm} 
 											width={"120px"} height={"50px"} 
-											gradient="blueish"
+											bg={"accent1"} color={"light"}
 											fontWeight="bold"
-											hoverShadow
+											hoverColor={"#3437c7"}
+											hoverBg={"white"}
+											hoverShadow="card"
+											boxShadow="xs"
 										>
 											Login
-										</BubbleButton>
+										</Button>
 									</Box>
-									<FlexBox flexDirection="column" alignItems="flex-start" width="100%">
+									<FlexBox flexDirection="column" alignItems="flex-start" width="100%" mt={[3,3,3,4]}>
 										{/*
-										<Fb.Logout />
-										<Fb.Auth />
 										*/}
+										<Fb.Connect />
+										<Fb.Auth />
 									</FlexBox>
 								</FlexBox>
 								
