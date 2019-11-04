@@ -72,7 +72,7 @@ export const Loading = () => (
 )
 
 
-export const Error = () => production ? window.location.replace("https://pixly.app/404") : <Redirect to="/404" />
+export const Error = () => <Redirect to="/404" /> // production ? window.location.replace("https://pixly.app/404") : <Redirect to="/404" />
 
 /*
 
