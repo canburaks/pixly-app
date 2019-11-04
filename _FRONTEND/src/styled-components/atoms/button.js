@@ -12,18 +12,19 @@ export const Button = styled.button`
     transition:  ${themeGet("transitions.medium")};
     cursor:pointer;
     background:transparent;
-    ${props => props.gradient && themeGet(`gradients.${props.gradient}.colors`)(props) 
-        && linearGradient({
-        colorStops: themeGet(`gradients.${props.gradient}.colors`)(props),
-        toDirection: themeGet(`gradients.${props.gradient}.direction`)(props),
-        fallback: themeGet(`gradients.${props.gradient}.fallback`)(props),
-    })}
     :hover {
         background-color:${props => props.hoverBg && props.hoverBg};
         color:${props => props.hoverColor && props.hoverColor};
         box-shadow:${props => props.hoverShadow && props.hoverShadow};
         border-color:${props => props.hoverBorderColor && props.hoverBorderColor}
     }
+    ${props => props.gradient && themeGet(`gradients.${props.gradient}.colors`)(props) 
+        && linearGradient({
+        colorStops: themeGet(`gradients.${props.gradient}.colors`)(props),
+        toDirection: themeGet(`gradients.${props.gradient}.direction`)(props),
+        fallback: themeGet(`gradients.${props.gradient}.fallback`)(props),
+    })};
+
     :focus {
         outline: none;
     };
@@ -99,8 +100,8 @@ export const BubbleButton = styled.button`
       }
     :hover {
         cursor: pointer;
-        color: ${themeGet("colors.white")};
-        border-color:${themeGet("colors.accent1")};
+        color:${props => props.hoverColor ? props.hoverColor : themeGet("colors.light")};
+        border-color:${props => props.hoverBg ? props.hoverBg : themeGet("colors.accent1")};
         box-shadow:${props => props.hoverShadow && props.hoverShadow};
       }
 

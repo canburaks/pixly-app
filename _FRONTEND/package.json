@@ -94,6 +94,7 @@
     "styled-components": "^4.3.2",
     "styled-system": "^5.1.2",
     "sweetalert2": "^8.15.1",
+    "sweetalert2-react-content": "^1.1.0",
     "unfetch": "^4.0.1",
     "use-events": "^1.1.11",
     "use-graphql-request": "^0.0.4"
@@ -161,7 +162,12 @@
       "/",
       "/404",
       "/directors/1",
-      "/explore"
+      "/explore",
+      "/advance-search",
+      "/directors/1",
+      "/explore",
+      "/advance-search"
+
     ],
     "publicPath": "/"
   }

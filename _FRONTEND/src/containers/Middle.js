@@ -117,8 +117,9 @@ const Middle = (props) => {
             */}
 
             <Route exact path={`/${state.methods.getUsername()}/dashboard`} component={HomeQuery} />
-            <Route component={StaticRoute} />
+            <Route path="*" component={StaticRoute} />
             {/* 
+            <Route component={StaticRoute} />
             {authCheck() ? <Redirect to={`/${state.methods.getUsername()}/dashboard`} /> : <Redirect to="/" />}
             <Redirect to="/" />
             <Route exact path="/" component={authCheck() ? HomeQuery : Login } />
@@ -139,7 +140,7 @@ const NotFoundPage = (props) => (
 const HomeQuery = () => {
     const { loading, error, data, refetch } = useQuery(PERSONA, { variables:{username:localStorage.getItem("USERNAME")}})
     if (loading) return <Loading />
-    if (error) return <div>{error.message}</div>
+    if (error) return <Error />
     if (data) return <HomePage data={data} refetch={refetch}/>
 };
 
@@ -231,7 +232,7 @@ const PersonQuery = (props) => {
         <Query query={DIRECTOR_PERSON_MIX} variables={queryVariables} partialRefetch={true}>
             {({ loading, data, error, refetch }) => {
                 if (loading) return <Loading />;
-                if (error) return <div className="gql-error">{JSON.stringify(error)}</div>;
+                if (error) return <Error>{console.log("error",error.message)}</Error>
                 //console.log(data)
                 if (data.directorPersonMix && isImdbId){
                     props.history.replace(`/person/${data.directorPersonMix.slug}`)
@@ -247,7 +248,7 @@ const UserQuery = (props) => {
         <Query query={PROFILE} variables={{ username: props.match.params.username }}  partialRefetch={true}>
             {({ loading, data, error, refetch }) => {
                 if (loading) return <Loading />;
-                if (error) return <div className="gql-error">{JSON.stringify(error)}</div>;
+                if (error) return <Error>{console.log("error",error.message)}</Error>
                 return <ProfilePage item={data} parentProps={props} refetch={refetch} />
             }}
         </Query>
@@ -281,7 +282,7 @@ const MovieListQuery = (props) => {
         { variables:{page:parseInt(props.match.params.page) ,...queryVariables}, partialRefetch:true}
     )
     if (loading) return <Loading />
-    if (error) return <div>{error.message}</div>
+    if (error) return <Error>{console.log("error",error.message)}</Error>
     if (data) {
         if (data.liste && shouldReplace){props.history.replace(`/list/${data.liste.slug}/1`)}
         const item = data[Object.keys(data)[0]];
