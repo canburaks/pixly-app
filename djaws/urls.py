@@ -44,14 +44,20 @@ from django.views.decorators.cache import cache_page
 from django.urls import path, include, re_path
 from pprint import pprint
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound, Http404
 from django.conf.urls import handler400, handler403, handler404, handler500
+#django.views.defaults.page_not_found()
+from django.shortcuts import render
+from django.views.defaults import page_not_found
+
+def not_found2(request, exception=None):
+    return page_not_found(request, exception, template_name="prerendered/404/index.html")
 
 
-handler400 = 'common.views.bad_request'
-handler403 = 'common.views.permission_denied'
-handler404 = 'common.views.page_not_found'
-handler500 = 'common.views.server_error'
+def not_found(request, exception=None):
+    return render(request, "prerendered/404/index.html")
+
+handler404 = not_found2
 
 def logout_view(request):
   auth.logout(request)
@@ -67,11 +73,14 @@ sitemaps = {
     "topic": TopicSitemap()
 }
 
-def page_not_found(request):
-    context = {}
-    return render(request, '404/index.html', context, status=404)
+
+def hand_crafted_redirect_view(request):
+  response = HttpResponse("404/index.html", status=404)
+  response["status"] = 404
+  return response
 
 urlpatterns = [
+    path("404", handler404),
     path(f'termsofservice', TemplateView.as_view(template_name=f"others/terms_of_service.html")),
     path(f'privacy', TemplateView.as_view(template_name=f"others/privacy.html")),
     #facebook bussiness
@@ -99,7 +108,6 @@ urlpatterns = [
 ]
 
 urlpatterns = urlpatterns + custom_url_pages + [
-    path("/404", page_not_found, name='404'),
     path("/", TemplateView.as_view(template_name="prerendered/index.html")),
     path("", TemplateView.as_view(template_name="prerendered/index.html")),
     re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")),  

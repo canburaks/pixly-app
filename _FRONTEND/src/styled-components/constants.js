@@ -9,7 +9,7 @@ if (window.location.href.includes("pixly.app")){
     var dev= false
 }
 
-else if (window.location.href.includes("localhost")){
+else {
     var prod = false
     var dev= true
 }

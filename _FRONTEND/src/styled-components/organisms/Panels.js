@@ -8,7 +8,7 @@ import {
     Box, Text, HeaderMini, NewLink, TopPanelBackElement, TopPanelCoverElement,
     DirectorLink, DirectorLinks,FlexBox, TagBox,Image,
     LikeMutation,BookmarkMutation, RatingMutation, FollowMutation,
-    UsersIcon, EyeIcon,UserIcon,PageContainer
+    UsersIcon, EyeIcon,UserIcon,PageContainer, production
 } from "../index"
 
 //import { ColorExtractor } from 'react-color-extractor'
@@ -72,7 +72,7 @@ export const Loading = () => (
 )
 
 
-export const Error = () => <Redirect to="/404" />
+export const Error = () => production ? window.location.replace("https://pixly.app/404") : <Redirect to="/404" />
 
 /*
 
