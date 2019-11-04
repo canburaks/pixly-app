@@ -50,7 +50,7 @@ export const facebook = () => {
     const connectSuccessHandler = useCallback((r) =>  {const newData= {...r};print(newData);  facebookConnect({variables:{data:JSON.stringify(newData)}}); setFbData(newData);},[])
     const authSuccessHandler = useCallback((r) =>  {const newData= {...r};print(newData);  facebookAuthenticate({variables:{data:JSON.stringify(newData)}}); setFbData(newData);},[])
 
-    print("facebook", isLogged,fbData )
+    //print("facebook", isLogged,fbData )
 
     const store = {
         //Logout:() => <LogoutButton onClick={logoutHandler}/>,
