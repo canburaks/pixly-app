@@ -54,6 +54,7 @@ const TopicPage = (props) =>{
         <PageContainer>
             {queryData && queryData.topic &&
                 <Head
+                    richdata={queryData.topic.richdata}
                     title={queryData.topic.seoTitle}
                     description={queryData.topic.seoShortDescription}
                     keywords={queryData.topic.keywords}
