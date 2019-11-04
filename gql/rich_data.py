@@ -1,5 +1,5 @@
 from django.conf import settings
-from items.models import Rating,Movie, List,  Video, Tag
+from items.models import Rating,Movie, List,  Video, Tag, Topic
 from persons.models import Person, Director, Crew
 from persons.profile import Profile
 from pprint import pprint
@@ -106,7 +106,7 @@ class RichData:
     @classmethod
     def create_movie_list_data(cls, liste):
         template = {"@context": "http://schema.org", "@type": ["ItemList", "CreativeWork"]}
-        all_m = liste.movies.all().only("id","imdb_id", "name", "slug", "imdb", "wiki")
+        all_m = liste.movies.all().only("id","imdb_id", "name", "slug", "imdb", "wiki", "imdb_rating").order_by("-imdb_rating")[:20]
 
         #----- Creation of rich data-------------------->
         liste_url = f"https://pixly.app/list/{liste.slug}/1"
@@ -127,8 +127,8 @@ class RichData:
 
         
         # Image
-        if liste.poster != None and liste.poster != "":
-            liste_image = liste.poster.url
+        if liste.cover_poster != None and liste.cover_poster != "":
+            liste_image = liste.cover_poster.url
         else:
             liste_image = liste.single_image
         template["image"] = liste_image
@@ -172,7 +172,69 @@ class RichData:
         #pprint(template)
         return template
 
+    @classmethod
+    def create_topic_data(cls, topic):
+        template = {"@context": "http://schema.org", "@type": ["ItemList", "CreativeWork"]}
+        all_topics = topic.movies.all().only("id","imdb_id", "name", "slug", "imdb", "wiki", "imdb_rating").order_by("-imdb_rating")[:20]
 
+        #----- Creation of rich data-------------------->
+        topic_url = f"https://pixly.app/topic/{topic.slug}"
+        template["url"] = topic_url
+        #print(liste.name)
+        #print(sanitize(liste.name))
+        template["name"] = sanitize(topic.name)
+
+        if len(topic.summary) < 300:
+            template["description"] = sanitize(topic.summary)
+        elif len(topic.summary) > 300 and topic.seo_short_description and len(topic.seo_short_description) > 20:
+            template["description"] = sanitize(topic.seo_short_description)
+        else:
+            template["description"] = sanitize(topic.name)
+
+
+        template["author"] = {"@type": "Person",  "url":"https://pixly.app/user/canburaks", "name":"Can Burak Sofyalioglu"}
+
+        
+        # Image
+        if topic.cover_poster != None and topic.cover_poster != "":
+            topic_image = topic.cover_poster.url
+            template["image"] = topic_image
+
+
+        # About
+        about_data = {
+            "@type": ["Movie", "ItemList"],
+            "name": sanitize(topic.name),
+            "image": topic_image,
+            "dateCreated": topic.created_at.isoformat()
+            }
+        template["about"] = about_data 
+        
+        # DateCreation
+        #template["dateCreated"] = liste.created_at.isoformat()
+
+        # Order
+        template["itemListOrder"] = "ItemListUnordered"
+        
+        # Item Quantity
+        template["numberOfItems"] = all_topics.count()
+
+        # List Items
+        topic_items = []
+        template["itemListElement"] = topic_items
+        for i in range(all_topics.count()):
+            movie = all_topics[i]
+            #item_data = {"@type": "ListItem", "name": f"{movie.name}",  "position":i}
+            item_data = {"@type": ["ListItem", "Movie"], "url": f"https://pixly.app/movie/{movie.slug}",  "position":i, **cls.create_mini_movie(movie)}
+
+
+            #item_data["item"] = cls.create_mini_movie(movie)
+            #item_data["item"] = cls.create_mini_movie(movie, parent_url = liste_url)
+            topic_items.append(item_data)
+
+        template["itemListElement"] = topic_items
+        #pprint(template)
+        return template
     @classmethod
     def create_person_data(cls, person):
         template = {"@context": "http://schema.org"}

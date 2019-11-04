@@ -121,7 +121,6 @@ const MainPage = React.memo(() => {
 								<FlexBox flexDirection="column" zIndex={1} >
 									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
 									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
-									<Modal />
 									<Box  my={[3]}>
 										<BubbleButton px={[2]} mx={[2]}
 											onClick={insertJoinForm} 
@@ -149,9 +148,9 @@ const MainPage = React.memo(() => {
 									</Box>
 									<FlexBox flexDirection="column" alignItems="flex-start" width="100%" mt={[3,3,3,4]}>
 										{/*
-										*/}
 										<Fb.Connect />
 										<Fb.Auth />
+										*/}
 									</FlexBox>
 								</FlexBox>
 								

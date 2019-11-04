@@ -15,16 +15,36 @@ import withReactContent from 'sweetalert2-react-content'
 
 const MySwal = withReactContent(Swal)
 
+const B = () => (
+  <Button borderRadius={"6px"}   mx={[2]}
+  width={"120px"} height={"50px"} 
+  bg={"accent1"} color={"light"}
+  fontWeight="bold"
+  hoverColor={"#3437c7"}
+  hoverBg={"white"}
+  hoverShadow="card"
+  boxShadow="xs"
+>
+  Login
+</Button>
+)
+
 export const SweetAlert = () =>(
     MySwal.fire({
-        title: <p>Hello World</p>,
-        footer: 'Copyright 2018',
-        onOpen: () => {
-          // `MySwal` is a subclass of `Swal`
-          //   with all the same instance & static methods
-          MySwal.clickConfirm()
-        }
-      }).then(() => {
-        return MySwal.fire(<p>Shorthand works too</p>)
-      })
+      type: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong!',
+      footer: '<a href>Why do I have this issue?</a>',
+      onOpen: () => {
+        // `MySwal` is a subclass of `Swal`
+        //   with all the same instance & static methods
+        MySwal.clickConfirm()
+      }
+    }).then(() => {
+      return MySwal.fire(
+        <Box width={"80vw"} bg="black" height={"50vh"}>
+
+        </Box>
+      )
+    })
 )

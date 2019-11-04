@@ -917,6 +917,11 @@ class Topic(SEO, MainPage):
         topic.tags.add(tag)
         topic.save()
 
+    def set_richdata(self, save=True):
+        from gql.rich_data import RichData
+        rdf = RichData.create_topic_data(self)
+        self.richdata = rdf
+    
 
     def add_slug(self):
         from django.utils.text import slugify
