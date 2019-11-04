@@ -676,7 +676,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                 topic{
                     name, summary,content, slug, poster, 
                     seoTitle, seoShortDescription, seoKeywords,
-                    coverPoster, createdAt, updatedAt, wiki
+                    coverPoster, createdAt, updatedAt, wiki, richdata
                     quotes{
                         ownerName, text
                     }
@@ -696,7 +696,7 @@ export const TOPIC_LIST_QUERY = gql`
 export const TOPIC_QUERY = gql`
     query topic($slug:String){
         topic(slug:$slug){
-            id,name, slug, coverPoster
+            id,name, slug, coverPoster, richdata
         }
     }
 `
