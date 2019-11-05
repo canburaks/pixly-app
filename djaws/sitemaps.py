@@ -14,6 +14,11 @@ from pprint import pprint
 # CUSTOM SELECTED PAGES FOR PRE-RENDER
 
 movie__slugs = [
+    "movie/the-lighthouse-2019",
+    "movie/pain-and-glory-2019",
+    "movie/hustlers-2019",
+    "movie/judy-2019",
+
     "movie/once-upon-a-time-in-hollywood-2019",
     "movie/midsommar-2019",
     "movie/john-wick-chapter-3-parabellum-2019",
