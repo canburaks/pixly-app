@@ -49,8 +49,8 @@ SECURE_FRAME_DENY               = True
 SECURE_CONTENT_TYPE_NOSNIFF     = True
 SECURE_BROWSER_XSS_FILTER       = True
 X_FRAME_OPTIONS                 = 'DENY'
-"""
 
+"""
 """
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -254,6 +254,9 @@ AWS_DEFAULT_ACL = "public-read"
 AWS_QUERYSTRING_AUTH = False
 DEFAULT_FILE_STORAGE = "djaws.storage_backends.MediaStorage"
 AWS_QUERYSTRING_AUTH = False
+
+GOOGLE__PIXLY_REACT_CLIENT_ID = env('GOOGLE__PIXLY_REACT_CLIENT_ID')
+GOOGLE__PIXLY_REACT_CLIENT_SECRET = env('GOOGLE__PIXLY_REACT_CLIENT_SECRET')
 
 
 ##########################################################################
