@@ -165,12 +165,8 @@
       "/",
       "/404",
       "/directors/1",
-      "/explore",
-  
-      "/movie/the-lighthouse-2019",
-      "/movie/pain-and-glory-2019",
-      "/movie/hustlers-2019",
-      "/movie/judy-2019"
+      "/explore"
+
     ],
     "publicPath": "/"
   }
