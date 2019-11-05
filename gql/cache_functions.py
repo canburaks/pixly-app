@@ -25,7 +25,7 @@ from functools import lru_cache
 
 class Cache():
     # ------ Main Page ---------gql.types 
-    #@lru_cache(maxsize=100)
+    @lru_cache(maxsize=100)
     def main_page_movies():
         mqs = Movie.objects.filter(main_page=True).values_list("slug", flat=True)
         return [CustomMovieType(slug=x) for x in mqs]
