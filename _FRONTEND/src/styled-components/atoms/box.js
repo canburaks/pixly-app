@@ -128,7 +128,32 @@ export const ListBox = styled(Box)`
     }
     
 `
+export const ModalBox = styled.div`
+    position: fixed;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:rgba(0,0,0, 0.75);
+    padding:5vh 10vw;
+    z-index:10;
+    box-sizing: border-box;
+    transition: all 1.8s cubic-bezier(.51,.17,.46, .88);
 
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
 
 export const BlurBox = styled(SuperBox)`
     -webkit-filter: ${props => props.blur && `blur(${props.blur}px)`};

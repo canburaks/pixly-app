@@ -10,35 +10,72 @@ import { Text, Paragraph,
         ImdbRatingIcon, YearClockIcon, 
 } from "../index"
 
+
+
 export const MovieRichCard = (props) => {
     return (
-    <DarkCard 
-        src={props.item.coverPoster || props.item.poster}
-        link={`/movie/${props.item.slug}`}
-        year={props.item.year}
-        imdbRating={props.item.imdbRating}
-        header={props.item.name}
-        textSize={["13px", "13px", "13px","14px", "14px", "16px"]}
-        buttonText={"Show More"}
-        follow={props.follow}
+        <FlexBox 
+        flexDirection="column" justifyContent="flex-start" 
+        width={"100%"} height={"100%"} 
+        bg="dark" borderRadius={"8px"}
+        boxShadow="card"
+        hoverShadow={"hover"}
     >
+        <ImageCard
+            src={props.item.coverPoster || props.item.poster} 
+            link={`/movie/${props.item.slug}`}
+            ratio={props.ratio || 0.5625} 
+            borderRadius={0}
+            borderTopLeftRadius={"8px"}
+            borderTopRightRadius={"8px"}
+            boxShadow="card"
+            textShadow="textLight"
+        />
 
-        {/* MUTATIONS */}
-        <FlexBox justifyContent="space-between" alignItems={"center"} mb={[1]} mt={[2]} width="100%">
-            <RatingMutation  item={props.item} />
-            <BookmarkMutation id={props.item.id} active={props.item.isBookmarked} size={"28px"}/>
+        <FlexBox 
+            flexDirection="column" justifyContent="flex-start" 
+            width={"100%"} height="auto" 
+            flexGrow={1}
+            px={[2,2,2,2,3]} pt={[3]} pb={[1]}  
+        >
+            <HeaderMini fontWeight="bold" m={0} my={[2]} color="light" fontSize={["18px", "18px", "22px"]}>
+                <NewLink link={`/movie/${props.item.slug}`} follow={props.follow}>
+                    {props.item.name}
+                </NewLink>
+            </HeaderMini>
+
+            <FlexBox justifyContent="space-between" alignItems={"center"} mb={[1]} mt={[2]} px={[0]} width="100%">
+            {props.item.imdbRating && 
+                <ImdbRatingIcon 
+                    rating={props.item.imdbRating} 
+                    size={"22px"} 
+                    fill="#fac539"
+                />}
+            {props.item.year && 
+                <YearClockIcon fill="white"
+                    year={props.item.year} 
+                    size={"22px"} 
+                    ml={[2,2,2,2,3]}
+                />}
+            </FlexBox>
+
+            {/* MUTATIONS */}
+            <FlexBox justifyContent="space-between" alignItems={"center"} mb={[1]} mt={[2]} width="100%">
+                <RatingMutation  item={props.item} />
+                <BookmarkMutation id={props.item.id} active={props.item.isBookmarked} size={"28px"}/>
+            </FlexBox>
+
+            <TagBox tags={props.item.tags || []} num={8} />
+            <Text mt="auto"
+                fontSize={["13px", "13px", "13px","14px", "14px", "16px"]}
+                color="rgb(210, 210, 210)"
+                py={[3]} pb={[4]}
+                >
+                {(props.item.summary && props.item.summary.length > 250) ? props.item.summary.slice(0,250) + "..." : props.item.summary}
+            </Text>
+            <LinkButton link={`/movie/${props.item.slug}`} text={"Show More"} mt="auto"></LinkButton>
         </FlexBox>
-
-        <TagBox tags={props.item.tags || []} num={8} />
-        <Text mt="auto"
-            fontSize={["13px", "13px", "13px","14px", "14px", "16px"]}
-            color="rgb(210, 210, 210)"
-            my={[2]}
-            >
-            {(props.item.summary && props.item.summary.length > 250) ? props.item.summary.slice(0,250) + "..." : props.item.summary}
-        </Text>
-
-    </DarkCard>
+    </FlexBox>
     )
 }
 
@@ -123,7 +160,16 @@ ImageCard.defaultProps = {
     fontSize: "m",
 }
 export const PlaceHolderCard = (props) => (
-    <SuperBox width={"100%"} {...props} height="auto" ratio={1.6} bg="black" border="2px solid" color="active">
+    <SuperBox width={"100%"} 
+        height="auto" ratio={1.6} 
+        gradient="blueish" 
+        boxShadow="0 2px 8px 1px rgba(255,255,255, 0.3)"
+        hoverShadow="0 4px 8px 1px rgba(255,255,255, 0.4)"
+        border="4px solid" 
+        
+        color="light"
+        {...props} 
+        >
         <StatefullLink 
             link={props.link}
             state={props.state}

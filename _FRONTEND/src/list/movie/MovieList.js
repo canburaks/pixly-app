@@ -50,7 +50,7 @@ const MovieList = (props) => {
     const LıstHeader = liste.slug==="our-selection" 
         ? () => <HeaderText>A Curated Movie List: <em>{liste.name}</em></HeaderText> 
         : () => <HeaderText>{liste.name}</HeaderText> 
-    console.log(liste.summary)
+    //console.log(liste.summary)
     return(
         <PageContainer>
             <Head

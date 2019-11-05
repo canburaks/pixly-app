@@ -24,6 +24,7 @@ import JoinBanner from "../components/JoinBanner.js";
 import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
 import {
+	MovieRichCardBox,
 	MovieCoverBox,
 	DirectorCard,
 	MovieCoverCard,
@@ -134,7 +135,7 @@ const ExplorePage = React.memo(props => {
 
 				{/*<FeatureBox />*/}
 				<HeaderMini>Populars & Upcomings</HeaderMini>
-				<MovieCoverBox items={movies} follow={true} columns={[1,2, 2, 3,3,3,3,4]} fontSize={["12px", "14px", "14px"]}  />
+				<MovieRichCardBox items={movies} follow={true} columns={[1,2, 2, 3,3,3,3,4]} fontSize={["12px", "14px", "14px"]}  />
 
 
 			</ContentContainer>

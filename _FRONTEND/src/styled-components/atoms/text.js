@@ -107,7 +107,7 @@ export const HeaderText = styled('h1')({
   )
 )
 export const HeaderMini = styled('h4')({
-  minWidth:"100% !important",
+  width:"100% ",
   textTransform:"capitalize",
   fontWeight:"bold",
   color:"dark",

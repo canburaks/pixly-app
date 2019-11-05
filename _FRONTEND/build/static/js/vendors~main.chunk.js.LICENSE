@@ -19,13 +19,6 @@ object-assign
 @license MIT
 */
 
-/** @preserve
-  * package: sweetalert2-react-content v1.1.0
-  * file: dist/sweetalert2-react-content.umd.js
-  * homepage: https://github.com/sweetalert2/sweetalert2-react-content#readme
-  * license: MIT
-  **/
-
 /*!
  * Glide.js v3.4.1
  * (c) 2013-2019 Jędrzej Chałubek <jedrzej.chalubek@gmail.com> (http://jedrzejchalubek.com/)
