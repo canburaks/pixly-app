@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
 import { production } from "../styled-components"
 import { useLocation, } from "react-router-dom";
 
-//console.log("produciton: ", production)
+//console.log("production: ", production)
 
 export const Head = React.memo((props) => {
     const titleText = props.title ? props.title.slice(0,69) :"Pixly - Movie Recommendation and Social Cinema Platform "
@@ -83,26 +83,28 @@ export function usePageViews() {
 
     useEffect(() => {
         //console.log("location change: ",location)
-        const willSet = {page: location.pathname}
-        if (localStorage.getItem("USERNAME")){
-            const userIds = localStorage.getItem("USERNAME").split("").map((letter,i) => letter + i*20)
-            willSet.userId = userIds.join("")
-        }
-        ReactGA.set(willSet);
-        ReactGA.pageview(location.pathname)
+        if(production){
+            const willSet = {page: location.pathname}
+            if (localStorage.getItem("USERNAME")){
+                const userIds = localStorage.getItem("USERNAME").split("").map((letter,i) => letter + i*20)
+                willSet.userId = userIds.join("")
+            }
+            ReactGA.set(willSet);
+            ReactGA.pageview(location.pathname)
 
-        // calculate miliseconds between page navigation
-        const passed = Math.round(timeHandler())
-        const navtext = navTextHandler()
-        if (navtext) {
-            rgaSetNavTime(passed,navtext)
-            rgaSetEvent("Nav", navtext, passed, passed.toString())
+            // calculate miliseconds between page navigation
+            const passed = Math.round(timeHandler())
+            const navtext = navTextHandler()
+            if (navtext) {
+                rgaSetNavTime(passed,navtext)
+                rgaSetEvent("Nav", navtext, passed, passed.toString())
+            }
         }
-
     }, [location]);
   }
 
 export function rgaStart(){
+        if(production){
         //const userId = localStorage.getItem("USERNAME")
         ReactGA.initialize('UA-141617385-1', {
             debug: false,
@@ -114,6 +116,7 @@ export function rgaStart(){
             }
         })
         //if (userId) ReactGA.set({userId})
+        }
 }
 
 
@@ -140,7 +143,7 @@ export function rgaSetUser(){
 }
 
 
-const rgaSetNavTime = (value, label) => rgaSetTiming("Timing", "navigation", value, label)
+const rgaSetNavTime = (value, label) => production ? rgaSetTiming("Timing", "navigation", value, label) :null
 
 
 export const rgaSetCloseTime = (label) => {
@@ -156,17 +159,19 @@ export const rgaSetCloseTime = (label) => {
     }
 
     useEffect(() => {
-        const handler = (event) => {
-        event.preventDefault();
-        const passed = Math.round(timeHandler())
-        //console.log("passed",passed)
-        rgaSetTiming("Timing", "close/reload", passed,label)
-        rgaSetEvent("App Close", passed.toString(), passed, label)
-      };
-  
-      window.addEventListener('beforeunload', handler);
-  
-      return () => window.removeEventListener('beforeunload', handler);
+        if(production){
+            const handler = (event) => {
+            event.preventDefault();
+            const passed = Math.round(timeHandler())
+            //console.log("passed",passed)
+            rgaSetTiming("Timing", "close/reload", passed,label)
+            rgaSetEvent("App Close", passed.toString(), passed, label)
+        };
+
+        window.addEventListener('beforeunload', handler);
+        return () => window.removeEventListener('beforeunload', handler);
+    
+    }
     });
   };
   

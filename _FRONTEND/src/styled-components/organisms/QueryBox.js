@@ -19,7 +19,7 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,MoviePosterBox, CloseIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox,
-    RatingSlider, YearSlider,MoviePosterCard, PlaceHolderCard, Label
+    RatingSlider, YearSlider,MoviePosterCard, PlaceHolderCard, Label, Modal
 } from "../../styled-components"
 
 
@@ -95,8 +95,12 @@ export const SearchQueryBox = (props) =>{
                         <CloseIcon  stroke="white" strokeWidth="3" size={30} />
                     </Button>}
                 </FlexBox>
+                
+                
+                    {debouncedkeywords.length >2 && <SearchQueryResult keywords={debouncedkeywords} cleaner={keywordsCleaner} />}
+                
 
-                {debouncedkeywords.length >2 && 
+                {/*debouncedkeywords.length >2 && 
                     <Box ref={ref}
                         position="fixed"
                         top={"100px"} left={"40px"} right={"40px"}
@@ -109,7 +113,7 @@ export const SearchQueryBox = (props) =>{
                         p={"15px"}
                     >
                         <SearchQueryResult keywords={debouncedkeywords} cleaner={keywordsCleaner} />
-                    </Box>}
+                    </Box>*/}
             </Box>
     );
 }
@@ -117,8 +121,8 @@ export const SearchQueryBox = (props) =>{
 
 const SearchQueryResult = React.memo(({keywords, cleaner}) => {
     const [location, setLocation] = useState(window.location.pathname)
-    const values = useValues([4,6,8,10,12])
-    const { loading, data, error } = useQuery(COMPLEX_SEARCH, {variables:{page:1, keywords, first:(values*3 )- 1} });
+    const values = useValues([4,,4, 6,8,10])
+    const { loading, data, error } = useQuery(COMPLEX_SEARCH, {variables:{page:1, keywords, first:(values*2 )- 1} });
 
     //console.log(loading, error, data)
     const locationhook = useLocation()
@@ -146,33 +150,22 @@ const SearchQueryResult = React.memo(({keywords, cleaner}) => {
     if (data) {
         
         return (
-            <Box  width={"100%"}   position="relative" overflowY="auto">
-            <Text 
-                textAlign="center" fontSize={["18px"]}
-                hoverUnderline fontWeight="bold"
-                onClick={cleaner} clickable 
-                color="light" zIndex={11}
-            >
-                Close
-            </Text>
-
-            <Grid columns={[3,4,5,6,6,6, 8]} pt={"10px"} overflowY="scroll" >
-                {data.complexSearch.result.map( item => (
-                    <MoviePosterCard
-                        item={item}
-                        key={item.slug}
-                        ratio={1.6} 
-                        width={"100%"}
-                        fontSize="xs"
-                        onClick={cleaner}
-                    />
-                    ))}
-                {data.complexSearch.quantity >= 18 && <MoreCard />}
-            </Grid>
-
-
-            </Box>
-    )}
+            <Modal isOpen={true} header={`search term: ${keywords}`} closeModal={cleaner}>
+                <Grid columns={[3,4,5,6,6,6, 8]}  py={"10px"} px="10px" position="relative"  >
+                    {data.complexSearch.result.map( item => (
+                        <MoviePosterCard
+                            item={item}
+                            key={item.slug}
+                            ratio={1.6} 
+                            width={"100%"}
+                            fontSize="xs"
+                            onClick={cleaner}
+                        />
+                        ))}
+                    {data.complexSearch.quantity >= 18 && <MoreCard />}
+                </Grid>
+            </Modal>
+        )}
     else return <div></div>
 })  
 

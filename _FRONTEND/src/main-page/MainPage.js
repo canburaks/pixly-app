@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext, useState, useReducer, useEffect, useMemo, useCallback, useRef} from "react";
+
 import { Route, Switch, Link, withRouter } from "react-router-dom";
 import { MAIN_PAGE } from "../functions/query";
 import { Query } from "react-apollo";
@@ -33,6 +34,21 @@ import {Box,Span,FlexBox,MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Gri
 import "./MainPage.css";
 import "./dist/css/style.css"
 
+const Sample = () => (
+	<div className="hero-figure anime-element">
+		<svg className="placeholder" width={528} height={396} viewBox="0 0 528 396">
+			<rect width={528} height={396} style={{fill:"transparent"}} />
+		</svg>
+		<div className="hero-figure-box hero-figure-box-01" data-rotation="45deg"></div>
+		<div className="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
+		<div className="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
+		<div className="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
+		<div className="hero-figure-box hero-figure-box-07"></div>
+		<div className="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
+		<div className="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
+	</div>
+)
+
 const MainPage = React.memo(() => {
 	//rgaPageView()
 	//console.log("main-page props: ",props)
@@ -40,12 +56,13 @@ const MainPage = React.memo(() => {
 	const state = useContext(GlobalContext)
 	const insertLoginForm = useCallback(() => state.methods.insertAuthForm("login"),[])
 	const insertJoinForm = useCallback(() => state.methods.insertAuthForm("signup"),[])
-
+	const [isModalOpen, setModalOpen] = useState(false)
+	const closeModal = () => setModalOpen(false)
 	rgaSetCloseTime("Landing Page")
 	
 
 	const Fb = facebook()
-	//console.log("main")
+	//console.log("main", isModalOpen)
 	//const listAndTopics = [...topics, ...lists]
 	const heroHeaderText = "Improve your experience in discovering movies"
 	const heroSubheaderText = "Don't waste your time by browsing endless cycles. " + 
@@ -63,8 +80,7 @@ const MainPage = React.memo(() => {
 				keywords={
 					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
 				}
-				canonical={`https://pixly.app`}
-			>
+				canonical={`https://pixly.app`}>
 				<meta name="twitter:card" content="app" />
 				<meta name="twitter:site" content="@pixlymovie" />
 				<meta
@@ -121,9 +137,14 @@ const MainPage = React.memo(() => {
 								<FlexBox flexDirection="column" zIndex={1} >
 									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
 									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
+									
+									{/*
+									<Modal isOpen={isModalOpen} closeModal={closeModal}><Box width={"100%"} bg="black" height={"50vh"}></Box></Modal>}
+									*/}
+									
 									<Box  my={[3]}>
 										<BubbleButton px={[2]} mx={[2]}
-											onClick={insertJoinForm} 
+											onClick={() => setModalOpen(true)} 
 											width={"120px"} height={"50px"}
 											color="light" 
 											borderRadius="4px" 
