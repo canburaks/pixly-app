@@ -14,11 +14,6 @@ from pprint import pprint
 # CUSTOM SELECTED PAGES FOR PRE-RENDER
 
 movie__slugs = [
-    "movie/the-lighthouse-2019",
-    "movie/pain-and-glory-2019",
-    "movie/hustlers-2019",
-    "movie/judy-2019",
-
     "movie/once-upon-a-time-in-hollywood-2019",
     "movie/midsommar-2019",
     "movie/john-wick-chapter-3-parabellum-2019",
@@ -156,6 +151,11 @@ movie__slugs = [
     "movie/now-something-is-slowly-changing-2019",
     "movie/hard-paint-2019",
     "movie/in-this-gray-place-2019",
+
+    "movie/the-lighthouse-2019",
+    "movie/pain-and-glory-2019",
+    "movie/hustlers-2019",
+    "movie/judy-2019",
 ]
 
 person__slugs = [
@@ -527,6 +527,10 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/the-secret-of-a-leader-2019",
       "/movie/now-something-is-slowly-changing-2019",
       "/movie/hard-paint-2019",
-      "/movie/in-this-gray-place-2019"
+      "/movie/in-this-gray-place-2019",
+      "/movie/the-lighthouse-2019",
+      "/movie/pain-and-glory-2019",
+      "/movie/hustlers-2019",
+      "/movie/judy-2019"
     ],
 """
