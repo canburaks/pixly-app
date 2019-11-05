@@ -165,7 +165,8 @@
       "/",
       "/404",
       "/directors/1",
-      "/explore"
+      "/explore",
+      "/movie/jojo-rabbit-2019"
 
     ],
     "publicPath": "/"
