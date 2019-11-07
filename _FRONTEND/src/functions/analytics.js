@@ -46,7 +46,7 @@ export const Head = React.memo((props) => {
         {/* Twitter */}
         {twitter("title", titleText.slice(0,55))}
         {twitter("card", "summary_large_image")}
-        {twitter("description", descriptionText.slice(0,125))}
+        {twitter("description", props.twitterdescription || descriptionText.slice(0,125))}
         {twitter("site", "@pixlymovie")}
         {twitter("creator", "@canburaks")}
 
