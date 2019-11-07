@@ -26,9 +26,13 @@
   },
   "browserslist": [
     "> 0.25%",
-    "safari > 5",
-    "ie >= 11",
-    "iOS >= 9",
+    "safari > 4",
+    "android > 3",
+    "chrome > 20",
+    "firefox > 6",
+    "opera > 24",
+    "ie >= 5",
+    "iOS >= 7",
     "last 20 versions"
   ],
   "postcss": {
