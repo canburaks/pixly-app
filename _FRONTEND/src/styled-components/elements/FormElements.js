@@ -9,8 +9,24 @@ import {
     DirectorLink, DirectorLinks, TagText,
     LikeMutation,BookmarkMutation, RatingMutation, FollowMutation,
     UsersIcon, EyeIcon,UserIcon,ImdbIcon, WatchIcon, SearchIcon,
-    Input,InputRange,
+    Input,InputRange,Label
 } from "../index"
+
+export const FormInput = (props) => (
+    <FlexBox flexDirection="column" width={"100%"} px={[2]} mt={[2]}>
+        <Label color="dark">{props.name}</Label>
+        <Input 
+            name={props.name} 
+            defaultValue={props.defaultValue}
+            type={props.type || "text"}
+            placeholder={props.placeholder}
+            ref={props.formRef}
+            {...props}
+        />
+        <Text fontSize={["12px"]} color="red" m={0} p={0} minHeight={["12px"]}>{props.error}</Text>
+    </FlexBox>
+)
+
 
 export const YearSlider = (props) => {
     const min = props.min || 1950

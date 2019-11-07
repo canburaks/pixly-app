@@ -27,7 +27,8 @@ import { GlideBox } from "../components2/Glide.js";
 import {Box,Span,FlexBox,MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
 	PageContainer,ContentContainer,Loading,
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text,NewLink,
-	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, Modal
+	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
+	GradientAnimationBox,SignupForm, SignupFormModal
 } from "../styled-components";
 
 
@@ -55,8 +56,10 @@ const MainPage = React.memo(() => {
 	const authStatus = useAuthCheck();
 	const state = useContext(GlobalContext)
 	const insertLoginForm = useCallback(() => state.methods.insertAuthForm("login"),[])
-	const insertJoinForm = useCallback(() => state.methods.insertAuthForm("signup"),[])
+	//const insertJoinForm = useCallback(() => state.methods.insertAuthForm("signup"),[])
+	
 	const [isModalOpen, setModalOpen] = useState(false)
+	const insertJoinForm = useCallback(() => state.methods.insertAuthForm("signup"),[])
 	const closeModal = () => setModalOpen(false)
 	rgaSetCloseTime("Landing Page")
 	
@@ -134,17 +137,17 @@ const MainPage = React.memo(() => {
 					<section className="hero">
 						<div className="container">
 							<div className="hero-inner">
-								<FlexBox flexDirection="column" zIndex={1} >
+								<FlexBox flexDirection="column" zIndex={10} >
 									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
 									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
 									
+									<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />
 									{/*
-									<Modal isOpen={isModalOpen} closeModal={closeModal}><Box width={"100%"} bg="black" height={"50vh"}></Box></Modal>}
 									*/}
 									
 									<Box  my={[3]}>
 										<BubbleButton px={[2]} mx={[2]}
-											onClick={() => setModalOpen(true)} 
+											onClick={setModalOpen} 
 											width={"120px"} height={"50px"}
 											color="light" 
 											borderRadius="4px" 
@@ -168,10 +171,7 @@ const MainPage = React.memo(() => {
 										</Button>
 									</Box>
 									<FlexBox flexDirection="column" alignItems="flex-start" width="100%" mt={[3,3,3,4]}>
-										{/*
-										<Fb.Connect />
 										<Fb.Auth />
-										*/}
 									</FlexBox>
 								</FlexBox>
 								

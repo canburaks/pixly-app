@@ -40,7 +40,16 @@ def url_image(url, filename):
     fp.write(response.content)
     return filename, files.File(fp)
 
-
+def get_poster_url(self):
+    if self.data.get("tmdb_poster_path"):
+        return self.data.get("tmdb_poster_path")
+    else:
+        try:
+            plinks = self.tmdb.poster_links()
+            if plinks.get("tmdb_poster_path"):
+                return plinks.get("tmdb_poster_path")
+        except:
+            return None
 
 class Person(SocialMedia, SEO, MainPage):
 
@@ -133,27 +142,27 @@ class Person(SocialMedia, SEO, MainPage):
             return TP(self.tmdb_id)
 
 
-    def save_poster_from_url(self, force=False):
-        from gql.functions import url_image, get_poster_url
-        if force==False:
-            if self.poster and hasattr(self.poster, "url"):
-                print("Person already have poster")
-                pass
-            else: 
-                if get_poster_url(self):
-                    poster_url = get_poster_url(self)
-                    filename = "{}-poster.jpg".format(self.id)
-                    self.poster.save(*url_image(poster_url, filename))
-                else:
-                    print("1-person poster url could not found")
-        elif force==True:
-            poster_url = get_poster_url(self)
-            if poster_url:
-                filename = "{}-poster.jpg".format(self.id)
-                self.poster.save(*url_image(poster_url, filename))
-                print("poster saved")
-            else:
-                print("2-person poster url could not found")
+    #def save_poster_from_url(self, force=False):
+    #    from gql.functions import url_image, get_poster_url
+    #    if force==False:
+    #        if self.poster and hasattr(self.poster, "url"):
+    #            print("Person already have poster")
+    #            pass
+    #        else: 
+    #            if get_poster_url(self):
+    #                poster_url = get_poster_url(self)
+    #                filename = "{}-poster.jpg".format(self.id)
+    #                self.poster.save(*url_image(poster_url, filename))
+    #            else:
+    #                print("1-person poster url could not found")
+    #    elif force==True:
+    #        poster_url = get_poster_url(self)
+    #        if poster_url:
+    #            filename = "{}-poster.jpg".format(self.id)
+    #            self.poster.save(*url_image(poster_url, filename))
+    #            print("poster saved")
+    #        else:
+    #            print("2-person poster url could not found")
 
 
     #update existing person (first 75000 handled 26/08/2019 tmdb_id)

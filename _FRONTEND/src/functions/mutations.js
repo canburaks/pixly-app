@@ -9,6 +9,7 @@ export const FACEBOOK_CONNECT = gql`
           username,
         }
       },
+      status,
       success,
       message
     }
@@ -18,7 +19,16 @@ export const FACEBOOK_AUTHENTICATE = gql`
   mutation facebookAuthenticate($data: String!) {
     facebookAuthenticate(data:$data) {
       success,
+      status,
       message,
+      form,
+      login{
+        user{
+          profile{
+            id,token, username, points, ratingset, cognitoRegistered, cognitoVerified
+          }
+        }
+      },
       user{
         profile{
           id,
@@ -26,7 +36,6 @@ export const FACEBOOK_AUTHENTICATE = gql`
           username,
           points,
           ratingset,
-          numBookmarks,
           cognitoRegistered,
           cognitoVerified
         }
@@ -209,8 +218,13 @@ export const SIGNUP_MUTATION = gql`
     $password: String!
     $username: String!
     $name: String!
+    $avatarUrl: String
+    $fbData: String
+
   ) {
-    createUser(email: $email, password: $password, username: $username, name: $name) {
+    createUser(email: $email, password: $password, username: $username, name: $name, avatarUrl: $avatarUrl,fbData: $fbData) {
+      success,
+      message,
       user {
         profile {
           token,username, id,

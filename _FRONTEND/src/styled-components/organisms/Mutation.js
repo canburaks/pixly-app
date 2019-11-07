@@ -6,14 +6,69 @@ import gql from 'graphql-tag';
 import { 
     Box, Grid, ImageCard,PaginationBox,
     MovieCoverCard, MoviePosterCard,MovieSimilarCard, CrewCard, TagText,
-    LikeIcon, BookmarkIcon , FollowIcon, FollowSuccessIcon, UnfollowIcon, FollowSuccessAnimateIcon,
+	LikeIcon, BookmarkIcon , FollowIcon, FollowSuccessIcon, UnfollowIcon, FollowSuccessAnimateIcon,
+	ActionButton, Text
   } from "../index"
 
-import { useDebounce, useHover, useValues, MOVIE,LISTE,LOGOUT_MUTATION, useAuthCheck } from "../../functions" 
+import {
+	useDebounce, useHover, useValues,useAuthCheck, print,
+	MOVIE,LISTE,LOGOUT_MUTATION,SIGNUP_MUTATION,
+} from "../../functions" 
 import ReactStars from 'react-stars'
 
 const mutationchecker = (prevProps, nextProps) => prevProps.id === nextProps.id
 import { GlobalContext } from "../../";
+import { FlexBox } from "../atoms";
+
+
+
+
+export const SignupMutation = (props) => {
+	const globalstate = useContext(GlobalContext)
+    const [ authError, setAuthError ] = useState("")
+
+	const [SignupMutation, { data, loading, error }] = useMutation(SIGNUP_MUTATION, {
+		onCompleted:(data) => mutationSuccessHandler(data),
+		onError:(e) => mutationErrorHandler(e)
+	});
+
+	print("mutation props", props)
+	print("mutation data", data)
+
+	const mutationErrorHandler = (e) => {print("mutation error:", e);setAuthError(e.message.split("'")[1]);}
+	const mutationSuccessHandler = (response) => {
+		print("mutation response:", response);
+		if (response.createUser.success){
+			globalstate.methods.signup(response);
+		}
+}
+
+	useEffect(() => {
+		if (props.data && props.data.username && props.data.email){
+			SignupMutation({variables:props.data})
+		}
+	},[props.data])
+
+	return (
+		<FlexBox  
+				flexDirection="column" justifyContent="center"
+				alignItems="center" 
+				width="100%" height="auto"				
+				{...props}
+				>
+			<Text color="red" fontSize={["12px"]} minHeight={["12px"]}>{authError}</Text>
+            <ActionButton 
+                maxWidth={"200px"}
+                alignSelf="center" 
+                px={[3,3,3,3,4]} mt={[3]}
+				type="submit"
+                borderRadius={[2]}
+                isLoading={loading}
+            >
+                Register
+            </ActionButton>
+		</FlexBox>
+)}
 
 
 export const LogoutMutation = (props) => {

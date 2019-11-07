@@ -9,11 +9,13 @@ export const Input = styled("input")`
     margin: 4px 0;
     box-sizing: border-box;
     border:0px solid transparent !important;
-    border-bottom: 3px solid gray !important;
+    border-bottom:${props => props.status === "success" 
+        ? `5px solid #30c5b1 !important` 
+        : `5px solid gray !important`}
     background: transparent;
     font-size:14px;
     font-weight: 400;
-    color:rgb(69, 69, 69);
+    color:rgb(39, 39, 39);
     line-height:16.1px;
     transition:  ${themeGet("transitions.fast")};
     outline-color: initial;
@@ -21,7 +23,7 @@ export const Input = styled("input")`
     outline-width: 0px;
     outline-offset: -2px;
     :focus {
-        border-bottom: 3px solid rgba(76, 86, 226, 1) !important;
+        border-bottom: 5px solid rgba(76, 86, 226, 1) !important;
         outline: none;
     };
     ${color}
@@ -38,7 +40,7 @@ export const Form = styled("form")`
     width: 100%;
     box-sizing: border-box;
     display:flex;
-    flex-direction:row;
+    flex-direction:column;
     transition:  ${themeGet("transitions.fast")};
     ${color}
     ${space}
@@ -90,6 +92,7 @@ export const SearchInput = styled("input")`
 
 `
 export const Label = styled("label")`
+    font-weight:bold;
     ${color}
     ${space}
     ${shadow}

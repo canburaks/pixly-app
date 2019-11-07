@@ -18,12 +18,13 @@ import { NavBar } from "./styled-components"
 import Middle from "./containers/Middle"
 import LandingPage from "./auth/LandingPage"
 import MainPage from "./main-page/MainPage";
+import ExploreQuery from "./list/Explore";
 
 import { AuthForm, ForgetForm } from "./forms/AuthForm"
 import ContactForm from "./forms/ContactForm"
 
 import { client, cache } from "./index"
-import { useWindowSize,  usePageViews, rgaStart} from "./functions"
+import { useWindowSize,  usePageViews, rgaStart, useAuthCheck} from "./functions"
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
@@ -38,7 +39,8 @@ const App = (props) => {
     const globalstate = useContext(GlobalContext)
     //var cookie = document.cookie;
     //console.log("cookie", cookie)
-
+    const authStatus = useAuthCheck()
+    const MainPageRedirect =() => authStatus ? <Redirect to="/explore" /> : <MainPage />
 
     useEffect(() => {
         rgaStart()
@@ -54,7 +56,7 @@ const App = (props) => {
             <Clippy />
             <Box minHeight="80vh" mt={navbarheight}>
                 <Switch>
-                    <Route exact path="/" component={MainPage} />
+                    <Route exact path="/" component={MainPageRedirect} />
                     <Route path="/" component={Middle} />
                 </Switch>
                 

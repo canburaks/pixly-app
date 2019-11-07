@@ -410,7 +410,7 @@ class Movie(SocialMedia, SEO,MainPage):
 
 
     def update_cover_poster(self):
-        from gql.functions import url_image
+        from pixly.lib import url_image
         cover_url = self.tmdb.poster_links().get("tmdb_cover_path")
         if cover_url:
             filename = "{}-cover.jpg".format(self.id)
@@ -420,22 +420,22 @@ class Movie(SocialMedia, SEO,MainPage):
             print("cover url could not found")
 
 
-    def update_poster(self, force=False):
-        from gql.functions import url_image, get_poster_url
-        if force==False:
-            try:
-                if self.poster and hasattr(self.poster, "url"):
-                    print("Person already have poster")
-                    pass
-                else: 
-                    if get_poster_url(self):
-                        poster_url = get_poster_url(self)
-                        filename = "{}-poster.jpg".format(self.id)
-                        self.poster.save(*url_image(poster_url, filename))
-                    else:
-                        print("movie poster url could not found")
-            except:
-                print("Movie Model poster could not be saved from source ")
+    #def update_poster(self, force=False):
+    #    from pixly.lib import url_image, get_poster_url
+    #    if force==False:
+    #        try:
+    #            if self.poster and hasattr(self.poster, "url"):
+    #                print("Person already have poster")
+    #                pass
+    #            else: 
+    #                if get_poster_url(self):
+    #                    poster_url = get_poster_url(self)
+    #                    filename = "{}-poster.jpg".format(self.id)
+    #                    self.poster.save(*url_image(poster_url, filename))
+    #                else:
+    #                    print("movie poster url could not found")
+    #        except:
+    #            print("Movie Model poster could not be saved from source ")
 
     def create_or_update_tmdb_movie(self):
         from archive.models import TmdbMovie

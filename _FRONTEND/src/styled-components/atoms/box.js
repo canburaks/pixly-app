@@ -1,12 +1,12 @@
 import React from "react"
 import { compose, typography, color, space, shadow, layout, border, background, flexbox, position, system, grid } from 'styled-system'
-import {  styled } from "../"
+import {  styled, linearGradientAnimationKeyframe } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import { Image } from "./image"
 import { Spinner } from "../others"
 //import { motion } from "framer-motion"
 import { linearGradient, backgrounds, backgroundImages, setLightness } from 'polished'
-
+import { generateGradient } from "../../functions/"
 const hoverShadow = `:hover { box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')}}`
 
 
@@ -98,7 +98,7 @@ export const NavBarBox = styled.nav`
     transition: all 0.3s ease-in-out;
     transition: background-color 1.5s cubic-bezier(.66,.04,.9,.88);
     overflow-y: visible;
-    z-index: 1500;
+    z-index: 10;
     ${color}
     ${space}
     ${shadow}
@@ -131,6 +131,7 @@ export const ListBox = styled(Box)`
 export const ModalBox = styled.div`
     position: fixed;
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
     top:0;
@@ -138,8 +139,8 @@ export const ModalBox = styled.div`
     right:0;
     bottom:0;
     background-color:rgba(0,0,0, 0.75);
-    padding:5vh 10vw;
-    z-index:10;
+    padding:5vh 5vw;
+    z-index:11;
     box-sizing: border-box;
     transition: all 1.8s cubic-bezier(.51,.17,.46, .88);
 

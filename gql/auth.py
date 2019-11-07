@@ -12,13 +12,13 @@ from graphql_jwt.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 #from background_task import background
 from django.contrib.sitemaps import ping_google
-from djaws import cognito
+from . import cognito
 from django.contrib.auth import authenticate, login, user_logged_in
 from django.contrib.auth import logout
-from persons.profile import LogEntry
+from persons.profile import LogEntry, Profile
 from gql.types import (VideoType, MovieType, ProfileType, PersonType,
         DirectorType, TopicType, ListType, UserType, RatingType)
-from persons.profile import LogEntry
+from pixly.lib import get_image_file_from_url, to_english_chars
 
 
 @convert_django_field.register(JSONField)
@@ -29,6 +29,8 @@ debug = True
 def trace(text, *args, **kwargs):
     if debug:
         print(text, *args, **kwargs)
+
+
 
 # PASSWORD CHANGE AUTH USER
 class ChangePassword(graphene.Mutation):
@@ -73,14 +75,21 @@ class ChangePassword(graphene.Mutation):
 class CreateUser(graphene.Mutation):
     user = graphene.Field(UserType)
     message = graphene.String()
+    success = graphene.Boolean()
+
     class Arguments:
         username = graphene.String(required=True)
         password = graphene.String(required=True)
         email = graphene.String(required=True)
         name = graphene.String(required=True)
 
+        #for facebook auth
+        fb_data = graphene.String(required=False)
+        avatar_url = graphene.String(required=False) 
+
     @classmethod
-    def mutate(cls, root, info, username, password, email, name):
+    def mutate(cls, root, info, username, password, email, name, fb_data, avatar_url):
+        username = to_english_chars(username)
         if User.objects.filter(username__iexact=username).exists():
             raise ValidationError('This username has already been taken!')
         if User.objects.filter(email__iexact=email).exists():
@@ -89,10 +98,12 @@ class CreateUser(graphene.Mutation):
             raise ValidationError('Invalid password!')
 
         #------- Cognito Check-------------------------------
-        cognito_userlist = cognito.get_user_list()
-        #filter cognito_users with username
-        user_cognito_account = list(filter(lambda x: x.username==username, cognito_userlist))
-        if (user_cognito_account):
+        #cognito_userlist = cognito.get_user_list()
+        ##filter cognito_users with username
+        #user_cognito_account = list(filter(lambda x: x.username==username, cognito_userlist))
+        is_username_exists_on_cognito = cognito.CognitoClass.is_username_registered(username)
+        print("is_username_exists_on_cognito:", is_username_exists_on_cognito)
+        if (is_username_exists_on_cognito and not fb_data):
             raise ValidationError('This username has already been taken!')
 
         trace("----------DATABASE SIGNUP---------------------")
@@ -108,7 +119,17 @@ class CreateUser(graphene.Mutation):
         profile = user.profile
         profile.name = name
         profile.email = email
+        
+        # CASE: Register with Facebook
+        if fb_data:
+            social_account = profile.get_or_create_social_account()
+            social_account.save_facebook_data(fb_data)
+            profile.avatar.save(*get_image_file_from_url(avatar_url, profile.username))
+            profile.registered_with_facebook = True
+            profile.connected_with_facebook = True
         profile.save()
+
+
         trace(f"user with {username} was created. ")
 
         #------------COGNITO REGISTER-----------------
@@ -138,7 +159,7 @@ class CreateUser(graphene.Mutation):
         #token_auth = graphql_jwt.ObtainJSONWebToken.Field()
         #token = graphql_jwt.shortcuts.get_token(user)
         trace("------------------------------------------------- \n")
-        return cls(user=user, message="Successfull")
+        return cls(user=user, message="Successfull", success=True)
 
 
 class Login(graphene.Mutation):
@@ -447,6 +468,7 @@ class ChangeForgetPassword(graphene.Mutation):
 
 
 class DBCheck:
+
     def username(username):
         try:
             user = User.objects.get(username__iexact=username)
@@ -455,11 +477,11 @@ class DBCheck:
             return False
 
     def email(email):
-        try:
-            user = User.objects.get(email__iexact=email)
+        user_exist = User.objects.filter(email__iexact=email).exists()
+        profile_exist = Profile.objects.filter(email__iexact=email).exists()
+        if user_exist or profile_exist:
             return True
-        except:
-            return False
+        return False
 
     def username_and_password(username, password):
         try:

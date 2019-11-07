@@ -1,5 +1,22 @@
 import { development } from "../styled-components"
 
+export function generateGradient(
+    colors=[ "#3437C7", "#3010AC", "#39CCCC", "#01FF6F",  "#777FEC"],
+    angle=270){
+        return `linear-gradient(${angle}deg, ${colors.join(", ")})`
+}
+
+
+export function lockBodyScroll(){
+    document.body.style.position = 'fixed';
+    document.body.style.overflowY = "hidden";
+}
+
+export function unlockBodyScroll(){
+    document.body.style.scrollBehavior = 'smooth'
+    document.body.style.overflowY = "auto";
+}
+
 export const capitalize = (text) => text.replace(/\b\w/g, l => l.toUpperCase())
 export function isEqualObj(a,b){
    // Create arrays of property names
