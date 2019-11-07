@@ -1,6 +1,11 @@
 import React from "react"
 import "./Spinner.css"
+import { Text, Paragraph, 
+    Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
+    Box, AbsoluteBox, 
 
-export const Spinner = () => (
-<div className="loader"></div>
+} from "../"
+
+export const Spinner = (props) => (
+<Box className="loader" id="spinner">{console.log("spinner props", props)}</Box>
 )
