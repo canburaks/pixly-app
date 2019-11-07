@@ -26,7 +26,7 @@ const Header = () => (
         title={"Pixly Search - Search Movies by Genre, Tag, IMDb Rating and Release Year"}
         description={"Pixly Search is a free service that you can search and filter movies with respect to their genres, tags, IMDb Ratings and release date"}
         keywords={["Movie Search", "Advance Movie Search", "Search by IMDb Rating", "Movie with Release Year"]}
-        canonical={`https://pixly.app/movie/advance-search`}
+        canonical={`https://pixly.app/advance-search`}
     />
 )
 
