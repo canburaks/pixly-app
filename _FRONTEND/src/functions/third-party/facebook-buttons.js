@@ -2,10 +2,28 @@ import React, { useState } from "react";
 import {  styled, Button, ImageButton, Image } from "../../styled-components"
 import {  typography, color, space, shadow, layout, border, background, flexbox, position } from 'styled-system'
 import { LoginButton } from 'react-facebook';
-import { Initialize } from 'react-facebook';
-
+import { Initialize, Login } from 'react-facebook';
 
 export const AuthButton = (props) => (
+  <Login
+  scope="email"
+  onCompleted={props.onCompleted}
+  onError={props.onError}
+>
+	{({ loading, handleClick, error, data }) => (
+		<FacebookContinueSvg onClick={handleClick}>
+		{console.log("AUTHBUTTON", loading, error, data)}
+		Login via Facebook
+		{loading && (
+			<span>Loading...</span>
+		)}
+		</FacebookContinueSvg>
+	)}
+</Login>
+)
+
+
+export const AuthButton2 = (props) => (
   	<FbookAuthButton  
     className="auth-button"
 		width={"auto"}
