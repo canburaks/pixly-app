@@ -172,7 +172,7 @@ const MainPage = React.memo(() => {
 										</Button>
 									</Box>
 									<FlexBox flexDirection="column" alignItems="flex-start" width="100%" mt={[3,3,3,4]}>
-										{production && <Fb.Auth />}
+										<Fb.Auth />
 									</FlexBox>
 								</FlexBox>
 								
