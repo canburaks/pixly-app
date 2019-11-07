@@ -13,7 +13,6 @@ export const AuthButton = (props) => (
 		{...props}
 	>
         <FacebookContinueSvg />
-        {props.children}
     </FbookAuthButton>
 )
 export const ConnectButton = (props) => (

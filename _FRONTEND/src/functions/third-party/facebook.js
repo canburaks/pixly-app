@@ -5,7 +5,7 @@ import { GlobalContext } from "../../";
 import { FACEBOOK_CONNECT, FACEBOOK_AUTHENTICATE } from "../mutations";
 import { print } from "../lib"
 import { LoginButton, Status, Initialize, useApi, FacebookContext, Facebook } from 'react-facebook';
-import { ConnectButton, LogoutButton, AuthButton } from "./facebook-buttons"
+import { ConnectButton, LogoutButton, AuthButton, production } from "./facebook-buttons"
 
 import {  
 	SimpleModal,FlexBox, GradientAnimationBox, Loading, Text,
@@ -70,7 +70,7 @@ export const FaceBookAuthentication = () => {
 
     return(
       <>
-        {loading && <Loading  text="loading"/>}
+        {(loading && fbData) && <Loading  text="loading"/>}
         
         <SimpleModal 
 			isOpen={isOpen} closeModal={closeModal} header={modalHeader}
@@ -134,10 +134,10 @@ export const facebook = () => {
     const connectSuccessHandler = useCallback((r) =>  {const newData= {...r};print(newData);  facebookConnect({variables:{data:JSON.stringify(newData)}}); setFbData(newData);},[])	
 
 
-
-    const Login = useCallback(() => <ConnectButton onCompleted={connectSuccessHandler} onError={errorHandler} />)
-    const Logout = useCallback(() => <LogoutButton onClick={logoutHandler} />)
-    const Function = useCallback(() => <button >status</button>)
+	
+    const Login = useCallback(() => api ? <ConnectButton onCompleted={connectSuccessHandler} onError={errorHandler} /> : FlexBox, [api])
+    const Logout = useCallback(() => api ? <LogoutButton onClick={logoutHandler} /> : FlexBox, [api])
+    const Function = useCallback(() => api ? <button >status</button> : FlexBox, [api])
     const Connect = isLogged ? Logout : Login
 
     const store = {
@@ -146,7 +146,7 @@ export const facebook = () => {
         Login,
         Connect,
         Function,
-        Auth: FaceBookAuthentication,
+        Auth: api ? FaceBookAuthentication : FlexBox,
         data:fbData
     }
     //checkFbStatus()
