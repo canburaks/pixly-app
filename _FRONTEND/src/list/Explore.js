@@ -132,7 +132,7 @@ const ExplorePage = React.memo(props => {
 
 				{/*<FeatureBox />*/}
 				<HeaderMini>Populars & Upcomings</HeaderMini>
-				<MovieRichCardBox items={movies} follow={true} columns={[1,2, 2, 3,3,3,3,4]} fontSize={["12px", "14px", "14px"]}  />
+				<MovieRichCardBox items={movies}  columns={[1,2, 2, 3,3,3,3,4]} fontSize={["12px", "14px", "14px"]}  />
 
 
 			</ContentContainer>

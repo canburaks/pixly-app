@@ -8,7 +8,7 @@ import { Input } from "../styled-components"
 
 import { GlobalContext } from "../";
 
-const ContactForm = (props) =>{
+export const ContactForm = (props) =>{
     const elements = {
         name: "",
         email: "",
