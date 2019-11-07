@@ -28,7 +28,7 @@ import {Box,Span,FlexBox,MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Gri
 	PageContainer,ContentContainer,Loading,
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text,NewLink,
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
-	GradientAnimationBox,SignupForm, SignupFormModal
+	GradientAnimationBox,SignupForm, SignupFormModal, production
 } from "../styled-components";
 
 
@@ -172,7 +172,7 @@ const MainPage = React.memo(() => {
 										</Button>
 									</Box>
 									<FlexBox flexDirection="column" alignItems="flex-start" width="100%" mt={[3,3,3,4]}>
-										<Fb.Auth />
+										{production && <Fb.Auth />}
 									</FlexBox>
 								</FlexBox>
 								
