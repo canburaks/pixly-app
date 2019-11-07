@@ -7,6 +7,7 @@ import { Initialize } from 'react-facebook';
 
 export const AuthButton = (props) => (
   	<FbookAuthButton  
+    className="auth-button"
 		width={"auto"}
 		mx={[1]} p={0} 
 		scope="email"
@@ -48,7 +49,7 @@ export const Init = ({Child ,...props}) =>(
 )
 
 const FacebookContinueSvg = (props) => (
-    <SvgFb width={233} height={30} fill="none" {...props}>
+    <SvgFb width={233} height={30} fill="none" {...props} className="svg-fb-api-continue">
     <path
       d="M16.738 28.5l-2.116-27H218c7.456 0 13.5 6.044 13.5 13.5s-6.044 13.5-13.5 13.5H16.738z"
       stroke="#3a67af"
@@ -74,7 +75,7 @@ const FacebookContinueSvg = (props) => (
 )
 
 const FacebookConnectSvg = (props) => (
-    <SvgFb width={114} height={30} fill="none" {...props}>
+    <SvgFb width={114} height={30} fill="none" {...props} className="svg-fb-api-connect">
     <path
       d="M16.905 28.5l-.384-27H99c7.456 0 13.5 6.044 13.5 13.5S106.456 28.5 99 28.5H16.906z"
       stroke="#3a67af"
@@ -99,7 +100,7 @@ const FacebookConnectSvg = (props) => (
   </SvgFb>
 )
 const FacebookLogoutSvg = (props) => (
-    <SvgFb width={114} height={30} fill="none" {...props}>
+    <SvgFb width={114} height={30} fill="none" {...props} className="svg-fb-api-logout">
     <path
       d="M18.11 28.5l-1.523-27H99c7.456 0 13.5 6.044 13.5 13.5S106.456 28.5 99 28.5H18.11z"
       stroke="#3a67af"

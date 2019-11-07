@@ -10,7 +10,7 @@ import { Text, Paragraph,
 import { TextSection } from "./TextSection"
 import { useScrollPosition } from "../../functions/hooks"
 
-export const ActionButton = ({onClick, borderRadius="6px", ...props}) => (
+export const ActionButton = ({onClick,isLoading, borderRadius="6px", ...props}) => (
     <Button 
         borderRadius={borderRadius}
         minWidth={"120px"}
@@ -24,7 +24,8 @@ export const ActionButton = ({onClick, borderRadius="6px", ...props}) => (
         alignItems="center"
         {...props}
     >
-        {props.isLoading ? <Spinner /> : props.children}
+        {console.log("action button isLoading", isLoading)}
+        {isLoading ? <Spinner /> : props.children}
     </Button>
 )
 
