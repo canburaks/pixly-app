@@ -4,32 +4,7 @@ import {  typography, color, space, shadow, layout, border, background, flexbox,
 import { LoginButton } from 'react-facebook';
 import { Initialize, Login } from 'react-facebook';
 
-
-export const AuthButton = (props) =>(
-    <Initialize>
-    {({isReady, api }) => {
-        console.log("init", isReady, api)
-        //console.log("initialize fb script", window.FB)
-        if (isReady !== true) return <div></div>
-		return (<Login
-		scope="email"
-		onCompleted={props.onCompleted}
-		onError={props.onError}
-		>
-			{({ loading, handleClick, error, data }) => (
-				<FacebookContinueSvg onClick={handleClick}>
-				Login via Facebook
-				{loading && (
-					<span>Loading...</span>
-				)}
-				</FacebookContinueSvg>
-			)}
-		</Login>)
-    }}
-</Initialize>
-)
-
-export const AuthButton3 = (props) => (
+export const AuthButton = (props) => (
   <Login
   scope="email"
   onCompleted={props.onCompleted}
@@ -37,8 +12,7 @@ export const AuthButton3 = (props) => (
 >
 	{({ loading, handleClick, error, data }) => (
 		<FacebookContinueSvg onClick={handleClick}>
-		{console.log("AUTHBUTTON", loading, error, data)}
-		Login via Facebook
+		{console.log("AUTHBUTTON", loading,)}
 		{loading && (
 			<span>Loading...</span>
 		)}
@@ -84,7 +58,7 @@ export const Init = ({Child ,...props}) =>(
     <Initialize>
     {({isReady, api }) => {
         console.log("init", isReady, api)
-        //console.log("initialize fb script", window.FB)
+        console.log("initialize fb script", window.FB)
         if (isReady !== true) return <div></div>
     }}
         <Child {...props} />
