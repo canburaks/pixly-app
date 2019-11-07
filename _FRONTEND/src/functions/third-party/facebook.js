@@ -14,6 +14,7 @@ import {
 
 export const FaceBookAuthentication = () => {
 	const globalstate = useContext(GlobalContext)
+    const [api, handleApi] = useApi()
 
     const [ fbData, setFbData ] = useState({})
     const [ authMutationResponse, setAuthMutationResponse ] = useState({})
@@ -98,7 +99,7 @@ export const FaceBookAuthentication = () => {
 
           </FlexBox>
         </SimpleModal>
-        <AuthButton onCompleted={authMutationHandler} onError={errorHandler} />
+        {api && <AuthButton onCompleted={authMutationHandler} onError={errorHandler} />}
       </>
     )
   }
