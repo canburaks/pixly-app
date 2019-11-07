@@ -64,8 +64,8 @@ export const FaceBookAuthentication = () => {
 		}
     },[data])
 
-	print("auth",fbData, authMutationResponse)
-	print("after response status", afterResponseStatus)
+	//print("auth",fbData, authMutationResponse)
+	//print("after response status", afterResponseStatus)
 
 
     return(
@@ -78,7 +78,7 @@ export const FaceBookAuthentication = () => {
 			width={["90vw","90vw","80vw", "60vw"]} maxWidth={"400px"}
 			minHeight="200px"
 		>
-          {console.log("modal content", isOpen)}
+          {console.log("modal content facebook", loading)}
           <FlexBox flexDirection="column" alignItems="center" justifyContent="flex-start" width="100%" bg="light" zIndex={11}>
 
 
