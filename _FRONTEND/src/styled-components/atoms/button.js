@@ -1,6 +1,6 @@
 import React from "react"
 import { compose, typography, color, space, shadow, layout, border, background, flexbox, position } from 'styled-system'
-import {  styled, keyframes } from "../"
+import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import { linearGradient } from 'polished'
 

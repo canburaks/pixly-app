@@ -84,6 +84,7 @@ six==1.11.0
 termcolor==1.1.0
 texttable==0.9.1
 tqdm==4.26.0
+Unidecode==1.1.1
 urllib3==1.22
 warrant==0.6.1
 wcwidth==0.1.7

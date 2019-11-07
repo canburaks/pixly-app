@@ -7,108 +7,17 @@ import { print } from "../lib"
 import { LoginButton, Status, Initialize, useApi, FacebookContext, Facebook } from 'react-facebook';
 import { ConnectButton, LogoutButton, AuthButton } from "./facebook-buttons"
 
-import {  
-	SimpleModal,FlexBox, GradientAnimationBox, Loading, Text,
-	SignupForm
-} from "../../styled-components"
-
-export const FaceBookAuthentication = () => {
-	const globalstate = useContext(GlobalContext)
-
-    const [ fbData, setFbData ] = useState({})
-    const [ authMutationResponse, setAuthMutationResponse ] = useState({})
-    const [ isOpen, setOpenStatus ] = useState(null)
+import {  SimpleModal,FlexBox, GradientAnimationBox, Loading, Text } from "../../styled-components"
 
 
-    const [facebookAuthenticate, { data, loading, error }] = useMutation(FACEBOOK_AUTHENTICATE, {
-      onError:() => print("fbook authentication error"),
-      onCompleted: (d) => setAuthMutationResponse(d)});
-    
-      
-    const errorHandler   = useCallback((error) =>  console.log("error: ", error),[])
-    const closeModal = useCallback(() => setOpenStatus(false),[])
-    const openModal = useCallback(() => setOpenStatus(true),[])
-
-    const authMutationHandler = useCallback((fbData) => {setFbData(fbData); facebookAuthenticate({variables:{data:JSON.stringify(fbData)}});}, [])
-	
-	//Reactive Values
-	const avatarUrl = useMemo(() => (fbData.profile && fbData.profile.picture) ? fbData.profile.picture.data.url : null, [fbData.profile])
-	const preFilledForm = useMemo(() => (authMutationResponse && authMutationResponse.form) ? JSON.parse(authMutationResponse.form): {}, [authMutationResponse.form])
-	const afterResponseStatus = useMemo(() => (authMutationResponse && authMutationResponse.status) ? authMutationResponse.status : null, [authMutationResponse])
-	const modalHeader = useMemo(() => {
-		if (afterResponseStatus === "register") return "One Last Step"
-		else if (afterResponseStatus === "login") return `Welcome`
-		else return "Just a second ..."
-	}, [afterResponseStatus])
-
-	//print("modal status", isOpen)
-
-
-
-    useEffect(() => {
-      	//print("use effect success", data);
-		// If response arrived from server 
-		if (data && data.facebookAuthenticate){
-			setOpenStatus(true)
-			const serverResponse = data.facebookAuthenticate
-			setAuthMutationResponse(serverResponse)
-
-
-			//CASE: Login
-			print("User now logging in0", serverResponse)
-			if (serverResponse.success && serverResponse.status==="login") {
-				print("User now logging in")
-				const profile = serverResponse.user.profile
-				globalstate.methods.login(profile)
-			}
-		}
-    },[data])
-
-	print("auth",fbData, authMutationResponse)
-	print("after response status", afterResponseStatus)
-
-
-    return(
-      <>
-        {loading && <Loading  text="loading"/>}
-        
-        <SimpleModal 
-			isOpen={isOpen} closeModal={closeModal} header={modalHeader}
-			bg="light" color="dark"  
-			width={["90vw","90vw","80vw", "60vw"]} maxWidth={"400px"}
-			minHeight="200px"
-		>
-          {console.log("modal content", isOpen)}
-          <FlexBox flexDirection="column" alignItems="center" justifyContent="flex-start" width="100%" bg="light" zIndex={11}>
-
-
-		  {afterResponseStatus !== "register" &&
-		  	<Text >{authMutationResponse.message}</Text>}
-
-			{afterResponseStatus === "register" && 
-				<SignupForm 
-					zIndex={11}
-					focus="Password" 
-					username={preFilledForm.username} 
-					email={preFilledForm.email} 
-					name={preFilledForm.name} 
-					fbData={fbData}
-					avatarUrl={avatarUrl}
-				/>}
-
-          </FlexBox>
-        </SimpleModal>
-        <AuthButton onCompleted={authMutationHandler} onError={errorHandler} />
-      </>
-    )
-  }
 
 export const facebook = () => {
     const [api, handleApi] = useApi()
     const globalstate = useContext(GlobalContext)
 
 	const [ isLogged, setIsLogged ] = useState(false)
-
+	const [ isModalOpen, setModalStatus ] = useState(false)
+	const [ authMutationResponse, setAuthMutationResponse ] = useState({})
 
     const [ fbData, setFbData ] = useState({})
 
@@ -118,6 +27,10 @@ export const facebook = () => {
         onError:() => print("fbook mutation error"),
         onCompleted: (data) => (print("fbook mutation success", data), setLoginStatus(data.facebookConnect.success))
     });
+    const [facebookAuthenticate, { data:authData, loading, error }] = useMutation(FACEBOOK_AUTHENTICATE, {
+		onError:() => print("fbook authentication error"),
+		onCompleted: (data) => authMutationOnComplete(data) });
+
 
 
     // Callback functions
@@ -129,15 +42,36 @@ export const facebook = () => {
     const cleanHandler   = useCallback(() => {setIsLogged(false); setFbData(null);},[])
     const logoutHandler  = useCallback(async () => {if(api){api.logout(l => print("l",l))}; cleanHandler()},[])
     const errorHandler   = useCallback((error) =>  console.log("error: ", error),[])
-
+  	const closeModal = () => setModalStatus(false)
+	const openModal = () => setModalStatus(true)
 	  
     const connectSuccessHandler = useCallback((r) =>  {const newData= {...r};print(newData);  facebookConnect({variables:{data:JSON.stringify(newData)}}); setFbData(newData);},[])	
+	const authMutationHandler = (fbData) => {print("auth mutation handler", fbData); facebookAuthenticate({variables:{data:JSON.stringify(fbData)}});}
+  	const authMutationOnComplete = (data) => {
+		print("fbook  auth mutations success", data.facebookAuthenticate);
+		setAuthMutationResponse(data.facebookAuthenticate)
+		openModal()
+	  }
+    print("facebook", isLogged,isModalOpen, fbData, authMutationResponse )
 
 
 
+    // Render Elements
+    const Auth = () => (
+		<>
+			{loading && <Loading  text="loading"/>}
+			<SimpleModal isOpen={isModalOpen} closeModal={closeModal} bg="light" color="dark"  width="40vw" minHeight="200px">
+				<FlexBox flexDirection="column" alignItems="center" justifyContent="flex-start" width="100%">
+					<Text >{authMutationResponse.message}</Text>
+					{error && <Text color="red">{error.message}</Text>}
+				</FlexBox>
+			</SimpleModal>
+			<AuthButton onCompleted={authMutationHandler} onError={errorHandler} />
+		</>
+	)
     const Login = useCallback(() => <ConnectButton onCompleted={connectSuccessHandler} onError={errorHandler} />)
     const Logout = useCallback(() => <LogoutButton onClick={logoutHandler} />)
-    const Function = useCallback(() => <button >status</button>)
+    const Function = useCallback(() => <button onClick={openModal}>status</button>)
     const Connect = isLogged ? Logout : Login
 
     const store = {
@@ -146,7 +80,7 @@ export const facebook = () => {
         Login,
         Connect,
         Function,
-        Auth: FaceBookAuthentication,
+        Auth,
         data:fbData
     }
     //checkFbStatus()

@@ -14,7 +14,7 @@ import graphene
 
 from django.db.models import Q
 from graphene_django.converter import convert_django_field
-from gql.types import CustomListType,CustomMovieType
+from pixly.lib import get_class_callable_names, get_class_cache_methods
 #from .types import ( MovieType, MovieListType, RatingType, ProfileType, PersonType,TagType,
 #        CustomListType, CustomMovieType, DirectorPersonMixType,CountryType, PersonaType,
 #        DirectorType, TopicType, ListType, UserType, CrewType, movie_defer,
@@ -24,14 +24,24 @@ from gql.types import CustomListType,CustomMovieType
 from functools import lru_cache
 
 class Cache():
+    
+    def flush():
+        try:
+            [Cache.__dict__[name].cache_clear() for name,method in get_class_cache_methods(Cache)]
+            return True
+        except:
+            return False
+    
     # ------ Main Page ---------gql.types 
     @lru_cache(maxsize=100)
     def main_page_movies():
+        from gql.types import CustomMovieType
         mqs = Movie.objects.filter(main_page=True).order_by("-created_at").values_list("slug", flat=True)
         return [CustomMovieType(slug=x) for x in mqs]
 
     @lru_cache(maxsize=100)
     def main_page_lists():
+        from gql.types import CustomListType
         lqs =  List.objects.filter(main_page=True).values_list("slug", flat=True)
         return [CustomListType(slug=x) for x in lqs]
 
@@ -70,14 +80,20 @@ class Cache():
         return qs
 
 
-    # ------ MOVIE LISTS --------- gql.schema resolve_liste 
+    # ------  LISTS --------- gql.schema resolve_liste 
     @lru_cache(maxsize=200)
     def get_custom_list_anonymous_user(id, slug, page):
+        from gql.types import CustomListType
         return CustomListType(id, slug, page=page)
 
     @lru_cache(maxsize=300)
     def get_custom_list_auth_user(id, slug, page, username):
+        from gql.types import CustomListType
         profile = Profile.objects.filter(username=username) 
         return CustomListType(id, slug, page=page, viewer=profile)
 
-    # ------ Persona  ---------
+    # ------ Movies  ---------gql.types 
+    @lru_cache(maxsize=100)
+    def recent_movies(quantity=20):
+        mqs = Movie.objects.filter(year=2019, imdb_rating__gte=6.5).defer("director", "data").order_by("-updated_at")[:quantity]
+        return mqs

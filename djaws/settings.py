@@ -149,6 +149,7 @@ DEFAULT_HOST = "default"
 AUTHENTICATION_BACKENDS = [
     'graphql_jwt.backends.JSONWebTokenBackend',
     'django.contrib.auth.backends.ModelBackend',
+    #'gql.social.facebook.FacebookBackend',
 ]
 JWT_VERIFY_EXPIRATION=True
 JWT_REFRESH_EXPIRATION_DELTA=3
@@ -246,7 +247,7 @@ USE_TZ = True
 #       S3
 #STATIC_URL = '/static/'
 
-
+AWS_DEFAULT_REGION = env('AWS_DEFAULT_REGION')
 AWS_ACCESS_KEY_ID = env('AWS_KEY')
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_KEY')
 AWS_STORAGE_BUCKET_NAME = "cbs-static"
@@ -258,7 +259,8 @@ AWS_QUERYSTRING_AUTH = False
 GOOGLE__PIXLY_REACT_CLIENT_ID = env('GOOGLE__PIXLY_REACT_CLIENT_ID')
 GOOGLE__PIXLY_REACT_CLIENT_SECRET = env('GOOGLE__PIXLY_REACT_CLIENT_SECRET')
 
-
+COGNITO_USER_POOL_ID=env("COGNITO_USER_POOL_ID")
+COGNITO_CLIENT_ID=env("COGNITO_CLIENT_ID")
 ##########################################################################
 
 

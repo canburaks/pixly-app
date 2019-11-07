@@ -108,6 +108,18 @@ export const Store = () => {
                     else return localStorage.getItem("USERNAME")
                 }
             },
+            signup: async function mutationCompleteHandler(data) {
+                const profile = data.createUser.user.profile;
+                localStorage.setItem("AUTH_TOKEN", profile.token);
+                localStorage.setItem("USERNAME", profile.username);
+                localStorage.setItem("USER_ID", profile.id);
+                await state.methods.updateToken(profile.token)
+                await state.methods.updateUsername(profile.username)        
+                setTimeout(() => {
+                    window.location = window.location.origin + `/${profile.username}/dashboard`;
+                }, 1000)
+                console.log("end of store signup function ", state.token, state.username)
+            },
             login: async function(profile){
                 console.log("store profile mutation data:", profile)
                 localStorage.setItem("AUTH_TOKEN", profile.token);

@@ -3,7 +3,7 @@ import { compose,typography, color, space, shadow, layout, border, background, f
 
 import {  styled } from "../"
 import { Box } from "./box"
-import { Spinner } from "../others"
+//import { Spinner } from "../others"
 
 import { themeGet } from '@styled-system/theme-get'
 
@@ -23,13 +23,14 @@ const placeholderstyle = {
     transition:"0.35s linear"
 }
 
+/*
 export const ImagePlaceholder = (props) => (
     <ImgShim fallback={<Spinner />} {...props} style={{...placeholderstyle, ...props.style}}  />
 )
-
 
 export const ImageShim = React.memo((props) => (
     <ImgShim fallback={<Spinner />} {...props} style={{...shimstyle, ...props.style}}  />
 ))
 const shimstyle = {width:"100%", height:"100%", minHeight:150, minWidth:150, transition:"0.35s linear"}
 
+*/

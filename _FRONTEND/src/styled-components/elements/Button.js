@@ -3,13 +3,30 @@ import { useMemo, useCallback } from 'react';
 
 import { Text, Paragraph, 
         Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
-        Box, AbsoluteBox, 
+        Box, AbsoluteBox, Spinner,
         NewLink, Input, Button, BubbleButton
-} from "../atoms"
+} from "../"
 
 import { TextSection } from "./TextSection"
 import { useScrollPosition } from "../../functions/hooks"
 
+export const ActionButton = ({onClick, borderRadius="6px", ...props}) => (
+    <Button 
+        borderRadius={borderRadius}
+        minWidth={"120px"}
+        maxwidth={"160px"}
+        height={["50px"]}
+        fontSize={[12,14,14,16]}
+        bg="shark"
+        color="light"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        {...props}
+    >
+        {props.isLoading ? <Spinner /> : props.children}
+    </Button>
+)
 
 export const LinkButton = (props) => (
     <BubbleButton type="button"

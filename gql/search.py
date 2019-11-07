@@ -9,7 +9,7 @@ from graphene_django.converter import convert_django_field
 from django.db.models import Q
 import django_filters
 from django.conf import settings
-from .cache_functions import Cache
+from pixly.cache_functions import Cache
 from .types import (VideoType, MovieType, MovieListType, RatingType, ProfileType, PersonType,
         CustomListType, CustomMovieType, DirectorPersonMixType, TagType,
         DirectorType, TopicType, ListType, UserType, CrewType, movie_defer)

@@ -12,6 +12,8 @@ from persona.myqueue import MyQueue
 from archive import custom_functions as cbs
 from .abstract import SocialMedia, SEO
 from collections import Counter
+from pixly.lib import is_email_registered
+import json
 cc = cbs.cc
 
 FOLLOW_TYPE = (
@@ -62,30 +64,26 @@ class Profile(SocialMedia, SEO):
     #------------------------------
     should_change_password = models.BooleanField(default=False)
 
-
+    #Social Media
+    connected_with_facebook = models.BooleanField(default=False)
+    registered_with_facebook = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username
 
-    #in order to bulk update, does not save
-    def set_seo_description_keywords(self, save=True):
-        name = self.name if self.name != None else self.username
-        description_text = f"{name}'s Pixly Profile; favourite movies, bookmarks, watchlist, favorite directors, "
-        words = []
-        keywords = ["Personal Cinema History", "Cinema Taste", name, "Favourite Movies"]
-        
-        description_text += "following people, "
-        description_text += "followers, "
-        
-        self.seo_description = description_text
-        self.seo_keywords = ", ".join(keywords)
-        self.save()
+    @property
+    def is_verified(self):
+        if cognito_registered or registered_with_facebook:
+            return True
+        return False
 
     #for authenticated users only
     def get_or_create_social_account(self):
         from persons.profile import Social
         if not Social.objects.filter(profile=self).exists():
             info_obj = Social.objects.create(profile=self)
+            self.connected_with_facebook = True
+            self.save()
             print(f"new social accounts created for existing user: {self.username}")
             return info_obj
         return Social.objects.filter(profile=self).first()
@@ -106,6 +104,20 @@ class Profile(SocialMedia, SEO):
     def print_info(self, text):
         new_text = f"profile username:{self.username} --> " + text
         print(new_text)
+
+    #in order to bulk update, does not save
+    def set_seo_description_keywords(self, save=True):
+        name = self.name if self.name != None else self.username
+        description_text = f"{name}'s Pixly Profile; favourite movies, bookmarks, watchlist, favorite directors, "
+        words = []
+        keywords = ["Personal Cinema History", "Cinema Taste", name, "Favourite Movies"]
+        
+        description_text += "following people, "
+        description_text += "followers, "
+        
+        self.seo_description = description_text
+        self.seo_keywords = ", ".join(keywords)
+        self.save()
 
     def rated_movie_list(self):
         qs = self.rates.select_related("movie").only("movie", "movie_id", "profile").all()
@@ -520,6 +532,40 @@ class Social(models.Model):
         if cls.objects.filter(facebook_email=email).exists():
             return cls.objects.filter(facebook_email=email).first()
         return False
+    
+    def save_facebook_data(self, fb_data):
+        #print("is fb_data string: ", isinstance(fb_data,str))
+        fb_data = json.loads(fb_data) if isinstance(fb_data, str) else fb_data
+
+        #pprint(fb_data["profile"])
+        self.facebook_data = fb_data
+
+        if fb_data.get("profile"):
+            fb_profile = fb_data.get("profile")
+
+            #check email clash for new accounts
+            #print("1")
+            if not self.facebook_id or not self.facebook_email:
+                #print("2")
+                have_email_clash = is_email_registered(fb_profile.get("email"))
+                #print("have email clash: ", have_email_clash)
+                self.email_clash["facebook"] = have_email_clash
+                self.profile.connected_with_facebook = True
+
+            # set fb data
+            self.facebook_email = fb_profile.get("email")
+            self.facebook_name = fb_profile.get("name")
+            self.facebook_id = fb_profile.get("id")
+
+        #print("3")
+        # set token details
+        if fb_data.get("tokenDetail"):
+            #print("4")
+            token_data = fb_data.get("tokenDetail")
+            self.facebook_token = token_data.get("accessToken")
+            self.facebook_sign = token_data.get("signedRequest")
+        #print("facebook data is saved")
+        self.save()
 
 
 class Statistics(models.Model):

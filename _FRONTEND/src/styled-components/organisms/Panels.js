@@ -8,7 +8,8 @@ import {
     Box, Text, HeaderMini, NewLink, TopPanelBackElement, TopPanelCoverElement,
     DirectorLink, DirectorLinks,FlexBox, TagBox,Image,
     LikeMutation,BookmarkMutation, RatingMutation, FollowMutation,
-    UsersIcon, EyeIcon,UserIcon,PageContainer, production
+    UsersIcon, EyeIcon,UserIcon,PageContainer, production,
+    GradientAnimationModal
 } from "../index"
 
 //import { ColorExtractor } from 'react-color-extractor'
@@ -62,7 +63,7 @@ export const ListCoverPanel = React.memo(( props ) =>(
 ), (prevProps, nextProps) => (prevProps.item.slug === nextProps.item.slug  && prevProps.isLargeScreen === nextProps.isLargeScreen ))
 
 
-export const Loading = () => (
+export const Loading2 = () => (
     <PageContainer bg="transparent">
         {window.scrollTo({ top: 0, left: 0, behavior: "smooth" })}
         <div className="loading-container">
@@ -70,7 +71,7 @@ export const Loading = () => (
         </div>
     </PageContainer>
 )
-
+export const Loading = () => <GradientAnimationModal text="loading..."/>
 
 export const Error = () => <Redirect to="/404" /> // production ? window.location.replace("https://pixly.app/404") : <Redirect to="/404" />
 

@@ -20,7 +20,6 @@ export function passwordValidator(value) {
     else if (value === value.toLowerCase()) return false
     else if (value === value.toUpperCase()) return false
     else return true
-
 }
 
 export function oldpasswordValidator(value) {

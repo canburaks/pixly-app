@@ -42,10 +42,12 @@ class UploadAvatar(graphene.Mutation):
         if info.context.user.is_authenticated:
             profile = info.context.user.profile
             file = info.context.FILES.get("1")
+            print("context files" ,info.context.FILES)
             if file._size>3500000:
                 return UploadAvatar(success=False, profile=profile)
             print("file", file.__dict__)
             file_content_type=file.content_type.split("/")[1]
+
             if file_content_type=="png":
                 file_type="PNG"
             else:

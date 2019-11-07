@@ -16,6 +16,7 @@ import itertools
 from pprint import pprint
 from django.conf import settings
 from functools import lru_cache
+from pixly.cache_functions import Cache
 
 @convert_django_field.register(JSONField)
 def convert_json_field_to_string(field, registry=None):
@@ -1178,9 +1179,13 @@ class ProfileType(DjangoObjectType, SocialMediaType, SEOType):
     activities = graphene.List("gql.types.ActivityType")
 
     cognito_status = graphene.Boolean()
+    is_verified =  graphene.Boolean()
 
     class Meta:
         model = Profile
+
+    def resolve_is_verified(self, info, *_):
+        return self.is_verified
 
     def resolve_seo_title(self, info, *_):
         if self.seo_title == None:
@@ -2041,19 +2046,19 @@ class MainPageType(graphene.ObjectType, SEOType):
     topics = graphene.List(TopicType)
 
     def resolve_movies(self, info, *_):
-        from .cache_functions import Cache
+        from pixly.cache_functions import Cache
         return Cache.main_page_movies()
         
     def resolve_lists(self, info, *_):
-        from .cache_functions import Cache
+        from pixly.cache_functions import Cache
         return Cache.main_page_lists()
 
     def resolve_persons(self, info, *_):
-        from .cache_functions import Cache
+        from pixly.cache_functions import Cache
         return Cache.main_page_persons()
 
     def resolve_topics(self, info, *_):
-        from .cache_functions import Cache
+        from pixly.cache_functions import Cache
         return Cache.main_page_topics()
 
 

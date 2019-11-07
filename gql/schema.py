@@ -26,7 +26,7 @@ from .types import (VideoType, MovieType, MovieListType, RatingType, ProfileType
 from .search import ComplexSearchType, ComplexSearchQuery
 from .persona_query import CustomPersonaType
 from functools import lru_cache
-from .cache_functions import Cache
+from pixly.cache_functions import Cache
 
 class ListQuery(object):
     list_of_movie_search = graphene.List(MovieType,

@@ -15,7 +15,7 @@ from django_countries import countries
 import itertools
 from pprint import pprint
 from django.conf import settings
-
+from pixly.cache_functions import Cache
 from gql.types import (MovieType, ProfileType, DirectorPersonMixType,CustomListType,
         ActivityType, TopicType, ListType, UserType, RatingType, RecommendationType,
         TagType, SocialMediaType, SEOType)
@@ -122,7 +122,7 @@ class CustomPersonaType(graphene.ObjectType, SocialMediaType, SEOType):
         return self.user.profile
 
     def resolve_recent_movies(self, info):
-        return Movie.objects.filter(year=2019, imdb_rating__gte=6.5).defer("director", "data").order_by("-updated_at")[:20]
+        return Cache.recent_movies(quantity=20)
 
     def resolve_recommendations(self, info, *_):
         records = Recommendation.get_recommendations(profile=self.user.profile, real=True)
