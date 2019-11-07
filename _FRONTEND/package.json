@@ -167,9 +167,7 @@
     "include": [
       "",
       "/",
-      "/explore",
-      "/404"
-
+      "/explore"
     ],
     "publicPath": "/"
   }

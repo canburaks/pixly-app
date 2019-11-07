@@ -2,6 +2,7 @@ import React from "react";
 import { useContext, useState, useReducer, useEffect, lazy, Suspense } from 'react';
 import { useModal } from "cbs-react-components";
 import { AuthForm, ForgetForm } from "../forms/AuthForm"
+import { ContactForm } from "../forms/ContactForm"
 
 import { useWindowSize } from "../functions"
 import { client, cache } from "../index"
