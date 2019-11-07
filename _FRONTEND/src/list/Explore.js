@@ -40,6 +40,7 @@ import {
 	HeaderText,
 	HeaderMini,
 	Text,
+	TextSection,
 	NewLink,
 	CoverLink,
 	CoverCard
@@ -47,6 +48,7 @@ import {
 
 import "./Explore.css";
 
+const exploremessage = "As Pixly, We have just started. But we passionately strive to bring our business to the best place. Our AI algorithm is currently in a beta phase, and we've collect several movie lists and topics to enrich your discovery experience. These include films that have won major awards (Grand Prize) from prestigious film festivals like cannes film festival, favorite movies and  lists from some famous directors such as Quentin Tarantino and Stanley Kubrick, and various topicals such as art-house, cyberpunk or based on true story movies.In addition, we have gather together the best popular movies that are up to date and the upcoming cinema works that we are looking forward to. We constantly try to keep our content up to date. Your intellectual support and suggestions are always welcome. Please send us any questions and suggestions in the message box at the bottom of the page or email us at pixly@pixly.app. "
 const ExplorePage = React.memo(props => {
 	//rgaPageView()
 	const { movies, lists, topics} = props.data
@@ -102,8 +104,8 @@ const ExplorePage = React.memo(props => {
 			</Head>
 
 			<ContentContainer alignItems="center" mb={"100px"} pt={"40px"}>
-				<HeaderText fontSize={["30px"]}>Discover Movie Lists, Topics, Populars and Upcoming Movies</HeaderText>
-
+				<HeaderText fontSize={["30px"]}>Discover Best Movies that Fit Your Cinema Taste.</HeaderText>
+				<Text fontSize={["14px", "14px", "16px", "18px"]} mt={[2]} mb={[4]}>{exploremessage}</Text>
 				<Grid columns={[1,1, 2, 2,2,3]} py={[4]}>
 					{topics.map(topic => (
 						<CoverCard 
