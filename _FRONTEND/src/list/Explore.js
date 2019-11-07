@@ -58,10 +58,12 @@ const ExplorePage = React.memo(props => {
 		<PageContainer>
 			<Head
 				description={
-					"Movie Collections: curated movie lists, director's film lists, cannes film festival awards, berlin film festival awards, venice film festival awards, arthouse films and movies, cyberpunk films and movies, based on true story films and movies, latest movies"
+					"Curated movie lists, director's favorite film lists, film festival awards, " +
+					"arthouse, cyberpunk, based on true story films, " + 
+					"best of popular and upcoming movies."
 				}
 				title={
-					"Pixly - Discover Your Next Movie"
+					"Pixly - Discover Movie Lists, Topics, Popular and Upcoming Movies."
 				}
 				keywords={
 					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"
@@ -71,13 +73,12 @@ const ExplorePage = React.memo(props => {
 				<meta name="twitter:site" content="@pixlymovie" />
 				<meta
 					name="twitter:description"
-					content="Personal Movie Recommendation and Social Movie Discovering Platform"
+					content="Pixly - Discover Movie Lists, Topics, Popular and Upcoming Movies."
 				/>
 				<meta name="twitter:app:name:iphone" content="Pixly" />
 				<meta name="twitter:app:name:ipad" content="Pixly" />
 				<meta name="twitter:app:name:googleplay" content="Pixly" />
 				<meta property="og:type" content="business.business" />
-				<meta property="og:url" content="https://pixly.app" />
 				<meta
 					property="og:image"
 					content="https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/brand/pixly-hare-circle.png"
@@ -104,9 +105,8 @@ const ExplorePage = React.memo(props => {
 				/>
 			</Head>
 
-			<ContentContainer alignItems="center" mb={"100px"} pt={"80px"}>
-				<HiddenHeader>Pixly Movies</HiddenHeader>
-				{/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
+			<ContentContainer alignItems="center" mb={"100px"} pt={"40px"}>
+				<HeaderText fontSize={["30px"]}>Discover Movie Lists, Topics, Populars and Upcoming Movies</HeaderText>
 
 				<Grid columns={[1,1, 2, 2,2,3]} py={[4]}>
 					{topics.map(topic => (
