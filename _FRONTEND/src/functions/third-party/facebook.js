@@ -14,7 +14,6 @@ import {
 
 export const FaceBookAuthentication = () => {
 	const globalstate = useContext(GlobalContext)
-    const [api, handleApi] = useApi()
 
     const [ fbData, setFbData ] = useState({})
     const [ authMutationResponse, setAuthMutationResponse ] = useState({})
@@ -65,8 +64,8 @@ export const FaceBookAuthentication = () => {
 		}
     },[data])
 
-	//print("auth",fbData, authMutationResponse)
-	//print("after response status", afterResponseStatus)
+	print("auth",fbData, authMutationResponse)
+	print("after response status", afterResponseStatus)
 
 
     return(
@@ -79,7 +78,7 @@ export const FaceBookAuthentication = () => {
 			width={["90vw","90vw","80vw", "60vw"]} maxWidth={"400px"}
 			minHeight="200px"
 		>
-          {console.log("modal content facebook", loading)}
+          {console.log("modal content", isOpen)}
           <FlexBox flexDirection="column" alignItems="center" justifyContent="flex-start" width="100%" bg="light" zIndex={11}>
 
 
@@ -99,7 +98,7 @@ export const FaceBookAuthentication = () => {
 
           </FlexBox>
         </SimpleModal>
-        {api && <AuthButton onCompleted={authMutationHandler} onError={errorHandler} />}
+        <AuthButton onCompleted={authMutationHandler} onError={errorHandler} />
       </>
     )
   }
@@ -135,10 +134,10 @@ export const facebook = () => {
     const connectSuccessHandler = useCallback((r) =>  {const newData= {...r};print(newData);  facebookConnect({variables:{data:JSON.stringify(newData)}}); setFbData(newData);},[])	
 
 
-	
-    const Login = useCallback(() => api ? <ConnectButton onCompleted={connectSuccessHandler} onError={errorHandler} /> : FlexBox, [api])
-    const Logout = useCallback(() => api ? <LogoutButton onClick={logoutHandler} /> : FlexBox, [api])
-    const Function = useCallback(() => api ? <button >status</button> : FlexBox, [api])
+
+    const Login = useCallback(() => <ConnectButton onCompleted={connectSuccessHandler} onError={errorHandler} />)
+    const Logout = useCallback(() => <LogoutButton onClick={logoutHandler} />)
+    const Function = useCallback(() => <button >status</button>)
     const Connect = isLogged ? Logout : Login
 
     const store = {
@@ -147,7 +146,7 @@ export const facebook = () => {
         Login,
         Connect,
         Function,
-        Auth: api ? FaceBookAuthentication : FlexBox,
+        Auth: FaceBookAuthentication,
         data:fbData
     }
     //checkFbStatus()
