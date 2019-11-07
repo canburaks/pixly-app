@@ -7,10 +7,10 @@ import { production } from "../styled-components"
 import { useLocation, } from "react-router-dom";
 
 //console.log("production: ", production)
-
 export const Head = React.memo((props) => {
     const titleText = props.title ? props.title.slice(0,69) :"Pixly - Movie Recommendation and Social Cinema Platform "
     const descriptionText = props.description ? props.description.slice(0,159) : "Personalized Movie Recommendation, Social Cinema Platform, Movie Discovery, and Cultural Content"
+    //"Pixly - Discover Best Movies that Fit Your Cinema Taste."
     const url = props.canonical ? props.canonical : "https://pixly.app" + window.location.pathname 
     const image =  props.image ? props.image : "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/pixly-wide-zip.jpg"
     const richdata = props.richdata ? JSON.stringify(JSON.parse(props.richdata)) : null
@@ -40,7 +40,7 @@ export const Head = React.memo((props) => {
         {opengraph("type", "website")}
         {opengraph("sitename", "Pixly")}
         {opengraph("url", url)}
-        {opengraph("description", descriptionText.slice(0,65))}
+        {opengraph("description", descriptionText.slice(0,60))}
         {opengraph("image", image)}
 
         {/* Twitter */}

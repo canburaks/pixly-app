@@ -58,9 +58,8 @@ const ExplorePage = React.memo(props => {
 		<PageContainer>
 			<Head
 				description={
-					"Curated movie lists, director's favorite film lists, film festival awards, " +
-					"arthouse, cyberpunk, based on true story films, " + 
-					"best of popular and upcoming movies."
+					"Curated must seen movie lists, masterpieces of arthouse, cyberpunk, and based on true story films, and " + 
+					"also the best and the newest popular and upcoming movies."
 				}
 				title={
 					"Pixly - Discover Movie Lists, Topics, Popular and Upcoming Movies."
@@ -68,13 +67,10 @@ const ExplorePage = React.memo(props => {
 				keywords={
 					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"
 				}
-				canonical={`https://pixly.app/explore`}>
-				<meta name="twitter:card" content="app" />
-				<meta name="twitter:site" content="@pixlymovie" />
-				<meta
-					name="twitter:description"
-					content="Pixly - Discover Movie Lists, Topics, Popular and Upcoming Movies."
-				/>
+				canonical={`https://pixly.app/explore`}
+				twitterdescription={"Pixly - Discover Movie Lists, Topics, Popular and Upcoming Movies."}
+				>
+
 				<meta name="twitter:app:name:iphone" content="Pixly" />
 				<meta name="twitter:app:name:ipad" content="Pixly" />
 				<meta name="twitter:app:name:googleplay" content="Pixly" />

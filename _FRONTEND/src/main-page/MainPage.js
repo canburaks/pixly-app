@@ -75,7 +75,8 @@ const MainPage = React.memo(() => {
 		<PageContainer>
 			<Head
 				description={
-					"Pixly is a movie recommendation app. Get personalized movie recommendations, find similar movies, curated movie lists, new and must seen movies. Social media for film lovers."
+					"Discover best movies that fit your cinema taste with our AI-based recommendations. " + 
+					"Find out similars movies, curated movie lists, and film lovers."
 
 				}
 				title={
@@ -84,9 +85,11 @@ const MainPage = React.memo(() => {
 				keywords={
 					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
 				}
-				canonical={`https://pixly.app`}>
+				canonical={`https://pixly.app`}
+				twitterdescription={"AI-Based Film Recommendations, Movie Lists, Topics, Popular and Upcoming Movies."}
+
+				>
 				<meta name="twitter:card" content="app" />
-				<meta name="twitter:site" content="@pixlymovie" />
 				<meta
 					name="twitter:description"
 					content="Personal Movie Recommendation and Social Movie Discovering Platform"
@@ -126,9 +129,6 @@ const MainPage = React.memo(() => {
 					<div className="container">
 						<div className="site-header-inner">
 							<div className="brand header-brand">
-								<h1 className="m-0">
-								</h1>
-								<HiddenText>Pixly is a movie recommendation app.</HiddenText>
 							</div>
 						</div>
 					</div>
@@ -230,18 +230,18 @@ const MainPage = React.memo(() => {
 
 
 
-const MiniMovies = () => <Image info="pixly main page posters" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/movies.jpg"} style={{width:"100%", height:"100%", boxShadow:"-2px 2px 4px 1px rgba(40,40,40, 0.6)"}} />
+const MiniMovies = () => <Image info="pixly main page movies collage" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/movies.jpg"} style={{width:"100%", height:"100%", boxShadow:"-2px 2px 4px 1px rgba(40,40,40, 0.6)"}} />
 
-const SpaceOddysey = () => <Image info="pixly main page posters" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/space-oddysey.png"} style={{width:"100%", height:"auto"}} />
+const SpaceOddysey = () => <Image info="space oddysey mini image" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/space-oddysey.png"} style={{width:"100%", height:"auto"}} />
 
-const SkinILive = () => <Image info="pixly main page posters" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/skin.png"} style={{width:"100%", height:"auto"}} />
+const SkinILive = () => <Image info="the skin i live in image" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/skin.png"} style={{width:"100%", height:"auto"}} />
 
 
 const Feature1 = () => (
 	<div className="feature text-center is-revealing">
 		<div className="feature-inner">
 			<div className="feature-icon">
-				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-01.svg"} alt="Feature 01" />
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-01.svg"} info="Pixly main page Feature 01" />
 			</div>
 			<HeaderMini>Personal Recommendations - <Span fontSize={["14px"]} fontWeight="bold">BETA</Span></HeaderMini>
 			<Text>After rating 40 movies, we can analyze your cinema taste with artifical intelligence then we will make very personalized movie recommendations every week.</Text>
@@ -252,7 +252,7 @@ const Feature2 = () => (
 	<div className="feature text-center is-revealing">
 		<div className="feature-inner">
 			<div className="feature-icon">
-				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-02.svg"} alt="Feature 01" />
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-02.svg"} info="Pixly main page Feature 01" />
 			</div>
 			<HeaderMini>Curated Collections</HeaderMini>
 			<Text>Handpicked selected lists of movies by Pixly Editors, beside well known collected movie lists all around the world including favorite film lists of directors and festival awarded movies. Special lists that we call topics that find movies that treat specific topics or subjects.</Text>
@@ -263,7 +263,7 @@ const Feature3 = () => (
 	<div className="feature text-center is-revealing">
 		<div className="feature-inner">
 			<div className="feature-icon">
-				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-03.svg"} alt="Feature 01" />
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-03.svg"} info="Pixly main page Feature 01" />
 			</div>
 			<HeaderMini>Search & Filter</HeaderMini>
 			<Text>Advance Search and Filter mechanism with respect to IMDb rating and release year of movies.</Text>
@@ -274,7 +274,7 @@ const Feature4 = () => (
 	<div className="feature text-center is-revealing">
 		<div className="feature-inner">
 			<div className="feature-icon">
-				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-04.svg"} alt="Feature 01" />
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-04.svg"} info="Pixly main page Feature 01" />
 			</div>
 			<HeaderMini>Personal Records</HeaderMini>
 			<Text>Keep and track your personal cinema history by adding movies to watchlist, liking them and giving ratings. </Text>
@@ -285,7 +285,7 @@ const Feature5 = () => (
 	<div className="feature text-center is-revealing">
 		<div className="feature-inner">
 			<div className="feature-icon">
-				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-05.svg"} alt="Feature 01" />
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-05.svg"} info="Pixly main page Feature 01" />
 			</div>
 			<HeaderMini>Social Discovery</HeaderMini>
 			<Text>Find people whose cinema taste is similar to you. See which movies are currently watched by your friends, and also check your cinema taste similarity with your friends. </Text>
@@ -297,7 +297,7 @@ const Feature6 = () => (
 	<div className="feature text-center is-revealing">
 		<div className="feature-inner">
 			<div className="feature-icon">
-				<img src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-06.svg"} alt="Feature 01" />
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-06.svg"} info="Pixly main page Feature 01" />
 			</div>
 			<HeaderMini>Filmography & Content</HeaderMini>
 			<Text>Filmographies of the directors, actors, and actress'. The favorite film lists of the famous directors that impressed them. Conversations, interviews and movie essays about directors</Text>
