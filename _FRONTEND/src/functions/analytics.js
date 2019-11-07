@@ -40,13 +40,16 @@ export const Head = React.memo((props) => {
         {opengraph("type", "website")}
         {opengraph("sitename", "Pixly")}
         {opengraph("url", url)}
-        {opengraph("description", descriptionText)}
+        {opengraph("description", descriptionText.slice(0,65))}
         {opengraph("image", image)}
 
         {/* Twitter */}
-        {twitter("title", titleText)}
+        {twitter("title", titleText.slice(0,55))}
         {twitter("card", "summary_large_image")}
-        {twitter("description", descriptionText)}
+        {twitter("description", descriptionText.slice(0,125))}
+        {twitter("site", "@pixlymovie")}
+        {twitter("creator", "@canburaks")}
+
         {twitter("image", image)}
         {twitter("url", url)}
 

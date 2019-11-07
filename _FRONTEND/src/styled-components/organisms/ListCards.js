@@ -109,7 +109,6 @@ export const TopicCoverCard = (props) => (
 export const DirectorCard = (props) => (
     <ImageCard 
         src={props.item.poster}
-        text={props.item.name}
         text={!props.notext ? props.item.name : null}
         link={`/person/${props.item.slug}`}
         hiddentext={props.item.name}
@@ -127,9 +126,9 @@ export const CrewCard = (props) => (
             src={props.crew.person.poster} 
             link={`/person/${props.crew.person.slug}`}
             hiddentext={props.crew.person.name}
-
             ratio={1.5}
             borderRadius={"8px"}
+            title={props.crew.person.name}
         />
         <Text fontSize={["xs", "xs", "s"]} fontWeight="bold">{props.crew.person.name}</Text>
         <Text fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"}>{props.crew.character}</Text>

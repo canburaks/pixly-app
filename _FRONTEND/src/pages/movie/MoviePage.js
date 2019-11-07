@@ -146,9 +146,6 @@ const MoviePage = props => {
 
 			{/* SUMMARY */}
 			<ContentContainer zIndex={1} mt={[4]}>
-				<HiddenHeader>
-					{item.name} - {item.year}
-				</HiddenHeader>
 				{item.summary && item.summary.length > 50 && (
 					<>
 						<HeaderText fontSize={["xxl", "xxl", "xxxl", "large"]} mt={[3]}>{item.name}</HeaderText>
@@ -220,6 +217,8 @@ const MoviePage = props => {
 										<img
 											alt={`This movie is in the ${list.name}`}
 											className="bor-rad-2x lazyload"
+											title={list.relatedPersons[0] + " favorite film list poster."}
+											alt={list.relatedPersons[0] + " favorite film list poster."}
 											src={list.relatedPersons[0].poster}
 										/>
 									</Link>

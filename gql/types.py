@@ -1780,24 +1780,21 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         return self.movie.seo_description
 
     def resolve_seo_short_description(self, info, *_):
-        dsc = ""
-        qs = self.movie.content_similar_object.all()
-        if qs.exists():
-            dsc += f" The Most similar movies to {self.movie.name}: "
-            content_object = qs.first()
-            similars = content_object.similars.order_by("-imdb_rating")[:5].values_list("name", "year")
-            for m in similars:
-                dsc += f"{m[0]} ({m[1]}), "
-            dsc += ". "
+        director_name = self.movie.director
+        if director_name and len(director_name)>0:
+            dsc = f"{self.movie.name} - {director_name} "
+        else:
+            dsc = f"{self.movie.name} - "
 
         tag_qs = self.movie.tags.filter(theme_tag=True)
         if tag_qs.exists():
-            dsc += "Discover movies about "
-            tag_names = tag_qs[:10].values_list("name", flat=True)
+            dsc += "A Movie has "
+            tag_names = tag_qs[:6].values_list("name", flat=True)
             for t in tag_names:
                 dsc += f"{t}, "
-            dsc += "."
-        
+            dsc += " genres and tags. "
+            dsc += f"Find Similar movies like {self.movie.name}, and get ai based movie recommendations."
+
         else:
             dsc =  f"Discover similar movies like '{self.movie.name}'. films like {self.movie.name}, Movies with similar contents with {self.movie.name}."
             dsc = dsc + f" People who like {self.movie.name} also like these films... "
