@@ -1,10 +1,19 @@
 from graphqlclient import GraphQLClient
 import json
 
-client = GraphQLClient('http://playthough.com/graphql')
+client = GraphQLClient('http://pixly.app/graphql')
 
 #client = GraphQLClient('http://127.0.0.1:8000/graphql')
 
+def get_movie(id):
+    import json
+    r = client.execute('''
+        query movie($id:Int!){
+            movie(id:$id)
+        }
+    ''',{"id":id})
+    result = json.loads(r)
+    return result, r
 
 
 
