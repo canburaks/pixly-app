@@ -848,6 +848,8 @@ class TopicType(DjangoObjectType, SEOType):
 
 
     def resolve_seo_short_description(self, info, *_):
+        if self.seo_short_description:
+            return self.seo_short_description
         highest_movie_names = self.movies.order_by("-imdb_rating").values_list("name", flat=True)[:5]
         text = f"Discover best {self.name} films "
         if highest_movie_names.count() > 0:

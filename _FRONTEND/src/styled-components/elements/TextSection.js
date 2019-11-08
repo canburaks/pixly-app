@@ -32,7 +32,8 @@ export const ArticleSection = (props) =>(
         {...props} 
     >
         {/* Schema headline*/}
-        <HeaderText fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px", "36px"]} 
+        <HeaderText fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px", "34px"]}
+
             fontWeight="bold" 
             color={"dark"} textShadow={props.textShadow || "textGray"}
             pt={"4px"} 
@@ -46,7 +47,7 @@ export const ArticleSection = (props) =>(
                 quote={props.quote}
                 alignSelf="center"
                 maxWidth={["100%", "90%", "90%", "80%"]}
-                my={[3,3,3,4]}
+                my={[2,2,2,3]}
             />}
 
 
