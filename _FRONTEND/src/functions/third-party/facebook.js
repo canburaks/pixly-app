@@ -12,7 +12,7 @@ import {
 	SignupForm
 } from "../../styled-components"
 
-export const FaceBookAuthentication0 = () => {
+export const FaceBookAuthentication = () => {
 	const FB = window.FB
 	const globalstate = useContext(GlobalContext)
 
@@ -107,6 +107,7 @@ export const FaceBookAuthentication0 = () => {
 
 
 export const facebook = () => {
+	const FB = window.FB
     const [api, handleApi] = useApi()
     const globalstate = useContext(GlobalContext)
 
@@ -156,16 +157,21 @@ export const facebook = () => {
     //const fbSubscribe = async () => {if(api){api.subscribe("auth.authResponseChange", r => console.log("subscribe response", r),true);}}
     //fbSubscribe()
     useEffect(() => {
-        checkFbStatus()
-        //fbSubscribe()
-        //const FB = window.FB
-        //console.log("useEffect ")
-    },[api])
+		if (FB){FB.getLoginStatus(function(response) {
+			console.log("resp",response)
+			if (response.status === "connected" && isLogged === false){
+				setIsLogged(true);
+			}
+			else if (response.status !== "connected" && isLogged === true){
+				setIsLogged(false)
+			}   
+		});}
+    },[FB])
     return store
 }
 
 
-export const FaceBookAuthentication = () => {
+export const FaceBookAuthentication0 = () => {
 	const globalstate = useContext(GlobalContext)
 
     const [ fbData, setFbData ] = useState({})

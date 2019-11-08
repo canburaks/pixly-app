@@ -54,7 +54,6 @@ const Sample = () => (
 const MainPage = React.memo(() => {
 	//rgaPageView()
 	//console.log("main-page props: ",props)
-    const [api, handleApi] = useApi()
 	const authStatus = useAuthCheck();
 	const state = useContext(GlobalContext)
 	const insertLoginForm = useCallback(() => state.methods.insertAuthForm("login"),[])
@@ -179,7 +178,7 @@ const MainPage = React.memo(() => {
 										{/*
 
 										*/}
-										{!authStatus && api && <Fb.Auth />}
+										{!authStatus  && <Fb.Auth />}
 									</FlexBox>
 								</FlexBox>
 								
