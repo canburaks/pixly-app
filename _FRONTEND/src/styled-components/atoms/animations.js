@@ -3,15 +3,20 @@ import { generateGradient } from "../../functions/"
 import {  styled, keyframes, css } from "../"
 
 import { 
-    ModalBox,Box, Text
+    ModalBox,Box,FlexBox, Text
 } from "../index"
 
 
 export const GradientAnimationModal = (props) => {
     return (
-        <ModalBox bg={props.bg ? props.bg : "transparent"}>
+        <FlexBox 
+            position="fixed" justifyContent="center" alignItems="center"
+            left={`calc(50vw - 300px)`} right={`calc(50vw - 300px)`}
+            top={`calc(50vh - 300px)`} bottom={`calc(50vh - 300px)`}
+        
+        >
             <GradientAnimationBox text={props.text} />
-        </ModalBox>
+        </FlexBox>
 )}
 
 export const GradientAnimationBox = (props) => (
