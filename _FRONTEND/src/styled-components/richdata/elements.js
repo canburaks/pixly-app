@@ -54,6 +54,7 @@ export const SchemaArticle = (props) =>(
                 maxWidth={["100%", "90%", "90%", "80%"]}
                 my={[3,3,3,4]}
             />}
+            
 
 
 
