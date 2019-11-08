@@ -26,9 +26,13 @@ import {
 	HiddenHeader,
 	HeaderMini,
 	Grid,
+	Card,
+	Image,
+	ImageCard,
 	HiddenSpan,
 	HeaderText,Text,
 	Span,
+	NewLink,
 	TextSection,
 	MovieRichCardBox
 } from "../../styled-components";
@@ -201,42 +205,24 @@ const MoviePage = props => {
 				{/*<!--APPEARS IN  LIST Section--> */}
 				{item.appears.length > 0 && (
 					<>
-						<TextSection header={"Movie Lists"} text={listsThatInvolveText} />
-
-						<GridBox size="m">
-							{item.appears.map((list, index) => (
-								<GridItem
-									key={list.id + list.slug + index}
-									title={list.name}
-									className={"box-shadow bor-rad-2x shadow"}
-								>
-									<Link
-										rel="nofollow"
-										to={`/list/${list.slug}/1`}
-									>
-										<img
-											alt={`This movie is in the ${list.name}`}
-											className="bor-rad-2x lazyload"
-											title={list.relatedPersons[0] + " favorite film list poster."}
-											alt={list.relatedPersons[0] + " favorite film list poster."}
-											src={list.relatedPersons[0].poster}
-										/>
-									</Link>
-
-									<p className="t-s t-colorful t-bold">
-										{list.name}
-									</p>
-									<Link
-										to={`/person/${list.relatedPersons[0].id}/${list.relatedPersons[0].slug}`}
-										rel="nofollow"
-									>
-										<p className="t-xs hover-t-underline fl-l mw100 t-color-dark">
-											{list.relatedPersons[0].name}
-										</p>
-									</Link>
-								</GridItem>
-							))}
-						</GridBox>
+					<TextSection header={"Movie Lists"} text={listsThatInvolveText} />
+					<Grid columns={[2,3,3,4]}>
+						{item.appears.map((liste, index) => (
+							<Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card"  maxWidth={"200px"}>
+								<Image
+									src={liste.relatedPersons[0].poster} 
+									borderRadius={"8px"}
+									alt={liste.name + " image"}
+									title={liste.name}
+								/>
+								<NewLink to={`/list/${liste.name}/1`} hoverUnderline>
+									<Text fontSize={["xs", "xs", "s"]} fontWeight="bold" >{liste.name}</Text>
+								</NewLink>
+								<NewLink to={`/person/${liste.relatedPersons[0].name}`} hoverUnderline>
+									<Text fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"} >{liste.relatedPersons[0].name}</Text>
+								</NewLink>
+							</Card>))}
+					</Grid>
 					</>
 				)}
 

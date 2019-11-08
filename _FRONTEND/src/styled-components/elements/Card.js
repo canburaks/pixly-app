@@ -137,13 +137,13 @@ export const ImageCard = ({src, text,follow, link, ratio, width,borderRadius, co
         borderRadius={borderRadius || 0}
         {...props}
     > 
-        <HeaderMini fontSize={fontSize}
+        <Text fontSize={fontSize}
             color={color} fontWeight="bold" 
             position="absolute" left="8px" 
             bottom="8px" textShadow={props.textShadow}
         >
             {text}
-        </HeaderMini>
+        </Text>
         <NewLink to={link} follow={follow} hidden position="absolute" width={"100%"} height="100%" top="0" left="0">
         {props.hiddentext ? props.hiddentext : text}
         {/*props.hiddentext && <HiddenText>{props.hiddentext}</HiddenText>*/}

@@ -50,19 +50,17 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 from django.shortcuts import render
 from django.views.defaults import page_not_found
 
-def not_found2(request, exception=None):
+def pixly_404(request, exception=None):
     return page_not_found(request, exception, template_name="prerendered/404/index.html")
 
 
-def not_found(request, exception=None):
-    return render(request, "prerendered/404/index.html")
+def raw_404(request):
+  response = HttpResponse("Not Found", status=404)
+  response["status"] = 404
+  return response
 
-handler404 = not_found2
+handler404 = raw_404
 
-def logout_view(request):
-  auth.logout(request)
-  # Redirect to a success page.
-  return HttpResponseRedirect("/logout/")
 
 sitemaps = {
     'static': StaticSitemap(),
@@ -74,13 +72,21 @@ sitemaps = {
 }
 
 
-def hand_crafted_redirect_view(request):
-  response = HttpResponse("404/index.html", status=404)
-  response["status"] = 404
-  return response
 
-urlpatterns = [
+def get_deindex_paths():
+    deindex_file = open("djaws/deindex.txt","r")
+    url_patterns = []
+    for line in deindex_file:
+        line = line.replace("https://pixly.app/", "").strip()
+        single_path = path(line, handler404)
+        url_patterns.append(single_path)
+    #print(url_patterns)
+    return url_patterns
+deindex_patterns = get_deindex_paths()
+
+urlpatterns = deindex_patterns + [
     path("404", handler404),
+    path("movie/242", handler404),
     path(f'termsofservice', TemplateView.as_view(template_name=f"others/terms_of_service.html")),
     path(f'privacy', TemplateView.as_view(template_name=f"others/privacy.html")),
     #facebook bussiness
@@ -113,9 +119,11 @@ urlpatterns = urlpatterns + custom_url_pages + [
     re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")),  
     #path("", TemplateView.as_view(template_name="prerendered/404.html")), #bcs 404 returns to main-page
     #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")), #200.html is original - not prerendered page template 
-
-
 ]
+def logout_view(request):
+  auth.logout(request)
+  # Redirect to a success page.
+  return HttpResponseRedirect("/logout/")
 
 
 

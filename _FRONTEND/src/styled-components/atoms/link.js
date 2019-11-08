@@ -7,12 +7,28 @@ import { UnderlineEffect, Box, HiddenSpan } from "../index"
 import { hideText } from 'polished'
 
 
-const LinkNoFollow = ({ to,link, className, children, follow }) => <Link rel={!follow ? "nofollow" : ""}  className={className} to={link || to} >{children}</Link>
+const LinkNoFollow = ({ to,link, className, children, follow, ...props }) => (
+	<Link 
+		rel={!follow ? "nofollow" : ""}  
+		className={className} 
+		to={link || to} 
+	>
+		{children}
+	</Link>)
 
 
-export const DirectorLink = ({director, ...props}) => <NewLink to={`/person/${director.slug}`}  mr={[0]} textShadow={"textDark"} {...props}><UnderlineEffect>{director.name}</UnderlineEffect>{props.extra}</NewLink>
+export const DirectorLink = ({director, ...props}) => (
+	<NewLink 
+		to={`/person/${director.slug}`}  
+		textShadow={"textDark"} 
+		{...props}
+		mr={[0]} 
+	>
+		<UnderlineEffect>{director.name}</UnderlineEffect>
+		{props.extra}
+    </NewLink>)
 
-const StateLink = (props) => <Link  {...props} to={{pathname:props.link, state:{...props.state}}}  />
+const StateLink = (props) => <Link  {...props} to={{pathname:props.link, state:{...props.state}}}  rel="nofollow"/>
 export const StatefullLink = styled(StateLink)`
   ${color}
   ${space}
@@ -50,7 +66,9 @@ export const NewLink = styled(LinkNoFollow)`
   :hover {
       background-color:${props => props.hoverBg && props.hoverBg};
       color:${props => props.hoverColor && props.hoverColor};
-      box-shadow:${props => props.hoverShadow && props.hoverShadow}
+      box-shadow:${props => props.hoverShadow && props.hoverShadow};
+      text-decoration:${props => props.hoverUnderline && "underline"};
+
   };
   text-decoration:initial;
   transition: ${themeGet("transitions.medium")};

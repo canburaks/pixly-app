@@ -4,7 +4,6 @@ import { Query } from 'react-apollo'
 import { GET_DIRECTOR_LIST } from "../../functions/gql"
 
 import { rgaPageView, Head, DirectorPageAd } from "../../functions/analytics"
-import { Helmet } from "react-helmet";
 import { GridBox, GridItem } from "../../components/GridBox" 
 import { useAuthCheck } from "../../functions/hooks";
 import JoinBanner from "../../components/JoinBanner.js"
@@ -52,7 +51,7 @@ const DirectorList = (props) =>{
                 window.scrollTo(0, 0)
                 return(
                     <div className="page-container fbox-c jcfs aic">
-                        <Helmet
+                        <Head
                             description={"Filmographies, Favourite Films of some directors like: " +directorNames.join(", ") }
                             title={"Directors Collection - Pixly"}
                             keywords={`Famous Directors List, ` + directorNames.join(", ") }
