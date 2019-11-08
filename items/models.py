@@ -973,6 +973,7 @@ TAG_OBJECT_TYPE = (
 )
 
 class Tag( SEO, MainPage):
+    
     name = models.CharField(max_length=400)
     summary = models.TextField(max_length=5000,null=True, blank=True)
     slug = models.SlugField(max_length=100, null=True, blank=True, unique=True, db_index=True)
