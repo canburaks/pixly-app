@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 Disallow: /cgi-bin/
-Sitemap:https://pixly.app/site.xml
+Sitemap:https://pixly.app/sitemap.xml
