@@ -800,11 +800,16 @@ class TopicType(DjangoObjectType, SEOType):
     tags = graphene.List("gql.types.TagType")
     quotes = graphene.List(QuoteType)
 
+    searchable = graphene.Boolean()
+
     created_at = graphene.String()
     updated_at = graphene.String()
 
     class Meta:
         model = Topic
+
+    def resolve_searchable(self, info, *_):
+        return self.searchable
 
     def resolve_wiki(self, info, *_):
         return self.wiki

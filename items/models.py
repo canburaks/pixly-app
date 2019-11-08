@@ -897,6 +897,8 @@ class Topic(SEO, MainPage):
     persons = models.ManyToManyField(Person,null=True, blank=True, related_name="topics")
     quotes = models.ManyToManyField("items.Quote",null=True, blank=True, related_name="topics")
 
+    searchable = models.BooleanField(default=True)
+
     poster = models.ImageField(blank=True, upload_to=topic_image_upload_path)
     cover_poster = models.ImageField(blank=True, upload_to=topic_cover_poster_upload_path)
 
