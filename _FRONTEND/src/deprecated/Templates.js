@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useCallback } from "react";
 import { withRouter, Link } from "react-router-dom";
-import { GridBox, GridItem } from "./GridBox" 
+import { GridBox, GridItem } from "../components/GridBox" 
 
 const TemplateRaw = ({
     items,
@@ -17,6 +17,7 @@ const TemplateRaw = ({
     linkPrefix="/movie/",
     children,
     ad=null,
+    
 }) =>{
     const [currentPage, setCurrentPage] = useState(1)
     //console.log("m",movies)

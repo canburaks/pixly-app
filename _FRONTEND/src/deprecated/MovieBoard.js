@@ -3,16 +3,19 @@ import { useState, useContext } from "react"
 import { withRouter, Link } from "react-router-dom";
 import { Query } from "react-apollo";
 //import  { useWindowSize } from "../../functions/hooks"
-import { MOVIE_BOARD } from "../../functions/query"
+import { MOVIE_BOARD } from "../functions/query"
 
 
-import { useAuthCheck } from "../../functions/hooks";
-import { rgaPageView, Head, MidPageAd } from "../../functions/analytics"
+import { useAuthCheck } from "../functions/hooks";
+import { rgaPageView, Head, MidPageAd } from "../functions/analytics"
 
-import { GlobalContext } from "../../";
-import { GridBox, GridItem, SpeedyGridBox } from "../../components/GridBox" 
-import JoinBanner from "../../components/JoinBanner.js"
-import { movieAutoComplete } from "../../functions/grec";
+import { GlobalContext } from "..";
+import { GridBox, GridItem, SpeedyGridBox } from "../components/GridBox" 
+import JoinBanner from "../components/JoinBanner.js"
+import { movieAutoComplete } from "../functions/grec";
+
+
+
 
 
 

@@ -9,30 +9,18 @@ import { useQuery } from '@apollo/react-hooks';
 import { PERSONA, MOVIE, DIRECTOR_PERSON_MIX, PROFILE, LIST_BOARD, LISTE, MOVIE_SEARCH, MOVIE_BOARD, TAG_LIST } from "../functions/query";
 
 
-//import MovieList from "../list/movie/MovieList";
-//import MovieListQuery from "../list/movie/MovieListQuery";
 
 import DirectorList from "../list/director/DirectorList";
 import TopicList from "../list/topic/TopicList";
 
-//import DiscoverQuery from "../list/filter/DiscoverQuery";
-import AdvanceSearch from "../list/advance-search/AdvanceSearch";
 
-//import BarSearchList from "../list/search/BarSearchList";
-//import BookmarkList from "../lists/BookmarkList";
-//import RatingList from "../lists/RatingList";
 
 import HomePage from "../pages/home/HomePage.js";
 
-//import ProfilePage from "../pages/profile/ProfilePage.js";
 
-
-//import TopicPage from "../pages/TopicPage.js";
-//import ListBoard from "../list/lists/ListBoard";
 import Collections from "../list/lists/Collections";
 
 import MovieList from "../list/movie/MovieList";
-import MovieBoard from "../list/movie/MovieBoard";
 import BarSearch from "../list/search/BarSearch";
 
 //import SearchMovieList from "../list/search/BarSearchList";
@@ -106,7 +94,6 @@ const Middle = (props) => {
 
             <Route exact path="/person/:slug/:id" component={PersonQuery} />
 
-            <Route exact path="/movies/:page" component={MovieBoard} />
 
             <Route exact path="/movies/search/:query/:page" component={BarSearch} />
             <Route path="/404" component={StaticRoute} />

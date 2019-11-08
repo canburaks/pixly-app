@@ -17,6 +17,7 @@ const BigMosaicPoster = (props) => {
     /* Number of image in one row */
     const imagePerRow = props.column ? props.column : 5
     const posterWidth = clientWidth / imagePerRow;
+    
     const posterHeight = posterWidth * 1.56
 
     return (
