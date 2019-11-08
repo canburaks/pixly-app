@@ -39,7 +39,7 @@ export const MovieRichCard = (props) => {
             px={[2,2,2,2,3]} pt={[3]} pb={[1]}  
         >
             <HeaderMini fontWeight="bold" m={0} my={[2]} color="light" fontSize={["18px", "18px", "22px"]}>
-                <NewLink link={`/movie/${props.item.slug}`} follow={props.follow}>
+                <NewLink link={`/movie/${props.item.slug}`} follow={props.follow} hoverUnderline>
                     {props.item.name}
                 </NewLink>
             </HeaderMini>

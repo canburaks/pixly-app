@@ -135,7 +135,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
     const variables = lazyvariables ? lazyvariables : {minYear:1950, maxYear:2019, minRating:5.0, maxRating:9.9}
     const { loading, data, } = useQuery(TOPIC_SEARCH_QUERY,{variables:{
         topicSlug, page, ...variables
-    }})
+    },partialRefetch:true})
 
 
     //console.log("topic query")
