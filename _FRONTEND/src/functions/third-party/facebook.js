@@ -13,8 +13,7 @@ import {
 } from "../../styled-components"
 
 export const FaceBookAuthentication = () => {
-	const FB = window.FB
-	const globalstate = useContext(GlobalContext)
+  	const globalstate = useContext(GlobalContext)
 
     const [ fbData, setFbData ] = useState({})
     const [ authMutationResponse, setAuthMutationResponse ] = useState({})
@@ -33,14 +32,14 @@ export const FaceBookAuthentication = () => {
     const authMutationHandler = useCallback((fbData) => {setFbData(fbData); facebookAuthenticate({variables:{data:JSON.stringify(fbData)}});}, [])
 	
 	//Reactive Values
-	const avatarUrl = useMemo(() => (fbData.profile && fbData.profile.picture) ? fbData.profile.picture.data.url : null, [fbData.profile])
-	const preFilledForm = useMemo(() => (authMutationResponse && authMutationResponse.form) ? JSON.parse(authMutationResponse.form): {}, [authMutationResponse.form])
-	const afterResponseStatus = useMemo(() => (authMutationResponse && authMutationResponse.status) ? authMutationResponse.status : null, [authMutationResponse])
-	const modalHeader = useMemo(() => {
-		if (afterResponseStatus === "register") return "One Last Step"
-		else if (afterResponseStatus === "login") return `Welcome`
-		else return "Just a second ..."
-	}, [afterResponseStatus])
+    const avatarUrl = useMemo(() => (fbData.profile && fbData.profile.picture) ? fbData.profile.picture.data.url : null, [fbData.profile])
+    const preFilledForm = useMemo(() => (authMutationResponse && authMutationResponse.form) ? JSON.parse(authMutationResponse.form): {}, [authMutationResponse.form])
+    const afterResponseStatus = useMemo(() => (authMutationResponse && authMutationResponse.status) ? authMutationResponse.status : null, [authMutationResponse])
+    const modalHeader = useMemo(() => {
+        if (afterResponseStatus === "register") return "One Last Step"
+        else if (afterResponseStatus === "login") return `Welcome`
+        else return "Just a second ..."
+    }, [afterResponseStatus])
 
 	//print("modal status", isOpen)
 
@@ -56,9 +55,9 @@ export const FaceBookAuthentication = () => {
 
 
 			//CASE: Login
-			print("User now logging in0", serverResponse)
+			//print("User now logging in0", serverResponse)
 			if (serverResponse.success && serverResponse.status==="login") {
-				print("User now logging in")
+				//print("User now logging in")
 				const profile = serverResponse.user.profile
 				globalstate.methods.login(profile)
 			}
@@ -79,7 +78,6 @@ export const FaceBookAuthentication = () => {
 			width={["90vw","90vw","80vw", "60vw"]} maxWidth={"400px"}
 			minHeight="200px"
 		>
-          {console.log("modal content", isOpen)}
           <FlexBox flexDirection="column" alignItems="center" justifyContent="flex-start" width="100%" bg="light" zIndex={11}>
 
 
@@ -152,9 +150,69 @@ export const facebook = () => {
         Auth: FaceBookAuthentication,
         data:fbData
     }
-    //checkFbStatus()
-    //const fbSubscribe = async () => {if(api){api.subscribe("auth.authResponseChange", r => console.log("subscribe response", r),true);}}
-    //fbSubscribe()
+
+    useEffect(() => {
+		if (FB){FB.getLoginStatus(function(response) {
+			//console.log("resp",response)
+			if (response.status === "connected" && isLogged === false){
+				setIsLogged(true);
+			}
+			else if (response.status !== "connected" && isLogged === true){
+				setIsLogged(false)
+			}   
+		});}
+    },[FB])
+    return store
+}
+
+
+export const facebook0 = () => {
+	const FB = window.FB
+    const [api, handleApi] = useApi()
+
+	const [ isLogged, setIsLogged ] = useState(false)
+
+
+    const [ fbData, setFbData ] = useState({})
+
+
+    // MUTATIONS
+    const [facebookConnect, { data }] = useMutation(FACEBOOK_CONNECT, {
+        onError:() => print("fbook mutation error"),
+        onCompleted: (data) => (print("fbook mutation success", data), setLoginStatus(data.facebookConnect.success))
+    });
+
+
+    // Callback functions
+    const setLoginStatus = useCallback((bool) => bool !== isLogged ? setIsLogged(bool) : null,[isLogged])
+    const setFbStatus    = useCallback((status) => ((status==="connected") !== isLogged) ? setIsLogged(status==="connected") : null,[isLogged] )
+    const checkFbStatus  = useCallback(async () => {if(api){const r = await api.getLoginStatus(); setFbStatus(r.status)}}, [api])
+
+  	//handlers
+    const cleanHandler   = useCallback(() => {setIsLogged(false); setFbData(null);},[])
+    const logoutHandler  = useCallback(async () => {if(api){api.logout(l => print("l",l))}; cleanHandler()},[])
+    const errorHandler   = useCallback((error) =>  console.log("error: ", error),[])
+
+	  
+    const connectSuccessHandler = useCallback((r) =>  {const newData= {...r};print(newData);  facebookConnect({variables:{data:JSON.stringify(newData)}}); setFbData(newData);},[])	
+
+
+
+    const Login = useCallback(() => <ConnectButton onCompleted={connectSuccessHandler} onError={errorHandler} />)
+    const Logout = useCallback(() => <LogoutButton onClick={logoutHandler} />)
+    const Function = useCallback(() => <button >status</button>)
+    const Connect = isLogged ? Logout : Login
+
+    const store = {
+        //Logout:() => <LogoutButton onClick={logoutHandler}/>,
+        Logout,
+        Login,
+        Connect,
+        Function,
+        Auth: FaceBookAuthentication,
+        data:fbData
+    }
+
     useEffect(() => {
 		if (FB){FB.getLoginStatus(function(response) {
 			//console.log("resp",response)
@@ -236,7 +294,6 @@ export const FaceBookAuthentication0 = () => {
 			width={["90vw","90vw","80vw", "60vw"]} maxWidth={"400px"}
 			minHeight="200px"
 		>
-          {console.log("modal content", isOpen)}
           <FlexBox flexDirection="column" alignItems="center" justifyContent="flex-start" width="100%" bg="light" zIndex={11}>
 
 
