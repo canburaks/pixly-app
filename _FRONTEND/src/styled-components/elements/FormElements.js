@@ -11,6 +11,7 @@ import {
     UsersIcon, EyeIcon,UserIcon,ImdbIcon, WatchIcon, SearchIcon,
     Input,InputRange,Label
 } from "../index"
+import "./slider.css"
 
 export const FormInput = (props) => (
     <FlexBox flexDirection="column" width={"100%"} px={[2]} mt={[2]}>
@@ -41,6 +42,7 @@ export const YearSlider = (props) => {
         }
         setSelectedYears(e)
     }
+    console.log("year")
     return(
         <FlexBox boxShadow={"mini"}
             alignItems={"center"}
@@ -50,11 +52,12 @@ export const YearSlider = (props) => {
             border="0.5px solid"
             borderColor="rgba(80,80,80, 0.5)"
             borderRadius={"8px"}
+            zIndex={10}
         >
             <WatchIcon title="Release Year" stroke={"black"}  size={30}/>
             <InputRange
                 max={2020}
-                min={1900}
+                min={1920}
                 step={1}
                 value={selectedYears}
                 onChange={changeHandler}

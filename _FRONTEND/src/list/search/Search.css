@@ -1,0 +1,212 @@
+.search-query-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-menu-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    padding-bottom: 40px;
+    margin-top: 0px;
+}
+
+.search-menu-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    border-bottom-right-radius: 64px;
+    border-bottom-left-radius: 64px;
+    border-radius: 64px;
+    /*
+    box-shadow: 0 40px 29px -8px rgba(0, 0, 0, 0.0);
+    background-color: #323336;
+    */
+}
+
+.search-menu-option {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 4px 8px;
+    box-shadow: 0 40px 29px -8px rgba(0, 0, 0, 0.47);
+    margin-top: 24px;
+    border-radius: 0px;
+    max-width:500px;
+    /*
+    */
+}
+
+.search-menu-option:first-child {
+    /*
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+    margin-top: 0;
+    */
+}
+
+.search-menu-button-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 0px;
+    /*
+    border-bottom-right-radius: 128px;
+    border-bottom-left-radius: 128px;
+    background-color: #323336;
+    */
+}
+
+.search-menu-button {
+    position: relative;
+    bottom: -30px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    background-color: rgba(21, 160, 69, 1);
+    box-shadow: 0 -5px 10px 1px rgba(0, 0, 0, 0.27);
+    transition: 0.2s ease-in-out;
+    text-align: center;
+    font-size: 12px;
+    color:white;
+    font-weight: 600;
+}
+
+.search-menu-button:hover {
+    background-color: rgb(53, 221, 112);
+}
+
+.search-menu-button:focus {
+    border-color: transparent;
+}
+
+
+/* WIDGET COLORS */
+
+.search-menu-option.tag-select {
+    background: #FF416C;
+    background: -webkit-linear-gradient(45deg, #FF4B2B, #FF416C);
+    background: linear-gradient(45deg, #FF4B2B, #FF416C);
+}
+
+.search-menu-option.year-select {
+    background: #3437c7;
+    background: -webkit-linear-gradient(45deg, #3437c7, #4b55e1);
+    background: linear-gradient(45deg, #3437c7, #4b55e1);
+}
+
+.search-menu-option.rating-select {
+    background: #5f3f8f;
+    background: -webkit-linear-gradient(45deg, #3e1966, #5f3f8f);
+    background: linear-gradient(45deg, #3e1966, #5f3f8f);
+}
+
+.search-menu-option h4,
+.search-menu-option p {
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.57);
+}
+
+.search-menu-option h4 {
+    font-size: 24px;
+}
+
+
+/*----------------------- WIDGETS---------------------- */
+
+
+/* ------------ TAG-SELECT------------ */
+
+.tag-select-menu {
+    width: 100%;
+}
+
+
+/* REMOVER */
+
+.css-1tdz8rt.tag-select-item__multi-value__remove {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.css-1tdz8rt.tag-select-item__multi-value__remove:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+}
+
+
+/* ------------ YEAR-SELECT------------ */
+
+.year-select-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.year-select-menu {
+    width: 50%;
+}
+
+
+/* ------------ RATING-SELECT------------ */
+
+.rating-select-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.rating-select-menu {
+    width: 50%;
+}
+
+@media all and (min-width: 250px) {
+
+}
+
+@media all and (min-width: 736px) {
+
+}
+
+
+
+/*----   SCROLLBAR---- */
+/* width */
+.select-menu ::-webkit-scrollbar {
+    width: 20px;
+    border-radius: 16px
+}
+/* Track */
+.select-menu ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+/* Handle */
+.select-menu ::-webkit-scrollbar-thumb {
+    background: #323336;
+    border-radius: 10px;
+    height: 35px;
+}
+/* Handle on hover */
+.select-menu ::-webkit-scrollbar-thumb:hover {
+    background: #7d84e9;
+}
+
