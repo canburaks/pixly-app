@@ -94,8 +94,10 @@ urlpatterns = deindex_patterns + [
 
     re_path(r'^sitemap.xml', cache_page(300)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
-    re_path(r'^robots.txt', lambda x: HttpResponse("User-Agent: *\nSitemap: https://pixly.app/sitemap.xml\nDisallow:",
-            content_type="text/plain"), name="robots_file"),
+    re_path(r'^robots.txt', lambda x: TemplateView.as_view(template_name="robots.txt"), name="robots_file"),
+
+    #re_path(r'^robots.txt', lambda x: HttpResponse("User-Agent: *\nSitemap: https://pixly.app/sitemap.xml\nDisallow:",
+    #        content_type="text/plain"), name="robots_file"),
             
     path("ads.txt", TemplateView.as_view(template_name="others/ads.txt")),
     re_path(r'^.well-known/brave-rewards-verification.txt', lambda x: HttpResponse("This is a Brave Rewards publisher verification file.\n\nDomain: pixly.app\nToken: b8b10bb0d60345f4f49ec7839609e9c92a9799ed95004ce17065b097604f0161",
