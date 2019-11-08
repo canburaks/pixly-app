@@ -629,11 +629,11 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
         request_user = info.context.user
         username_user = User.objects.get(username=username)
         
+        print(f"{request_user.username} ----> {username_user.username}'")
         #CHECK IF USERNAME AND REQUEST USER ARE THE SAME
-        
-        if request_user!=username_user:
-            raise Exception('Credentials user and username mismatched. Please login again!')
+        if request_user.username!=username_user.username:
             logout(info.context)
+            raise Exception(f'Credentials user and username mismatched. Please login again!{request_user.username} {username_user.username}')
             return None
     
         return CustomPersonaType(username=username, first=first, skip=skip)
