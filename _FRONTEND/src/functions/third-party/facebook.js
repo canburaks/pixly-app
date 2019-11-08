@@ -109,7 +109,6 @@ export const FaceBookAuthentication = () => {
 export const facebook = () => {
 	const FB = window.FB
     const [api, handleApi] = useApi()
-    const globalstate = useContext(GlobalContext)
 
 	const [ isLogged, setIsLogged ] = useState(false)
 
@@ -158,7 +157,7 @@ export const facebook = () => {
     //fbSubscribe()
     useEffect(() => {
 		if (FB){FB.getLoginStatus(function(response) {
-			console.log("resp",response)
+			//console.log("resp",response)
 			if (response.status === "connected" && isLogged === false){
 				setIsLogged(true);
 			}
