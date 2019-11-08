@@ -38,13 +38,12 @@ export const SchemaArticle = (props) =>(
         {/* Schema headline*/}
 
         <HeaderText itemProp="headline"
-            fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px", "36px"]} 
+            fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px"]} 
             fontWeight="bold" 
             color={"dark"} textShadow={props.textShadow || "textGray"}
             pt={"4px"} 
         >
             {props.header}
-            <Span invisible>{` and ${capitalize(props.header)} Movies`}</Span>
         </HeaderText>
 
         {props.quote && 

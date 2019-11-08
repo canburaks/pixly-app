@@ -66,10 +66,10 @@ const TopicPage = (props) =>{
                 <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"}>
                     {queryData && queryData.topic &&
                         <SchemaArticle 
-                            headerSize={[24, 26, 28, 32, 36]}
+                            headerSize={[24, 26, 28, 32]}
                             textSize={[14,16]}
                             mt={[3]} mb={[0]} py={[0]}
-                            header={queryData.topic.name}
+                            header={queryData.topic.name + " Films"}
                             quote={queryData.topic.quotes.length > 0 && queryData.topic.quotes[0]}
                             summary={queryData.topic.summary}
                             content={queryData.topic.content}
