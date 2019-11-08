@@ -42,7 +42,6 @@ export const YearSlider = (props) => {
         }
         setSelectedYears(e)
     }
-    console.log("year")
     return(
         <FlexBox boxShadow={"mini"}
             alignItems={"center"}
