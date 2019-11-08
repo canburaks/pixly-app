@@ -80,8 +80,9 @@ def get_deindex_paths():
         line = line.replace("https://pixly.app/", "").strip()
         single_path = path(line, handler404)
         url_patterns.append(single_path)
-    #print(url_patterns)
+    #pprint(url_patterns)
     return url_patterns
+pprint(custom_url_pages)
 deindex_patterns = get_deindex_paths()
 
 urlpatterns =  [

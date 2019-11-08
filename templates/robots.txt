@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: 
-Disallow: /cgi-bin/
 Sitemap:https://pixly.app/sitemap.xml
+Disallow: 
+Disallow: /movie/mortal-kombat-conquest-1998
