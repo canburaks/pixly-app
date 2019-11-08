@@ -6,21 +6,51 @@ import { Initialize, Login, useApi } from 'react-facebook';
 
 
 
-export const AuthButton = (props) => {
-	const [api, handleApi] = useApi()
-	if (api) return (
-  	<FbookAuthButton  
-    className="auth-button"
+export const AuthButton = ({onCompleted, onError, ...props}) =>  {
+	const FB = window.FB
+	function loginfunction(){
+		FB.login(function(response) {
+			// handle the response
+			const responseData = {}
+			if (response.status === "connected"){
+				//console.log(response)
+				responseData.tokenDetail = response.authResponse
+				responseData.status = response.status
+				FB.api('/me',{fields: ["first_name", "last_name", "name",'email', "id", "picture"]}, 
+					function(apiresponse) {
+						responseData.profile = apiresponse
+						//console.log('Successful login for: ', responseData);
+						onCompleted(responseData)
+				  });
+			}
+			else {
+				onError()
+			}
+		  }, {scope: 'public_profile, email'});
+	}
+	return (
+  	<Button  
+    	className="auth-button"
 		width={"auto"}
 		mx={[1]} p={0} 
-		scope="email"
 		{...props}
+		onClick={loginfunction}
 	>
         <FacebookContinueSvg />
-    </FbookAuthButton>
-	)
-	return <div></div>
-}
+    </Button>
+)}
+
+export const AuthButton0 = (props) =>  (
+	<FbookAuthButton  
+  className="auth-button"
+	  width={"auto"}
+	  mx={[1]} p={0} 
+	  scope="email"
+	  {...props}
+  >
+	  <FacebookContinueSvg />
+  </FbookAuthButton>
+) 
 export const ConnectButton = (props) => (
     <FbookAuthButton  
         width={"auto"}
