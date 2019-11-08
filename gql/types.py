@@ -841,7 +841,7 @@ class TopicType(DjangoObjectType, SEOType):
         if self.seo_title:
             return self.seo_title
         name = " ".join([x.capitalize() for x in self.name.split(" ")])
-        return f"Pixly Topics: {name} - Best {name} Movies"
+        return f"Pixly Topics: Best {name.title()} Films"
 
     def resolve_seo_description(self, info, *_):
         return self.seo_description if self.seo_description else self.summary
