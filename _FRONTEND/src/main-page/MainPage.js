@@ -20,6 +20,7 @@ import { GlobalContext } from "../";
 
 import JoinBanner from "../components/JoinBanner.js";
 import { facebook } from "../functions"
+import { useApi} from 'react-facebook';
 
 
 import { GlideBox } from "../components2/Glide.js";
@@ -53,6 +54,7 @@ const Sample = () => (
 const MainPage = React.memo(() => {
 	//rgaPageView()
 	//console.log("main-page props: ",props)
+    const [api, handleApi] = useApi()
 	const authStatus = useAuthCheck();
 	const state = useContext(GlobalContext)
 	const insertLoginForm = useCallback(() => state.methods.insertAuthForm("login"),[])
@@ -146,6 +148,7 @@ const MainPage = React.memo(() => {
 									{/*
 									*/}
 									
+									{!authStatus && 
 									<Box  my={[3]}>
 										<BubbleButton px={[2]} mx={[2]}
 											onClick={setModalOpen} 
@@ -171,11 +174,12 @@ const MainPage = React.memo(() => {
 											Login
 										</Button>
 									</Box>
+										}
 									<FlexBox flexDirection="column" alignItems="flex-start" width="100%" mt={[3,3,3,4]}>
 										{/*
 
 										*/}
-										<Fb.Auth />
+										{!authStatus && api && <Fb.Auth />}
 									</FlexBox>
 								</FlexBox>
 								
