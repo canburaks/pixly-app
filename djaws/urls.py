@@ -82,8 +82,8 @@ def get_deindex_paths():
         url_patterns.append(single_path)
     #pprint(url_patterns)
     return url_patterns
-pprint(custom_url_pages)
-deindex_patterns = get_deindex_paths()
+#pprint(custom_url_pages)
+#deindex_patterns = get_deindex_paths()
 
 urlpatterns =  [
     path("404", handler404),

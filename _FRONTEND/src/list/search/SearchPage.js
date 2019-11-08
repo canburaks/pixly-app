@@ -4,8 +4,7 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 
 //import { Query } from "react-apollo";
 import { COMPLEX_SEARCH,TAG_LIST } from "../../functions/query"
-import BackButton from "../../components/buttons/BackButton"
-import JoinBanner from "../../components/JoinBanner.js"
+
 import { Head, MidPageAd, rgaSetEvent } from "../../functions/analytics"
 import TagSelectStatic from "./TagSelectStatic"
 import {  isEqualObj} from "../../functions"
@@ -19,7 +18,8 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox,
     RatingSlider, YearSlider,
 } from "../../styled-components"
-
+import "./Search.css"
+import "react-input-range/lib/css/index.css"
 
 const Header = () => (
     <Head
@@ -127,7 +127,7 @@ const SearchPage = (props) =>{
                     <TagSelectStatic tags={tags} tagSetter={setTags} />
                 </FlexBox>
 
-                <YearSlider dispatcher={yearDispatcher}  />
+                <YearSlider dispatcher={yearDispatcher} classname="cbssss" />
                 <RatingSlider dispatcher={ratingDispatcher} />
 
               
