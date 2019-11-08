@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {  styled, Button, ImageButton, Image } from "../../styled-components"
 import {  typography, color, space, shadow, layout, border, background, flexbox, position } from 'styled-system'
 import { LoginButton } from 'react-facebook';
 import { Initialize, Login, useApi } from 'react-facebook';
-
 
 
 export const AuthButton = ({onCompleted, onError, ...props}) =>  {
@@ -28,6 +27,8 @@ export const AuthButton = ({onCompleted, onError, ...props}) =>  {
 			}
 		  }, {scope: 'public_profile, email'});
 	}
+
+
 	return (
   	<Button  
     	className="auth-button"
