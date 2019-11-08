@@ -62,79 +62,79 @@ const TopicPage = (props) =>{
                     canonical={`https://pixly.app/topic/${queryData.topic.slug}`}
                 />
             }
-
-            <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"}>
-                {queryData && queryData.topic &&
-                    <SchemaArticle 
-                        headerSize={[24, 26, 28, 32, 36]}
-                        textSize={[14,16]}
-                        mt={[3]} mb={[0]} py={[0]}
-                        header={queryData.topic.name}
-                        quote={queryData.topic.quotes.length > 0 && queryData.topic.quotes[0]}
-                        summary={queryData.topic.summary}
-                        content={queryData.topic.content}
-                        createdAt={queryData.topic.createdAt}
-                        updatedAt={queryData.topic.updatedAt}
-                        wiki={queryData.topic.wiki}
-                    />}   
-            </FlexBox>
-
-            <Form flexWrap="wrap" onSubmit={submitHandler}>
-                <FlexBox id="search-settings-box" 
-                    flexDirection={["row", "row"]} 
-                    width={["100%", "100%", "100%"]}  
-                    minHeight={["80px", "80px", "80px", "100%"]}
-                    justifyContent="space-around"
-                    flexWrap="wrap"
-                    px={[3]}
-                    borderBottom="1px solid"
-                    borderTop="1px solid"
-                >
-
-                <YearSlider dispatcher={yearDispatcher}  />
-                <RatingSlider dispatcher={ratingDispatcher} />
-
-
-                    <Button type="submit" 
-                        display="flex" justifyContent="center" alignItems="center"
-                        p={0} width={[30, 35, 40,45]} height={[30, 35, 40,45]} 
-                        hoverBg={"blue"}
-                        borderRadius="50%" 
-                        bg="dark"
-                    >
-                        <SearchIcon  stroke="white" strokeWidth="3" size={20} />
-                    </Button>
+            <ContentContainer>
+                <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"}>
+                    {queryData && queryData.topic &&
+                        <SchemaArticle 
+                            headerSize={[24, 26, 28, 32, 36]}
+                            textSize={[14,16]}
+                            mt={[3]} mb={[0]} py={[0]}
+                            header={queryData.topic.name}
+                            quote={queryData.topic.quotes.length > 0 && queryData.topic.quotes[0]}
+                            summary={queryData.topic.summary}
+                            content={queryData.topic.content}
+                            createdAt={queryData.topic.createdAt}
+                            updatedAt={queryData.topic.updatedAt}
+                            wiki={queryData.topic.wiki}
+                        />}   
                 </FlexBox>
-            </Form>
 
-            <Box id="search-rresult-box"  
-                    borderLeft="2px solid" 
-                    borderColor="rgba(40,40,40, 0.3)"
-                    minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
-                    p={[1,2,3]}
-                >
-                <SearchQueryBox 
-                    topicSlug={topicSlug} 
-                    page={page} 
-                    lazyvariables={lazyvariables} 
-                    dispatcher={dataDispatcher} 
-                />
+                {queryData && queryData.topic.searchable && <Form flexWrap="wrap" onSubmit={submitHandler}>
+                    <FlexBox id="search-settings-box" 
+                        flexDirection={["row", "row"]} 
+                        width={["100%", "100%", "100%"]}  
+                        minHeight={["80px", "80px", "80px", "100%"]}
+                        justifyContent="space-around"
+                        flexWrap="wrap"
+                        px={[3]}
+                        borderBottom="1px solid"
+                        borderTop="1px solid"
+                    >
 
-                { queryData && queryData.quantity > 18&&
-                 <PaginationBox 
-                    currentPage={page} 
-                    totalPage={Math.ceil(queryData.quantity/18)} 
-                    nextPage={nextPage} prevPage={prevPage} 
-                />}
+                    <YearSlider dispatcher={yearDispatcher}  />
+                    <RatingSlider dispatcher={ratingDispatcher} />
+
+
+                        <Button type="submit" 
+                            display="flex" justifyContent="center" alignItems="center"
+                            p={0} width={[30, 35, 40,45]} height={[30, 35, 40,45]} 
+                            hoverBg={"blue"}
+                            borderRadius="50%" 
+                            bg="dark"
+                        >
+                            <SearchIcon  stroke="white" strokeWidth="3" size={20} />
+                        </Button>
+                    </FlexBox>
+                </Form>}
+
+                <Box id="search-rresult-box"  
+                        borderColor="rgba(40,40,40, 0.3)"
+                        minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
+                        p={[1,2,3]}
+                    >
+                    <SearchQueryBox 
+                        topicSlug={topicSlug} 
+                        page={page} 
+                        lazyvariables={lazyvariables} 
+                        dispatcher={dataDispatcher} 
+                    />
+
+                    { queryData && queryData.quantity > 18&&
+                    <PaginationBox 
+                        currentPage={page} 
+                        totalPage={Math.ceil(queryData.quantity/18)} 
+                        nextPage={nextPage} prevPage={prevPage} 
+                    />}
                 </Box>
+            </ContentContainer>
         </PageContainer>
     );
 }
 
 const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher}) =>{
-
+    const variables = lazyvariables ? lazyvariables : {minYear:1950, maxYear:2019, minRating:5.0, maxRating:9.9}
     const { loading, data, } = useQuery(TOPIC_SEARCH_QUERY,{variables:{
-        topicSlug, page, ...lazyvariables
+        topicSlug, page, ...variables
     }})
 
 
