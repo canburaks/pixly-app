@@ -113,6 +113,7 @@ const ExplorePage = React.memo(props => {
 							item={topic}
 							notext
 							link={"/topic/" + topic.slug}
+							follow={true}
 						/>
 					))}
 				</Grid>
