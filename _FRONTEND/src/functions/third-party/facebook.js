@@ -112,14 +112,13 @@ function initFb(callback){
 		FB.AppEvents.logPageView();
 		callback(true)
 	};
-	var d = document.getElementById("fb-root")
-	var d = document.body
-	var script = document.createElement("script");
-	script.type = "text/javascript";
-	script.async = true;
-	script.src = "https://connect.facebook.net/en_US/sdk.js";
-	d.appendChild(script);
-	callback(true)
+	if(!window.FB){
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.async = true;
+		script.src = "https://connect.facebook.net/en_US/sdk.js";
+		document.getElementsByTagName("head")[0].appendChild(script)
+	}
 }
 
 export const facebook = () => {
