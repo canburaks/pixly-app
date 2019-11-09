@@ -234,15 +234,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Istanbul'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
 #########################################################################
 #       S3
 #STATIC_URL = '/static/'
@@ -327,19 +319,82 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': ','.join([
             'uploadimage', # the upload image feature
             # your extra plugins here
-            'div',
-            'autolink',
-            'autoembed',
-            'embedsemantic',
-            'autogrow',
-            # 'devtools',
-            'widget',
-            'lineutils',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath'
+            "a11yhelp",
+            "about",
+            "adobeair",
+            "ajax",
+            "autoembed",
+            "autogrow",
+            "autolink",
+            "bbcode",
+            "clipboard",
+            "codesnippet",
+            "codesnippetgeshi",
+            "colordialog",
+            "devtools",
+            "dialog",
+            "div",
+            "divarea",
+            "docprops",
+            "embed",
+            "embedbase",
+            "embedsemantic",
+            "filetools",
+            "find",
+            "flash",
+            "forms",
+            "iframe",
+            "iframedialog",
+            "image",
+            "image2",
+            "language",
+            "lineutils",
+            "link",
+            "liststyle",
+            "magicline",
+            "mathjax",
+            "menubutton",
+            "notification",
+            "notificationaggregator",
+            "pagebreak",
+            "pastefromword",
+            "placeholder",
+            "preview",
+            "scayt",
+            "sharedspace",
+            "showblocks",
+            "smiley",
+            "sourcedialog",
+            "specialchar",
+            "stylesheetparser",
+            "table",
+            "tableresize",
+            "tabletools",
+            "templates",
+            "uicolor",
+            "uploadimage",
+            "uploadwidget",
+            "widget",
+            "wsc",
+            "xml"
         ]),
+
+        #'extraPlugins': ','.join([
+        #    'uploadimage', # the upload image feature
+        #    # your extra plugins here
+        #    'div',
+        #    'autolink',
+        #    'autoembed',
+        #    'embedsemantic',
+        #    'autogrow',
+        #    # 'devtools',
+        #    'widget',
+        #    'lineutils',
+        #    'clipboard',
+        #    'dialog',
+        #    'dialogui',
+        #    'elementspath',
+        #]),
     }
 }
 
@@ -350,7 +405,15 @@ CKEDITOR_CONFIGS = {
 
 
 
+LANGUAGE_CODE = 'en-us'
 
+TIME_ZONE = 'Europe/Istanbul'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
 
 
 LOGIN_REDIRECT_URL = "/"
