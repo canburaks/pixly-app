@@ -32,7 +32,6 @@ import { Box, ScrollTopButton, navbarheight, PageContainer, Image } from "./styl
 import themes from './styled-components/theme'
 import { Clippy } from './styled-components'
 import { GlobalContext } from "./";
-import { FacebookProvider } from 'react-facebook';
 
 
 const App = (props) => {
