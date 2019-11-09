@@ -16,7 +16,12 @@
   },
   "babel": {
     "presets": [
-      ["@babel/preset-env", { "debug":true }],
+      [
+        "@babel/preset-env",
+        {
+          "debug": true
+        }
+      ],
       "@babel/preset-react"
     ],
     "plugins": [
@@ -84,7 +89,6 @@
     "react-content-loader": "^4.2.2",
     "react-datepicker": "^2.0.0",
     "react-dom": "^16.10.2",
-    "react-facebook": "^8.0.4",
     "react-flexbox-grid": "^2.1.2",
     "react-ga": "^2.5.6",
     "react-helmet": "^5.2.1",
@@ -172,7 +176,6 @@
       "/topic/cyberpunk",
       "/topic/based-on-true-story",
       "/advance-search"
-
     ],
     "publicPath": "/"
   }

@@ -356,7 +356,7 @@ export function useClientWidth(clsname){
 
 //const [loaded, error] = useScript('https://pm28k14qlj.codesandbox.io/test-external-script.js');
 let cachedScripts = [];
-export function useScript(src) {
+export function useScript(src, defer=null) {
   // Keeping track of script loaded and error state
   const [state, setState] = useState({
     loaded: false,
@@ -379,6 +379,10 @@ export function useScript(src) {
         let script = document.createElement('script');
         script.src = src;
         script.async = true;
+        if (defer){
+          script.defer = true
+        }
+        
 
         // Script event listener callbacks for load and error
         const onScriptLoad = () => {
