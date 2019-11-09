@@ -100,17 +100,27 @@ export const FaceBookAuthentication = React.memo(() => {
     )
   })
 
-function initFb(){
-	const FB = window.FB;
-	FB.init({
-		appId            : '371976677063927',
-		autoLogAppEvents : true,
-		xfbml            : true,
-		version          : 'v5.0'
-	});
+
+function initFb(callback){
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId: "371976677063927",
+			cookie: true,
+			xfbml: true,
+			version: "v4.0"
+		});
+
+		FB.AppEvents.logPageView();
+	};
+	var d = document.getElementById("fb-root")
+	var d = document.body
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.async = true;
+	script.src = "https://connect.facebook.net/en_US/sdk.js";
+	d.appendChild(script);
+	callback(true)
 }
-
-
 
 export const facebook = () => {
     
@@ -165,27 +175,7 @@ export const facebook = () => {
 	},[loaded])
 
 	useEffect(() => {
-		if (!document.getElementById("fb-root")) {
-			// create div required for fb
-			const fbDiv = document.createElement("div");
-			console.log("loading")
-			fbDiv.id = "fb-root";
-			document.body.appendChild(fbDiv);
-			// Run any script after sdk is loaded
-			window.fbAsyncInit = () => {
-			  //
-			};
-			// inject sdk.js
-			(function(d, script) {
-			  script = d.createElement("script");
-			  script.type = "text/javascript";
-			  script.async = true;
-			  script.src =
-				"https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=371976677063927&autoLogAppEvents=1";
-			  d.getElementsByTagName("head")[0].appendChild(script);
-			})(document);
-			setLoaded(true)
-		}
+		initFb(setLoaded)
 	},[])
 	
     return store
@@ -193,6 +183,36 @@ export const facebook = () => {
 
 /*
 
+function initFb0(){
+	//const FB = window.FB;
+	//FB.init({
+	//	appId            : '371976677063927',
+	//	autoLogAppEvents : true,
+	//	xfbml            : true,
+	//	version          : 'v5.0'
+	//});
+	if (!document.getElementById("fb-root")) {
+		// create div required for fb
+		const fbDiv = document.createElement("div");
+		console.log("loading")
+		fbDiv.id = "fb-root";
+		document.body.appendChild(fbDiv);
+		// Run any script after sdk is loaded
+		window.fbAsyncInit = () => {
+		  //
+		};
+		// inject sdk.js
+		(function(d, script) {
+		  script = d.createElement("script");
+		  script.type = "text/javascript";
+		  script.async = true;
+		  script.src =
+			"https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=371976677063927&autoLogAppEvents=1";
+		  d.getElementsByTagName("head")[0].appendChild(script);
+		})(document);
+		setLoaded(true)
+	}
+}
 export const facebook0 = () => {
 	const FB = window.FB
     const [api, handleApi] = useApi()
