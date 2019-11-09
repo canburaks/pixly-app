@@ -889,7 +889,6 @@ class Topic(SEO, MainPage):
     name = models.CharField(max_length=400)
     summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic. max: 300 characters")
     content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
-    html_content = RichTextField(null=True, blank=True)
 
     wiki = models.URLField(blank=True, null=True)
     

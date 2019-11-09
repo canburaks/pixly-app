@@ -633,8 +633,7 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
         #CHECK IF USERNAME AND REQUEST USER ARE THE SAME
         if request_user.username!=username_user.username:
             logout(info.context)
-            raise Exception(f'Credentials user and username mismatched. Please login again!{request_user.username} {username_user.username}')
-            return None
+            return CustomPersonaType(username=username, first=first, skip=skip)
     
         return CustomPersonaType(username=username, first=first, skip=skip)
 
