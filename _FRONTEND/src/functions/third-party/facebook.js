@@ -143,7 +143,8 @@ export const facebook = () => {
     });
 	const FB = window.FB
 
-    // Callback functions
+	// Callback functions
+    const setScriptStatus = useCallback((bool) => bool !== isLogged ? setLoaded(bool) : null,[isLogged])
     const setLoginStatus = useCallback((bool) => bool !== isLogged ? setIsLogged(bool) : null,[isLogged])
     const setFbStatus    = useCallback((status) => ((status==="connected") !== isLogged) ? (setIsLogged(status==="connected")) : null,[isLogged] )
     //const checkFbStatus  = useCallback(async () => {if(api){const r = await api.getLoginStatus(); setFbStatus(r.status)}}, [api])
@@ -178,7 +179,27 @@ export const facebook = () => {
 	},[loaded])
 
 	useEffect(() => {
-		initFb(setLoaded)
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId: "371976677063927",
+				cookie: true,
+				xfbml: true,
+				version: "v4.0"
+			});
+			//FB.AppEvents.logPageView();
+			setScriptStatus(true)
+		};
+		//console.log("window fb:", window.FB)
+		if(!window.FB){
+			var script = document.createElement("script");
+			script.type = "text/javascript";
+			script.async = true;
+			script.src = "https://connect.facebook.net/en_US/sdk.js";
+			document.getElementsByTagName("head")[0].appendChild(script)
+		}
+		else if (window.FB){
+			setScriptStatus(true)
+		}
 	},[])
 	
     return store
