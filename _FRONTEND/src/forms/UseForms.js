@@ -4,7 +4,7 @@ import useForm from "react-hook-form";
 import { Mutation } from "react-apollo";
 import { PROFILE_MUTATION } from "../functions/mutations";
 import UploadAvatar from "./UploadAvatar";
-//import { FbookConnectButton } from "../functions/facebook-react";
+import { facebook } from "../functions"
 import { GlobalContext } from "../";
 //import { Input } from "../styled-components"
 import { Input, FlexBox } from "../styled-components";
@@ -124,6 +124,8 @@ export const ProfileInfoForm = props => {
 const ProfileForm = props => {
 	const { register, handleSubmit, errors } = useForm();
 	//.log("profile-info-form", props)
+	const Fb = facebook()
+
 	const onSubmit = data => {
 		const qv = {};
 		qv.name = data["Full Name"];
@@ -193,7 +195,7 @@ const ProfileForm = props => {
 			<Input className="frm-item info-submit" type="submit" />
 
 			<FlexBox justifyContent="center" alignItems="center" className="fb-cont-box">
-				{/*<FbookConnectButton maxWidth="180px" /> */}
+				<Fb.Connect />
 			</FlexBox>
 		</form>
 	);

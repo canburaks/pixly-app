@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {  styled, Button, ImageButton, Image } from "../../styled-components"
 import {  typography, color, space, shadow, layout, border, background, flexbox, position } from 'styled-system'
-import { LoginButton } from 'react-facebook';
-import { Initialize, Login, useApi } from 'react-facebook';
+//import { LoginButton } from 'react-facebook';
 
 
 export const AuthButton = ({onCompleted, onError, ...props}) =>  {
-	const FB = window.FB
 	function loginfunction(){
 		FB.login(function(response) {
 			// handle the response
@@ -27,8 +25,6 @@ export const AuthButton = ({onCompleted, onError, ...props}) =>  {
 			}
 		  }, {scope: 'public_profile, email'});
 	}
-
-
 	return (
   	<Button  
     	className="auth-button"
@@ -41,27 +37,41 @@ export const AuthButton = ({onCompleted, onError, ...props}) =>  {
     </Button>
 )}
 
-export const AuthButton0 = (props) =>  (
-	<FbookAuthButton  
-  className="auth-button"
-	  width={"auto"}
-	  mx={[1]} p={0} 
-	  scope="email"
-	  {...props}
-  >
-	  <FacebookContinueSvg />
-  </FbookAuthButton>
-) 
-export const ConnectButton = (props) => (
-    <FbookAuthButton  
-        width={"auto"}
-        mx={[1]} p={0} 
-        scope="email"
-        {...props}
-    >
-        <FacebookConnectSvg />
-    </FbookAuthButton>
-)
+
+export const ConnectButton = ({onCompleted, onError, ...props}) => {
+	function connectfunction(){
+		FB.login(function(response) {
+			// handle the response
+			const responseData = {}
+			if (response.status === "connected"){
+				//console.log(response)
+				responseData.tokenDetail = response.authResponse
+				responseData.status = response.status
+				FB.api('/me',{fields: ["first_name", "last_name", "name",'email', "id", "picture"]}, 
+					function(apiresponse) {
+						responseData.profile = apiresponse
+						//console.log('Successful login for: ', responseData);
+						onCompleted(responseData)
+				  });
+			}
+			else {
+				onError()
+			}
+		  }, {scope: 'public_profile, email'});
+	}
+	return (
+		<Button  
+			className="connect-button"
+			width={"auto"}
+			mx={[1]} p={0} 
+			scope="email"
+			{...props}
+			onClick={connectfunction}
+		>
+			<FacebookConnectSvg />
+		</Button>
+)}
+
 export const LogoutButton = (props) => (
     <Button 
         bg="transparent" 
@@ -73,16 +83,7 @@ export const LogoutButton = (props) => (
     </Button>
 )
 
-export const Init = ({Child ,...props}) =>(
-    <Initialize>
-    {({isReady, api }) => {
-        console.log("init", isReady, api)
-        console.log("initialize fb script", window.FB)
-        if (isReady !== true) return <div></div>
-    }}
-        <Child {...props} />
-    </Initialize>
-)
+
 
 const FacebookContinueSvg = (props) => (
     <SvgFb width={233} height={30} fill="none" {...props} className="svg-fb-api-continue">
@@ -211,7 +212,17 @@ const SvgFb = styled("svg")`
     ${position}
     ${typography}
 `
-
+/*
+export const Init = ({Child ,...props}) =>(
+    <Initialize>
+    {({isReady, api }) => {
+        console.log("init", isReady, api)
+        console.log("initialize fb script", window.FB)
+        if (isReady !== true) return <div></div>
+    }}
+        <Child {...props} />
+    </Initialize>
+)
   const FbookAuthButton = styled(LoginButton)`
   margin: 4px;
   box-sizing: border-box;
@@ -239,7 +250,28 @@ const SvgFb = styled("svg")`
 `
 
 
-/*
+
+export const AuthButton0 = (props) =>  (
+	<FbookAuthButton  
+  className="auth-button"
+	  width={"auto"}
+	  mx={[1]} p={0} 
+	  scope="email"
+	  {...props}
+  >
+	  <FacebookContinueSvg />
+  </FbookAuthButton>
+) 
+export const ConnectButton0 = (props) => (
+    <FbookAuthButton  
+        width={"auto"}
+        mx={[1]} p={0} 
+        scope="email"
+        {...props}
+    >
+        <FacebookConnectSvg />
+    </FbookAuthButton>
+)
 
 const FacebookConnectSvg = (props) => (
     <svg width="202"  viewBox="0 0 202 38" fill="none" xmlns="http://www.w3.org/2000/svg" 
