@@ -887,8 +887,10 @@ class Topic(SEO, MainPage):
     slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
     tag = models.OneToOneField("items.Tag", null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=400)
-    summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic")
+    summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic. max: 300 characters")
     content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
+    html_content = RichTextField(null=True, blank=True)
+
     wiki = models.URLField(blank=True, null=True)
     
     movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="topics")
@@ -897,7 +899,8 @@ class Topic(SEO, MainPage):
     persons = models.ManyToManyField(Person,null=True, blank=True, related_name="topics")
     quotes = models.ManyToManyField("items.Quote",null=True, blank=True, related_name="topics")
 
-    searchable = models.BooleanField(default=True)
+    searchable = models.BooleanField(default=False, help_text="Allows year and rating filtering. " + 
+        "If there are many movies, select this.")
 
     poster = models.ImageField(blank=True, upload_to=topic_image_upload_path)
     cover_poster = models.ImageField(blank=True, upload_to=topic_cover_poster_upload_path)
