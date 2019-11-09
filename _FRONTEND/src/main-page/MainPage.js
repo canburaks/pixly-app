@@ -20,7 +20,6 @@ import { GlobalContext } from "../";
 
 import JoinBanner from "../components/JoinBanner.js";
 import { facebook } from "../functions"
-import { useApi} from 'react-facebook';
 
 
 import { GlideBox } from "../components2/Glide.js";

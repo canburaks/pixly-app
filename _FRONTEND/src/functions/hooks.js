@@ -353,6 +353,8 @@ export function useClientWidth(clsname){
 }
 
 
+
+//const [loaded, error] = useScript('https://pm28k14qlj.codesandbox.io/test-external-script.js');
 let cachedScripts = [];
 export function useScript(src) {
   // Keeping track of script loaded and error state

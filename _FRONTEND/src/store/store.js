@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState, useReducer, useEffect, lazy, Suspense } from 'react';
+import { useContext, useCallback, useState, useReducer, useEffect, lazy, Suspense } from 'react';
 import { useModal } from "cbs-react-components";
 import { AuthForm, ForgetForm } from "../forms/AuthForm"
 import { ContactForm } from "../forms/ContactForm"
@@ -19,6 +19,8 @@ export const Store = () => {
     const [username, setUsername] = useState(USERNAME)
 
     const [points, setPoints] = useState(0)
+    const [facebookStatus, setFacebookStatus] = useState(false)
+
     const [isLeftPanelOpen, setIsLeftPanelOpen] = useState(false)
 
     //const [showLoginModal, setLoginModal] = useState(false)
@@ -28,6 +30,51 @@ export const Store = () => {
 
     const { isOpen, toggle } = useModal();
     //console.log("actual lcoation: ", location)
+
+
+    //callbacks
+    const setfacebookOnline = useCallback(() => setFacebookStatus(true),[])
+    const setfacebookOffline = useCallback(() => setFacebookStatus(false),[])
+    const toggleModal = useCallback(() => setModal(!showModal),[showModal])
+    const toggleLeftPanel = useCallback(() => setIsLeftPanelOpen(!isLeftPanelOpen) ,[isLeftPanelOpen],[isLeftPanelOpen])
+    const updatePoints = useCallback((value) => {if(value !== points){setPoints(value)}}  )
+    const insertAuthForm = useCallback(() => {state.methods.updateModalComponent(() => <AuthForm form={form} />);toggleModal();} ,[])
+    const insertContactForm = useCallback(() => {state.methods.updateModalComponent(() => <ContactForm />);toggleModal();} ,[])
+
+
+
+    const updateToken = useCallback(async (value) => {if(value!==null){
+            const localToken = localStorage.getItem("AUTH_TOKEN");
+            if (localToken !== value){localStorage.setItem("AUTH_TOKEN", value); setToken(value);}
+        }})
+
+
+    const updateUsername = useCallback(async (value) => {if(value!==null){
+        const localUsername = localStorage.getItem("USERNAME");
+        if(localUsername !== value){localStorage.setItem("USERNAME", value); setUsername(value);}
+    }},[])
+
+    const getUsername = useCallback(() => {if (localStorage.getItem("USERNAME")){return localStorage.getItem("USERNAME")}
+        else { if (username){ return localStorage.getItem("USERNAME") } else return localStorage.getItem("USERNAME") }
+    }) 
+
+    const logout = useCallback(async () => {
+            cache.reset()
+            client.resetStore();
+            localStorage.removeItem("USERNAME")
+            localStorage.removeItem("AUTH_TOKEN")
+            localStorage.clear("USERNAME");
+            localStorage.clear("AUTH_TOKEN");
+            localStorage.removeItem("LISTS");
+            setUsername(null);
+            setToken(null);
+            window.location = window.location.origin + "/"
+    },[])
+
+
+    //const facebookOnlineSetter = useCallback(() => ,[])
+    //const facebookOnlineSetter = useCallback(() => ,[])
+
 
 
     useEffect(() =>{
@@ -49,9 +96,11 @@ export const Store = () => {
         token,
         points,
         speed,
+        facebookStatus,
         modal: showModal,
         modalComponent: modalComponent,
         isLeftPanelOpen: isLeftPanelOpen,
+
         //loginForm: showLoginModal,
         //signupForm: showSignupModal,
 
@@ -59,56 +108,19 @@ export const Store = () => {
             //updateLoginForm: setLoginModal,
             //updateSignupForm: setSignupModal,
             updateModalComponent: setModalComponent,
-            toggleLeftPanel: function () {
-                setIsLeftPanelOpen(!isLeftPanelOpen)
-            },
-            toggleModal: function () {
-                setModal(!showModal)
-            },
-            updatePoints: function (value) {
-                if (value !== points) {
-                    setPoints(value)
-                }
-            },
+            toggleLeftPanel,
+            toggleModal,
+
+            updatePoints,
 
 
-            insertAuthForm: function insertAuthForm(form) {
-                //first insert updateform to state
-                state.methods.updateModalComponent(() => <AuthForm form={form} />);
-                //then opens the form
-                state.methods.toggleModal()
-            },
-            insertContactForm: function insertContactForm() {
-                //first insert updateform to state
-                state.methods.updateModalComponent(() => <ContactForm  />);
-                //then opens the form
-                state.methods.toggleModal()
-            },
-            updateToken: async function (value) {
-                if (value !== null) {
-                    const localToken = localStorage.getItem("AUTH_TOKEN")
-                    if (localToken !== value) {
-                        localStorage.setItem("AUTH_TOKEN", value)
-                        setToken(value)
-                    }
-                }
-            },
-            updateUsername: async function (value) {
-                if (value !== null) {
-                    const localUsername = localStorage.getItem("USERNAME")
-                    if (localUsername !== value) {
-                        localStorage.setItem("USERNAME", value)
-                        setUsername(value)
-                    }
-                }
-            },
-            getUsername: function () {
-                if (localStorage.getItem("USERNAME")) return localStorage.getItem("USERNAME")
-                else {
-                    if (username) return username
-                    else return localStorage.getItem("USERNAME")
-                }
-            },
+            insertAuthForm,
+            insertContactForm,
+            updateToken,
+            updateUsername,
+            getUsername,
+            setfacebookOnline,
+            setfacebookOffline,
             signup: async function mutationCompleteHandler(data) {
                 const profile = data.createUser.user.profile;
                 localStorage.setItem("AUTH_TOKEN", profile.token);
@@ -134,18 +146,7 @@ export const Store = () => {
                 },1000)
                 console.log("end of store login function ",state.token, state.username)
             },
-            logout: async function logout() {
-                cache.reset()
-                client.resetStore();
-                localStorage.removeItem("USERNAME")
-                localStorage.removeItem("AUTH_TOKEN")
-                localStorage.clear("USERNAME");
-                localStorage.clear("AUTH_TOKEN");
-                localStorage.removeItem("LISTS");
-                setUsername(null);
-                setToken(null);
-                window.location = window.location.origin + "/"
-            }
+            logout
         }
     }
 
