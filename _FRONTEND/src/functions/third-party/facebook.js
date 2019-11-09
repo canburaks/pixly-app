@@ -110,9 +110,12 @@ function initFb(){
 	});
 }
 
+
+
 export const facebook = () => {
     
-	const [loaded, error] = useScript('https://connect.facebook.net/en_US/sdk.js');
+	//const [loaded, error] = useScript('https://connect.facebook.net/en_US/sdk.js');
+	const [loaded, setLoaded] = useState(false);
 	const globalstate = useContext(GlobalContext)
 
 	const golbalFbStatus = globalstate.facebookStatus
@@ -125,16 +128,16 @@ export const facebook = () => {
         onError:() => print("fbook mutation error"),
         onCompleted: (data) => (print("fbook mutation success", data), setLoginStatus(data.facebookConnect.success))
     });
-
+	const FB = window.FB
 
     // Callback functions
     const setLoginStatus = useCallback((bool) => bool !== isLogged ? setIsLogged(bool) : null,[isLogged])
     const setFbStatus    = useCallback((status) => ((status==="connected") !== isLogged) ? (setIsLogged(status==="connected")) : null,[isLogged] )
     //const checkFbStatus  = useCallback(async () => {if(api){const r = await api.getLoginStatus(); setFbStatus(r.status)}}, [api])
-	const checkFbStatus  = useCallback(() => {if (loaded){ const FB = window.FB; FB.getLoginStatus(r => {print("fb response");setFbStatus(r.status)})}}, [loaded])
+	const checkFbStatus  = useCallback(() => {if (FB){ const FB = window.FB; FB.getLoginStatus(r => {print("fb response");setFbStatus(r.status)})}}, [FB])
 
   	//handlers
-    const logoutHandler  = useCallback(async () => {if(loaded){ const FB = window.FB; FB.logout(() => {setIsLogged(false); setFbData(null)})}},[loaded])
+    const logoutHandler  = useCallback(async () => {if(FB){ const FB = window.FB; FB.logout(() => {setIsLogged(false); setFbData(null)})}},[FB])
     const errorHandler   = useCallback((error) =>  console.log("error: ", error),[])
 
 	  
@@ -156,13 +159,34 @@ export const facebook = () => {
         Auth,
         data:fbData
     }
-
+	console.log("loaded", loaded)
     useEffect(() => {
 		checkFbStatus()
-		if (loaded){
-			window.fbAsyncInit = initFb;
-		}
 	},[loaded])
+
+	useEffect(() => {
+		if (!document.getElementById("fb-root")) {
+			// create div required for fb
+			const fbDiv = document.createElement("div");
+			console.log("loading")
+			fbDiv.id = "fb-root";
+			document.body.appendChild(fbDiv);
+			// Run any script after sdk is loaded
+			window.fbAsyncInit = () => {
+			  //
+			};
+			// inject sdk.js
+			(function(d, script) {
+			  script = d.createElement("script");
+			  script.type = "text/javascript";
+			  script.async = true;
+			  script.src =
+				"https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=371976677063927&autoLogAppEvents=1";
+			  d.getElementsByTagName("head")[0].appendChild(script);
+			})(document);
+			setLoaded(true)
+		}
+	},[])
 	
     return store
 }
