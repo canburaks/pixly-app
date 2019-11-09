@@ -109,15 +109,15 @@ function initFb(callback){
 			xfbml: true,
 			version: "v4.0"
 		});
-
 		FB.AppEvents.logPageView();
+		callback(true)
 	};
 	var d = document.getElementById("fb-root")
 	var d = document.body
 	var script = document.createElement("script");
 	script.type = "text/javascript";
 	script.async = true;
-	script.src = "https://connect.facebook.net/en_US/sdk.js";
+	script.src = "https://connect.facebook.net/en_US/sdk/debug.js";
 	d.appendChild(script);
 	callback(true)
 }
