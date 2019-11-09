@@ -120,6 +120,9 @@ function initFb(callback){
 		script.src = "https://connect.facebook.net/en_US/sdk.js";
 		document.getElementsByTagName("head")[0].appendChild(script)
 	}
+	else if (window.FB){
+		callback(true)
+	}
 }
 
 export const facebook = () => {
