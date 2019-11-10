@@ -82,7 +82,8 @@ export const NewLink = styled(LinkNoFollow)`
   ${position}
   ${typography}
 `
-export const OuterLink = styled.a.attrs(() => ({rel:"nofollow noopener", target:"_blank"}))`
+export const OuterLink = styled.a.attrs((props) => (
+  props.follow ? {rel:"noopener", target:"_blank"}: {rel:"nofollow noopener", target:"_blank"}))`
   :hover { 
     text-decoration: ${props => props.hoverUnderline && "underline"}
   };

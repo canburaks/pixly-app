@@ -48,7 +48,7 @@ export const ProfileIcon = (props) => <Profile size={props.size || 24} clickable
 
 //More Complex Icons
 export const ImdbRatingIcon = (props) => (
-    <OuterLink href={props.link} mr={[1]} display="flex" alignItems="flex-end">
+    <OuterLink href={props.link} mr={[1]} display="flex" alignItems="flex-end" follow={props.follow}>
         <ImdbIcon imdb title="See IMDb Page" fill="#f1f1f1" {...props}/>
         {props.rating && 
         <Text 

@@ -18,7 +18,7 @@ export const SocialBox = ({ item, size, styles, ...props}) => (
 
 export const SocialMedia = (props) => {
     if (props.homepage) return  <HomeLink link={props.homepage} size={props.size} styles={props.styles} name={props.name} />
-    else if (props.imdb) return  <ImdbRatingIcon link={props.imdb} size={props.size + 2} rating={props.rating}  name={props.name} />
+    else if (props.imdb) return  <ImdbRatingIcon link={props.imdb} size={props.size + 2} rating={props.rating}  name={props.name} follow={true} />
     else if (props.facebook) return  <FacebookLink link={props.facebook} size={props.size} styles={props.styles} name={props.name} />
     else if (props.twitter) return  <TwitterLink link={props.twitter} size={props.size} styles={props.styles} name={props.name} />
     else if (props.instagram) return  <InstagramLink link={props.instagram} size={props.size} styles={props.styles} name={props.name} />
