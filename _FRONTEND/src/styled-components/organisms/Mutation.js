@@ -32,12 +32,12 @@ export const SignupMutation = (props) => {
 		onError:(e) => mutationErrorHandler(e)
 	});
 
-	print("mutation props", props)
-	print("mutation data", data)
+	//print("mutation props", props)
+	//print("mutation data", data)
 
 	const mutationErrorHandler = (e) => {print("mutation error:", e);setAuthError(e.message.split("'")[1]);}
 	const mutationSuccessHandler = (response) => {
-		print("mutation response:", response);
+		//print("mutation response:", response);
 		if (response.createUser.success){
 			globalstate.methods.signup(response);
 		}
@@ -138,7 +138,6 @@ export const RatingMutation = (props) => {
 		
 		if (window.location.pathname.includes("/movie/")){
 			var oldData = client.readQuery({ query: MOVIE, variables:{slug:props.item.slug} });
-			console.log("oldData",oldData)
 			const newMovieData = {...oldData.movie, ...newData}
 			oldData.movie = newMovieData;
 			client.writeQuery({ query: MOVIE, variables:{slug:props.item.slug}, data: oldData});

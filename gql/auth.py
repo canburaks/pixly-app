@@ -88,7 +88,7 @@ class CreateUser(graphene.Mutation):
         avatar_url = graphene.String(required=False) 
 
     @classmethod
-    def mutate(cls, root, info, username, password, email, name, fb_data, avatar_url):
+    def mutate(cls, root, info, username, password, email, name, fb_data=None, avatar_url=None):
         username = to_english_chars(username)
         if User.objects.filter(username__iexact=username).exists():
             raise ValidationError('This username has already been taken!')
