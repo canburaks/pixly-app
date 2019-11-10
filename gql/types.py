@@ -1559,30 +1559,20 @@ class CustomListType(graphene.ObjectType, SocialMediaType, SEOType,StatisticsTyp
         return self.liste.richdata
 
     def resolve_seo_title(self, info, *_):
-        if self.liste.seo_title == None:
-            self.liste.seo_title = f"{self.liste.name} - Pixly"
-            self.liste.save()
-        return self.liste.seo_title
+        if self.liste.seo_title:
+            return self.liste.seo_title
+        return = f"Pixly - {self.liste.name}"
 
     def resolve_seo_description(self, info, *_):
-        if self.liste.seo_description == None:
-            try:
-                #self.liste.set_seo_description_keywords()
+        if self.liste.seo_description:
                 return self.liste.seo_description
-            except:
-                print(f"{self.liste.name} person seo description could not be saved in -> resolve_seo_description ")
-                return self.liste.seo_description
-        return self.liste.seo_description
+        return self.liste.summary[:140]
+        
 
     def resolve_seo_short_description(self, info, *_):
-        if self.liste.seo_short_description == None:
-            try:
-                #self.liste.set_seo_description_keywords()
-                return self.liste.seo_short_description
-            except:
-                print(f"{self.liste.name} person seo description could not be saved in -> resolve_seo_description ")
-                return self.liste.seo_short_description
-        return self.liste.seo_short_description
+        if self.liste.seo_short_description:
+            return self.liste.seo_short_description
+        return self.liste.summary[:140]
 
     def resolve_seo_keywords(self, info, *_):
         if self.liste.seo_keywords == None:
