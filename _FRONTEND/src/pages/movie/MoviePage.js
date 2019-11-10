@@ -152,16 +152,16 @@ const MoviePage = props => {
 			<ContentContainer zIndex={1} mt={[4]}>
 				{item.summary && item.summary.length > 50 && (
 					<>
-						<HeaderText fontSize={["xxl", "xxl", "xxxl", "large"]} mt={[3]}>{item.name}</HeaderText>
-						<p className="t-m mar-b-2x">{item.summary}</p>
+						<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{item.name}</HeaderText>
+						<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>{item.summary}</Text>
 					</>
 				)}
 
 				{/*<!--SIMILAR Section--> */}
 				{similarPlaceholder.length > 0 && (
 					<>
-						<TextSection header={"People Also Like"}>
-							<Text mt={[2]}>
+						<HeaderMini mt={[5]} fontSize={["18px", "18px", "22px", "24px","26px"]}>{`Movie Recommendations If You Like ${item.name}`}</HeaderMini>
+							<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>
 								People who like
 								<Span fontWeight="bold" opacity={1}> {item.name} </Span>
 								also like and give high ratings below movies. This
@@ -172,8 +172,8 @@ const MoviePage = props => {
 								wisely. If you have any issues please feel free to
 								write us from the bottom part of the page.
 							</Text>
-							<Text>{invtext}</Text>
-						</TextSection>
+							<Text fontSize={["14px", "16px", "18px"]}>{invtext}</Text>
+						
 
 						<MovieRichCardBox items={similarPlaceholder} />
 						<hr />
@@ -185,8 +185,8 @@ const MoviePage = props => {
 				{/*<!--CONTENT SIMILAR Section--> */}
 				{contentSimilarCover.length > 0 && (
 					<>
-						<HeaderMini mt={[5]}>Similar Movies <Span fontSize={["14px", "16px"]} opacity={0.8} color="dark"> like {item.name}</Span></HeaderMini>
-						<Text mt={[2]}>
+						<HeaderMini mt={[5]} fontSize={["18px", "18px", "22px", "24px","26px"]}>Similar Movies like {item.name}</HeaderMini>
+						<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>
 							Those movies have content similarities with{" "}
 							<Span fontWeight="bold" opacity={1}> {item.name} </Span>. If
 							you like any topic or tag under the below movies,
@@ -196,7 +196,7 @@ const MoviePage = props => {
 							improving our recommendation mechanism. Therefore
 							any feedback is welcome.
 						</Text>
-						<Text>{vistext}</Text>
+						<Text fontSize={["14px", "16px", "18px"]}>{vistext}</Text>
 						<MovieSimilarBox items={contentSimilarCover}  />
 						<hr />
 					</>
