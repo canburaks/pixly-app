@@ -529,3 +529,6 @@ Disallow: /person/nm0155365
 Disallow: /person/nm0768614
 Disallow: /person/nm0002057
 Disallow: /person/nm0480099
+Disallow: /person/nm0000518
+Disallow: /person/nm0000177
+Disallow: /person/nm0315041
