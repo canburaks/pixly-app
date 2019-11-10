@@ -1561,7 +1561,7 @@ class CustomListType(graphene.ObjectType, SocialMediaType, SEOType,StatisticsTyp
     def resolve_seo_title(self, info, *_):
         if self.liste.seo_title:
             return self.liste.seo_title
-        return = f"Pixly - {self.liste.name}"
+        return f"Pixly - {self.liste.name}"
 
     def resolve_seo_description(self, info, *_):
         if self.liste.seo_description:
