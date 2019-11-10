@@ -112,7 +112,7 @@ function initFb(callback){
 		FB.AppEvents.logPageView();
 		callback(true)
 	};
-	console.log("window fb:", window.FB)
+	//console.log("window fb:", window.FB)
 	if(!window.FB){
 		var script = document.createElement("script");
 		script.type = "text/javascript";
@@ -173,7 +173,7 @@ export const facebook = () => {
         Auth,
         data:fbData
     }
-	console.log("loaded", loaded)
+	//console.log("loaded", loaded)
     useEffect(() => {
 		checkFbStatus()
 	},[loaded])
