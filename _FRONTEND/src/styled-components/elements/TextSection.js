@@ -63,12 +63,12 @@ export const ArticleSection = (props) =>(
         
         {/* Article Body*/}
         <Box width={"100%"} height="auto">
-            <Text fontSize={props.textSize} mt={[1]}>
+            <Text fontSize={props.textSize} mt={[1]} textAlign="justify">
                 {props.summary}
             </Text>
             
             <Text 
-                 fontSize={props.textSize} mt={[1]}>
+                 fontSize={props.textSize} mt={[1]} textAlign="justify">
                 {props.content}
             </Text>
         

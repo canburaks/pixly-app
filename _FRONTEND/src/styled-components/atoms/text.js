@@ -72,7 +72,7 @@ export const Text = styled('p')({
   cursor:props => props.clickable ? "pointer" : "inherit",
   whiteSpace:props => props.truncate && "nowrap",
   overflow:props => props.truncate && "hidden",
-  textOverflow:props => props.truncate && "ellipsis"
+  textOverflow:props => props.truncate && "ellipsis",
   },
     compose(
       typography,
@@ -106,7 +106,7 @@ export const HeaderText = styled('h1')({
     border
   )
 )
-export const HeaderMini = styled('h4')({
+export const HeaderMini = styled('h2')({
   width:"100% ",
   textTransform:"capitalize",
   fontWeight:"bold",
@@ -129,8 +129,8 @@ export const HeaderMini = styled('h4')({
 export const Paragraph = styled('p')({
     overflowY: props => props.textHidden && "hidden",
     textOverflow: props => props.textHidden && "ellipsis",
-    wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
-
+    wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal",
+    textAlign:"justify"
   },
     compose(
       typography,

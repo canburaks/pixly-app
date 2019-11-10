@@ -67,7 +67,7 @@ const TopicPage = (props) =>{
                     {queryData && queryData.topic &&
                         <SchemaArticle 
                             headerSize={[24, 26, 28, 32]}
-                            textSize={[14,16]}
+                            textSize={[14,16, 16, 18]}
                             mt={[3]} mb={[0]} py={[0]}
                             header={queryData.topic.name + " Films"}
                             quote={queryData.topic.quotes.length > 0 && queryData.topic.quotes[0]}
