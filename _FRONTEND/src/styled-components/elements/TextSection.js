@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Text, Paragraph, HeaderMini,HeaderText, NewLink, Box, FlexBox, Blockquote, Cite} from "../atoms"
 
 export const Stats = (props) => (
@@ -25,7 +24,9 @@ Quote.defaultProps = {
     fontSize:"xl"
 }
 
-export const ArticleSection = (props) =>(
+export const ArticleSection = (props) => {
+
+    return (
     <Box 
         display="flex" flexDirection="column" justifyContent="flex-start"
         py={[3]} my={[3,3,4]}
@@ -75,7 +76,7 @@ export const ArticleSection = (props) =>(
         </Box>
 
     </Box>
-)
+)}
 
 ArticleSection.defaultProps = {
     headerSize:"xxl",

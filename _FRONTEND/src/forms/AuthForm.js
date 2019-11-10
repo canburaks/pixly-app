@@ -198,6 +198,7 @@ const SignupForm = (props) => {
                 getError={e => updateLocalErrors({ email: e })}
                 validation={emailValidator}
                 validationMessage={"Please enter a valid mail adress."}
+                maxLength={50}
             />
             
             {/* PASSWORD */}

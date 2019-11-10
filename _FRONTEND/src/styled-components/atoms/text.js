@@ -106,7 +106,27 @@ export const HeaderText = styled('h1')({
     border
   )
 )
-export const HeaderMini = styled('h2')({
+export const SubHeaderText = styled('h2')({
+  width:"100% ",
+  textTransform:"capitalize",
+  fontWeight:"bold",
+  color:"dark",
+  cursor:props => props.clickable ? "pointer" : "inherit",
+  textShadow:props => props.textShadow || themeGet("shadows.lightGray"),
+  wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
+
+},
+  compose(
+    typography,
+    color,
+    space,
+    shadow,
+    layout,
+    position,
+      border
+  )
+)
+export const HeaderMini = styled('h4')({
   width:"100% ",
   textTransform:"capitalize",
   fontWeight:"bold",

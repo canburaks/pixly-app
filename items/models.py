@@ -14,6 +14,7 @@ from django.db.models import Q
 from imagekit.processors import ResizeToFill
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+
 def item_image_upload_path(instance, filename):
     return "posters/{0}/{1}".format(instance.movie.id,filename)
 
@@ -889,6 +890,7 @@ class Topic(SEO, MainPage):
     name = models.CharField(max_length=400)
     summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic. max: 300 characters")
     content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
+    html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
 
     wiki = models.URLField(blank=True, null=True)
     

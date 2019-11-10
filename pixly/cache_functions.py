@@ -15,12 +15,6 @@ import graphene
 from django.db.models import Q
 from graphene_django.converter import convert_django_field
 from pixly.lib import get_class_callable_names, get_class_cache_methods
-#from .types import ( MovieType, MovieListType, RatingType, ProfileType, PersonType,TagType,
-#        CustomListType, CustomMovieType, DirectorPersonMixType,CountryType, PersonaType,
-#        DirectorType, TopicType, ListType, UserType, CrewType, movie_defer,
-#        CustomSearchType, AdvanceSearchType, PostType, MainPageType)
-#from .search import ComplexSearchType, ComplexSearchQuery
-#from .persona_query import CustomPersonaType
 from functools import lru_cache
 
 class Cache():
@@ -62,6 +56,7 @@ class Cache():
         if not qs.exists():
             return []
         topic = qs.first()
+        topic.html_content
         qs = topic.movies.all().only("id", "slug", "name", "poster", "cover_poster", "year").order_by("-imdb_rating")
         #print(tags, keywords)
 
