@@ -80,3 +80,8 @@ coverage
 
 # FuseBox cache
 /_FRONTEND/.fusebox/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
