@@ -900,6 +900,8 @@ class Topic(SEO, MainPage):
 
     searchable = models.BooleanField(default=False, help_text="Allows year and rating filtering. " + 
         "If there are many movies, select this.")
+    
+    is_article = models.BooleanField(default=False,help_text="If the content is rich enough select this.")
 
     poster = models.ImageField(blank=True, upload_to=topic_image_upload_path)
     cover_poster = models.ImageField(blank=True, upload_to=topic_cover_poster_upload_path)

@@ -36,7 +36,7 @@ export const ArticleSection = (props) =>(
 
             fontWeight="bold" 
             color={"dark"} textShadow={props.textShadow || "textGray"}
-            pt={"4px"} 
+            py={[3]} 
         >
             {props.header}
         </HeaderText>
@@ -63,12 +63,12 @@ export const ArticleSection = (props) =>(
         
         {/* Article Body*/}
         <Box width={"100%"} height="auto">
-            <Text fontSize={props.textSize} mt={[1]} textAlign="justify">
+            <Text fontSize={props.textSize} mt={[2]} textAlign="justify">
                 {props.summary}
             </Text>
             
             <Text 
-                 fontSize={props.textSize} mt={[1]} textAlign="justify">
+                 fontSize={props.textSize} mt={[3]} textAlign="justify">
                 {props.content}
             </Text>
         

@@ -41,7 +41,7 @@ export const SchemaArticle = (props) =>(
             fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px"]} 
             fontWeight="bold" 
             color={"dark"} textShadow={props.textShadow || "textGray"}
-            pt={"4px"} 
+            pt={[3]} 
         >
             {props.header}
         </HeaderText>
@@ -69,12 +69,12 @@ export const SchemaArticle = (props) =>(
         
         {/* Article Body*/}
         <Box width={"100%"} height="auto" itemProp="articleBody">
-            <Text fontSize={props.textSize} mt={[1]}>
+            <Text fontSize={props.textSize} mt={[2]}>
                 {props.summary}
             </Text>
             
             <Text 
-                 fontSize={props.textSize} mt={[1]}>
+                 fontSize={props.textSize} mt={[2]}>
                 {props.content}
             </Text>
         

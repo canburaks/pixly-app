@@ -70,7 +70,7 @@ class ArticleMovieInline(admin.TabularInline):
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ("id", "searchable", "slug",'name', "summary", "content", )
+    list_display = ("id", "searchable", "slug",'name', "summary", "content","is_article" )
 
     inlines = [TagTopicInline,]
     raw_id_fields = ['movies', 'persons', 'lists',"tags", "quotes"]
