@@ -146,7 +146,6 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
 
     if (loading) return <Loading />
     if (data && data.complexSearch) {
-        console.log(data.complexSearch.topic)
         const willBeDispatched = {topic:data.complexSearch.topic, quantity:data.complexSearch.quantity}
         //console.log("data", data, willBeDispatched)
         dispatcher(willBeDispatched)
