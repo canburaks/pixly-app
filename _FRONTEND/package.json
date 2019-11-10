@@ -172,9 +172,14 @@
     "include": [
       "",
       "/",
-
+      "/explore",
+      "/topic/art-house",
+      "/topic/cyberpunk",
+      "/topic/based-on-true-story",
+      "/directors/1",
+      "/advance-search",
       "/movie/the-social-network-2010"
-    
+
     ],
     "publicPath": "/"
   }
