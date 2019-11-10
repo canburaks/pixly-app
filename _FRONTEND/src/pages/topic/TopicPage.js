@@ -5,6 +5,7 @@ import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 
 import { isEqualObj, Head, MidPageAd} from "../../functions"
+import { renderToStaticMarkup } from 'react-dom/server';
 
 
 import { 
@@ -36,7 +37,7 @@ const TopicPage = (props) =>{
     const nextPage = () => setPage(page => page + 1)
     const prevPage = () => setPage(page => page - 1)
     
-    if ( lazyvariables === null) setLazyVariables({...yearData, ...ratingData})
+    if (lazyvariables === null) setLazyVariables({...yearData, ...ratingData})
 
     //console.log("yearData",yearData)
     //console.log("ratingData",ratingData)
@@ -50,6 +51,8 @@ const TopicPage = (props) =>{
             setPage(1);
         }
     }
+
+    const htmlContent = useMemo(() => (queryData && queryData.topic) && renderToStaticMarkup(queryData.topic.htmlContent), [queryData])
     return(
         <PageContainer>
             {queryData && queryData.topic &&
@@ -143,6 +146,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
 
     if (loading) return <Loading />
     if (data && data.complexSearch) {
+        console.log(data.complexSearch.topic)
         const willBeDispatched = {topic:data.complexSearch.topic, quantity:data.complexSearch.quantity}
         //console.log("data", data, willBeDispatched)
         dispatcher(willBeDispatched)

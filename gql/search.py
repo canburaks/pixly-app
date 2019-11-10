@@ -332,6 +332,7 @@ class ComplexSearchType(graphene.ObjectType):
     def resolve_topic(self, info):
         qs = Topic.objects.filter(slug=self.topic_slug)
         if qs.exists():
+            print(qs.first().html_content)
             return qs.first()
         return None
 
