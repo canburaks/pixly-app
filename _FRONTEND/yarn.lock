@@ -5641,6 +5641,11 @@ faye-websocket@~0.11.1:
   dependencies:
     websocket-driver ">=0.5.1"
 
+fb-sdk-wrapper@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/fb-sdk-wrapper/-/fb-sdk-wrapper-1.0.3.tgz#91c47856f6ced15ef28c074a54ecf63b3b3e50e4"
+  integrity sha512-NU5gOTYv9zPNX9yAUlc/3UKSlO9Yx319nNwm74JLEcnOCNOtMyhRZdgLtTyH1dSaq+sPbh9pYeu1EEFacpBf/A==
+
 fb-watchman@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/fb-watchman/-/fb-watchman-2.0.0.tgz#54e9abf7dfa2f26cd9b1636c588c1afc05de5d58"
