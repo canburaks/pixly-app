@@ -341,7 +341,7 @@ class ComplexSearchType(graphene.ObjectType):
             self.min_year, self.max_year,
             self.min_rating, self.max_rating
         )
-
+        cached_qs.cache_clear()
         #print(qs.count())
         self.quantity = cached_qs.count()
 
