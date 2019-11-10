@@ -38,8 +38,8 @@ export const Store = () => {
     const toggleModal = useCallback(() => setModal(!showModal),[showModal])
     const toggleLeftPanel = useCallback(() => setIsLeftPanelOpen(!isLeftPanelOpen) ,[isLeftPanelOpen],[isLeftPanelOpen])
     const updatePoints = useCallback((value) => {if(value !== points){setPoints(value)}}  )
-    const insertAuthForm = useCallback(() => {state.methods.updateModalComponent(() => <AuthForm form={form} />);toggleModal();} ,[])
-    const insertContactForm = useCallback(() => {state.methods.updateModalComponent(() => <ContactForm />);toggleModal();} ,[])
+    const insertAuthForm = (form) => {setModalComponent(() => <AuthForm form={form} />);toggleModal()}
+    const insertContactForm = () => {setModalComponent(() => <ContactForm />);toggleModal()}
 
 
 
