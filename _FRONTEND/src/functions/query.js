@@ -674,7 +674,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                     },
                 }
                 topic{
-                    name, summary,content, htmlContent, slug, poster, 
+                    name, summary,content, htmlContent, isArticle, slug, poster, 
                     seoTitle, seoShortDescription, seoKeywords,
                     coverPoster, createdAt, updatedAt, wiki, richdata,
                     searchable,

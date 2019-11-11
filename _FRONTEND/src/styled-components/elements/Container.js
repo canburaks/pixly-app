@@ -4,12 +4,48 @@ import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 
 import { 
-    Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, NewLink, Paragraph,
-    TagText,
+    Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, HeaderMini, NewLink, Paragraph,
+    TagText,HtmlBox,
 } from "../index"
 import { SocialBox } from "../others"
+import parse, { domToReact } from 'html-react-parser';
 
-//import { ColorExtractor } from 'react-color-extractor'
+
+
+export const HtmlContainer = ({ html, ...props }) => {
+
+    const options = {
+        replace: domNode => {
+            //console.log(domNode.name)
+            if (domNode.attribs && (
+                    domNode.name === 'h3' || 
+                    domNode.name === 'h4' ||
+                    domNode.name === 'h6')
+                ) {
+                return <HeaderMini {...props}>{domToReact(domNode.children)}</HeaderMini>
+            }
+            else if (domNode.attribs && domNode.name === 'p') {
+                //console.log(domNode)
+                return <Text {...props} textAlign="justify">{domToReact(domNode.children)}</Text>
+            }
+          }
+    }
+
+    function parseTest(){
+        if(html){
+            //console.log("parser" , html)
+            //console.log("topic: ", parseResult)
+            return parse(html, options)
+             
+        }
+    }
+    parseTest()
+    return (
+        <HtmlBox>
+            {parseTest()}
+        </HtmlBox>
+    )
+}
 
 export const TopPanelBackElement = (props) => (
     <Box display="flex"
