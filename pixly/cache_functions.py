@@ -93,4 +93,3 @@ class Cache():
         mqs = Movie.objects.filter(year=2019, imdb_rating__gte=6.5).defer("director", "data").order_by("-updated_at")[:quantity]
         return mqs
 
-Cache.flush()
