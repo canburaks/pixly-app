@@ -217,7 +217,8 @@ liste_slugs =[
 topic__slugs = [
     "topic/art-house",
     "topic/cyberpunk",
-    "topic/based-on-true-story"
+    "topic/based-on-true-story",
+    "topic/dialogue-focused"
 ]
 static__slugs = [
     "explore",
