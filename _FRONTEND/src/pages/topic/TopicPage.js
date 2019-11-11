@@ -5,7 +5,7 @@ import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 
 import { isEqualObj, Head, MidPageAd} from "../../functions"
-import { renderToStaticMarkup } from 'react-dom/server';
+import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 
 
 import { 
@@ -13,7 +13,7 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,
-    YearSlider,RatingSlider,
+    YearSlider,RatingSlider,HtmlBox, HtmlContainer,
 } from "../../styled-components"
 
 
@@ -27,6 +27,12 @@ const TopicPage = (props) =>{
 
     const [lazyvariables,setLazyVariables] = useState(null)
     const [queryData, setQueryData] = useState(null)
+    const isReady = useMemo(() => (queryData && queryData.topic) ? true : false, [queryData])
+    const haveStaticMarkup = useMemo(
+        () => (isReady && queryData.topic.htmlContent && queryData.topic.htmlContent.length > 5)
+            ? true 
+            : false
+    , [isReady])
 
     
     //handlers
@@ -40,7 +46,7 @@ const TopicPage = (props) =>{
     if (lazyvariables === null) setLazyVariables({...yearData, ...ratingData})
 
     //console.log("yearData",yearData)
-    //console.log("ratingData",ratingData)
+    isReady && console.log(queryData)
     //console.log("topic data", queryData)
 
     const submitHandler = (e) => {
@@ -52,10 +58,10 @@ const TopicPage = (props) =>{
         }
     }
 
-    const htmlContent = useMemo(() => (queryData && queryData.topic) && renderToStaticMarkup(queryData.topic.htmlContent), [queryData])
     return(
         <PageContainer>
-            {queryData && queryData.topic &&
+            
+            {isReady &&
                 <Head
                     richdata={queryData.topic.richdata}
                     title={queryData.topic.seoTitle}
@@ -67,19 +73,22 @@ const TopicPage = (props) =>{
             }
             <ContentContainer>
                 <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"}>
-                    {queryData && queryData.topic &&
+                    {isReady &&
                         <SchemaArticle 
                             headerSize={[24, 26, 28, 32]}
                             textSize={[14,16, 16, 18]}
                             mt={[3]} mb={[0]} py={[0]}
                             header={queryData.topic.name}
                             quote={queryData.topic.quotes.length > 0 && queryData.topic.quotes[0]}
-                            summary={queryData.topic.summary}
-                            content={queryData.topic.content}
+                            description={queryData.topic.seoShortDescription}
+                            summary={!haveStaticMarkup ? queryData.topic.summary : null}
+                            content={!haveStaticMarkup ? queryData.topic.content : null}
                             createdAt={queryData.topic.createdAt}
                             updatedAt={queryData.topic.updatedAt}
                             wiki={queryData.topic.wiki}
-                        />}   
+                        >   
+                            <HtmlContainer my={[3]} fontSize={[14,16, 16, 18]} html={queryData.topic.htmlContent} />
+                        </SchemaArticle>}   
                 </FlexBox>
 
                 {queryData && queryData.topic.searchable && <Form flexWrap="wrap" onSubmit={submitHandler}>

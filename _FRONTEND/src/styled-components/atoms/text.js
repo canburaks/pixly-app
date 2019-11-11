@@ -69,6 +69,7 @@ export const Text = styled('p')({
   color:themeGet("dark"),
   fontWeight:400,
   margin:0,
+  whiteSpace: "pre-line",
   cursor:props => props.clickable ? "pointer" : "inherit",
   whiteSpace:props => props.truncate && "nowrap",
   overflow:props => props.truncate && "hidden",
@@ -84,6 +85,8 @@ export const Text = styled('p')({
       border
     )
 )
+
+
 
 export const HeaderText = styled('h1')({
   minWidth:"100% !important",

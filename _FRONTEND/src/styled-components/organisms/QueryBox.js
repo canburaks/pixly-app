@@ -75,7 +75,6 @@ export const SearchQueryBox = (props) =>{
                 <FlexBox justifyContent="center" id="s-text-input" minWidth="100%" position="relative">
                     <SearchInput type="text"   
                         placeholder="Search.."
-                        autoFocus
                         value={keywords} 
                         onChange={keywordsHandler} 
                         minHeight="40px"

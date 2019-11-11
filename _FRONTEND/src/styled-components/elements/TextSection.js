@@ -12,7 +12,7 @@ export const Quote = (props) =>(
         <Blockquote cite={props.quote.ownerName}
             fontFamily="quote"
             fontWeight={"500"} fontSize={props.fontSize} 
-            mt={[1]} maxHeight={200} fontStyle="italic"
+            mt={[1]}  fontStyle="italic"
             color={"dark"} 
             {...props}
         >
@@ -27,17 +27,18 @@ Quote.defaultProps = {
 export const ArticleSection = (props) => {
 
     return (
-    <Box 
-        display="flex" flexDirection="column" justifyContent="flex-start"
+        <Box display="flex" flexDirection="column" justifyContent="flex-start"
         py={[3]} my={[3,3,4]}
         {...props} 
     >
-        {/* Schema headline*/}
-        <HeaderText fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px", "34px"]}
 
+        {/* Schema headline*/}
+
+        <HeaderText 
+            fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px"]} 
             fontWeight="bold" 
             color={"dark"} textShadow={props.textShadow || "textGray"}
-            py={[3]} 
+            pt={[3]} 
         >
             {props.header}
         </HeaderText>
@@ -48,8 +49,9 @@ export const ArticleSection = (props) => {
                 quote={props.quote}
                 alignSelf="center"
                 maxWidth={["100%", "90%", "90%", "80%"]}
-                my={[2,2,2,3]}
+                my={[3,3,3,4]}
             />}
+            
 
 
 
@@ -63,16 +65,16 @@ export const ArticleSection = (props) => {
             </HeaderMini>}
         
         {/* Article Body*/}
-        <Box width={"100%"} height="auto">
-            <Text fontSize={props.textSize} mt={[2]} textAlign="justify">
+        <Box width={"100%"} height="auto" mt={[3]}>
+            <Text fontSize={props.textSize} mt={[2]}>
                 {props.summary}
             </Text>
             
             <Text 
-                 fontSize={props.textSize} mt={[3]} textAlign="justify">
+                 fontSize={props.textSize} mt={[2]}>
                 {props.content}
             </Text>
-        
+            {props.children}
         </Box>
 
     </Box>
