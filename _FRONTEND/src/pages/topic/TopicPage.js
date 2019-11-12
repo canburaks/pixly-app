@@ -160,9 +160,9 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         dispatcher(willBeDispatched)
         return (
             <>
-            <MovieRichCardBox items={data.complexSearch.topicResult.slice(0,10)}  />
+            <MovieRichCardBox items={data.complexSearch.topicResult.slice(0,6)}  />
             <HomePageFeedAd/>
-            <MovieRichCardBox items={data.complexSearch.topicResult.slice(10,18)}  />
+            <MovieRichCardBox items={data.complexSearch.topicResult.slice(6,18)}  />
             <MidPageAd />
             </>
 
