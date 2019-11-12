@@ -149,7 +149,7 @@ const SearchQueryResult = React.memo(({keywords, cleaner}) => {
     if (data) {
         
         return (
-            <Modal isOpen={true} header={`search term: ${keywords}`} closeModal={cleaner}>
+            <Modal isOpen={true} header={`search term: ${keywords}`} closeModal={cleaner} zIndex={20}>
                 <Grid columns={[3,4,5,6,6,6, 8]}  py={"10px"} px="10px" position="relative"  >
                     {data.complexSearch.result.map( item => (
                         <MoviePosterCard

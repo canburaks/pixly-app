@@ -64,7 +64,7 @@ const MainPage = React.memo(() => {
 	rgaSetCloseTime("Landing Page")
 	
 
-	const Fb = facebook()
+	//const Fb = facebook()
 	//console.log("main", isModalOpen)
 	//const listAndTopics = [...topics, ...lists]
 	const heroHeaderText = "Improve your experience in discovering movies"
