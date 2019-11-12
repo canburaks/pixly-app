@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 
-import { isEqualObj, Head, MidPageAd} from "../../functions"
+import { isEqualObj, Head, MidPageAd,HomePageFeedAd} from "../../functions"
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 
 
@@ -160,7 +160,9 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         dispatcher(willBeDispatched)
         return (
             <>
-            <MovieRichCardBox items={data.complexSearch.topicResult}  />
+            <MovieRichCardBox items={data.complexSearch.topicResult.slice(0,10)}  />
+            <HomePageFeedAd/>
+            <MovieRichCardBox items={data.complexSearch.topicResult.slice(10,18)}  />
             <MidPageAd />
             </>
 
