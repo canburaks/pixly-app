@@ -30,7 +30,7 @@ export const SchemaArticle = (props) =>(
         <Meta itemProp="author" content="Can Burak S." />
         <Meta itemProp="dateModified" content={props.updatedAt} />
         <Meta itemProp="datePublished" content={props.createdAt} />
-        <Meta itemProp="description" content={capitalize(props.header) + " in cinema: " + props.description} />
+        <Meta itemProp="description" content={capitalize(props.header) + " review: " + props.description} />
 
         {/* Schema Publisher*/}
         <SchemaPublisher />

@@ -46,7 +46,7 @@ const TopicPage = (props) =>{
     if (lazyvariables === null) setLazyVariables({...yearData, ...ratingData})
 
     //console.log("yearData",yearData)
-    isReady && console.log(queryData)
+    //isReady && console.log(queryData)
     //console.log("topic data", queryData)
 
     const submitHandler = (e) => {
