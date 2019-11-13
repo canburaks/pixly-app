@@ -341,9 +341,8 @@ class ComplexSearchType(graphene.ObjectType):
         cached_qs = Cache.complex_search_topic_result(
             self.topic_slug, 
             self.min_year, self.max_year,
-            self.min_rating, self.max_rating,
-            username=info.context.user.username
-        )
+            self.min_rating, self.max_rating
+            )
         #print(qs.count())
         self.quantity = cached_qs.count()
 
