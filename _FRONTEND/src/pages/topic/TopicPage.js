@@ -156,13 +156,16 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
     if (loading) return <Loading />
     if (data && data.complexSearch) {
         const willBeDispatched = {topic:data.complexSearch.topic, quantity:data.complexSearch.quantity}
-        //console.log("data", data, willBeDispatched)
+        const pageQuantity = data.complexSearch.topicResult.length 
+        const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2))
+        const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2), 30)
+        //console.log("data", firstPart, secondPArt)
         dispatcher(willBeDispatched)
         return (
             <>
-            <MovieRichCardBox items={data.complexSearch.topicResult.slice(0,6)}  />
+            <MovieRichCardBox items={firstPart}  />
             <HomePageFeedAd/>
-            <MovieRichCardBox items={data.complexSearch.topicResult.slice(6,18)}  />
+            <MovieRichCardBox items={secondPArt}  />
             <MidPageAd />
             </>
 
