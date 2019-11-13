@@ -294,14 +294,15 @@ export const MidPageAd = () => {
     )
 }
 export const HomePageFeedAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
     useEffect(() => {
-        if (production && window) {
-            console.log("if true");
+        if (isProduction && window) {
+            //console.log("if true");
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
-    }, [window])
-    if (!production) return <div className="hidden"></div>
-    else return (
+    }, [isProduction])
+    //if (!production) return <div className="hidden"></div>
+    return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", minHeight: 90 }}
             data-ad-client="ca-pub-9259748524746137"
