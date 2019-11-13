@@ -131,7 +131,7 @@ export const RatingMutation = (props) => {
 
 	const [rating, { data }] = useMutation(RATING_MUTATION, {onCompleted(data){onComplete(data)}}  );
 	//console.log(window.location.pathname.split("/list/")[1].split("/")[0])
-
+	//console.log("asd",props.item.viewerRating)
 	const movieCacheUpdate = (newData) => {
 		//console.log("newData", newData) // newData =>
 		//{id: 58559, slug: "the-dark-knight-2008", viewerRating: 4, __typename: "MovieType"}

@@ -89,7 +89,7 @@ class ComplexSearchType(graphene.ObjectType):
     topic_result = graphene.List(MovieType)
 
     def __init__(self,kwargs):
-        print(kwargs)
+        #print(kwargs)
         self.keywords = kwargs.get("keywords")
         
         self.min_year = kwargs.get("min_year")
@@ -332,15 +332,17 @@ class ComplexSearchType(graphene.ObjectType):
     def resolve_topic(self, info):
         qs = Topic.objects.filter(slug=self.topic_slug)
         if qs.exists():
-            print(qs.first().html_content)
+            #print(qs.first().html_content)
             return qs.first()
         return None
 
     def resolve_topic_result(self, info):
+        #print("www", info.context.user.username)
         cached_qs = Cache.complex_search_topic_result(
             self.topic_slug, 
             self.min_year, self.max_year,
-            self.min_rating, self.max_rating
+            self.min_rating, self.max_rating,
+            username=info.context.user.username
         )
         #print(qs.count())
         self.quantity = cached_qs.count()

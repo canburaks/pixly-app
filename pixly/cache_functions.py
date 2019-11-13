@@ -51,14 +51,13 @@ class Cache():
 
     # ------ Complex Search ---------gql.complex_search 
     @lru_cache(maxsize=200)    
-    def complex_search_topic_result(topic_slug, min_year, max_year, min_rating, max_rating):
+    def complex_search_topic_result(topic_slug, min_year, max_year, min_rating, max_rating, username):
         qs = Topic.objects.filter(slug=topic_slug)
         if not qs.exists():
             return []
         topic = qs.first()
         topic.html_content
         qs = topic.movies.all().only("id", "slug", "name", "poster", "cover_poster", "year").order_by("year")
-        #print(tags, keywords)
 
 
         #YEAR FILTERING
