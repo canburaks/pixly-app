@@ -54,6 +54,7 @@ html, body {
     min-height: 150px !important;
     */
     min-width: 300px !important;
+    min-height:120px;
     width: 100%;
     margin:24px 8px;
 }
