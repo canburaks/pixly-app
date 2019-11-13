@@ -30,7 +30,7 @@ export const SchemaArticle = (props) =>(
         <Meta itemProp="author" content="Can Burak S." />
         <Meta itemProp="dateModified" content={props.updatedAt} />
         <Meta itemProp="datePublished" content={props.createdAt} />
-        <Meta itemProp="description" content={capitalize(props.header) + " review: " + props.description} />
+        <Meta itemProp="description" content={capitalize(props.header) + " review: " + props.summary} />
 
         {/* Schema Publisher*/}
         <SchemaPublisher />
@@ -69,9 +69,9 @@ export const SchemaArticle = (props) =>(
         
         {/* Article Body*/}
         <Box width={"100%"} height="auto" itemProp="articleBody" mt={[3]}>
-            <Text fontSize={props.textSize} mt={[2]}>
+            {/*<Text fontSize={props.textSize} mt={[2]}>
                 {props.summary}
-            </Text>
+            </Text>*/}
             
             <Text 
                  fontSize={props.textSize} mt={[2]}>
