@@ -338,6 +338,9 @@ class ProfileHomeSitemap(Sitemap):
 [
       "",
       "/",
+      "/topic/art-house",
+      "/topic/cyberpunk",
+      "/topic/based-on-true-story",
       "/directors/1",
       "/explore",
       "/advance-search",
@@ -352,9 +355,6 @@ class ProfileHomeSitemap(Sitemap):
       "/list/stanley-kubricks-list-of-top-10-films/1",
       "/list/nuri-bilge-ceylans-top-10-favorite-films/1",
       "/list/david-finchers-26-favorite-films/1",
-      "/topic/art-house",
-      "/topic/cyberpunk",
-      "/topic/based-on-true-story",
       "/person/ingmar-bergman-6648",
       "/person/alfred-hitchcock-2636",
       "/person/stanley-kubrick-240",
@@ -511,7 +511,7 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/terminator-dark-fate-2019",
       "/movie/the-true-don-quixote-2019",
       "/movie/devils-revenge-2019",
-      "/movie/wonder-woman-bloodlines-2019"
+      "/movie/wonder-woman-bloodlines-2019",
 
       "/movie/samsara-2001",
       "/movie/gladiator-1992",
