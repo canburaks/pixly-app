@@ -173,7 +173,9 @@ const MainPage = React.memo(() => {
 										</Button>
 									</Box>
 										}
-									<FlexBox flexDirection="column" alignItems="flex-start" width="100%" mt={[3,3,3,4]}>
+									<FlexBox flexDirection="row" alignItems="flex-start" width="100%" mt={[3,3,3,4]} justifyContent="flex-start">
+										<LinkButton link="/explore" color="light" bg="dark" borderRadius="4px" >Let Me Show</LinkButton>
+
 										{/*
 
 										{!authStatus  && <Fb.Auth />}

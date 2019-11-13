@@ -106,7 +106,7 @@ const ExplorePage = React.memo(props => {
 			<ContentContainer alignItems="center" mb={"100px"} pt={"40px"}>
 				<HeaderText fontSize={["30px"]}>Discover Best Movies that Fit Your Cinema Taste.</HeaderText>
 				<Text fontSize={["14px", "14px", "16px", "18px"]} mt={[2]} mb={[4]}>{exploremessage}</Text>
-				<Grid columns={[1,1, 2, 2,2,2,4]} py={[4]}>
+				<Grid columns={[1,1, 2, 2,2,2,5]} py={[4]}>
 					{topics.map(topic => (
 						<CoverCard 
 							key={topic.slug}
