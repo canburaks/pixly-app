@@ -414,9 +414,11 @@ class MovieType(DjangoObjectType):
         return False
 
     def resolve_viewer_rating(self, info, *_):
+        #print("sss", info.context.user)
         if info.context.user.is_authenticated:
             user= info.context.user
             return user.profile.ratings.get(str(self.id))
+        return None
 
     def resolve_data(self,info,*_):
         data = self.data
@@ -2009,6 +2011,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
 
     def resolve_viewer_rating(self, info, *_):
         if info.context.user.is_authenticated:
+            print("asd")
             user= info.context.user
             return user.profile.ratings.get(str(self.id))
         else:
@@ -2017,6 +2020,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     def resolve_viewer_rating_date(self, info, *_):
         if info.context.user.is_authenticated:
             profile= info.context.user.profile
+            print("pp", info.context.user.profile)
             try:
                 return profile.rates.get(movie=self.movie).date
             except:

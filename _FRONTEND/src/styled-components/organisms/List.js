@@ -8,13 +8,13 @@ import {
     TagBox,FlexBox
 } from "../index"
 
-export const MovieRichCardBox = React.memo((props) => (
+export const MovieRichCardBox = (props) => (
     <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
         {props.items.map( item => (
             <MovieRichCard item={item} key={"rec" + item.id} follow={props.follow} />
         ))}
     </Grid>
-))
+)
 
 
 
