@@ -12,7 +12,7 @@ import {
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
     ImdbIcon, WatchIcon, SearchIcon,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
-    TextSection,SchemaArticle,MovieRichCardBox,
+    TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer,
 } from "../../styled-components"
 
@@ -163,9 +163,17 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         dispatcher(willBeDispatched)
         return (
             <>
-            <MovieRichCardBox items={firstPart}  />
+            <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
+                {firstPart.map( item => (
+                    <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
+                ))}
+            </Grid>
             <HomePageFeedAd/>
-            <MovieRichCardBox items={secondPArt}  />
+            <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
+                {secondPArt.map( item => (
+                    <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
+                ))}
+            </Grid>
             <MidPageAd />
             </>
 
