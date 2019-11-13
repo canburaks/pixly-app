@@ -915,7 +915,7 @@ class Topic(SEO, MainPage):
         return self.name
 
     @classmethod
-    def create_tag_topic(cls, tag):
+    def create_tag_topic(cls, tag, copy_movies=False):
         last_pk = Topic.objects.all().last().pk
         topic = cls(id=last_pk + 1, name=tag.name, slug=tag.slug, summary=tag.summary, tag=tag)
         topic.save()
