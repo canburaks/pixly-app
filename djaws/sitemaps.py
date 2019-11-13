@@ -218,7 +218,8 @@ topic__slugs = [
     "topic/art-house",
     "topic/cyberpunk",
     "topic/based-on-true-story",
-    "topic/dialogue-focused"
+    "topic/dialogue-focused",
+    "topic/thought-provoking"
 ]
 static__slugs = [
     "explore",
