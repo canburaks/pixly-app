@@ -157,19 +157,19 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
     if (data && data.complexSearch) {
         const willBeDispatched = {topic:data.complexSearch.topic, quantity:data.complexSearch.quantity}
         const pageQuantity = data.complexSearch.topicResult.length 
-        const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2))
-        const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2), 30)
+        const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2) + 1)
+        const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2) + 1, 30)
         //console.log("data", firstPart, secondPArt)
         dispatcher(willBeDispatched)
         return (
             <>
-            <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
+            <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
                 {firstPart.map( item => (
                     <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
                 ))}
             </Grid>
             <HomePageFeedAd/>
-            <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
+            <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
                 {secondPArt.map( item => (
                     <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
                 ))}

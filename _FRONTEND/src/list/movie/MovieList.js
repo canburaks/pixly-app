@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 
 
 import { useAuthCheck } from "../../functions/hooks";
-import {   Head, MidPageAd } from "../../functions/analytics"
+import {   Head, MidPageAd, HomePageFeedAd } from "../../functions/analytics"
 
 import { GlobalContext } from "../../";
 
@@ -51,6 +51,10 @@ const MovieList = (props) => {
         ? () => <HeaderText>A Curated Movie List: <em>{liste.name}</em></HeaderText> 
         : () => <HeaderText>{liste.name}</HeaderText> 
     //console.log(liste.summary)
+
+    const pageQuantity = liste.movies.length 
+    const firstPart = liste.movies.slice(0, Math.floor(pageQuantity/ 2) + 1)
+    const secondPArt = liste.movies.slice(Math.floor(pageQuantity/ 2) + 1, 30)
     return(
         <PageContainer>
             <Head
@@ -83,7 +87,18 @@ const MovieList = (props) => {
                     display={screenSize.includes("L") ? "none" : null}
                     />
 
-                <MovieRichCardBox items={liste.movies} follow={true}/>
+                <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
+                    {firstPart.map( item => (
+                        <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
+                    ))}
+                </Grid>
+                
+                <HomePageFeedAd/>
+                <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
+                    {secondPArt.map( item => (
+                        <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
+                    ))}
+                </Grid>
                     
                 <MidPageAd />
                 

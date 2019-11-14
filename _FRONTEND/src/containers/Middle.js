@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, {  useContext  }  from "react";
+import React, {  useContext, useMemo  }  from "react";
 
 //import { connect } from "react-redux";
 import { Route, Switch, Redirect, withRouter,StaticRouter } from "react-router-dom"
@@ -26,7 +26,7 @@ import BarSearch from "../list/search/BarSearch";
 //import SearchMovieList from "../list/search/BarSearchList";
 
 
-import  { print, authCheck } from "../functions/lib"
+import  { print, authCheck, useLocation } from "../functions"
 import  { rgaSetUser } from "../functions/analytics"
 import TopicPage from "../pages/topic/TopicPage"
 
@@ -253,6 +253,10 @@ const CollectionsQuery = (props) => {
 
 const MovieListQuery = (props) => {
     //console.log(props)
+    const location = useLocation()
+    const currentPage = useMemo(() =>  location.split("/")[location.split("/").length - 1], [location])
+
+    console.log("loc", currentPage)
     let shouldReplace = false
     function is_numeric(str){
         return /^\d+$/.test(str);
@@ -264,9 +268,9 @@ const MovieListQuery = (props) => {
         queryVariables.id = parseInt(identifier)
     }
     else queryVariables.slug = identifier
-
+    //console.log("qv",parseInt(props.match.params.page),queryVariables  )
     const { loading, error, data, fetchMore } = useQuery(LISTE, 
-        { variables:{page:parseInt(props.match.params.page) ,...queryVariables}, partialRefetch:true}
+        { variables:{page:parseInt(currentPage) ,...queryVariables}, partialRefetch:true}
     )
     if (loading) return <Loading />
     if (error) return <Error>{console.log("error",error.message)}</Error>
