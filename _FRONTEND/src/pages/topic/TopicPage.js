@@ -75,8 +75,8 @@ const TopicPage = (props) =>{
                 <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"}>
                     {isReady &&
                         <SchemaArticle 
-                            headerSize={[24, 26, 28, 32]}
-                            textSize={[14,16, 16, 18]}
+                            headerSize={["24px", "26px", "28px", "32px"]}
+                            textSize={["14px","16px", "16px", "18px"]}
                             mt={[3]} mb={[0]} py={[0]}
                             header={queryData.topic.name}
                             quote={queryData.topic.quotes.length > 0 && queryData.topic.quotes[0]}
@@ -87,7 +87,7 @@ const TopicPage = (props) =>{
                             updatedAt={queryData.topic.updatedAt}
                             wiki={queryData.topic.wiki}
                         >   
-                            <HtmlContainer my={[3]} fontSize={[14,16, 16, 18]} html={queryData.topic.htmlContent} />
+                            <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={queryData.topic.htmlContent} />
                         </SchemaArticle>}   
                 </FlexBox>
 

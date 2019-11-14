@@ -219,8 +219,11 @@ topic__slugs = [
     "topic/cyberpunk",
     "topic/based-on-true-story",
     "topic/dialogue-focused",
-    "topic/thought-provoking"
+    "topic/thought-provoking",
+    "topic/bechdel-test",
+
 ]
+
 static__slugs = [
     "explore",
     "advance-search",
