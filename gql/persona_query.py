@@ -30,6 +30,7 @@ class CustomPersonaType(graphene.ObjectType, SocialMediaType, SEOType):
     most_actors = graphene.List(DirectorPersonMixType)
     most_directors = graphene.List(DirectorPersonMixType)
     most_lists = graphene.List(CustomListType)
+    starter_lists = graphene.List(CustomListType)
     most_genres = graphene.List(TagType)
 
     #feed_unique_profiles = graphene.List(ProfileType)
@@ -145,3 +146,7 @@ class CustomPersonaType(graphene.ObjectType, SocialMediaType, SEOType):
         else:
             return Activity.objects.filter(profile__in=target_profiles).order_by("-created_at")[:50]
 
+    def resolve_starter_lists(self, info):
+        imdb250_id = 3
+        movie_list_ids = [imdb250_id]
+        return [CustomListType(id=x) for x in movie_list_ids]
