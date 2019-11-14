@@ -64,7 +64,7 @@ const MainPage = React.memo(() => {
 	rgaSetCloseTime("Landing Page")
 	
 
-	//const Fb = facebook()
+	const Fb = facebook()
 	//console.log("main", isModalOpen)
 	//const listAndTopics = [...topics, ...lists]
 	const heroHeaderText = "Improve your experience in discovering movies"
@@ -174,12 +174,12 @@ const MainPage = React.memo(() => {
 									</Box>
 										}
 									<FlexBox flexDirection="row" alignItems="flex-start" flexWrap="wrap" width="100%" mt={[3,3,3,4]} justifyContent="flex-start">
-										{/*!authStatus  && <Fb.Auth />*/}
-										<LinkButton link="/explore" color="light" bg="dark" borderRadius="4px" mt={[4]}>Let Me Show</LinkButton>
-
+										{!authStatus  && <Fb.Auth />}
 										{/*
 
 										*/}
+										<LinkButton link="/explore" color="light" bg="dark" borderRadius="4px" mt={[4]}>Let Me Show</LinkButton>
+
 									</FlexBox>
 								</FlexBox>
 								
