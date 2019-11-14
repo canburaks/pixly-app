@@ -62,6 +62,7 @@ query persona($username:String!){
                 id, username, avatar
             },
         },
+        starterLists{ id, slug, name, coverPoster},
         recentMovies{
             id, name,slug, poster, coverPoster
         },

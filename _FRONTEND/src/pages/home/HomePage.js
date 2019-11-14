@@ -6,7 +6,7 @@ import { useAuthCheck, useWindowSize } from "../../functions/hooks";
 import { RESEND_REGISTRATION_MAIL } from "../../functions/mutations";
 import { Mutation } from 'react-apollo'
 
-import { rgaPageView, Head, HomePageFeedAd } from "../../functions/analytics"
+import { rgaPageView, Head, HomePageFeedAd, print } from "../../functions"
 import { GlobalContext } from "../../";
 import { GlobeIcon, HomeIcon, SettingsIcon } from "../../assets/f-icons"
 //import {UncompletedTask, BackGroundSvg } from "../../assets/illustrations"
@@ -15,17 +15,18 @@ import { GlobeIcon, HomeIcon, SettingsIcon } from "../../assets/f-icons"
 import { ProfileInfoForm } from "../../forms/UseForms"
 
 
-import { MessageBox } from "../../components/MessageBox"
+//import { MessageBox } from "../../components/MessageBox"
 import {ActivationMessage} from "./messages/ActivationMessage"
 import { RecommendationsInfo } from "./messages/RecommendationsInfo"
 //import { MiniMovieCard } from "../../styled-components"
 
 import "../pages.css"
+
 import { 
-    ListCard, DirectorCard, MovieCoverCard, Stats,
+    ListCard, DirectorCard, CoverCard , HeaderMini, FlexBox, MovieCoverCard, Stats,
     ImageCard, Grid, ElementListContainer, MovieCoverBox,
     Menu, MenuItem, PageContainer, ContentContainer,
-    ProfileCoverPanel,PlaceIcon
+    ProfileCoverPanel,PlaceIcon, MessageBox
 } from "../../styled-components"
 
 const UpdateForm = React.memo(({profile, refetch}) => (
@@ -91,6 +92,7 @@ const HomePage = (props) => {
     //console.log(recommendationmovies)
 
     //<CoverPanel profile={profile} settingsHandler={insertModal} ProfileMenuPanel={ProfileMenuPanel} />
+    print("homepage", props.data)
     return(
         <PageContainer>
             <ProfileCoverPanel 
@@ -112,7 +114,25 @@ const HomePage = (props) => {
 
                 {/* IF THERE IS NO RECOMMENDATION*/}
                 {!(persona.recommendations.length > 0) && 
-                    <RecommendationsInfo points={profile.points}  verified={profile.cognitoVerified} />}
+                    <RecommendationsInfo points={profile.points}  
+                        verified={profile.cognitoVerified}  />}
+
+                {profile.points < 40 &&
+                    <>
+                    <MessageBox header={"Low Points"} text={"You can start to give rating by looking the popular film list below"} />
+                    <Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
+                        {persona.starterLists.map(list => (
+                            <CoverCard follow={true}
+                                key={list.slug}
+                                notext
+                                ratio={0.41}
+                                item={list}
+                                link={"/list/" + list.slug + "/1"}
+                            />
+                        ))}
+                    </Grid>
+                    </>
+                }
 
                 <RenderElementContainer />
                 

@@ -46,6 +46,8 @@ export const RecommendationsInfo = (props) => (
                 }
                 
                 {!props.verified && <li>You should also activate your account by following the link that we sent.</li>}
+
+
             </ul>
 
         </div>
