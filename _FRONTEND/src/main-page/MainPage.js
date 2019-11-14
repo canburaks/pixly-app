@@ -76,7 +76,7 @@ const MainPage = React.memo(() => {
 			<Head
 				description={
 					"Discover best movies that fit your cinema taste with our AI-based recommendations. " + 
-					"Find out similars movies, curated movie lists, and film lovers."
+					"Find out similar movies, curated movie lists, and film lovers."
 
 				}
 				title={

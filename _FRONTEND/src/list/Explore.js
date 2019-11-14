@@ -69,7 +69,7 @@ const ExplorePage = React.memo(props => {
 					"also the best and the newest popular and upcoming movies."
 				}
 				title={
-					"Pixly - Discover Movie Lists, Topics, Popular and Upcoming Movies."
+					"Pixly - Discover Movie Lists, Topics, and Popular Movies."
 				}
 				keywords={
 					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"
@@ -116,7 +116,7 @@ const ExplorePage = React.memo(props => {
 				<Text textAlign="justify" fontSize={["14px", "14px", "16px", "18px"]}>The movie lists that we collect from other sources like the favorite films of the directors and topics that 
 					bring together movies that share common themes like art-house, cyberpunk,thought-provoking or based on true story films.
 				</Text>
-				<Grid columns={[1,1, 2, 2,2,2,5]} py={[4]}>
+				<Grid columns={[1,1, 2, 2,2,3,3]} py={[4]}>
 					{topics.map(topic => (
 						<CoverCard 
 							key={topic.slug}

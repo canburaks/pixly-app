@@ -22,7 +22,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                     domNode.name === 'h4' ||
                     domNode.name === 'h6')
                 ) {
-                return <HeaderMini {...props}>{domToReact(domNode.children)}</HeaderMini>
+                return <HeaderMini {...props}  mt={"32px !important"}>{domToReact(domNode.children)}</HeaderMini>
             }
             else if (domNode.attribs && domNode.name === 'p') {
                 //console.log(domNode)
