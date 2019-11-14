@@ -256,7 +256,7 @@ const MovieListQuery = (props) => {
     const location = useLocation()
     const currentPage = useMemo(() =>  location.split("/")[location.split("/").length - 1], [location])
 
-    console.log("loc", currentPage)
+    //console.log("loc", currentPage)
     let shouldReplace = false
     function is_numeric(str){
         return /^\d+$/.test(str);
