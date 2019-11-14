@@ -13,7 +13,6 @@ import parse, { domToReact } from 'html-react-parser';
 
 
 export const HtmlContainer = ({ html, ...props }) => {
-
     const options = {
         replace: domNode => {
             //console.log(domNode.name)
@@ -46,6 +45,28 @@ export const HtmlContainer = ({ html, ...props }) => {
         </HtmlBox>
     )
 }
+
+export const MessageBox = (props) => (
+    <FlexBox 
+        fontFamily="paragraph" overflow="hidden"
+        border="1px solid" borderColor="rgba(40,40,40, 0.4)" 
+        boxShadow="1px 5px 8px -8px rgba(0,0,0, 0.9)" 
+        bg="#e1e1e1"
+        p={[2]} mt={[4, 4,5]}
+        width={"100%"}
+    >
+        <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
+            <HeaderMini fontSize={["16px", "16px", "18px", "20px"]}>{props.header}</HeaderMini>
+            <Text>{props.text}</Text>
+            {props.children}
+        </FlexBox>
+        {props.Image && 
+            <FlexBox maxWidth={"30%"}>
+                <props.Image />
+            </FlexBox>
+        }
+    </FlexBox>
+)
 
 export const TopPanelBackElement = (props) => (
     <Box display="flex"
