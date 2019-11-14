@@ -8,15 +8,8 @@ import { GridBox, GridItem } from "../../components/GridBox"
 import { useAuthCheck } from "../../functions/hooks";
 import JoinBanner from "../../components/JoinBanner.js"
 //import { MaterialCard } from "../../comp-material/Card"
-import { DirectorCard,HiddenHeader } from "../../styled-components"
+import { DirectorCard,HiddenHeader, Loading, PageContainer, ContentContainer, HeaderText } from "../../styled-components"
 
-const Loading = () => (
-    <div className="page-container">
-        <div className="loading-container">
-            <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} />
-        </div>
-    </div>
-)
 
 const collage = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/directors-collage.jpg"
 const styles = {marginTop:10 }
@@ -50,22 +43,22 @@ const DirectorList = (props) =>{
 
                 window.scrollTo(0, 0)
                 return(
-                    <div className="page-container fbox-c jcfs aic">
+                    <PageContainer>
                         <Head
                             description={"Filmographies, Favourite Films of some directors like: " +directorNames.join(", ") }
-                            title={"Directors Collection - Pixly"}
+                            title={"Pixly - Directors Collection"}
                             keywords={`Famous Directors List, ` + directorNames.join(", ") }
                             canonical={`https://pixly.app/directors/1`}
                         />
                         
-                        <div className="content-container pad-lr-5vw">
-                        <HiddenHeader>Directors Collection</HiddenHeader>
+                        <ContentContainer>
+                            <HeaderText>Directors Collection</HeaderText>
                             <DirectorTemplate items={items} history={props.history}/>
                             <DirectorPageAd />
                             {!authStatus &&  <JoinBanner />}
 
-                        </div>
-                    </div>
+                        </ContentContainer>
+                    </PageContainer>
                 )
             }
         }

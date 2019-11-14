@@ -76,14 +76,14 @@ const MainPage = React.memo(() => {
 			<Head
 				description={
 					"Discover best movies that fit your cinema taste with our AI-based recommendations. " + 
-					"Find out similar movies, curated movie lists, and film lovers."
+					"Find out similar movies, curated movie lists, and film lovers. Pixly.app"
 
 				}
 				title={
-					"Pixly - AI Based Movie Recommendation App, Social Discovery, Similar Movies"
+					"Pixly App- AI Based Movie Recommendation App, Social Discovery, Similar Movies"
 				}
 				keywords={
-					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
+					"pixly.app ,discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
 				}
 				canonical={`https://pixly.app`}
 				twitterdescription={"AI-Based Film Recommendations, Movie Lists, Topics, Popular and Upcoming Movies."}
