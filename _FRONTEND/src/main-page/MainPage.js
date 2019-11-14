@@ -147,6 +147,8 @@ const MainPage = React.memo(() => {
 									*/}
 									
 									{!authStatus && 
+									<FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
+
 									<Box  my={[3]}>
 										<BubbleButton px={[2]} mx={[2]}
 											onClick={setModalOpen} 
@@ -172,9 +174,11 @@ const MainPage = React.memo(() => {
 											Login
 										</Button>
 									</Box>
+										{!authStatus  && <Fb.Auth />}
+									</FlexBox>
+
 										}
 									<FlexBox flexDirection="row" alignItems="flex-start" flexWrap="wrap" width="100%" mt={[3,3,3,4]} justifyContent="flex-start">
-										{!authStatus  && <Fb.Auth />}
 										{/*
 
 										*/}
