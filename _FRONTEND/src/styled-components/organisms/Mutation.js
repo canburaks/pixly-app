@@ -172,7 +172,7 @@ export const RatingMutation = (props) => {
       <ReactStars half 
           edit={authStatus} 
           color2={"#ffd700"} color1="grey" size={ratingSize} 
-          value={currentRating || props.viewerRating} 
+          value={authStatus ? (currentRating || props.viewerRating) : null} 
           onChange={ratingSetter}
       />
     )

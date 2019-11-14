@@ -4,16 +4,16 @@ import {  typography, color, space, shadow, layout, border, background, flexbox,
 //import { LoginButton } from 'react-facebook';
 
 
-export const AuthButton = ({onCompleted, onError, ...props}) =>  {
+export const AuthButton = ({onCompleted, onError,client, ...props}) =>  {
 	function loginfunction(){
-		FB.login(function(response) {
+		client.login(function(response) {
 			// handle the response
 			const responseData = {}
 			if (response.status === "connected"){
 				//console.log(response)
 				responseData.tokenDetail = response.authResponse
 				responseData.status = response.status
-				FB.api('/me',{fields: ["first_name", "last_name", "name",'email', "id", "picture"]}, 
+				client.api('/me',{fields: ["first_name", "last_name", "name",'email', "id", "picture"]}, 
 					function(apiresponse) {
 						responseData.profile = apiresponse
 						//console.log('Successful login for: ', responseData);
@@ -28,9 +28,9 @@ export const AuthButton = ({onCompleted, onError, ...props}) =>  {
 	return (
   	<Button  
     	className="auth-button"
-		width={"auto"}
-		mx={[1]} p={0} 
-		{...props}
+      width={"auto"}
+      mx={[1]} p={0} 
+      {...props}
 		onClick={loginfunction}
 	>
         <FacebookContinueSvg />
@@ -38,16 +38,16 @@ export const AuthButton = ({onCompleted, onError, ...props}) =>  {
 )}
 
 
-export const ConnectButton = ({onCompleted, onError, ...props}) => {
+export const ConnectButton = ({onCompleted, onError,client, ...props}) => {
 	function connectfunction(){
-		FB.login(function(response) {
+		client.login(function(response) {
 			// handle the response
 			const responseData = {}
 			if (response.status === "connected"){
 				//console.log(response)
 				responseData.tokenDetail = response.authResponse
 				responseData.status = response.status
-				FB.api('/me',{fields: ["first_name", "last_name", "name",'email', "id", "picture"]}, 
+				client.api('/me',{fields: ["first_name", "last_name", "name",'email', "id", "picture"]}, 
 					function(apiresponse) {
 						responseData.profile = apiresponse
 						//console.log('Successful login for: ', responseData);
@@ -213,6 +213,48 @@ const SvgFb = styled("svg")`
     ${typography}
 `
 /*
+
+export const AuthButton = ({onClick, ...props}) =>  {
+
+	return (
+  	<Button  
+    	className="auth-button"
+		width={"auto"}
+		mx={[1]} p={0} 
+		{...props}
+		onClick={onClick}
+	>
+        <FacebookContinueSvg />
+    </Button>
+)}
+
+
+export const ConnectButton = ({onClick, ...props}) => {
+	return (
+		<Button  
+			className="connect-button"
+			width={"auto"}
+			mx={[1]} p={0} 
+			scope="email"
+			{...props}
+			onClick={onClick}
+		>
+			<FacebookConnectSvg />
+		</Button>
+)}
+
+export const LogoutButton = (props) => (
+    <Button 
+        bg="transparent" 
+        width={"auto"}
+        mx={[1]} p={0}
+        {...props}
+    >   
+        <FacebookLogoutSvg />
+    </Button>
+)
+
+
 export const Init = ({Child ,...props}) =>(
     <Initialize>
     {({isReady, api }) => {
