@@ -84,7 +84,7 @@ class RemoveSitemap(Sitemap):
         deindex_file = open("djaws/deindex.txt","r")
         url_patterns = []
         for line in deindex_file:
-            line = line.replace("https://pixly.app/", "").strip()
+            line = line.replace("https://pixly.app", "").strip()
             remove_item = RemoveLinkClass(link=line)
             url_patterns.append(remove_item)
         print(url_patterns)
