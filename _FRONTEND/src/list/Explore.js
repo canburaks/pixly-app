@@ -49,7 +49,7 @@ import {
 
 import "./Explore.css";
 
-const exploremessage = "As Pixly, We have just started. But we passionately strive to bring our business to the best place. " + 
+const exploremessage = "As Pixly, We have just started. We work passionately to make our business your favorite film website." + 
 					"Our AI algorithm is currently in a beta phase, and we've collect several movie lists and topics to enrich your discovery experience." + 
 					"These include films that have won major awards (Grand Prize) from prestigious film festivals like cannes film festival, " + 
 					"favorite movies and  lists from some famous directors such as Quentin Tarantino and Stanley Kubrick, and various topicals such as art-house, " + 
@@ -116,6 +116,7 @@ const ExplorePage = React.memo(props => {
 				<Text textAlign="justify" fontSize={["14px", "14px", "16px", "18px"]}>The movie lists that we collect from other sources like the favorite films of the directors and topics that 
 					bring together movies that share common themes like art-house, cyberpunk,thought-provoking or based on true story films.
 				</Text>
+				
 				<Grid columns={[1,1, 2, 2,2,3,3]} py={[4]}>
 					{topics.map(topic => (
 						<CoverCard 
