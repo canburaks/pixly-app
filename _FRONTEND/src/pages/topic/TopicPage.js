@@ -11,10 +11,10 @@ import * as SocialButtons from 'react-social-sharing'
 
 import { 
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
-    ImdbIcon, WatchIcon, SearchIcon,
+    ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
-    YearSlider,RatingSlider,HtmlBox, HtmlContainer, SubHeaderText, MessageBox
+    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox
 } from "../../styled-components"
 
 
@@ -119,7 +119,14 @@ const TopicPage = (props) =>{
                         </Button>
                     </FlexBox>
                 </Form>}
-                { isReady && 
+
+                <Box id="search-rresult-box"  
+                        borderColor="rgba(40,40,40, 0.3)"
+                        minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
+                        p={[1,2,3]}
+                    >
+
+                    { queryData && queryData.topic && 
                         <MessageBox>
                             <SubHeaderText fontSize={["20px","20px","24px", ]}>Share Movies</SubHeaderText>
                             <FlexBox >
@@ -131,12 +138,6 @@ const TopicPage = (props) =>{
                             </FlexBox> 
                         </MessageBox>
                     }
-
-                <Box id="search-rresult-box"  
-                        borderColor="rgba(40,40,40, 0.3)"
-                        minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
-                        p={[1,2,3]}
-                    >
                     <SearchQueryBox 
                         topicSlug={topicSlug} 
                         page={page} 
@@ -176,7 +177,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         dispatcher(willBeDispatched)
         return (
             <>
-            <Grid columns={[1,1,1,2,2,2,2,3]} py={[5]}>
+            <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
                 {firstPart.map( item => (
                     <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
                 ))}
