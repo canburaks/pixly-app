@@ -123,11 +123,11 @@ const TopicPage = (props) =>{
                 <MessageBox>
                     <SubHeaderText fontSize={["20px","20px","24px", ]}>Share Movies</SubHeaderText>
                     <FlexBox >
-                        <SocialButtons.Twitter link={window.location.href} />
-                        <SocialButtons.Facebook link={window.location.href} />
-                        <SocialButtons.Linkedin link={window.location.href} />
-                        <SocialButtons.Tumblr link={window.location.href} />
-                        <SocialButtons.Pinterest link={window.location.href} />
+                        <SocialButtons.Twitter link={"https://pixly.app/" + window.location.pathname} />
+                        <SocialButtons.Facebook link={"https://pixly.app/" + window.location.pathname} />
+                        <SocialButtons.Linkedin link={"https://pixly.app/" + window.location.pathname} />
+                        <SocialButtons.Tumblr link={"https://pixly.app/" + window.location.pathname} />
+                        <SocialButtons.Pinterest link={"https://pixly.app/" + window.location.pathname} />
                     </FlexBox> 
                 </MessageBox>
                 
