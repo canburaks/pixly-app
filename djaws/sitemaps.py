@@ -318,7 +318,8 @@ class StaticSitemap(Sitemap):
     priority = 0.8
     def items(self):
         statics = [
-            "","/", "/directors/1", "/explore", "/advance-search"
+            "","/", "/directors/1", "/explore", "/advance-search", 
+            "/termsofservice", "/privacy"
         ]
         return statics
 
@@ -336,6 +337,7 @@ class ProfileHomeSitemap(Sitemap):
     def location(self, item):
         return f"/{item.username}/dashboard/"
 """
+
 
 """
 [

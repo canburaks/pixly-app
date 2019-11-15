@@ -4,7 +4,7 @@ import { useModal } from "cbs-react-components";
 import { AuthForm, ForgetForm } from "../forms/AuthForm"
 import { ContactForm } from "../forms/ContactForm"
 
-import { useWindowSize } from "../functions"
+import { useWindowSize, useScript } from "../functions"
 import { client, cache } from "../index"
 
 
@@ -17,6 +17,10 @@ export const Store = () => {
     const [screenSize, setScreenSize ] = useState(screen)
     const [token, setToken] = useState(AUTH_TOKEN)
     const [username, setUsername] = useState(USERNAME)
+
+    //Scripts 
+    //const [addtoanyLoaded, error] = useScript('https://static.addtoany.com/menu/page.js');
+
 
     const [points, setPoints] = useState(0)
     const [facebookStatus, setFacebookStatus] = useState(false)
