@@ -72,7 +72,7 @@ sitemaps = {
     'person': DirectorSitemap(),
     "topic": TopicSitemap()
 }
-links_will_be_remove = list(set([x.replace("https://pixly.app", "").strip() for x in open("djaws/deindex.txt","r")]))
+links_will_be_remove = list(set([x.replace("https://pixly.app", "").strip() for x in open("djaws/deindex.txt","r") if len(x.replace("https://pixly.app", "").strip()) > 2]))
 
 class RemoveLinkClass:
     def __init__(self, link):
@@ -83,7 +83,7 @@ class RemoveSitemap(Sitemap):
     priority = 0.8
     def items(self):
         deindex_file = open("djaws/deindex.txt","r")
-        url_patterns = [RemoveLinkClass(link=line) for line in links_will_be_remove]
+        url_patterns = [RemoveLinkClass(link=line) for line in links_will_be_remove ]
         return url_patterns
 
     def location(self, item):
@@ -103,7 +103,7 @@ removesitemaps = { "remove": RemoveSitemap()}
 
 deindex_patterns = get_deindex_paths()
 
-urlpatterns = deindex_patterns + [
+urlpatterns = [
     path("404", handler404),
     path("movie/242", handler404),
     path(f'termsofservice', TemplateView.as_view(template_name=f"others/terms_of_service.html")),
