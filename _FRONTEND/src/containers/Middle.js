@@ -188,7 +188,7 @@ const MovieQueryRedirect = (props) => {
                         props.history.replace(`/movie/${data.movie.slug}`)
                     }
                     const item = data;
-                    console.log("movie query data: ",data)
+                    //console.log("movie query data: ",data)
                     if (item == null || item.length === 0) return <div>{(console.log("zero"), refetch())}</div>
                     return <MoviePage item={item} viewer={data.viewer} />
             }}
