@@ -11,5 +11,5 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ("id", "author","header")
     #inlines = [TagInline,]
     #raw_id_fields = ('author', "tag",)
-    fields = ["id", "header", "summary","text", "active","image", "post_type","author", "slug",
-            "seoTitle", "seoShortDescription", "seoDescription", "wiki"]
+    fields = ["seo_title", "seo_short_description", "seo_description", "wiki", "slug",
+        "id", "header", "summary","active", "post_type","author","text"]

@@ -2,6 +2,7 @@ import { compose,typography, color, space, shadow, layout, border, background, f
 import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import { hideText } from 'polished'
+import { Head } from '../../functions'
 
 export const HiddenSpan = styled("span")`
     position:"absolute";
@@ -149,6 +150,16 @@ export const HeaderMini = styled('h4')({
       border
   )
 )
+
+HeaderMini.defaultProps = {
+  fontSize: ["18px", "18px", "20px", "22px", "24px", "26px"]
+}
+SubHeaderText.defaultProps = {
+  fontSize: ["20px", "20px", "22px", "26px", "28px", "30px"]
+}
+HeaderText.defaultProps = {
+  fontSize: ["22px", "22px", "26px", "30px", "32px", "34px"]
+}
 export const Paragraph = styled('p')({
     overflowY: props => props.textHidden && "hidden",
     textOverflow: props => props.textHidden && "ellipsis",

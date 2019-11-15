@@ -181,7 +181,9 @@
       "/topic/based-on-true-story",
       "/topic/dialogue-focused",
       "/topic/thought-provoking",
-      "/topic/bechdel-test"
+      "/topic/bechdel-test",
+      "/blog",
+      "/blog/a-brief-introduction-to-collaborative-filtering"
  
     ],
     "publicPath": "/"
