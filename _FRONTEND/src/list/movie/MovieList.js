@@ -55,7 +55,7 @@ const MovieList = (props) => {
     const pageQuantity = liste.movies.length 
     const firstPart = liste.movies.slice(0, Math.floor(pageQuantity/ 2) + 1)
     const secondPArt = liste.movies.slice(Math.floor(pageQuantity/ 2) + 1, 30)
-    console.log("liste", liste)
+    //console.log("liste", liste)
     return(
         <PageContainer>
             <Head
