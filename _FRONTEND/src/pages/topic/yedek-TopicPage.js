@@ -11,10 +11,10 @@ import * as SocialButtons from 'react-social-sharing'
 
 import { 
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
-    ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,
+    ImdbIcon, WatchIcon, SearchIcon,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
-    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox
+    YearSlider,RatingSlider,HtmlBox, HtmlContainer, SubHeaderText, MessageBox
 } from "../../styled-components"
 
 
@@ -119,14 +119,7 @@ const TopicPage = (props) =>{
                         </Button>
                     </FlexBox>
                 </Form>}
-
-                <Box id="search-rresult-box"  
-                        borderColor="rgba(40,40,40, 0.3)"
-                        minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
-                        p={[1,2,3]}
-                    >
-
-                    { queryData && queryData.topic && 
+                { isReady && 
                         <MessageBox>
                             <SubHeaderText fontSize={["20px","20px","24px", ]}>Share Movies</SubHeaderText>
                             <FlexBox >
@@ -138,6 +131,12 @@ const TopicPage = (props) =>{
                             </FlexBox> 
                         </MessageBox>
                     }
+
+                <FlexBox flexDirection="columns" id="search-result-box"  
+                        borderColor="rgba(40,40,40, 0.3)"
+                        minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
+                        p={[1,2,3]}
+                    >
                     <SearchQueryBox 
                         topicSlug={topicSlug} 
                         page={page} 
@@ -151,7 +150,7 @@ const TopicPage = (props) =>{
                         totalPage={Math.ceil(queryData.quantity/18)} 
                         nextPage={nextPage} prevPage={prevPage} 
                     />}
-                </Box>
+                </FlexBox>
             </ContentContainer>
         </PageContainer>
     );
@@ -177,13 +176,13 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         dispatcher(willBeDispatched)
         return (
             <>
-            <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
+            <Grid columns={[1,1,1,2,2,2,2,3]} py={[5]} width={"100%"}>
                 {firstPart.map( item => (
                     <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
                 ))}
             </Grid>
             <HomePageFeedAd/>
-            <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
+            <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]} width={"100%"}>
                 {secondPArt.map( item => (
                     <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
                 ))}
