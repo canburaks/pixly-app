@@ -26,7 +26,7 @@ import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
 import {Box,Span,FlexBox,MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
 	PageContainer,ContentContainer,Loading,
-	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text,NewLink,
+	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text, SubHeaderText, NewLink,
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
 	GradientAnimationBox,SignupForm, SignupFormModal, production
 } from "../styled-components";
@@ -251,7 +251,7 @@ const Feature1 = () => (
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-01.svg"} info="Pixly main page Feature 01" />
 			</div>
-			<HeaderMini>Personal Recommendations - <Span fontSize={["14px"]} fontWeight="bold">BETA</Span></HeaderMini>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Personal Recommendations - <Span fontSize={["14px"]} fontWeight="bold">BETA</Span></SubHeaderText>
 			<Text>After rating 40 movies, we can analyze your cinema taste with artifical intelligence then we will make very personalized movie recommendations every week.</Text>
 		</div>
 	</div>
@@ -262,7 +262,7 @@ const Feature2 = () => (
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-02.svg"} info="Pixly main page Feature 01" />
 			</div>
-			<HeaderMini>Curated Collections</HeaderMini>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Curated and Collected Movie Lists</SubHeaderText>
 			<Text>Handpicked selected lists of movies by Pixly Editors, beside well known collected movie lists all around the world including favorite film lists of directors and festival awarded movies. Special lists that we call topics that find movies that treat specific topics or subjects.</Text>
 		</div>
 	</div>
@@ -273,7 +273,7 @@ const Feature3 = () => (
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-03.svg"} info="Pixly main page Feature 01" />
 			</div>
-			<HeaderMini>Search & Filter</HeaderMini>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Advance Film Search</SubHeaderText>
 			<Text>Advance Search and Filter mechanism with respect to IMDb rating and release year of movies.</Text>
 		</div>
 	</div>
@@ -284,7 +284,7 @@ const Feature4 = () => (
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-04.svg"} info="Pixly main page Feature 01" />
 			</div>
-			<HeaderMini>Personal Records</HeaderMini>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Watchlist, Likes, Ratings</SubHeaderText>
 			<Text>Keep and track your personal cinema history by adding movies to watchlist, liking them and giving ratings. </Text>
 		</div>
 	</div>
@@ -295,7 +295,7 @@ const Feature5 = () => (
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-05.svg"} info="Pixly main page Feature 01" />
 			</div>
-			<HeaderMini>Social Discovery</HeaderMini>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Social Discovery</SubHeaderText>
 			<Text>Find people whose cinema taste is similar to you. See which movies are currently watched by your friends, and also check your cinema taste similarity with your friends. </Text>
 		</div>
 	</div>
@@ -307,7 +307,7 @@ const Feature6 = () => (
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-06.svg"} info="Pixly main page Feature 01" />
 			</div>
-			<HeaderMini>Filmography & Content</HeaderMini>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Filmography & Content</SubHeaderText>
 			<Text>Filmographies of the directors, actors, and actress'. The favorite film lists of the famous directors that impressed them. Conversations, interviews and movie essays about directors</Text>
 		</div>
 	</div>
