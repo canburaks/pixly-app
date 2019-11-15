@@ -72,6 +72,11 @@ sitemaps = {
     'person': DirectorSitemap(),
     "topic": TopicSitemap()
 }
+
+class RemoveLinkClass:
+    def __init__(self, link):
+        self.link = link
+
 class RemoveSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.8
@@ -80,12 +85,14 @@ class RemoveSitemap(Sitemap):
         url_patterns = []
         for line in deindex_file:
             line = line.replace("https://pixly.app/", "").strip()
-            url_patterns.append(line)
+            remove_item = RemoveLinkClass(link=line)
+            url_patterns.append(remove_item)
         pprint(url_patterns)
         return url_patterns
 
     def location(self, item):
         return item
+
 
 def get_deindex_paths():
     deindex_file = open("djaws/deindex.txt","r")
