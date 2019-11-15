@@ -131,7 +131,7 @@ export const CrewCard = (props) => (
             title={props.crew.person.name}
         />
         <Text fontSize={["xs", "xs", "s"]} fontWeight="bold">{props.crew.person.name}</Text>
-        <Text fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"}>{props.crew.character}</Text>
+        <Text fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"}>{props.crew.character.slice(0,20)}</Text>
     </Card>
 )
 
