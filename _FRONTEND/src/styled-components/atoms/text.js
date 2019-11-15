@@ -158,7 +158,7 @@ SubHeaderText.defaultProps = {
   fontSize: ["20px", "20px", "22px", "26px", "28px", "30px"]
 }
 HeaderText.defaultProps = {
-  fontSize: ["22px", "22px", "26px", "30px", "32px", "34px"]
+  fontSize: ["24px", "24px", "28px", "32px", "34px", "36px"]
 }
 export const Paragraph = styled('p')({
     overflowY: props => props.textHidden && "hidden",

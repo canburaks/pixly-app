@@ -38,9 +38,9 @@ export const SchemaPost = ({ post , ...props}) =>(
 
         {/* Schema headline*/}
         <HeaderText itemProp="headline"
-            fontSize={props.headerSize || ["22px", "22px", "26px", "30px", "32px", "34px"]} 
+            fontSize={props.headerSize || ["24px", "24px", "28px", "32px", "34px", "36px"]} 
             fontWeight="bold" 
-            color={"dark"} textShadow={props.textShadow || "textGray"}
+            color={"dark"}
             pt={[3]} my={[3]}
         >
             {post.header}
@@ -87,7 +87,7 @@ export const SchemaArticle = (props) =>(
         {/* Schema headline*/}
 
         <HeaderText itemProp="headline"
-            fontSize={props.headerSize || ["20px", "20px", "24px", "28px", "32px"]} 
+            fontSize={props.headerSize || ["24px", "24px", "28px", "32px", "34px", "36px"]} 
             fontWeight="bold" 
             color={"dark"} textShadow={props.textShadow || "textGray"}
             pt={[3]} 
