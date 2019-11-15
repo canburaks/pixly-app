@@ -68,6 +68,7 @@ export const MessageBox = (props) => (
     </FlexBox>
 )
 
+
 export const TopPanelBackElement = (props) => (
     <Box display="flex"
         flexDirection="column"
