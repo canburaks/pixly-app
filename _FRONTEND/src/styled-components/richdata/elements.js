@@ -37,17 +37,15 @@ export const SchemaPost = ({ post , ...props}) =>(
         <SchemaPublisher />
 
         {/* Schema headline*/}
-
         <HeaderText itemProp="headline"
-            fontSize={props.headerSize || ["24px", "26px", "28px", "32px"]} 
+            fontSize={props.headerSize || ["22px", "22px", "26px", "30px", "32px", "34px"]} 
             fontWeight="bold" 
-            color={"dark"} 
-            pt={[3]} 
+            color={"dark"} textShadow={props.textShadow || "textGray"}
+            pt={[3]} my={[3]}
         >
             {post.header}
         </HeaderText>
-
-        
+        <Text>{post.updatedAt.slice(0,10)}</Text>
         {/* Article Body*/}
         <Box width={"100%"} height="auto" itemProp="articleBody" mt={[3]}>
             <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={post.text} />

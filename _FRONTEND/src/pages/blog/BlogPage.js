@@ -19,7 +19,7 @@ import {
 
 
 const BlogPage = (props) =>{
-    print("blog props", props)
+    //print("blog props", props)
     return(
         <PageContainer>
             <Head
@@ -37,15 +37,15 @@ const BlogPage = (props) =>{
 }
 const PostPage = (props) =>{
     const post = props.post
-    print("blog props", props)
+    //print("blog props", props)
     return(
         <PageContainer>
             <Head
-                title={`Pixly Blog - ${post.name}`}
+                title={`Pixly Blog - ${post.header}`}
                 description={post.summary}
                 canonical={`https://pixly.app/blog/${post.slug}`}
             />
-            <ContentContainer>
+            <ContentContainer px={"10vw"}>
                 <SchemaPost 
                     post={post}
                 />
@@ -61,11 +61,11 @@ const MiniPost = ({ post }) => (
 )
 const BlogQuery = (props) => {
     const { loading, error, data, } = useQuery(BLOG_QUERY)
-    print("blog query props", props)
+    //print("blog query props", props)
     if (loading) return <Loading />
     if (error) return <Error />
     if (data){
-        print("blog query data", data)
+        //print("blog query data", data)
         const isPostPage = props.match.params.slug ? true : false
         if (isPostPage){
             const post = data.blogPosts.filter(p => p.slug === props.match.params.slug)[0]

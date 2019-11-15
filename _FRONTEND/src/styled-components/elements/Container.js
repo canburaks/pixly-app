@@ -15,20 +15,30 @@ import parse, { domToReact } from 'html-react-parser';
 export const HtmlContainer = ({ html, ...props }) => {
     const options = {
         replace: domNode => {
-            //console.log(domNode.name)
+            console.log(domNode)
+            if (domNode.attribs && domNode.name ==="h1"){
+                return (
+                    <HeaderText  mt={"32px !important"}
+                        fontSize={["20px", "20px", "24px", "28px", "32px"]}
+                    >
+                        {domToReact(domNode.children)}
+                    </HeaderText>)
+            }
             if (domNode.attribs && domNode.name ==="h2"){
-                return <SubHeaderText {...props}  mt={"32px !important"}>{domToReact(domNode.children)}</SubHeaderText>
+                return <SubHeaderText   mt={"32px !important"}>{domToReact(domNode.children)}</SubHeaderText>
             }
             else if (domNode.attribs && (
                     domNode.name === 'h3' || 
-                    domNode.name === 'h4' ||
-                    domNode.name === 'h6')
+                    domNode.name === 'h4')
                 ) {
-                return <HeaderMini {...props}  mt={"32px !important"}>{domToReact(domNode.children)}</HeaderMini>
+                return <HeaderMini   mt={"32px !important"}>{domToReact(domNode.children)}</HeaderMini>
             }
+            else if (domNode.attribs && (domNode.name === 'h6')
+            ) return <Text   mt={"32px !important"}>{domToReact(domNode.children)}</Text>
+        
             else if (domNode.attribs && domNode.name === 'p') {
                 //console.log(domNode)
-                return <Text {...props} textAlign="justify">{domToReact(domNode.children)}</Text>
+                return <Text textAlign="justify">{domToReact(domNode.children)}</Text>
             }
           }
     }
@@ -37,7 +47,7 @@ export const HtmlContainer = ({ html, ...props }) => {
         if(html){
             //console.log("parser" , html)
             //console.log("topic: ", parseResult)
-            return parse(html, options)
+            return parse(html)
              
         }
     }
