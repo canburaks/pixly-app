@@ -75,8 +75,8 @@ const MainPage = React.memo(() => {
 		<PageContainer>
 			<Head
 				description={
-					"Discover best movies that fit your cinema taste with our AI-based recommendations. " + 
-					"Find out similar movies, curated movie lists, and film lovers.A Film website pixly.app"
+					"Discover best movies that fit your cinema taste with our AI-based movie recommendations. " + 
+					"Find out similar movies, curated movie lists. A Film website. pixly.app"
 
 				}
 				title={
@@ -295,7 +295,7 @@ const Feature5 = () => (
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-05.svg"} info="Pixly main page Feature 01" />
 			</div>
-			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Social Discovery</SubHeaderText>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Discover People and Share Movies</SubHeaderText>
 			<Text>Find people whose cinema taste is similar to you. See which movies are currently watched by your friends, and also check your cinema taste similarity with your friends. </Text>
 		</div>
 	</div>
