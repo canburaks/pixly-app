@@ -183,7 +183,7 @@ class PostType(DjangoObjectType):
 
     summary = graphene.String()
     slug = graphene.String()
-    poster = graphene.String()
+    cover_poster = graphene.String()
 
     post_type = graphene.String()
     created_at = graphene.String()
@@ -213,12 +213,12 @@ class PostType(DjangoObjectType):
     def resolve_post_type(self, info, *_):
         return self.post_type
 
-    def resolve_poster(self, info, *_):
+    def resolve_cover_poster(self, info, *_):
         try:
-            return self.image.url
+            return self.cover_poster.url
         except:
-            if self.image != None  & self.image != "":
-                return "https://cbs-static.s3.amazonaws.com/static/media/" + self.image
+            if self.cover_poster != None  and  self.cover_poster != "":
+                return "https://cbs-static.s3.amazonaws.com/static/media/" + self.cover_poster
             return None
 
     def resolve_created_at(self, info, *_):
@@ -233,7 +233,15 @@ class PostType(DjangoObjectType):
     def resolve_author(self, info, *_):
         return self.author
 
+    def resolve_seo_title(self, info, *_):
+        return self.seo_title
+    def resolve_seo_short_description(self, info, *_):
+        return self.seo_short_description
+    def resolve_seo_description(self, info, *_):
+        return self.seo_description
 
+    def resolve_wiki(self, info, *_):
+        return self.wiki
 
 class FollowType(DjangoObjectType):
     class Meta:

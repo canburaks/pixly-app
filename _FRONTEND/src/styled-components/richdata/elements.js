@@ -6,6 +6,56 @@ import {
 
 const capitalize = (text) => text.replace(/\b\w/g, l => l.toUpperCase())
 
+export const SchemaPost = ({ post , ...props}) =>(
+    <Box itemScope itemType="http://schema.org/NewsArticle"
+        display="flex" flexDirection="column" justifyContent="flex-start"
+        py={[3]} my={[3,3,4]}
+        {...props} 
+    >
+        {/* Schema Image Object*/}
+        <Box itemProp="image" itemScope itemType="http://schema.org/ImageObject">
+            <Meta itemProp="height" content="800"/>
+            <Meta itemProp="width" content="200"/>
+            <Meta itemProp="url" content={post.coverPoster} />
+            <Image 
+                src={post.coverPoster} 
+                info={`${post.name} + Image`}
+                display={"none"}
+            />
+        </Box>
+
+        {/* Schema author*/}
+        <Meta itemProp="mainEntityOfPage" content={post.wiki}/>
+
+        <Meta itemProp="author" content="Can Burak S." />
+        <Meta itemProp="dateModified" content={post.updatedAt} />
+        <Meta itemProp="datePublished" content={post.createdAt} />
+        <Meta itemProp="description" content={post.summary} />
+
+        {/* Schema Publisher*/}
+        <SchemaPublisher />
+
+        {/* Schema headline*/}
+
+        <HeaderText itemProp="headline"
+            fontSize={props.headerSize || ["24px", "26px", "28px", "32px"]} 
+            fontWeight="bold" 
+            color={"dark"} 
+            pt={[3]} 
+        >
+            {props.header}
+        </HeaderText>
+
+        
+        {/* Article Body*/}
+        <Box width={"100%"} height="auto" itemProp="articleBody" mt={[3]}>
+            <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={props.text} />
+        </Box>
+
+    </Box>
+)
+
+
 export const SchemaArticle = (props) =>(
     <Box itemScope itemType="http://schema.org/NewsArticle"
         display="flex" flexDirection="column" justifyContent="flex-start"
@@ -16,9 +66,9 @@ export const SchemaArticle = (props) =>(
         <Box itemProp="image" itemScope itemType="http://schema.org/ImageObject">
             <Meta itemProp="height" content="600"/>
             <Meta itemProp="width" content="338"/>
-            <Meta itemProp="url" content="https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk-600x338.jpg"/>
+            <Meta itemProp="url" content={props.image} />
             <Image 
-                src="https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk-600x338.jpg" 
+                src={props.image}  
                 info={`${props.header} + Image`}
                 display={"none"}
             />

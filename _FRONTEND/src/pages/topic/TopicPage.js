@@ -84,6 +84,7 @@ const TopicPage = (props) =>{
                             description={queryData.topic.seoShortDescription}
                             summary={!haveStaticMarkup ? queryData.topic.summary : null}
                             content={!haveStaticMarkup ? queryData.topic.content : null}
+                            image={queryData.topic.coverPoster}
                             createdAt={queryData.topic.createdAt}
                             updatedAt={queryData.topic.updatedAt}
                             wiki={queryData.topic.wiki}
