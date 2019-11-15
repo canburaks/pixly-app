@@ -6,6 +6,7 @@ import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 import { isEqualObj, Head, MidPageAd,HomePageFeedAd} from "../../functions"
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
+import * as SocialButtons from 'react-social-sharing'
 
 
 import { 
@@ -124,6 +125,15 @@ const TopicPage = (props) =>{
                         minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
                         p={[1,2,3]}
                     >
+                    { isReady && 
+                        <FlexBox >
+                            <SocialButtons.Twitter link={window.location.href} />
+                            <SocialButtons.Facebook link={window.location.href} />
+                            <SocialButtons.Linkedin link={window.location.href} />
+                            <SocialButtons.Tumblr link={window.location.href} />
+                            <SocialButtons.Pinterest link={window.location.href} />
+                        </FlexBox> 
+                    }
                     <SearchQueryBox 
                         topicSlug={topicSlug} 
                         page={page} 

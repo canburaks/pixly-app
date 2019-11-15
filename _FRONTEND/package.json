@@ -102,6 +102,7 @@
     "react-scripts": "^3.0.1",
     "react-select": "^3.0.4",
     "react-shimmer": "^2.0.1",
+    "react-social-sharing": "^3.0.1",
     "react-stars": "^2.2.5",
     "styled-components": "^4.3.2",
     "styled-system": "^5.1.2",
@@ -192,7 +193,6 @@
       "/list/stanley-kubricks-list-of-top-10-films/1",
       "/list/nuri-bilge-ceylans-top-10-favorite-films/1",
       "/list/david-finchers-26-favorite-films/1"
- 
     ],
     "publicPath": "/"
   }
