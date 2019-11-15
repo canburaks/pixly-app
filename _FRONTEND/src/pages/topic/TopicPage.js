@@ -14,7 +14,7 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
-    YearSlider,RatingSlider,HtmlBox, HtmlContainer,
+    YearSlider,RatingSlider,HtmlBox, HtmlContainer, SubHeaderText, MessageBox
 } from "../../styled-components"
 
 
@@ -126,13 +126,16 @@ const TopicPage = (props) =>{
                         p={[1,2,3]}
                     >
                     { isReady && 
-                        <FlexBox >
-                            <SocialButtons.Twitter link={window.location.href} />
-                            <SocialButtons.Facebook link={window.location.href} />
-                            <SocialButtons.Linkedin link={window.location.href} />
-                            <SocialButtons.Tumblr link={window.location.href} />
-                            <SocialButtons.Pinterest link={window.location.href} />
-                        </FlexBox> 
+                        <MessageBox>
+                            <SubHeaderText fontSize={["20px","20px","24px", ]}>Share Movies</SubHeaderText>
+                            <FlexBox >
+                                <SocialButtons.Twitter link={window.location.href} />
+                                <SocialButtons.Facebook link={window.location.href} />
+                                <SocialButtons.Linkedin link={window.location.href} />
+                                <SocialButtons.Tumblr link={window.location.href} />
+                                <SocialButtons.Pinterest link={window.location.href} />
+                            </FlexBox> 
+                        </MessageBox>
                     }
                     <SearchQueryBox 
                         topicSlug={topicSlug} 
