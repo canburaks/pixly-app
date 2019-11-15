@@ -315,9 +315,11 @@ class ProfilePageSitemap(Sitemap):
 
 class StaticSitemap(Sitemap):
     changefreq = "monthly"
-    priority = 0.8
+    priority = 0.4
     def items(self):
         statics = [
+            "blog",
+            "blog/a-brief-introduction-to-collaborative-filtering",
             "","/", "/directors/1", "/explore", "/advance-search", 
             "/termsofservice", "/privacy"
         ]
