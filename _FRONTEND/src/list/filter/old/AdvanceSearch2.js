@@ -234,7 +234,7 @@ const AdvanceSearch = (props) => {
                 <div className="result-container pr fbox fr fw jcfs aic">
                     {result.length > 0 && result.map(movie => (
                         <div className="card-box br5 mr-bt20" key={movie.id} itemProp="itemListElement" itemScope itemType="http://schema.org/Movie">
-                            <Link to={`/movie/${movie.id}`} title={movie.name}>
+                            <Link to={`/movie/${movie.slug}`} title={movie.name} rel="nofollow">
                                 <img
                                     src={movie.poster} itemProp="image" alt={`${movie.name} Poster`}
                                     className="card-image hover-border br5" />

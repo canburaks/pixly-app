@@ -270,7 +270,7 @@ const AdvanceSearch = (props) =>{
                 <div className="grid-container cover">
                     {resultQuantity > 0 && result.filter(r => r.coverPoster!=="" && r.coverPoster !== null).map(movie => (
                         <div className="grid-item bor-rad-2x" key={movie.id} itemProp="itemListElement" itemScope itemType="http://schema.org/Movie">
-                            <Link to={`/movie/${movie.id}`} title={movie.name}>
+                            <Link to={`/movie/${movie.slug}`} title={movie.name} rel="nofollow">
                                 <img
                                     src={movie.coverPoster} itemProp="image" alt={`${movie.name} Poster`}
                                     className="grid-image hover-border hover-shadow bor-rad-2x" />
@@ -283,7 +283,7 @@ const AdvanceSearch = (props) =>{
                 <div className="grid-container poster">
                     {resultQuantity > 0 && result.filter(r => r.coverPoster === "" || r.coverPoster === null).map(movie => (
                         <div className="grid-item bor-rad-2x" key={movie.id} itemProp="itemListElement" itemScope itemType="http://schema.org/Movie">
-                            <Link to={`/movie/${movie.id}`} title={movie.name}>
+                            <Link to={`/movie/${movie.slug}`} title={movie.name} rel="nofollow">
                                 <img
                                     src={movie.poster} itemProp="image" alt={`${movie.name} Poster`}
                                     className="grid-image hover-border hover-shadow bor-rad-2x" />

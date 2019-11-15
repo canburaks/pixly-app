@@ -138,32 +138,4 @@ EXAMPLEs
 
 OR
 
-<GridItem
-    cover={cover}
-    title={item[title]}
-    key={item[id]} text={item[title]}
-    className={className}
-    image={item[image]}
-    onClick={() => go(item[id])}
->
-    {children}
-</GridItem>
-
-OR
-
-<GridBox size="l">
-{movies.map((movie) => (
-    <Link to={`/movie/${movie.id}`} key={movie.id}>
-        <GridItem cover
-            title={movie.name + " " + movie.year}
-
-            className="box-shadow bor-rad-2x shadow lazyload"
-            image={movie.coverPoster}
-            text={movie.name}
-        >
-        </GridItem>
-    </Link>
-))}
-</GridBox>
-
 */
