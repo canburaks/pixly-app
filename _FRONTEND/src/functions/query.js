@@ -1,5 +1,21 @@
 import gql from "graphql-tag";
 
+
+export const BLOG_QUERY = gql`
+    query blogPosts{
+        blogPosts{
+            id, header, summary, text, slug, coverPoster, postType, 
+            createdAt, updatedAt, active,
+            seoTitle, seoDescription, seoShortDescription,
+            author{
+                username, name, avatar, id
+            }
+        }
+    }
+`
+
+
+
 export const MAIN_PAGE = gql`
 query mainPage{
     mainPage{

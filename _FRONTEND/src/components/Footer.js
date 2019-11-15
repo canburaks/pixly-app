@@ -1,11 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Footer.css"
 import { GlobalContext } from "../";
-import {  HiddenText, PinterestIcon } from "../styled-components"
+import {  HiddenText, PinterestIcon, NewLink } from "../styled-components"
 
 const Footer = (props) =>{
     return(
         <div className="footer">
+            <NewLink 
+                position="absolute" left={20} 
+                fontWeight="bold" hoverColor="white"
+                link={"/blog"}
+            
+            >
+                BLOG
+            </NewLink>
             {/*
             <a href="https://twitter.com/pixlymovie" className="twitter-follow-button" data-show-count="false">Follow @pixlymovie</a>
             */}

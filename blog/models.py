@@ -8,6 +8,7 @@ from persons.profile import Profile
 from items.models import Tag
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from persons.abstract import SocialMedia, SEO, DateRecords, MainPage
 
 POST_MAIN_TYPE = (
     ('t', "Tech"),
@@ -19,13 +20,13 @@ def post_poster_upload_path(instance, filename):
     return "posts/{0}/{1}".format(instance.id,filename)
 
 # Create your models here.
-class Post(models.Model):
+class Post(SocialMedia, SEO, DateRecords, MainPage):
     id = models.IntegerField(primary_key=True)
     author = models.ForeignKey(Profile, related_name="posts", on_delete=models.CASCADE)
 
     header = models.CharField(max_length=300, null=True, blank=True)
     summary = models.TextField(max_length=500, null=True, blank=True, help_text="A brief summary of text")
-    image = models.ImageField(blank=True, upload_to=post_poster_upload_path)
+    cover_poster = models.ImageField(blank=True, upload_to=post_poster_upload_path)
 
 
     text = RichTextUploadingField(default="...", max_length=20000, null=True, blank=True)

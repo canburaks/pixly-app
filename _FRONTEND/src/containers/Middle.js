@@ -29,6 +29,7 @@ import BarSearch from "../list/search/BarSearch";
 import  { print, authCheck, useLocation } from "../functions"
 import  { rgaSetUser } from "../functions/analytics"
 import TopicPage from "../pages/topic/TopicPage"
+import Blog from "../pages/blog/BlogPage"
 
 import MoviePage from "../pages/movie/MoviePage"
 import PersonPage from "../pages/person/PersonPage";
@@ -69,9 +70,10 @@ const Middle = (props) => {
             <Route exact path="/advance-search" component={SearchPage} />
 
             <Route exact path="/topics" component={TopicList} />
-
             <Route exact path="/topic/:slug" component={TopicPage} />
 
+            <Route exact path="/blog" component={Blog} />
+            <Route exact path="/blog/:slug" component={Blog} />
 
             <Route exact path="/list/:slug/:page/" component={MovieListQuery} 
 
