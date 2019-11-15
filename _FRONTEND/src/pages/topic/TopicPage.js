@@ -176,7 +176,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         dispatcher(willBeDispatched)
         return (
             <>
-            <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
+            <Grid columns={[1,1,1,2,2,2,2,3]} py={[5]}>
                 {firstPart.map( item => (
                     <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
                 ))}
