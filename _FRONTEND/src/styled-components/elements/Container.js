@@ -5,7 +5,7 @@ import { themeGet } from '@styled-system/theme-get'
 
 import { 
     Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, HeaderMini, NewLink, Paragraph,
-    TagText,HtmlBox,
+    TagText,HtmlBox,SubHeaderText
 } from "../index"
 import { SocialBox } from "../others"
 import parse, { domToReact } from 'html-react-parser';
@@ -16,7 +16,10 @@ export const HtmlContainer = ({ html, ...props }) => {
     const options = {
         replace: domNode => {
             //console.log(domNode.name)
-            if (domNode.attribs && (
+            if (domNode.attribs && domNode.name ==="h2"){
+                return <SubHeaderText {...props}  mt={"32px !important"}>{domToReact(domNode.children)}</SubHeaderText>
+            }
+            else if (domNode.attribs && (
                     domNode.name === 'h3' || 
                     domNode.name === 'h4' ||
                     domNode.name === 'h6')
