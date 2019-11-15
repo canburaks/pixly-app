@@ -91,7 +91,7 @@ class RemoveSitemap(Sitemap):
         return url_patterns
 
     def location(self, item):
-        return item
+        return item.link
 
 
 def get_deindex_paths():
