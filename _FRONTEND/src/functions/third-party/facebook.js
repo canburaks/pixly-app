@@ -150,7 +150,7 @@ export const facebook = () => {
         data:fbData
     }
     useEffect(() => {
-		console.log("loaded", loaded)
+		//console.log("loaded", loaded)
 		checkFbStatus()
 		if (loaded && window.FB){ fbClient = window.FB}
 		print("fbClient", fbClient)

@@ -49,6 +49,8 @@ from django.conf.urls import handler400, handler403, handler404, handler500
 #django.views.defaults.page_not_found()
 from django.shortcuts import render
 from django.views.defaults import page_not_found
+from django.contrib.sitemaps import Sitemap
+from django.urls import path, include, re_path
 
 def pixly_404(request, exception=None):
     return page_not_found(request, exception, template_name="prerendered/404/index.html")
@@ -70,8 +72,20 @@ sitemaps = {
     'person': DirectorSitemap(),
     "topic": TopicSitemap()
 }
+class RemoveSitemap(Sitemap):
+    changefreq = "monthly"
+    priority = 0.8
+    def items(self):
+        deindex_file = open("djaws/deindex.txt","r")
+        url_patterns = []
+        for line in deindex_file:
+            line = line.replace("https://pixly.app/", "").strip()
+            url_patterns.append(line)
+        pprint(url_patterns)
+        return url_patterns
 
-
+    def location(self, item):
+        return item
 
 def get_deindex_paths():
     deindex_file = open("djaws/deindex.txt","r")
@@ -83,9 +97,11 @@ def get_deindex_paths():
     #pprint(url_patterns)
     return url_patterns
 #pprint(custom_url_pages)
-#deindex_patterns = get_deindex_paths()
+removesitemap = { "remove": RemoveSitemap()}
 
-urlpatterns =  [
+deindex_patterns = get_deindex_paths()
+
+urlpatterns = deindex_patterns + [
     path("404", handler404),
     path("movie/242", handler404),
     path(f'termsofservice', TemplateView.as_view(template_name=f"others/terms_of_service.html")),
@@ -94,6 +110,7 @@ urlpatterns =  [
     path(f'qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html', TemplateView.as_view(template_name=f"others/qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html")),
 
     re_path(r'^sitemap.xml', cache_page(300)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    re_path(r'^remove-sitemap.xml', cache_page(300)(removesitemap), {'sitemaps': removesitemap}, name='django.contrib.sitemaps.views.sitemap'),
 
     re_path(r'^robots.txt', TemplateView.as_view(template_name="robots.txt"), name="robots_file"),
     path("ads.txt", TemplateView.as_view(template_name="others/ads.txt")),
@@ -119,6 +136,7 @@ urlpatterns =  [
 urlpatterns = urlpatterns + custom_url_pages + [
     path("/", TemplateView.as_view(template_name="prerendered/index.html")),
     path("", TemplateView.as_view(template_name="prerendered/index.html")),
+    *deindex_patterns,
     re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")),  
     #path("", TemplateView.as_view(template_name="prerendered/404.html")), #bcs 404 returns to main-page
     #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")), #200.html is original - not prerendered page template 
