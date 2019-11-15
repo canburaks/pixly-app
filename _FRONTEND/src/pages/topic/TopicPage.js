@@ -119,13 +119,7 @@ const TopicPage = (props) =>{
                         </Button>
                     </FlexBox>
                 </Form>}
-
-                <Box id="search-rresult-box"  
-                        borderColor="rgba(40,40,40, 0.3)"
-                        minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
-                        p={[1,2,3]}
-                    >
-                    { isReady && 
+                { isReady && 
                         <MessageBox>
                             <SubHeaderText fontSize={["20px","20px","24px", ]}>Share Movies</SubHeaderText>
                             <FlexBox >
@@ -137,6 +131,12 @@ const TopicPage = (props) =>{
                             </FlexBox> 
                         </MessageBox>
                     }
+
+                <Box id="search-rresult-box"  
+                        borderColor="rgba(40,40,40, 0.3)"
+                        minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
+                        p={[1,2,3]}
+                    >
                     <SearchQueryBox 
                         topicSlug={topicSlug} 
                         page={page} 
