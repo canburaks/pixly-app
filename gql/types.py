@@ -397,6 +397,7 @@ class MovieType(DjangoObjectType):
     
 
 
+
     def resolve_poster(self, info, *_):
         if self.poster and hasattr(self.poster, "url"):
             return self.poster.url
