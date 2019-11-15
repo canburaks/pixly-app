@@ -69,7 +69,7 @@ const ExplorePage = React.memo(props => {
 					"also the best and the newest popular and upcoming movies."
 				}
 				title={
-					"Pixly - Discover Movie Lists, Topics, and Popular Movies."
+					"Discover Movie Lists, Topics, and Popular Movies. pixly.app a film website"
 				}
 				keywords={
 					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"
