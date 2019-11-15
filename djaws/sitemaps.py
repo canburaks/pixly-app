@@ -228,7 +228,9 @@ static__slugs = [
     "explore",
     "advance-search",
     "directors/1",
-    "404"
+    "404",
+    "blog",
+    "blog/a-brief-introduction-to-collaborative-filtering",
 ]
 def page_template_generator(routes):
     new_paths = []
