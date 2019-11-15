@@ -76,11 +76,11 @@ const MainPage = React.memo(() => {
 			<Head
 				description={
 					"Discover best movies that fit your cinema taste with our AI-based recommendations. " + 
-					"Find out similar movies, curated movie lists, and film lovers. Pixly.app"
+					"Find out similar movies, curated movie lists, and film lovers.A Film website pixly.app"
 
 				}
 				title={
-					"Pixly App- AI Based Movie Recommendation App, Social Discovery, Similar Movies"
+					"Pixly App- AI Based Movie Recommendation App, Similar Movies, Film Website"
 				}
 				keywords={
 					"pixly.app ,discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
@@ -285,7 +285,7 @@ const Feature4 = () => (
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-04.svg"} info="Pixly main page Feature 01" />
 			</div>
 			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Watchlist, Likes, Ratings</SubHeaderText>
-			<Text>Keep and track your personal cinema history by adding movies to watchlist, liking them and giving ratings. </Text>
+			<Text>Keep and track your personal cinema history by adding movies to watchlist, liking them and giving ratings in one film website. </Text>
 		</div>
 	</div>
 )
