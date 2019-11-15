@@ -120,24 +120,22 @@ const TopicPage = (props) =>{
                     </FlexBox>
                 </Form>}
 
+                <MessageBox>
+                    <SubHeaderText fontSize={["20px","20px","24px", ]}>Share Movies</SubHeaderText>
+                    <FlexBox >
+                        <SocialButtons.Twitter link={window.location.href} />
+                        <SocialButtons.Facebook link={window.location.href} />
+                        <SocialButtons.Linkedin link={window.location.href} />
+                        <SocialButtons.Tumblr link={window.location.href} />
+                        <SocialButtons.Pinterest link={window.location.href} />
+                    </FlexBox> 
+                </MessageBox>
+                
                 <Box id="search-rresult-box"  
                         borderColor="rgba(40,40,40, 0.3)"
                         minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
                         p={[1,2,3]}
                     >
-
-                    { queryData && queryData.topic && 
-                        <MessageBox>
-                            <SubHeaderText fontSize={["20px","20px","24px", ]}>Share Movies</SubHeaderText>
-                            <FlexBox >
-                                <SocialButtons.Twitter link={window.location.href} />
-                                <SocialButtons.Facebook link={window.location.href} />
-                                <SocialButtons.Linkedin link={window.location.href} />
-                                <SocialButtons.Tumblr link={window.location.href} />
-                                <SocialButtons.Pinterest link={window.location.href} />
-                            </FlexBox> 
-                        </MessageBox>
-                    }
                     <SearchQueryBox 
                         topicSlug={topicSlug} 
                         page={page} 
