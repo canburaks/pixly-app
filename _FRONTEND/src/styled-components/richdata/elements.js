@@ -1,7 +1,8 @@
 import React from "react";
 import { 
     Text, Image, HeaderMini,HeaderText, NewLink,
-    Box, FlexBox,Quote, OuterLink, Cite, Span, Meta
+    Box, FlexBox,Quote, OuterLink, Cite, Span, Meta,
+    HtmlContainer
 } from "../index"
 
 const capitalize = (text) => text.replace(/\b\w/g, l => l.toUpperCase())
@@ -19,7 +20,7 @@ export const SchemaPost = ({ post , ...props}) =>(
             <Meta itemProp="url" content={post.coverPoster} />
             <Image 
                 src={post.coverPoster} 
-                info={`${post.name} + Image`}
+                info={`${post.header} + Image`}
                 display={"none"}
             />
         </Box>
@@ -43,13 +44,13 @@ export const SchemaPost = ({ post , ...props}) =>(
             color={"dark"} 
             pt={[3]} 
         >
-            {props.header}
+            {post.header}
         </HeaderText>
 
         
         {/* Article Body*/}
         <Box width={"100%"} height="auto" itemProp="articleBody" mt={[3]}>
-            <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={props.text} />
+            <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={post.text} />
         </Box>
 
     </Box>

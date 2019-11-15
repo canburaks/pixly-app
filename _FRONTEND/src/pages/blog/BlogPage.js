@@ -10,16 +10,15 @@ import * as SocialButtons from 'react-social-sharing'
 
 
 import { 
-    Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
+    Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,Image,
     ImdbIcon, WatchIcon, SearchIcon,SubHeaderText, Error,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
-    TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
-    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox
+    TextSection,SchemaPost,MovieRichCardBox,MovieRichCard, Grid,
+    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, HeaderMini, NewLink
 } from "../../styled-components"
 
 
 const BlogPage = (props) =>{
-    const postSlug = props.match.params.slug 
     print("blog props", props)
     return(
         <PageContainer>
@@ -30,12 +29,36 @@ const BlogPage = (props) =>{
                 canonical={`https://pixly.app/blog`}
             />
             <ContentContainer>
+            {props.posts.map(post => <MiniPost post={post} key={post.slug} />)}
 
             </ContentContainer>
         </PageContainer>
     );
 }
+const PostPage = (props) =>{
+    const post = props.post
+    print("blog props", props)
+    return(
+        <PageContainer>
+            <Head
+                title={`Pixly Blog - ${post.name}`}
+                description={post.summary}
+                canonical={`https://pixly.app/blog/${post.slug}`}
+            />
+            <ContentContainer>
+                <SchemaPost 
+                    post={post}
+                />
+            </ContentContainer>
+        </PageContainer>
+    );
+}
 
+const MiniPost = ({ post }) => (
+    <MessageBox header={post.header} text={post.summary}>
+        <NewLink to={`/blog/${post.slug}`} color={"accent"} hoverUnderline fontWeight="bold">Show More</NewLink>
+    </MessageBox>
+)
 const BlogQuery = (props) => {
     const { loading, error, data, } = useQuery(BLOG_QUERY)
     print("blog query props", props)
@@ -43,6 +66,11 @@ const BlogQuery = (props) => {
     if (error) return <Error />
     if (data){
         print("blog query data", data)
+        const isPostPage = props.match.params.slug ? true : false
+        if (isPostPage){
+            const post = data.blogPosts.filter(p => p.slug === props.match.params.slug)[0]
+            return <PostPage post={post} />
+        }
         return <BlogPage posts={data.blogPosts} {...props} />
     }
 }
