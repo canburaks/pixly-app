@@ -117,7 +117,7 @@ urlpatterns = deindex_patterns + [
     path(f'qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html', TemplateView.as_view(template_name=f"others/qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html")),
 
     re_path(r'^sitemap.xml', cache_page(300)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    re_path(r'^remove-sitemap.xml', cache_page(300)(removesitemap), {'sitemaps': removesitemap}, name='django.contrib.sitemaps.views.sitemap'),
+    re_path(r'^remove-sitemap.xml', cache_page(10)(removesitemap), {'sitemaps': removesitemap}, name='django.contrib.sitemaps.views.sitemap'),
 
     re_path(r'^robots.txt', TemplateView.as_view(template_name="robots.txt"), name="robots_file"),
     path("ads.txt", TemplateView.as_view(template_name="others/ads.txt")),
