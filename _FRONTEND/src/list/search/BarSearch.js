@@ -83,36 +83,7 @@ const MovieSearchQuery = (props) => {
                             title={`Pixly Search: ${search}`}
                         />
                         <SpeedyGridBox movies={result} header={`Search: ${search}`} />
-                        {/*
-                        <h4 className="t-xl t-bold mar-b-2x">Search: <span className="t-m t-italic t-light">{search}</span></h4>
-                        <GridBox size="l">
-                            {resultCover.map((movie) => (
-                                <Link to={`/movie/${movie.id}`} key={movie.id}  rel="nofollow">
-                                    <GridItem cover
-                                        title={movie.name + " " + movie.year}
 
-                                        className="box-shadow bor-rad-2x shadow"
-                                        image={movie.coverPoster}
-                                        text={movie.name}
-                                    >
-                                    </GridItem>
-                                </Link>
-                            ))}
-                        </GridBox>
-                        <GridBox size="m">
-                            {resultPoster.map((movie) => (
-                                <Link to={`/movie/${movie.id}`} key={movie.id}>
-                                    <GridItem cover
-                                        title={movie.name + " " + movie.year}
-
-                                        className="box-shadow bor-rad-2x shadow"
-                                        image={movie.poster}
-                                        text={movie.name}
-                                    >
-                                    </GridItem>
-                                </Link>
-                            ))}
-                            </GridBox>*/}
                         {isOverflowed &&
                         <div className="fbox-r jcc aic pag">
                             {currentPage > 1 &&

@@ -18,7 +18,6 @@ const styles = {marginTop:10 }
 const DirectorList = (props) =>{
     const authStatus = useAuthCheck()
     const DirectorTemplate = (props) => {
-        const go = (id) => props.history.push(`/person/${id}`)
         //console.log(client)
 
         return (
