@@ -151,7 +151,6 @@ movie__slugs = [
     "movie/now-something-is-slowly-changing-2019",
     "movie/hard-paint-2019",
     "movie/in-this-gray-place-2019",
-
     "movie/the-lighthouse-2019",
     "movie/pain-and-glory-2019",
     "movie/hustlers-2019",
@@ -171,7 +170,11 @@ movie__slugs = [
     "movie/i-tonya-2017",
     "movie/good-will-hunting-1997",
     "movie/mifunes-last-song-1999"
-    "movie/dont-breathe-2016"
+    "movie/dont-breathe-2016",
+    "movie/blade-runner-2049-2017",
+    "movie/blade-runner-1982",
+    "movie/the-broken-2008",
+    "movie/ghost-in-the-shell-1995"
 ]
 
 person__slugs = [
@@ -567,8 +570,8 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/jojo-rabbit-2019",
       "/movie/the-lobster-2015",
 
-      "/movie/crawl-2019",
       "/movie/falling-inn-love-2019"
+      "/movie/crawl-2019",
       "/movie/les-miserables-2019",
       "/movie/midway-2019",
       "/movie/the-good-liar-2019",
@@ -576,11 +579,14 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/la-belle-epoque-2019",
       "/movie/last-christmas-2019",
       "/movie/la-la-land-2016",
-      "/movie/la-la-land-2016",
       "/movie/i-tonya-2017",
       "/movie/good-will-hunting-1997",
-      "/movie/mifunes-last-song-1999",
+      "/movie/mifunes-last-song-1999"
       "/movie/dont-breathe-2016",
+      "/movie/blade-runner-2049-2017",
+      "/movie/blade-runner-1982",
+      "/movie/the-broken-2008",
+      "/movie/ghost-in-the-shell-1995"
     
     ],
 """

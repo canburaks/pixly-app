@@ -30,7 +30,7 @@ export const SimpleModal = (props) => {
 					overflowX="hidden"
 					bg={props.bg ? props.bg : "dark"}
 					boxShadow="card"
-					zIndex={10}
+					zIndex={20}
 					{...props}
 				>
 					<FlexBox 
@@ -40,7 +40,7 @@ export const SimpleModal = (props) => {
 						px={[2]} mb={[2]} pb={[1]}
 					>
 						<HeaderMini maxWidth={"75%"} color={props.color ? props.color : "light"}>{props.header}</HeaderMini>
-						<CloseButton  zIndex={12} onClick={props.closeModal} color={props.color ? props.color : "light"} />
+						<CloseButton  zIndex={22} onClick={props.closeModal} color={props.color ? props.color : "light"} />
 					</FlexBox>
 					{props.children}
 				</FlexBox>
@@ -69,6 +69,7 @@ export const SimpleModal2 = (props) => {
 					overflowX="hidden"
 					bg={props.bg ? props.bg : "dark"}
 					boxShadow="card"
+					zIndex={20}
 					{...props}
 				>
 					<FlexBox 
@@ -78,7 +79,7 @@ export const SimpleModal2 = (props) => {
 						px={[2]} mb={[2]} pb={[1]}
 					>
 						<HeaderMini maxWidth={"75%"} color={props.color ? props.color : "light"}>{props.header}</HeaderMini>
-						<CloseButton  zIndex={10} onClick={props.closeModal} color={props.color ? props.color : "light"} />
+						<CloseButton  zIndex={22} onClick={props.closeModal} color={props.color ? props.color : "light"} />
 					</FlexBox>
 					{props.children}
 				</Box>
@@ -124,7 +125,7 @@ export const Modal = (props) => {
 					px={[2]} mb={[2]} pb={[1]}
 				>
 					<HeaderMini maxWidth={"75%"} color="light">{props.header}</HeaderMini>
-					<CloseButton  zIndex={10} onClick={props.closeModal} />
+					<CloseButton  zIndex={20} onClick={props.closeModal} />
 				</FlexBox>
 				{props.children}
 			</Box>

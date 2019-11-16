@@ -102,7 +102,7 @@ export const ModalBox = styled.div`
     bottom:0;
     background-color:rgba(0,0,0, 0.75);
     padding:5vh 5vw;
-    z-index:11;
+    z-index:20;
     box-sizing: border-box;
     transition: all 1.8s cubic-bezier(.51,.17,.46, .88);
 
