@@ -156,7 +156,8 @@ movie__slugs = [
     "movie/pain-and-glory-2019",
     "movie/hustlers-2019",
     "movie/judy-2019",
-    "movie/jojo-rabbit-2019"
+    "movie/jojo-rabbit-2019",
+    "movie/the-lobster-2015"
 ]
 
 person__slugs = [
@@ -544,6 +545,8 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/pain-and-glory-2019",
       "/movie/hustlers-2019",
       "/movie/judy-2019",
-      "/movie/jojo-rabbit-2019"
+      "/movie/jojo-rabbit-2019",
+      "/movie/the-lobster-2015"
+
     ],
 """

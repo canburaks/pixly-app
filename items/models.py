@@ -1,6 +1,6 @@
 from django.db import models
 from persons.abstract import SocialMedia, SEO, DateRecords, MainPage
-from persons.models import Person
+from persons.models import Person, Crew
 from persons.profile import Profile
 from django.urls import reverse
 from django_mysql.models import (JSONField, SetTextField, ListTextField, SetCharField)
@@ -89,6 +89,61 @@ class Movie(SocialMedia, SEO,MainPage):
     def __str__(self):
         return self.name
 
+    @property
+    def genre_names(self):
+        return self.tags.filter(genre_tag=True).values_list("slug", flat=True)
+    
+    @property
+    def tag_names(self):
+        return self.tags.all().values_list("slug", flat=True)
+
+    @property
+    def video_tags(self):
+        return self.videos.values_list("tags__slug", flat=True)
+
+    @property
+    def have_trailer(self):
+        return "trailer" in self.video_tags
+
+    @property
+    def have_content_similars(self):
+        try:
+            return self.content_similar_object.all()[0].similars.all().exists()
+        except:
+            return False
+    
+    @property
+    def have_similars(self):
+        from archive.models import MovSim
+        return MovSim.objects.filter(
+                base_id=self.id, pearson__gte=0.35,commons__gte=200 ).count()>0
+    
+
+    @property
+    def have_director(self):
+        return Crew.objects.filter(movie=self, job__in="d" \
+            ).exclude(person__poster__exact='').exists()
+
+    @property
+    def director_names(self):
+        return Crew.objects.filter(movie=self, job="d"
+            ).values_list("person__name", flat=True)
+
+    @property
+    def have_crew(self):
+        # returns true if more than 3 actor.
+        return Crew.objects.filter(movie=self, job__in="a" \
+            ).exclude(person__poster__exact='').count() > 3
+
+    @property
+    def get_content_similar_object(self):
+        return self.content_similar_object.all()[0]
+    
+    def get_similar_ids(self):
+        from archive.models import MovSim
+        return MovSim.objects.filter(base_id=self.id, pearson__gte=0.3, 
+            commons__gte=200).values_list("target_id", flat=True)
+
     def get_short_summary(self):
         if len(self.summary) < 200:
             return self.summary
@@ -111,112 +166,6 @@ class Movie(SocialMedia, SEO,MainPage):
         tags_1 = self.tags.filter(Q_TAG).values_list("name", flat=True)
         tags_2 = movie_2.tags.filter(Q_TAG).values_list("name", flat=True)
         return set(tags_1).intersection(set(tags_2))
-
-    #in order to bulk update, does not save
-    def set_seo_description_keywords(self, save=True):
-        from items.models import Tag
-        from persons.models import Crew
-        from archive.models import MovSim
-        from archive.models import ContentSimilarity
-        description_text = ""
-        keywords = [self.name, self.slug, "User Ratings", "Credits", "Poster"]
-        words = []
-
-        #keywords
-        csm = ContentSimilarity.objects.filter(movie=self)
-        if csm.exists():
-            keywords.append(f"similar movies like {self.name}")
-            keywords.append(f"similar of {self.name}")
-            keywords.append(f"movies like {self.name}")
-
-
-        # director part
-        dqs = Crew.objects.filter(job="d", movie=self).select_related("person").only("person__name")
-        try:
-            if dqs.exists():
-                director_text = " A " +  ", ".join([x.person.name for x in dqs]) + " movie."
-                words.append(director_text)
-        except:
-            print("try error: items.movie set_seo_desc ")
-
-        # writer part
-        wqs = Crew.objects.filter(job="w", movie=self).select_related("person").only("person__name")
-        if wqs.exists():
-            director_text = " Written by " +  ", ".join([x.person.name for x in wqs]) + "."
-            words.append(director_text)
-
-        # cast part
-        aqs = Crew.objects.filter(job="a", movie=self).select_related("person").only("person__name")
-        if aqs.exists():
-            cast_text = " Stars: " +  ", ".join([x.person.name for x in aqs[:3]])  + "."
-            words.append(cast_text)
-        
-        if self.seo_short_description!=None and len(self.seo_short_description) > 10 and len(self.seo_short_description) < 200:
-            words.append(self.seo_short_description)
-
-        description_text = "".join(words)
-
-            
-
-        if len(description_text)< 140:
-            # appears part
-            lqs = self.lists.all().filter(list_type="df")
-            if lqs.count() > 0:
-                fav_directors_qs = [x.related_persons.all()[0] for x in lqs]
-                fav_directors_names = [x.name for x in fav_directors_qs]
-                fav_d_text = f"{self.name} is a favourite movie of " +  ", ".join(fav_directors_names) + "."
-                description_text += fav_d_text
-        
-        
-        if len(description_text)< 140:
-            if (MovSim.objects.filter(base_id=self.id).count() + MovSim.objects.filter(target_id=self.id).count()) > 0:
-                #words.append(f" Similar Movies of {self.name} are: ")
-                keywords.append("Similar Movies")
-
-        #KEYWORDS
-        #video part
-        mvqs = self.videos.filter(tags__isnull=False)
-        if mvqs.count() > 0:
-            keywords.append("Videos")
-            video_tags = Tag.objects.filter(related_videos__in=mvqs).values_list("slug", flat=True)
-            if "trailer" in video_tags:
-                keywords.append("Trailer")
-
-            if "behind-the-scene" in video_tags:
-                keywords.append("Behind The Scene")
-
-            if "film-review" in video_tags:
-                keywords.append("Review")
-
-            if "video-essay" in video_tags:
-                keywords.append("Video Essays")
-
-            if "video-clip" in video_tags:
-                keywords.append("Video Clips")
-            if "film-critic" in video_tags:
-                keywords.append("Film Critic")
-
-
-        self.seo_description = description_text
-        self.seo_keywords = ", ".join(keywords)
-        #print(self.seo_description)
-        #print(self.seo_keywords)
-        if save:
-            self.save()
-        return (self.seo_description, self.seo_keywords)
-
-    def set_seo_short_description(self):
-        import requests
-        url = ("http://www.omdbapi.com/?i={}&apikey=3f49586a").format(str(self.imdb_id))
-        try:
-            req = requests.get(url)
-            data = req.json()
-            text = data.get("Plot")
-            if text != None  and len(text) >20:
-                self.seo_short_description = text
-                self.save()
-        except:
-            print(f"error id:{self.id}")
 
     def set_summary_from_omdb(self):
         import requests
@@ -408,8 +357,6 @@ class Movie(SocialMedia, SEO,MainPage):
                 print("Can not got imdb data")
 
 
-
-
     def update_cover_poster(self):
         from pixly.lib import url_image
         cover_url = self.tmdb.poster_links().get("tmdb_cover_path")
@@ -420,23 +367,6 @@ class Movie(SocialMedia, SEO,MainPage):
         else:
             print("cover url could not found")
 
-
-    #def update_poster(self, force=False):
-    #    from pixly.lib import url_image, get_poster_url
-    #    if force==False:
-    #        try:
-    #            if self.poster and hasattr(self.poster, "url"):
-    #                print("Person already have poster")
-    #                pass
-    #            else: 
-    #                if get_poster_url(self):
-    #                    poster_url = get_poster_url(self)
-    #                    filename = "{}-poster.jpg".format(self.id)
-    #                    self.poster.save(*url_image(poster_url, filename))
-    #                else:
-    #                    print("movie poster url could not found")
-    #        except:
-    #            print("Movie Model poster could not be saved from source ")
 
     def create_or_update_tmdb_movie(self):
         from archive.models import TmdbMovie
@@ -553,13 +483,150 @@ class Movie(SocialMedia, SEO,MainPage):
         self.update_tags_from_data_keywords()
         #print("2")
         self.set_seo_description_keywords()
-        #print("3")
-        #try:
-        #    self.set_summary_from_omdb()
-        #except:
-        #    #print("no omdb")
-        self.set_seo_short_description()
+        self.set_seo_title()
         self.set_richdata()
+
+    def generate_description(self):
+        text = ""
+        dn = self.director_names
+        tag_names = self.tag_names
+        genres = self.genre_names
+        director_name = ""
+        if dn:
+            if len(dn) == 1:
+                director_name = dn[0]
+            elif len(dn) == 2:
+                director_name = f"{dn[0]} and {dn[1]}"
+            elif len(dn) > 2:
+                director_name = "many directors"
+        #definition word
+        definition = ""
+        pheno_text = ""
+        if "mindfuck" in tag_names or "thought-provoking" in tag_names:
+            pheno_text = "thought-provoking"
+        elif "feel-good-movie" in tag_names or "feel-good" in tag_names:
+            pheno_text = "feeling good"
+        award_text = ""
+        if  "golden-bear-winner" in tag_names or \
+                "golden-lion-winner" in tag_names or \
+                "palme-dor-winner" in tag_names:
+            if len(pheno_text) > 0:
+                award_text = "awarded"
+        definition = pheno_text
+        if award_text:
+            definition += f" {award_text}"
+
+        #------------DOCUMENTARY------------
+        if "documentary" in tag_names:
+            tags_wo_doc = set(tag_names).difference({"documentary"})
+            text += f"A {self.year} documentary which has {', '.join(tags_wo_doc)} topics."
+        else:
+
+            #-------------MOVIES----------------
+            #Imdb Rating based text
+            if self.year == 2018 or self.year == 2019:
+                if self.imdb_rating > 7.5:
+                    if self.imdb_rating > 8:
+                        text += f"One of the best {definition} movies of {self.year} directed by {director_name}."
+                    else:
+                        text += f"One of the good {definition} movies of {self.year} directed by {director_name}."
+            else:
+                if self.imdb_rating > 8.2:
+                    text += f"One of the best {definition} movies directed by {director_name}."
+                else:
+                    text += f"A {director_name} movie released in {self.year}."
+            # Similars, Recommendation
+            sim_text = ""
+            if self.have_content_similars:
+                if self.have_similars:
+                    sim_text += f" Find similar movies and good movie recommendations based on "
+                else:
+                    sim_text += f" Find movies similar to "  
+                sim_text += f"{self.name[:14]}."
+
+            sim_text_num = len(sim_text)
+            current_num = len(text)
+            available_num = 158 - (current_num + sim_text_num)
+            text += f" {self.summary[:available_num]}.."
+            text += sim_text
+        print(f"description length: {len(text)}")
+        return text
+
+    def generate_title(self):
+        #start with year, add name at the end
+        year_text = f"({self.year}) - " 
+        text = year_text
+
+        # Similars, Recommendation
+        if self.have_content_similars:
+            text += "Similars, Recommendations, "
+
+        # Trailer
+        video_tags = set(self.video_tags)
+        if "trailer" in video_tags:
+            #check videos other than trailer
+            tags_without_trailer = video_tags.difference({"trailer"})  
+            if len(tags_without_trailer) > 0:
+                text += "Videos, "
+            else:
+                text += "Trailer, "
+
+        # Crew
+        if self.have_crew:
+            text += "Cast."
+
+        #-------ADD NAME TO BEGINNING---------------
+        added_text_length = len(text)
+        available_chars = 69 - added_text_length
+        if len(self.name) > available_chars - 1:
+            name = self.name[:available_chars - 2].title() + ".."
+        else:
+            name = self.name.title() + " "
+        title = name + text
+        print(f"title length: {len(title)}")
+        return title
+
+
+    #in order to bulk update, does not save
+    def set_seo_description_keywords(self, save=True):
+        description_text = self.generate_description()
+        #KEYWORDS
+        #video part
+        mvqs = self.videos.filter(tags__isnull=False)
+        if mvqs.count() > 0:
+            keywords.append("Videos")
+            video_tags = Tag.objects.filter(related_videos__in=mvqs).values_list("slug", flat=True)
+            if "trailer" in video_tags:
+                keywords.append("Trailer")
+
+            if "behind-the-scene" in video_tags:
+                keywords.append("Behind The Scene")
+
+            if "film-review" in video_tags:
+                keywords.append("Review")
+
+            if "video-essay" in video_tags:
+                keywords.append("Video Essays")
+
+            if "video-clip" in video_tags:
+                keywords.append("Video Clips")
+            if "film-critic" in video_tags:
+                keywords.append("Film Critic")
+
+
+        self.seo_description = description_text
+        self.seo_keywords = ", ".join(keywords)
+        #print(self.seo_description)
+        #print(self.seo_keywords)
+        if save:
+            self.save()
+        return (self.seo_description, self.seo_keywords)
+
+    def set_seo_title(self, save=True):
+        title = self.generate_title()
+        if save:
+            self.save()
+
 
     def save(self, *args, **kwargs):
         #self.quantity = self.related_movies.all().only("id").count()
@@ -573,7 +640,6 @@ class Movie(SocialMedia, SEO,MainPage):
             self.add_slug()
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
-                  
 
 
 class List(SEO,MainPage):

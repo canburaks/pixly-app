@@ -8,7 +8,10 @@ from pprint import pprint
 #c = vid.youtube_object.get_caption_data()
 cbs = Profile.objects.get(id=1)
 cs = cbs.get_statistics_object(force=True)
-mat = Movie.objects.get(id=2571)
+animatrix = Movie.objects.get(slug="the-animatrix-2003")
+matrix = Movie.objects.get(id=2571)
+lobster = Movie.objects.get(slug="the-lobster-2015")
+earthlings = Movie.objects.get(slug="earthlings-2006")
 mat2 = Movie.objects.get(id=6365)
 hol = Movie.objects.get(slug="once-upon-a-time-in-hollywood-2019")
 tr = Movie.objects.get(id=91947)
@@ -27,20 +30,127 @@ from tqdm import tqdm
 from django_bulk_update.helper import bulk_update
 
 
+def generate_title(movie):
+    #start with year, add name at the end
+    year_text = f"({movie.year}) - " 
+    text = year_text
+    # Similars, Recommendation
+    if movie.have_content_similars:
+        text += "Similars, Recommendations, "
+    # Trailer
+    video_tags = set(movie.video_tags)
+    if "trailer" in video_tags:
+        #check videos other than trailer
+        tags_without_trailer = video_tags.difference({"trailer"})  
+        if len(tags_without_trailer) > 0:
+            text += "Videos"
+        else:
+            text += "Trailer"
+    # Crew
+    if movie.have_crew:
+        text += ", Cast."
+    #-------ADD NAME TO BEGINNING---------------
+    added_text_length = len(text)
+    available_chars = 69 - added_text_length
+    #check if movie name fit or not
+    if len(movie.name) > available_chars - 1:
+        name = movie.name[:available_chars - 2].title() + ".."
+    else:
+        name = movie.name.title() + " "
+    title = name + text
+    print(f"title length: {len(title)}")
+    return title
+
+
+def generate_description(movie):
+    text = ""
+    dn = movie.director_names
+    tag_names = movie.tag_names
+    genres = movie.genre_names
+    director_name = ""
+    if dn:
+        if len(dn) == 1:
+            director_name = dn[0]
+        elif len(dn) == 2:
+            director_name = f"{dn[0]} and {dn[1]}"
+        elif len(dn) > 2:
+            director_name = "many directors"
+    #definition word
+    definition = ""
+    pheno_text = ""
+    if "mindfuck" in tag_names or "thought-provoking" in tag_names:
+        pheno_text = "thought-provoking"
+    elif "feel-good-movie" in tag_names or "feel-good" in tag_names:
+        pheno_text = "feeling good"
+    award_text = ""
+    if  "golden-bear-winner" in tag_names or \
+            "golden-lion-winner" in tag_names or \
+            "palme-dor-winner" in tag_names:
+        if len(pheno_text) > 0:
+            award_text = "awarded"
+    definition = pheno_text
+    if award_text:
+        definition += f" {award_text}"
+    #DOCUMENTARY
+    if "documentary" in tag_names:
+        tags_wo_doc = set(tag_names).difference({"documentary"})
+        text += f"A {movie.year} documentary which has {', '.join(tags_wo_doc)} topics."
+    else:
+        #-------------MOVIES----------------
+        #Imdb Rating based text
+        if movie.year == 2018 or movie.year == 2019:
+            if movie.imdb_rating > 7.5:
+                if movie.imdb_rating > 8:
+                    text += f"One of the best {definition} movies of {movie.year} directed by {director_name}."
+                else:
+                    text += f"One of the good {definition} movies of {movie.year} directed by {director_name}."
+        else:
+            if movie.imdb_rating > 8.2:
+                text += f"One of the best {definition} movies directed by {director_name}."
+            else:
+                text += f"A {director_name} movie released in {movie.year}."
+        # Similars, Recommendation
+        if movie.have_content_similars:
+            if movie.have_similars:
+                text += f" Find similar movies and good movie recommendations based on "
+            else:
+                text += f" Find movies similar to "  
+            available_num = 159 - len(text)
+            text += f"{movie.name[:available_num]}."
+        else:
+            current_num = len(text)
+            available_num = 159 - current_num
+            text += movie.summary[:available_num] 
+    #print(f"description length: {len(text)}")
+    return text
 
 
 
-def update_movie_description(start, end):
+
+def set_movie_title(start, end):
     from tqdm import tqdm
     import json
     from django_bulk_update.helper import bulk_update
-    allm_qs = Movie.objects.all().only("id", "seo_description").order_by("id")
+    allm_qs = Movie.objects.filter(year__gte=2017, seo_title=None).order_by("id")
     print("Current  elements: ", allm_qs.count())
     allm = allm_qs[start: end]
     for m in tqdm(allm):
-        m.seo_description = None
+        m.seo_title = m.generate_title()
     print("start updating: ")
-    bulk_update(allm, update_fields=["seo_description"])
+    bulk_update(allm, update_fields=["seo_title"])
+
+
+def clean_movie_title(start, end):
+    from tqdm import tqdm
+    import json
+    from django_bulk_update.helper import bulk_update
+    allm_qs = Movie.objects.all().only("id", "seo_title").order_by("id")
+    print("Current  elements: ", allm_qs.count())
+    allm = allm_qs[start: end]
+    for m in tqdm(allm):
+        m.seo_title = None
+    print("start updating: ")
+    bulk_update(allm, update_fields=["seo_title"])
 
 tall = Tag.objects.filter(object_type="video")
 for t in tqdm(tall):
