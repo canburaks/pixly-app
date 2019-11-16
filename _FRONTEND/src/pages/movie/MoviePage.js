@@ -128,7 +128,7 @@ const MoviePage = props => {
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
 			<Head
 				title={item.seoTitle}
-				description={item.seoShortDescription}
+				description={item.seoDescription || item.seoShortDescription}
 				richdata={item.richdata}
 				keywords={keywords ? keywords : item.seoKeywords}
 				image={item.coverPoster ? item.coverPoster : item.poster}
