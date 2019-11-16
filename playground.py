@@ -26,6 +26,22 @@ vall = Video.objects.all()
 from tqdm import tqdm
 from django_bulk_update.helper import bulk_update
 
+
+
+
+
+def update_movie_description(start, end):
+    from tqdm import tqdm
+    import json
+    from django_bulk_update.helper import bulk_update
+    allm_qs = Movie.objects.all().only("id", "seo_description").order_by("id")
+    print("Current  elements: ", allm_qs.count())
+    allm = allm_qs[start: end]
+    for m in tqdm(allm):
+        m.seo_description = None
+    print("start updating: ")
+    bulk_update(allm, update_fields=["seo_description"])
+
 tall = Tag.objects.filter(object_type="video")
 for t in tqdm(tall):
     t.video_tag = True
