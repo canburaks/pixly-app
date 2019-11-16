@@ -139,7 +139,7 @@ const MainPage = React.memo(() => {
 						<div className="container">
 							<div className="hero-inner">
 								<FlexBox flexDirection="column" zIndex={10} >
-									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)">{heroHeaderText}</HeaderText>
+									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)" zIndex={8}>{heroHeaderText}</HeaderText>
 									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
 									
 									<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />

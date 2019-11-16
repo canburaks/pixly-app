@@ -48,7 +48,6 @@ export const HtmlContainer = ({ html, ...props }) => {
             //console.log("parser" , html)
             //console.log("topic: ", parseResult)
             return parse(html)
-             
         }
     }
     parseTest()

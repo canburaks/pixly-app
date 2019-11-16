@@ -149,8 +149,8 @@ const SearchQueryResult = React.memo(({keywords, cleaner}) => {
     if (data) {
         
         return (
-            <Modal isOpen={true} header={`search term: ${keywords}`} closeModal={cleaner} zIndex={20}>
-                <Grid columns={[3,4,5,6,6,6, 8]}  py={"10px"} px="10px" position="relative"  >
+            <Modal isOpen={true} header={`search term: ${keywords}`} closeModal={cleaner} zIndex={100}>
+                <Grid columns={[3,4,5,6,6,6, 8]}  py={"10px"} px="10px" position="relative" zIndex={100} >
                     {data.complexSearch.result.map( item => (
                         <MoviePosterCard
                             item={item}
@@ -159,6 +159,7 @@ const SearchQueryResult = React.memo(({keywords, cleaner}) => {
                             width={"100%"}
                             fontSize="xs"
                             onClick={cleaner}
+                            zIndex={100}
                         />
                         ))}
                     {data.complexSearch.quantity >= 18 && <MoreCard />}

@@ -1787,13 +1787,6 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #return self.movie.seo_title
 
     def resolve_seo_description(self, info, *_):
-        if self.movie.seo_description == None:
-            try:
-                #self.movie.set_seo_description_keywords()
-                return self.movie.seo_description
-            except:
-                print(f"{self.movie.name} description could not be saved in -> resolve_seo_description ")
-                return self.movie.seo_description
         return self.movie.seo_description
 
     def resolve_seo_short_description(self, info, *_):
