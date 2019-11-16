@@ -378,6 +378,7 @@ class TmdbMovie(models.Model):
         except:
             print("no omdb")
         movie.full_update()
+        print("slug: ", movie.slug)
 
 
     def save(self, *args, **kwargs):

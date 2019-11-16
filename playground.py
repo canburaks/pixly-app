@@ -28,7 +28,7 @@ vall = Video.objects.all()
 #TAG NEW UPDATE
 from tqdm import tqdm
 from django_bulk_update.helper import bulk_update
-
+t = TmdbMovie.create_from_zero
 
 def generate_title(movie):
     #start with year, add name at the end
@@ -139,6 +139,17 @@ def set_movie_title(start, end):
     print("start updating: ")
     bulk_update(allm, update_fields=["seo_title"])
 
+def set_movie_title(start, end):
+    from tqdm import tqdm
+    import json
+    from django_bulk_update.helper import bulk_update
+    allm_qs = Movie.objects.filter(year__gte=2017, seo_title=None).order_by("id")
+    print("Current  elements: ", allm_qs.count())
+    allm = allm_qs[start: end]
+    for m in tqdm(allm):
+        m.seo_title = m.generate_title()
+    print("start updating: ")
+    bulk_update(allm, update_fields=["seo_title"])
 
 def clean_movie_title(start, end):
     from tqdm import tqdm
@@ -158,7 +169,11 @@ for t in tqdm(tall):
 
 bulk_update(tall, update_fields=["video_tag"])
 
-
+slugs = [x.strip().replace("movie/", "") for x in movie__slugs]
+mqs = Movie.objects.filter(slug__in=slugs)
+for m in tqdm(mqs):
+    m.set_seo_description_keywords()
+    m.set_seo_title()
 #REGULAR PROGRESSIVE NOT DONE JOBS
 
 def update_person_seo(start, end):
