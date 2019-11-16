@@ -1800,7 +1800,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
             self.movie.set_seo_description_keywords()
             return self.movie.seo_description
         except:
-            text = f"{self.movie.name}: A {', '.join(self.movie.director_name)} movie released in {self.movie.year}"
+            text = f"{self.movie.name}: A {', '.join(self.movie.director_names)} movie released in {self.movie.year}"
             available_num = 155 - len(text)
             text += f" {self.movie.summary[:available_num]}"
             return text
