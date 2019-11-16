@@ -1,5 +1,14 @@
 #Common Functions
 
+def director_name_formatter(director_name_list, duo, many):
+    directors_num = len(director_name_list)
+    elif directors_num == 1:
+        return director_names[0]
+    elif directors_num == 2:
+        return duo.join(director_names)
+    elif directors_num > 2:
+        return many.join(director_names)
+    return None
 
 
 def get_class_callable_names(cls):
