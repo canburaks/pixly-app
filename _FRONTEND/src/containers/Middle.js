@@ -21,7 +21,7 @@ import HomePage from "../pages/home/HomePage.js";
 import Collections from "../list/lists/Collections";
 
 import MovieList from "../list/movie/MovieList";
-import BarSearch from "../list/search/BarSearch";
+//import BarSearch from "../list/search/BarSearch";
 
 //import SearchMovieList from "../list/search/BarSearchList";
 
@@ -97,9 +97,9 @@ const Middle = (props) => {
             <Route exact path="/person/:slug/:id" component={PersonQuery} />
 
 
-            <Route exact path="/movies/search/:query/:page" component={BarSearch} />
             <Route path="/404" component={StaticRoute} />
             {/*
+            <Route exact path="/movies/search/:query/:page" component={BarSearch} />
             <Route exact path="/lists/:slug/:page" component={MovieListQuery} />
             <Route exact path="/movie/:id/:slug" component={MovieQuery} />
             <Route exact path="/person/:id/:slug" component={PersonQuery} />

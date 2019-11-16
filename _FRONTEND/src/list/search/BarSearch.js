@@ -59,6 +59,7 @@ const MovieSearchQuery = (props) => {
     const currentPage = parseInt(props.match.params.page)
     const skip = (currentPage - 1) * ppi
     const first = ppi
+    
 
     const search = props.search
 

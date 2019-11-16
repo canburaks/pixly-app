@@ -167,8 +167,11 @@ movie__slugs = [
     "movie/living-among-us-2019",
     "movie/la-belle-epoque-2019",
     "movie/last-christmas-2019",
-
-
+    "movie/la-la-land-2016",
+    "movie/i-tonya-2017",
+    "movie/good-will-hunting-1997",
+    "movie/mifunes-last-song-1999"
+    "movie/dont-breathe-2016"
 ]
 
 person__slugs = [
@@ -572,6 +575,12 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/living-among-us-2019",
       "/movie/la-belle-epoque-2019",
       "/movie/last-christmas-2019",
-      "/movie/la-la-land-2016"
+      "/movie/la-la-land-2016",
+      "/movie/la-la-land-2016",
+      "/movie/i-tonya-2017",
+      "/movie/good-will-hunting-1997",
+      "/movie/mifunes-last-song-1999",
+      "/movie/dont-breathe-2016",
+    
     ],
 """

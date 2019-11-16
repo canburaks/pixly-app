@@ -94,12 +94,12 @@ export const Modal = (props) => {
 
 
     
-    useEffect(() => {
-        if (props.isOpen){
-            lockBodyScroll()
-        }
-        return () => unlockBodyScroll()
-    },[props.isOpen])
+    //useEffect(() => {
+    //    if (props.isOpen){
+    //        lockBodyScroll()
+    //    }
+    //    return () => unlockBodyScroll()
+    //},[props.isOpen])
 
 	return(	
 		<ModalMotionBox isOpen={props.isOpen} top={"120px"} >

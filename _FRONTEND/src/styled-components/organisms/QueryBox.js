@@ -62,12 +62,12 @@ export const SearchQueryBox = (props) =>{
         document.body.style.overflowY = "auto";
     }
     
-    useEffect(() => {
-        if (keywords.length > 2){
-            lockbody()
-        }
-        return () => unlockbody()
-    })
+    //useEffect(() => {
+    //    if (keywords.length > 2){
+    //        lockbody()
+    //    }
+    //    return () => unlockbody()
+    //})
 
     return(
             <Box width={"auto"}>
@@ -137,11 +137,11 @@ const SearchQueryResult = React.memo(({keywords, cleaner}) => {
         document.body.style.overflowY = "auto";
     }
     
-    useEffect(() =>{
-        //console.log("outer", document.body.style.position, document.body.style.overflowY)
-        lockbody()
-        return () => unlockbody()
-    }, [])
+    //useEffect(() =>{
+    //    //console.log("outer", document.body.style.position, document.body.style.overflowY)
+    //    lockbody()
+    //    return () => unlockbody()
+    //}, [])
 
 
     const MoreCard = () => <PlaceHolderCard text="Get More" link={"/advance-search"} state={{keywords}} title="Bring More" />
