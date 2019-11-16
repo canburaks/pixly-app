@@ -157,7 +157,18 @@ movie__slugs = [
     "movie/hustlers-2019",
     "movie/judy-2019",
     "movie/jojo-rabbit-2019",
-    "movie/the-lobster-2015"
+    "movie/the-lobster-2015",
+    
+    "movie/falling-inn-love-2019"
+    "movie/crawl-2019",
+    "movie/les-miserables-2019",
+    "movie/midway-2019",
+    "movie/the-good-liar-2019",
+    "movie/living-among-us-2019",
+    "movie/la-belle-epoque-2019",
+    "movie/last-christmas-2019",
+
+
 ]
 
 person__slugs = [
@@ -348,12 +359,17 @@ class ProfileHomeSitemap(Sitemap):
 [
       "",
       "/",
+      "/explore",
+      "/directors/1",
       "/topic/art-house",
       "/topic/cyberpunk",
       "/topic/based-on-true-story",
-      "/directors/1",
-      "/explore",
-      "/advance-search",
+      "/topic/dialogue-focused",
+      "/topic/thought-provoking",
+      "/topic/bechdel-test",
+      "/blog",
+      "/blog/a-brief-introduction-to-collaborative-filtering",
+
       "/list/all-palme-dor-winners-cannes-film-festival/1",
       "/list/all-golden-bear-winners-berlin-film-festival/1",
       "/list/all-golden-lion-winners-venice-film-festival/1",
@@ -546,7 +562,16 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/hustlers-2019",
       "/movie/judy-2019",
       "/movie/jojo-rabbit-2019",
-      "/movie/the-lobster-2015"
+      "/movie/the-lobster-2015",
 
+      "/movie/crawl-2019",
+      "/movie/falling-inn-love-2019"
+      "/movie/les-miserables-2019",
+      "/movie/midway-2019",
+      "/movie/the-good-liar-2019",
+      "/movie/living-among-us-2019",
+      "/movie/la-belle-epoque-2019",
+      "/movie/last-christmas-2019",
+      "/movie/la-la-land-2016"
     ],
 """
