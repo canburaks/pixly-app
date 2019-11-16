@@ -546,7 +546,7 @@ class Movie(SocialMedia, SEO,MainPage):
 
             sim_text_num = len(sim_text)
             current_num = len(text)
-            available_num = 158 - (current_num + sim_text_num)
+            available_num = 157 - (current_num + sim_text_num)
             text += f" {self.summary[:available_num]}.."
             text += sim_text
         print(f"description length: {len(text)}")
@@ -590,6 +590,7 @@ class Movie(SocialMedia, SEO,MainPage):
     #in order to bulk update, does not save
     def set_seo_description_keywords(self, save=True):
         description_text = self.generate_description()
+        keywords = [self.name, self.slug, "movie rating website", "user ratings", *self.tag_names]
         #KEYWORDS
         #video part
         mvqs = self.videos.filter(tags__isnull=False)
@@ -620,7 +621,6 @@ class Movie(SocialMedia, SEO,MainPage):
         #print(self.seo_keywords)
         if save:
             self.save()
-        return (self.seo_description, self.seo_keywords)
 
     def set_seo_title(self, save=True):
         title = self.generate_title()
