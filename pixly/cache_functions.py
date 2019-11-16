@@ -50,7 +50,7 @@ class Cache():
         return Topic.objects.filter(slug__in=pqs)
 
     # ------ Complex Search ---------gql.complex_search 
-    #@lru_cache(maxsize=200)    
+    @lru_cache(maxsize=200)    
     def complex_search_topic_result(topic_slug, min_year, max_year, min_rating, max_rating):
         qs = Topic.objects.filter(slug=topic_slug)
         if not qs.exists():
