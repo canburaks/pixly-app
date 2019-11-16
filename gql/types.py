@@ -1780,14 +1780,30 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         
 
     def resolve_seo_title(self, info, *_):
-        return f"{self.movie.name.title()} ({self.movie.year}), Discover Similar Movies Like {self.movie.name}"
-        #if self.movie.seo_title == None:
-        #    self.movie.seo_title = f"{self.movie.name} ({self.movie.year}) and Similar Movies - Pixly "
-        #    self.movie.save()
-        #return self.movie.seo_title
+        if self.movie.seo_title:
+            return self.movie.seo_title
+        else:
+            try:
+                new_title = self.movie.generate_title()
+                self.movie.seo_title = new_title
+                self.movie.save()
+                return new_title
+            except:
+                return f"{self.movie.name.title()} ({self.movie.year}), Discover Similar Movies Like {self.movie.name}"
+                
+
 
     def resolve_seo_description(self, info, *_):
-        return self.movie.seo_description
+        if self.movie.seo_description:
+            return self.movie.seo_description
+        try:
+            self.movie.set_seo_description_keywords()
+            return self.movie.seo_description
+        except:
+            text = f"{self.movie.name}: A {', '.join(self.movie.director_name)} movie released in {self.movie.year}"
+            available_num = 155 - len(text)
+            text += f" {self.movie.summary[:available_num]}"
+            return text
 
     def resolve_seo_short_description(self, info, *_):
         director_name = self.movie.director
