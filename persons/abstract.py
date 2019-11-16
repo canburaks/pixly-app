@@ -17,7 +17,7 @@ class SocialMedia(models.Model):
         abstract = True
 
 class SEO(models.Model):
-    seo_title = models.CharField(max_length=100,null=True, blank=True) #dont exceed 60chars
+    seo_title = models.CharField(max_length=70,null=True, blank=True, help_text="70 character limit. 65 is OK") #dont exceed 60chars
     seo_short_description =  models.TextField(max_length=500,null=True, blank=True)
     seo_description = models.TextField(max_length=160,null=True, blank=True, help_text="160 character limit") #dont exceed 160 chars
     seo_keywords = models.TextField(max_length=2000,null=True, blank=True)
