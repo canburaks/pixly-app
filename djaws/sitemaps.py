@@ -158,17 +158,15 @@ movie__slugs = [
     "movie/the-lobster-2015",
     
     "movie/falling-inn-love-2019",
-    "movie/crawl-2019",
     "movie/les-miserables-2019",
     "movie/midway-2019",
     "movie/last-christmas-2019",
     "movie/i-tonya-2017",
     "movie/good-will-hunting-1997",
-    "movie/dont-breathe-2016",
     "movie/blade-runner-2049-2017",
     "movie/blade-runner-1982",
     "movie/the-broken-2008",
-    "movie/ghost-in-the-shell-1995"
+    "movie/ghost-in-the-shell-1995",
 ]
 
 person__slugs = [
@@ -564,18 +562,15 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/the-lobster-2015",
 
       "/movie/falling-inn-love-2019",
-      "/movie/crawl-2019",
       "/movie/les-miserables-2019",
       "/movie/midway-2019",
       "/movie/last-christmas-2019",
-      "/movie/la-la-land-2016",
       "/movie/i-tonya-2017",
       "/movie/good-will-hunting-1997",
-      "/movie/dont-breathe-2016",
       "/movie/blade-runner-2049-2017",
       "/movie/blade-runner-1982",
       "/movie/the-broken-2008",
-      "/movie/ghost-in-the-shell-1995"
+      "/movie/ghost-in-the-shell-1995",
     
     ],
 """
