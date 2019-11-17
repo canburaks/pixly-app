@@ -172,7 +172,7 @@ bulk_update(tall, update_fields=["video_tag"])
 slugs = [x.strip().replace("movie/", "") for x in movie__slugs]
 mqs = Movie.objects.filter(slug__in=slugs)
 for m in tqdm(mqs):
-    m.set_seo_description_keywords()
+    #m.set_seo_description_keywords()
     m.set_seo_title()
 #REGULAR PROGRESSIVE NOT DONE JOBS
 

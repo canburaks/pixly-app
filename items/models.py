@@ -577,7 +577,7 @@ class Movie(SocialMedia, SEO,MainPage):
 
         #-------ADD NAME TO BEGINNING---------------
         added_text_length = len(text)
-        available_chars = 69 - added_text_length
+        available_chars = 67 - added_text_length
         if len(self.name) > available_chars - 1:
             name = self.name[:available_chars - 2].title() + ".."
         else:
