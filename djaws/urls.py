@@ -133,6 +133,8 @@ urlpatterns = [
     re_path(r'^graphql', csrf_exempt(FileUploadGraphQLView.as_view(graphiql=True))),
     re_path(r'^gql', csrf_exempt(GraphQLView.as_view(graphiql=True))),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    re_path(r'^froala_editor/', include('froala_editor.urls')),
+ 
 ]
 
 urlpatterns = urlpatterns + custom_url_pages + [
