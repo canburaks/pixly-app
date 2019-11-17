@@ -133,7 +133,6 @@ movie__slugs = [
     "movie/the-true-don-quixote-2019",
     "movie/devils-revenge-2019",
     "movie/wonder-woman-bloodlines-2019",
-
     "movie/samsara-2001",
     "movie/gladiator-1992",
     "movie/the-hills-have-eyes-1977",
@@ -142,8 +141,7 @@ movie__slugs = [
     "movie/daniel-isnt-real-2019",
     "movie/kill-chain-2019",
     "movie/vision-portraits-2019",
-    "movie/seventeen-2019"
-
+    "movie/seventeen-2019",
     "movie/pariyerum-perumal-2018"
     "movie/an-officer-and-a-spy-2019"
     "movie/silicon-valley-2013",
