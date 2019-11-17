@@ -245,7 +245,7 @@ const MoviePage = props => {
 				<br/>
 
 				{/* VIDEO */}
-				{hasVideos > 0 && 
+				{hasVideos && window.location.href.includes("pixly") > 0 && 
 					<>
 					<HeaderMini my={[2]} mt={[5]}>{item.name} Videos</HeaderMini>
 					<YoutubePlayer
