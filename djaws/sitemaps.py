@@ -133,6 +133,7 @@ movie__slugs = [
     "movie/the-true-don-quixote-2019",
     "movie/devils-revenge-2019",
     "movie/wonder-woman-bloodlines-2019",
+
     "movie/samsara-2001",
     "movie/gladiator-1992",
     "movie/the-hills-have-eyes-1977",
@@ -141,7 +142,8 @@ movie__slugs = [
     "movie/daniel-isnt-real-2019",
     "movie/kill-chain-2019",
     "movie/vision-portraits-2019",
-    "movie/seventeen-2019",
+    "movie/seventeen-2019"
+
     "movie/pariyerum-perumal-2018"
     "movie/an-officer-and-a-spy-2019"
     "movie/silicon-valley-2013",
@@ -537,7 +539,6 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/the-true-don-quixote-2019",
       "/movie/devils-revenge-2019",
       "/movie/wonder-woman-bloodlines-2019",
-
       "/movie/samsara-2001",
       "/movie/gladiator-1992",
       "/movie/the-hills-have-eyes-1977",
@@ -563,11 +564,12 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/jojo-rabbit-2019",
       "/movie/the-lobster-2015",
 
-      "/movie/falling-inn-love-2019"
+      "/movie/falling-inn-love-2019",
       "/movie/crawl-2019",
       "/movie/les-miserables-2019",
       "/movie/midway-2019",
       "/movie/last-christmas-2019",
+      "/movie/la-la-land-2016",
       "/movie/i-tonya-2017",
       "/movie/good-will-hunting-1997",
       "/movie/dont-breathe-2016",
