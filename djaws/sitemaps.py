@@ -163,10 +163,8 @@ movie__slugs = [
     "movie/les-miserables-2019",
     "movie/midway-2019",
     "movie/last-christmas-2019",
-    "movie/la-la-land-2016",
     "movie/i-tonya-2017",
     "movie/good-will-hunting-1997",
-    "movie/mifunes-last-song-1999"
     "movie/dont-breathe-2016",
     "movie/blade-runner-2049-2017",
     "movie/blade-runner-1982",
@@ -572,10 +570,8 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/les-miserables-2019",
       "/movie/midway-2019",
       "/movie/last-christmas-2019",
-      "/movie/la-la-land-2016",
       "/movie/i-tonya-2017",
       "/movie/good-will-hunting-1997",
-      "/movie/mifunes-last-song-1999"
       "/movie/dont-breathe-2016",
       "/movie/blade-runner-2049-2017",
       "/movie/blade-runner-1982",
