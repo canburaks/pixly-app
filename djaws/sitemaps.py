@@ -167,6 +167,7 @@ movie__slugs = [
     "movie/blade-runner-1982",
     "movie/the-broken-2008",
     "movie/ghost-in-the-shell-1995",
+    "movie/bohemian-rhapsody-2018"
 ]
 
 person__slugs = [
