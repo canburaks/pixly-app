@@ -142,10 +142,9 @@ movie__slugs = [
     "movie/daniel-isnt-real-2019",
     "movie/kill-chain-2019",
     "movie/vision-portraits-2019",
-    "movie/seventeen-2019"
-
-    "movie/pariyerum-perumal-2018"
-    "movie/an-officer-and-a-spy-2019"
+    "movie/seventeen-2019",
+    "movie/pariyerum-perumal-2018",
+    "movie/an-officer-and-a-spy-2019",
     "movie/silicon-valley-2013",
     "movie/the-secret-of-a-leader-2019",
     "movie/now-something-is-slowly-changing-2019",
@@ -158,7 +157,7 @@ movie__slugs = [
     "movie/jojo-rabbit-2019",
     "movie/the-lobster-2015",
     
-    "movie/falling-inn-love-2019"
+    "movie/falling-inn-love-2019",
     "movie/crawl-2019",
     "movie/les-miserables-2019",
     "movie/midway-2019",
