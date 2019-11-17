@@ -109,7 +109,6 @@ movie__slugs = [
     "movie/the-colour-out-of-space-2010",
     "movie/dave-chappelle-sticks-stones-2019",
     "movie/schoolgirl-report-part-2-what-keeps-parents-awake-at-night-1971",
-    "movie/mindwalk-1990",
     "movie/darby-ogill-and-the-little-people-1959",
     "movie/his-secret-life-2001",
     "movie/sometimes-happiness-sometimes-sorrow-2001",

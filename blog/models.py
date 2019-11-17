@@ -30,6 +30,7 @@ class Post(SocialMedia, SEO, DateRecords, MainPage):
 
 
     text = RichTextUploadingField(default="...", max_length=20000, null=True, blank=True, help_text="Only Content, Don't add H1 Heading")
+
     slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
     #tag = models.ManyToManyField(Tag, null=True, blank=True, related_name="posts")
 

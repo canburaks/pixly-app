@@ -12,4 +12,4 @@ class PostAdmin(admin.ModelAdmin):
     #inlines = [TagInline,]
     #raw_id_fields = ('author', "tag",)
     fields = ["seo_title", "seo_short_description", "seo_description", "wiki", "slug",
-        "id", "header", "summary","active", "post_type","author","text"]
+        "id", "header", "summary","active", "post_type","author" ,"text"]
