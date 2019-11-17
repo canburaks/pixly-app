@@ -330,8 +330,8 @@ class StaticSitemap(Sitemap):
     priority = 0.4
     def items(self):
         statics = [
-            "blog",
-            "blog/a-brief-introduction-to-collaborative-filtering",
+            "/blog",
+            "/blog/a-brief-introduction-to-collaborative-filtering",
             "","/", "/directors/1", "/explore", "/advance-search", 
             "/termsofservice", "/privacy"
         ]
