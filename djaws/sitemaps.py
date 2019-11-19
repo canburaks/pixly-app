@@ -570,7 +570,7 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/blade-runner-2049-2017",
       "/movie/blade-runner-1982",
       "/movie/the-broken-2008",
-      "/movie/ghost-in-the-shell-1995",
+      "/movie/ghost-in-the-shell-1995"
     
     ],
 """

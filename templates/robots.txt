@@ -532,3 +532,17 @@ Disallow: /person/nm0480099
 Disallow: /person/nm0000518
 Disallow: /person/nm0000177
 Disallow: /person/nm0315041
+
+
+Disallow: /movie/151449/undefined
+Disallow: /movie/44694/undefined
+Disallow: /movie/6783/undefined
+Disallow: /movie/818/None
+Disallow: /movie/7253/it-1927
+Disallow: /movie/2916/
+Disallow: /movie/5139
+Disallow: /movie/4370
+Disallow: /movie/2053
+Disallow: /movie/1414/
+Disallow: /movie/4836
+Disallow: /person/nm0000487
