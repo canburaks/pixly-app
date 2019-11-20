@@ -241,6 +241,7 @@ static__slugs = [
     "404",
     "blog",
     "blog/a-brief-introduction-to-collaborative-filtering",
+    "blog/django-graphql-react-integration-tutorial-part-1"
 ]
 def page_template_generator(routes):
     new_paths = []

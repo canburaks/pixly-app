@@ -1,0 +1,1151 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Django - GraphQL - React Integration Tutorial: Part-1</title>
+		<style>
+			/* webkit printing magic: print all background colors */
+			html {
+				-webkit-print-color-adjust: exact;
+			}
+			* {
+				box-sizing: border-box;
+				-webkit-print-color-adjust: exact;
+			}
+
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+			}
+			@media only screen {
+				body {
+					margin: 2em auto;
+					max-width: 900px;
+					color: rgb(55, 53, 47);
+				}
+			}
+
+			body {
+				line-height: 1.5;
+				white-space: pre-wrap;
+			}
+
+			a,
+			a.visited {
+				color: inherit;
+				text-decoration: underline;
+			}
+
+			.pdf-relative-link-path {
+				font-size: 80%;
+				color: #444;
+			}
+
+			h1,
+			h2,
+			h3 {
+				letter-spacing: -0.01em;
+				line-height: 1.2;
+				font-weight: 600;
+				margin-bottom: 0;
+			}
+
+			.page-title {
+				font-size: 2.5rem;
+				font-weight: 700;
+				margin-top: 0;
+				margin-bottom: 0.75em;
+			}
+
+			h1 {
+				font-size: 1.875rem;
+				margin-top: 1.875rem;
+			}
+
+			h2 {
+				font-size: 1.5rem;
+				margin-top: 1.5rem;
+			}
+
+			h3 {
+				font-size: 1.25rem;
+				margin-top: 1.25rem;
+			}
+
+			.source {
+				border: 1px solid #ddd;
+				border-radius: 3px;
+				padding: 1.5em;
+				word-break: break-all;
+			}
+
+			.callout {
+				border-radius: 3px;
+				padding: 1rem;
+			}
+
+			figure {
+				margin: 1.25em 0;
+				page-break-inside: avoid;
+			}
+
+			figcaption {
+				opacity: 0.5;
+				font-size: 85%;
+				margin-top: 0.5em;
+			}
+
+			mark {
+				background-color: transparent;
+			}
+
+			.indented {
+				padding-left: 1.5em;
+			}
+
+			hr {
+				background: transparent;
+				display: block;
+				width: 100%;
+				height: 1px;
+				visibility: visible;
+				border: none;
+				border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+			}
+
+			img {
+				max-width: 100%;
+			}
+
+			@media only print {
+				img {
+					max-height: 100vh;
+					object-fit: contain;
+				}
+			}
+
+			@page {
+				margin: 1in;
+			}
+
+			.collection-content {
+				font-size: 0.875rem;
+			}
+
+			.column-list {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.column {
+				padding: 0 1em;
+			}
+
+			.column:first-child {
+				padding-left: 0;
+			}
+
+			.column:last-child {
+				padding-right: 0;
+			}
+
+			.table_of_contents-item {
+				display: block;
+				font-size: 0.875rem;
+				line-height: 1.3;
+				padding: 0.125rem;
+			}
+
+			.table_of_contents-indent-1 {
+				margin-left: 1.5rem;
+			}
+
+			.table_of_contents-indent-2 {
+				margin-left: 3rem;
+			}
+
+			.table_of_contents-indent-3 {
+				margin-left: 4.5rem;
+			}
+
+			.table_of_contents-link {
+				text-decoration: none;
+				opacity: 0.7;
+				border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+			}
+
+			table,
+			th,
+			td {
+				border: 1px solid rgba(55, 53, 47, 0.09);
+				border-collapse: collapse;
+			}
+
+			table {
+				border-left: none;
+				border-right: none;
+			}
+
+			th,
+			td {
+				font-weight: normal;
+				padding: 0.25em 0.5em;
+				line-height: 1.5;
+				min-height: 1.5em;
+				text-align: left;
+			}
+
+			th {
+				color: rgba(55, 53, 47, 0.6);
+			}
+
+			ol,
+			ul {
+				margin: 0;
+				margin-block-start: 0.6em;
+				margin-block-end: 0.6em;
+			}
+
+			li > ol:first-child,
+			li > ul:first-child {
+				margin-block-start: 0.6em;
+			}
+
+			ul > li {
+				list-style: disc;
+			}
+
+			ul.to-do-list {
+				text-indent: -1.7em;
+			}
+
+			ul.to-do-list > li {
+				list-style: none;
+			}
+
+			.to-do-children-checked {
+				text-decoration: line-through;
+				opacity: 0.375;
+			}
+
+			ul.toggle > li {
+				list-style: none;
+			}
+
+			ul {
+				padding-inline-start: 1.7em;
+			}
+
+			ul > li {
+				padding-left: 0.1em;
+			}
+
+			ol {
+				padding-inline-start: 1.6em;
+			}
+
+			ol > li {
+				padding-left: 0.2em;
+			}
+
+			.mono ol {
+				padding-inline-start: 2em;
+			}
+
+			.mono ol > li {
+				text-indent: -0.4em;
+			}
+
+			.toggle {
+				padding-inline-start: 0em;
+				list-style-type: none;
+			}
+
+			/* Indent toggle children */
+			.toggle > li > details {
+				padding-left: 1.7em;
+			}
+
+			.toggle > li > details > summary {
+				margin-left: -1.1em;
+			}
+
+			.selected-value {
+				display: inline-block;
+				padding: 0 0.5em;
+				background: rgba(206, 205, 202, 0.5);
+				border-radius: 3px;
+				margin-right: 0.5em;
+				margin-top: 0.3em;
+				margin-bottom: 0.3em;
+				white-space: nowrap;
+			}
+
+			.collection-title {
+				display: inline-block;
+				margin-right: 1em;
+			}
+
+			time {
+				opacity: 0.5;
+			}
+
+			.icon {
+				display: inline-block;
+				max-width: 1.2em;
+				max-height: 1.2em;
+				text-decoration: none;
+				vertical-align: text-bottom;
+				margin-right: 0.5em;
+			}
+
+			img.icon {
+				border-radius: 3px;
+			}
+
+			.user-icon {
+				width: 1.5em;
+				height: 1.5em;
+				border-radius: 100%;
+				margin-right: 0.5rem;
+			}
+
+			.user-icon-inner {
+				font-size: 0.8em;
+			}
+
+			.text-icon {
+				border: 1px solid #000;
+				text-align: center;
+			}
+
+			.page-cover-image {
+				display: block;
+				object-fit: cover;
+				width: 100%;
+				height: 30vh;
+			}
+
+			.page-header-icon {
+				font-size: 3rem;
+				margin-bottom: 1rem;
+			}
+
+			.page-header-icon-with-cover {
+				margin-top: -0.72em;
+				margin-left: 0.07em;
+			}
+
+			.page-header-icon img {
+				border-radius: 3px;
+			}
+
+			.link-to-page {
+				margin: 1em 0;
+				padding: 0;
+				border: none;
+				font-weight: 500;
+			}
+
+			p > .user {
+				opacity: 0.5;
+			}
+
+			td > .user,
+			td > time {
+				white-space: nowrap;
+			}
+
+			input[type="checkbox"] {
+				transform: scale(1.5);
+				margin-right: 0.6em;
+				vertical-align: middle;
+			}
+
+			p {
+				margin-top: 0.5em;
+				margin-bottom: 0.5em;
+			}
+
+			.image {
+				border: none;
+				margin: 1.5em 0;
+				padding: 0;
+				border-radius: 0;
+				text-align: center;
+			}
+
+			.code,
+			code {
+				background: rgba(135, 131, 120, 0.15);
+				border-radius: 3px;
+				padding: 0.2em 0.4em;
+				border-radius: 3px;
+				font-size: 85%;
+				tab-size: 2;
+			}
+
+			code {
+				color: #eb5757;
+			}
+
+			.code {
+				padding: 1.5em 1em;
+			}
+
+			.code > code {
+				background: none;
+				padding: 0;
+				font-size: 100%;
+				color: inherit;
+			}
+
+			blockquote {
+				font-size: 1.25em;
+				margin: 1em 0;
+				padding-left: 1em;
+				border-left: 3px solid rgb(55, 53, 47);
+			}
+
+			.bookmark-href {
+				font-size: 0.75em;
+				opacity: 0.5;
+			}
+
+			.sans {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+					Helvetica, "Apple Color Emoji", Arial, sans-serif,
+					"Segoe UI Emoji", "Segoe UI Symbol";
+			}
+			.code {
+				font-family: "SFMono-Regular", Consolas, "Liberation Mono",
+					Menlo, Courier, monospace;
+			}
+			.serif {
+				font-family: Lyon-Text, Georgia, KaiTi, STKaiTi, "华文楷体",
+					KaiTi_GB2312, "楷体_GB2312", serif;
+			}
+			.mono {
+				font-family: Nitti, "Microsoft YaHei", "微软雅黑", monospace;
+			}
+			.pdf .sans {
+				font-family: Inter, -apple-system, BlinkMacSystemFont,
+					"Segoe UI", Helvetica, "Apple Color Emoji", Arial,
+					sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", "Twemoji",
+					"Noto Color Emoji", "Noto Sans CJK SC", "Noto Sans CJK KR";
+			}
+
+			.pdf .code {
+				font-family: Source Code Pro, "SFMono-Regular", Consolas,
+					"Liberation Mono", Menlo, Courier, monospace, "Twemoji",
+					"Noto Color Emoji", "Noto Sans Mono CJK SC",
+					"Noto Sans Mono CJK KR";
+			}
+
+			.pdf .serif {
+				font-family: PT Serif, Lyon-Text, Georgia, KaiTi, STKaiTi,
+					"华文楷体", KaiTi_GB2312, "楷体_GB2312", serif, "Twemoji",
+					"Noto Color Emoji", "Noto Sans CJK SC", "Noto Sans CJK KR";
+			}
+
+			.pdf .mono {
+				font-family: PT Mono, Nitti, "Microsoft YaHei", "微软雅黑",
+					monospace, "Twemoji", "Noto Color Emoji",
+					"Noto Sans Mono CJK SC", "Noto Sans Mono CJK KR";
+			}
+
+			.highlight-default {
+			}
+			.highlight-gray {
+				color: rgb(155, 154, 151);
+			}
+			.highlight-brown {
+				color: rgb(100, 71, 58);
+			}
+			.highlight-orange {
+				color: rgb(217, 115, 13);
+			}
+			.highlight-yellow {
+				color: rgb(223, 171, 1);
+			}
+			.highlight-teal {
+				color: rgb(15, 123, 108);
+			}
+			.highlight-blue {
+				color: rgb(11, 110, 153);
+			}
+			.highlight-purple {
+				color: rgb(105, 64, 165);
+			}
+			.highlight-pink {
+				color: rgb(173, 26, 114);
+			}
+			.highlight-red {
+				color: rgb(224, 62, 62);
+			}
+			.highlight-gray_background {
+				background: rgb(235, 236, 237);
+			}
+			.highlight-brown_background {
+				background: rgb(233, 229, 227);
+			}
+			.highlight-orange_background {
+				background: rgb(250, 235, 221);
+			}
+			.highlight-yellow_background {
+				background: rgb(251, 243, 219);
+			}
+			.highlight-teal_background {
+				background: rgb(221, 237, 234);
+			}
+			.highlight-blue_background {
+				background: rgb(221, 235, 241);
+			}
+			.highlight-purple_background {
+				background: rgb(234, 228, 242);
+			}
+			.highlight-pink_background {
+				background: rgb(244, 223, 235);
+			}
+			.highlight-red_background {
+				background: rgb(251, 228, 228);
+			}
+			.block-color-default {
+				color: inherit;
+				fill: inherit;
+			}
+			.block-color-gray {
+				color: rgba(55, 53, 47, 0.6);
+				fill: rgba(55, 53, 47, 0.6);
+			}
+			.block-color-brown {
+				color: rgb(100, 71, 58);
+				fill: rgb(100, 71, 58);
+			}
+			.block-color-orange {
+				color: rgb(217, 115, 13);
+				fill: rgb(217, 115, 13);
+			}
+			.block-color-yellow {
+				color: rgb(223, 171, 1);
+				fill: rgb(223, 171, 1);
+			}
+			.block-color-teal {
+				color: rgb(15, 123, 108);
+				fill: rgb(15, 123, 108);
+			}
+			.block-color-blue {
+				color: rgb(11, 110, 153);
+				fill: rgb(11, 110, 153);
+			}
+			.block-color-purple {
+				color: rgb(105, 64, 165);
+				fill: rgb(105, 64, 165);
+			}
+			.block-color-pink {
+				color: rgb(173, 26, 114);
+				fill: rgb(173, 26, 114);
+			}
+			.block-color-red {
+				color: rgb(224, 62, 62);
+				fill: rgb(224, 62, 62);
+			}
+			.block-color-gray_background {
+				background: rgb(235, 236, 237);
+			}
+			.block-color-brown_background {
+				background: rgb(233, 229, 227);
+			}
+			.block-color-orange_background {
+				background: rgb(250, 235, 221);
+			}
+			.block-color-yellow_background {
+				background: rgb(251, 243, 219);
+			}
+			.block-color-teal_background {
+				background: rgb(221, 237, 234);
+			}
+			.block-color-blue_background {
+				background: rgb(221, 235, 241);
+			}
+			.block-color-purple_background {
+				background: rgb(234, 228, 242);
+			}
+			.block-color-pink_background {
+				background: rgb(244, 223, 235);
+			}
+			.block-color-red_background {
+				background: rgb(251, 228, 228);
+			}
+
+			.checkbox {
+				display: inline-flex;
+				vertical-align: text-bottom;
+				width: 16;
+				height: 16;
+				background-size: 16px;
+				margin-left: 2px;
+				margin-right: 5px;
+			}
+
+			.checkbox-on {
+				background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+			}
+
+			.checkbox-off {
+				background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+			}
+		</style>
+	</head>
+	<body>
+		<article id="1b336afd-6dc6-429c-9a59-3c99b9b8eba1" class="page serif">
+			<header>
+				<img
+					class="page-cover-image"
+					src="https://images.unsplash.com/photo-1496715976403-7e36dc43f17b?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"
+					style="object-position:center 50%"
+				/>
+				<div class="page-header-icon page-header-icon-with-cover">
+					<span class="icon">✏️</span>
+				</div>
+				<h1 class="page-title">
+					Django - GraphQL - React Integration Tutorial: Part-1
+				</h1>
+			</header>
+			<div class="page-body">
+				<p id="ed8071b7-1af2-4003-840e-7f03d176fe4d" class=""></p>
+				<h2 id="d27cce6c-441e-4bc5-9ef8-43603141b4b5" class="">
+					Introduction
+				</h2>
+				<p id="cdf6976f-b620-4ad8-93bb-233a3cc4ad9a" class="">
+					In <a href="https://pixly.app">Pixly</a>, we are using
+					Django framework as our backend due to the excellent data
+					science libraries and great community of the Python
+					ecosystem. However, when we have decided to make frontend
+					app as a single-page-application with React, we faced many
+					difficulties. We hope that our tutorial will help newcomers
+					a bit for solving their future problems.
+				</p>
+				<p id="f516eac9-b9b6-4c67-a530-a2f4ae0e490f" class=""></p>
+				<p id="ee1fe155-d4b2-42fa-8155-1bfff530fb8a" class="">
+					<strong>What are the requirements to follow?</strong>
+				</p>
+				<p id="5c523c39-b6af-4fcb-b2b7-3882855c9303" class="">
+					People who follow this tutorial should have at least an
+					elementary level of knowledge about Python and basic level
+					of knowledge Django framework. Also basic level of
+					Javascript and React is a must.
+				</p>
+				<p id="8c636c94-391f-43d7-b104-adce1abbfcbd" class=""></p>
+				<p id="d4018bce-5717-4e4c-9c9b-e99f0b04f7fd" class="">
+					This tutorial series are planned to be three detailed parts.
+				</p>
+				<ol
+					id="3dc88e42-7d63-4d7a-872a-fbc3fa138b5a"
+					class="numbered-list"
+					start="1"
+				>
+					<li>Django backend</li>
+				</ol>
+				<ol
+					id="2ba0f006-bc36-4957-a506-b76dc776c9d0"
+					class="numbered-list"
+					start="2"
+				>
+					<li>GraphQL API</li>
+				</ol>
+				<ol
+					id="112d1573-b607-4904-ac86-e18770939ce5"
+					class="numbered-list"
+					start="3"
+				>
+					<li>
+						React frontend and bundling the client app with Webpack
+					</li>
+				</ol>
+				<p id="d1b03f7b-ae72-4899-8d08-8c18379915fc" class=""></p>
+				<h3 id="11620b12-d7b3-4ff3-8cc1-b3fa36ec1ee6" class="">
+					The Project Description
+				</h3>
+				<p id="c09dc72a-39d5-47a6-becf-77591ffa8eee" class="">
+					We will make a stupidly simple single page application
+					written by React that will communicate Django backend via
+					GraphQL API. React app will be written from scratch with
+					webpack. Create-react-app boilerplate will not be used.
+				</p>
+				<p id="a2c22e51-1f2b-4f88-ac2c-ffbefc53b365" class="">
+					There are a few options to make django and react integrated
+					in production, as I know.
+				</p>
+				<p id="577a0e74-0b78-4a3d-9139-ba32e87b07b9" class="">
+					You may run two servers, one is django backend and one for
+					Node backend server which is not an ideal one because of
+					running two different server costs.
+				</p>
+				<p id="da4d6bab-c640-4c50-a834-502b3e410b67" class="">
+					You may use serverless architecture which is quite a new
+					technology that you may pay only for the functions that is
+					triggered by client side and query your database with it.
+				</p>
+				<p id="f8421148-3b07-4863-ab62-87eddc70d3ad" class="">
+					You can run a Django backend server that will responses our
+					frontend application&#x27;s requests. Our frontend
+					application will run on the browser of the users. All the
+					frontend requests, logic and other stuff will be done by the
+					browser with a React Javascript application.
+				</p>
+				<p id="fd682ece-548c-4741-8a25-16d48a39a32b" class="">
+					Our project will not be an isomorphic application. Therefore
+					we need an API that will be used for the communication of
+					Python backend and Javascript frontend. We have two options
+					for that; REST and relatively new technology GraphQL. We
+					will use the GraphQL. Our frontend and backend will use
+					Apollo GraphQL and Graphene frameworks respectively.
+				</p>
+				<p id="5f2c3b33-470f-4004-a38b-947af857aacb" class="">
+					Maybe it is not the best solution but we will use two server
+					in development. In production, we will use only one. Our
+					bundled frontend app will not need a server.
+				</p>
+				<p id="80264e53-5239-4f6c-b7dc-060f242b83ad" class=""></p>
+				<p id="ec9fcdab-4e03-4100-b515-99beb16b0f2a" class=""></p>
+				<h3 id="06b1fe1a-4b6a-42e6-b4bf-649cae168a73" class="">
+					Step-0: Configuring Environment
+				</h3>
+				<p id="4e73fc1b-a9e3-4458-8a5a-cf4bd100ad9e" class="">
+					(Note: If you choose to use your existing python
+					environment, you can skip this part and go to step-1)
+				</p>
+				<p id="40f1602f-e855-408a-a325-7985c34dbf6d" class=""></p>
+				<p id="627f1b14-8be1-4787-a022-1873d4cd6028" class="">
+					This tutorial was written on a computer with Ubuntu 18.04
+					operating system. The default python interpreter is Python
+					3.6.x. Due to the need for clean environment, Python 3.8
+					will be installed, and virtual environment will be built on
+					it.
+				</p>
+				<pre
+					id="2517ac4c-711d-4303-ae70-74664d5453ee"
+					class="code"
+				><code>#&lt;---Install python 3.8---&gt;
+cd /opt
+sudo wget https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
+
+#extract the source
+sudo tar xzf Python-3.8.0.tgz
+
+cd Python-3.8.0
+sudo ./configure --enable-loadable-sqlite-extensions
+
+#use altinstall to prevent overriding your existing python environment
+sudo make altinstall
+
+#check version of python
+python3.8 --version
+# print Python 3.8.0</code></pre>
+				<pre
+					id="be8a8786-2024-4c99-8973-2a861069e9e3"
+					class="code"
+				><code># &lt;---Create Virtual Environment---&gt;
+
+# create virtual environment folder
+cd ~/
+mkdir venv
+ 
+# create python 3.8 virtual environment name djr-venv
+python3.8 -m venv ~/venv/djr-venv
+
+# activate it
+source ~/venv/djr-venv/bin/activate
+# you can deactivate it with deactivate command</code></pre>
+				<p id="069c0d06-5cb6-41e1-beb2-98ba8f0b680d" class=""></p>
+				<h2 id="43d480fd-672b-47e4-a8f1-4fa2d4afead4" class="">
+					Create Django Project
+				</h2>
+				<h3 id="bc283cd3-3915-45a9-ab0c-7b920d9e12ac" class="">
+					<strong>Step-1: Install dependencies</strong>
+				</h3>
+				<pre
+					id="0bc5ed65-0278-455f-a3cc-67808ecb67a7"
+					class="code"
+				><code># &lt;--- Create Django Project ---&gt;
+
+# We will create the project in the Blog folder 
+# with a name djr
+
+# install our dependencies
+pip install ipython django django_extensions django-cors-headers &quot;graphene-django&gt;=2.0&quot; </code></pre>
+				<p id="3a4b62c7-4da8-49b1-ac70-65c61adacecb" class=""></p>
+				<h3 id="53588e71-9e0c-498c-ac6c-5b86536ca973" class="">
+					<strong> Step -2: Create django project</strong>
+				</h3>
+				<pre
+					id="28bed2e8-3ea5-4dd1-ad64-1ec6d22f083c"
+					class="code"
+				><code>#start a django project
+django-admin startproject djr
+
+# change directory
+cd djr
+
+# create templates directory
+mkdir templates
+
+# create static folder
+mkdir static</code></pre>
+				<p id="bab28965-9c7c-4516-8fc8-f98fdf105584" class=""></p>
+				<h3 id="9de2dbc5-b4c7-4181-9eb0-6a3f3ff3a858" class="">
+					<strong>Step -3: Create new django app</strong>
+				</h3>
+				<p id="a8dbb7c7-0e13-4396-814c-4b2325f464b9" class="">
+					Now we can create our app in order to create database
+					models.
+				</p>
+				<pre
+					id="e38d839c-fd94-49a4-b92a-37df90e14c1b"
+					class="code"
+				><code># create our app and activate it on the settings.py
+python manage.py startapp items</code></pre>
+				<p id="22ebb47f-e181-406d-83ed-1135cfad8c46" class=""></p>
+				<h3 id="9f67047e-e765-4f8c-874d-391e7a1d8e62" class="">
+					<strong> Step -4: Configure django settings</strong>
+				</h3>
+				<p id="ef955040-997c-4460-9cf5-a52cce5b8e40" class="">
+					Update your setting file.
+				</p>
+				<pre
+					id="7feecc7a-5b4c-4334-bcea-fb3606cf0b12"
+					class="code"
+				><code>
+INSTALLED_APPS = [
+    &#x27;django.contrib.admin&#x27;,
+    &#x27;django.contrib.auth&#x27;,
+    &#x27;django.contrib.contenttypes&#x27;,
+    &#x27;django.contrib.sessions&#x27;,
+    &#x27;django.contrib.messages&#x27;,
+    &#x27;django.contrib.staticfiles&#x27;,
+
+    &quot;django_extensions&quot;,# New! (useful extension)
+    &#x27;graphene_django&#x27;,  # New! (for graphql communication)
+    &#x27;corsheaders&#x27;,      # New! (for cors request in dev env)
+    &quot;items&quot; # ---&gt; New! (make our app will active)
+]
+
+# New
+# for improved interactive shell
+# add this
+SHELL_PLUS = &quot;ipython&quot;
+
+# allow webpack development server to make cross-request
+CORS_ORIGIN_WHITELIST = (
+    &#x27;http://localhost:8080&#x27;,
+)
+GRAPHENE = {
+    &#x27;SCHEMA&#x27;: &#x27;gql.schema.schema&#x27;
+}
+
+MIDDLEWARE = [
+    &#x27;django.middleware.security.SecurityMiddleware&#x27;,
+    &#x27;corsheaders.middleware.CorsMiddleware&#x27;, # New Add this
+    &#x27;django.contrib.sessions.middleware.SessionMiddleware&#x27;,
+    &#x27;django.middleware.common.CommonMiddleware&#x27;,
+    &#x27;django.middleware.csrf.CsrfViewMiddleware&#x27;,
+    &#x27;django.contrib.auth.middleware.AuthenticationMiddleware&#x27;,
+    &#x27;django.contrib.messages.middleware.MessageMiddleware&#x27;,
+    &#x27;django.middleware.clickjacking.XFrameOptionsMiddleware&#x27;,
+]
+
+TEMPLATES = [
+    {
+        &#x27;BACKEND&#x27;: &#x27;django.template.backends.django.DjangoTemplates&#x27;,
+        &#x27;DIRS&#x27;: (os.path.join(BASE_DIR, &#x27;templates&#x27;),), # New
+        &#x27;APP_DIRS&#x27;: True,
+        &#x27;OPTIONS&#x27;: {
+            &#x27;context_processors&#x27;: [
+                &#x27;django.template.context_processors.debug&#x27;,
+                &#x27;django.template.context_processors.request&#x27;,
+                &#x27;django.contrib.auth.context_processors.auth&#x27;,
+                &#x27;django.contrib.messages.context_processors.messages&#x27;,
+            ],
+        },
+    },
+]
+
+#New 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, &#x27;static&#x27;),
+)</code></pre>
+				<p id="7a720e9c-1bcf-4b5e-b5fe-95a17a02d7da" class=""></p>
+				<p id="5d57e406-8218-451d-9444-697b9256c61e" class="">
+					Now the general structure of the directory should look like
+					this.
+				</p>
+				<figure id="10238a19-4950-4767-afb0-ee8e3a37403a" class="image">
+					<a
+						href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/backend-structure.jpg"
+						><img
+							style="width:708px"
+							src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/backend-structure.jpg"
+					/></a>
+				</figure>
+				<p id="0041565a-6e61-4f03-8168-88655334b437" class=""></p>
+				<p id="b83a562b-bae8-4a07-a105-2054f09d36b5" class=""></p>
+				<h3 id="bac039f8-c60f-4210-adb2-bb42cf674335" class="">
+					<strong> Step-5: Run django server</strong>
+				</h3>
+				<p id="9ce95097-47c0-4ced-96c2-453d6ed94f57" class="">
+					Before starting our project, we should first make database
+					migration.
+				</p>
+				<pre
+					id="4a39eeaa-285e-4a81-abbd-9e3ae19c56b2"
+					class="code"
+				><code># create migration for django-orm
+python manage.py migrate</code></pre>
+				<p id="5b79c669-eb90-451e-9a23-73dcdf5d1e57" class="">
+					Now we can start our project and see what happens.
+				</p>
+				<pre
+					id="a9a15da9-6c73-4d1b-930c-8446debee065"
+					class="code"
+				><code># run server
+python manage.py runserver</code></pre>
+				<figure id="b032fc74-12af-476c-9d30-460907934bb1" class="image">
+					<a
+						href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/first-runserver.jpg"
+						><img
+							style="width:1584px"
+							src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/first-runserver.jpg"
+					/></a>
+				</figure>
+				<p id="3e396e45-5dfa-4840-8efc-c72fd440327d" class="">
+					Now, Our django development server is ready.
+				</p>
+				<p id="5c641ec2-4020-4345-97fe-3bfd24dc3ba8" class="">
+					You can go to the url address of
+					<a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>
+					and verify that it is working.
+				</p>
+				<figure id="4415493a-0a6e-4e4e-ad8e-725a9ad03498" class="image">
+					<a
+						href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/django-runserver-first-screen.jpg"
+						><img
+							style="width:1475px"
+							src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/django-runserver-first-screen.jpg"
+					/></a>
+				</figure>
+				<p id="91da1d4a-036c-4d87-8b3d-2d0e53f34300" class=""></p>
+				<p id="b4562a05-e6cc-4fc2-a092-8e71e2be64ad" class="">
+					After then, you can stop the server by pressing CTRL+C
+				</p>
+				<p id="0e272030-2c3d-44a3-92f4-6cf9987c25f1" class=""></p>
+				<p id="7be6fcb6-a8c9-48ba-b499-2333a9f54171" class=""></p>
+				<h3 id="b49f537a-4ba7-4447-9016-976c9af7da01" class="">
+					<strong> Step-6: Create movie app</strong>
+				</h3>
+				<p id="d1d1a0fd-64ed-4b85-9264-a4e15816541f" class="">
+					We will create a movie model with basic fields that a movie
+					should have.
+				</p>
+				<p id="187af86c-c0ab-48fd-a18e-28637f975fcd" class="">
+					Before that we should give some information about the field
+					choices.
+				</p>
+				<p id="9382ec24-e471-4cf6-b080-ea36bbadbf46" class=""></p>
+				<p id="2e1acba0-c43c-405d-b994-86ad1c5453e6" class="">
+					<strong
+						>Why there is url field for poster rather than image
+						field ?</strong
+					>
+				</p>
+				<p id="b4ce7cd7-d5e0-4899-b986-b3e7c419c073" class="">
+					Because serving static files in production is out of our
+					scope, we decide to use only url field. Fetching the image
+					from remote and then saving it to our production storage is
+					a topic of another post.
+				</p>
+				<p id="83b9a819-29e2-4160-89b3-5b8dc4b411e9" class="">
+					Due to this, we will save only the poster&#x27;s url, not
+					poster&#x27;s itself as an image file. Also sending static
+					files like images is not a good approach. We will send the
+					exact url of an image to the user. Then, user&#x27;s browser
+					fetch the image from this.
+				</p>
+				<p id="5082fc81-a30d-432d-a3fe-2d583842abd7" class=""></p>
+				<p id="e354650a-3be4-4da6-a136-b6a525bf47e3" class="">
+					<strong>What is slug and why it should be unique?</strong>
+				</p>
+				<p id="63bcef38-2ff2-4817-a955-34937f31a741" class="">
+					Let me explain; When you browsing on Pixly, if you open the
+					The Matrix movie page, you will see that your address bar
+					will be : &quot;<a
+						href="https://pixly.app/movie/the-matrix-1999"
+						>https://pixly.app/movie/the-matrix-1999</a
+					>&quot;.
+				</p>
+				<p id="10b41cc6-a3d2-469a-8149-595ca48c7c3c" class="">
+					The last part of the url is the slug of The Matrix movie and
+					also it is an identifier which makes the url distinctive
+					from other movie pages. In the GraphQL part of the tutorial
+					you will see that this slug will be used as a query
+					parameter meaning that database queries will be done
+					according to slug. Therefore it should be unique.
+				</p>
+				<p id="7618d429-f048-41d7-bd55-2ce6903d7ee5" class="">
+					We can also choose the movie id as url identifier, but
+					it&#x27;s clear that the url will not be human-readable
+					address. Moreover, search engine indexing and ranking is a
+					vital part of any website that targeting new users. Readable
+					url address&#x27; are good for users themselves and also
+					suggested by search engine guides. For example;
+					<a
+						href="https://support.google.com/webmasters/answer/76329?hl=en&amp;ref_topic=9460495"
+						>Google webmaster guideline</a
+					>
+					recommends to use clean and concise url structures.
+				</p>
+				<p id="9caa2118-13b0-41c2-92da-1edbcc288328" class=""></p>
+				<p id="8a52b077-0e65-43bf-b6be-f1d1abddcc5a" class="">
+					Let&#x27;s make our model. Open items/models.py file.
+				</p>
+				<pre
+					id="87c25859-4473-4843-88ed-180d2f964677"
+					class="code"
+				><code># items.models
+from django.db import models
+
+# Create your models here.
+class Movie(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    year = models.IntegerField(null=True)
+    summary = models.TextField(max_length=5000,null=True)
+    poster_url = models.URLField(blank=True, null=True)
+    slug = models.SlugField(
+				max_length=50, null=True,blank =True, unique=True)
+
+    class Meta:
+        ordering = [&quot;-year&quot;]
+
+    def __str__(self):
+        return self.name</code></pre>
+				<p id="137b29ba-d4b0-4bf6-88e8-38a266735713" class="">
+					Migrate again in order to make database arrangements for our
+					new model.
+				</p>
+				<pre
+					id="48967cf4-a547-4bfb-8325-074d478bb1b2"
+					class="code"
+				><code>python manage.py makemigrations
+python manage.py migrate</code></pre>
+				<p id="c429c8c2-3bdd-40ad-9091-15000b125898" class=""></p>
+				<p id="c0813a73-7701-4e98-97cd-6270d97c4f49" class=""></p>
+				<h3 id="6287b703-761e-41d0-ac50-6d870c1eb929" class="">
+					Step-7: Populating Database with Initial Data
+				</h3>
+				<p id="7d889831-e1eb-41dc-a61c-651632e3abc5" class="">
+					There is no movie record currently in our database. We will
+					provide a small initial data to create some movie records.
+					All the data is provided by community built
+					<a href="https://www.themoviedb.org/">The Movie Database</a>
+					(TMDb).
+				</p>
+				<p id="b316ea7a-0d32-4ccf-b0d7-e245f7623130" class=""></p>
+				<p id="e6656992-d2ca-46e9-846b-3ca5bfdc8e94" class="">
+					First, create a class method in order to import initial
+					data.
+				</p>
+				<pre
+					id="1b883d74-1c92-455c-9c6e-6e7354d77ee8"
+					class="code"
+				><code># items.models
+
+class Movie(models.Model):
+		&quot;&quot;&quot;
+			... Model is truncated
+		&quot;&quot;&quot;
+
+#&lt;-----Add this class method------&gt;
+    @classmethod
+    def import_records(cls, record_list):
+        for record in record_list:
+            # create record if id is not exist
+            if not Movie.objects.filter(id=record.get(&quot;id&quot;)).exists():
+                new_movie = cls.objects.create(**record)
+            else:
+                print(f&quot;Id:{record.get(&#x27;id&#x27;)} is already exist.&quot;)
+        print(&quot;Import operation done successfully&quot;)</code></pre>
+				<p id="c1d54380-fb78-49b7-afde-508b1ea28d73" class=""></p>
+				<p id="2c3db597-9c3f-4c59-b38a-4f7cc541db22" class="">
+					Then, get initial data file from
+					<a
+						href="https://raw.githubusercontent.com/canburaks/djr/master/utils/initial_data.py"
+						>github repo</a
+					>
+					and set the initial_data.py file in utils folder. The
+					directories and the initial data looks like this.
+				</p>
+				<figure id="ec755d61-7ecb-4daf-abf7-d11feabd9b97" class="image">
+					<a
+						href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/initial_data.png"
+						><img
+							style="width:934px"
+							src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/initial_data.png"
+					/></a>
+				</figure>
+				<p id="15e24e34-133a-48a9-a03f-2a46d5315433" class=""></p>
+				<p id="aab9e4de-7e23-46d5-88eb-5d50e84a0661" class=""></p>
+				<p id="cf5ad324-f99c-400a-a37b-9fb37bb3d642" class="">
+					Normally we should have open django shell. However
+					shell_plus which is provided by django_extensions package is
+					more functional so we will use this.
+				</p>
+				<pre
+					id="8b0a19f1-f3cd-4198-b1f8-98ee09082d48"
+					class="code"
+				><code># normally we use this command
+# python manage.py shell 
+# However django_extensions shell is more functional
+# it preimports all apps we created
+
+# open interactive shell 
+python manage.py shell_plus</code></pre>
+				<pre
+					id="7837bfc6-9999-4d6c-ae95-342541814183"
+					class="code"
+				><code># django interactive shell
+
+# let&#x27;s first check our database for movie records
+# and verify that it empty.
+<mark class="highlight-teal">In [1]</mark>: Movie.objects.all()                                                                                       
+<mark class="highlight-red">Out[1]</mark>: &lt;QuerySet []&gt;
+
+
+# import the list of records
+<mark class="highlight-teal">In [2]:</mark> from utils.initial_data import initial_data
+
+# create records in the database
+<mark class="highlight-teal">In [2]</mark>: Movie.import_records(initial_data)
+#Import operation done successfully
+
+#Successfully imported our initial data</code></pre>
+				<p id="b652204e-f2dc-4244-8822-6d1be1a5985c" class="">
+					Our model and database are ready. You can close the shell
+					with quit command.
+				</p>
+				<p id="050d8c60-4d0f-41e0-8194-3a5128f26828" class=""></p>
+				<p id="4cca0643-8a67-4b84-8d1b-836bc2ff26be" class="">
+					In the next part we will create our API with python graphql
+					framework
+					<a href="https://graphene-python.org/">Graphene</a> and its
+					django package
+					<a
+						href="http://docs.graphene-python.org/projects/django/en/latest/"
+						>graphene-django</a
+					>.
+				</p>
+				<p id="d3a730d7-5915-401d-ba77-9fa121c3c8f3" class=""></p>
+			</div>
+		</article>
+	</body>
+</html>

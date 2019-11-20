@@ -16,7 +16,9 @@ import {
     TextSection,SchemaPost,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, HeaderMini, NewLink
 } from "../../styled-components"
+import Highlight from 'react-highlight'
 
+import "../../../node_modules/highlight.js/styles/rainbow.css"
 
 const BlogPage = (props) =>{
     //print("blog props", props)
@@ -49,8 +51,9 @@ const PostPage = (props) =>{
                 description={post.summary}
                 canonical={`https://pixly.app/blog/${post.slug}`}
             />
-            <ContentContainer px={"10vw"}>
-                <InnerHtml />
+            <ContentContainer px={"10vw"}  pb={40}  >
+            <SchemaPost post={post}/>
+
             </ContentContainer>
         </PageContainer>
     );
