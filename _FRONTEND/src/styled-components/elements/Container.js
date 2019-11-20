@@ -10,12 +10,14 @@ import {
 import { SocialBox } from "../others"
 import parse, { domToReact } from 'html-react-parser';
 
+import Highlight from 'react-highlight'
 
+import "../../../node_modules/highlight.js/styles/rainbow.css"
 
 export const HtmlContainer = ({ html, ...props }) => {
     const options = {
         replace: domNode => {
-            console.log(domNode)
+            //console.log(domNode)
             if (domNode.attribs && domNode.name ==="h1"){
                 return (
                     <HeaderText  mt={"32px !important"}
@@ -24,8 +26,11 @@ export const HtmlContainer = ({ html, ...props }) => {
                         {domToReact(domNode.children)}
                     </HeaderText>)
             }
-            if (domNode.attribs && domNode.name ==="h2"){
+            else if (domNode.attribs && domNode.name ==="h2"){
                 return <SubHeaderText   mt={"32px !important"}>{domToReact(domNode.children)}</SubHeaderText>
+            }
+            else if (domNode.attribs && domNode.name ==="code"){
+                return <Highlight>{domToReact(domNode.children)}</Highlight>
             }
             else if (domNode.attribs && (
                     domNode.name === 'h3' || 
@@ -47,7 +52,7 @@ export const HtmlContainer = ({ html, ...props }) => {
         if(html){
             //console.log("parser" , html)
             //console.log("topic: ", parseResult)
-            return parse(html)
+            return parse(html, options)
         }
     }
     parseTest()
