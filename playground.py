@@ -19,6 +19,7 @@ tt = Tag.objects.get(tmdb_id=11192)
 
 vid = Video.objects.get(youtube_id="W9Cu7Otn9Io")
 
+b = Post.objects.filter(id=4).first() 
 
 vall = Video.objects.all()
 #from gql.youtube_client import Youtube

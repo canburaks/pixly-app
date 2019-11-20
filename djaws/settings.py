@@ -347,6 +347,8 @@ CKEDITOR_CONFIGS = {
             'python': 'Python',
             'javascript': 'JavaScript',
             'bash': 'Bash',
+            "html": "HTML",
+            "css": "CSS"
         },
 
 
