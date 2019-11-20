@@ -37,7 +37,11 @@ const BlogPage = (props) =>{
 }
 const PostPage = (props) =>{
     const post = props.post
-    //print("blog props", props)
+    print("blog props", props)
+    function createMarkup() {
+        return {__html: props.post.text};
+      }
+    const InnerHtml = () => <div dangerouslySetInnerHTML={createMarkup()} />;
     return(
         <PageContainer>
             <Head
@@ -46,9 +50,7 @@ const PostPage = (props) =>{
                 canonical={`https://pixly.app/blog/${post.slug}`}
             />
             <ContentContainer px={"10vw"}>
-                <SchemaPost 
-                    post={post}
-                />
+                <InnerHtml />
             </ContentContainer>
         </PageContainer>
     );
