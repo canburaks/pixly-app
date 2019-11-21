@@ -54,9 +54,9 @@ html, body {
     min-height: 150px !important;
     */
     min-width: 300px !important;
-    min-height:120px;
+    min-height:100px;
     width: 100%;
-    margin:24px 8px;
+    margin:16px 8px;
 }
 
 
@@ -137,4 +137,16 @@ div.content-container[screen="L"] {
 
 .active.f-icon.fa-plus {
     color: var(--color-green-light);
+}
+
+pre {
+    margin:2px 0px;
+}
+p{
+    line-height: 1.6rem;
+    word-spacing: 4px;
+}
+
+h3 {
+    margin-top:40px !important; 
 }
