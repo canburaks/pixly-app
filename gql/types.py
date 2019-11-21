@@ -213,9 +213,9 @@ class PostType(DjangoObjectType):
     def resolve_post_type(self, info, *_):
         return self.post_type
 
-    def resolve_cover(self, info, *_):
+    def resolve_cover_poster(self, info, *_):
         try:
-            return self.cover_poster.url
+            return self.cover.url
         except:
             if self.cover != None  and  self.cover != "":
                 return "https://cbs-static.s3.amazonaws.com/static/media/" + self.cover
