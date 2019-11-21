@@ -1,6 +1,19 @@
 import gql from "graphql-tag";
 import { request, GraphQLClient } from 'graphql-request'
 
+export const BLOG_POST_MUTATION = gql`
+  mutation blogPostMutation($slug: String, $text:String) {
+    blogPostMutation(slug:$slug, text:$text) {
+      post {
+        active, slug,
+        header, summary, text,
+        seoTitle, seoDescription, seoShortDescription
+      },
+      message
+    }
+  }
+`;
+
 export const FACEBOOK_CONNECT = gql`
   mutation facebookConnect($data: String!) {
     facebookConnect(data:$data) {

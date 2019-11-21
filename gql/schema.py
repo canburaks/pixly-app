@@ -763,7 +763,7 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
 
 
 from .mutations import (Bookmark, Follow, Rating, BackgroundTasks,ContactMutation,
-        ObtainJSONWebToken, Prediction, RedisMutation, Fav, #BackgroundCacheSet,
+        ObtainJSONWebToken, Prediction, RedisMutation, Fav, BlogPostMutation,
         EmailValidation, UsernameValidation,Logout, ObtainJSONWebToken)
         
 
@@ -777,6 +777,7 @@ from .social.facebook import FacebookConnect, FacebookAuthentication
 from .social.twitter import TwitterMutation
 
 class Mutation(graphene.ObjectType):
+    blog_post_mutation = BlogPostMutation.Field()
     contact_mutation = ContactMutation.Field()
 
     facebook_connect = FacebookConnect.Field()
