@@ -130,25 +130,31 @@ export const SubHeaderText = styled('h2')({
       border
   )
 )
-export const HeaderMini = styled('h4')({
-  width:"100% ",
-  textTransform:"capitalize",
-  fontWeight:"bold",
-  color:"dark",
-  cursor:props => props.clickable ? "pointer" : "inherit",
-  textShadow:props => props.textShadow || themeGet("shadows.lightGray"),
-  wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
+export const HM = styled("h4")`
+    :hover {
+      text-decoration:${props => props.hoverUnderline && "underline"};
+    };
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
+`
 
-},
-  compose(
-    typography,
-    color,
-    space,
-    shadow,
-    layout,
-    position,
-      border
-  )
+export const HeaderMini = styled(HM)({
+    width:"100% ",
+    textTransform:"capitalize",
+    fontWeight:"bold",
+    color:"dark",
+    cursor:props => props.clickable ? "pointer" : "inherit",
+    textShadow:props => props.textShadow || themeGet("shadows.lightGray"),
+    wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
+
+    }
 )
 
 HeaderMini.defaultProps = {

@@ -213,7 +213,7 @@ class PostType(DjangoObjectType):
     def resolve_post_type(self, info, *_):
         return self.post_type
 
-    def resolve_cover_poster(self, info, *_):
+    def resolve_cover(self, info, *_):
         try:
             return self.cover.url
         except:
