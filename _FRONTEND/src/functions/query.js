@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 export const BLOG_QUERY = gql`
     query blogPosts{
         blogPosts{
-            id, header, summary, text, slug, coverPoster, postType, 
+            id, header, summary, text, slug, cover, postType, 
             createdAt, updatedAt, active,
             seoTitle, seoDescription, seoShortDescription,
             author{
