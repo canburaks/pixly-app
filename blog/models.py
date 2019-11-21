@@ -26,7 +26,7 @@ class Post(SocialMedia, SEO, DateRecords, MainPage):
 
     header = models.CharField(max_length=300, null=True, blank=True)
     summary = models.TextField(max_length=500, null=True, blank=True, help_text="A brief summary of text")
-    cover_poster = models.ImageField(blank=True, upload_to=post_poster_upload_path)
+    cover = models.ImageField(blank=True, upload_to=post_poster_upload_path)
 
 
     text = RichTextUploadingField(default="...", max_length=20000, null=True, blank=True, help_text="Only Content, Don't add H1 Heading")
