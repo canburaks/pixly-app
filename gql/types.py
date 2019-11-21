@@ -183,7 +183,7 @@ class PostType(DjangoObjectType):
 
     summary = graphene.String()
     slug = graphene.String()
-    cover_poster = graphene.String()
+    cover = graphene.String()
 
     post_type = graphene.String()
     created_at = graphene.String()
@@ -213,12 +213,12 @@ class PostType(DjangoObjectType):
     def resolve_post_type(self, info, *_):
         return self.post_type
 
-    def resolve_cover_poster(self, info, *_):
+    def resolve_cover(self, info, *_):
         try:
             return self.cover_poster.url
         except:
-            if self.cover_poster != None  and  self.cover_poster != "":
-                return "https://cbs-static.s3.amazonaws.com/static/media/" + self.cover_poster
+            if self.cover != None  and  self.cover != "":
+                return "https://cbs-static.s3.amazonaws.com/static/media/" + self.cover
             return None
 
     def resolve_created_at(self, info, *_):
