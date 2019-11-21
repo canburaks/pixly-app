@@ -31,7 +31,7 @@ const BlogPage = (props) =>{
                     "cinema, movie recommendation, and technical stuff."}
                 canonical={`https://pixly.app/blog`}
             />
-            <ContentContainer>
+            <ContentContainer pb={"80px"}>
             {props.posts.map(post => <PostInfoBox post={post} key={post.slug} />)}
 
             </ContentContainer>
