@@ -5,7 +5,7 @@ import { themeGet } from '@styled-system/theme-get'
 
 import { 
     Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, HeaderMini, NewLink, Paragraph,
-    TagText,HtmlBox,SubHeaderText
+    TagText,HtmlBox,SubHeaderText, Image
 } from "../index"
 import { SocialBox } from "../others"
 import parse, { domToReact } from 'html-react-parser';
@@ -85,6 +85,27 @@ export const MessageBox = (props) => (
     </FlexBox>
 )
 
+export const PostInfoBox = ({ post, children }) => (
+    <FlexBox 
+        fontFamily="paragraph" overflow="hidden"
+        border="1px solid" borderColor="rgba(40,40,40, 0.4)" 
+        boxShadow="1px 5px 8px -8px rgba(0,0,0, 0.9)" 
+        bg="#e1e1e1"
+        p={[2]} mt={[4, 4,5]}
+        width={"100%"}
+    >
+        <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
+            <NewLink to={`/blog/${post.slug}`}>
+                <Image src={post.cover} info={post.header + " post image"} width={"auto"} height={"150px"} maxHeight={300} />
+            </NewLink>
+            <NewLink to={`/blog/${post.slug}`}>
+                <HeaderMini fontSize={["16px", "16px", "18px", "20px"]} hoverUnderline>{post.header}</HeaderMini>
+            </NewLink>
+            <Text>{post.summary}</Text>
+            {children}
+        </FlexBox>
+    </FlexBox>
+)
 
 export const TopPanelBackElement = (props) => (
     <Box display="flex"

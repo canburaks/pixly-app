@@ -14,7 +14,8 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,SubHeaderText, Error,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaPost,MovieRichCardBox,MovieRichCard, Grid,
-    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, HeaderMini, NewLink
+    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, HeaderMini, NewLink,
+    PostInfoBox
 } from "../../styled-components"
 import Highlight from 'react-highlight'
 
@@ -31,7 +32,7 @@ const BlogPage = (props) =>{
                 canonical={`https://pixly.app/blog`}
             />
             <ContentContainer>
-            {props.posts.map(post => <MiniPost post={post} key={post.slug} />)}
+            {props.posts.map(post => <PostInfoBox post={post} key={post.slug} />)}
 
             </ContentContainer>
         </PageContainer>
