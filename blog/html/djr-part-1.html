@@ -1,0 +1,397 @@
+<h1 style="text-align:justify">&nbsp;</h1>
+
+<p style="text-align:justify">In <a href="https://pixly.app" target="_blank">Pixly</a>, we are using Django framework as our backend due to the excellent data science libraries and great community of the Python ecosystem. However, when we have decided to make frontend app as a single-page-application with React, we faced many difficulties. We hope that our tutorial will help newcomers a bit for solving their future problems.</p>
+
+<p>&nbsp;</p>
+
+<div>
+<p><strong>What are the requirements to follow?</strong></p>
+
+<p style="text-align:justify">People who follow this tutorial should have at least an elementary level of knowledge about Python and basic level of knowledge Django framework. Also basic level of Javascript and React is a must.</p>
+</div>
+
+<div>
+<p style="text-align:justify">This tutorial series are planned to be three detailed parts.</p>
+
+<ol>
+	<li style="text-align:justify">Django backend</li>
+	<li style="text-align:justify">GraphQL API</li>
+	<li style="text-align:justify">React frontend and bundling the client app with Webpack</li>
+</ol>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>
+<h3>Project Description</h3>
+
+<p style="text-align:justify">We will make a stupidly simple single page application written by React that will communicate Django backend via GraphQL API. React app will be written from scratch with webpack. Create-react-app boilerplate will not be used.</p>
+
+<p style="text-align:justify">There are a few options to make django and react integrated in production, as I know.</p>
+
+<ol>
+	<li style="text-align:justify">You may run two servers, one is django backend and one for Node backend server which is not an ideal one because of running two different server costs.</li>
+	<li style="text-align:justify">You may use serverless architecture which is quite a new technology that you may pay only for the functions that is triggered by client side and query your database with it.</li>
+	<li style="text-align:justify">You can run a Django backend server that will responses our frontend application&#39;s requests and this will be our approach in this series. Our frontend application will run on the browser of the users. All the frontend requests, logic and other stuff will be done by the browser with a React Javascript application.</li>
+</ol>
+
+<p style="text-align:justify">Our project will not be an isomorphic application. Therefore we need an API that will be used for the communication of Python backend and Javascript frontend. We have two options for that; REST and relatively new technology GraphQL. We will use the GraphQL. Our frontend and backend will use Apollo GraphQL and Graphene frameworks respectively.</p>
+
+<p style="text-align:justify">Maybe it is not the best solution but we will use two server in development. In production, we will use only one. Our bundled frontend app will not need a server.</p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>
+<h3 style="text-align:justify"><strong>Step-0: Configuring Environment</strong></h3>
+
+<p style="text-align:justify">(Note: If you choose to use your existing python environment, you can skip this part and go to step-1)</p>
+
+<p style="text-align:justify">This tutorial was written on a computer with Ubuntu 18.04 operating system. The default python interpreter is Python 3.6.x. Due to the need for clean environment, Python 3.8 will be installed, and virtual environment will be built on it.</p>
+
+<pre>
+    <code class="language-bash">#&lt;---Install python 3.8---&gt;
+    cd /opt
+    sudo wget &lt;https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz&gt;
+
+    #extract the source
+    sudo tar xzf Python-3.8.0.tgz
+
+    cd Python-3.8.0
+    sudo ./configure --enable-loadable-sqlite-extensions
+
+    #use altinstall to prevent overriding your existing python environment
+    sudo make altinstall
+
+    #check version of python
+    python3.8 --version
+    # print Python 3.8.0
+
+    # &lt;---Create Virtual Environment---&gt;
+
+    # create virtual environment folder
+    cd ~/
+    mkdir venv
+    
+    # create python 3.8 virtual environment name djr-venv
+    python3.8 -m venv ~/venv/djr-venv
+
+    # activate it
+    source ~/venv/djr-venv/bin/activate
+    # you can deactivate it with deactivate command
+    </code></pre>
+</div>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-9259748524746137"
+     data-ad-slot="3189262161"></ins>
+<div>&nbsp;</div>
+
+<div>&nbsp;</div>
+
+<div><img alt="start django project" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/django-project.jpg" style="height:150px; width:100%; margin-top:32px" /></div>
+
+<div>&nbsp;</div>
+
+<h2 style="text-align:justify"><strong>Step-1: Install dependencies</strong></h2>
+
+<div>
+<pre>
+    <code class="language-bash"># &lt;--- Create Django Project ---&gt;
+
+    # We will create the project in the Blog folder 
+    # with a name djr
+
+    # install our dependencies
+    pip install ipython django django_extensions django-cors-headers "graphene-django&gt;=2.0" 
+    </code></pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>
+<h3 style="text-align:justify"><strong>Step-2: Create django project</strong></h3>
+
+<pre>
+    <code class="language-bash">#start a django project
+    django-admin startproject djr
+
+    # change directory
+    cd djr
+
+    # create templates directory
+    mkdir templates
+
+    # create static folder
+    mkdir static
+    </code></pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>
+<h3 style="text-align:justify"><strong>Step-3: Create new django app</strong></h3>
+
+<p style="text-align:justify">Now we can create our app in order to create database models.</p>
+
+<pre>
+    <code class="language-bash"># create our app and activate it on the settings.py
+    python manage.py startapp items
+    </code></pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>
+<h3 style="text-align:justify"><strong>Step-4: Configure django settings</strong></h3>
+
+<p style="text-align:justify">Update your settings file.</p>
+
+<pre>
+    <code class="language-python">INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+
+        "django_extensions",# New! (useful extension)
+        'graphene_django',  # New! (for graphql communication)
+        'corsheaders',      # New! (for cors request in dev env)
+        "items" # ---&gt; New! (make our app will active)
+    ]
+
+    # New
+    # for improved interactive shell
+    # add this
+    SHELL_PLUS = "ipython"
+
+    # allow webpack development server to make cross-request
+    CORS_ORIGIN_WHITELIST = (
+        '&lt;http://localhost:8080&gt;',
+    )
+    GRAPHENE = {
+        'SCHEMA': 'gql.schema.schema'
+    }
+
+    MIDDLEWARE = [
+        'django.middleware.security.SecurityMiddleware',
+        'corsheaders.middleware.CorsMiddleware', # New Add this
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    ]
+
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': (os.path.join(BASE_DIR, 'templates'),), # New
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+            },
+        },
+    ]
+
+    #New 
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
+    </code></pre>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:justify">Now the general structure of the directory should look like this.</p>
+
+<p style="text-align:justify"><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/backend-structure.jpg" target="_blank"><img alt="backend directory" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/backend-structure.jpg" style="margin-left:auto" /></a></p>
+
+<p style="text-align:justify">&nbsp;</p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>
+<h3 style="text-align:justify"><strong>Step-5: Run django server</strong></h3>
+
+<p style="text-align:justify">Before starting our project, we should first make database migration.</p>
+
+<pre>
+    <code class="language-bash"># create migration for django-orm
+    python manage.py migrate
+    </code></pre>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:justify">Now we can start our project and see what happens.</p>
+
+<pre>
+    <code class="language-bash"># run server
+    python manage.py runserver
+    </code></pre>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:justify">Now, Our django development server is ready.</p>
+
+<p style="text-align:justify">You can go to the url address of <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> and verify that it is working.</p>
+
+<p style="text-align:justify"><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/first-runserver.jpg" target="_blank"><img alt="when django server runs" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/first-runserver.jpg" style="height:300px; width:681px" /></a></p>
+
+<p style="text-align:justify">After then, you can stop the server by pressing CTRL+C</p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>
+<h3 style="text-align:justify"><strong>Step-6: Create movie app</strong></h3>
+
+<p style="text-align:justify">We will create a movie model with basic fields that a movie should have.</p>
+
+<p style="text-align:justify">Before that we should give some information about the field choices.</p>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:justify"><strong>Why there is url field for poster rather than image field ?</strong></p>
+
+<p style="text-align:justify">Because serving static files in production is out of our scope, we decide to use only url field. Fetching the image from remote and then saving it to our production storage is a topic of another post.</p>
+
+<p style="text-align:justify">Due to this, we will save only the poster&#39;s url, not poster&#39;s itself as an image file. Also sending static files like images is not a good approach. We will send the exact url of an image to the user. Then, user&#39;s browser fetch the image from this.</p>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:justify"><strong>What is slug and why it should be unique?</strong></p>
+
+<p style="text-align:justify">Let me explain; When you browsing on Pixly, if you open the The Matrix movie page, you will see that your address bar will be : &quot;<a href="https://pixly.app/movie/the-matrix-1999" target="_blank">https://pixly.app/movie/the-matrix-1999</a>&quot;.</p>
+
+<p style="text-align:justify">The last part of the url is the slug of The Matrix movie and also it is an identifier which makes the url distinctive from other movie pages. In the GraphQL part of the tutorial you will see that this slug will be used as a query parameter meaning that database queries will be done according to slug. Therefore it should be unique.</p>
+
+<p style="text-align:justify">We can also choose the movie id as url identifier, but it&#39;s clear that the url will not be human-readable address. Moreover, search engine indexing and ranking is a vital part of any website that targeting new users. Readable url address&#39; are good for users themselves and also suggested by search engine guides. For example; <a href="https://support.google.com/webmasters/answer/76329?hl=en&amp;ref_topic=9460495" target="_blank">Google webmaster guideline</a> recommends to use clean and concise url structures.</p>
+
+<p style="text-align:justify">Let&#39;s make our model. Open items/models.py file.</p>
+
+<pre>
+<code class="language-python"># items.models
+from django.db import models
+
+# Create your models here.
+class Movie(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    year = models.IntegerField(null=True)
+    summary = models.TextField(max_length=5000,null=True)
+    poster_url = models.URLField(blank=True, null=True)
+    slug = models.SlugField(
+				max_length=50, null=True,blank =True, unique=True)
+
+    class Meta:
+        ordering = ["-year"]
+
+    def __str__(self):
+        return self.name
+</code></pre>
+
+<p style="text-align:justify">Migrate again in order to make database arrangements for our new model.</p>
+
+<pre>
+<code class="language-bash">python manage.py makemigrations
+python manage.py migrate
+</code></pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>
+<h3 style="text-align:justify">Step-7: Populating Database with Initial Data</h3>
+
+<p style="text-align:justify">There is no movie record currently in our database. We will provide a small initial data to create some movie records. All the data is provided by community built <a href="https://www.themoviedb.org/">The Movie Database</a> (TMDb).</p>
+
+<p style="text-align:justify">First, create a class method in order to import initial data.</p>
+
+<pre>
+    <code class="language-python"># items.models
+
+    class Movie(models.Model):
+            """
+                ... Model is truncated
+            """
+
+    #&lt;-----Add this class method------&gt;
+        @classmethod
+        def import_records(cls, record_list):
+            for record in record_list:
+                # create record if id is not exist
+                if not Movie.objects.filter(id=record.get("id")).exists():
+                    new_movie = cls.objects.create(**record)
+                else:
+                    print(f"Id:{record.get('id')} is already exist.")
+            print("Import operation done successfully")
+    </code></pre>
+
+<p style="text-align:justify">Then, get initial data file from <a href="https://raw.githubusercontent.com/canburaks/djr/master/utils/initial_data.py">github repo</a> and set the initial_data.py file in utils folder. The directories and the initial data looks like this.</p>
+
+<p style="text-align:justify">Normally we should have open django shell. However shell_plus which is provided by django_extensions package is more functional so we will use this.</p>
+
+<pre>
+    <code class="language-python"># normally we use this command
+    # python manage.py shell 
+    # However django_extensions shell is more functional
+    # it preimports all apps we created
+
+    # open interactive shell 
+    python manage.py shell_plus
+
+    # django interactive shell
+
+    # let's first check our database for movie records
+    # and verify that it empty.
+    In [1]: Movie.objects.all()                                                                                       
+    Out[1]: &lt;QuerySet []&gt;
+
+
+    # import the list of records
+    In [2]: from utils.initial_data import initial_data
+
+    # create records in the database
+    In [2]: Movie.import_records(initial_data)
+    #Import operation done successfully
+
+    #Successfully imported our initial data
+    </code></pre>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>
+<p style="text-align:justify">Our model and database are ready. You can close the shell with quit command.</p>
+
+<p style="text-align:justify">In the next part we will create our API with python graphql framework <a href="https://graphene-python.org/" target="_blank">Graphene</a> and its django package <a href="http://docs.graphene-python.org/projects/django/en/latest/" target="_blank">graphene-django</a>.</p>
+</div>

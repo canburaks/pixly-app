@@ -36,7 +36,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                     domNode.name === 'h3' || 
                     domNode.name === 'h4')
                 ) {
-                return <HeaderMini   mt={"32px !important"}>{domToReact(domNode.children)}</HeaderMini>
+                return <HeaderMini   mt={"8px !important"}>{domToReact(domNode.children)}</HeaderMini>
             }
             else if (domNode.attribs && (domNode.name === 'h6')
             ) return <Text   mt={"32px !important"}>{domToReact(domNode.children)}</Text>
@@ -45,6 +45,10 @@ export const HtmlContainer = ({ html, ...props }) => {
                 //console.log(domNode)
                 return <Text textAlign="justify">{domToReact(domNode.children)}</Text>
             }
+            //else if (domNode.attribs && domNode.name === 'img') {
+            //    //console.log(domNode)
+            //    return <Image maxWidth={"100%"}>{domToReact(domNode.children)}</Image>
+            //}
           }
     }
 

@@ -1754,7 +1754,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
 
     def resolve_quotes(self, info, *_):
         if self.movie.quotes.exists():
-            quote_list = [x.text for x in self.movie.quotes]
+            quote_list = [x.text for x in self.movie.quotes.all()]
             return quote_list
         return []
 
