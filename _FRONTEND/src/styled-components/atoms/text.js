@@ -64,8 +64,30 @@ export const Span = styled("span")`
     ${position}
     ${border}
 `
-
-export const Text = styled('p')({
+export const Text= styled("p")`
+    wordSpacing: ${props => props.wordSpacing ? props.wordSpacing : "normal"};
+    color:${themeGet("dark")};
+    font-weight:400;
+    margin:0;
+    white-space: "pre-line";
+    cursor:${props => props.clickable ? "pointer" : "inherit"};
+    white-space:${props => props.truncate && "nowrap"};
+    overflow:${props => props.truncate && "hidden"};
+    text-overflow:${props => props.truncate && "ellipsis"};
+    text-decoration:${props => props.underline && "underline"}
+    :hover {
+      text-decoration:${props => props.hoverUnderline && "underline"};
+    }
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${position}
+    ${typography}
+`
+export const Text0 = styled('p')({
   wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal",
   color:themeGet("dark"),
   fontWeight:400,

@@ -5,7 +5,7 @@ import { themeGet } from '@styled-system/theme-get'
 
 import { 
     Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, HeaderMini, NewLink, Paragraph,
-    TagText,HtmlBox,SubHeaderText, Image
+    TagText,HtmlBox,SubHeaderText, Image,CoverLink
 } from "../index"
 import { SocialBox } from "../others"
 import parse, { domToReact } from 'html-react-parser';
@@ -94,14 +94,24 @@ export const PostInfoBox = ({ post, children }) => (
         p={[2]} mt={[4, 4,5]}
         width={"100%"}
     >
-        <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
+        <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start" pb={[3]} width={"100%"}>
+            <SuperBox 
+                title={post.header}
+                src={post.cover} 
+                info={post.header + " post image"} 
+                width={"100%"} height={"300px"} maxHeight={350}
+                mb={[4]}
+                >
+                <CoverLink to={`/blog/${post.slug}`} width={"100%"}/>
+            </SuperBox>
+
             <NewLink to={`/blog/${post.slug}`}>
-                <Image src={post.cover} info={post.header + " post image"} width={"auto"} height={"150px"} maxHeight={300} />
+                <HeaderMini fontSize={["18px", "18px", "20px", "22px"]} hoverUnderline>{post.header}</HeaderMini>
             </NewLink>
+            <Text fontWeight="bold" color={"rgba(40,40,40, 0.7)"} mt={[1]}>{post.summary}</Text>
             <NewLink to={`/blog/${post.slug}`}>
-                <HeaderMini fontSize={["16px", "16px", "18px", "20px"]} hoverUnderline>{post.header}</HeaderMini>
+                <Text mt={[3]} fontWeight="bold" underline>See the post</Text>
             </NewLink>
-            <Text>{post.summary}</Text>
             {children}
         </FlexBox>
     </FlexBox>
