@@ -1,6 +1,7 @@
 from items.models import Movie, List, Video, Rating, Topic, Article
 from persons.models import Director, Person
 from persons.profile import Profile
+from blog.models import Post
 from pixly.models import Contact
 from archive.models import UserArchive
 from django.contrib.auth import get_user_model 
@@ -17,11 +18,32 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.sitemaps import ping_google
 from datetime import datetime, timezone
 from .types import (VideoType, MovieType, ProfileType, PersonType,
-        DirectorType, TopicType, ListType, UserType, RatingType)
+        DirectorType, TopicType, ListType, UserType, RatingType,PostType )
 
 @convert_django_field.register(JSONField)
 def convert_json_field_to_string(field, registry=None):
     return graphene.String()
+
+
+
+class BlogPostMutation(graphene.Mutation):
+    post = graphene.Field(PostType)
+    message = graphene.String()
+    class Arguments:
+        #will cache.set("dummy{dummy_id}", value[dummy_id], timeout=None)
+        slug = graphene.String()
+        text = graphene.String()
+
+    def mutate(self, info, slug, text):
+        if info.context.user.is_superuser:
+            post_qs = Post.objects.filter(slug=slug)
+            if post_qs.exists():
+                post = post_qs.first()
+                post.text = text
+                post.save()
+            return BlogPostMutation(post = post, message="Success")
+        else:
+            return BlogPostMutation(message="Not Authorized")
 
 
 

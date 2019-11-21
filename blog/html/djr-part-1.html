@@ -55,36 +55,38 @@
 
 <pre>
     <code class="language-bash">#&lt;---Install python 3.8---&gt;
-    cd /opt
-    sudo wget &lt;https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz&gt;
+cd /opt
+sudo wget &lt;https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz&gt;
 
-    #extract the source
-    sudo tar xzf Python-3.8.0.tgz
+#extract the source
+sudo tar xzf Python-3.8.0.tgz
 
-    cd Python-3.8.0
-    sudo ./configure --enable-loadable-sqlite-extensions
+cd Python-3.8.0
+sudo ./configure --enable-loadable-sqlite-extensions
 
-    #use altinstall to prevent overriding your existing python environment
-    sudo make altinstall
+#use altinstall to prevent overriding your existing python environment
+sudo make altinstall
 
-    #check version of python
-    python3.8 --version
-    # print Python 3.8.0
+#check version of python
+python3.8 --version
+# print Python 3.8.0
 
-    # &lt;---Create Virtual Environment---&gt;
+# &lt;---Create Virtual Environment---&gt;
 
-    # create virtual environment folder
-    cd ~/
-    mkdir venv
+# create virtual environment folder
+cd ~/
+mkdir venv
     
-    # create python 3.8 virtual environment name djr-venv
-    python3.8 -m venv ~/venv/djr-venv
+# create python 3.8 virtual environment name djr-venv
+python3.8 -m venv ~/venv/djr-venv
 
-    # activate it
-    source ~/venv/djr-venv/bin/activate
-    # you can deactivate it with deactivate command
+# activate it
+source ~/venv/djr-venv/bin/activate
+# you can deactivate it with deactivate command
     </code></pre>
 </div>
+
+<div>&nbsp;</div>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-layout="in-article"
@@ -93,23 +95,21 @@
      data-ad-slot="3189262161"></ins>
 <div>&nbsp;</div>
 
-<div>&nbsp;</div>
-
-<div><img alt="start django project" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/django-project.jpg" style="height:150px; width:100%; margin-top:32px" /></div>
+<div><img alt="start django project" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/django-project.jpg" style="height:150px; margin-top:32px; width:100%" /></div>
 
 <div>&nbsp;</div>
 
-<h2 style="text-align:justify"><strong>Step-1: Install dependencies</strong></h2>
+<h3 style="text-align:justify"><strong>Step-1: Install dependencies</strong></h3>
 
 <div>
 <pre>
     <code class="language-bash"># &lt;--- Create Django Project ---&gt;
 
-    # We will create the project in the Blog folder 
-    # with a name djr
+# We will create the project in the Blog folder 
+# with a name djr
 
-    # install our dependencies
-    pip install ipython django django_extensions django-cors-headers "graphene-django&gt;=2.0" 
+# install our dependencies
+pip install ipython django django_extensions django-cors-headers "graphene-django&gt;=2.0" 
     </code></pre>
 </div>
 
@@ -122,16 +122,16 @@
 
 <pre>
     <code class="language-bash">#start a django project
-    django-admin startproject djr
+django-admin startproject djr
 
-    # change directory
-    cd djr
+# change directory
+cd djr
 
-    # create templates directory
-    mkdir templates
+# create templates directory
+mkdir templates
 
-    # create static folder
-    mkdir static
+# create static folder
+mkdir static
     </code></pre>
 </div>
 
@@ -146,7 +146,7 @@
 
 <pre>
     <code class="language-bash"># create our app and activate it on the settings.py
-    python manage.py startapp items
+python manage.py startapp items
     </code></pre>
 </div>
 
@@ -160,64 +160,65 @@
 <p style="text-align:justify">Update your settings file.</p>
 
 <pre>
-    <code class="language-python">INSTALLED_APPS = [
-        'django.contrib.admin',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'django.contrib.staticfiles',
+    <code class="language-python">
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
-        "django_extensions",# New! (useful extension)
-        'graphene_django',  # New! (for graphql communication)
-        'corsheaders',      # New! (for cors request in dev env)
-        "items" # ---&gt; New! (make our app will active)
-    ]
+    "django_extensions",# New! (useful extension)
+    'graphene_django',  # New! (for graphql communication)
+    'corsheaders',      # New! (for cors request in dev env)
+    "items" # ---&gt; New! (make our app will active)
+]
 
-    # New
-    # for improved interactive shell
-    # add this
-    SHELL_PLUS = "ipython"
+# New
+# for improved interactive shell
+# add this
+ SHELL_PLUS = "ipython"
 
-    # allow webpack development server to make cross-request
-    CORS_ORIGIN_WHITELIST = (
-        '&lt;http://localhost:8080&gt;',
-    )
-    GRAPHENE = {
-        'SCHEMA': 'gql.schema.schema'
-    }
+# allow webpack development server to make cross-request
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8080',
+)
+GRAPHENE = {
+    'SCHEMA': 'gql.schema.schema'
+}
 
-    MIDDLEWARE = [
-        'django.middleware.security.SecurityMiddleware',
-        'corsheaders.middleware.CorsMiddleware', # New Add this
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ]
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # New Add this
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 
-    TEMPLATES = [
-        {
-            'BACKEND': 'django.template.backends.django.DjangoTemplates',
-            'DIRS': (os.path.join(BASE_DIR, 'templates'),), # New
-            'APP_DIRS': True,
-            'OPTIONS': {
-                'context_processors': [
-                    'django.template.context_processors.debug',
-                    'django.template.context_processors.request',
-                    'django.contrib.auth.context_processors.auth',
-                    'django.contrib.messages.context_processors.messages',
-                ],
-            },
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': (os.path.join(BASE_DIR, 'templates'),), # New
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
         },
-    ]
+    },
+]
 
-    #New 
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
+#New 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
     </code></pre>
 
 <p style="text-align:justify">&nbsp;</p>
@@ -240,7 +241,7 @@
 
 <pre>
     <code class="language-bash"># create migration for django-orm
-    python manage.py migrate
+python manage.py migrate
     </code></pre>
 
 <p style="text-align:justify">&nbsp;</p>
@@ -249,7 +250,7 @@
 
 <pre>
     <code class="language-bash"># run server
-    python manage.py runserver
+python manage.py runserver
     </code></pre>
 
 <p style="text-align:justify">&nbsp;</p>
@@ -337,21 +338,21 @@ python manage.py migrate
 <pre>
     <code class="language-python"># items.models
 
-    class Movie(models.Model):
-            """
-                ... Model is truncated
-            """
+class Movie(models.Model):
+        """
+            ... Model is truncated
+        """
 
-    #&lt;-----Add this class method------&gt;
-        @classmethod
-        def import_records(cls, record_list):
-            for record in record_list:
-                # create record if id is not exist
-                if not Movie.objects.filter(id=record.get("id")).exists():
-                    new_movie = cls.objects.create(**record)
-                else:
-                    print(f"Id:{record.get('id')} is already exist.")
-            print("Import operation done successfully")
+#&lt;-----Add this class method------&gt;
+    @classmethod
+    def import_records(cls, record_list):
+        for record in record_list:
+            # create record if id is not exist
+            if not Movie.objects.filter(id=record.get("id")).exists():
+                new_movie = cls.objects.create(**record)
+            else:
+                print(f"Id:{record.get('id')} is already exist.")
+        print("Import operation done successfully")
     </code></pre>
 
 <p style="text-align:justify">Then, get initial data file from <a href="https://raw.githubusercontent.com/canburaks/djr/master/utils/initial_data.py">github repo</a> and set the initial_data.py file in utils folder. The directories and the initial data looks like this.</p>
@@ -360,29 +361,29 @@ python manage.py migrate
 
 <pre>
     <code class="language-python"># normally we use this command
-    # python manage.py shell 
-    # However django_extensions shell is more functional
-    # it preimports all apps we created
+# python manage.py shell 
+# However django_extensions shell is more functional
+# it preimports all apps we created
 
-    # open interactive shell 
-    python manage.py shell_plus
+# open interactive shell 
+python manage.py shell_plus
 
-    # django interactive shell
+# django interactive shell
 
-    # let's first check our database for movie records
-    # and verify that it empty.
-    In [1]: Movie.objects.all()                                                                                       
-    Out[1]: &lt;QuerySet []&gt;
+# let's first check our database for movie records
+# and verify that it empty.
+In [1]: Movie.objects.all()                                                                                       
+Out[1]: &lt;QuerySet []&gt;
 
 
-    # import the list of records
-    In [2]: from utils.initial_data import initial_data
+# import the list of records
+In [2]: from utils.initial_data import initial_data
 
-    # create records in the database
-    In [2]: Movie.import_records(initial_data)
-    #Import operation done successfully
+# create records in the database
+In [2]: Movie.import_records(initial_data)
+#Import operation done successfully
 
-    #Successfully imported our initial data
+#Successfully imported our initial data
     </code></pre>
 </div>
 
