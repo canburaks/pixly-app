@@ -206,8 +206,8 @@ export const BlogPostAd = () => {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
     }, [window])
-    if (!production) return <div className="hidden"></div>
-    else return (
+    
+    return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", textAlign:"center" , minHeight: 90 }}
             data-ad-layout="in-article"
