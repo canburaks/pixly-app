@@ -195,6 +195,11 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
                 ))}
             </Grid>
             <HomePageFeedAd/>
+            <Grid columns={[1,1,1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                {secondPArt.map( item => (
+                    <SmallTopicMovieCard item={item} key={"rec" + item.id}/>
+                ))}
+            </Grid>
             {/*
             <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
                 {firstPart.map( item => (
@@ -206,6 +211,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
                 ))}
             </Grid> */}
             <MidPageAd />
+            <br/>
             </>
 
         )}
