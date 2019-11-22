@@ -197,6 +197,28 @@ ReactGA.timing({
 
 
 //--------------ADS------------------------------
+
+
+export const BlogPostAd = () => {
+    useEffect(() => {
+        if (production && window) {
+            //console.log("if true");
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }, [window])
+    if (!production) return <div className="hidden"></div>
+    else return (
+        <ins className="adsbygoogle"
+            style={{ display: "block", width: "100%", textAlign:"center" , minHeight: 90 }}
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-9259748524746137"
+            data-ad-slot="3189262161">
+        </ins>
+    )
+}
+
+
 export const DirectorPageAd = () => {
     useEffect(() => {
         if (production && window) {

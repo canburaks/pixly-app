@@ -241,7 +241,9 @@ static__slugs = [
     "404",
     "blog",
     "blog/a-brief-introduction-to-collaborative-filtering",
-    "blog/django-graphql-react-integration-tutorial-part-1"
+    "blog/django-graphql-react-integration-tutorial-part-1",
+    "blog/django-graphql-react-integration-tutorial-part-2",
+    "blog/django-graphql-react-integration-tutorial-part-3"
 ]
 def page_template_generator(routes):
     new_paths = []
@@ -333,6 +335,8 @@ class StaticSitemap(Sitemap):
         statics = [
             "/blog",
             "/blog/a-brief-introduction-to-collaborative-filtering",
+            "/blog/django-graphql-react-integration-tutorial-part-2",
+            "/blog/django-graphql-react-integration-tutorial-part-3",
             "","/", "/directors/1", "/explore", "/advance-search", 
             "/termsofservice", "/privacy"
         ]

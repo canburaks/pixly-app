@@ -21,13 +21,13 @@ export const HtmlContainer = ({ html, ...props }) => {
             if (domNode.attribs && domNode.name ==="h1"){
                 return (
                     <HeaderText  mt={"32px !important"}
-                        fontSize={["20px", "20px", "24px", "28px", "32px"]}
+                        fontSize={["24px", "24px", "28px", "32px", "36px"]}
                     >
                         {domToReact(domNode.children)}
                     </HeaderText>)
             }
             else if (domNode.attribs && domNode.name ==="h2"){
-                return <SubHeaderText   mt={"32px !important"}>{domToReact(domNode.children)}</SubHeaderText>
+                return <SubHeaderText ontSize={["22px", "22px", "26px"]}  mt={"32px !important"}>{domToReact(domNode.children)}</SubHeaderText>
             }
             else if (domNode.attribs && domNode.name ==="code"){
                 return <Highlight>{domToReact(domNode.children)}</Highlight>
@@ -36,14 +36,14 @@ export const HtmlContainer = ({ html, ...props }) => {
                     domNode.name === 'h3' || 
                     domNode.name === 'h4')
                 ) {
-                return <HeaderMini   mt={"8px !important"}>{domToReact(domNode.children)}</HeaderMini>
+                return <HeaderMini   mt={"8px !important"} fontSize={["20px", "20px", "22px"]}>{domToReact(domNode.children)}</HeaderMini>
             }
             else if (domNode.attribs && (domNode.name === 'h6')
             ) return <Text   mt={"32px !important"}>{domToReact(domNode.children)}</Text>
         
             else if (domNode.attribs && domNode.name === 'p') {
                 //console.log(domNode)
-                return <Text textAlign="justify">{domToReact(domNode.children)}</Text>
+                return <Text textAlign="justify" fontSize={["16px", "16px", "18px"]}>{domToReact(domNode.children)}</Text>
             }
             //else if (domNode.attribs && domNode.name === 'img') {
             //    //console.log(domNode)
