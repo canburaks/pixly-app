@@ -231,7 +231,7 @@ topic__slugs = [
     "topic/dialogue-focused",
     "topic/thought-provoking",
     "topic/bechdel-test",
-
+    "topic/feel-good-movies"
 ]
 
 static__slugs = [
