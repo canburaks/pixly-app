@@ -1,10 +1,13 @@
-<h1 style="text-align:justify">&nbsp;</h1>
+<p style="text-align:justify">&nbsp;</p>
+
+<p style="text-align:justify">&nbsp;</p>
+
+<h1 style="text-align:justify"><strong>Introduction</strong></h1>
 
 <p style="text-align:justify">In <a href="https://pixly.app" target="_blank">Pixly</a>, we are using Django framework as our backend due to the excellent data science libraries and great community of the Python ecosystem. However, when we have decided to make frontend app as a single-page-application with React, we faced many difficulties. We hope that our tutorial will help newcomers a bit for solving their future problems.</p>
 
 <p>&nbsp;</p>
 
-<div>
 <p><strong>What are the requirements to follow?</strong></p>
 
 <p style="text-align:justify">People who follow this tutorial should have at least an elementary level of knowledge about Python and basic level of knowledge Django framework. Also basic level of Javascript and React is a must.</p>
@@ -18,13 +21,11 @@
 	<li style="text-align:justify">GraphQL API</li>
 	<li style="text-align:justify">React frontend and bundling the client app with Webpack</li>
 </ol>
-</div>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<div>
 <h3>Project Description</h3>
 
 <p style="text-align:justify">We will make a stupidly simple single page application written by React that will communicate Django backend via GraphQL API. React app will be written from scratch with webpack. Create-react-app boilerplate will not be used.</p>
@@ -40,13 +41,11 @@
 <p style="text-align:justify">Our project will not be an isomorphic application. Therefore we need an API that will be used for the communication of Python backend and Javascript frontend. We have two options for that; REST and relatively new technology GraphQL. We will use the GraphQL. Our frontend and backend will use Apollo GraphQL and Graphene frameworks respectively.</p>
 
 <p style="text-align:justify">Maybe it is not the best solution but we will use two server in development. In production, we will use only one. Our bundled frontend app will not need a server.</p>
-</div>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<div>
 <h3 style="text-align:justify"><strong>Step-0: Configuring Environment</strong></h3>
 
 <p style="text-align:justify">(Note: If you choose to use your existing python environment, you can skip this part and go to step-1)</p>
@@ -84,24 +83,22 @@ python3.8 -m venv ~/venv/djr-venv
 source ~/venv/djr-venv/bin/activate
 # you can deactivate it with deactivate command
     </code></pre>
-</div>
 
-<div>&nbsp;</div>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-9259748524746137"
-     data-ad-slot="3189262161"></ins>
-<div>&nbsp;</div>
+<p>&nbsp;</p>
 
-<div><img alt="start django project" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/django-project.jpg" style="height:150px; margin-top:32px; width:100%" /></div>
+<p>&nbsp;</p>
+
+
+<p><img alt="start django project" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/django-project.jpg" style="height:150px; margin-top:32px; width:100%" /></p>
 
 <div>&nbsp;</div>
 
-<h3 style="text-align:justify"><strong>Step-1: Install dependencies</strong></h3>
+<h2><strong>Django Project</strong></h2>
 
-<div>
+<p>&nbsp;</p>
+
+<p><strong>Step-1: Install dependencies</strong></p>
+
 <pre>
     <code class="language-bash"># &lt;--- Create Django Project ---&gt;
 
@@ -117,7 +114,6 @@ pip install ipython django django_extensions django-cors-headers "graphene-djang
 
 <p>&nbsp;</p>
 
-<div>
 <h3 style="text-align:justify"><strong>Step-2: Create django project</strong></h3>
 
 <pre>
@@ -133,13 +129,13 @@ mkdir templates
 # create static folder
 mkdir static
     </code></pre>
-</div>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<div>
+<p>&nbsp;</p>
+
 <h3 style="text-align:justify"><strong>Step-3: Create new django app</strong></h3>
 
 <p style="text-align:justify">Now we can create our app in order to create database models.</p>
@@ -148,16 +144,16 @@ mkdir static
     <code class="language-bash"># create our app and activate it on the settings.py
 python manage.py startapp items
     </code></pre>
-</div>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<div>
+<p>&nbsp;</p>
+
 <h3 style="text-align:justify"><strong>Step-4: Configure django settings</strong></h3>
 
-<p style="text-align:justify">Update your settings file.</p>
+<p style="text-align:justify">Update your settings file according to this.</p>
 
 <pre>
     <code class="language-python">
@@ -225,16 +221,14 @@ STATICFILES_DIRS = (
 
 <p style="text-align:justify">Now the general structure of the directory should look like this.</p>
 
-<p style="text-align:justify"><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/backend-structure.jpg" target="_blank"><img alt="backend directory" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/backend-structure.jpg" style="margin-left:auto" /></a></p>
+<p style="text-align:justify"><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/backend-structure.jpg" target="_blank"><img alt="backend directory" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/backend-structure.jpg" style="float:left;" /></a></p>
 
 <p style="text-align:justify">&nbsp;</p>
-</div>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<div>
 <h3 style="text-align:justify"><strong>Step-5: Run django server</strong></h3>
 
 <p style="text-align:justify">Before starting our project, we should first make database migration.</p>
@@ -243,8 +237,6 @@ STATICFILES_DIRS = (
     <code class="language-bash"># create migration for django-orm
 python manage.py migrate
     </code></pre>
-
-<p style="text-align:justify">&nbsp;</p>
 
 <p style="text-align:justify">Now we can start our project and see what happens.</p>
 
@@ -262,13 +254,13 @@ python manage.py runserver
 <p style="text-align:justify"><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/first-runserver.jpg" target="_blank"><img alt="when django server runs" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/first-runserver.jpg" style="height:300px; width:681px" /></a></p>
 
 <p style="text-align:justify">After then, you can stop the server by pressing CTRL+C</p>
-</div>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<div>
+<p>&nbsp;</p>
+
 <h3 style="text-align:justify"><strong>Step-6: Create movie app</strong></h3>
 
 <p style="text-align:justify">We will create a movie model with basic fields that a movie should have.</p>
@@ -322,13 +314,13 @@ class Movie(models.Model):
 <code class="language-bash">python manage.py makemigrations
 python manage.py migrate
 </code></pre>
-</div>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<div>
+<p>&nbsp;</p>
+
 <h3 style="text-align:justify">Step-7: Populating Database with Initial Data</h3>
 
 <p style="text-align:justify">There is no movie record currently in our database. We will provide a small initial data to create some movie records. All the data is provided by community built <a href="https://www.themoviedb.org/">The Movie Database</a> (TMDb).</p>
@@ -384,15 +376,12 @@ In [2]: Movie.import_records(initial_data)
 #Import operation done successfully
 
 #Successfully imported our initial data
-    </code></pre>
-</div>
+</code></pre>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<div>
 <p style="text-align:justify">Our model and database are ready. You can close the shell with quit command.</p>
 
-<p style="text-align:justify">In the next part we will create our API with python graphql framework <a href="https://graphene-python.org/" target="_blank">Graphene</a> and its django package <a href="http://docs.graphene-python.org/projects/django/en/latest/" target="_blank">graphene-django</a>.</p>
-</div>
+<p style="text-align:justify">In the <a href="https://pixly.app/blog/django-graphql-react-integration-tutorial-part-2" target="_blank">next part</a> we will create our API with python graphql framework <a href="https://graphene-python.org/" target="_blank">Graphene</a> and its django package <a href="http://docs.graphene-python.org/projects/django/en/latest/" target="_blank">graphene-django</a>.</p>

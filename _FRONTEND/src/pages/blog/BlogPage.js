@@ -81,16 +81,5 @@ const PostPage = (props) =>{
         </PageContainer>
     );
 }
-class Editor extends React.Component {
-    render() {
-      return (
-            <Dante 
-                onChange={editor => { console.log('editor content: ', editor.emitSerializedOutput()) }}
-
-            />
-      )            
-      ;
-    }
-  }
 
 export default withRouter(BlogQuery);
