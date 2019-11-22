@@ -590,6 +590,16 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
                 id=graphene.Int(default_value = None),
                 slug=graphene.String(default_value = None))
 
+    tag_movies = graphene.List(CustomMovieType,slug=graphene.String(default_value = None))
+
+    def resolve_tag_movies(self, info, **kwargs):
+        slug = kwargs.get("slug")
+        t = Tag.objects.filter(slug=slug)
+        if t.exists():
+            movids = t.movies.all().values_list("id", flat=True)
+            return [CustomMovieType(id=x) for x in movids]
+            
+
     def resolve_topic(self, info, **kwargs):
         id = kwargs.get("id")
         slug = kwargs.get("slug")
