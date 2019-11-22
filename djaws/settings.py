@@ -348,8 +348,7 @@ CKEDITOR_CONFIGS = {
             'javascript': 'JavaScript',
             'bash': 'Bash',
             "html": "HTML",
-            "css": "CSS",
-            "graphql": "GraphQL"
+            "css": "CSS"
         },
 
 
@@ -372,7 +371,7 @@ CKEDITOR_CONFIGS = {
             'elementspath',
             "devtools",
             "pagebreak",
-            "codesnippetgeshi"
+
         ]),
     }
 }
