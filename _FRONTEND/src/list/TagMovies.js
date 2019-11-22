@@ -29,9 +29,11 @@ const TagMovies = (props) => {
     return(
         <PageContainer>
             <ContentContainer>
-            {data && data.tagMovies.map(movie => (
-                    <MovieRichCard item={movie} key={movie.id} />
-            ))}
+            <Grid columns={[1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                {data && data.tagMovies.map(movie => (
+                        <MovieRichCard item={movie} key={movie.id} />
+                ))}
+            </Grid>
             </ContentContainer>
         </PageContainer>
     )
