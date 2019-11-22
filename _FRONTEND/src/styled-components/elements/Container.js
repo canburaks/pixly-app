@@ -103,7 +103,7 @@ export const PostInfoBox = ({ post, children }) => (
                 title={post.header}
                 src={post.cover} 
                 info={post.header + " post image"} 
-                width={"100%"} height={"150px"} minHeight={"80px"}
+                width={"100%"} height={"200px"} minHeight={"120px"}
                 mb={[4]}
                 >
                 <CoverLink to={`/blog/${post.slug}`} width={"100%"}/>
