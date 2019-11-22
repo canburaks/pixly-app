@@ -91,8 +91,8 @@ export const SchemaArticle = (props) =>(
         <HeaderText itemProp="headline"
             fontSize={props.headerSize || ["24px", "24px", "28px", "32px", "34px", "36px"]} 
             fontWeight="bold" 
-            color={"dark"} textShadow={props.textShadow || "textGray"}
-            pt={[3]} 
+            color={"dark"}
+            pt={[3]} fontFamily={"playfair"}
         >
             {props.header}
         </HeaderText>

@@ -75,7 +75,7 @@ const PostPage = (props) =>{
                 description={post.summary}
                 canonical={`https://pixly.app/blog/${post.slug}`}
             />
-            <ContentContainer px={"10vw"}  pb={40}  >
+            <ContentContainer px={"10vw"}  pb={40} px={["5vw", "5vw", "8vw", "10vw", "15vw"]} >
             <SchemaPost post={post}/>
             </ContentContainer>
         </PageContainer>

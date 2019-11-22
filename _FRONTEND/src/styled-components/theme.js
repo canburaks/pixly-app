@@ -20,7 +20,7 @@ themes.default.fonts = {
 	header: "'Nunito', sans-serif",
 	paragraph: "'Montserrat', sans-serif",
 	quote: 'Georgia, serif',
-
+	playfair: "'Playfair Display', serif",
 	fira: 	"'Fira Sans', sans-serif"
 }
 

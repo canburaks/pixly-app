@@ -9,6 +9,7 @@ import { Text, Paragraph,
         BookmarkMutation, RatingMutation,TagBox,
         ImdbRatingIcon, YearClockIcon, 
 } from "../index"
+import { movieAutoComplete } from "../../functions/grec";
 
 
 

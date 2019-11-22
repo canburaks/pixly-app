@@ -47,7 +47,7 @@ export const ProfileIcon = (props) => <Profile size={props.size || 24} clickable
 //export const YearGlassIcon = (props) => <HourGlassYear title="Release Year" {...props} />
 
 //More Complex Icons
-export const ImdbRatingIcon = (props) => (
+export const ImdbRatingIconLink = (props) => (
     <OuterLink href={props.link} mr={[1]} display="flex" alignItems="flex-end" follow={props.follow}>
         <ImdbIcon imdb title="See IMDb Page" fill="#f1f1f1" {...props}/>
         {props.rating && 
@@ -65,7 +65,24 @@ export const ImdbRatingIcon = (props) => (
         <HiddenText>IMDb Page</HiddenText>
     </OuterLink>
 )
-
+export const ImdbRatingIcon = (props) => (
+  <FlexBox mr={[1]} display="flex" alignItems="flex-end" follow={props.follow}>
+      <ImdbIcon imdb title="See IMDb Page" fill="#f1f1f1" {...props} className="no-click"/>
+      {props.rating && 
+      <Text 
+          fontWeight="bold"
+          fontSize={["14px"]}
+          color="light"
+          textShadow="textDark"
+          position="relative"
+          m={[0]} p={[0]}
+          ml={[1]}
+      >
+          {props.rating}/10
+      </Text>}
+      <HiddenText>IMDb Page</HiddenText>
+  </FlexBox>
+)
 export const YearClockIcon = (props) => (
     <FlexBox  mr={[1]} display="flex" alignItems="center">
         <ClockIcon title="Release Year"  {...props}/>
