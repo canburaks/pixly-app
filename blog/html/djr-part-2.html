@@ -1,0 +1,297 @@
+<h1><strong>Create GraphQL API</strong></h1>
+
+<p>
+	In the first part, we created the Django project with item app includes our
+	movie model.
+</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-1: Create API app</strong></h3>
+
+<p>Let&#39;s create our second app that will be responsible for GraphQL API.</p>
+
+<pre>
+<code class="language-bash"># djr/
+# create app with the name gql
+# (name is not necessarily to be gql)
+python manage.py startapp gql
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-2: Configure Url endpoints and necessary settings</strong></h3>
+
+<p>Add url endpoint that all the API requests will be done through.</p>
+
+<p>
+	Note: (graphiql=True) option is responsible for interactive GraphQL API
+	browser. We will use it for manually querying the database.
+</p>
+
+<pre>
+<code class="language-python">from django.contrib import admin
+from django.urls import path
+from graphene_django.views import GraphQLView
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+    # apiclient on client-side will request this adress later
+    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+
+    
+    # index.html file will be our root template. When a user opens our webste,
+    # this file will be sent by server at first. After then, api requests
+    # will directed above address.
+
+    # (it points to ~/Blog/djr/templates/index.html)
+    # (currently there is no file, webpack production bundle will come here )
+    path("", TemplateView.as_view(template_name="index.html")),
+]
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>
+	Define the schema location for Graphene in the
+	<strong>settings.py</strong> file of your Django project. SCHEMA location
+	points to our schema that we will create in a moment.
+</p>
+
+<pre>
+<code class="language-python"># djr/djr/settings.py
+GRAPHENE = {
+    'SCHEMA': 'gql.schema.schema'
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>Create a <strong>schema.py</strong> file in gql directory.</p>
+
+<pre>
+<code class="language-python"># djr/gql/schema.py
+import graphene
+
+# this is what we define SCHEMA in settings.py
+schema = graphene.Schema(query=Query)
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-3: Define API model and query</strong></h3>
+
+<p>
+	Now, we should clearly define the API requests and its relevant type of
+	data.
+</p>
+
+<p>
+	First, we will create an API model type and its resolvers that will be the
+	interface of our previously defined movie model.
+</p>
+
+<p>
+	You can also define custom types with graphene.ObjectType that is not
+	connected to any pre-defined django-model.
+</p>
+
+<p>&nbsp;</p>
+
+<p><strong>API-Model</strong></p>
+
+<p>
+	When we create api-model, we first define api-model-fields with respect to
+	our original movie model. There is no obligation to define all the field,
+	but we will do. Also, you can write custom fields that is not defined
+	before.
+</p>
+
+<p>
+	Let&#39;s look at how our movie model fields and api-model fields are
+	paired.
+</p>
+
+<p>&nbsp;</p>
+
+<p>
+	<a
+		href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/movie-model-api-pair.jpg"
+		target="_blank"
+		><img
+			alt="Compare your movie mode with API model-type"
+			src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/movie-model-api-pair.jpg"
+			style="min-height:300px; height:auto; width:100%"
+	/></a>
+</p>
+
+<p>&nbsp;</p>
+
+<p><strong>Resolvers</strong></p>
+
+<p>
+	After the fields, we will define resolvers which is responsible for logic
+	part. The second argument of resolvers is info argument which holds useful
+	information like authentication or http information.
+</p>
+
+<p>&nbsp;</p>
+
+<p><strong>Queries</strong></p>
+
+<p>
+	Now we are going to write our queries. Client side app will make their
+	requests according to these queries. For the sake of simplicity only two
+	queries will be defined.
+</p>
+
+<p>The movie_list query returns all the movies in the database.</p>
+
+<p>
+	The movie query returns only specific movie, if slug of the url matches any
+	slug field of a movie.
+</p>
+
+<p>The final code of <strong>schema.py</strong> file is here:</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-python">import graphene
+from items.models import Movie
+from graphene_django.types import DjangoObjectType
+
+# api-movie-model
+class MovieType(DjangoObjectType):
+    id = graphene.Int()
+    name = graphene.String()
+    year = graphene.Int()
+    summary = graphene.String()
+    poster_url = graphene.String()
+    slug = graphene.String()
+
+    class Meta:
+        model = Movie
+
+    def resolve_id(self, info):
+        return self.id
+    
+    def resolve_name(self, info):
+        return self.name
+
+    def resolve_year(self, info):
+        return self.year
+
+    def resolve_summary(self, info):
+        return self.summary
+
+    def resolve_poster_url(self, info):
+        # Note: in client side app snake_case fields
+        # will be resolved as camelCase
+        # Eg: poster_url ==&gt; posterUrl
+        return self.poster_url
+
+    def resolve_slug(self, info):
+        return self.slug
+
+
+class Query(graphene.ObjectType):
+    movie_list = graphene.List(MovieType)
+    movie = graphene.Field(MovieType, slug=graphene.String())
+
+    def resolve_movie_list(self, info, *_):
+        # for large lists only query what you need
+        return Movie.objects.all().only("name", "poster_url", "slug")
+    
+    def resolve_movie(self, info, slug):
+        movie_queryset = Movie.objects.filter(slug=slug)
+        if movie_queryset.exists():
+            return movie_queryset.first()
+
+schema = graphene.Schema(query=Query)
+</code></pre>
+
+<p>
+	Writing API for backend is finished. Now, we can check it in the GraphQL
+	interactive browser.
+</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-3: Interactive graphql playground</strong></h3>
+
+<p>
+	Please run the server and open
+	<a href="http://127.0.0.1:8000/graphql">http://127.0.0.1:8000/graphql</a> in
+	the browser and write this. You will see the response to this query.
+</p>
+
+<pre>
+<code>query {
+  #the query name
+  movieList{
+    # the fields which we will request
+    id,
+    name,
+    posterUrl, #camelCase
+  }
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>Our second query has arguments. We can make the request like this:</p>
+
+<pre>
+<code>query {
+  #the query and argument
+  movie(slug:"the-matrix-1999"){
+      # the fields which we will request
+      id,
+      name,
+      posterUrl, #camelCase
+
+    }
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>then the response will be:</p>
+
+<pre>
+<code>{
+  "data": {
+    "movie": {
+      "id": 2571,
+      "name": "The Matrix",
+      "posterUrl": "&lt;https://image.tmdb.org/t/p/w185/lZpWprJqbIFpEV5uoHfoK0KCnTW.jpg&gt;"
+    }
+  }
+}
+</code></pre>
+
+<p>
+	We checked that our API is ready.This part of the tutorial is finished. You
+	can stop the server.
+</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>
+	Next, we will create a single page application with React. Then we make
+	requests to our backend.
+</p>

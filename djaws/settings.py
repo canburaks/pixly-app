@@ -316,7 +316,7 @@ CKEDITOR_CONFIGS = {
                        'HiddenField']},
             '/',
             {'name': 'basicstyles',
-             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat', 'CodeSnippet', "codesnippetgeshi"]},
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat', 'CodeSnippet']},
             {'name': 'paragraph',
              'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
                        'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
@@ -348,7 +348,8 @@ CKEDITOR_CONFIGS = {
             'javascript': 'JavaScript',
             'bash': 'Bash',
             "html": "HTML",
-            "css": "CSS"
+            "css": "CSS",
+            "graphql": "GraphQL"
         },
 
 
