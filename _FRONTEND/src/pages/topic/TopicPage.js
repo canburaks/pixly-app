@@ -185,7 +185,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         const pageQuantity = data.complexSearch.topicResult.length 
         const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2) + 1)
         const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2) + 1, 30)
-        console.log("data", firstPart, secondPArt)
+        //console.log("data", firstPart, secondPArt)
         dispatcher(willBeDispatched)
         return (
             <>
