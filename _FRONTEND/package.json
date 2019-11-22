@@ -182,6 +182,13 @@
     "include": [
       "",
       "/",
+      "/explore",
+      "/directors/1",
+      "/topic/art-house",
+      "/topic/cyberpunk",
+      "/topic/based-on-true-story",
+      "/topic/dialogue-focused",
+      "/topic/thought-provoking",
       "/blog",
       "/blog/a-brief-introduction-to-collaborative-filtering",
       "/blog/django-graphql-react-integration-tutorial-part-1",
