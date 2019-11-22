@@ -21,7 +21,7 @@ import {
 
 
 const BlogQuery = (props) => {
-    const { loading, error, data, } = useQuery(BLOG_QUERY)
+    const { loading, error, data, } = useQuery(BLOG_QUERY, {partialRefetch:true})
     //print("blog query props", props)
     if (loading) return <Loading />
     if (error) return <Error />
@@ -64,10 +64,10 @@ const PostPage = (props) =>{
     const authCheck = useAuthCheck()
     const post = props.post
     print("blog props", props)
-    function createMarkup() {
-        return {__html: props.post.text};
-      }
-    const InnerHtml = () => <div dangerouslySetInnerHTML={createMarkup()} />;
+    //function createMarkup() {
+    //    return {__html: props.post.text};
+    //  }
+    //const InnerHtml = () => <div dangerouslySetInnerHTML={createMarkup()} />;
     return(
         <PageContainer>
             <Head
