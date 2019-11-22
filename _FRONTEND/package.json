@@ -193,7 +193,8 @@
       "/blog",
       "/blog/a-brief-introduction-to-collaborative-filtering",
       "/blog/django-graphql-react-integration-tutorial-part-1",
-      "/list/all-palme-dor-winners-cannes-film-festival/1"
+      "/blog/django-graphql-react-integration-tutorial-part-2",
+      "/blog/django-graphql-react-integration-tutorial-part-3"
     ],
     "publicPath": "/"
   }

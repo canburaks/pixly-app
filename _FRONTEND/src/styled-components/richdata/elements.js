@@ -1,8 +1,9 @@
 import React from "react";
+import { BlogPostAd } from "../../functions"
 import { 
     Text, Image, HeaderMini,HeaderText, NewLink,
     Box, FlexBox,Quote, OuterLink, Cite, Span, Meta,
-    HtmlContainer
+    HtmlContainer, 
 } from "../index"
 
 const capitalize = (text) => text.replace(/\b\w/g, l => l.toUpperCase())
@@ -35,7 +36,7 @@ export const SchemaPost = ({ post , ...props}) =>(
 
         {/* Schema Publisher*/}
         <SchemaPublisher />
-
+        {post.cover && <Image src={post.cover} info={post.header} width={"100%"} minHeight={"80px"} maxHeight={"200px"} />}
         {/* Schema headline*/}
         <HeaderText itemProp="headline"
             fontSize={props.headerSize || ["24px", "24px", "28px", "32px", "34px", "36px"]} 
@@ -46,8 +47,9 @@ export const SchemaPost = ({ post , ...props}) =>(
             {post.header}
         </HeaderText>
         <Text>{post.updatedAt.slice(0,10)}</Text>
+        <BlogPostAd />
         {/* Article Body*/}
-        <Box width={"100%"} height="auto" itemProp="articleBody" mt={[3]}>
+        <Box width={"100%"} height="auto" itemProp="articleBody" mt={[5]}>
             <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={post.text} />
         </Box>
 
