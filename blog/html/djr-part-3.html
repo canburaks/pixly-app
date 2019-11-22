@@ -1,0 +1,783 @@
+<h1>&nbsp;</h1>
+
+<p>In the <a href="https://pixly.app/blog/django-graphql-react-integration-tutorial-part-2" target="_blank">previous part</a>, we build an api that is responsible for communication of django project and react app. The third part of the tutorial is creating a single page application with React.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-1: Configuring Environment</strong></h3>
+
+<p>(Note: if you already installed the node, you can skip this part)</p>
+
+<p>We will use Node backend for development environment. Therefore we need to install Node and Node package manager npm. In order to prevent possible dependency problems, I need to create a clean node environment. I will use NVM which is Node version manager and it allows us to create isolated Node environments.</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-bash"># install node version manager 
+wget -qO- &lt;https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh&gt; | bash
+
+# check installation
+command -v nvm  #should prints nvm
+
+# install node
+nvm install node #"node" is an alias for the latest version
+
+# use the installed version
+nvm use node
+# prints Now using node v13.1.0 (npm v6.12.1)
+
+# Note:versions can be different
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-2: Create frontend director</strong></h3>
+
+<pre>
+<code># go django root directory
+
+# create frontend directory
+mkdir FRONTEND
+cd FRONTEND
+
+# create a node project
+npm init
+# you may fill the rest
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-3: Install dependencies</strong></h3>
+
+<pre>
+<code># djr/FRONTEND
+
+# add core react library
+npm install react react-dom
+
+# add graphql client-side framework of Apollo and parser 
+npm install apollo-boost @apollo/react-hooks graphql
+
+# add routing library for single page app
+npm install react-router-dom  
+
+# DEVELOPMENT PACKAGES
+# add babel transpiler
+npm install -D @babel/core @babel/preset-env @babel/preset-react
+
+# add webpack bundler
+npm install -D webpack webpack-cli webpack-dev-server
+
+# add webpack loaders and plugins
+npm install -D babel-loader css-loader style-loader html-webpack-plugin mini-css-extract-plugin postcss-loader postcss-preset-env
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-4: Create necessary files</strong></h3>
+
+<pre>
+<code># djr/FRONTEND
+
+# create source folder
+mkdir src
+
+#create webpack config file
+touch webpack.config.js
+
+# get into src folder
+cd src
+
+# djr/FRONTEND
+
+# create html file for developing with react
+touch index.html
+
+# our react app's root file
+touch index.js
+
+# our app file and styling
+touch App.js
+touch App.css
+
+# query file
+touch query.js
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-4: Package.json file</strong></h3>
+
+<p>Your package.json file should look like this.</p>
+
+<pre>
+<code>{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --open --hot --mode development",
+    "build": "webpack --mode production"
+  },
+  "author": "",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "postcss-preset-env": {}
+    }
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.3",
+    "apollo-boost": "^0.4.4",
+    "graphql": "^14.5.8",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-4: Webpack configuration</strong></h3>
+
+<p>We decided to make two different webpack setting; one for production and for development.</p>
+
+<p>This is the minimal configuration of webpack and it is not optimized.</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-javascript">const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+
+// checks if it is production bundling or development bundling 
+const isEnvProduction = process.argv.includes("production")
+
+// our root file
+const entrypoint = './src/index.js'
+
+const productionSettings = {
+	mode: "production",
+	entry: entrypoint,
+	output: {
+        // output directory will be the root directory of django
+        path: path.resolve(__dirname, '../'),
+        // this is the bundled code we wrote
+        filename: 'static/js/[name].js',
+        // this is the bundled library code
+	      chunkFilename: 'static/js/[name].chunk.js'
+	},
+    optimization: {
+		minimize: true,
+		splitChunks: {
+		  chunks: 'all',
+		  name: true,
+		},
+		runtimeChunk: false,
+	  },
+	devServer: {
+		historyApiFallback: true,
+		stats: 'normal',
+	  },
+	module: {
+		rules: [
+			{
+				// for bundling transpiled javascript
+				test: /\\.m?js$/,
+				exclude: /(node_modules|bower_components)/,
+				use: {
+					loader: "babel-loader",
+				}
+			},
+			{
+				test: /\\.css$/i,
+				use: [
+				  // IMPORTANT =&gt; don't forget `injectType`  option  
+				  // in some cases some styles can be missing due to 
+				  // inline styling. 
+				  { loader: 'style-loader', options: { injectType: 'styleTag' } },
+				  "css-loader"
+				],
+			},
+		]
+	},
+	plugins: [
+		new HtmlWebPackPlugin({
+			// this is where webpack read our app for bundling
+			template: "./src/index.html",
+			// this is emitted bundle html file
+			// django will use this as template after bundling
+      filename:"./templates/index.html"
+		}),
+	]
+};
+
+const devSettings = {
+	mode: "development",
+    entry: entrypoint,
+	output: {
+		path: path.resolve(__dirname, './build'),
+		publicPath: "/",
+		filename: 'static/js/bundle.js',
+		chunkFilename: 'static/js/[name].chunk.js',
+	},
+	devtool: 'inline',
+	devServer: {
+		historyApiFallback: true,
+		contentBase: './dist',
+		stats: 'minimal',
+	  },
+	module: {
+		rules: [
+			{	// using transpiled javascript
+				test: /\\.m?js$/,
+				exclude: /(node_modules|bower_components)/,
+				include: path.resolve(__dirname, 'src'),
+				use: {
+					loader: "babel-loader",
+					options: {
+						presets: ["@babel/preset-env"],
+						plugins: ["@babel/plugin-proposal-object-rest-spread"],
+						// for fast development environment
+						// enable caching transpilation
+						cacheDirectory: true
+					},
+				}
+			},
+
+			{
+				test: /\\.css$/i,
+				use: [
+				  // IMPORTANT =&gt; don't forget `injectType`  option  
+				  // in some cases some styles can be missing due to 
+				  // inline styling. 
+				  { loader: 'style-loader', options: { injectType: 'styleTag' } },
+				  "css-loader",
+				  'postcss-loader'
+				  //{ loader: 'sass-loader' },
+				],
+			},
+		]
+	},
+	plugins: [
+		new HtmlWebPackPlugin({
+			template: "./src/index.html",
+		})
+	]
+};
+
+
+
+module.exports = isEnvProduction ? productionSettings : devSettings;
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-5: Create Index Html file</strong></h3>
+
+<p>When we are developing frontend, our react app render all our javascript code to this html file located in the src folder. Also when we build our code for production (bundling), webpack will be use this html as a template.</p>
+
+<p>However, It is important to say that django will use bundled html file that is defined in filename option which is under the HtmlWebPackPlugin in webpack configs.</p>
+
+<pre>
+<code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;
+    &lt;meta name="theme-color" content="#000000" /&gt;
+    &lt;meta name="description" content="Django-React Integration Tutorial"/&gt;
+    &lt;title&gt;Django React Integration&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-6: Create the root file of react application: Index.js</strong></h3>
+
+<p>Index file is the root file of our app meaning that all our code will connected to this root file. The other tutorials or react boilerplates generally use this file for only render function of ReactDOM and leave it very small and clear. Writing this index file as it is is a totally a personal choice.</p>
+
+<p>What we will do is create an Init component that will initialize API framework and routing library.</p>
+
+<p>We will wrap our App file with API framework so that all our components will be in the context of our API. The Apollo Provider expects an Apollo client which has the information of requesting address will be the address of our Django server.</p>
+
+<p>After than we will wrap our App file again with the router component namely Browser Router. This will allows us routing without rendering all the page when the url of the address bar changes.</p>
+
+<p>At the end of the file you will see the render function of ReactDOM which accepts our root component, which is Init component in our case, and the DOM element that our app will be rendered in there.</p>
+
+<p>&nbsp;</p>
+
+<pre>
+<code class="language-javascript">// ~/Blog/djr/FRONTEND/src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+import { BrowserRouter } from "react-router-dom"
+
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+
+
+
+/*
+    our api client will make request to thils adress.
+    at      ~/Blog/djr/djr/urls.py
+*/
+const apiclient = new ApolloClient({
+    uri: '&lt;http://127.0.0.1:8000/graphql&gt;',
+  });
+
+
+const Init = () =&gt; (
+    &lt;ApolloProvider client={apiclient}&gt;
+        &lt;BrowserRouter&gt;
+            &lt;App /&gt;
+        &lt;/BrowserRouter&gt;
+    &lt;/ApolloProvider&gt;
+)
+
+ReactDOM.render( &lt;Init /&gt;, document.getElementById('root'))
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p><strong>Information about the application</strong></p>
+
+<p>Now, we are ready to create our simple movie app.</p>
+
+<p>Our app has two different screens ;The main page which lists all movies in the database with small information and the movie page will show specific movie with more information.</p>
+
+<p>&nbsp;</p>
+
+<p><strong>Technical explanation</strong></p>
+
+<p>When a user first open our page, switch component from react-router-dom will look the url. Then try to match path of route components with this url, if any, then the matched component in the route will be rendered.</p>
+
+<p>In ideal scenario, when a user open our homepage, switch function will match the main page component. Then the query in the main page will make request to the server. If query will be successful, main page will render the data and user will see the small movie cards. When the user click any of these cards, link component from react-router-dom will redirect user to the movie page of this specific movie. The url will be changed. Then switch function looks and match this url with the movie page component. This time query in the movie page will request to the server with the given slug argument that was captured from url. The server will look at this argument and check its database, if any match, then the movie information will be sent back to the client. Finally, movie page render the movie information with this data.</p>
+
+<p>Note: It is better to load all information at first then render movie page with this data. It is not a good option to make a second request with this small data. Because of the need for explanation, this approach was selected.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-7: Create App.js file</strong></h3>
+
+<pre>
+<code>// ~/Blog/djr/FRONTEND/src/App.js
+import React from "react";
+import { Route, Switch, Link } from "react-router-dom"
+
+import "./App.css"
+
+const App = () =&gt; {
+    return (
+        &lt;div className="App"&gt;
+            &lt;Switch&gt;
+                &lt;Route exact path="/" component={MainPage} /&gt;
+
+                // colon before slug means it is a dynamic value
+                // that makes slug parameter anything
+                // like: /movie/the-matrix-1999   or /movie/anything
+                &lt;Route exact path="/movie/:slug" component={MoviePage} /&gt;
+            &lt;/Switch&gt;
+        &lt;/div&gt;
+    )
+}
+export default App
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-7: Write client-side queries</strong></h3>
+
+<p>Before creating our main page and movie page components, we should first create our API queries.</p>
+
+<pre>
+<code class="language-javascript">// ~/Blog/djr/FRONTEND/src/query.js
+
+//import our graph query parser
+import gql from "graphql-tag";
+
+// our first query will requests all movies
+// with only given fields
+// note the usage of gql with jsvascript string literal
+export const MOVIE_LIST_QUERY = gql`
+    query movieList{
+        movieList{
+            name, posterUrl, slug
+        }
+    }
+`
+// Note the usage of argument.
+// the exclamation mark makes the slug argument as required
+// without it , argument will be optional
+export const MOVIE_QUERY = gql`
+    query movie($slug:String!){
+        movie(slug:$slug){
+            id, name, year, summary, posterUrl, slug
+        }
+    }
+`
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-7: Creation of page components</strong></h3>
+
+<p>Normally, it is better to create different page for components. However, because of this project is small, writing in them in App file will be no problem.</p>
+
+<p>Import Apollo query hook and our queries to App file</p>
+
+<pre>
+<code>// ~/Blog/djr/FRONTEND/src/App.js
+
+// import Apollo framework query hook
+import { useQuery } from '@apollo/react-hooks'; // New
+
+// import our queries previously defined
+import { MOVIE_QUERY, MOVIE_LIST_QUERY } from "./query" //New
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p><strong>Main page component</strong></p>
+
+<pre>
+<code class="language-javascript">// ~/Blog/djr/FRONTEND/src/App.js
+const MainPage = (props) =&gt; {
+    const { loading, error, data } = useQuery(MOVIE_LIST_QUERY);
+    
+    // when query starts, loading will be true until the response will back.
+    // At this time this will be rendered on screen
+    if (loading) return &lt;div&gt;Loading&lt;/div&gt;
+    
+    // if response fail, this will be rendered
+    if (error) return &lt;div&gt;Unexpected Error: {error.message}&lt;/div&gt;
+
+    //if query succeed, data will be available and render the data
+    return(
+        &lt;div className="main-page"&gt;
+            {data &amp;&amp; data.movieList &amp;&amp;
+                data.movieList.map(movie =&gt; (
+                    &lt;div className="movie-card" key={movie.slug}&gt;
+                        &lt;img 
+                            className="movie-card-image"
+                            src={movie.posterUrl} 
+                            alt={movie.name + " poster"} 
+                            title={movie.name + " poster"} 
+                        /&gt;
+                        &lt;p className="movie-card-name"&gt;{movie.name}&lt;/p&gt;
+                        &lt;Link to={`/movie/${movie.slug}`} className="movie-card-link" /&gt;
+                    &lt;/div&gt;
+                ))
+            }
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p><strong>Movie page component</strong></p>
+
+<p>The Browser router component that we define in the index.js set some routing properties on components. You can see them with printing props.</p>
+
+<pre>
+<code class="language-javascript">// ~/Blog/djr/FRONTEND/src/App.js
+const MoviePage = (props) =&gt; {
+    // uncomment to see which props are passed from router
+    //console.log(props)
+
+    // due to we make slug parameter dynamic in route component,
+    // urlParameters will look like this { slug: 'slug-of-the-selected-movie' }
+    const urlParameters = props.match.params
+
+    const { loading, error, data } = useQuery(MOVIE_QUERY, { 
+        variables:{slug:urlParameters.slug}
+    });
+
+    if (loading) return &lt;div&gt;Loading&lt;/div&gt;
+    if (error) return &lt;div&gt;Unexpected Error: {error.message}&lt;/div&gt;
+  
+    return (
+        &lt;div className="movie-page"&gt;
+        &lt;Link to="/" className="back-button" &gt;Main Page&lt;/Link&gt;
+            {data &amp;&amp; data.movie &amp;&amp; 
+                &lt;div className="movie-page-box"&gt;
+                    &lt;img 
+                        className="movie-page-image"
+                        src={data.movie.posterUrl} 
+                        alt={data.movie.name + " poster"} 
+                        title={data.movie.name + " poster"} 
+                    /&gt;
+                    &lt;div className="movie-page-info"&gt;
+                        &lt;h1&gt;{data.movie.name}&lt;/h1&gt;
+                        &lt;p&gt;Year: {data.movie.year}&lt;/p&gt;
+                        &lt;br /&gt;
+                        &lt;p&gt;{data.movie.summary}&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            }
+
+        &lt;/div&gt;
+    )
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-8: Add styles</strong></h3>
+
+<p>You can copy them to App.css</p>
+
+<pre>
+<code class="language-css">/* ~/Blog/djr/FRONTEND/src/App.css  */
+
+html, body {
+    width:100vw;
+    overflow-x: hidden;
+    height:auto;
+    min-height: 100vh;
+    margin:0;
+}
+
+.App {
+    position: absolute;
+    left:0;
+    right:0;
+    display: flex;
+    min-width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #181818;
+    /*font-family: "Open Sans", sans-serif;*/
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+/* MAIN PAGE */
+.main-page {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 80vh;
+    background-color: #3f3e3e;
+    margin:10vh 5vw;
+    border-radius: 6px;
+}
+
+/* MOVIE CARD */
+.movie-card {
+    position: relative;
+    width:168px;
+    height:auto;
+    background: #f1f1f1;
+    border-radius: 6px;
+    margin:16px;
+    box-shadow: 0 12px 12px -4px rgba(0,0,0, 0.4);
+}
+.movie-card:hover {
+    box-shadow: 0 12px 18px 4px rgba(0,0,0, 0.8);
+
+}
+.movie-card-image {
+    width:168px;
+    height:264px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.movie-card-name {
+    text-align: center;
+    margin: 0;
+    padding: 8px;
+    font-weight: bold;
+}
+.movie-card-link {
+    position: absolute;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+}
+
+/* MOVIE PAGE */
+.back-button {
+    position: absolute;
+    left:10px;
+    top:10px;
+    width:120px;
+    padding: 8px 16px;
+    text-align: center;
+    background: #f1f1f1;
+    color:black;
+    font-weight: bold;
+    cursor:pointer;
+}
+
+.movie-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 80vh;
+    margin:10vh 10vw;
+    border-radius: 6px;
+}
+
+.movie-page-box {
+    position: relative;
+    display: flex;
+    height:352px;
+    background-color: #f1f1f1;
+}
+.movie-page-image {
+    width:280px;
+    height:352px;
+}
+.movie-page-info {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height:352px;
+    width: auto;
+    max-width: 400px;
+    padding: 16px 32px;
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3>Step-9: Start development environment</h3>
+
+<p>Open two different terminal screen.</p>
+
+<pre>
+<code class="language-bash"># in root directory of django project     djr/
+
+# make ready server for client requests.
+python manage.py runserver
+
+# in FRONTEND directory   ~/Blog/djr/FRONTEND
+
+# run react dev environment
+npm run start
+# this will probably open a browser page
+# &lt;http://localhost:8080/&gt;
+</code></pre>
+
+<p>&nbsp;</p>
+
+<h3><strong>Voila!!!</strong></h3>
+
+<p><strong><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/react-movie-list-page.jpg" target="_blank"><img alt="Opening page: list of movies" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/react-movie-list-page.jpg" style="height:874px; width:1892px" /></a></strong></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3>When we click any of the movies, you will see that the url address will be changed. Let&#39;s click</h3>
+
+<p><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/movie-page.jpg" target="_blank"><img alt="Movie page" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/movie-page.jpg" style="height:803px; width:1667px" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>We created a simple single-page-application. Now, the last part of this tutorial will be make this app works seamlessly with our django project.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<h3><strong>Step-10: Build production environment</strong></h3>
+
+<p>Now you can stop the webpack server with corresponding terminal screen.</p>
+
+<pre>
+<code class="language-bash"># in djr/FRONTEND
+npm run build
+</code></pre>
+
+<p>if you successfully build, you&#39;ll have two bundled javascript file in static folder of the root directory, and index.html file in the templates directory.</p>
+
+<p><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/build-result.jpg" target="_blank"><img alt="Directory structure should look like this after bundling" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/build-result.jpg" style="height:441px; width:853px" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>This is the production build. Let&#39;s test it. In the beginning of this series, I said that we will develop this project on two server, but in the production environment, there will only one server.</p>
+
+<p>Now Let&#39;s test it.</p>
+
+<p>Please close open terminal sessions and re-open the django server.</p>
+
+<pre>
+<code class="language-bash"># in root directory
+python manage.py runserver
+
+# then open &lt;http://127.0.0.1:8000/&gt; on your browser.
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>Then It is working.</p>
+
+<p>This tutorial series ended. I hope it will be useful for someone. Criticisms or feedbacks are welcome.</p>
+
+<p>Finally, You can find all the code of this tutorial from <a href="https://github.com/canburaks/djr">here</a>.</p>
