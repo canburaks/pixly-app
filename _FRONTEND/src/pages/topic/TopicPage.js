@@ -85,6 +85,7 @@ const TopicPage = (props) =>{
             <ContentContainer>
                 <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"}>
                     {isReady &&
+                        <>
                         <SchemaArticle 
                             headerSize={["24px", "26px", "28px", "32px"]}
                             textSize={["14px","16px", "16px", "18px"]}
@@ -100,7 +101,7 @@ const TopicPage = (props) =>{
                             wiki={queryData.topic.wiki}
                         >   
                             <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={queryData.topic.htmlContent} />
-                        </SchemaArticle>}   
+                        </SchemaArticle>
 
                         <FlexBox my={[4,4,4,5]} width={"100%"} overflow="hidden" flexWrap="wrap" className="social-share-box" flexDirection="row">
                             <SocialButtons.Twitter className="social-share" link={"https://pixly.app/" + window.location.pathname} />
@@ -109,6 +110,8 @@ const TopicPage = (props) =>{
                             <SocialButtons.Tumblr className="social-share" link={"https://pixly.app/" + window.location.pathname} />
                             <SocialButtons.Pinterest className="social-share" link={"https://pixly.app/" + window.location.pathname} />
                         </FlexBox> 
+                        </>
+                        }   
                 </FlexBox>
 
                 {queryData && queryData.topic.searchable && <Form flexWrap="wrap" onSubmit={submitHandler}>
