@@ -596,7 +596,7 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
         slug = kwargs.get("slug")
         t = Tag.objects.filter(slug=slug)
         if t.exists():
-            movids = t.first().related_movies.all().values_list("id", flat=True)
+            movids = t.first().related_movies.all().order_by("-imdb_rating").values_list("id", flat=True)
             return [CustomMovieType(id=x) for x in movids]
 
 

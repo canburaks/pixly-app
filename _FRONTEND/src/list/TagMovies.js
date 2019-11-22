@@ -30,7 +30,7 @@ const TagMovies = (props) => {
         <PageContainer>
             <ContentContainer>
             {data && data.tagMovies.map(movie => (
-                    <MovieRichCardBox item={movie} key={movie.id} />
+                    <MovieRichCard item={movie} key={movie.id} />
             ))}
             </ContentContainer>
         </PageContainer>
