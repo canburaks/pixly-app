@@ -305,7 +305,7 @@ CKEDITOR_CONFIGS = {
         'skin': 'moono',
         # 'skin': 'office2013',
         'toolbar_Basic': [
-            ['Source', '-', 'Bold', 'Italic']
+            ['Source', 'Bold', 'Italic', "link"]
         ],
         'toolbar_YourCustomToolbarConfig': [
             {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
@@ -316,7 +316,7 @@ CKEDITOR_CONFIGS = {
                        'HiddenField']},
             '/',
             {'name': 'basicstyles',
-             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat', 'CodeSnippet']},
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat', 'CodeSnippet', "codesnippetgeshi"]},
             {'name': 'paragraph',
              'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
                        'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
@@ -371,7 +371,7 @@ CKEDITOR_CONFIGS = {
             'elementspath',
             "devtools",
             "pagebreak",
-
+            "codesnippetgeshi"
         ]),
     }
 }

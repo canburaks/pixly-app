@@ -15,10 +15,9 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaPost,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, HeaderMini, NewLink,
-    PostInfoBox, MyEditor
+    PostInfoBox
 } from "../../styled-components"
-import Highlight from 'react-highlight'
-import "../../../node_modules/highlight.js/styles/rainbow.css"
+
 
 
 const BlogQuery = (props) => {
@@ -65,10 +64,10 @@ const PostPage = (props) =>{
     const authCheck = useAuthCheck()
     const post = props.post
     print("blog props", props)
-    //function createMarkup() {
-    //    return {__html: props.post.text};
-    //  }
-    //const InnerHtml = () => <div dangerouslySetInnerHTML={createMarkup()} />;
+    function createMarkup() {
+        return {__html: props.post.text};
+      }
+    const InnerHtml = () => <div dangerouslySetInnerHTML={createMarkup()} />;
     return(
         <PageContainer>
             <Head
@@ -76,12 +75,22 @@ const PostPage = (props) =>{
                 description={post.summary}
                 canonical={`https://pixly.app/blog/${post.slug}`}
             />
-            <ContentContainer px={"10vw"}  pb={120}  >
-            <MyEditor />
-            {/* <SchemaPost post={post}/> */}
+            <ContentContainer px={"10vw"}  pb={40}  >
+            <SchemaPost post={post}/>
             </ContentContainer>
         </PageContainer>
     );
 }
+class Editor extends React.Component {
+    render() {
+      return (
+            <Dante 
+                onChange={editor => { console.log('editor content: ', editor.emitSerializedOutput()) }}
+
+            />
+      )            
+      ;
+    }
+  }
 
 export default withRouter(BlogQuery);
