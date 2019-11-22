@@ -596,9 +596,9 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
         slug = kwargs.get("slug")
         t = Tag.objects.filter(slug=slug)
         if t.exists():
-            movids = t.movies.all().values_list("id", flat=True)
+            movids = t.first().movies.all().values_list("id", flat=True)
             return [CustomMovieType(id=x) for x in movids]
-            
+
 
     def resolve_topic(self, info, **kwargs):
         id = kwargs.get("id")
