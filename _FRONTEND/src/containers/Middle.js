@@ -37,6 +37,7 @@ import ProfilePage from "../pages/profil/ProfilePage";
 import DraftPage from "../pages/DraftPage"
 import SearchPage from "../list/search/SearchPage";
 import ExploreQuery from "../list/Explore";
+import TagMovies from "../list/TagMovies";
 
 //import AdvanceSearch from "../list/advance-search/AdvanceSearch";
 
@@ -91,7 +92,7 @@ const Middle = (props) => {
             <Route exact path="/movie/:slug/:text" component={MovieQueryRedirect} />
             {/*
             */}
-
+            <Route exact path="/tag/:slug" component={TagMovies} />
             <Route exact path="/person/:slug" component={PersonQuery} />
 
             <Route exact path="/person/:slug/:id" component={PersonQuery} />

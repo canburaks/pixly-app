@@ -15,6 +15,21 @@ export const BLOG_QUERY = gql`
 `
 
 
+export const TAG_MOVIES_QUERY = gql`
+query tagMovies($slug:String!){
+    tagMovies(slug:$slug){
+        id,
+        name,
+        imdbRating
+        year,
+        slug,
+        hasCover,
+        poster,
+        coverPoster,
+    }
+}
+`
+
 
 export const MAIN_PAGE = gql`
 query mainPage{
