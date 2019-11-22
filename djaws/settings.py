@@ -303,6 +303,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
         'skin': 'moono',
+        "removePlugins": "stylesheetparser",
         # 'skin': 'office2013',
         'toolbar_Basic': [
             ['Source', 'Bold', 'Italic', "link"]

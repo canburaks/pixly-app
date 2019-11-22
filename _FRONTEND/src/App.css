@@ -150,3 +150,22 @@ p{
 h3 {
     margin-top:40px !important; 
 }
+
+
+
+.social-share-box > a {
+    max-width: 30%;
+}
+@media all and (max-width: 480px) { 
+    .social-share-box span {
+        font-size:12px;
+    }
+
+}
+.social-share-box span {
+    font-size:14px;
+
+}
+.social-share {
+    width:100%;
+}

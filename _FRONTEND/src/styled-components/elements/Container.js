@@ -228,12 +228,14 @@ Grid.defaultProps = {
     gridRowGap: "32px"
 }
 
-export const TagBox = ({tags, num=100}) => (
-    <FlexBox flexWrap="wrap" py={[2]} color="light">
+export const TagBox = ({tags, num=100, color}) => (
+    <FlexBox flexWrap="wrap" py={[2]} color={color || "light"}>
         {tags.slice(0, num).map(tag => (
             <TagText key={tag.name ? "tbox"+ tag.name : "tbox" + tag}  
                 fontSize={["10px","12px","12px", "12px", "12px", "14px"]}
                 fontFamily="header"
+                borderColor={color || "light"}
+                color={color || "light"}
             >
                 {tag.name ? tag.name : tag}
             </TagText>

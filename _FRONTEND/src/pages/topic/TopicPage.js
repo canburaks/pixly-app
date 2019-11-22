@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 
-import { isEqualObj, Head, MidPageAd,HomePageFeedAd} from "../../functions"
+import { isEqualObj, Head, MidPageAd,HomePageFeedAd, useValues, useWindowSize} from "../../functions"
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import * as SocialButtons from 'react-social-sharing'
 
@@ -14,9 +14,19 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
-    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox
+    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, 
+    LargeTopicMovieCard, SmallTopicMovieCard,
 } from "../../styled-components"
 
+
+export const ResponsiveTopicCard = ({ item }) => {
+    const screenSize = useWindowSize()
+    const isLargeScreen = useMemo(() => screenSize.includes("L"), [screenSize])
+    console.log("isLargeScreen", isLargeScreen)
+    return (
+        <LargeTopicMovieCard item={item} />
+    )
+}
 
 const TopicPage = (props) =>{
     const topicSlug = props.match.params.slug 
@@ -91,6 +101,14 @@ const TopicPage = (props) =>{
                         >   
                             <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={queryData.topic.htmlContent} />
                         </SchemaArticle>}   
+
+                        <FlexBox my={[4,4,4,5]} maxWidth={"100%"} overflow="hidden" flexWrap="wrap" className="social-share-box">
+                            <SocialButtons.Twitter className="social-share" link={"https://pixly.app/" + window.location.pathname} />
+                            <SocialButtons.Facebook className="social-share" link={"https://pixly.app/" + window.location.pathname} />
+                            <SocialButtons.Linkedin className="social-share" link={"https://pixly.app/" + window.location.pathname} />
+                            <SocialButtons.Tumblr className="social-share" link={"https://pixly.app/" + window.location.pathname} />
+                            <SocialButtons.Pinterest className="social-share" link={"https://pixly.app/" + window.location.pathname} />
+                        </FlexBox> 
                 </FlexBox>
 
                 {queryData && queryData.topic.searchable && <Form flexWrap="wrap" onSubmit={submitHandler}>
@@ -121,16 +139,6 @@ const TopicPage = (props) =>{
                     </FlexBox>
                 </Form>}
 
-                <MessageBox>
-                    <SubHeaderText fontSize={["20px","20px","24px", ]}>Share Movies</SubHeaderText>
-                    <FlexBox >
-                        <SocialButtons.Twitter link={"https://pixly.app/" + window.location.pathname} />
-                        <SocialButtons.Facebook link={"https://pixly.app/" + window.location.pathname} />
-                        <SocialButtons.Linkedin link={"https://pixly.app/" + window.location.pathname} />
-                        <SocialButtons.Tumblr link={"https://pixly.app/" + window.location.pathname} />
-                        <SocialButtons.Pinterest link={"https://pixly.app/" + window.location.pathname} />
-                    </FlexBox> 
-                </MessageBox>
                 
                 <Box id="search-rresult-box"  
                         borderColor="rgba(40,40,40, 0.3)"
@@ -162,7 +170,9 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         topicSlug, page, ...variables
     },partialRefetch:true})
 
-
+    const screenSize = useWindowSize()
+    const isLargeScreen = useMemo(() => screenSize.includes("L"), [screenSize])
+    const TopicCard = (props) => isLargeScreen ? <LargeTopicMovieCard {...props} /> : <SmallTopicMovieCard {...props} />
     //console.log("topic query")
 
 
@@ -172,21 +182,26 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         const pageQuantity = data.complexSearch.topicResult.length 
         const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2) + 1)
         const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2) + 1, 30)
-        //console.log("data", firstPart, secondPArt)
+        console.log("data", firstPart, secondPArt)
         dispatcher(willBeDispatched)
         return (
             <>
+            <Grid columns={[1,1,1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                {firstPart.map( item => (
+                    <SmallTopicMovieCard item={item} key={"rec" + item.id}/>
+                ))}
+            </Grid>
+            <HomePageFeedAd/>
+            {/*
             <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
                 {firstPart.map( item => (
                     <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
                 ))}
-            </Grid>
-            <HomePageFeedAd/>
-            <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
+            
                 {secondPArt.map( item => (
                     <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
                 ))}
-            </Grid>
+            </Grid> */}
             <MidPageAd />
             </>
 

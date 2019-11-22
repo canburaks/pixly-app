@@ -1,13 +1,104 @@
 import React from "react";
 import { Text, Paragraph, HeaderMini,
         Image, ImageShim, //AspectRatioImage, 
-        Box, FlexBox,
+        Box, FlexBox, SuperBox, TagBox,
         TextSection, Card, ImageCard, AspectRatioCard, MosaicCard,DarkCard,
         NewLink, Input, LinkButton, ImdbRatingIcon, YearClockIcon, 
         BookmarkMutation, RatingMutation
 } from "../index"
 
+export const SmallTopicMovieCard = ({ item }) => (
+<FlexBox flexDirection="column" mb={[5]} height={"100%"}>
+    <SuperBox 
+        display="flex" flexDirection="column" 
+        src={item.coverPoster || item.poster} 
+        ratio={0.5625} borderRadius={"8px"}
+        width={"100%"}
+    >
+        <FlexBox flexDirection="column" 
+            position="absolute"
+            bottom={0} left={0}
+            width="100%" height="auto" 
+            p={[2]} 
+            bg={"rgba(0,0,0, 0.7)"}
+        >
+            <FlexBox width={"100%"}  justifyContent="flex-end">
+                {item.imdbRating && 
+                    <ImdbRatingIcon 
+                        rating={item.imdbRating} 
+                        size={"22px"} 
+                        fill="#fac539"
+                    />}
+                {item.year && 
+                    <YearClockIcon fill="#f1f1f1"
+                        year={item.year} 
+                        size={"22px"} 
+                        ml={[2,2,2,2,3]}
+                    />}
+                <BookmarkMutation id={item.id} active={item.isBookmarked} size={"28px"} ml={[2]} mb={"4px"}/>
+            </FlexBox>
+        </FlexBox>
+    </SuperBox>
+        <HeaderMini width={"75%"} fontFamily={"playfair"} color="dark" hoverUnderline
+            my={[2,2,3]}
+            >
+            <NewLink link={`/movie/${item.slug}`}>
+                {item.name}
+            </NewLink>
+        </HeaderMini>
+    <Text  color="dark">{item.summary > 400 ? `${item.summary.slice(0,400)} ...` : item.summary.slice(0,400)}</Text>
+    <TagBox tags={item.tags || []} num={6} color={"dark"} />
+    <Box position="absolute" bottom={"20px"} width={"100%"}>
+        <NewLink link={`/movie/${item.slug}`}  
+            fontWeight="bold" color="dark" 
+            hoverUnderline            
+        >
+            See more
+        </NewLink>
+        <hr />
+    </Box>
 
+</FlexBox>
+)
+
+export const LargeTopicMovieCard = ({ item }) => (
+    <SuperBox 
+        display="flex" flexDirection="column" 
+        src={item.coverPoster || item.poster} 
+        ratio={0.5625} borderRadius={"8px"}
+    >
+        <FlexBox flexDirection="column" 
+            position="absolute"
+            bottom={0} left={0}
+            width="100%" height="auto" 
+            p={[3,3,3,3,4]} 
+            bg={"rgba(0,0,0, 0.7)"}
+        >
+            <FlexBox width={"100%"} pb={[3,3,3,3,4]}>
+                <HeaderMini width={"75%"} fontFamily={"playfair"} color="light" hoverUnderline>
+                    <NewLink link={`/movie/${item.slug}`}>
+                        {item.name}
+                    </NewLink>
+                </HeaderMini>
+                {item.imdbRating && 
+                    <ImdbRatingIcon 
+                        rating={item.imdbRating} 
+                        size={"22px"} 
+                        fill="#fac539"
+                    />}
+                {item.year && 
+                    <YearClockIcon fill="#f1f1f1"
+                        year={item.year} 
+                        size={"22px"} 
+                        ml={[2,2,2,2,3]}
+                    />}
+                <BookmarkMutation id={item.id} active={item.isBookmarked} size={"28px"} ml={[2]} mb={"4px"}/>
+            </FlexBox>
+            <Text color="light">{item.summary < 200 ? item.summary.slice(0,200) + "..." : item.summary.slice(0,200)}</Text>
+            <TagBox tags={item.tags || []} num={6} />
+        </FlexBox>
+    </SuperBox>
+)
 export const CoverCard = (props) => (
     <ImageCard
         src={props.item.coverPoster || props.item.poster} 
