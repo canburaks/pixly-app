@@ -199,7 +199,8 @@ class RichData:
         if topic.cover_poster != None and topic.cover_poster != "":
             topic_image = topic.cover_poster.url
             template["image"] = topic_image
-
+        else:
+            topic_image = topic.movies.first().cover_poster.url
 
         # About
         about_data = {
