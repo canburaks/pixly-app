@@ -1,6 +1,6 @@
-<h1>&nbsp;</h1>
+<h2><strong>Create Single Page Application with React</strong></h2>
 
-<p>In the <a href="https://pixly.app/blog/django-graphql-react-integration-tutorial-part-2" target="_blank">previous part</a>, we build an api that is responsible for communication of django project and react app. The third part of the tutorial is creating a single page application with React.</p>
+<p>In the <a href="https://pixly.app/blog/django-graphql-react-integration-tutorial-part-2" target="_blank">previous part</a> we build an api that is responsible for communication of django project and react app. The third part of the tutorial is creating a single page application with React.</p>
 
 <p>&nbsp;</p>
 
@@ -14,6 +14,7 @@
 
 <p>&nbsp;</p>
 
+<div>
 <pre>
 <code class="language-bash"># install node version manager 
 wget -qO- &lt;https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh&gt; | bash
@@ -30,6 +31,7 @@ nvm use node
 
 # Note:versions can be different
 </code></pre>
+</div>
 
 <p>&nbsp;</p>
 
@@ -37,8 +39,9 @@ nvm use node
 
 <h3><strong>Step-2: Create frontend director</strong></h3>
 
+<div>
 <pre>
-<code># go django root directory
+<code class="language-bash"># go django root directory
 
 # create frontend directory
 mkdir FRONTEND
@@ -48,6 +51,7 @@ cd FRONTEND
 npm init
 # you may fill the rest
 </code></pre>
+</div>
 
 <p>&nbsp;</p>
 
@@ -55,8 +59,9 @@ npm init
 
 <h3><strong>Step-3: Install dependencies</strong></h3>
 
+<div>
 <pre>
-<code># djr/FRONTEND
+<code class="language-bash"># djr/FRONTEND
 
 # add core react library
 npm install react react-dom
@@ -77,6 +82,7 @@ npm install -D webpack webpack-cli webpack-dev-server
 # add webpack loaders and plugins
 npm install -D babel-loader css-loader style-loader html-webpack-plugin mini-css-extract-plugin postcss-loader postcss-preset-env
 </code></pre>
+</div>
 
 <p>&nbsp;</p>
 
@@ -84,8 +90,9 @@ npm install -D babel-loader css-loader style-loader html-webpack-plugin mini-css
 
 <h3><strong>Step-4: Create necessary files</strong></h3>
 
+<div>
 <pre>
-<code># djr/FRONTEND
+<code class="language-bash"># djr/FRONTEND
 
 # create source folder
 mkdir src
@@ -111,6 +118,7 @@ touch App.css
 # query file
 touch query.js
 </code></pre>
+</div>
 
 <p>&nbsp;</p>
 
@@ -120,6 +128,7 @@ touch query.js
 
 <p>Your package.json file should look like this.</p>
 
+<div>
 <pre>
 <code>{
   "name": "frontend",
@@ -168,6 +177,7 @@ touch query.js
   }
 }
 </code></pre>
+</div>
 
 <p>&nbsp;</p>
 
@@ -175,11 +185,31 @@ touch query.js
 
 <h3><strong>Step-4: Webpack configuration</strong></h3>
 
-<p>We decided to make two different webpack setting; one for production and for development.</p>
+<p>&nbsp;</p>
 
-<p>This is the minimal configuration of webpack and it is not optimized.</p>
+<p><strong>What is webpack ?</strong></p>
+
+<p>Webpack is a module bundler and a task runner. We will bundle all our javascript application including css styling into&nbsp;two javascript file, if you prefer you can output only one file. Due to the rich plugins, you can also do many things with webpack like compressing with different algorithms of your file, eliminate unused CSS code, extracting your CSS&nbsp;&nbsp;to different files,&nbsp;uploading your bundle&nbsp;to cloud etc...&nbsp;</p>
 
 <p>&nbsp;</p>
+
+<p>This image below is a visual representation of&nbsp;ultimate bundle process with&nbsp;webpack.&nbsp;</p>
+
+<p><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/webpack-process.jpg" target="_blank">
+    <img alt="Visual representation of webpack process" 
+    src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/webpack-process.jpg" 
+    style="min-height:300px; height:auto; width:1009px; max-width:100%;" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>We decided to make two different webpack setting in single file; one for production and for development.</p>
+
+<div>
+<pre>
+&nbsp;</pre>
+</div>
 
 <pre>
 <code class="language-javascript">const path = require("path");
@@ -314,10 +344,11 @@ module.exports = isEnvProduction ? productionSettings : devSettings;
 
 <p>When we are developing frontend, our react app render all our javascript code to this html file located in the src folder. Also when we build our code for production (bundling), webpack will be use this html as a template.</p>
 
-<p>However, It is important to say that django will use bundled html file that is defined in filename option which is under the HtmlWebPackPlugin in webpack configs.</p>
+<p>However, It is important to say that django will not use this html file as a template. This is the html entry point of webpack and django will use the output of bundle.</p>
 
+<div>
 <pre>
-<code>&lt;!DOCTYPE html&gt;
+<code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
   &lt;head&gt;
     &lt;meta charset="utf-8" /&gt;
@@ -329,8 +360,10 @@ module.exports = isEnvProduction ? productionSettings : devSettings;
   &lt;body&gt;
     &lt;div id="root"&gt;&lt;/div&gt;
   &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+&lt;/html&gt;</code></pre>
+
+<p>&nbsp;</p>
+</div>
 
 <p>&nbsp;</p>
 
@@ -350,8 +383,13 @@ module.exports = isEnvProduction ? productionSettings : devSettings;
 
 <p>&nbsp;</p>
 
+<div>
 <pre>
-<code class="language-javascript">// ~/Blog/djr/FRONTEND/src/index.js
+&nbsp;</pre>
+</div>
+
+<pre>
+<code class="language-javascript">// djr/FRONTEND/src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -407,8 +445,13 @@ ReactDOM.render( &lt;Init /&gt;, document.getElementById('root'))
 
 <h3><strong>Step-7: Create App.js file</strong></h3>
 
+<div>
 <pre>
-<code>// ~/Blog/djr/FRONTEND/src/App.js
+&nbsp;</pre>
+</div>
+
+<pre>
+<code class="language-javascript">// djr/FRONTEND/src/App.js
 import React from "react";
 import { Route, Switch, Link } from "react-router-dom"
 
@@ -439,8 +482,13 @@ export default App
 
 <p>Before creating our main page and movie page components, we should first create our API queries.</p>
 
+<div>
 <pre>
-<code class="language-javascript">// ~/Blog/djr/FRONTEND/src/query.js
+&nbsp;</pre>
+</div>
+
+<pre>
+<code class="language-javascript">// djr/FRONTEND/src/query.js
 
 //import our graph query parser
 import gql from "graphql-tag";
@@ -465,9 +513,9 @@ export const MOVIE_QUERY = gql`
         }
     }
 `
-</code></pre>
 
-<p>&nbsp;</p>
+
+</code></pre>
 
 <p>&nbsp;</p>
 
@@ -477,8 +525,13 @@ export const MOVIE_QUERY = gql`
 
 <p>Import Apollo query hook and our queries to App file</p>
 
+<div>
 <pre>
-<code>// ~/Blog/djr/FRONTEND/src/App.js
+&nbsp;</pre>
+</div>
+
+<pre>
+<code class="language-javascript">// djr/FRONTEND/src/App.js
 
 // import Apollo framework query hook
 import { useQuery } from '@apollo/react-hooks'; // New
@@ -491,8 +544,9 @@ import { MOVIE_QUERY, MOVIE_LIST_QUERY } from "./query" //New
 
 <p><strong>Main page component</strong></p>
 
+<div>
 <pre>
-<code class="language-javascript">// ~/Blog/djr/FRONTEND/src/App.js
+<code class="language-javascript">// djr/FRONTEND/src/App.js
 const MainPage = (props) =&gt; {
     const { loading, error, data } = useQuery(MOVIE_LIST_QUERY);
     
@@ -522,8 +576,10 @@ const MainPage = (props) =&gt; {
             }
         &lt;/div&gt;
     )
-}
-</code></pre>
+}</code></pre>
+
+<p>&nbsp;</p>
+</div>
 
 <p>&nbsp;</p>
 
@@ -531,8 +587,13 @@ const MainPage = (props) =&gt; {
 
 <p>The Browser router component that we define in the index.js set some routing properties on components. You can see them with printing props.</p>
 
+<div>
 <pre>
-<code class="language-javascript">// ~/Blog/djr/FRONTEND/src/App.js
+&nbsp;</pre>
+</div>
+
+<pre>
+<code class="language-javascript">// djr/FRONTEND/src/App.js
 const MoviePage = (props) =&gt; {
     // uncomment to see which props are passed from router
     //console.log(props)
@@ -581,8 +642,13 @@ const MoviePage = (props) =&gt; {
 
 <p>You can copy them to App.css</p>
 
+<div>
 <pre>
-<code class="language-css">/* ~/Blog/djr/FRONTEND/src/App.css  */
+&nbsp;</pre>
+</div>
+
+<pre>
+<code class="language-css">/* djr/FRONTEND/src/App.css  */
 
 html, body {
     width:100vw;
@@ -706,6 +772,7 @@ html, body {
 
 <p>Open two different terminal screen.</p>
 
+<div>
 <pre>
 <code class="language-bash"># in root directory of django project     djr/
 
@@ -717,26 +784,32 @@ python manage.py runserver
 # run react dev environment
 npm run start
 # this will probably open a browser page
-# &lt;http://localhost:8080/&gt;
-</code></pre>
+# &lt;http://localhost:8080/&gt;</code></pre>
+
+<p>&nbsp;</p>
+</div>
 
 <p>&nbsp;</p>
 
 <h3><strong>Voila!!!</strong></h3>
 
-<p><strong><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/react-movie-list-page.jpg" target="_blank"><img alt="Opening page: list of movies" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/react-movie-list-page.jpg" style="min-height:150px; height:auto; width:100%" /></a></strong></p>
+<p><strong><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/react-movie-list-page.jpg" target="_blank"><img alt="Opening page: list of movies" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/react-movie-list-page.jpg" style="height:auto; min-height:150px; width:100%" /></a></strong></p>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-<h3>When we click any of the movies, you will see that the url address will be changed. Let&#39;s click</h3>
+<p>When we click any of the movies, you will see that the url address will be changed. Let&#39;s click</p>
 
-<p><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/movie-page.jpg" target="_blank"><img alt="Movie page" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/movie-page.jpg" style="min-height:150px; height:auto; width:100%" /></a></p>
+<p><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/movie-page.jpg" target="_blank"><img alt="Movie page" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/movie-page.jpg" style="height:auto; min-height:150px; width:100%" /></a></p>
 
 <p>&nbsp;</p>
 
 <p>We created a simple single-page-application. Now, the last part of this tutorial will be make this app works seamlessly with our django project.</p>
+
+<p>Now you can stop the webpack server from corresponding terminal screen.</p>
+
+<div>&nbsp;</div>
 
 <p>&nbsp;</p>
 
@@ -744,33 +817,47 @@ npm run start
 
 <h3><strong>Step-10: Build production environment</strong></h3>
 
-<p>Now you can stop the webpack server with corresponding terminal screen.</p>
+<p>&nbsp;</p>
 
+<p>Before building our app with webpack, I will show a visual representation of the webpack process. As you will se, webpack takes index.js&nbsp; and index.html files as inputs, after then it will ouputs two javascript files and a new index.html.</p>
+
+<p>When the bundling process is over, Django will use this new index.html file as a template which contains our client-side app.</p>
+
+<p><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/webpack-to-django-process.jpg" target="_blank"><img alt="Django usage of webpack outputs" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/webpack-to-django-process.jpg" style="height:auto; max-width:100%; min-height:250px; width:1009px" /></a></p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>Now, We can build our app for production environment.&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>
 <pre>
 <code class="language-bash"># in djr/FRONTEND
-npm run build
-</code></pre>
+npm run build</code></pre>
 
-<p>if you successfully build, you&#39;ll have two bundled javascript file in static folder of the root directory, and index.html file in the templates directory.</p>
+<p>&nbsp;</p>
 
-<p><a href="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/build-result.jpg" target="_blank"><img alt="Directory structure should look like this after bundling" src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/blog-images/django-react-integration/build-result.jpg" style="height:441px; width:853px; max-width:100%;"/></a></p>
+<p>if you successfully build, you&#39;ll have two bundled javascript file in static folder of the root directory, and index.html file in the templates directory.&nbsp;</p>
+
+<p>In the beginning of this series, I said that we will develop this project on two server, but in the production environment, there will only one server.</p>
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
-
-<p>This is the production build. Let&#39;s test it. In the beginning of this series, I said that we will develop this project on two server, but in the production environment, there will only one server.</p>
 
 <p>Now Let&#39;s test it.</p>
 
 <p>Please close open terminal sessions and re-open the django server.</p>
 
+<div>
 <pre>
 <code class="language-bash"># in root directory
 python manage.py runserver
 
-# then open &lt;http://127.0.0.1:8000/&gt; on your browser.
-</code></pre>
+# then open &lt;http://127.0.0.1:8000/&gt; on your browser.</code></pre>
 
 <p>&nbsp;</p>
 
@@ -781,3 +868,9 @@ python manage.py runserver
 <p>This tutorial series ended. I hope it will be useful for someone. Criticisms, feedbacks, and questions&nbsp; are welcome.</p>
 
 <p>Finally, You can find all the code of this tutorial from <a href="https://github.com/canburaks/djr">here</a>.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+</div>
+</div>
