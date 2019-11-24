@@ -51,7 +51,7 @@ from django.shortcuts import render
 from django.views.defaults import page_not_found
 from django.contrib.sitemaps import Sitemap
 from django.urls import path, include, re_path
-from pixly.indexing import RemoveSitemap, deindex_url_patterns
+#from pixly.indexing import RemoveSitemap, deindex_url_patterns
 
 def raw_404(request):
   response = HttpResponse("Not Found", status=404)
@@ -69,7 +69,7 @@ sitemaps = {
     'person': DirectorSitemap(),
     "topic": TopicSitemap()
 }
-removesitemaps = { "remove": RemoveSitemap()}
+#removesitemaps = { "remove": RemoveSitemap()}
 
 
 
