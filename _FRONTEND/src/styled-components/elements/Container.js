@@ -27,7 +27,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                     </HeaderText>)
             }
             else if (domNode.attribs && domNode.name ==="h2"){
-                return <SubHeaderText ontSize={["22px", "22px", "26px"]}  mt={"32px !important"}>{domToReact(domNode.children)}</SubHeaderText>
+                return <SubHeaderText fontSize={["22px", "22px", "26px"]}  mt={"32px !important"}>{domToReact(domNode.children)}</SubHeaderText>
             }
             else if (domNode.attribs && domNode.name ==="code"){
                 return <Highlight>{domToReact(domNode.children)}</Highlight>
