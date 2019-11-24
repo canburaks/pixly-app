@@ -4,9 +4,18 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import path, include, re_path
 from django.conf.urls import handler400, handler403, handler404, handler500
 from django.http import HttpResponse
+from pixly.lib import is_ascii, to_english_chars
+
 
 deindex_file = open("djaws/deindex.txt", "r")
-deindex_unique_urls = list({x.strip() for x in deindex_file.readlines()})
+unique_urls = list({x.strip() for x in deindex_file.readlines()})
+unique_urls_no_whitespace = [to_english_chars(x) for x in unique_urls]
+
+# for check
+#endswith_slash = list(filter(lambda x: x.endswith("/"), unique_urls_no_whitespace ))
+#not_ascii = list(filter(lambda x: not is_ascii(x), unique_urls_no_whitespace ))
+
+deindex_unique_urls = unique_urls_no_whitespace
 
 
 def get_pathname(link):
@@ -23,7 +32,7 @@ def get_pathname(link):
 def raw_404(request):
   response = HttpResponse("Not Found", status=404)
   response["status"] = 404
-  print("404 returned")
+  #print("404 returned")
   return response
 handler404 = raw_404
 
@@ -31,7 +40,7 @@ def make_url_pattern():
     url_patterns = []
     for url in deindex_unique_pathnames:
         regex_pattern = rf'^{url}$'
-        single_path = re_path(regex_pattern, raw_404)
+        single_path = re_path(regex_pattern, handler404)
         url_patterns.append(single_path)
     return url_patterns
 

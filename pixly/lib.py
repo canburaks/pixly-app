@@ -1,5 +1,8 @@
 #Common Functions
+def is_ascii(s):
+    return all(ord(c) < 128 for c in s)
 
+    
 def director_name_formatter(director_name_list, duo, many):
     directors_num = len(director_name_list)
     if directors_num == 1:
