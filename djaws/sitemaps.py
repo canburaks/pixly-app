@@ -260,10 +260,10 @@ def page_template_generator(routes):
 custom_movie_pages =  page_template_generator(movie__slugs)
 custom_person_pages = page_template_generator(person__slugs)
 custom_list_pages =   page_template_generator(liste_slugs)
-custom_topic_pages =   page_template_generator(topic__slugs)
+#custom_topic_pages =   page_template_generator(topic__slugs)
 custom_static_pages =   page_template_generator(static__slugs)
 
-custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages + custom_topic_pages + custom_static_pages
+custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages + custom_static_pages
 
 #pprint(custom_url_pages)
 
