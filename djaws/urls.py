@@ -51,7 +51,7 @@ from django.shortcuts import render
 from django.views.defaults import page_not_found
 from django.contrib.sitemaps import Sitemap
 from django.urls import path, include, re_path
-from pixly.indexing import deindex_url_patterns
+#from pixly.indexing import deindex_url_patterns
 
 def raw_404(request):
   response = HttpResponse("Not Found", status=404)
@@ -110,7 +110,7 @@ urlpatterns = [
 urlpatterns = urlpatterns + custom_url_pages +  [
     path("/", TemplateView.as_view(template_name="prerendered/index.html")),
     path("", TemplateView.as_view(template_name="prerendered/index.html")),
-    *deindex_url_patterns,
+    #*deindex_url_patterns,
     re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")),  
     #path("", TemplateView.as_view(template_name="prerendered/404.html")), #bcs 404 returns to main-page
     #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")), #200.html is original - not prerendered page template 
