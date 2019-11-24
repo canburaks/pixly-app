@@ -115,7 +115,7 @@ const TopicPage = (props) =>{
                 </FlexBox>
 
                 {queryData && queryData.topic.searchable && <Form flexWrap="wrap" onSubmit={submitHandler}>
-                    <FlexBox id="search-settings-box"
+                    <FlexBox id="search-settings-box" className="topic-page"
                         flexDirection={["row", "row"]} 
                         width={["100%", "100%", "100%"]}  
                         minHeight={["80px", "80px", "80px", "100%"]}

@@ -509,7 +509,7 @@ p {
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-	min-height: 100vh;
+	min-height: 90vh;
 	position: relative;
 	top:-95px;
 	background: #f1f1f1;

@@ -109,10 +109,7 @@ const ExplorePage = React.memo(props => {
 			</Head>
 
 			<ContentContainer mb={"100px"} pt={"40px"}>
-				<HeaderText fontSize={["30px"]}>Discover Best Movies that Fit Your Cinema Taste.</HeaderText>
-				<Text fontSize={["14px", "14px", "16px", "18px"]} mt={[2]} mb={[4]} textAlign="justify" >{exploremessage}</Text>
-
-				<SubHeaderText fontSize={["26px"]} mt={[4,4,4,5]}>Movie Lists and Topics</SubHeaderText>
+				<HeaderText fontSize={["30px"]} my={[4]}>Pixly Collections: Movie Lists and Topics</HeaderText>
 				<Text textAlign="justify" fontSize={["14px", "14px", "16px", "18px"]}>The movie lists that we collect from other sources like the favorite films of the directors and topics that 
 					bring together movies that share common themes like art-house, cyberpunk,thought-provoking or based on true story films.
 				</Text>
