@@ -127,7 +127,7 @@ export const SignupFormModal = (props) => (
     <SimpleModal 
         isOpen={props.isOpen} closeModal={props.closeModal} 
         width={["90vw","90vw","80vw", "60vw"]} maxWidth={"400px"}
-        bg="light" color="dark" zIndex={100}
+        bg="light" color="dark" zIndex={100} over
     >
         <SignupForm {...props} />
     </SimpleModal>

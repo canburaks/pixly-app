@@ -23,9 +23,9 @@ export const Head = React.memo((props) => {
     const twitter = (type, content) => (<meta property={`twitter:${type}`} content={`${content}`}/>)
     //Analytics()
     //console.log("can",props.canonical)
-    console.log(window.location.pathname)
+    //console.log(window.location.pathname)
     const isAllowedUrls = allowedUrls.all.includes(window.location.pathname)
-    console.log("is Allowed:", isAllowedUrls)
+    //console.log("is Allowed:", isAllowedUrls)
     return (
     <Helmet>
         {/*rgaPageView()*/}
