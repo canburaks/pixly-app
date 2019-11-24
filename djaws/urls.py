@@ -51,10 +51,7 @@ from django.shortcuts import render
 from django.views.defaults import page_not_found
 from django.contrib.sitemaps import Sitemap
 from django.urls import path, include, re_path
-
-def pixly_404(request, exception=None):
-    return page_not_found(request, exception, template_name="prerendered/404/index.html")
-
+from pixly.indexing import RemoveSitemap, deindex_url_patterns
 
 def raw_404(request):
   response = HttpResponse("Not Found", status=404)
@@ -72,37 +69,10 @@ sitemaps = {
     'person': DirectorSitemap(),
     "topic": TopicSitemap()
 }
-"""
-links_will_be_remove = list(set([x.replace("https://pixly.app", "").strip() for x in open("djaws/deindex.txt","r") if len(x.replace("https://pixly.app", "").strip()) > 2]))
-
-class RemoveLinkClass:
-    def __init__(self, link):
-        self.link = link
-
-class RemoveSitemap(Sitemap):
-    changefreq = "monthly"
-    priority = 0.8
-    def items(self):
-        deindex_file = open("djaws/deindex.txt","r")
-        url_patterns = [RemoveLinkClass(link=line) for line in links_will_be_remove ]
-        return url_patterns
-
-    def location(self, item):
-        return item.link
-
-
-def get_deindex_paths():
-    url_patterns = []
-    for line in links_will_be_remove:
-        line = line.strip("/")
-        single_path = path(line, handler404)
-        url_patterns.append(single_path)
-    #print(url_patterns)
-    return url_patterns
-#pprint(RemoveSitemap())
 removesitemaps = { "remove": RemoveSitemap()}
-"""
-#deindex_patterns = get_deindex_paths()
+
+
+
 
 urlpatterns = [
     path("404", handler404),
@@ -113,7 +83,7 @@ urlpatterns = [
     path(f'qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html', TemplateView.as_view(template_name=f"others/qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html")),
 
     re_path(r'^sitemap.xml', cache_page(300)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    #re_path(r'^remove-sitemap.xml', cache_page(10)(sitemap), {'sitemaps': removesitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    re_path(r'^remove-sitemap.xml', cache_page(10)(sitemap), {'sitemaps': removesitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
     re_path(r'^robots.txt', TemplateView.as_view(template_name="robots.txt"), name="robots_file"),
     path("ads.txt", TemplateView.as_view(template_name="others/ads.txt")),
@@ -140,7 +110,7 @@ urlpatterns = [
 urlpatterns = urlpatterns + custom_url_pages + [
     path("/", TemplateView.as_view(template_name="prerendered/index.html")),
     path("", TemplateView.as_view(template_name="prerendered/index.html")),
-    #*deindex_patterns,
+    *deindex_url_patterns,
     re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")),  
     #path("", TemplateView.as_view(template_name="prerendered/404.html")), #bcs 404 returns to main-page
     #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")), #200.html is original - not prerendered page template 

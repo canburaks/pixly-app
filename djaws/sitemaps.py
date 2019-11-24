@@ -16,18 +16,19 @@ from pixly.lib import get_json
 allowed_urls_dict = get_json("./allowed_urls.json")
 #print("allowed", allowed_urls_dict.get("movie")[0][1:])
 
-movie__slugs = [x[0][1:] for x in allowed_urls_dict.get("movie")]
+movie__slugs = [x[1:] for x in allowed_urls_dict.get("movie")]
 
-person__slugs = [x[0][1:] for x in allowed_urls_dict.get("person")]
+person__slugs = [x[1:] for x in allowed_urls_dict.get("person")]
 
-liste_slugs = [x[0][1:] for x in allowed_urls_dict.get("list")]
+liste__slugs = [x[1:] for x in allowed_urls_dict.get("list")]
 
-topic__slugs = [x[0][1:] for x in allowed_urls_dict.get("topic")]
+topic__slugs = [x[1:] for x in allowed_urls_dict.get("topic")]
 
-blog__slugs = [x[0][1:] for x in allowed_urls_dict.get("blog")]
+blog__slugs = [x[1:] for x in allowed_urls_dict.get("blog")]
+#print(movie__slugs,person__slugs,liste__slugs, topic__slugs, blog__slugs )
 
-
-static__slugs = blog__slugs +[
+static__slugs = blog__slugs + [
+    "/"
     "explore",
     "advance-search",
     "directors/1",
@@ -48,7 +49,7 @@ def page_template_generator(routes):
 
 custom_movie_pages =  page_template_generator(movie__slugs)
 custom_person_pages = page_template_generator(person__slugs)
-custom_list_pages =   page_template_generator(liste_slugs)
+custom_list_pages =   page_template_generator(liste__slugs)
 custom_topic_pages =   page_template_generator(topic__slugs)
 custom_static_pages =   page_template_generator(static__slugs)
 
@@ -61,10 +62,13 @@ class TopicSitemap(Sitemap):
     changefreq = "weekly"
     priority = 0.9
     def items(self):
-        topics =  Topic.objects.filter(main_page=True).only("id", "name", "slug").order_by("id")
+        slugs = [x.replace("topic/", "").strip() for x in topic__slugs]
+        topics =  Topic.objects.filter(slug__in=slugs).only("id", "slug")
+        print(topics.count())
         return topics
     
     def location(self, item):
+        print("/topic/{item.slug}")
         return f"/topic/{item.slug}"
 
 
@@ -72,9 +76,9 @@ class ListSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.9
     def items(self):
-        lists =  List.objects.all().only("id", "name", "slug", "summary").order_by("id")
-        filtered_list = [x for x in lists if len(x.summary) > settings.LIST_MIN_SUMMARY]
-        return filtered_list
+        slugs = [x.replace("list/", "").strip().replace("/1", "").strip() for x in liste__slugs]
+        lists =  List.objects.filter(slug__in=slugs).only("id", "slug")
+        return lists
     
     def location(self, item):
         return f"/list/{item.slug}/1"
@@ -89,7 +93,7 @@ class MovieSitemap(Sitemap):
         slugs = [x.split("movie/")[1] for x in movie__slugs]
         #print(slugs)
         #mqs = movie_filter()
-        mqs_mini = Movie.objects.filter(slug__in=slugs).only("id", "slug", "name", "year")
+        mqs_mini = Movie.objects.filter(slug__in=slugs).only("id", "slug")
         #print(mqs_mini)
         return mqs_mini  
 
@@ -121,15 +125,7 @@ class StaticSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.4
     def items(self):
-        statics = [
-            "/blog",
-            "/blog/a-brief-introduction-to-collaborative-filtering",
-            "/blog/django-graphql-react-integration-tutorial-part-2",
-            "/blog/django-graphql-react-integration-tutorial-part-3",
-            "","/", 
-            "/directors/1", 
-            "/explore", 
-            "/advance-search", 
+        statics = static__slugs + [
             "/termsofservice", "/privacy"
         ]
         return statics

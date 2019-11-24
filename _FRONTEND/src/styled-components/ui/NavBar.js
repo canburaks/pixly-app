@@ -48,10 +48,7 @@ const NB = props => {
 						<UnderlineEffect >Topics / Movie Lists</UnderlineEffect>
 					</NewLink>
 					<NewLink color="#f1f1f1 !important" link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]}>
-						<UnderlineEffect >Movies</UnderlineEffect>
-					</NewLink>
-					<NewLink color="#f1f1f1 !important" link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]}>
-						<UnderlineEffect >Search</UnderlineEffect>
+						<UnderlineEffect >Discover Movies</UnderlineEffect>
 					</NewLink>
 					<SearchQueryBox />
 				</>

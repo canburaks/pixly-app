@@ -139,10 +139,11 @@ const ExplorePage = React.memo(props => {
 				</Grid>
 
 
-				{/*<FeatureBox />*/}
+				{/*<FeatureBox />
 				<SubHeaderText fontSize={["26px"]} mt={[4,4,4,5]}>Popular & Upcoming Films</SubHeaderText>
 				<Text textAlign="justify" fontSize={["14px", "14px", "16px", "18px"]}>The latest popular and upcoming movies that will updated constantly.</Text>
 				<MovieRichCardBox items={movies}  columns={[1,2, 2, 3,3,3,3,4]} fontSize={["12px", "14px", "14px"]}  />
+				*/}
 
 
 			</ContentContainer>
