@@ -23,14 +23,15 @@ def get_pathname(link):
 def raw_404(request):
   response = HttpResponse("Not Found", status=404)
   response["status"] = 404
+  print("404 returned")
   return response
 handler404 = raw_404
 
 def make_url_pattern():
     url_patterns = []
     for url in deindex_unique_pathnames:
-        regex_pattern = rf'^{url}'
-        single_path = re_path(regex_pattern, handler404)
+        regex_pattern = rf'^{url}$'
+        single_path = re_path(regex_pattern, raw_404)
         url_patterns.append(single_path)
     return url_patterns
 
@@ -52,7 +53,7 @@ class RemoveSitemap(Sitemap):
     changefreq = "daily"
     priority = 0.9
     def items(self):
-        url_patterns = [f"/{RemoveLinkClass(link=url)}" for url in deindex_unique_pathnames ]
+        url_patterns = [RemoveLinkClass(link=f"/{url}") for url in deindex_unique_pathnames ]
         return url_patterns
 
     def location(self, item):
