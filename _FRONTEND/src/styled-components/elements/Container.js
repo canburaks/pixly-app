@@ -38,9 +38,6 @@ export const HtmlContainer = ({ html, ...props }) => {
                 ) {
                 return <HeaderMini   mt={"8px !important"} fontSize={["20px", "20px", "22px"]}>{domToReact(domNode.children)}</HeaderMini>
             }
-            else if (domNode.attribs && (domNode.name === 'h6')
-            ) return <Text   mt={"32px !important"}>{domToReact(domNode.children)}</Text>
-        
             else if (domNode.attribs && domNode.name === 'p' ) {
                 //console.log(domNode)
                 return <Text textAlign="justify" >{domToReact(domNode.children)}</Text>
