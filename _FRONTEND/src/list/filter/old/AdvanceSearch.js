@@ -117,7 +117,7 @@ const AdvanceSearch = (props) =>{
             <Breadcrumb.Section >Advance Search</Breadcrumb.Section>
         </Breadcrumb>
     )
-    console.log(queryVariables)
+    //console.log(queryVariables)
     //console.log(props)
 
 
@@ -323,7 +323,7 @@ const AdvanceSearch = (props) =>{
                     {({ data, loading, error, refetch }) => {
                         if (loading) return <Loader />;
                         if (error) return <div>{error}</div>
-                        console.log("data", data)
+                        //console.log("data", data)
 
                         return (
                             <div className="">

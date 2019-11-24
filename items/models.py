@@ -21,6 +21,9 @@ def item_image_upload_path(instance, filename):
 def movie_poster_upload_path(instance, filename):
     return "posters/{0}/{1}".format(instance.id,filename)
 
+def movie_large_poster_upload_path(instance, filename):
+    return "posters/{0}/large-{1}".format(instance.id,filename)
+
 def movie_cover_poster_upload_path(instance, filename):
     return "posters/{0}/cover/{1}".format(instance.id,filename)
 
@@ -70,6 +73,8 @@ class Movie(SocialMedia, SEO,MainPage):
     imdb_votes = models.IntegerField(null=True, blank=True)
 
     poster = models.ImageField(blank=True, upload_to=movie_poster_upload_path)
+    large_poster = models.ImageField(blank=True, upload_to=movie_large_poster_upload_path)
+
     cover_poster = models.ImageField(blank=True, upload_to=movie_cover_poster_upload_path)
     #cover_mini = ImageSpecField(source='cover_poster',
     #                                  processors=[ResizeToFill(300, 168.75)],

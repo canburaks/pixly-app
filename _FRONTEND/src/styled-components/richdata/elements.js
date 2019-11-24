@@ -50,7 +50,7 @@ export const SchemaPost = ({ post , ...props}) =>(
         <BlogPostAd />
         {/* Article Body*/}
         <Box width={"100%"} height="auto" itemProp="articleBody" mt={[5]}>
-            <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={post.text} />
+            <HtmlContainer my={[3]} fontSize={["16px","16px", "16px", "18px"]} html={post.text} />
         </Box>
 
     </Box>

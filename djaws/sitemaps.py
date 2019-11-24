@@ -337,7 +337,10 @@ class StaticSitemap(Sitemap):
             "/blog/a-brief-introduction-to-collaborative-filtering",
             "/blog/django-graphql-react-integration-tutorial-part-2",
             "/blog/django-graphql-react-integration-tutorial-part-3",
-            "","/", "/directors/1", "/explore", "/advance-search", 
+            "","/", 
+            "/directors/1", 
+            "/explore", 
+            "/advance-search", 
             "/termsofservice", "/privacy"
         ]
         return statics

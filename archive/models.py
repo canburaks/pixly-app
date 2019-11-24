@@ -93,10 +93,14 @@ class TmdbMovie(models.Model):
         #<------------POSTERS--------------------->
         cover_base_url = "https://image.tmdb.org/t/p/w1280"
         poster_base_url = "https://image.tmdb.org/t/p/w185"# + "poster_path"
+        large_poster_base_url = "https://image.tmdb.org/t/p/w342"# + "poster_path"
+        
         poster_path = details.get("poster_path")
         poster_path = poster_base_url + poster_path if poster_path!=None else None
+        large_poster_path = large_poster_base_url + poster_path if poster_path!=None else None
         if poster_path!=None:
             data["poster_url"] = poster_path
+            data["large_poster_url"] = large_poster_path
         cover_path = details.get("backdrop_path")
         cover_path = cover_base_url + cover_path if cover_path!=None else None
         if cover_path!=None:
@@ -220,12 +224,17 @@ class TmdbMovie(models.Model):
             self.save()
 
             poster_url = movie_data.get("poster_url")
+            large_poster_url = movie_data.get("large_poster_url")
             cover_url = movie_data.get("cover_url")
 
             poster_filename = f"{self.movielens_id}-poster.jpg"
             if poster_url:
                 m.poster.save(*url_image(poster_url, poster_filename))
                 print("poster was saved")
+            large_poster_filename = f"{self.movielens_id}-poster-l.jpg"
+            if large_poster_url:
+                m.large_poster.save(*url_image(large_poster_url, large_poster_filename))
+                print("large poster was saved")   
             cover_filename = f"{self.movielens_id}-cover.jpg"
             if cover_url:
                 m.cover_poster.save(*url_image(cover_url, cover_filename))

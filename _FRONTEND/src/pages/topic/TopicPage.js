@@ -22,7 +22,7 @@ import {
 export const ResponsiveTopicCard = ({ item }) => {
     const screenSize = useWindowSize()
     const isLargeScreen = useMemo(() => screenSize.includes("L"), [screenSize])
-    console.log("isLargeScreen", isLargeScreen)
+    //console.log("isLargeScreen", isLargeScreen)
     return (
         <LargeTopicMovieCard item={item} />
     )
@@ -115,7 +115,7 @@ const TopicPage = (props) =>{
                 </FlexBox>
 
                 {queryData && queryData.topic.searchable && <Form flexWrap="wrap" onSubmit={submitHandler}>
-                    <FlexBox id="search-settings-box" 
+                    <FlexBox id="search-settings-box"
                         flexDirection={["row", "row"]} 
                         width={["100%", "100%", "100%"]}  
                         minHeight={["80px", "80px", "80px", "100%"]}
@@ -126,8 +126,8 @@ const TopicPage = (props) =>{
                         borderTop="1px solid"
                     >
 
-                    <YearSlider dispatcher={yearDispatcher}  />
-                    <RatingSlider dispatcher={ratingDispatcher} />
+                    <YearSlider dispatcher={yearDispatcher}  iconColor="black" />
+                    <RatingSlider dispatcher={ratingDispatcher} iconColor="black"/>
 
 
                         <Button type="submit" 
@@ -145,7 +145,7 @@ const TopicPage = (props) =>{
                 
                 <Box id="search-rresult-box"  
                         borderColor="rgba(40,40,40, 0.3)"
-                        minWidth={["100%", "100%", "100%", "100%", "100%"]} minHeight={["100vw"]}
+                        minWidth={["100%", "100%", "100%", "100%", "100%"]} height={["100vw"]}
                         p={[1,2,3]}
                     >
                     <SearchQueryBox 

@@ -43,7 +43,7 @@ export const HtmlContainer = ({ html, ...props }) => {
         
             else if (domNode.attribs && domNode.name === 'p') {
                 //console.log(domNode)
-                return <Text textAlign="justify" fontSize={["16px", "16px", "18px"]}>{domToReact(domNode.children)}</Text>
+                return <Text textAlign="justify" fontSize={["16px", "16px", "18px"]} className="ssr-p">{domToReact(domNode.children)}</Text>
             }
             //else if (domNode.attribs && domNode.name === 'img') {
             //    //console.log(domNode)
@@ -61,7 +61,7 @@ export const HtmlContainer = ({ html, ...props }) => {
     }
     parseTest()
     return (
-        <HtmlBox>
+        <HtmlBox maxWidth={"100%"} overflowX="hidden">
             {parseTest()}
         </HtmlBox>
     )

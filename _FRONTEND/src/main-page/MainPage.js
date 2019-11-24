@@ -125,22 +125,13 @@ const MainPage = React.memo(() => {
 			</Head>
 
 			<div className="body-wrap">
-				<header className="site-header">
-					<div className="container">
-						<div className="site-header-inner">
-							<div className="brand header-brand">
-							</div>
-						</div>
-					</div>
-				</header>
 
 				<main>
-					<section className="hero">
-						<div className="container">
-							<div className="hero-inner">
-								<FlexBox flexDirection="column" zIndex={9} >
-									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)" zIndex={8}>{heroHeaderText}</HeaderText>
-									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold">{heroSubheaderText}</Text>
+						<SuperBox className="container" gradient="blueish" top={95} py={"40px"} width={"100vw"} mx={"0px"}>
+							<Box className="hero-inner" mr={[5]}>
+								<FlexBox flexDirection="column" zIndex={9}  px={[2,3,3,4,6,6,7]}>
+									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)" zIndex={8} color="light">{heroHeaderText}</HeaderText>
+									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold" color="light">{heroSubheaderText}</Text>
 									
 									<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />
 									{/*
@@ -150,29 +141,28 @@ const MainPage = React.memo(() => {
 									<FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
 
 									<Box  my={[3]}>
+										<Button borderRadius={"6px"}   mx={[2]}
+											onClick={insertLoginForm} 
+											width={"120px"} height={"50px"} 
+											color={"light"}
+											fontWeight="bold"
+		
+											hoverShadow="card"
+											boxShadow="xs"
+											gradient="navy"
+										>
+											Login
+										</Button>
 										<BubbleButton px={[2]} mx={[2]}
 											onClick={setModalOpen} 
 											width={"120px"} height={"50px"}
 											color="light" 
 											borderRadius="4px" 
-											link="/explore" gradient="lime"
-											fontWeight="bold"
+											link="/explore" gradient="pinkish"
+											fontWeight="bold" hoverBg={"dark"}
 											>
 											Join
 										</BubbleButton>
-
-										<Button borderRadius={"6px"}   mx={[2]}
-											onClick={insertLoginForm} 
-											width={"120px"} height={"50px"} 
-											bg={"accent1"} color={"light"}
-											fontWeight="bold"
-											hoverColor={"#3437c7"}
-											hoverBg={"white"}
-											hoverShadow="card"
-											boxShadow="xs"
-										>
-											Login
-										</Button>
 									</Box>
 										{!authStatus  && <Fb.Auth />}
 									</FlexBox>
@@ -202,22 +192,21 @@ const MainPage = React.memo(() => {
 									<div className="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
 									<div className="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
 								</div>
-							</div>
-						</div>
-					</section>
+							</Box>
+						</SuperBox>
 
 					<section className="features section">
 						<div className="container">
 							<div className="features-inner section-inner has-bottom-divider">
-								<div className="features-wrap">
-									<Feature1 />
+								<Box className="features-wrap" pt={[5]}>
+									<Feature1 onClick={setModalOpen}/>
 									<Feature2 />
-									<Feature4 />
+									<Feature4 onClick={setModalOpen}/>
 									<Feature3 />
 									<Feature5 />
 									<Feature6 />
 
-								</div>
+								</Box>
 							</div>
 						</div>
 					</section>
@@ -245,8 +234,8 @@ const SpaceOddysey = () => <Image info="space oddysey mini image" src={"https://
 const SkinILive = () => <Image info="the skin i live in image" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/skin.png"} style={{width:"100%", height:"auto"}} />
 
 
-const Feature1 = () => (
-	<div className="feature text-center is-revealing">
+const Feature1 = ({onClick}) => (
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" minHeight={"450px"} flexDirection="column" justifyContent="space-between">
 		<div className="feature-inner">
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-01.svg"} info="Pixly main page Feature 01" />
@@ -254,21 +243,50 @@ const Feature1 = () => (
 			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Personal Recommendations - <Span fontSize={["14px"]} fontWeight="bold">BETA</Span></SubHeaderText>
 			<Text>After rating 40 movies, we can analyze your cinema taste with artifical intelligence then we will make very personalized movie recommendations every week.</Text>
 		</div>
-	</div>
+			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
+				<BubbleButton px={[1]} py={[1]}  mt={[3]} 
+					width={"150px"} height={"40px"}
+					bg="transparent"
+					color="dark" 
+					borderRadius="4px" 
+					border="2px solid"
+					borderColor="rgba(40,40,40, 0.8)"
+					fontWeight="bold"
+					onClick={onClick}
+					>
+					Join Now
+				</BubbleButton>
+			</FlexBox>
+	</FlexBox>
 )
 const Feature2 = () => (
-	<div className="feature text-center is-revealing">
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" minHeight={"450px"} flexDirection="column" justifyContent="space-between">
 		<div className="feature-inner">
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-02.svg"} info="Pixly main page Feature 01" />
 			</div>
 			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Curated and Collected Movie Lists</SubHeaderText>
 			<Text>Handpicked selected lists of movies by Pixly Editors, beside well known collected movie lists all around the world including favorite film lists of directors and festival awarded movies. Special lists that we call topics that find movies that treat specific topics or subjects.</Text>
+
 		</div>
-	</div>
+			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
+				<LinkButton px={[1]} py={[1]}  mt={[3]} 
+					width={"150px"} height={"40px"}
+					color="dark" 
+					borderRadius="4px" 
+					border="2px solid"
+					borderColor="rgba(40,40,40, 0.8)"
+					link="/explore" 
+					fontWeight="bold"
+					zIndex={0}
+					>
+					Show Me
+				</LinkButton>
+			</FlexBox>
+	</FlexBox>
 )
 const Feature3 = () => (
-	<div className="feature text-center is-revealing">
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" height={"450px"} flexDirection="column" justifyContent="space-between">
 		<div className="feature-inner">
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-03.svg"} info="Pixly main page Feature 01" />
@@ -276,10 +294,24 @@ const Feature3 = () => (
 			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Advance Film Search</SubHeaderText>
 			<Text>Advance Search and Filter mechanism with respect to IMDb rating and release year of movies.</Text>
 		</div>
-	</div>
+			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
+				<LinkButton px={[1]} py={[1]}  mt={[3]} 
+					width={"150px"} height={"40px"}
+					color="dark" 
+					borderRadius="4px" 
+					border="2px solid"
+					borderColor="rgba(40,40,40, 0.8)"
+					link="/advance-search" 
+					fontWeight="bold"
+					zIndex={0}
+					>
+					Let's Search
+				</LinkButton>
+			</FlexBox>
+	</FlexBox>
 )
-const Feature4 = () => (
-	<div className="feature text-center is-revealing">
+const Feature4 = ({onClick}) => (
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" height={"450px"} flexDirection="column" justifyContent="space-between">
 		<div className="feature-inner">
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-04.svg"} info="Pixly main page Feature 01" />
@@ -287,10 +319,24 @@ const Feature4 = () => (
 			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Watchlist, Likes, Ratings</SubHeaderText>
 			<Text>Keep and track your personal cinema history by adding movies to watchlist, liking them and giving ratings in one film website. </Text>
 		</div>
-	</div>
+			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
+				<BubbleButton px={[1]} py={[1]}  mt={[3]} 
+					width={"150px"} height={"40px"}
+					bg="transparent"
+					color="dark" 
+					borderRadius="4px" 
+					border="2px solid"
+					borderColor="rgba(40,40,40, 0.8)"
+					fontWeight="bold"
+					onClick={onClick}
+					>
+					Join Now
+				</BubbleButton>
+			</FlexBox>
+	</FlexBox>
 )
 const Feature5 = () => (
-	<div className="feature text-center is-revealing">
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" height={"450px"} flexDirection="column" justifyContent="space-between">
 		<div className="feature-inner">
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-05.svg"} info="Pixly main page Feature 01" />
@@ -298,11 +344,11 @@ const Feature5 = () => (
 			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Discover People and Share Movies</SubHeaderText>
 			<Text>Find people whose cinema taste is similar to you. See which movies are currently watched by your friends, and also check your cinema taste similarity with your friends. </Text>
 		</div>
-	</div>
+	</FlexBox>
 )
 
 const Feature6 = () => (
-	<div className="feature text-center is-revealing">
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" height={"450px"} flexDirection="column" justifyContent="space-between">
 		<div className="feature-inner">
 			<div className="feature-icon">
 				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-06.svg"} info="Pixly main page Feature 01" />
@@ -310,38 +356,10 @@ const Feature6 = () => (
 			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Filmography & Content</SubHeaderText>
 			<Text>Filmographies of the directors, actors, and actress'. The favorite film lists of the famous directors that impressed them. Conversations, interviews and movie essays about directors</Text>
 		</div>
-	</div>
+	</FlexBox>
 )
 
 
 
 export default MainPage;
 
-/*
-const MainPageQuery2 = (props) =>{
-    const client = useApolloClient();
-
-    const cachedata = client.readQuery({query:MAIN_PAGE})
-    const [mainPage, { loading, error, data, refetch }] = useLazyQuery(MAIN_PAGE)
-
-    const [ pageData, setPageData ] = useState(null)
-
-    if (pageData){
-        return  <MainPage data={pageData.mainPage} />
-    }
-    if (pageData === null){
-        if (cachedata && cachedata.mainPage){
-            console.log("cache data is setting")
-            setPageData(cachedata)
-        }
-        else if (data && data.mainPage){
-            console.log("lazy query data is setting")
-            setPageData(data)
-        }
-        
-        else if (!cachedata){
-            console.log("no data: querying lazily")
-            mainPage()
-        }
-    }
-*/

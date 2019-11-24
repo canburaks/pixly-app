@@ -110,7 +110,7 @@ const AdvanceSearch = (props) =>{
     }
 
 
-    console.log(queryVariables)
+    //console.log(queryVariables)
     //console.log(props)
 
 

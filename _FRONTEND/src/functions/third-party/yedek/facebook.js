@@ -25,7 +25,7 @@ export const FaceBookAuthentication = () => {
       onCompleted: (d) => setAuthMutationResponse(d)});
     
       
-    const errorHandler   = useCallback((error) =>  console.log("error: ", error),[])
+    const errorHandler   = useCallback((error) =>  console.log("error: ",[])
     const closeModal = useCallback(() => setOpenStatus(false),[])
     const openModal = useCallback(() => setOpenStatus(true),[])
 
@@ -128,7 +128,7 @@ export const facebook = () => {
   	//handlers
     const cleanHandler   = useCallback(() => {setIsLogged(false); setFbData(null);},[])
     const logoutHandler  = useCallback(async () => {if(api){api.logout(l => print("l",l))}; cleanHandler()},[])
-    const errorHandler   = useCallback((error) =>  console.log("error: ", error),[])
+    const errorHandler   = useCallback((error) =>  console.log("error: ",[])
 
 	  
     const connectSuccessHandler = useCallback((r) =>  {const newData= {...r};print(newData);  facebookConnect({variables:{data:JSON.stringify(newData)}}); setFbData(newData);},[])	

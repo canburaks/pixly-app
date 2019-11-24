@@ -8,13 +8,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safePostCssParser = require('postcss-safe-parser');
 const BrotliPlugin = require('brotli-webpack-plugin');
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
+//const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const CssCleanupPlugin = require('css-cleanup-webpack-plugin');
 
 var DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 const postcssPresetEnv = require('postcss-preset-env');
-var Visualizer = require('webpack-visualizer-plugin');
-const Jarvis = require("webpack-jarvis");
+
 
 
 
@@ -228,7 +227,7 @@ const productionSettings = {
 					minifyURLs: true,
 				  }
 		}),
-		new PreloadWebpackPlugin(),
+		//new PreloadWebpackPlugin(),
 		//new CssCleanupPlugin(),
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
@@ -236,9 +235,6 @@ const productionSettings = {
           filename: 'static/css/[name].css',
           chunkFilename: 'static/css/[name].chunk.css',
 		}),
-		new Visualizer({
-			filename: '../../../statistics.html'
-		  })
 	]
 };
 
@@ -272,7 +268,7 @@ const devSettings = {
 	  },
 	devtool: 'inline',
 	devServer: {
-	    https: true,
+	    https: false,
 		historyApiFallback: true,
 		contentBase: './dist',
 		stats: 'minimal',

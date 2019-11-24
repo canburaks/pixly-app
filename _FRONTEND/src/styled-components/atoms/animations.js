@@ -13,7 +13,7 @@ export const GradientAnimationModal = (props) => {
             position="fixed" justifyContent="center" alignItems="center"
             left={`calc(50vw - 300px)`} right={`calc(50vw - 300px)`}
             top={`calc(50vh - 300px)`} bottom={`calc(50vh - 300px)`}
-        
+            {...props}
         >
             <GradientAnimationBox text={props.text} />
         </FlexBox>

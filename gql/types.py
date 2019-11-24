@@ -342,6 +342,8 @@ class MovieType(DjangoObjectType):
     isFaved = graphene.Boolean()
     prediction_history = graphene.Float()
     cover_poster = graphene.String()
+    large_poster = graphene.String()
+
     has_cover = graphene.Boolean()
     slug = graphene.String()
     short_summary = graphene.String()
@@ -403,7 +405,10 @@ class MovieType(DjangoObjectType):
             return len(profile.ratings.items())
         return 0
     
-
+    def resolve_large_poster(self, info, *_):
+        if self.large_poster and hasattr(self.large_poster, "url"):
+            return self.large_poster.url
+        return "https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/default.jpg"
 
 
     def resolve_poster(self, info, *_):
@@ -1698,6 +1703,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     year = graphene.Int()
 
     poster = graphene.String()
+    large_poster = graphene.String()
     has_cover = graphene.Boolean()
     cover_poster = graphene.String()
 
@@ -1944,11 +1950,12 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
             return self.movie.poster.url
         else:
             return "https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/default.jpg"
-        #else:
-        #    self.movie.save_poster_from_url()
-        #    if self.movie.poster!="" and self.movie.poster!=None:
-        #        return self.movie.poster.url
-        #    return "https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/default.jpg"
+
+    def resolve_large_poster(self,info):
+        if self.movie.large_poster!="" and self.movie.large_poster!=None:
+            return self.movie.large_poster.url
+        else:
+            return None
 
     def resolve_has_cover(self,info):
         if self.movie.cover_poster and hasattr(self.movie.cover_poster, "url"):

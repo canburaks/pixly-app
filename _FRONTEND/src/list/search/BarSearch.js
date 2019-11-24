@@ -39,7 +39,7 @@ const MovieSearch = (props) => {
             </div>
         </div>
     )
-    console.log(props.match.params.query)
+    //console.log(props.match.params.query)
     return (
         <div className="page-container">
             <Head
@@ -69,7 +69,7 @@ const MovieSearchQuery = (props) => {
             {({ loading, data, error, refetch }) => {
                 if (loading) return <Loading />;
                 if (error) return <div className="gql-error">{JSON.stringify(error)}</div>;
-                console.log("movie-search",data)
+                //console.log("movie-search",data)
                 const result = data.search.movies
                 const resultCover = result.filter(m => m.hasCover)
                 const resultPoster = result.filter(m => !m.hasCover)

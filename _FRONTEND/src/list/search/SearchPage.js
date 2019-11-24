@@ -5,26 +5,27 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 //import { Query } from "react-apollo";
 import { COMPLEX_SEARCH,TAG_LIST } from "../../functions/query"
 
-import { Head, MidPageAd, rgaSetEvent } from "../../functions/analytics"
+import { Head, MidPageAd, HomePageFeedAd, rgaSetEvent } from "../../functions/analytics"
 import TagSelectStatic from "./TagSelectStatic"
 import {  isEqualObj} from "../../functions"
 
 //import "react-input-range/lib/css/index.css"
 
 import { 
-    Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
+    Box, FlexBox,SuperBox, Text,Input,SearchInput, Form,Loading, Button,
     ImdbIcon, WatchIcon, SearchIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox,
-    RatingSlider, YearSlider,
+    RatingSlider, YearSlider, HeaderText,
 } from "../../styled-components"
 import "./Search.css"
 import "react-input-range/lib/css/index.css"
 
 const Header = () => (
     <Head
-        title={"Pixly Search - Search Movies by Genre, Tag, IMDb Rating and Release Year"}
-        description={"Pixly Search is a free service that you can search and filter movies with respect to their genres, tags, IMDb Ratings and release date"}
+        title={"Pixly - Advance Film Search by Genre, IMDb Rating and Release Year"}
+        description={"Pixly Search is a free service that you can make advance movie search and also filter them " + 
+                "with respect to their genres, tags, IMDb Ratings and release date"}
         keywords={["Movie Search", "Advance Movie Search", "Search by IMDb Rating", "Movie with Release Year"]}
         canonical={`https://pixly.app/advance-search`}
     />
@@ -82,8 +83,9 @@ const SearchPage = (props) =>{
     return(
         <PageContainer>
             <Header />
-            <Form flexWrap="wrap" onSubmit={submitHandler}>
 
+            <Form flexWrap="wrap" onSubmit={submitHandler} gradient={"blueish"} py={[4]}>
+                <HeaderText textAlign="center" color="rgba(255,255,255, 0.9)" my={[5]}>Search Movies by Genre, Rating and Year</HeaderText>
                 <FlexBox justifyContent="center" id="s-text-input" minWidth="100%" position="relative">
                     <SearchInput type="text"   
                         px={[2,3,4,4,4]}
@@ -115,26 +117,22 @@ const SearchPage = (props) =>{
                     justifyContent="space-around"
                     flexWrap="wrap"
                     px={[3]} mt={[3,3,3]}
-                    borderBottom="1px solid"
                 >
-                <FlexBox 
-                    flexDirection={["row"]} 
-                    alignItems={"flex-start"} 
-                    my={[3]} px={[3,3,3, 3]} 
-                    width={"100%"}
-                    flexGrow={1,1,1, 0}
-                >
-                    <TagSelectStatic tags={tags} tagSetter={setTags} />
+                    <FlexBox 
+                        flexDirection={["row"]} 
+                        alignItems={"flex-start"} 
+                        my={[3]} px={[3,3,3, 3]} 
+                        width={"100%"}
+                        flexGrow={1,1,1, 0}
+                    >
+                        <TagSelectStatic tags={tags} tagSetter={setTags} />
+                    </FlexBox>
+                    <YearSlider dispatcher={yearDispatcher} classname="cbssss" />
+                    <RatingSlider dispatcher={ratingDispatcher} />
                 </FlexBox>
+            </Form>
 
-                <YearSlider dispatcher={yearDispatcher} classname="cbssss" />
-                <RatingSlider dispatcher={ratingDispatcher} />
-
-              
-                </FlexBox>
-
-
-                <Box id="search-rresult-box"  
+            <Box id="search-rresult-box"  
                     borderLeft="2px solid" 
                     borderColor="rgba(40,40,40, 0.3)"
                     minWidth={["100%"]} minHeight={["60vw"]}
@@ -143,10 +141,7 @@ const SearchPage = (props) =>{
                     <Text fontSize={[14,14,16]} minHeight={16} fontWeight={"bold"}>{message}</Text>
                     
                     <SearchQueryBox lazyvariables={lazyvariables} skip={skip} />
-                    
-
                 </Box>
-            </Form>
         </PageContainer>
     );
 }
@@ -158,13 +153,25 @@ const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
     const prevPage = useCallback(() => setPage(page - 1), [page])
     const nextPage = useCallback(() => setPage(page + 1), [page])
     //console.log(loading, error, data)
-    if (loading) return <Loading />
+    if (loading) return <Loading text="Searching"/>
     if (data) {
+        const pageQuantity = data.complexSearch.result.length
+        const firstPart = data.complexSearch.result.slice(0, Math.floor(pageQuantity/ 2) + 1)
+        const secondPArt = data.complexSearch.result.slice(Math.floor(pageQuantity/ 2) + 1, 30)
         return (
             <>
-            <MovieCoverBox items={data.complexSearch.result} columns={[2,2,3,3,4,4,6]} fontSize={[12,12,14]} my={[3,3,3,3,4]} />
-            
-            <MidPageAd />
+            <Grid columns={[1,2,2,3,3,3,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                {firstPart.map( item => (
+                    <MovieCoverCard item={item} key={"rec" + item.id}/>
+                ))}
+            </Grid>
+            <MidPageAd/>
+            <Grid columns={[1,2,2,3,3,3,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                {secondPArt.map( item => (
+                    <MovieCoverCard item={item} key={"rec" + item.id}/>
+                ))}
+            </Grid>
+            <HomePageFeedAd />
 
             {data.complexSearch.quantity >= 18 &&
                     <PaginationBox mb={[2]}

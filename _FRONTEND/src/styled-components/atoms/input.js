@@ -1,6 +1,7 @@
 import { compose,typography, color, space, shadow, layout, border, background, flexbox, position, system } from 'styled-system'
 import { themeGet } from '@styled-system/theme-get'
 import {  styled } from "../"
+import { linearGradient, backgrounds, backgroundImages, setLightness } from 'polished'
 
 
 export const Input = styled("input")`
@@ -42,6 +43,13 @@ export const Form = styled("form")`
     display:flex;
     flex-direction:column;
     transition:  ${themeGet("transitions.fast")};
+
+    ${props => props.gradient && themeGet(`gradients.${props.gradient}.colors`)(props) 
+        && linearGradient({
+        colorStops: themeGet(`gradients.${props.gradient}.colors`)(props),
+        toDirection: themeGet(`gradients.${props.gradient}.direction`)(props),
+        fallback: themeGet(`gradients.${props.gradient}.fallback`)(props),
+    })}
     ${color}
     ${space}
     ${shadow}
