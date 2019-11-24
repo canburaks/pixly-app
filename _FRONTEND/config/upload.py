@@ -99,10 +99,11 @@ def upload_files(base_path, target_path, configs):
 print("JS Files are uploading now... \n\n")
 #Upload JS files
 for js_file in js_files:
-    base_path = "./build/static/js/" + js_file
-    target_path =  "static/bundle/dist/static/js/" + js_file
-    configs = set_configs(js_file)
-    upload_files(base_path, target_path, configs)
+    if ".br" in js_file:
+        base_path = "./build/static/js/" + js_file
+        target_path =  "static/bundle/dist/static/js/" + js_file
+        configs = set_configs(js_file)
+        upload_files(base_path, target_path, configs)
 
 print("JS Files uploaded. \nCSS Files are uploading now.")
 

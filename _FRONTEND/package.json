@@ -12,7 +12,8 @@
     "deploy-frontend": "python config/upload.py",
     "deploy-backend": "cd .. && git add . && git commit -m '...' && git push",
     "snap": "react-snap",
-    "fullbuild": "npm run build && npm run deploy-frontend && npm run snap && npm run deploy-backend"
+    "fullbuild": "npm run build && npm run deploy-frontend && npm run snap && npm run deploy-backend",
+    "snapshot": "snapshotify"
   },
   "babel": {
     "presets": [
@@ -58,9 +59,6 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.0.1",
     "@babel/runtime": "^7.6.3",
-    "@ckeditor/ckeditor5-build-balloon": "^15.0.0",
-    "@ckeditor/ckeditor5-build-classic": "^15.0.0",
-    "@ckeditor/ckeditor5-react": "^1.1.3",
     "@glidejs/glide": "^3.3.0",
     "@styled-system/css": "^5.0.23",
     "@styled-system/theme-get": "^5.1.2",
@@ -82,10 +80,8 @@
     "html-react-parser": "^0.10.0",
     "immer": "^5.0.0",
     "immutable": "^4.0.0-rc.12",
-    "linaria": "^1.3.1",
     "polished": "^3.4.1",
     "postcss-js": "^2.0.3",
-    "puppeteer": "^2.0.0",
     "query-string": "^6.7.0",
     "react": "^16.10.2",
     "react-adsense": "^0.0.6",
@@ -106,17 +102,12 @@
     "react-router-dom": "^5.1.0",
     "react-scripts": "^3.0.1",
     "react-select": "^3.0.4",
-    "react-shimmer": "^2.0.1",
+    "react-snap": "^1.22.1",
     "react-social-sharing": "^3.0.1",
     "react-stars": "^2.2.5",
     "remove": "^0.1.5",
-    "slate": "^0.47.9",
-    "slate-react": "^0.22.10",
     "styled-components": "^4.3.2",
     "styled-system": "^5.1.2",
-    "sweetalert2": "^8.15.1",
-    "sweetalert2-react": "^0.8.3",
-    "sweetalert2-react-content": "^1.1.0",
     "unfetch": "^4.0.1",
     "use-events": "^1.1.11",
     "use-graphql-request": "^0.0.4"
@@ -135,7 +126,6 @@
     "css-loader": "^3.2.0",
     "dotenv": "^8.1.0",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
-    "eslint-plugin-react-hooks": "^2.1.2",
     "extract-loader": "^3.1.0",
     "file-loader": "^4.2.0",
     "html-loader": "^0.5.5",
@@ -146,9 +136,6 @@
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.7.0",
     "postcss-safe-parser": "^4.0.1",
-    "preload-webpack-plugin": "3.0.0-beta.3",
-    "prerender-spa-plugin": "^3.4.0",
-    "react-snap": "^1.23.0",
     "rm-unused-css": "^1.1.13",
     "speed-measure-webpack-plugin": "^1.3.1",
     "style-loader": "^1.0.0",
@@ -158,11 +145,10 @@
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2",
     "webpack-dotenv-plugin": "^2.1.0",
-    "webpack-jarvis": "^0.3.2",
-    "webpack-s3-plugin": "^1.0.3",
-    "webpack-visualizer-plugin": "^0.1.11"
+    "webpack-s3-plugin": "^1.0.3"
   },
   "reactSnap": {
+    "headless": true,
     "crawl": false,
     "destination": "../templates/prerendered",
     "source": "build",
@@ -180,22 +166,13 @@
       "width": 730
     },
     "include": [
+
       "",
       "/",
       "/explore",
-      "/directors/1",
-      "/topic/art-house",
-      "/topic/cyberpunk",
-      "/topic/based-on-true-story",
-      "/topic/dialogue-focused",
-      "/topic/thought-provoking",
-      "/topic/bechdel-test",
-      "/topic/feel-good-movies",
+      "/advance-search",
       "/blog",
-      "/blog/a-brief-introduction-to-collaborative-filtering",
-      "/blog/django-graphql-react-integration-tutorial-part-1",
-      "/blog/django-graphql-react-integration-tutorial-part-2",
-      "/blog/django-graphql-react-integration-tutorial-part-3"
+      "/movie/the-matrix-1999"
     ],
     "publicPath": "/"
   }

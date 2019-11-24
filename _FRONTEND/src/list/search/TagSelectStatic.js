@@ -32,7 +32,7 @@ const TagSelectStatic = React.memo((props) =>{
             ...base,
             minHeight:50,
             padding: 5,
-            zIndex:5
+            zIndex:12
         }),
         control: base => ({...base,
             border:"1px solid rgba(40, 40, 40, 0.3)", 
@@ -103,7 +103,7 @@ const TagSelectStatic = React.memo((props) =>{
             color:"rgba(40,40,40, 0.6)"
         }),
         placeholder: base => ({...base,
-            color:"rgba(40,40,40, 0.8)"
+            color:"rgba(255,255,255, 0.9)"
         })
     }
 

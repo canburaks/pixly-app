@@ -24,7 +24,7 @@ import {
 
 const TopicList = React.memo((props) => {
     const topics = props.topics
-    console.log("topics", topics)
+    //console.log("topics", topics)
     const topicnames = topics.map(topic => topic.name).join(", ")
     const authStatus = useAuthCheck()
     return (
@@ -72,7 +72,7 @@ const TopicList = React.memo((props) => {
 
 const Query = (props) =>{
     const { loading, error, data } = useQuery(TOPIC_LIST_QUERY)
-    console.log(data, loading, error)
+    //console.log(data, loading, error)
     if (loading) return <Loading />
     if (data) return <TopicList topics={data.listOfTopics} />
     else return <div></div>

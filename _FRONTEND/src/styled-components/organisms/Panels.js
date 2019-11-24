@@ -71,7 +71,7 @@ export const Loading2 = () => (
         </div>
     </PageContainer>
 )
-export const Loading = () => <GradientAnimationModal text="loading..."/>
+export const Loading = ({text}) => <GradientAnimationModal text={text || "loading..."} zIndex={16}/>
 
 export const Error = () => <Redirect to="/404" /> // production ? window.location.replace("https://pixly.app/404") : <Redirect to="/404" />
 

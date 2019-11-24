@@ -24,7 +24,7 @@ export const FaceBookAuthentication = React.memo(() => {
       onCompleted: (d) => {setAuthMutationResponse(d); globalstate.methods.setFacebookOnline()}});
     
       
-    const errorHandler   = useCallback((error) =>  console.log("error: ", error),[])
+    const errorHandler   = useCallback((error) =>  console.log("error: "),[])
     const closeModal = useCallback(() => setOpenStatus(false),[])
     const openModal = useCallback(() => setOpenStatus(true),[])
 
@@ -139,7 +139,7 @@ export const facebook = () => {
 	const disconnect = useCallback(() => (isLogged === true) ? setIsLogged(false) : null, [isLogged]) 
 	const logoutHandler  = useCallback(() => fbApiLogout(disconnect))
 
-	const errorHandler   = useCallback((error) =>  console.log("error: ", error),[])
+	const errorHandler   = useCallback((error) =>  console.log("error: "),[])
   
 	print("fb", `isLogged:${isLogged}`, `fbData:${fbData}`)
 
@@ -281,7 +281,7 @@ export const facebook0 = () => {
   	//handlers
     const cleanHandler   = useCallback(() => {setIsLogged(false); setFbData(null);},[])
     const logoutHandler  = useCallback(async () => {if(api){api.logout(l => print("l",l))}; cleanHandler()},[])
-    const errorHandler   = useCallback((error) =>  console.log("error: ", error),[])
+    const errorHandler   = useCallback((error) =>  console.log("error: "),[])
 
 	  
     const connectSuccessHandler = useCallback((r) =>  {const newData= {...r};print(newData);  facebookConnect({variables:{data:JSON.stringify(newData)}}); setFbData(newData);},[])	
@@ -331,7 +331,7 @@ export const FaceBookAuthentication0 = () => {
       onCompleted: (d) => setAuthMutationResponse(d)});
     
       
-    const errorHandler   = useCallback((error) =>  console.log("error: ", error),[])
+    const errorHandler   = useCallback((error) =>  console.log("error: "),[])
     const closeModal = useCallback(() => setOpenStatus(false),[])
     const openModal = useCallback(() => setOpenStatus(true),[])
 

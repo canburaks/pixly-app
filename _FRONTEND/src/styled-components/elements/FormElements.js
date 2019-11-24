@@ -52,14 +52,16 @@ export const YearSlider = (props) => {
             borderColor="rgba(80,80,80, 0.5)"
             borderRadius={"8px"}
             zIndex={10}
+            color="black"
         >
-            <WatchIcon title="Release Year" stroke={"black"}  size={30}/>
+            <WatchIcon title="Release Year" stroke={props.iconColor || "white"}  size={30}/>
             <InputRange
                 max={2020}
                 min={1920}
                 step={1}
                 value={selectedYears}
                 onChange={changeHandler}
+
             />
         </FlexBox>
     )
@@ -92,7 +94,7 @@ export const RatingSlider = (props) => {
             borderColor="rgba(80,80,80, 0.4)"
             borderRadius={"8px"}
         >
-        <ImdbIcon title="IMDb Rating" fill="black"  size="30px !important;" imdb/>
+        <ImdbIcon title="IMDb Rating" fill={props.iconColor || "#fac539"}  size="30px !important;" imdb/>
         <InputRange
             max={10.0}
             min={1.0}

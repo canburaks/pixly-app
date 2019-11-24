@@ -21,7 +21,7 @@ export const FbookAuthButton = (props) =>{
 
     
     FB.getLoginStatus(function(response) {
-        console.log("resp",response)
+        //console.log("resp",response)
         if (response.status === "connected" && status === false){
             setStatus(true);
         }
@@ -30,7 +30,7 @@ export const FbookAuthButton = (props) =>{
         }   
     });
     }
-    console.log("fbook status", status)
+    //console.log("fbook status", status)
     function logoutHandler(){
         const FB = window.FB;
         //print("logout-cb FB", FB)
@@ -43,9 +43,9 @@ export const FbookAuthButton = (props) =>{
         const FB = window.FB
         setStatus(true)
         FB.api('/me', function(response) {
-            console.log(JSON.stringify(response));
+            //console.log(JSON.stringify(response));
         });
-        FB.getAuthResponse(e => console.log("sync response", e))
+        FB.getAuthResponse(e => //console.log("sync response", e))
     }
 
     const Button = () => status===false 

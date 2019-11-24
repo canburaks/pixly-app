@@ -39,26 +39,23 @@ p {
 .container-sm {
 	width: 100%;
 	margin: 0 auto;
-	padding-left: 16px;
-	padding-right: 16px;
+
 }
 @media (min-width: 481px) {
 	.container,
 	.container-sm {
-		padding-left: 24px;
-		padding-right: 24px;
+
 	}
 }
 .container {
-	max-width: 1128px;
+	max-width: 100%;
 }
 .container-sm {
-	max-width: 848px;
+	max-width: 100%;
 }
 .container .container-sm {
-	max-width: 800px;
-	padding-left: 0;
-	padding-right: 0;
+	max-width: 100%;
+
 }
 
 
@@ -154,7 +151,7 @@ p {
 		background: #242830;
 		background: linear-gradient(
 			80deg,
-			rgba(36, 40, 48, 0.5) 0%,
+			rgba(18, 72, 182, 0.5) 0%,
 			rgba(36, 40, 48, 0) 100%
 		);
 		-webkit-transform-origin: 0;

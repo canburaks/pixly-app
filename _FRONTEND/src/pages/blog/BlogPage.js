@@ -63,7 +63,7 @@ const MiniPost = ({ post }) => (
 const PostPage = (props) =>{
     const authCheck = useAuthCheck()
     const post = props.post
-    print("blog props", props)
+    //print("blog props", props)
     //function createMarkup() {
     //    return {__html: props.post.text};
     //  }
@@ -75,8 +75,8 @@ const PostPage = (props) =>{
                 description={post.summary}
                 canonical={`https://pixly.app/blog/${post.slug}`}
             />
-            <ContentContainer px={"10vw"}  pb={40} px={["5vw", "5vw", "8vw", "10vw", "15vw"]} >
-            <SchemaPost post={post}/>
+            <ContentContainer  pb={40} px={["5vw", "5vw", "8vw", "10vw", "15vw"]} maxWidth={"100%"}  overFlowX={"hidden"}>
+                <SchemaPost post={post}/>
             </ContentContainer>
         </PageContainer>
     );

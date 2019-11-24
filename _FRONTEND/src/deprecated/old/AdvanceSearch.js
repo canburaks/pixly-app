@@ -117,7 +117,7 @@ const AdvanceSearch = (props) =>{
             <Breadcrumb.Section >Advance Search</Breadcrumb.Section>
         </Breadcrumb>
     )
-    console.log(queryVariables)
+    //console.log(queryVariables)
     //console.log(props)
 
 

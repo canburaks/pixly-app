@@ -177,7 +177,7 @@ const TopicQuery = React.memo(({ match }) =>{
 
     if (loading) return <Loading />
     if (data && data.complexSearch){
-        console.log("data", data)
+        //console.log("data", data)
         return (
             <TopicPage 
                 variables={variables}
