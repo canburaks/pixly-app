@@ -59,7 +59,7 @@ const ExplorePage = React.memo(props => {
 	const { movies, lists, topics} = props.data
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
-
+	console.log(movies)
 	//const listAndTopics = [...topics, ...lists]
 	return (
 		<PageContainer>
@@ -160,7 +160,7 @@ const ExploreQuery = props => {
 		partialRefetch: true
 	});
 	if (loading) return <Loading />;
-	//console.log("main", data)
+	console.log("main", data)
 	if (error) return <div>{error.message}</div>;
 	if (data) return <ExplorePage data={data.mainPage} {...props} />;
 };
