@@ -9,8 +9,7 @@ from pixly.lib import is_ascii, to_english_chars
 
 deindex_file = open("djaws/deindex.txt", "r")
 unique_urls = list({x.strip() for x in deindex_file.readlines()})
-no_whitespace = [to_english_chars(x) for x in unique_urls]
-unique_urls_no_whitespace = list(filter( lambda x: x is not None, no_whitespace))
+unique_urls_no_whitespace = [to_english_chars(x) for x in unique_urls]
 # for check
 #endswith_slash = list(filter(lambda x: x.endswith("/"), unique_urls_no_whitespace ))
 #not_ascii = list(filter(lambda x: not is_ascii(x), unique_urls_no_whitespace ))
@@ -22,13 +21,23 @@ deindex_unique_urls = unique_urls_no_whitespace
 
 def get_pathname(link):
     if "https://wwww.pixly.app/" in link:
-        return link.replace("https://wwww.pixly.app/", "").strip()
+        path = link.replace("https://wwww.pixly.app/", "").strip()
+        if is_ascii(path):
+            return path
     elif "http://wwww.pixly.app/" in link:
-        return link.replace("http://wwww.pixly.app/", "").strip()
+        path = link.replace("http://wwww.pixly.app/", "").strip()
+        if is_ascii(path):
+            return path
     elif "https://pixly.app/" in link:
-        return link.replace("https://pixly.app/", "").strip()
+        path = link.replace("https://pixly.app/", "").strip()
+        #print("sss")
+        return path
+        if is_ascii(path):
+            return path
     elif "http://pixly.app/" in link:
-        return link.replace("http://pixly.app/", "").strip()
+        path = link.replace("http://pixly.app/", "").strip()
+        if is_ascii(path):
+            return path
 
 
 def raw_404(request):
@@ -41,14 +50,18 @@ handler404 = raw_404
 def make_url_pattern():
     url_patterns = []
     for url in deindex_unique_pathnames:
-        regex_pattern = rf'^{url}$'
-        single_path = re_path(regex_pattern, handler404)
-        url_patterns.append(single_path)
+        try:
+            regex_pattern = rf'^{url}$'
+            single_path = re_path(rf'^{url}$', raw_404)
+            url_patterns.append(single_path)
+        except:
+            continue
     return url_patterns
 
 
 # without trailing_slash
-deindex_unique_pathnames = [get_pathname(x) for x in deindex_unique_urls] 
+unique_pathnames = [get_pathname(x) for x in deindex_unique_urls] 
+deindex_unique_pathnames = list(filter( lambda x: x is not None, unique_pathnames))
 
 
 
@@ -71,5 +84,5 @@ class RemoveSitemap(Sitemap):
         return item.link
 
 
-
+sss = [x.get("location") for x in RemoveSitemap().get_urls()]
 
