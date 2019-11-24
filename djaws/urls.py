@@ -71,37 +71,7 @@ sitemaps = {
 }
 #removesitemaps = { "remove": RemoveSitemap()}
 
-links_will_be_removed = list(set([x.replace("https://pixly.app", "").strip() for x in open("djaws/deindex.txt","r") if len(x.replace("https://pixly.app", "").strip()) > 2]))
 
-class RemoveLinkClass:
-    def __init__(self, link):
-        self.link = link
-
-class RemoveSitemap(Sitemap):
-    changefreq = "monthly"
-    priority = 0.8
-    def items(self):
-        deindex_file = open("djaws/deindex.txt","r")
-        url_patterns = [RemoveLinkClass(link=line) for line in links_will_be_removed ]
-        return url_patterns
-
-    def location(self, item):
-        return item.link
-
-
-def get_deindex_paths():
-    url_patterns = []
-    for line in links_will_be_removed:
-        line = line.strip("/")
-        #regex_pattern = rf'^{line}$'
-        single_path = re_path(line, handler404)
-        url_patterns.append(single_path)
-    #print(url_patterns)
-    return url_patterns
-#pprint(RemoveSitemap())
-removesitemaps = { "remove": RemoveSitemap()}
-
-deindex_patterns = get_deindex_paths()
 
 
 urlpatterns = [
@@ -140,7 +110,7 @@ urlpatterns = [
 urlpatterns = urlpatterns + custom_url_pages +  [
     path("/", TemplateView.as_view(template_name="prerendered/index.html")),
     path("", TemplateView.as_view(template_name="prerendered/index.html")),
-    #*deindex_patterns,
+    #*deindex_url_patterns,
     re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")),  
     #path("", TemplateView.as_view(template_name="prerendered/404.html")), #bcs 404 returns to main-page
     #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")), #200.html is original - not prerendered page template 
