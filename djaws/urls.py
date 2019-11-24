@@ -101,7 +101,7 @@ def get_deindex_paths():
 #pprint(RemoveSitemap())
 removesitemaps = { "remove": RemoveSitemap()}
 
-deindex_patterns = get_deindex_paths()
+#deindex_patterns = get_deindex_paths()
 
 urlpatterns = [
     path("404", handler404),
