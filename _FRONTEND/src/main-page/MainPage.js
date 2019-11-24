@@ -24,7 +24,7 @@ import { facebook } from "../functions"
 
 import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
-import {Box,Span,FlexBox,MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
+import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
 	PageContainer,ContentContainer,Loading,
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text, SubHeaderText, NewLink,
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
@@ -67,6 +67,7 @@ const MainPage = React.memo(() => {
 	const Fb = facebook()
 	//console.log("main", isModalOpen)
 	//const listAndTopics = [...topics, ...lists]
+	const herMainText = "Discover Best Movies that Fit Your Cinema Taste."
 	const heroHeaderText = "Improve your experience in discovering movies"
 	const heroSubheaderText = "Don't waste your time by browsing endless cycles. " + 
 		"With our AI-based personalized recommendation systems, we are guiding you through multiple universes " + 
@@ -125,75 +126,74 @@ const MainPage = React.memo(() => {
 			</Head>
 
 			<div className="body-wrap">
-
 				<main>
-						<SuperBox className="container" gradient="blueish" top={95} py={"40px"} width={"100vw"} mx={"0px"}>
-							<Box className="hero-inner" mr={[5]}>
-								<FlexBox flexDirection="column" zIndex={9}  px={[2,3,3,4,6,6,7]}>
-									<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)" zIndex={8} color="light">{heroHeaderText}</HeaderText>
-									<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold" color="light">{heroSubheaderText}</Text>
-									
-									<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />
-									{/*
-									*/}
-									
-									{!authStatus && 
-									<FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
-
-									<Box  my={[3]}>
-										<Button borderRadius={"6px"}   mx={[2]}
-											onClick={insertLoginForm} 
-											width={"120px"} height={"50px"} 
-											color={"light"}
-											fontWeight="bold"
-		
-											hoverShadow="card"
-											boxShadow="xs"
-											gradient="navy"
-										>
-											Login
-										</Button>
-										<BubbleButton px={[2]} mx={[2]}
-											onClick={setModalOpen} 
-											width={"120px"} height={"50px"}
-											color="light" 
-											borderRadius="4px" 
-											link="/explore" gradient="pinkish"
-											fontWeight="bold" hoverBg={"dark"}
-											>
-											Join
-										</BubbleButton>
-									</Box>
-										{!authStatus  && <Fb.Auth />}
-									</FlexBox>
-
-										}
-									<FlexBox flexDirection="row" alignItems="flex-start" flexWrap="wrap" width="100%" mt={[3,3,3,4]} justifyContent="flex-start">
-										{/*
-
-										*/}
-										<LinkButton link="/explore" color="light" bg="dark" borderRadius="4px" mt={[4]}>Let Me Show</LinkButton>
-
-									</FlexBox>
-								</FlexBox>
+					<SuperBox className="container" gradient="blueish" top={95} py={"40px"} width={"100vw"} mx={"0px"}>
+						<Box className="hero-inner" mr={[5]}>
+							<FlexBox flexDirection="column" zIndex={9}  px={[2,3,3,4,6,6,7]}>
+								<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)" zIndex={8} color="light">{herMainText}</HeaderText>
+								<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold" color="light">{heroHeaderText}</Text>
 								
-								<div className="hero-figure anime-element">
-									<svg className="placeholder" width={528} height={396} viewBox="0 0 528 396">
-										<rect width={528} height={396} style={{fill:"transparent"}} />
-									</svg>
-									<div className="hero-figure-box hero-figure-box-01" data-rotation="45deg"></div>
-									<div className="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
-									<div className="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
-									<div className="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
-									<div className="hero-figure-box hero-figure-box-05"><MiniMovies /></div>
-									<div className="hero-figure-box hero-figure-box-06"><SpaceOddysey /></div>
-									<div className="hero-figure-box hero-figure-box-07"></div>
-									<div className="hero-figure-box hero-figure-box-08" data-rotation="-22deg"><SkinILive /></div>
-									<div className="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
-									<div className="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
-								</div>
-							</Box>
-						</SuperBox>
+								<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />
+								{/*
+								*/}
+								
+								{!authStatus && 
+								<FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
+
+								<Box  my={[3]}>
+									<Button borderRadius={"6px"}   mx={[2]}
+										onClick={insertLoginForm} 
+										width={"120px"} height={"50px"} 
+										color={"light"}
+										fontWeight="bold"
+	
+										hoverShadow="card"
+										boxShadow="xs"
+										gradient="navy"
+									>
+										Login
+									</Button>
+									<BubbleButton px={[2]} mx={[2]}
+										onClick={setModalOpen} 
+										width={"120px"} height={"50px"}
+										color="light" 
+										borderRadius="4px" 
+										link="/explore" gradient="pinkish"
+										fontWeight="bold" hoverBg={"dark"}
+										>
+										Join
+									</BubbleButton>
+								</Box>
+									{!authStatus  && <Fb.Auth />}
+								</FlexBox>
+
+									}
+								<FlexBox flexDirection="row" alignItems="flex-start" flexWrap="wrap" width="100%" mt={[3,3,3,4]} justifyContent="flex-start">
+									{/*
+
+									*/}
+									<LinkButton link="/explore" color="light" bg="dark" borderRadius="4px" mt={[4]}>Let Me Show</LinkButton>
+
+								</FlexBox>
+							</FlexBox>
+							
+							<div className="hero-figure anime-element">
+								<svg className="placeholder" width={528} height={396} viewBox="0 0 528 396">
+									<rect width={528} height={396} style={{fill:"transparent"}} />
+								</svg>
+								<div className="hero-figure-box hero-figure-box-01" data-rotation="45deg"></div>
+								<div className="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
+								<div className="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
+								<div className="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
+								<div className="hero-figure-box hero-figure-box-05"><MiniMovies /></div>
+								<div className="hero-figure-box hero-figure-box-06"><SpaceOddysey /></div>
+								<div className="hero-figure-box hero-figure-box-07"></div>
+								<div className="hero-figure-box hero-figure-box-08" data-rotation="-22deg"><SkinILive /></div>
+								<div className="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
+								<div className="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
+							</div>
+						</Box>
+					</SuperBox>
 
 					<section className="features section">
 						<div className="container">
@@ -218,8 +218,17 @@ const MainPage = React.memo(() => {
 							<LinkButton link="/explore" color="light" bg="dark" borderRadius="4px" >Explore</LinkButton>
 						</div>
 					</section>
+
 				</main>
 			</div>
+					<SuperBox  
+						display="flex" flexDirection="column" 
+						width={"100vw"} mx={"0px"} py={[5]} px={["5vw", "5vw", "5vw", "8vw"]} 
+						gradient="blueish" 
+					>
+						<HeaderMini color={"light"} my={[3]} fontSize={["22px", "22px", "26px", "30px", "32px"]} textAlign="center">We have just started</HeaderMini>
+						<Message />
+					</SuperBox>
 
 		</PageContainer>
 	);
@@ -358,6 +367,18 @@ const Feature6 = () => (
 		</div>
 	</FlexBox>
 )
+
+const Message = () =>(
+	<Text fontSize={["14px", "14px", "16px", "18px"]} color={"light"} mt={[2]} textAlign="justify" >
+	As Pixly, We have just started. We work passionately to make our business your favorite film website. <br/>
+	Our AI algorithm is currently in a beta phase, and we've collect several movie lists and topics to enrich your discovery experience.
+	These include films that have won major awards (Grand Prize) from prestigious film festivals like cannes film festival, 
+	favorite movies and  lists from some famous directors such as Quentin Tarantino and Stanley Kubrick, and various topicals such as art-house, 
+	cyberpunk or based on true story movies. <br/>In addition, we have gather together the best popular movies that are up to date and the upcoming
+	cinema works that we are looking forward to. We constantly try to keep our content up to date. Your intellectual support and suggestions are 
+	always welcome. Please send us any questions and suggestions in the message box at the bottom of the page or email us at pixly@pixly.app
+	</Text>
+) 
 
 
 

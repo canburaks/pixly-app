@@ -45,7 +45,7 @@ export const SignupForm = (props) => {
     //print("get-set", getValues())
     //          06301987Cbs
     return(
-        <Form onSubmit={handleSubmit(onSubmit)} p={[2]}>
+        <Form onSubmit={handleSubmit(onSubmit)} p={[2]} zIndex={20}>
             <FormInput 
                 name={"Name"}
                 defaultValue={props.name || ""}
@@ -127,7 +127,7 @@ export const SignupFormModal = (props) => (
     <SimpleModal 
         isOpen={props.isOpen} closeModal={props.closeModal} 
         width={["90vw","90vw","80vw", "60vw"]} maxWidth={"400px"}
-        bg="light" color="dark" zIndex={20}
+        bg="light" color="dark" zIndex={100}
     >
         <SignupForm {...props} />
     </SimpleModal>

@@ -81,7 +81,7 @@ const SearchPage = (props) =>{
 
     //console.log("qv",variables)
     return(
-        <PageContainer>
+        <PageContainer  p={[0]}>
             <Header />
 
             <Form flexWrap="wrap" onSubmit={submitHandler} gradient={"blueish"} py={[4]}>
@@ -130,18 +130,19 @@ const SearchPage = (props) =>{
                     <YearSlider dispatcher={yearDispatcher} classname="cbssss" />
                     <RatingSlider dispatcher={ratingDispatcher} />
                 </FlexBox>
+                <Text fontSize={[14,14,16]} fontWeight={"bold"}>{message}</Text>
             </Form>
 
             <Box id="search-rresult-box"  
-                    borderLeft="2px solid" 
-                    borderColor="rgba(40,40,40, 0.3)"
-                    minWidth={["100%"]} minHeight={["60vw"]}
-                    p={[1,2,3]}
-                >
-                    <Text fontSize={[14,14,16]} minHeight={16} fontWeight={"bold"}>{message}</Text>
-                    
-                    <SearchQueryBox lazyvariables={lazyvariables} skip={skip} />
-                </Box>
+                borderLeft="2px solid" 
+                borderColor="rgba(40,40,40, 0.3)"
+                minWidth={["100%"]} minHeight={["60vw"]}
+                left={"-5px"}
+                p={[0]}
+            >
+                
+                <SearchQueryBox lazyvariables={lazyvariables} skip={skip} />
+            </Box>
         </PageContainer>
     );
 }
@@ -156,19 +157,19 @@ const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
     if (loading) return <Loading text="Searching"/>
     if (data) {
         const pageQuantity = data.complexSearch.result.length
-        const firstPart = data.complexSearch.result.slice(0, Math.floor(pageQuantity/ 2) + 1)
-        const secondPArt = data.complexSearch.result.slice(Math.floor(pageQuantity/ 2) + 1, 30)
+        const firstPart = data.complexSearch.result.slice(0, 6)
+        const secondPArt = data.complexSearch.result.slice(6)
         return (
             <>
-            <Grid columns={[1,2,2,3,3,3,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
+            <Grid columns={[1,2,2,3,3,3,4]} pb={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
                 {firstPart.map( item => (
-                    <MovieCoverCard item={item} key={"rec" + item.id}/>
+                    <MovieCoverCard item={item} key={"rec" + item.id} borderRadius={[0]}/>
                 ))}
             </Grid>
             <MidPageAd/>
-            <Grid columns={[1,2,2,3,3,3,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
+            <Grid columns={[1,2,2,3,3,3,4]} py={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
                 {secondPArt.map( item => (
-                    <MovieCoverCard item={item} key={"rec" + item.id}/>
+                    <MovieCoverCard item={item} key={"rec" + item.id} borderRadius={[0]}/>
                 ))}
             </Grid>
             <HomePageFeedAd />

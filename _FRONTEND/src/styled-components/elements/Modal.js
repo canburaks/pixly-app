@@ -19,13 +19,13 @@ export const SimpleModal = (props) => {
 	return(	
 		<>
 			{props.isOpen && 
-			<ModalBox overflowY="auto">
+			<ModalBox overflowY="auto" zIndex={20} pt={"80px"}>
 				<FlexBox flexDirection="column" alignItems="center"
 					justifyContent="flex-start"
 					position="relative" 
 					height="auto" 
 					px={"20px"} pb={"15px"}
-					borderRadius={"16px"}
+					borderRadius={"4px"}
 					
 					overflowX="hidden"
 					bg={props.bg ? props.bg : "dark"}

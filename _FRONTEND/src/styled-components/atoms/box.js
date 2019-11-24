@@ -131,7 +131,7 @@ export const NavBarBox = styled.nav`
     transition: all 0.3s ease-in-out;
     transition: background-color 1.5s cubic-bezier(.66,.04,.9,.88);
     overflow-y: visible;
-    z-index: 10;
+    z-index: 10 !important;
     ${color}
     ${space}
     ${shadow}

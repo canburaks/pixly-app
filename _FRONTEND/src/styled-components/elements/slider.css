@@ -27,7 +27,7 @@ div.input-range * {
     color:#f1f1f1;
 
 }
-#search-settings-box div.input-range * {
+#search-settings-box.topic-page div.input-range * {
     font-family: Nunito, serif;
     font-weight: bold;
     color:#000000;

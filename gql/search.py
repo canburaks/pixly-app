@@ -112,7 +112,9 @@ class ComplexSearchType(graphene.ObjectType):
     def result_query(self):
         keywords = self.keywords.strip() if self.keywords != None else None
         tags = self.tags
-        #print(tags, keywords)
+        if len(tags)==0 and (keywords == None or keywords == ""):
+            return Movie.objects.filter(main_page = True)
+        print(keywords, "asd")
 
         #MAIN QUERY
 
