@@ -78,6 +78,7 @@ class RemoveLinkClass:
     def __init__(self, link):
         self.link = link
 
+"""
 class RemoveSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.8
@@ -100,7 +101,7 @@ def get_deindex_paths():
     return url_patterns
 #pprint(RemoveSitemap())
 removesitemaps = { "remove": RemoveSitemap()}
-
+"""
 #deindex_patterns = get_deindex_paths()
 
 urlpatterns = [
@@ -112,7 +113,7 @@ urlpatterns = [
     path(f'qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html', TemplateView.as_view(template_name=f"others/qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html")),
 
     re_path(r'^sitemap.xml', cache_page(300)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    re_path(r'^remove-sitemap.xml', cache_page(10)(sitemap), {'sitemaps': removesitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    #re_path(r'^remove-sitemap.xml', cache_page(10)(sitemap), {'sitemaps': removesitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
     re_path(r'^robots.txt', TemplateView.as_view(template_name="robots.txt"), name="robots_file"),
     path("ads.txt", TemplateView.as_view(template_name="others/ads.txt")),
