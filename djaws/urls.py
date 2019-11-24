@@ -72,13 +72,13 @@ sitemaps = {
     'person': DirectorSitemap(),
     "topic": TopicSitemap()
 }
+"""
 links_will_be_remove = list(set([x.replace("https://pixly.app", "").strip() for x in open("djaws/deindex.txt","r") if len(x.replace("https://pixly.app", "").strip()) > 2]))
 
 class RemoveLinkClass:
     def __init__(self, link):
         self.link = link
 
-"""
 class RemoveSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.8
