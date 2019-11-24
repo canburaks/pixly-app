@@ -166,6 +166,11 @@
       "width": 730
     },
     "include": [
+
+      "",
+      "/",
+      "/explore",
+      "/advance-search",
       "/topic/art-house",
       "/topic/cyberpunk",
       "/topic/based-on-true-story",
@@ -173,15 +178,12 @@
       "/topic/thought-provoking",
       "/topic/bechdel-test",
       "/topic/feel-good-movies",
-      "",
-      "/",
-      "/explore",
-      "/advance-search",
       "/blog",
       "/blog/a-brief-introduction-to-collaborative-filtering",
       "/blog/django-graphql-react-integration-tutorial-part-1",
       "/blog/django-graphql-react-integration-tutorial-part-2",
       "/blog/django-graphql-react-integration-tutorial-part-3"
+
     ],
     "publicPath": "/"
   }
