@@ -227,8 +227,8 @@ export const DirectorPageAd = () => {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
     }, [window])
-    if (!production) return <div className="hidden"></div>
-    else return (
+
+    return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", minHeight: 90 }}
             data-ad-format="fluid"
@@ -246,8 +246,7 @@ export const ListBoardAd = () => {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
     }, [window])
-    if (!production) return <div className="hidden"></div>
-    else return (
+    return (
         <ins className="adsbygoogle"
             style={{display:"block", width:"100%", minHeight:90}}
             data-ad-client="ca-pub-9259748524746137"
@@ -266,8 +265,7 @@ export const ListBoardAd2 = () => {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
     }, [window])
-    if (!production) return <div className="hidden"></div>
-    else return (
+    return (
         <ins className="adsbygoogle"
             style={{display:"block", width:"100%", minHeight:90}}
             data-ad-client="ca-pub-9259748524746137"
@@ -286,8 +284,7 @@ export const MoviePageAd = () => {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
     }, [window])
-    if (!production) return <div className="hidden"></div>
-    else return (
+    return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", minHeight: 90 }}
             data-ad-client="ca-pub-9259748524746137"
@@ -304,8 +301,7 @@ export const MidPageAd = () => {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
     }, [window])
-    if (!production) return <div className="hidden"></div>
-    else return (
+    return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", minHeight: 90 }}
             data-ad-format="fluid"
@@ -341,8 +337,7 @@ export const HomePageArchiveAd = () => {
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
     }, [window])
-    if (!production) return <div className="hidden"></div>
-    else return (
+    return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", minHeight: 90 }}
             data-ad-client="ca-pub-9259748524746137"
