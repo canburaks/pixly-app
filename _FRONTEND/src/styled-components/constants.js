@@ -16,3 +16,6 @@ else {
 export const production = prod
 export const development = dev
 
+//ALLOWED URLS
+export const allowedUrls = require('../../../allowedUrls.json');
+//console.log("config",allowedUrls)

@@ -1,12 +1,13 @@
 import React from "react";
-import { useEffect, useState} from "react"
+import { useEffect, useState, useMemo } from "react"
 import ReactGA from 'react-ga';
 import AdSense from 'react-adsense';
 import { Helmet } from "react-helmet";
 import { production } from "../styled-components"
 import { useLocation, } from "react-router-dom";
-
+import { allowedUrls } from "../styled-components/constants"
 //console.log("production: ", production)
+
 export const Head = React.memo((props) => {
     const titleText = props.title ? props.title.slice(0,69) :"Pixly - Movie Recommendation and Social Cinema Platform "
     const descriptionText = props.description ? props.description.slice(0,159) : "Personalized Movie Recommendation, Social Cinema Platform, Movie Discovery, and Cultural Content"
@@ -22,6 +23,9 @@ export const Head = React.memo((props) => {
     const twitter = (type, content) => (<meta property={`twitter:${type}`} content={`${content}`}/>)
     //Analytics()
     //console.log("can",props.canonical)
+    console.log(window.location.pathname)
+    const isAllowedUrls = allowedUrls.all.includes(window.location.pathname)
+    console.log("is Allowed:", isAllowedUrls)
     return (
     <Helmet>
         {/*rgaPageView()*/}
@@ -30,7 +34,7 @@ export const Head = React.memo((props) => {
 
         {/* DESCRIPTION */}
         <meta name="description" content={descriptionText} />
-
+        {!isAllowedUrls && <meta name="googlebot" content="nofollow noindex" />}
         {/* KEYWORDS */}
         <meta name="keywords" content={keywordsText} />
 
