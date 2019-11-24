@@ -9,11 +9,13 @@ from pixly.lib import is_ascii, to_english_chars
 
 deindex_file = open("djaws/deindex.txt", "r")
 unique_urls = list({x.strip() for x in deindex_file.readlines()})
-unique_urls_no_whitespace = [to_english_chars(x) for x in unique_urls]
-
+no_whitespace = [to_english_chars(x) for x in unique_urls]
+unique_urls_no_whitespace = list(filter( lambda x: x is not None, no_whitespace))
 # for check
 #endswith_slash = list(filter(lambda x: x.endswith("/"), unique_urls_no_whitespace ))
 #not_ascii = list(filter(lambda x: not is_ascii(x), unique_urls_no_whitespace ))
+def ascii_check(liste):
+    return list(filter(lambda x: not is_ascii(x), liste ))
 
 deindex_unique_urls = unique_urls_no_whitespace
 
