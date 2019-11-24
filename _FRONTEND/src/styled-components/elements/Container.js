@@ -41,9 +41,9 @@ export const HtmlContainer = ({ html, ...props }) => {
             else if (domNode.attribs && (domNode.name === 'h6')
             ) return <Text   mt={"32px !important"}>{domToReact(domNode.children)}</Text>
         
-            else if (domNode.attribs && domNode.name === 'p') {
+            else if (domNode.attribs && domNode.name === 'p' ) {
                 //console.log(domNode)
-                return <Text textAlign="justify" fontSize={["16px", "16px", "18px"]} className="ssr-p">{domToReact(domNode.children)}</Text>
+                return <Text textAlign="justify" >{domToReact(domNode.children)}</Text>
             }
             //else if (domNode.attribs && domNode.name === 'img') {
             //    //console.log(domNode)
