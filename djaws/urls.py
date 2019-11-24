@@ -83,7 +83,7 @@ urlpatterns = [
     path(f'qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html', TemplateView.as_view(template_name=f"others/qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html")),
 
     re_path(r'^sitemap.xml', cache_page(300)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    re_path(r'^remove-sitemap.xml', cache_page(10)(sitemap), {'sitemaps': removesitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    #re_path(r'^remove-sitemap.xml', cache_page(10)(sitemap), {'sitemaps': removesitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
     re_path(r'^robots.txt', TemplateView.as_view(template_name="robots.txt"), name="robots_file"),
     path("ads.txt", TemplateView.as_view(template_name="others/ads.txt")),
@@ -110,7 +110,7 @@ urlpatterns = [
 urlpatterns = urlpatterns + custom_url_pages + [
     path("/", TemplateView.as_view(template_name="prerendered/index.html")),
     path("", TemplateView.as_view(template_name="prerendered/index.html")),
-    #*deindex_url_patterns,
+    *deindex_url_patterns,
     re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")),  
     #path("", TemplateView.as_view(template_name="prerendered/404.html")), #bcs 404 returns to main-page
     #re_path(r'^(?:.*)/?$',TemplateView.as_view(template_name="prerendered/200.html")), #200.html is original - not prerendered page template 
