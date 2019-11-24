@@ -161,18 +161,18 @@ const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
         const secondPArt = data.complexSearch.result.slice(6)
         return (
             <>
-            <Grid columns={[1,2,2,3,3,3,4]} pb={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
+            <Grid columns={[1,2,2,3,3,3]} pb={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
                 {firstPart.map( item => (
                     <MovieCoverCard item={item} key={"rec" + item.id} borderRadius={[0]}/>
                 ))}
             </Grid>
-            <MidPageAd/>
-            <Grid columns={[1,2,2,3,3,3,4]} py={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
+            <HomePageFeedAd />
+            <Grid columns={[1,2,2,3,3,3]} py={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
                 {secondPArt.map( item => (
                     <MovieCoverCard item={item} key={"rec" + item.id} borderRadius={[0]}/>
                 ))}
             </Grid>
-            <HomePageFeedAd />
+            <MidPageAd/>
 
             {data.complexSearch.quantity >= 18 &&
                     <PaginationBox mb={[2]}
