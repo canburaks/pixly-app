@@ -128,7 +128,7 @@ const ExplorePage = React.memo(props => {
 						/>
 					))}
 				</Grid>
-
+				<MidPageAd />
 				<Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
 					{lists.map(list => (
 						<CoverCard follow={true}

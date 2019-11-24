@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 
-import { isEqualObj, Head, MidPageAd,HomePageFeedAd, useValues, useWindowSize} from "../../functions"
+import { isEqualObj, Head, MidPageAd,HomePageFeedAd,MoviePageAd, useValues, useWindowSize} from "../../functions"
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import * as SocialButtons from 'react-social-sharing'
 
@@ -183,12 +183,17 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
     if (data && data.complexSearch) {
         const willBeDispatched = {topic:data.complexSearch.topic, quantity:data.complexSearch.quantity}
         const pageQuantity = data.complexSearch.topicResult.length 
-        const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2) + 1)
-        const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2) + 1, 30)
+        //const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2) + 1)
+        //const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2) + 1, 30)
+
+        const firstPart = data.complexSearch.topicResult.slice(0, 4)
+        const secondPArt = data.complexSearch.topicResult.slice(4, 8)
+        const thirdPart = data.complexSearch.topicResult.slice( 8, 16)
         //console.log("data", firstPart, secondPArt)
         dispatcher(willBeDispatched)
         return (
             <>
+            <MoviePageAd />
             <Grid columns={[1,1,1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {firstPart.map( item => (
                     <SmallTopicMovieCard item={item} key={"rec" + item.id}/>
@@ -200,17 +205,13 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
                     <SmallTopicMovieCard item={item} key={"rec" + item.id}/>
                 ))}
             </Grid>
-            {/*
-            <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
-                {firstPart.map( item => (
-                    <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
-                ))}
-            
-                {secondPArt.map( item => (
-                    <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
-                ))}
-            </Grid> */}
             <MidPageAd />
+            <Grid columns={[1,1,1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                {thirdPart.map( item => (
+                    <SmallTopicMovieCard item={item} key={"rec" + item.id}/>
+                ))}
+            </Grid>
+            <MoviePageAd />
             <br/>
             </>
 
