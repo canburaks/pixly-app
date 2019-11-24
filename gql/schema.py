@@ -772,6 +772,7 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
         return CustomMovieType(id=id, slug=slug)
 
 
+
 from .mutations import (Bookmark, Follow, Rating, BackgroundTasks,ContactMutation,
         ObtainJSONWebToken, Prediction, RedisMutation, Fav, BlogPostMutation,
         EmailValidation, UsernameValidation,Logout, ObtainJSONWebToken)
