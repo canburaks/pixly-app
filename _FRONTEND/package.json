@@ -171,8 +171,7 @@
       "/",
       "/explore",
       "/advance-search",
-      "/blog",
-      "/movie/the-matrix-1999"
+      "/blog"
     ],
     "publicPath": "/"
   }
