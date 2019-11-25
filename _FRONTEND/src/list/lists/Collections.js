@@ -21,7 +21,6 @@ import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, Ima
 
 const ListBoard = (props) => {
     const lists = props.data
-    rgaPageView()
     const authStatus = useAuthCheck();
     const state = useContext(GlobalContext);
     
