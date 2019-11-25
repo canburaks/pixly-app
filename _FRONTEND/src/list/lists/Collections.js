@@ -7,7 +7,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../functions/hooks"
 
 import { rgaPageView, Head, MidPageAd, HomePageFeedAd, ListBoardAd,
-    MAIN_PAGE
+    MAIN_PAGE, LIST_BOARD
 } from "../../functions"
 
 import { GlobalContext } from "../../";
@@ -20,7 +20,7 @@ import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, Ima
 
 
 const ListBoard = (props) => {
-    const lists = props.data.lists
+    const lists = props.data
     rgaPageView()
     const authStatus = useAuthCheck();
     const state = useContext(GlobalContext);
@@ -118,13 +118,13 @@ const ListBoard = (props) => {
 };
 
 const ExploreQuery = props => {
-	const { loading, error, data } = useQuery(MAIN_PAGE, {
+	const { loading, error, data } = useQuery(LIST_BOARD, {
 		partialRefetch: true
 	});
 	if (loading) return <Loading />;
 	//console.log("main", data)
 	if (error) return <div>{error.message}</div>;
-	if (data) return <ListBoard data={data.mainPage} {...props} />;
+	if (data) return <ListBoard data={data.listOfCategoricalLists} {...props} />;
 };
 
 export default withRouter(ExploreQuery);
