@@ -42,7 +42,6 @@ const ListBoard = (props) => {
     const thirdPart = allLists.slice(8, 18)
 
 
-    const pixlyselectionSize = useValues([0.41, 0.43, 0.3, 0.2, 0.15])
 
     //console.log(otherLists)
 
