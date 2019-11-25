@@ -51,7 +51,8 @@ from django.shortcuts import render
 from django.views.defaults import page_not_found
 from django.contrib.sitemaps import Sitemap
 from django.urls import path, include, re_path
-from pixly.indexing import deindex_url_patterns
+#from pixly.indexing import deindex_url_patterns
+from pixly.lib import is_ascii, to_english_chars, save_json, get_json
 
 def raw_404(request):
   response = HttpResponse("Not Found", status=404)
@@ -71,7 +72,20 @@ sitemaps = {
 }
 #removesitemaps = { "remove": RemoveSitemap()}
 
-
+def make_url_pattern():
+    url_patterns = []
+    #for url in deindex_unique_pathnames:
+    json_urls = get_json("pixly/unique_deindex.json")
+    for url in json_urls:
+        try:
+            #regex_pattern = rf'^{url}$'
+            single_path = re_path(rf'^{url}$', lambda x: HttpResponse("Not Found",
+            content_type="text/plain", status=404), name="deindex")
+            url_patterns.append(single_path)
+        except:
+            continue
+    return url_patterns
+deindex_url_patterns = make_url_pattern()
 
 
 urlpatterns = [
@@ -107,7 +121,7 @@ urlpatterns = [
 ]
 
 #print(deindex_url_patterns)
-urlpatterns = urlpatterns + custom_url_pages +  [
+urlpatterns = urlpatterns + custom_url_pages + deindex_url_patterns + [
     path("/", TemplateView.as_view(template_name="prerendered/index.html")),
     path("", TemplateView.as_view(template_name="prerendered/index.html")),
     #*deindex_url_patterns,
