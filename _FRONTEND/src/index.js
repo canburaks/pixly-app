@@ -45,7 +45,7 @@ const UriSwitcher = (uriType) =>{
     //else if(uriType===3)return 'https://localhost:8000/graphql/'
 }
 //try comment delete it later
-const uri = UriSwitcher(2)// 1-Remote / 2-Local / 3- Local-upload
+const uri = UriSwitcher(1)// 1-Remote / 2-Local / 3- Local-upload
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors){

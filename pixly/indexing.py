@@ -68,7 +68,7 @@ unique_pathnames = [get_pathname(x) for x in deindex_unique_urls]
 deindex_unique_pathnames = list(filter( lambda x: x is not None, unique_pathnames))
 
 #SAVE JSON
-#save_json(deindex_unique_pathnames, "/home/jb/Projects/Github/pixly-app/pixly/unique_deindex.json")
+#save_json(deindex_unique_pathnames, "/home/jb/Projects/Github/pixly-app/pixly/unique_pathname.json")
 
 
 # add this to url_patterns of your project
