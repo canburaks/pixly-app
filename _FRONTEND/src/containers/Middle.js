@@ -58,7 +58,7 @@ const Middle = (props) => {
         <Switch>
             <Route exact path="/draft" component={DraftPage} />
 
-            <Route exact path="/film-lists" component={Collections} />
+            <Route exact path="/film-lists" component={CollectionsQuery} />
             {/*
             <Route exact path="/discover" component={DiscoverQuery} />
             <Route exact path="/discover/search" component={DiscoverQuery} />
@@ -249,7 +249,7 @@ const CollectionsQuery = (props) => {
     const { loading, error, data } = useQuery(LIST_BOARD, { variables:{admin:true}, partialRefetch:true})
     if (loading) return <Loading />
     if (error) return <div>{error.message}</div>
-    if (data) return <Collections liste={data.listOfCategoricalLists} viewer={data.viewer} />
+    if (data) return <Collections data={data.listOfCategoricalLists} viewer={data.viewer} />
 }
 
 

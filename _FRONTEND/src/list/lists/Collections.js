@@ -56,8 +56,6 @@ const ListBoard = (props) => {
             />
 
             <ContentContainer mb={[3,3,3,3,4]}>
-            <HiddenHeader>Pixly Collections</HiddenHeader>
-
                 <div className="list-type-header fbox-c pad-bt-4x ">
                     <h2 className="primary-text">
                         Pixly Collections
@@ -127,4 +125,4 @@ const ExploreQuery = props => {
 	if (data) return <ListBoard data={data.listOfCategoricalLists} {...props} />;
 };
 
-export default withRouter(ExploreQuery);
+export default withRouter(ListBoard);
