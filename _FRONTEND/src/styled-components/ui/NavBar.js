@@ -44,7 +44,7 @@ const NB = props => {
 			{window.innerWidth > 480 
 			? 	<>
 
-					<NewLink color="#f1f1f1 !important" link={"/collections"} fontSize={["12px", "12px", "12px", "16px"]}>
+					<NewLink color="#f1f1f1 !important" link={"/film-lists"} fontSize={["12px", "12px", "12px", "16px"]}>
 						<UnderlineEffect >Film Lists</UnderlineEffect>
 					</NewLink>
 					<NewLink color="#f1f1f1 !important" link={"/topics"} fontSize={["12px", "12px", "12px", "16px"]}>

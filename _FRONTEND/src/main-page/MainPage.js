@@ -28,7 +28,7 @@ import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,G
 	PageContainer,ContentContainer,Loading,Section,
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text, SubHeaderText, NewLink,
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
-	GradientAnimationBox,SignupForm, SignupFormModal, production
+	GradientAnimationBox,SignupForm, SignupFormModal, production, PulseButton
 } from "../styled-components";
 import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon} from "./icons"
 
@@ -237,13 +237,7 @@ const MainPage = React.memo(() => {
 								</FlexBox>
 
 									}
-								<FlexBox flexDirection="row" alignItems="flex-start" flexWrap="wrap" width="100%" mt={[3,3,3,4]} justifyContent="flex-start">
-									{/*
 
-									*/}
-									<LinkButton link="/explore" color="light" bg="dark" borderRadius="4px" mt={[4]}>Let Me Show</LinkButton>
-
-								</FlexBox>
 							</FlexBox>
 							
 							<div className="hero-figure anime-element">
@@ -269,10 +263,15 @@ const MainPage = React.memo(() => {
 					</Section>
 
 
-					<Section className="cta section">
+					<Section className="cta section" >
 						<div className="cta-inner section-inner">
 							<HeaderMini textAlign="center" my={[2,3,3,3,3,4]}>Let me Show</HeaderMini>
-							<LinkButton link="/explore" color="light" bg="dark" borderRadius="4px" >Explore</LinkButton>
+							<FlexBox>
+								<LinkButton link="/film-lists" color="light" bg="dark" borderRadius="4px" height={"50px"}>Film Lists</LinkButton>
+								<LinkButton link="/topics" color="light" bg="dark" borderRadius="4px" height={"50px"}>Topics</LinkButton>
+								<LinkButton link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}>Advance Search</LinkButton>
+
+							</FlexBox>
 						</div>
 					</Section>
 

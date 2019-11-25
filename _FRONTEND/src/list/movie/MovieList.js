@@ -5,14 +5,14 @@ import { withRouter } from "react-router-dom";
 
 
 import { useAuthCheck } from "../../functions/hooks";
-import {   Head, MidPageAd, HomePageFeedAd } from "../../functions/analytics"
+import {   Head, MidPageAd, HomePageFeedAd, MoviePageAd } from "../../functions/analytics"
 
 import { GlobalContext } from "../../";
 
 import {  
     MovieCoverBox, ProfileCircleBox, PageContainer,
     ContentContainer, PaginationBox, ListCoverPanel,
-    TextSection,HiddenHeader, MovieRichCardBox,
+    TextSection,HiddenHeader, MovieRichCardBox,WhiteMovieCard,
     MovieRichCard, Grid, HeaderText, Text, Span
 } from "../../styled-components"
 
@@ -53,13 +53,15 @@ const MovieList = (props) => {
     //console.log(liste.summary)
 
     const pageQuantity = liste.movies.length 
-    const firstPart = liste.movies.slice(0, Math.floor(pageQuantity/ 2) + 1)
-    const secondPArt = liste.movies.slice(Math.floor(pageQuantity/ 2) + 1, 30)
+    const firstPart = liste.movies.slice(0, 4)
+    const secondPArt = liste.movies.slice(4, 8)
+    const thirdPart = liste.movies.slice(8, 18)
+    const haveThirdPart = liste.movies.length > 8;
     //console.log("liste", liste)
     return(
         <PageContainer>
             <Head
-                description={liste.seoShortDescription ?  liste.seoShortDescription : liste.seoDescription}
+                description={liste.seoDescription}
                 title={liste.seoTitle}
                 richdata={liste.richdata}
                 keywords={liste.seoKeywords}
@@ -82,26 +84,28 @@ const MovieList = (props) => {
             <ContentContainer>
                 <LıstHeader />
                 <Text>{liste.summary}</Text>
-                <TextSection 
-                    header={liste.name} text={liste.summary} 
-                    headerSize="xl" textSize="m" 
-                    display={screenSize.includes("L") ? "none" : null}
-                    />
 
-                <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
+
+                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {firstPart.map( item => (
-                        <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
+                        <WhiteMovieCard item={item} key={"rec" + item.id} />
                     ))}
                 </Grid>
                 
                 <HomePageFeedAd/>
-                <Grid columns={[1,1,1,2,2,2,2,3]} py={[4]}>
+                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {secondPArt.map( item => (
-                        <MovieRichCard item={item} key={"rec" + item.id} follow={false} />
+                        <WhiteMovieCard item={item} key={"rec" + item.id} />
                     ))}
                 </Grid>
-                    
                 <MidPageAd />
+
+                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {thirdPart.map( item => (
+                        <WhiteMovieCard item={item} key={"rec" + item.id} />
+                    ))}
+                </Grid>
+                {haveThirdPart && <MoviePageAd />}
                 
                 
                 {liste.numMovies > ppi && 

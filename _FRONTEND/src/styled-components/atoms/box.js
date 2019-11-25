@@ -9,6 +9,18 @@ import { linearGradient, backgrounds, backgroundImages, setLightness } from 'pol
 import { generateGradient } from "../../functions/"
 const hoverShadow = `:hover { box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')}}`
 
+export const Hr = styled("hr")`
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
 
 export const Section = styled.section`
     ${color}

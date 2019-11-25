@@ -118,3 +118,26 @@ export const BubbleButton = styled.button`
       ${position}
       ${typography}
 `
+
+export const PulseButton = styled.button`
+    min-width:120px;
+    min-height:40px;
+    border:1px solid black;
+    color:black;
+    position:relative;
+    background: transparent;
+    border: 1px solid #f1f1f1;
+    color:hsl(0, 0%, 100%);
+    :hover {
+        transform: scale(1.1);
+    }
+      ${color}
+      ${space}
+      ${shadow}
+      ${layout}
+      ${background}
+      ${border}
+      ${flexbox}
+      ${position}
+      ${typography}
+`
