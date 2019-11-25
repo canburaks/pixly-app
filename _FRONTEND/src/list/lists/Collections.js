@@ -20,7 +20,7 @@ import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, Ima
 
 
 const ListBoard = (props) => {
-    const lists = props.data
+    const lists = props.data.lists
     const authStatus = useAuthCheck();
     const state = useContext(GlobalContext);
     
@@ -74,6 +74,7 @@ const ListBoard = (props) => {
                             item={item} key={"rec" + item.id} 
                             link={`/list/${item.slug}/1`} 
                             text={item.seoShortDescription}
+                            ratio={0.4}
                         />
                     ))}
                 </Grid>
@@ -86,6 +87,7 @@ const ListBoard = (props) => {
                             item={item} key={"rec" + item.id} 
                             link={`/list/${item.slug}/1`} 
                             text={item.seoShortDescription}
+                            ratio={0.4}
                         />
                     ))}
                 </Grid>
@@ -98,6 +100,7 @@ const ListBoard = (props) => {
                             item={item} key={"rec" + item.id} 
                             link={`/list/${item.slug}/1`} 
                             text={item.seoShortDescription}
+                            ratio={0.4}
                         />
                     ))}
                 </Grid>
@@ -114,13 +117,13 @@ const ListBoard = (props) => {
 };
 
 const ExploreQuery = props => {
-	const { loading, error, data } = useQuery(LIST_BOARD, {
+	const { loading, error, data } = useQuery(MAIN_PAGE, {
 		partialRefetch: true
 	});
 	if (loading) return <Loading />;
 	//console.log("main", data)
 	if (error) return <div>{error.message}</div>;
-	if (data) return <ListBoard data={data.listOfCategoricalLists} {...props} />;
+	if (data) return <ListBoard data={data.mainPage} {...props} />;
 };
 
-export default withRouter(ListBoard);
+export default withRouter(ExploreQuery);
