@@ -51,8 +51,7 @@ const ListBoard = (props) => {
             <Head
                 title={"Pixly Film Lists"}
                 description={"Collections of festival awarded films, famous director's favorite " +
-                            "movie lists, curated and recommended films and lists to watch. " + 
-                        }
+                            "movie lists, curated and recommended films and lists to watch. "}
                 canonical={`https://pixly.app/film-lists`}
             />
 
