@@ -89,5 +89,5 @@ class RemoveSitemap(Sitemap):
         return item.link
 
 
-sss = [x.get("location") for x in RemoveSitemap().get_urls()]
+#sss = [x.get("location") for x in RemoveSitemap().get_urls()]
 
