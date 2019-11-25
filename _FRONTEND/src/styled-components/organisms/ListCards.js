@@ -29,7 +29,6 @@ export const CollectionCard = (props) => (
             textAlign="justify"
         >
             {props.text.slice(0,200)}
-            {props.text.length > 200 && "..."}
         </Text>
         <Box position="absolute" bottom={"20px"} width={"100%"}>
             <NewLink link={props.link}  
