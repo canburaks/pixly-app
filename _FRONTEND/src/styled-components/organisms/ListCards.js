@@ -3,9 +3,44 @@ import { Text, Paragraph, HeaderMini,
         Image, ImageShim, //AspectRatioImage, 
         Box, FlexBox, SuperBox, TagBox,
         TextSection, Card, ImageCard, AspectRatioCard, MosaicCard,DarkCard,
-        NewLink, Input, LinkButton, ImdbRatingIcon, YearClockIcon, 
+        NewLink, Input, LinkButton,CoverLink, ImdbRatingIcon, YearClockIcon, 
         BookmarkMutation, RatingMutation
 } from "../index"
+
+
+export const CollectionCard = (props) => (
+    <FlexBox flexDirection="column" mb={[5]} height={"100%"}>
+        <SuperBox 
+            display="flex" flexDirection="column" 
+            src={props.item.coverPoster || props.item.poster} 
+            ratio={0.5625} borderRadius={"8px"}
+            width={"100%"}
+        ><CoverLink link={props.link} color="transparent">{props.item.name}</CoverLink>
+        </SuperBox>
+        <HeaderMini width={"75%"} fontFamily={"playfair"} color="dark" hoverUnderline
+            my={[2,2,3]}
+            >
+            <NewLink link={props.link}>
+                {props.item.name}
+            </NewLink>
+        </HeaderMini>
+        <Text  
+            color="dark"
+            textAlign="justify"
+        >
+            {props.item.summary > 400 ? `${props.item.summary.slice(0,400)} ...` : props.item.summary.slice(0,400)}
+        </Text>
+        <Box position="absolute" bottom={"20px"} width={"100%"}>
+            <NewLink link={props.link}  
+                fontWeight="bold" color="dark" 
+                hoverUnderline            
+            >
+                {props.buttonText || "See more"}
+            </NewLink>
+            <hr />
+        </Box>
+    </FlexBox>
+    )
 
 export const SmallTopicMovieCard = ({ item }) => (
 <FlexBox flexDirection="column" mb={[5]} height={"100%"}>

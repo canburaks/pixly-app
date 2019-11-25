@@ -547,7 +547,6 @@ export const HeroPatternBottom = props => (
   )
   
 
-
 export const HeroPatternTop = props => (
     <svg width={302} height={348} {...props}>
       <defs>

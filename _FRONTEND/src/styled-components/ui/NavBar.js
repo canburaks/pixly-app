@@ -44,11 +44,14 @@ const NB = props => {
 			{window.innerWidth > 480 
 			? 	<>
 
-					<NewLink follow={true} color="#f1f1f1 !important" link={"/explore"} fontSize={["12px", "12px", "12px", "16px"]}>
-						<UnderlineEffect >Topics / Movie Lists</UnderlineEffect>
+					<NewLink color="#f1f1f1 !important" link={"/collections"} fontSize={["12px", "12px", "12px", "16px"]}>
+						<UnderlineEffect >Film Lists</UnderlineEffect>
+					</NewLink>
+					<NewLink color="#f1f1f1 !important" link={"/topics"} fontSize={["12px", "12px", "12px", "16px"]}>
+						<UnderlineEffect >Topics</UnderlineEffect>
 					</NewLink>
 					<NewLink color="#f1f1f1 !important" link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]}>
-						<UnderlineEffect >Discover Movies</UnderlineEffect>
+						<UnderlineEffect >Search</UnderlineEffect>
 					</NewLink>
 					<SearchQueryBox />
 				</>

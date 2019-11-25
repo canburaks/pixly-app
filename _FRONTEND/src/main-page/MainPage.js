@@ -25,30 +25,99 @@ import { facebook } from "../functions"
 import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
 import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
-	PageContainer,ContentContainer,Loading,
+	PageContainer,ContentContainer,Loading,Section,
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text, SubHeaderText, NewLink,
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
 	GradientAnimationBox,SignupForm, SignupFormModal, production
 } from "../styled-components";
-
+import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon} from "./icons"
 
 import "./MainPage.css";
 import "./dist/css/style.css"
 
-const Sample = () => (
-	<div className="hero-figure anime-element">
-		<svg className="placeholder" width={528} height={396} viewBox="0 0 528 396">
-			<rect width={528} height={396} style={{fill:"transparent"}} />
-		</svg>
-		<div className="hero-figure-box hero-figure-box-01" data-rotation="45deg"></div>
-		<div className="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
-		<div className="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
-		<div className="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
-		<div className="hero-figure-box hero-figure-box-07"></div>
-		<div className="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
-		<div className="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
-	</div>
+
+const FeatureText = (props) => (
+	<FlexBox flexDirection="column" px={[3]} maxWidth={600}>
+		<SubHeaderText mr={[2]}
+			fontSize={["14px", "14px", "14px", "16px"]}
+			width={"auto"}
+		>
+			{props.header}
+		</SubHeaderText>
+		<Text mr={[2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>{props.text}</Text>
+	</FlexBox>
 )
+
+const Features = () => {
+	const screenSize = useWindowSize()
+	const isLargeScreen = useMemo(() => screenSize.includes("XL"), [screenSize] )
+
+	const flexDirection = isLargeScreen ? "row" : "column"
+	const imageMaxWidth = isLargeScreen ? "40%" : "100%"
+	console.log("screen size", screenSize,flexDirection)
+
+	return (
+		<FlexBox 
+			flexDirection={"column"} 
+			px={["5vw", "5vw", "8vw", "10vw"]} pt={"20px"} pb={"40px"}
+			alignItems="center"
+		
+		>
+				<FlexBox mt={[4]}>
+					<RecommendationIcon />
+					<FeatureText 
+						header={"Personal Movie Recommendation"}
+						text={"We will analyze " + 
+							"your cinema taste with AI-Based algorithmns after you rated 40 movies " +
+							"then we will make very personalized movie " +
+							"recommendations every week."}
+					/>
+				</FlexBox>
+				<FlexBox mt={[4]}>
+					<SearchIcon />
+					<FeatureText 
+						header={"Advance Film Search"}
+						text={"You can search movies within your favourite genre or subgenre" + 
+							" and filter them with IMDb rating or release year."}
+					/>
+				</FlexBox>
+
+				<FlexBox mt={[4]}>
+					<ActionsIcon />
+					<FeatureText 
+						header={"Watchlist, Likes, Ratings"}
+						text={"Keep and track your personal cinema history " + 
+							"by adding movies to watchlist, liking them and " + 
+							"giving ratings in one film website. "}
+					/>
+				</FlexBox>
+
+				<FlexBox mt={[4]}>
+					<CollectionsIcon />
+					<FeatureText 
+						header={"Curated and Collected Movie Lists"}
+						text={"Handpicked and collected lists of movies; " + 
+							"director's favorite films, grand prize winners of prestigious " +
+							"film festivals. Topics lists like; " + 
+							" arthouse, cyberpunk, based on true story, rich dialogues etc.."}
+					/>
+				</FlexBox>
+
+				<FlexBox mt={[4]}>
+					<PeopleIcon />
+					<FeatureText 
+						header={"Discover People and Share Movies"}
+						text={"Find people whose cinema taste is similar " + 
+							"to you. See which movies are currently watched " + 
+							"by your friends, and also check your cinema taste " +
+							"similarity with your friends."}
+					/>
+			</FlexBox>
+		</FlexBox>
+	)
+}
+
+
 
 const MainPage = React.memo(() => {
 	//rgaPageView()
@@ -67,7 +136,7 @@ const MainPage = React.memo(() => {
 	const Fb = facebook()
 	//console.log("main", isModalOpen)
 	//const listAndTopics = [...topics, ...lists]
-	const herMainText = "Discover Best Movies that Fit Your Cinema Taste."
+	const heroMainText = "Discover Best Movies that Fit Your Cinema Taste."
 	const heroHeaderText = "Improve your experience in discovering movies"
 	const heroSubheaderText = "Don't waste your time by browsing endless cycles. " + 
 		"With our AI-based personalized recommendation systems, we are guiding you through multiple universes " + 
@@ -129,8 +198,8 @@ const MainPage = React.memo(() => {
 				<main>
 					<SuperBox className="container" gradient="blueish" top={95} py={"40px"} width={"100vw"} mx={"0px"}>
 						<Box className="hero-inner" mr={[5]}>
-							<FlexBox flexDirection="column" zIndex={9}  px={[2,3,3,4,6,6,7]}>
-								<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)" zIndex={8} color="light">{herMainText}</HeaderText>
+							<FlexBox flexDirection="column" zIndex={9}  px={[2,3,3,4]}>
+								<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)" zIndex={8} color="light">{heroMainText}</HeaderText>
 								<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold" color="light">{heroHeaderText}</Text>
 								
 								<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />
@@ -195,29 +264,17 @@ const MainPage = React.memo(() => {
 						</Box>
 					</SuperBox>
 
-					<section className="features section">
-						<div className="container">
-							<div className="features-inner section-inner has-bottom-divider">
-								<Box className="features-wrap" pt={[5]}>
-									<Feature1 onClick={setModalOpen}/>
-									<Feature2 />
-									<Feature4 onClick={setModalOpen}/>
-									<Feature3 />
-									<Feature5 />
-									<Feature6 />
-
-								</Box>
-							</div>
-						</div>
-					</section>
+					<Section mt={[6]}>
+						<Features />
+					</Section>
 
 
-					<section className="cta section">
+					<Section className="cta section">
 						<div className="cta-inner section-inner">
 							<HeaderMini textAlign="center" my={[2,3,3,3,3,4]}>Let me Show</HeaderMini>
 							<LinkButton link="/explore" color="light" bg="dark" borderRadius="4px" >Explore</LinkButton>
 						</div>
-					</section>
+					</Section>
 
 				</main>
 			</div>
@@ -235,6 +292,11 @@ const MainPage = React.memo(() => {
 }, () => true)
 
 
+const PartyImage = (props) => (<Image 
+	src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/partying.png"}
+	info={"We have just started."}
+	{...props}
+/>)
 
 const MiniMovies = () => <Image info="pixly main page movies collage" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/movies.jpg"} style={{width:"100%", height:"100%", boxShadow:"-2px 2px 4px 1px rgba(40,40,40, 0.6)"}} />
 
@@ -253,7 +315,7 @@ const Feature1 = ({onClick}) => (
 			<Text>After rating 40 movies, we can analyze your cinema taste with artifical intelligence then we will make very personalized movie recommendations every week.</Text>
 		</div>
 			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
-				<BubbleButton px={[1]} py={[1]}  mt={[3]} 
+				<BubbleButton px={[1]} py={[1]}  mt={[4]} 
 					width={"150px"} height={"40px"}
 					bg="transparent"
 					color="dark" 
@@ -279,7 +341,7 @@ const Feature2 = () => (
 
 		</div>
 			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
-				<LinkButton px={[1]} py={[1]}  mt={[3]} 
+				<LinkButton px={[1]} py={[1]}  mt={[4]} 
 					width={"150px"} height={"40px"}
 					color="dark" 
 					borderRadius="4px" 
@@ -304,7 +366,7 @@ const Feature3 = () => (
 			<Text>Advance Search and Filter mechanism with respect to IMDb rating and release year of movies.</Text>
 		</div>
 			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
-				<LinkButton px={[1]} py={[1]}  mt={[3]} 
+				<LinkButton px={[1]} py={[1]}  mt={[4]} 
 					width={"150px"} height={"40px"}
 					color="dark" 
 					borderRadius="4px" 
@@ -329,7 +391,7 @@ const Feature4 = ({onClick}) => (
 			<Text>Keep and track your personal cinema history by adding movies to watchlist, liking them and giving ratings in one film website. </Text>
 		</div>
 			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
-				<BubbleButton px={[1]} py={[1]}  mt={[3]} 
+				<BubbleButton px={[1]} py={[1]}  mt={[4]} 
 					width={"150px"} height={"40px"}
 					bg="transparent"
 					color="dark" 

@@ -1,19 +1,26 @@
 import React  from "react";
 import { useState, useContext, useMemo, useCallback } from "react"
 import { withRouter, Link } from "react-router-dom";
+import { useQuery } from '@apollo/react-hooks';
 
 
 import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../functions/hooks"
 
-import { rgaPageView, Head, ListBoardAd, ListBoardAd2  } from "../../functions/analytics"
+import { rgaPageView, Head, MidPageAd, HomePageFeedAd, ListBoardAd,
+    MAIN_PAGE
+} from "../../functions"
 
 import { GlobalContext } from "../../";
 import JoinBanner from "../../components/JoinBanner.js"
 
-import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard } from "../../styled-components"
+import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
+    Loading
+} from "../../styled-components"
+
+
 
 const ListBoard = (props) => {
-    const item = props.liste
+    const lists = props.data.lists
     rgaPageView()
     const authStatus = useAuthCheck();
     const state = useContext(GlobalContext);
@@ -21,20 +28,21 @@ const ListBoard = (props) => {
     if (props.viewer){
         state.methods.updatePoints(props.viewer.points)
     }
-    const pixlyselection = useMemo(() => item.filter(l => l.slug === "our-selection")[0])
-    const nonpixlyselection = useMemo(() => item.filter(l => l.slug !== "our-selection"))
+    const pixlyselection = useMemo(() => lists.filter(l => l.slug === "our-selection")[0])
+    const nonpixlyselection = useMemo(() => lists.filter(l => l.slug !== "our-selection"))
 
 
-    const directorsFavourite = useMemo(() => nonpixlyselection.filter( l => l.listType==="df"))
-    const festivalWinners = useMemo(() => nonpixlyselection.filter(l => l.listType === "fw"))
-    const otherLists = useMemo(() => nonpixlyselection.filter(l => l.listType === "ms"))
+    const directorsFavourite = useMemo(() => lists.filter( l => l.listType==="df"))
+    const festivalWinners = useMemo(() => lists.filter(l => l.listType === "fw"))
+    const otherLists = useMemo(() => lists.filter(l => l.listType === "ms"))
 
     const firstPart = [pixlyselection,...otherLists, ...festivalWinners, ...directorsFavourite]
 
 
     const pixlyselectionSize = useValues([0.41, 0.43, 0.3, 0.2, 0.15])
 
-    //console.log(item)
+    console.log(otherLists)
+
     return (
         <PageContainer>
             <Head
@@ -63,22 +71,28 @@ const ListBoard = (props) => {
                     <hr />
                 </div>
                 
-                {/*<ImageCard item={pixlyselection}
-                    src={pixlyselection.coverPoster}
-                    text={null}
-                    key={pixlyselection.slug}
-                    link={`/list/${pixlyselection.slug}/1`}
-                    hiddentext={pixlyselection.name}
-                    ratio={pixlyselectionSize}
-                    width={"100%"}
-                    boxShadow="card"
-                    hoverShadow
-                />}
-                {/*<ListCoverBox columns={[1]} ratio={0.41} items={pixlyselection} text={false} />*/}
+                <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {otherLists.map( item => (
+                        <CollectionCard item={item} key={"rec" + item.id} link={`/list/${item.slug}/1`} />
+                    ))}
+                </Grid>
+                
+                <HomePageFeedAd />
 
+                <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {festivalWinners.map( item => (
+                        <CollectionCard item={item} key={"rec" + item.id} link={`/list/${item.slug}/1`} />
+                    ))}
+                </Grid>
 
-                <ListCoverBox columns={[1,2,2,2,3,3,3,4]} items={firstPart} />
+                <MidPageAd />
 
+                <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {festivalWinners.map( item => (
+                        <CollectionCard item={item} key={"rec" + item.id} link={`/list/${item.slug}/1`} />
+                    ))}
+                </Grid>
+                
                 <ListBoardAd />
 
 
@@ -90,34 +104,14 @@ const ListBoard = (props) => {
     );
 };
 
-export default withRouter(ListBoard);
+const ExploreQuery = props => {
+	const { loading, error, data } = useQuery(MAIN_PAGE, {
+		partialRefetch: true
+	});
+	if (loading) return <Loading />;
+	console.log("main", data)
+	if (error) return <div>{error.message}</div>;
+	if (data) return <ListBoard data={data.mainPage} {...props} />;
+};
 
-/*
-
-
-                    <GridBox size="xl">
-                        {festivalWinners.map(list => (
-                            <Link to={`/list/${list.slug}/1`} rel="nofollow" key={list.slug}>
-                            <GridItem 
-                                key={list.id}
-                                className="box-shadow bor-rad-2x shadow mosaic-items ms-list"
-                                id={list.id}
-                            >
-                                {list.coverPoster
-                                
-                                ? <img className="ms-list-cover bor-rad-2x" src={list.coverPoster} 
-                                    alt={list.name + " image"} 
-                                    title={list.name + " image"}
-                                    style={{height:msListWidth * 0.42}} 
-                                    />
-                                : <MosaicPoster item={list} parentClientWidth={mosaicWidth} />
-                            }
-                                <div className="mar-t-x pad-x mar-bt-2x">
-                                    <p className="t-color-dark" style={{fontWeight:600}}>{list.name}</p>
-                                    <p className="t-m t-color-dark" >{list.seoShortDescription}</p>
-                                </div>
-                            </GridItem>
-                            </Link>
-                            ))}
-                    </GridBox>
-*/
+export default withRouter(ExploreQuery);
