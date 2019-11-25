@@ -15,7 +15,7 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, 
-    LargeTopicMovieCard, SmallTopicMovieCard,
+    LargeTopicMovieCard, WhiteMovieCard,
 } from "../../styled-components"
 
 
@@ -175,7 +175,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
 
     const screenSize = useWindowSize()
     const isLargeScreen = useMemo(() => screenSize.includes("L"), [screenSize])
-    const TopicCard = (props) => isLargeScreen ? <LargeTopicMovieCard {...props} /> : <SmallTopicMovieCard {...props} />
+    const TopicCard = (props) => isLargeScreen ? <LargeTopicMovieCard {...props} /> : <WhiteMovieCard {...props} />
     //console.log("topic query")
 
 
@@ -196,19 +196,19 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
             <MoviePageAd />
             <Grid columns={[1,1,1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {firstPart.map( item => (
-                    <SmallTopicMovieCard item={item} key={"rec" + item.id}/>
+                    <WhiteMovieCard item={item} key={"rec" + item.id}/>
                 ))}
             </Grid>
             <HomePageFeedAd/>
             <Grid columns={[1,1,1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {secondPArt.map( item => (
-                    <SmallTopicMovieCard item={item} key={"rec" + item.id}/>
+                    <WhiteMovieCard item={item} key={"rec" + item.id}/>
                 ))}
             </Grid>
             <MidPageAd />
             <Grid columns={[1,1,1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {thirdPart.map( item => (
-                    <SmallTopicMovieCard item={item} key={"rec" + item.id}/>
+                    <WhiteMovieCard item={item} key={"rec" + item.id}/>
                 ))}
             </Grid>
             <MoviePageAd />

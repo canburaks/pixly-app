@@ -36,7 +36,10 @@ const ListBoard = (props) => {
     const festivalWinners = useMemo(() => lists.filter(l => l.listType === "fw"))
     const otherLists = useMemo(() => lists.filter(l => l.listType === "ms"))
 
-    const firstPart = [pixlyselection,...otherLists, ...festivalWinners, ...directorsFavourite]
+    const allLists = [...otherLists, ...festivalWinners, ...directorsFavourite]
+    const firstPart = allLists.slice(0,4)
+    const secondPart = allLists.slice(4, 8)
+    const thirdPart = allLists.slice(8, 18)
 
 
     const pixlyselectionSize = useValues([0.41, 0.43, 0.3, 0.2, 0.15])
@@ -46,12 +49,11 @@ const ListBoard = (props) => {
     return (
         <PageContainer>
             <Head
-                title={"Pixly Collections"}
-                description={"Collections of movie lists; Cannes, Berlin, Venice Film festival winner films. " + 
-                            "Favorite film lists of Quentin Tarantino, David Fincher, Stanley Kubrick and Nuri Bilge Ceylan. " + 
-                            "Curated film lists, Imdb 250 list, Pixly selected Movies "
+                title={"Pixly Film Lists"}
+                description={"Collections of festival awarded films, famous director's favorite " +
+                            "movie lists, curated and recommended films and lists to watch. " + 
                         }
-                canonical={`https://pixly.app/collections`}
+                canonical={`https://pixly.app/film-lists`}
             />
 
             <ContentContainer mb={[3,3,3,3,4]}>
@@ -71,28 +73,40 @@ const ListBoard = (props) => {
                     <hr />
                 </div>
                 
-                <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {otherLists.map( item => (
-                        <CollectionCard item={item} key={"rec" + item.id} link={`/list/${item.slug}/1`} />
+                <Grid columns={[1,1,2,2,2,2,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {firstPart.map( item => (
+                        <CollectionCard 
+                            item={item} key={"rec" + item.id} 
+                            link={`/list/${item.slug}/1`} 
+                            text={item.seoShortDescription}
+                        />
                     ))}
                 </Grid>
                 
                 <HomePageFeedAd />
 
-                <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {festivalWinners.map( item => (
-                        <CollectionCard item={item} key={"rec" + item.id} link={`/list/${item.slug}/1`} />
+                <Grid columns={[1,1,2,2,2,2,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {secondPart.map( item => (
+                        <CollectionCard 
+                            item={item} key={"rec" + item.id} 
+                            link={`/list/${item.slug}/1`} 
+                            text={item.seoShortDescription}
+                        />
                     ))}
                 </Grid>
 
                 <MidPageAd />
 
-                <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {festivalWinners.map( item => (
-                        <CollectionCard item={item} key={"rec" + item.id} link={`/list/${item.slug}/1`} />
+                <Grid columns={[1,1,2,2,2,2,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {thirdPart.map( item => (
+                        <CollectionCard 
+                            item={item} key={"rec" + item.id} 
+                            link={`/list/${item.slug}/1`} 
+                            text={item.seoShortDescription}
+                        />
                     ))}
                 </Grid>
-                
+
                 <ListBoardAd />
 
 
