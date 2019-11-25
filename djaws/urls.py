@@ -107,7 +107,7 @@ urlpatterns = [
 ]
 
 #print(deindex_url_patterns)
-urlpatterns = urlpatterns + custom_url_pages +  deindex_url_patterns +[
+urlpatterns = urlpatterns + custom_url_pages +  [
     path("/", TemplateView.as_view(template_name="prerendered/index.html")),
     path("", TemplateView.as_view(template_name="prerendered/index.html")),
     #*deindex_url_patterns,
