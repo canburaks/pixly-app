@@ -4,7 +4,7 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import path, include, re_path
 from django.conf.urls import handler400, handler403, handler404, handler500
 from django.http import HttpResponse
-from pixly.lib import is_ascii, to_english_chars
+from pixly.lib import is_ascii, to_english_chars, save_json, get_json
 
 
 deindex_file = open("djaws/deindex.txt", "r")
@@ -49,10 +49,14 @@ handler404 = raw_404
 
 def make_url_pattern():
     url_patterns = []
-    for url in deindex_unique_pathnames:
+    #for url in deindex_unique_pathnames:
+    json_urls = get_json("/home/jb/Projects/Github/pixly-app/pixly/unique_deindex.json")
+    for url in json_urls:
         try:
             regex_pattern = rf'^{url}$'
-            single_path = re_path(rf'^{url}$', raw_404)
+
+            single_path = re_path(rf'^{url}$', lambda x: HttpResponse("Not Found",
+            content_type="text/plain", status=404), name="deindex")
             url_patterns.append(single_path)
         except:
             continue
@@ -63,7 +67,8 @@ def make_url_pattern():
 unique_pathnames = [get_pathname(x) for x in deindex_unique_urls] 
 deindex_unique_pathnames = list(filter( lambda x: x is not None, unique_pathnames))
 
-
+#SAVE JSON
+#save_json(deindex_unique_pathnames, "/home/jb/Projects/Github/pixly-app/pixly/unique_deindex.json")
 
 
 # add this to url_patterns of your project
