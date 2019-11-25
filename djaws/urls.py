@@ -77,7 +77,7 @@ def make_url_pattern():
     url_patterns = []
     for url in json_pathnames:
         try:
-            single_path = re_path(rf'^{url}$', lambda x: HttpResponse("Not Found",
+            single_path = re_path(rf'^{url}$', lambda x: HttpResponse("404 Not Found",
             content_type="text/plain", status=404), name="deindex")
             url_patterns.append(single_path)
         except:
