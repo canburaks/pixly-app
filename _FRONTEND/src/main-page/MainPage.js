@@ -54,7 +54,7 @@ const Features = () => {
 
 	const flexDirection = isLargeScreen ? "row" : "column"
 	const imageMaxWidth = isLargeScreen ? "40%" : "100%"
-	console.log("screen size", screenSize,flexDirection)
+	//console.log("screen size", screenSize,flexDirection)
 
 	return (
 		<FlexBox 
