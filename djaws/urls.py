@@ -72,13 +72,11 @@ sitemaps = {
 }
 #removesitemaps = { "remove": RemoveSitemap()}
 
+json_pathnames = get_json("pixly/unique_deindex_pathname.json")
 def make_url_pattern():
     url_patterns = []
-    #for url in deindex_unique_pathnames:
-    json_urls = get_json("pixly/unique_deindex.json")
-    for url in json_urls:
+    for url in json_pathnames:
         try:
-            #regex_pattern = rf'^{url}$'
             single_path = re_path(rf'^{url}$', lambda x: HttpResponse("Not Found",
             content_type="text/plain", status=404), name="deindex")
             url_patterns.append(single_path)
@@ -86,6 +84,21 @@ def make_url_pattern():
             continue
     return url_patterns
 deindex_url_patterns = make_url_pattern()
+
+
+class RemoveLinkClass:
+    def __init__(self, link):
+        self.link = link
+
+class RemoveSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 0.9
+    def items(self):
+        url_patterns = [RemoveLinkClass(link=f"/{path}") for path in json_pathnames ]
+        return url_patterns
+
+    def location(self, item):
+        return item.link
 
 
 urlpatterns = [
