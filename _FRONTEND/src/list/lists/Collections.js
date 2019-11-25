@@ -44,7 +44,7 @@ const ListBoard = (props) => {
 
     const pixlyselectionSize = useValues([0.41, 0.43, 0.3, 0.2, 0.15])
 
-    console.log(otherLists)
+    //console.log(otherLists)
 
     return (
         <PageContainer>
@@ -122,7 +122,7 @@ const ExploreQuery = props => {
 		partialRefetch: true
 	});
 	if (loading) return <Loading />;
-	console.log("main", data)
+	//console.log("main", data)
 	if (error) return <div>{error.message}</div>;
 	if (data) return <ListBoard data={data.mainPage} {...props} />;
 };

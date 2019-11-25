@@ -87,7 +87,7 @@ const ExploreQuery = props => {
 		partialRefetch: true
 	});
 	if (loading) return <Loading />;
-	console.log("main", data)
+	//console.log("main", data)
 	if (error) return <div>{error.message}</div>;
 	if (data) return <TopicList data={data.mainPage} {...props} />;
 };
