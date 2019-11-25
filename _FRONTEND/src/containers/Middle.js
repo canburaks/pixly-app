@@ -58,7 +58,7 @@ const Middle = (props) => {
         <Switch>
             <Route exact path="/draft" component={DraftPage} />
 
-            <Route exact path="/film-lists" component={CollectionsQuery} />
+            <Route exact path="/film-lists" component={Collections} />
             {/*
             <Route exact path="/discover" component={DiscoverQuery} />
             <Route exact path="/discover/search" component={DiscoverQuery} />
