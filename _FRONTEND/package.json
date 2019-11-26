@@ -169,7 +169,9 @@
       "/topic/feel-good-movies",
       "/film-lists",
       "/movie/portrait-of-a-lady-on-fire-2019",
-      "/movie/doctor-sleep-2019"
+      "/movie/doctor-sleep-2019",
+      "/movie/ford-v-ferrari-2019",
+      "/movie/pain-and-glory-2019"
     ],
     "publicPath": "/"
   }

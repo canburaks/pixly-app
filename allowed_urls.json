@@ -230,7 +230,8 @@
         "/movie/blade-runner-2049-2017",
         "/movie/blade-runner-1982",
         "/movie/the-broken-2008",
-        "/movie/ghost-in-the-shell-1995"
+        "/movie/ghost-in-the-shell-1995",
+        "/movie/ford-v-ferrari-2019"
     ],
     "all":[
         "",
@@ -450,6 +451,7 @@
         "/movie/blade-runner-2049-2017",
         "/movie/blade-runner-1982",
         "/movie/the-broken-2008",
-        "/movie/ghost-in-the-shell-1995"
+        "/movie/ghost-in-the-shell-1995",
+        "/movie/ford-v-ferrari-2019"
     ]
 }
