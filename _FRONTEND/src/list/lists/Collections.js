@@ -14,7 +14,7 @@ import { GlobalContext } from "../../";
 import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
-    Loading
+    Loading, HeaderText, Text
 } from "../../styled-components"
 
 
@@ -54,20 +54,14 @@ const ListBoard = (props) => {
             />
 
             <ContentContainer mb={[3,3,3,3,4]}>
-                <div className="list-type-header fbox-c pad-bt-4x ">
-                    <h2 className="primary-text">
-                        Pixly Collections
-                    </h2>
-                    <p className="t-m t-color-dark">
-                        Pixly collections is a collected and curated lists of movies. 
-                        Pixly Selections is edited and curated by us. If you are wondering what are the favorite films of famous directors, you will find it in there. 
-                        You can also find movies that are awarded by very prestigious film festivals like Cannes, Berlin and Venice. 
-                        We are still collecting and improving our database for you. 
-                        If you have any suggestions to add or in any case, please feel free to write it from the bottom part of the page.
-                    </p>
-                    <hr />
-                </div>
-                
+                <HeaderText width={"75%"} fontFamily={"playfair"} color="dark" mt={[4,4,5]}>Pixly Film Lists: Curated and Collected Movie Lists</HeaderText>  
+                <Text mt={[3]} textAlign="justify"> 
+                    Pixly Selections is edited and curated by us. If you are wondering what are the favorite films of famous directors, you will find it in there. 
+                    You can also find movies that are awarded by very prestigious film festivals like Cannes, Berlin and Venice. 
+                    We are still collecting and improving our database for you. 
+                    If you have any suggestions to add or in any case, please feel free to write it from the bottom part of the page.
+                </Text>    
+                <hr/>
                 <Grid columns={[1,1,2,2,2,2,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {firstPart.map( item => (
                         <CollectionCard 
