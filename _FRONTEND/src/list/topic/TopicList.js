@@ -16,7 +16,7 @@ import JoinBanner from "../../components/JoinBanner.js"
 import {
      ListCard, PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,
      TopicCoverCard, TextSection,CollectionCard,
-     Loading
+     Loading, HeaderText, Text
  } from "../../styled-components"
 
 
@@ -41,19 +41,15 @@ const TopicList = React.memo((props) => {
             />
 
             <ContentContainer pb={"100px"}>
-                <HiddenHeader>Pixly Topics</HiddenHeader>
-            
-                <TextSection
-                headerSize={["20px", "20px", "24px", "28px", "32px", "36px"]}
-                textSize={["14px", "14px", "16px"]}
-                header={"Pixly Topics"}
-                text={`Pixly topics are kind of collections that are more specific than genre based collections.` + 
+            <HeaderText width={"75%"} fontFamily={"playfair"} color="dark" mt={[4,4,5]}>Pixly Topics: Theme Based Film Lists</HeaderText>  
+            <Text mt={[3]} textAlign="justify">
+            {`Pixly topics are kind of collections that are more specific than genre based collections. ` + 
                         `Topic movies can focus on some specific issue, or can include the topic as an element of the narrative ` +
                         `such as arthouse, cyberpunk films or movies that focus on rich dialogues or movies passed the Bechdel test. ` +
                         `We added a filter mechanism to some topics which you can filter the films by IMDb rating or release year. ` 
                         }
-                mb={[2,2,3]}
-                />
+            </Text>          
+
                 <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {firstPart.map( item => (
                         <CollectionCard 

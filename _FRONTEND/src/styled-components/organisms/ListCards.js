@@ -13,7 +13,7 @@ export const CollectionCard = (props) => (
         <SuperBox 
             display="flex" flexDirection="column" 
             src={props.item.coverPoster || props.item.poster} 
-            ratio={0.5625} borderRadius={"8px"}
+            ratio={props.ratio || 0.5625} borderRadius={"8px"}
             width={"100%"}
         ><CoverLink link={props.link} color="transparent">{props.link}</CoverLink>
         </SuperBox>
