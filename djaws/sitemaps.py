@@ -26,9 +26,7 @@ topic__slugs = [x[1:] for x in allowed_urls_dict.get("topic")]
 
 blog__slugs = [x[1:] for x in allowed_urls_dict.get("blog")]
 #print(movie__slugs,person__slugs,liste__slugs, topic__slugs, blog__slugs )
-
 static__slugs = blog__slugs + [
-    "/"
     "explore",
     "advance-search",
     "directors/1",
@@ -53,7 +51,9 @@ custom_list_pages =   page_template_generator(liste__slugs)
 custom_topic_pages =   page_template_generator(topic__slugs)
 custom_static_pages =   page_template_generator(static__slugs)
 
-custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages + custom_topic_pages + custom_static_pages
+home_page = [path("/", TemplateView.as_view(template_name=f"prerendered/index.html")), path("", TemplateView.as_view(template_name=f"prerendered/index.html"))]
+custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages + custom_topic_pages + custom_static_pages + home_page
+
 
 #pprint(custom_url_pages)
 
@@ -125,8 +125,10 @@ class StaticSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.4
     def items(self):
-        statics = static__slugs + [
-            "/termsofservice", "/privacy"
+        stat_slug = [f"/{x}" for x in static__slugs]
+        print(stat_slug)
+        statics = stat_slug + [
+            "/termsofservice", "/privacy", "", "/"
         ]
         return statics
 
