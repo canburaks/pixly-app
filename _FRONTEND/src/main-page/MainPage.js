@@ -30,7 +30,7 @@ import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,G
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
 	GradientAnimationBox,SignupForm, SignupFormModal, production, PulseButton
 } from "../styled-components";
-import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon} from "./icons"
+import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon, RateIcon} from "./icons"
 
 import "./MainPage.css";
 import "./dist/css/style.css"
@@ -53,27 +53,28 @@ const Features = () => {
 	const isLargeScreen = useMemo(() => screenSize.includes("XL"), [screenSize] )
 
 	const flexDirection = isLargeScreen ? "row" : "column"
-	const imageMaxWidth = isLargeScreen ? "40%" : "100%"
+	const maxWidth = isLargeScreen ? "50%" : "100%"
 	//console.log("screen size", screenSize,flexDirection)
 
 	return (
 		<FlexBox 
-			flexDirection={"column"} 
-			px={["5vw", "5vw", "8vw", "10vw"]} pt={"20px"} pb={"40px"}
-			alignItems="center"
+			flexDirection={flexDirection}  flexWrap="wrap"
+			px={["5vw", "5vw", ]}
+			pt={"20px"} pb={"40px"}
+			alignItems="flex-start"
 		
 		>
-				<FlexBox mt={[4]}>
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
 					<RecommendationIcon />
 					<FeatureText 
-						header={"Personal Movie Recommendation"}
+						header={"Personal Movie Recommendations"}
 						text={"We will analyze " + 
 							"your cinema taste with AI-Based algorithmns after you rated 40 movies " +
 							"then we will make very personalized movie " +
-							"recommendations every week."}
+							"suggestions every week."}
 					/>
 				</FlexBox>
-				<FlexBox mt={[4]}>
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
 					<SearchIcon />
 					<FeatureText 
 						header={"Advance Film Search"}
@@ -82,37 +83,46 @@ const Features = () => {
 					/>
 				</FlexBox>
 
-				<FlexBox mt={[4]}>
-					<ActionsIcon />
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
+					<RateIcon />
 					<FeatureText 
-						header={"Watchlist, Likes, Ratings"}
-						text={"Keep and track your personal cinema history " + 
-							"by adding movies to watchlist, liking them and " + 
-							"giving ratings in one film website. "}
+						header={"Movie Rating Website"}
+						text={"You can rate any movie in order to get good film recommendations or " + 
+							" reflect your opinion about this movie. It can also be your public opinion. "}
 					/>
 				</FlexBox>
 
-				<FlexBox mt={[4]}>
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
+					<ActionsIcon />
+					<FeatureText 
+						header={"Watchlist and Likes"}
+						text={"Keep and track your personal cinema history " + 
+							"by adding movies to watchlist, or liking them. Then You can share movies from there"}
+					/>
+				</FlexBox>
+
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
 					<CollectionsIcon />
 					<FeatureText 
 						header={"Curated and Collected Movie Lists"}
 						text={"Handpicked and collected lists of movies; " + 
 							"director's favorite films, grand prize winners of prestigious " +
 							"film festivals. Topics lists like; " + 
-							" arthouse, cyberpunk, based on true story, rich dialogues etc.."}
+							" arthouse, cyberpunk, based on true story, rich dialogues and really good movies."}
 					/>
 				</FlexBox>
 
-				<FlexBox mt={[4]}>
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
 					<PeopleIcon />
 					<FeatureText 
-						header={"Discover People and Share Movies"}
+						header={"Discover People and Share Movie"}
 						text={"Find people whose cinema taste is similar " + 
 							"to you. See which movies are currently watched " + 
 							"by your friends, and also check your cinema taste " +
 							"similarity with your friends."}
 					/>
 			</FlexBox>
+			<SubHeaderText></SubHeaderText>
 		</FlexBox>
 	)
 }
@@ -150,7 +160,7 @@ const MainPage = React.memo(() => {
 
 				}
 				title={
-					"Pixly App- AI Based Movie Recommendation App, Similar Movies, Film Website"
+					"Pixly App- AI Based Movie Recommendations App, Similar Movies, Film Website"
 				}
 				keywords={
 					"pixly.app ,discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
