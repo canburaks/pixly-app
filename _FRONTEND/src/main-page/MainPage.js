@@ -25,10 +25,12 @@ import { facebook } from "../functions"
 import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
 import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
-	PageContainer,ContentContainer,Loading,Section,
+	PageContainer,ContentContainer,Loading,Section, 
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text, SubHeaderText, NewLink,
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
-	GradientAnimationBox,SignupForm, SignupFormModal, production, PulseButton
+	GradientAnimationBox,SignupForm, SignupFormModal, production, PulseButton,
+	ScaleButton
+	
 } from "../styled-components";
 import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon, RateIcon} from "./icons"
 
@@ -127,6 +129,18 @@ const Features = () => {
 	)
 }
 
+const MainPageImage = () => (
+	<Image 
+		src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"
+		info={"Discover Best Movies that Fit Your Cinema Taste"}
+		minWidth={"100vw"}
+		height={"auto"}
+		position="absolute"
+		top={0}
+		left={0}
+	/>
+)
+
 
 
 const MainPage = React.memo(() => {
@@ -151,8 +165,10 @@ const MainPage = React.memo(() => {
 	const heroSubheaderText = "Don't waste your time by browsing endless cycles. " + 
 		"With our AI-based personalized recommendation systems, we are guiding you through multiple universes " + 
 		"of the art of film."
-	return (
-		<PageContainer>
+
+
+		return (
+		<>
 			<Head
 				description={
 					"Discover best movies that fit your cinema taste with our AI-based movie recommendations. " + 
@@ -204,13 +220,41 @@ const MainPage = React.memo(() => {
 				/>
 			</Head>
 
-			<div className="body-wrap">
-				<main>
-					<SuperBox className="container" gradient="blueish" top={95} py={"40px"} width={"100vw"} mx={"0px"}>
-						<Box className="hero-inner" mr={[5]}>
+			<PageContainer >
+					<SuperBox 
+						src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"} 
+						
+						top={-75} 
+						py={"30px"} mx={"0px"} 
+						width={"100vw"} 
+						position="relative"
+						borderBottom="3px solid"
+						borderColor="rgba(40,40,40, 0.7)"
+						minHeight={"600px"}
+					>
+						<Box  mr={[5]}>
 							<FlexBox flexDirection="column" zIndex={9}  px={[2,3,3,4]}>
-								<HeaderText fontSize={["40px", "40px"]} uncapitalize textShadow="-2px 2px 2px rgba(40, 40, 40, 0.6)" zIndex={8} color="light">{heroMainText}</HeaderText>
-								<Text my={[2,2,2,3]} fontSize={["18px", "18px"]} fontWeight="bold" color="light">{heroHeaderText}</Text>
+								<HeaderText fontSize={["40px", "40px", "48px"]} 
+									mt={[5,5]}
+									uncapitalize 
+									textShadow="-3px 3px 2px rgba(40, 40, 40, 0.8)" 
+									zIndex={8} 
+									color="light"
+									maxWidth={"800px"}
+								>
+									{heroMainText}
+								</HeaderText>
+
+
+								<Text 
+									my={[2,2,2,3]} 
+									fontSize={["16px", "16px"]}  
+									color="light" maxWidth={"500px"}
+									fontWeight="bold"
+									textShadow="-1px 1px 1px rgba(40, 40, 40, 0.8)"
+								>
+									{heroSubheaderText}
+								</Text>
 								
 								<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />
 								{/*
@@ -219,29 +263,30 @@ const MainPage = React.memo(() => {
 								{!authStatus && 
 								<FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
 
-								<Box  my={[3]}>
+								<Box  my={[3]} py={[3]}>
 									<Button borderRadius={"6px"}   mx={[2]}
 										onClick={insertLoginForm} 
 										width={"120px"} height={"50px"} 
 										color={"light"}
 										fontWeight="bold"
-	
-										hoverShadow="card"
 										boxShadow="xs"
 										gradient="navy"
+										hoverScale
 									>
 										Login
 									</Button>
-									<BubbleButton px={[2]} mx={[2]}
+									<Button px={[2]} mx={[2]}
 										onClick={setModalOpen} 
 										width={"120px"} height={"50px"}
 										color="light" 
 										borderRadius="4px" 
-										link="/explore" gradient="pinkish"
+										gradient="pinkish"
+										boxShadow={"card"} 
 										fontWeight="bold" hoverBg={"dark"}
+										hoverScale={1.1}
 										>
 										Join
-									</BubbleButton>
+									</Button>
 								</Box>
 									{!authStatus  && <Fb.Auth />}
 								</FlexBox>
@@ -250,46 +295,52 @@ const MainPage = React.memo(() => {
 
 							</FlexBox>
 							
-							<div className="hero-figure anime-element">
-								<svg className="placeholder" width={528} height={396} viewBox="0 0 528 396">
-									<rect width={528} height={396} style={{fill:"transparent"}} />
-								</svg>
-								<div className="hero-figure-box hero-figure-box-01" data-rotation="45deg"></div>
-								<div className="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
-								<div className="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
-								<div className="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
-								<div className="hero-figure-box hero-figure-box-05"><MiniMovies /></div>
-								<div className="hero-figure-box hero-figure-box-06"><SpaceOddysey /></div>
-								<div className="hero-figure-box hero-figure-box-07"></div>
-								<div className="hero-figure-box hero-figure-box-08" data-rotation="-22deg"><SkinILive /></div>
-								<div className="hero-figure-box hero-figure-box-09" data-rotation="-52deg"></div>
-								<div className="hero-figure-box hero-figure-box-10" data-rotation="-50deg"></div>
-							</div>
 						</Box>
 					</SuperBox>
+					<ContentContainer>
 
-					<Section mt={[6]}>
+					<Section mt={[3]} position="relative" top={-60}>
 						<Features />
 					</Section>
 
 
-					<Section className="cta section" >
-						<div className="cta-inner section-inner">
-							<HeaderMini textAlign="center" my={[2,3,3,3,3,4]}>Let me Show</HeaderMini>
+					<Section 
+						display="flex" flexDirection="column" alignItems="center" 
+						position="relative" top={-60}
+						py={[4]} 
+						mb={[4]}
+						width={"100%"}
+						borderTop="1px solid"
+						borderBottom="1px solid"
+						borderColor="rgba(80,80,80, 0.4)"
+					
+					>
+							<HeaderMini textAlign="center" my={[2,3]}>Let me Show</HeaderMini>
 							<FlexBox>
-								<LinkButton link="/film-lists" color="light" bg="dark" borderRadius="4px" height={"50px"}>Film Lists</LinkButton>
-								<LinkButton link="/topics" color="light" bg="dark" borderRadius="4px" height={"50px"}>Topics</LinkButton>
-								<LinkButton link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}>Advance Search</LinkButton>
+								<LinkButton link="/film-lists" color="light" bg="dark" borderRadius="4px" height={"50px"}
+									hoverScale hoverBg="#3633CC"
+								>
+									Film Lists
+								</LinkButton>
+								<LinkButton link="/topics" color="light" bg="dark" borderRadius="4px" height={"50px"}
+									hoverScale hoverBg="#3633CC"
+								>
+									Topics
+								</LinkButton>
+								<LinkButton link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}
+									hoverScale hoverBg="#3633CC"
+								>
+									Advance Search
+								</LinkButton>
 
 							</FlexBox>
-						</div>
 					</Section>
 
-				</main>
-			</div>
+					</ContentContainer>
+
 					<SuperBox  
 						display="flex" flexDirection="column" 
-						width={"100vw"} mx={"0px"} py={[5]} px={["5vw", "5vw", "5vw", "8vw"]} 
+						width={"100%"} mx={"0px"} py={[5]} px={["5vw", "5vw", "5vw", "8vw"]} 
 						gradient="blueish" 
 					>
 						<HeaderMini color={"light"} my={[3]} fontSize={["22px", "22px", "26px", "30px", "32px"]} textAlign="center">We have just started</HeaderMini>
@@ -297,6 +348,7 @@ const MainPage = React.memo(() => {
 					</SuperBox>
 
 		</PageContainer>
+	</>
 	);
 }, () => true)
 
@@ -440,8 +492,8 @@ const Feature6 = () => (
 )
 
 const Message = () =>(
-	<Text fontSize={["14px", "14px", "16px", "18px"]} color={"light"} mt={[2]} textAlign="justify" >
-	As Pixly, We have just started. We work passionately to make our business your favorite film website. <br/>
+	<Text fontSize={["14px", "14px", "16px", "18px"]} color={"light"} mt={[2]} textAlign="justify">
+	As Pixly, We have just started. We work passionately to make our business your favorite film website.<br/>
 	Our AI algorithm is currently in a beta phase, and we've collect several movie lists and topics to enrich your discovery experience.
 	These include films that have won major awards (Grand Prize) from prestigious film festivals like cannes film festival, 
 	favorite movies and  lists from some famous directors such as Quentin Tarantino and Stanley Kubrick, and various topicals such as art-house, 

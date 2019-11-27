@@ -4,6 +4,8 @@ import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import { linearGradient } from 'polished'
 
+
+
 export const Button = styled.button`
     padding: 8px 8px;
     margin: 4px;
@@ -16,7 +18,8 @@ export const Button = styled.button`
         background-color:${props => props.hoverBg && props.hoverBg};
         color:${props => props.hoverColor && props.hoverColor};
         box-shadow:${props => props.hoverShadow && props.hoverShadow};
-        border-color:${props => props.hoverBorderColor && props.hoverBorderColor}
+        border-color:${props => props.hoverBorderColor && props.hoverBorderColor};
+        transform:${props => props.hoverScale && "scale(1.1)"};
     }
     ${props => props.gradient && themeGet(`gradients.${props.gradient}.colors`)(props) 
         && linearGradient({
@@ -108,29 +111,6 @@ export const BubbleButton = styled.button`
       :hover::before {
         transform: translate3d(50%, 50%, 0) scale3d(15, 15, 15);
       }
-      ${color}
-      ${space}
-      ${shadow}
-      ${layout}
-      ${background}
-      ${border}
-      ${flexbox}
-      ${position}
-      ${typography}
-`
-
-export const PulseButton = styled.button`
-    min-width:120px;
-    min-height:40px;
-    border:1px solid black;
-    color:black;
-    position:relative;
-    background: transparent;
-    border: 1px solid #f1f1f1;
-    color:hsl(0, 0%, 100%);
-    :hover {
-        transform: scale(1.1);
-    }
       ${color}
       ${space}
       ${shadow}

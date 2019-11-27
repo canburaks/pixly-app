@@ -10,6 +10,9 @@ import { Text, Paragraph,
 import { TextSection } from "./TextSection"
 import { useScrollPosition } from "../../functions/hooks"
 
+
+
+
 export const ActionButton = ({onClick,isLoading, borderRadius="6px", ...props}) => (
     <Button 
         borderRadius={borderRadius}
@@ -30,7 +33,7 @@ export const ActionButton = ({onClick,isLoading, borderRadius="6px", ...props}) 
 )
 
 export const LinkButton = (props) => (
-    <BubbleButton type="button"
+    <Button type="button"
         fontSize={[12,14]} fontWeight="bold"
         bg="transparent" color={"light"}
         alignSelf="center"
@@ -45,7 +48,7 @@ export const LinkButton = (props) => (
             {props.text}
             {props.children}
         </NewLink>
-    </BubbleButton>
+    </Button>
 )
 
 
