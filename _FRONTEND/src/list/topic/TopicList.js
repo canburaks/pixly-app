@@ -49,6 +49,7 @@ const TopicList = React.memo((props) => {
                         `We added a filter mechanism to some topics which you can filter the films by IMDb rating or release year. ` 
                         }
             </Text>          
+            <hr/>
 
                 <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {firstPart.map( item => (

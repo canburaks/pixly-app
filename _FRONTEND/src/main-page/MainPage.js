@@ -223,14 +223,13 @@ const MainPage = React.memo(() => {
 			<PageContainer >
 					<SuperBox 
 						src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"} 
-						
 						top={-75} 
-						py={"30px"} mx={"0px"} 
+						py={["30px", "30px", "45px", "45px","45px", "90px","120px"]} mx={"0px"} 
 						width={"100vw"} 
 						position="relative"
 						borderBottom="3px solid"
 						borderColor="rgba(40,40,40, 0.7)"
-						minHeight={"600px"}
+						minHeight={"650px"}
 					>
 						<Box  mr={[5]}>
 							<FlexBox flexDirection="column" zIndex={9}  px={[2,3,3,4]}>
