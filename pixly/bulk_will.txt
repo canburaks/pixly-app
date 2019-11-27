@@ -352,3 +352,9 @@
 /movie/5231
 /person/nm0006721
 /movie/48877/saw-iii-2006
+/person/nm0000347
+/person/nm0103038
+/movie/7919
+/person/nm0488662
+/movie/6641
+/person/nm0005316
