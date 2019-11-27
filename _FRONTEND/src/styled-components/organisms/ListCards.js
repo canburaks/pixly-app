@@ -73,6 +73,7 @@ export const WhiteMovieCard = ({ item }) => (
                 <BookmarkMutation id={item.id} active={item.isBookmarked} size={"28px"} ml={[2]} mb={"4px"}/>
             </FlexBox>
         </FlexBox>
+        <CoverLink link={`/movie/${item.slug}`} color="transparent">{item.name}</CoverLink>
     </SuperBox>
         <HeaderMini width={"75%"} fontFamily={"playfair"} color="dark" hoverUnderline
             my={[2,2,3]}
