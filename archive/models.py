@@ -370,16 +370,22 @@ class TmdbMovie(models.Model):
 
 
     @classmethod
-    def create_from_zero(cls, tmdb_id, movielens_id):
+    def create_from_zero(cls, tmdb_id, movielens_id=None):
+        if not movielens_id or movielens_id==None:
+            movielens_id = Movie.objects.all().order_by("id").last().id + 1
         tm = cls(tmdb_id=tmdb_id, movielens_id=movielens_id)
         tm.save()
         tm.save_data()
         movie = tm.create_movie()
         try:
             tm.create_cast()
+        except:
+            print("cast error")
+        try:
             tm.create_crew()
         except:
             print("crew error")
+        tm.save()
         tm.create_videos()
         try:
             movie.set_imdb_rating_and_votes()

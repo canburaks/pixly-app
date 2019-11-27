@@ -194,19 +194,19 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         return (
             <>
             <MoviePageAd />
-            <Grid columns={[1,1,1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+            <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {firstPart.map( item => (
                     <WhiteMovieCard item={item} key={"rec" + item.id}/>
                 ))}
             </Grid>
             <HomePageFeedAd/>
-            <Grid columns={[1,1,1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+            <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {secondPArt.map( item => (
                     <WhiteMovieCard item={item} key={"rec" + item.id}/>
                 ))}
             </Grid>
             <MidPageAd />
-            <Grid columns={[1,1,1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+            <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {thirdPart.map( item => (
                     <WhiteMovieCard item={item} key={"rec" + item.id}/>
                 ))}

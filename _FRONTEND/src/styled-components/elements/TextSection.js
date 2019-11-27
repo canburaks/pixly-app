@@ -8,7 +8,9 @@ export const Stats = (props) => (
     </FlexBox>
 )
 
-export const Quote = (props) =>(
+export const Quote = (props) =>{
+    const textWithBreak = props.quote.text.split("\n").filter(n => n.length > 2)
+    return (
         <Blockquote cite={props.quote.ownerName}
             fontFamily="quote"
             fontWeight={"500"} fontSize={props.fontSize} 
@@ -16,10 +18,11 @@ export const Quote = (props) =>(
             color={"dark"} 
             {...props}
         >
-            {props.quote.text}
+            {textWithBreak.map( t => <>{t}<br/></> )}
             <Cite>{props.quote.ownerName}</Cite>
         </Blockquote>
-)
+)}
+
 Quote.defaultProps = {
     fontSize:"xl"
 }

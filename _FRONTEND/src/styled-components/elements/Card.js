@@ -119,7 +119,11 @@ export const DarkCard = props => (
             flexGrow={1}
             px={[2,2,2,2,3]} pt={[3]} pb={[1]}  
         >
-            {props.header && <HeaderMini fontWeight="bold" m={0} my={[2]} color="light" fontSize={["18px", "18px", "22px"]}>{props.header}</HeaderMini> }
+            {props.header && 
+                <NewLink link={props.link} hoverUnderline>
+                    <HeaderMini fontWeight="bold" m={0} my={[2]} color="light" fontSize={["18px", "18px", "22px"]}>{props.header}</HeaderMini> 
+                </NewLink>
+                }
             {props.text && <Text color="light" my={[2,2,3]} fontSize={props.textSize}>{props.text}</Text>}
             {props.children}
             {props.buttonText && <LinkButton link={props.link} text={props.buttonText} mt="auto" follow={props.follow}></LinkButton>}

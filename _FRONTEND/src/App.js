@@ -46,7 +46,7 @@ const App = (props) => {
         //console.log("Google Analytics initialized")
     },[])
     usePageViews()
-
+    const isPathIncludes = (pathname) => window.location.pathname.includes(pathname)
     return (
     <ThemeProvider theme={themes.default}>
         <div className="App" theme="palette-1"  id="app-container">
@@ -62,8 +62,8 @@ const App = (props) => {
                     {globalstate.modalComponent}
                 </Modal>
             </Box>
+            {!isPathIncludes("topic/") && <Footer />}
             <ScrollTopButton />
-            <Footer />
         </div>
     </ThemeProvider>
 

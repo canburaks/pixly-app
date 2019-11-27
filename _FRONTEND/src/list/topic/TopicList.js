@@ -40,7 +40,7 @@ const TopicList = React.memo((props) => {
                 canonical={`https://pixly.app/topics`}
             />
 
-            <ContentContainer pb={"100px"}>
+            <ContentContainer >
             <HeaderText width={"75%"} fontFamily={"playfair"} color="dark" mt={[4,4,5]}>Pixly Topics: Theme Based Film Lists</HeaderText>  
             <Text mt={[3]} textAlign="justify">
             {`Pixly topics are kind of collections that are more specific than genre based collections. ` + 
@@ -71,7 +71,6 @@ const TopicList = React.memo((props) => {
                 </Grid>
             </ContentContainer>
 
-            {!authStatus && <JoinBanner />}
 
         </PageContainer>
     );
