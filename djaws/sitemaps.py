@@ -60,7 +60,7 @@ custom_url_pages = custom_movie_pages + custom_person_pages + custom_list_pages 
 
 #----------------------------------------------------------------------------
 class TopicSitemap(Sitemap):
-    changefreq = "weekly"
+    changefreq = "yearly"
     priority = 0.9
     def items(self):
         slugs = [x.replace("topic/", "").strip() for x in topic__slugs]
@@ -74,7 +74,7 @@ class TopicSitemap(Sitemap):
 
 
 class ListSitemap(Sitemap):
-    changefreq = "monthly"
+    changefreq = "yearly"
     priority = 0.9
     def items(self):
         slugs = [x.replace("list/", "").strip().replace("/1", "").strip() for x in liste__slugs]
