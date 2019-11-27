@@ -81,7 +81,7 @@ export const WhiteMovieCard = ({ item }) => (
                 {item.name}
             </NewLink>
         </HeaderMini>
-    <Text  color="dark">{item.summary > 400 ? `${item.summary.slice(0,400)} ...` : item.summary.slice(0,400)}</Text>
+    <Text  color="dark">{item.summary.length > 300 ? `${item.summary.slice(0,300)} ...` : item.summary.slice(0,300)}</Text>
     <TagBox tags={item.tags || []} num={6} color={"dark"} />
     <Box position="absolute" bottom={"20px"} width={"100%"}>
         <NewLink link={`/movie/${item.slug}`}  
@@ -247,7 +247,7 @@ export const DirectorCard = (props) => (
 )
 
 export const CrewCard = (props) => (
-    <Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card" hoverShadow maxWidth={"200px"}>
+    <Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card" maxWidth={"200px"}>
         <ImageCard
             src={props.crew.person.poster} 
             link={`/person/${props.crew.person.slug}`}
@@ -256,7 +256,11 @@ export const CrewCard = (props) => (
             borderRadius={"8px"}
             title={props.crew.person.name}
         />
-        <Text fontSize={["xs", "xs", "s"]} fontWeight="bold">{props.crew.person.name}</Text>
+        <NewLink link={`/person/${props.crew.person.slug}`} hoverUnderline>
+            <Text fontSize={["xs", "xs", "s"]} fontWeight="bold">
+                {props.crew.person.name}
+            </Text>
+        </NewLink>
         {props.crew.character && 
             <Text fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"}>{props.crew.character.slice(0,20)}</Text>
             }

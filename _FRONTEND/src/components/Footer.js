@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Footer.css"
 import { GlobalContext } from "../";
-import {  HiddenText, PinterestIcon, NewLink } from "../styled-components"
+import {  HiddenText, PinterestIcon, NewLink, Box } from "../styled-components"
 
 const Footer = (props) =>{
     return(
-        <div className="footer">
+        <Box className="footer">
             <NewLink 
                 position="absolute" left={20} 
                 fontWeight="bold" hoverColor="white"
@@ -19,7 +19,7 @@ const Footer = (props) =>{
             */}
 
             <PixlyTwitterIcon />
-        </div>
+        </Box>
     )
 }
 

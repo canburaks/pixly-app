@@ -487,9 +487,9 @@ class Movie(SocialMedia, SEO,MainPage):
         #print("1")
         self.update_tags_from_data_keywords()
         #print("2")
+        self.set_richdata()
         self.set_seo_description_keywords()
         self.set_seo_title()
-        self.set_richdata()
 
     def generate_description(self):
         text = ""
@@ -589,7 +589,7 @@ class Movie(SocialMedia, SEO,MainPage):
             name = self.name.title() + " "
         title = name + text
         print(f"title length: {len(title)}")
-        return title
+        return title[:70]
 
 
     #in order to bulk update, does not save

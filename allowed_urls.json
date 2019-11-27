@@ -14,7 +14,8 @@
         "/topic/dialogue-focused",
         "/topic/thought-provoking",
         "/topic/bechdel-test",
-        "/topic/feel-good-movies"
+        "/topic/feel-good-movies",
+        "/topic/lgbtq-plus-films,"
     ],
     "blog":[
         "/blog",
@@ -247,6 +248,7 @@
         "/topic/thought-provoking",
         "/topic/bechdel-test",
         "/topic/feel-good-movies",
+        "/topic/lgbtq-plus-films",
         "/blog",
         "/blog/a-brief-introduction-to-collaborative-filtering",
         "/blog/django-graphql-react-integration-tutorial-part-1",
