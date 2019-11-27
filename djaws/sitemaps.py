@@ -26,7 +26,7 @@ topic__slugs = [x[1:] for x in allowed_urls_dict.get("topic")]
 
 blog__slugs = [x[1:] for x in allowed_urls_dict.get("blog")]
 #print(movie__slugs,person__slugs,liste__slugs, topic__slugs, blog__slugs )
-print(topic__slugs)
+#print(topic__slugs)
 static__slugs = blog__slugs + [
     "explore",
     "advance-search",
