@@ -36,7 +36,8 @@ const NB = props => {
     const keywordsHandler = useCallback((e) => setKeywords(e.target.value), [keywords])
     const isSearchPage = window.location.pathname.includes("advance-search")
     const isTransparentBg = (window.location.pathname.includes("/list/") 
-        || window.location.pathname.includes("/movie/") )
+        || window.location.pathname.includes("/movie/")  
+        || window.location.pathname === "/"  )
 
 
     const MiddleBar = () => (

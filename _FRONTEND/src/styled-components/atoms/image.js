@@ -17,13 +17,26 @@ export const Image = styled('img').attrs((props) =>( props.info ? {alt:props.inf
     ${position}
 `
 
-const placeholderstyle = {
-    width:"100%", height:"100%", position:"absolute",
-    left:0, top:0, right:0, bottom:0, width:"100%", height:"100%",
-    transition:"0.35s linear"
-}
+export const styledPicture = styled.picture`
+    ${space}
+    ${shadow}
+    ${layout}
+    ${border}
+    ${position}
+`
 
 /*
+export const Picture = (props) => (
+    <styledPicture {...props}>
+        {props.links.map(link => {
+            splitted = link.split(".")
+            extension = splitted[splitted.length - 1]
+            return <source srcset={link} type={`image/${extension}`} />
+        })}
+        <Image src={props.links[0]} alt={props.info} />
+    </styledPicture>
+)
+
 export const ImagePlaceholder = (props) => (
     <ImgShim fallback={<Spinner />} {...props} style={{...placeholderstyle, ...props.style}}  />
 )
