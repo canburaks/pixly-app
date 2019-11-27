@@ -1000,6 +1000,8 @@ class Topic(SEO, MainPage):
         from gql.rich_data import RichData
         rdf = RichData.create_topic_data(self)
         self.richdata = rdf
+        if save:
+            self.save()
     
 
     def add_slug(self):
