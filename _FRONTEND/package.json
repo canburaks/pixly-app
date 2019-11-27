@@ -166,9 +166,9 @@
       "/explore",
       "/advance-search",
       "/topics",
+      "/topic/lgbtq-plus-films",
       "/film-lists",
-      "/list/our-selection/1",
-      "/topic/lgbtq-plus-films"
+      "/list/our-selection/1"
     ],
     "publicPath": "/"
   }
