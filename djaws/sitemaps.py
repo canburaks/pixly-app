@@ -33,6 +33,7 @@ static__slugs = blog__slugs + [
     "404",
 ]
 
+
 def page_template_generator(routes):
     new_paths = []
     for route in routes:
