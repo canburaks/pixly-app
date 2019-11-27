@@ -45,7 +45,6 @@ def page_template_generator(routes):
     return new_paths
 
 
-
 custom_movie_pages =  page_template_generator(movie__slugs)
 custom_person_pages = page_template_generator(person__slugs)
 custom_list_pages =   page_template_generator(liste__slugs)
