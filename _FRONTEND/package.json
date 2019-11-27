@@ -175,7 +175,12 @@
       "/topic/feel-good-movies",
       "/topic/lgbtq-plus-films",
       "/film-lists",
-      "/list/our-selection/1"
+      "/list/our-selection/1",
+      "/blog",
+      "/blog/a-brief-introduction-to-collaborative-filtering",
+      "/blog/django-graphql-react-integration-tutorial-part-1",
+      "/blog/django-graphql-react-integration-tutorial-part-2",
+      "/blog/django-graphql-react-integration-tutorial-part-3"
     ],
     "publicPath": "/"
   }
