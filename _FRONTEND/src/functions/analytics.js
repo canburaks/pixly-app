@@ -26,6 +26,12 @@ export const Head = React.memo((props) => {
     //console.log(window.location.pathname)
     const isAllowedUrls = allowedUrls.all.includes(window.location.pathname)
     //console.log("is Allowed:", isAllowedUrls)
+    useEffect(() =>{
+        if (isAllowedUrls){
+            const googlebot = document.getElementById("google-bot")
+            googlebot.content = ""
+        }
+    }, [])
     return (
     <Helmet>
         {/*rgaPageView()*/}
