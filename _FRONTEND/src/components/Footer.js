@@ -71,7 +71,7 @@ const PixlyTwitterIcon = () => {
             <HiddenText>Pixly instagram</HiddenText>
         </a>
 
-        <a target="_blank" rel={anchorRelationship} href="https://www.pinterest.com/pixlymovies" className="footer-link fbox-r jcfs aic">
+        <a target="_blank" rel={anchorRelationship} href="https://www.pinterest.com/pixlymovie/" className="footer-link fbox-r jcfs aic">
         <svg
             aria-hidden="true"
             data-prefix="fab"
