@@ -72,7 +72,7 @@ sitemaps = {
 }
 #removesitemaps = { "remove": RemoveSitemap()}
 
-json_pathnames = get_json("pixly/unique_pathname.json")
+json_pathnames = get_json("pixly/404.json")
 def make_url_pattern():
     url_patterns = []
     for url in json_pathnames:
