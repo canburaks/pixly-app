@@ -76,6 +76,7 @@ const ExplorePage = React.memo(props => {
 				}
 				canonical={`https://pixly.app/explore`}
 				twitterdescription={"Pixly - Discover Movie Lists, Topics, Popular and Upcoming Movies."}
+				image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"}
 				>
 
 				<meta name="twitter:app:name:iphone" content="Pixly" />

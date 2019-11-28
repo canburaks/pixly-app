@@ -50,6 +50,8 @@ const ListBoard = (props) => {
                 title={"Pixly Film Lists"}
                 description={"Collections of festival awarded films, famous director's favorite " +
                             "movie lists, curated and recommended films and lists to watch. "}
+                image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"}
+
                 canonical={`https://pixly.app/film-lists`}
             />
 
