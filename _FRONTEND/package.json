@@ -165,7 +165,10 @@
       "/",
       "/explore",
       "/advance-search",
-      "/topics"
+      "/film-lists",
+      "/topics",
+      "/topic/cyberpunk"
+
     ],
     "publicPath": "/"
   }
