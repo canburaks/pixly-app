@@ -176,11 +176,12 @@ const MainPage = React.memo(() => {
 
 				}
 				title={
-					"Pixly App- AI Based Movie Recommendations App, Similar Movies, Film Website"
+					"Pixly - AI Assisted Movie Recommendation, Similar Movies, Film Website"
 				}
 				keywords={
 					"pixly.app ,discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
 				}
+				image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"}
 				canonical={`https://pixly.app`}
 				twitterdescription={"AI-Based Film Recommendations, Movie Lists, Topics, Popular and Upcoming Movies."}
 

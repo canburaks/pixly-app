@@ -38,6 +38,7 @@ const TopicList = React.memo((props) => {
                             "movies based on true stories or focus on rich dialogues." 
                         }
                 canonical={`https://pixly.app/topics`}
+				image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"}
             />
 
             <ContentContainer >
