@@ -233,7 +233,7 @@ const MainPage = React.memo(() => {
 						minHeight={"650px"}
 					>
 						<Box  mr={[5]}>
-							<FlexBox flexDirection="column" zIndex={9}  px={[2,3,3,4]}>
+							<FlexBox flexDirection="column" zIndex={9}  px={[2,3,3,4]} ml={[3,3,4,5]}>
 								<HeaderText fontSize={["40px", "40px", "48px"]} 
 									mt={[5,5]}
 									uncapitalize 
