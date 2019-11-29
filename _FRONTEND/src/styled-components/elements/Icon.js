@@ -44,7 +44,19 @@ export const ProfileIcon = (props) => <Profile size={props.size || 24} clickable
 
 //export const YearIcon = (props) => <WatchYear title="Release Year" {...props} />
 //export const HourGlassIcon = (props) => <HourGlass title="Release Year" {...props} />
-//export const YearGlassIcon = (props) => <HourGlassYear title="Release Year" {...props} />
+//export const YearGlassIcon = (props) => <HourGlassYear title="Release Year" {...props} />Download icon
+
+export const TumblrIcon = (props) => (
+<SocialMediaSvg
+  viewBox="0 0 24 24" 
+  fill="#000"
+  {...props}
+  m={[0]} p={[0]}
+>
+	<path d="M20 0a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h16zm-7.38 5H10.6c-.1.72-.26 1.32-.5 1.78-.25.47-.57.87-.97 1.2-.35.3-.9.53-1.4.7l-.22.07v1.99h1.95v4.9c0 .65.07 1.14.2 1.47.14.34.39.66.74.96a4.49 4.49 0 0 0 2.83.93 7.28 7.28 0 0 0 2.98-.63l.3-.13v-2.21c-.72.46-1.44.69-2.17.69-.4 0-.76-.1-1.08-.28a1.3 1.3 0 0 1-.55-.6 3.14 3.14 0 0 1-.08-.92v-4.18h3.32v-2.5h-3.32V5z"/>
+</SocialMediaSvg>
+)
+
 
 //More Complex Icons
 export const ImdbRatingIconLink = (props) => (
