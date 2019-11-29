@@ -162,12 +162,8 @@
     },
     "include": [
       "",
-      "/",
-      "/explore",
-      "/advance-search",
-      "/film-lists",
-      "/topics",
-      "/topic/cyberpunk"
+      "/movie/sorry-we-missed-you-2019",
+      "/movie/the-predator-2018"
 
     ],
     "publicPath": "/"

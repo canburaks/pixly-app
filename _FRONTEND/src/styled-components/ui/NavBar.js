@@ -26,7 +26,7 @@ import {
 
 } from "../"
 
-const BgTexture = React.memo(() => <div style={{backgroundImage:`url(https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/background/navbar-bg.jpg)`, backgroundSize:"cover", width:"100%", height:60, position:"absolute", top:-2, left:-2, zIndex:-1}}></div>)
+const BgTexture = React.memo(() => <div style={{backgroundImage:`url(https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/navbar-collage.jpg)`, backgroundSize:"cover", width:"100%", height:60, position:"absolute", top:-2, left:-2, zIndex:-1}}></div>)
 
 const NB = props => {
     const { username, history, isAuthenticated, logoutDispatcher } = props;
@@ -69,7 +69,12 @@ const NB = props => {
 	)
 
     return (
-        <NavBarBox bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"} height={navbarheight}>
+        <NavBarBox 
+            bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"} 
+            height={navbarheight}
+			opacity={isTransparentBg ? 1 : 0.98}
+			src={!isTransparentBg && "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/navbar-collage.jpg"}
+		>
             <Box width={"10vw"}>
                 <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
             </Box>

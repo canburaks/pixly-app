@@ -155,6 +155,10 @@ export const NavBarBox = styled.nav`
     transition: background-color 1.5s cubic-bezier(.66,.04,.9,.88);
     overflow-y: visible;
     z-index: 10 !important;
+
+    ${props => props.src && backgroundImages(`url(${props.src})`)};
+    background-size: cover;
+    background-position: center;
     ${color}
     ${space}
     ${shadow}
