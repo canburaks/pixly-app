@@ -38,7 +38,6 @@ export function isEqualObj(a,b){
            return false;
        }
    }
-
    // If we made it this far, objects
    // are considered equivalent
    return true;
