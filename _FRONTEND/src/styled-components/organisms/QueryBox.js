@@ -74,13 +74,17 @@ export const SearchQueryBox = (props) =>{
         
                 <FlexBox justifyContent="center" id="s-text-input" minWidth="100%" position="relative">
                     <SearchInput type="text"   
-                        placeholder="Search.."
+                        placeholder="Search"
                         value={keywords} 
                         onChange={keywordsHandler} 
                         minHeight="40px"
+                        maxHeight="40px"
                         width={"100%"}
-                        maxWidth={["80vw", "80vw", "30vw"]}
-                    /><Label position="absolute" color="transparent">Search</Label>
+                        bg={"rgba(20,20,20, 0.4)"}
+                        fontWeight="500"
+                        color="white"
+                        maxWidth={["40vw", "40vw", "30vw", "200px"]}
+                    /><Label position="absolute" color="transparent" height="1px" width="1px" fontSize="1px">Search</Label>
                     {debouncedkeywords.length > 2 && 
                     <Button type="submit" 
                         position="absolute" 

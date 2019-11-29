@@ -1,4 +1,4 @@
-export const navbarheight = "75px"
+export const navbarheight = "65px"
 
 
 

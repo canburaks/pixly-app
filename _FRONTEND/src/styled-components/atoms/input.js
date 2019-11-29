@@ -12,7 +12,7 @@ export const Input = styled("input")`
     border:0px solid transparent !important;
     border-bottom:${props => props.status === "success" 
         ? `5px solid #30c5b1 !important` 
-        : `5px solid gray !important`}
+        : `5px solid gray !important`};
     background: transparent;
     font-size:14px;
     font-weight: 400;
@@ -76,17 +76,20 @@ export const SearchInput = styled("input")`
     -webkit-appearance: none;
     outline: none;
     transition:0.25s ease-in-out;
-    border-radius:32px;
-    border:2px solid;
+    border-radius:8px;
+    border:0px solid;
     box-sizing:border-box;
-    box-shadow: 0px 2px 6px rgba(6, 28, 63, 0.3);
+    box-shadow: 0px 2px 6px rgba(6, 28, 63, 0.1);
     :focus {
-        background-color: rgba(20, 20, 20, 0.8);
+        background-color: rgba(180, 180, 180, 0.4);
         color:white;
     }
     :focus  ::placeholder {
         color: ${themeGet("colors.active")} ;
         border-color:white;
+    }
+    ::placeholder {
+        color: rgba(180,180,180, 0,9);
     }
     ${color}
     ${space}
