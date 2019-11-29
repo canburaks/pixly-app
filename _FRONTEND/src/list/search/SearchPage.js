@@ -84,9 +84,9 @@ const SearchPage = (props) =>{
         <PageContainer  p={[0]}>
             <Header />
 
-            <Form flexWrap="wrap" onSubmit={submitHandler} gradient={"blueish"} py={[4]}>
+            <Form flexWrap="wrap" onSubmit={submitHandler} gradient={"blueish"} py={[4]} width="100vw">
                 <HeaderText textAlign="center" color="rgba(255,255,255, 0.9)" my={[5]}>Search Movies by Genre, Rating and Year</HeaderText>
-                <FlexBox justifyContent="center" id="s-text-input" minWidth="100%" position="relative">
+                <FlexBox justifyContent="center" id="s-text-input" minWidth="100%"  position="relative">
                     <SearchInput type="text"   
                         px={[2,3,4,4,4]}
                         placeholder="Search.."
@@ -136,8 +136,9 @@ const SearchPage = (props) =>{
             <Box id="search-rresult-box"  
                 borderLeft="2px solid" 
                 borderColor="rgba(40,40,40, 0.3)"
+                width="101vw"
                 minWidth={["100%"]} minHeight={["60vw"]}
-                left={"-5px"}
+                left={"-1vw"}
                 p={[0]}
             >
                 
