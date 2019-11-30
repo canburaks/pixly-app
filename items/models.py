@@ -67,6 +67,7 @@ class Movie(SocialMedia, SEO,MainPage):
 
     name = models.CharField(max_length=100)
     year = models.IntegerField(null=True)
+    release = models.CharField(max_length=20, null=True, blank=True)
     summary = models.TextField(max_length=5000,null=True)
     slug = models.SlugField(db_index=True, max_length=100, null=True, blank=True, unique=True, )
 
