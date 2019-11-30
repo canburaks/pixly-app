@@ -100,6 +100,7 @@ class ListAdmin(admin.ModelAdmin):
     raw_id_fields = ['movies', "owner", "related_persons"]
     list_select_related = ('owner',)
     list_filter = ('list_type',)
+    fields = ("content", )
     #exclude = ('related_persons',)
     autocomplete_lookup_fields = {
         'm2m': ['movies', ],
