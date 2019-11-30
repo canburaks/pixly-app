@@ -59,6 +59,7 @@ const MoviePage = props => {
 		state.methods.updatePoints(viewer.points);
 	}
 	const hasVideos = item.videos && item.videos.length > 0 ? true : false;
+	console.log(item.videos)
 
 	const directorFilter = item.crew
 		.filter(c => c.job == "D")

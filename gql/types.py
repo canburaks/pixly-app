@@ -1733,7 +1733,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     social_media = graphene.types.json.JSONString()
     quotes = graphene.List(graphene.String)
     short_summary = graphene.String()
-
+    video_tags = graphene.List(graphene.String)
 
     def __init__(self, id=None, slug=None, viewer=None):
         #print(self,  id, slug)
@@ -1754,6 +1754,11 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_video_tags(self, info):
+        if len(self.movie.video_tags) > 0:
+            return self.movie.video_tags
+        return []
 
     def resolve_short_summary(self,info):
         return self.movie.get_short_summary()

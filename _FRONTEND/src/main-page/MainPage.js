@@ -171,8 +171,8 @@ const MainPage = React.memo(() => {
 		<>
 			<Head
 				description={
-					"Discover best movies that fit your cinema taste with our AI-based movie recommendations. " + 
-					"Find out similar movies, curated movie lists.A Film website. pixly.app"
+					"Discover best movies that fit your cinema taste with our movie recommendation. " + 
+					"Find out similar movies, curated movie lists. A Film website. pixly.app"
 
 				}
 				title={
