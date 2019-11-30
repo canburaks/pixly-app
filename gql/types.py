@@ -353,6 +353,7 @@ class MovieType(DjangoObjectType):
         model = Movie
 
     def resolve_release(self, info):
+        print(self.release)
         if self.release:
             return self.release
 
