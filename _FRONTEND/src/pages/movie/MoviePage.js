@@ -59,7 +59,16 @@ const MoviePage = props => {
 		state.methods.updatePoints(viewer.points);
 	}
 	const hasVideos = item.videos && item.videos.length > 0 ? true : false;
-	console.log(item.videos)
+	const haveTrailer = item.videoTags.includes("trailer")
+	const haveNonTrailer = item.videoTags.filter(t => t !== "trailer").length > 0
+
+	const videoText = haveTrailer 
+		? haveNonTrailer
+			? `${item.name} (${item.year}) Trailer and Videos`
+			: `${item.name} (${item.year}) Trailer`
+		: `${item.name} (${item.year}) Videos`
+
+	console.log(videoText)
 
 	const directorFilter = item.crew
 		.filter(c => c.job == "D")
@@ -248,7 +257,7 @@ const MoviePage = props => {
 				{/* VIDEO */}
 				{hasVideos && 
 					<>
-					<HeaderMini my={[2]} mt={[5]}>{item.name} Videos</HeaderMini>
+					<HeaderMini my={[2]} mt={[5]}>{videoText}</HeaderMini>
 					<YoutubePlayer
 						videos={item.videos.reverse()}
 						title={item.name + " Videos"}

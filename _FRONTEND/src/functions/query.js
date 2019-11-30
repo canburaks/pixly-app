@@ -232,7 +232,7 @@ export const MOVIE = gql`
         seoShortDescription,
         seoKeywords,
         richdata,
-
+        videoTags,
         quotes,
             director{
                 id,
