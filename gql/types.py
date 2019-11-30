@@ -347,9 +347,15 @@ class MovieType(DjangoObjectType):
     has_cover = graphene.Boolean()
     slug = graphene.String()
     short_summary = graphene.String()
+    release = graphene.types.datetime.Date()
 
     class Meta:
         model = Movie
+
+    def resolve_release(self, info):
+        if self.release:
+            return self.release
+
     def resolve_short_summary(self,info):
         return self.get_short_summary()
 

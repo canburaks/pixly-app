@@ -233,6 +233,7 @@ export const MOVIE = gql`
         seoKeywords,
         richdata,
         videoTags,
+        release,
         quotes,
             director{
                 id,
@@ -446,7 +447,7 @@ query liste($id:Int, $slug:String, $page:Int,$first:Int, $skip:Int ){
             },
         movies{
             id, name,slug, year, hasCover, poster,isBookmarked, isFaved,
-            viewerRating, coverPoster, summary,imdbRating
+            viewerRating, coverPoster, summary,imdbRating, release
             tags{
                 name, slug, genreTag, subgenreTag
             },
