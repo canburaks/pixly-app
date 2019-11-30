@@ -55,6 +55,7 @@ LIST_RELATION_TYPE = (
     ("fw", "Festival Winner Movies"),
     ("gr", "Genre Related"),
     ("ms", "Miscellaneous"),
+    ("mm", "Movies of the Month")
 )
 
 
