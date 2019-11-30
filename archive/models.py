@@ -208,6 +208,7 @@ class TmdbMovie(models.Model):
             d["tmdb_id"] = self.tmdb_id
             d["imdb_id"] = self.imdb_id
             d["year"] = movie_data.get("year")
+            d["release"] = movie_data.get("release_date")
             d["summary"] = movie_data.get("summary")
             d["active"] = True
 

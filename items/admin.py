@@ -79,7 +79,7 @@ class TopicAdmin(admin.ModelAdmin):
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ("id",'name',"year","imdb_id","tmdb_id", "imdb_rating","created_at")
+    list_display = ("id",'name',"year","release" ,"imdb_id","tmdb_id", "imdb_rating","created_at")
     raw_id_fields = ['tags',]
     readony_fields = ("homepage", "twitter","facebook", "instagram", "imdb",)
     exclude = ('data', "director")
