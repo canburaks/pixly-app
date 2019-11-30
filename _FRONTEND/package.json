@@ -165,7 +165,8 @@
       "/",
       "/explore",
       "/advance-search",
-      "/topics"
+      "/topics",
+      "/movie/proof-1991"
 
     ],
     "publicPath": "/"
