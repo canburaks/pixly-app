@@ -530,13 +530,13 @@ class Movie(SocialMedia, SEO,MainPage):
             #-------------MOVIES----------------
             #Imdb Rating based text
             if self.year == 2018 or self.year == 2019:
-                if self.imdb_rating > 7.5:
-                    if self.imdb_rating > 8:
+                if self.imdb_rating and self.imdb_rating > 7.5:
+                    if self.imdb_rating and self.imdb_rating > 8:
                         text += f"One of the best {definition} movies of {self.year} directed by {director_name}."
                     else:
                         text += f"One of the good {definition} movies of {self.year} directed by {director_name}."
             else:
-                if self.imdb_rating > 8.2:
+                if self.imdb_rating and self.imdb_rating > 8.2:
                     text += f"One of the best {definition} movies directed by {director_name}."
                 else:
                     text += f"A {director_name} movie released in {self.year}."
@@ -654,6 +654,7 @@ class List(SEO,MainPage):
     summary = models.TextField(max_length=1000,null=True, blank=True,
         help_text="Minimumun 250 character, otherwise will not be shown.")
     movies = models.ManyToManyField(Movie, related_name="lists")
+    content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
 
     slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
 
