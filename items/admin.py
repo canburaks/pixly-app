@@ -96,11 +96,10 @@ class MovieAdmin(admin.ModelAdmin):
 # Register your models here.
 @admin.register(List)
 class ListAdmin(admin.ModelAdmin):
-    list_display = ("id",'name', "owner", "updated_at")
+    list_display = ("id",'name', "owner", "updated_at", "content")
     raw_id_fields = ['movies', "owner", "related_persons"]
     list_select_related = ('owner',)
     list_filter = ('list_type',)
-    fields = ("content", )
     #exclude = ('related_persons',)
     autocomplete_lookup_fields = {
         'm2m': ['movies', ],
