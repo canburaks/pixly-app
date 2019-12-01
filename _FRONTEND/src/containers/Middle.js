@@ -89,13 +89,13 @@ const Middle = (props) => {
             <Route exact path={`/user/:username`} component={UserQuery} />
 
             <Route exact path="/movie/:slug" component={MovieQuery} />
-            <Route exact path="/movie/:slug/:text" component={MovieQueryRedirect} />
             {/*
+            <Route exact path="/movie/:slug/:text" component={MovieQueryRedirect} />
+            <Route exact path="/person/:slug/:id" component={PersonQuery} />
             */}
             <Route exact path="/tag/:slug" component={TagMovies} />
             <Route exact path="/person/:slug" component={PersonQuery} />
 
-            <Route exact path="/person/:slug/:id" component={PersonQuery} />
 
 
             <Route path="/404" component={StaticRoute} />
