@@ -83,8 +83,8 @@ const MovieList = (props) => {
             
             <ContentContainer>
                 <LıstHeader />
-                <Text>{liste.summary}</Text>
-
+                <Text mt={[3]}>{liste.summary}</Text>
+                <hr />
 
                 <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {firstPart.map( item => (

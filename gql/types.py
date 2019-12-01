@@ -348,9 +348,16 @@ class MovieType(DjangoObjectType):
     slug = graphene.String()
     short_summary = graphene.String()
     release = graphene.types.datetime.Date()
+    director_name = graphene.String()
 
     class Meta:
         model = Movie
+
+    def resolve_director_name(self, info):
+        dn = self.director_names
+        if dn and len(dn) > 0:
+            return ", ".join(dn)
+        return None
 
     def resolve_release(self, info):
         if self.release:
