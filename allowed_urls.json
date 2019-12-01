@@ -81,6 +81,11 @@
         "/person/virginia-madsen-12519"
     ],
     "movie":[
+        "/movie/jumanji-the-next-level-2019",
+        "/movie/a-tale-of-three-sisters-2019",
+        "/movie/star-wars-the-rise-of-skywalker-2019",
+        "/movie/spies-in-disguise-2019",
+        "/movie/uncut-gems-2019",
         "/movie/sometimes-happiness-sometimes-sorrow-2001",
         "/movie/once-upon-a-time-in-hollywood-2019",
         "/movie/midsommar-2019",
@@ -465,6 +470,11 @@
         "/movie/ford-v-ferrari-2019",
         "/movie/sorry-we-missed-you-2019",
         "/movie/the-predator-2018",
-        "/movie/proof-1991"
+        "/movie/proof-1991",
+        "/movie/jumanji-the-next-level-2019",
+        "/movie/a-tale-of-three-sisters-2019",
+        "/movie/star-wars-the-rise-of-skywalker-2019",
+        "/movie/spies-in-disguise-2019",
+        "/movie/uncut-gems-2019"
     ]
 }
