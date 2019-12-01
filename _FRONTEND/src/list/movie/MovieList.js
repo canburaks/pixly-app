@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext, useCallback } from "react"
+import { useState, useContext, useCallback, useMemo } from "react"
 import { withRouter } from "react-router-dom";
 
 
@@ -17,14 +17,6 @@ import {
 } from "../../styled-components"
 
 
-
-const Loading = () => (
-    <div className="page-container">
-        <div className="loading-container fbox-c jcc aic">
-            <img src={"https://s3.eu-west-2.amazonaws.com/cbs-static/static/images/loading.svg"} style={{width:"100", height:"100%"}} />
-        </div>
-    </div>
-)
 
 
 const MovieList = (props) => {
@@ -53,11 +45,13 @@ const MovieList = (props) => {
     //console.log(liste.summary)
 
     const pageQuantity = liste.movies.length 
-    const firstPart = liste.movies.slice(0, 4)
-    const secondPArt = liste.movies.slice(4, 8)
-    const thirdPart = liste.movies.slice(8, 18)
-    const haveThirdPart = liste.movies.length > 8;
-    console.log("liste", liste)
+
+    const orderedMovies = useMemo(() => liste.movies.sort((a,b) => b.imdbRating - a.imdbRating ), [liste.slug])
+    const firstPart = orderedMovies.slice(0, 4)
+    const secondPArt = orderedMovies.slice(4, 8)
+    const thirdPart = orderedMovies.slice(8, 18)
+    const haveThirdPart = orderedMovies.length > 8;
+    //console.log("liste", orderedMovies)
     return(
         <PageContainer>
             <Head
