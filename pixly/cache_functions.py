@@ -33,7 +33,7 @@ class Cache():
         mqs = Movie.objects.filter(main_page=True).order_by("-created_at").values_list("slug", flat=True)
         return [CustomMovieType(slug=x) for x in mqs]
 
-    @lru_cache(maxsize=100)
+    #@lru_cache(maxsize=100)
     def main_page_lists():
         from gql.types import CustomListType
         lqs =  List.objects.filter(main_page=True).values_list("slug", flat=True)
@@ -75,7 +75,7 @@ class Cache():
 
 
     # ------  LISTS --------- gql.schema resolve_liste 
-    #@lru_cache(maxsize=200)
+    @lru_cache(maxsize=200)
     def get_custom_list_anonymous_user(id, slug, page):
         from gql.types import CustomListType
         return CustomListType(id, slug, page=page)

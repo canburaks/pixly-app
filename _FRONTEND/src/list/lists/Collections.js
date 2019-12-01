@@ -34,7 +34,8 @@ const ListBoard = (props) => {
     const directorsFavourite = useMemo(() => lists.filter( l => l.listType==="df"))
     const festivalWinners = useMemo(() => lists.filter(l => l.listType === "fw"))
     const otherLists = useMemo(() => lists.filter(l => l.listType === "ms"))
-
+    const listOfMonth = useMemo(() => lists.filter(l => l.listType === "mm"))
+    console.log(listOfMonth)
     const allLists = [...otherLists, ...festivalWinners, ...directorsFavourite]
     const firstPart = allLists.slice(0,4)
     const secondPart = allLists.slice(4, 8)
