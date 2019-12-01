@@ -51,7 +51,7 @@ const MovieList = (props) => {
     const secondPArt = orderedMovies.slice(4, 8)
     const thirdPart = orderedMovies.slice(8, 18)
     const haveThirdPart = orderedMovies.length > 8;
-    //console.log("liste", orderedMovies)
+    //console.log("liste", liste.richdata)
     return(
         <PageContainer>
             <Head
