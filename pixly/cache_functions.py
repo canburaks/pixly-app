@@ -75,7 +75,7 @@ class Cache():
 
 
     # ------  LISTS --------- gql.schema resolve_liste 
-    @lru_cache(maxsize=200)
+    #@lru_cache(maxsize=200)
     def get_custom_list_anonymous_user(id, slug, page):
         from gql.types import CustomListType
         return CustomListType(id, slug, page=page)
