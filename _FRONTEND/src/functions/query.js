@@ -447,7 +447,7 @@ query liste($id:Int, $slug:String, $page:Int,$first:Int, $skip:Int ){
             },
         movies{
             id, name,slug, year, hasCover, poster,isBookmarked, isFaved,
-            viewerRating, coverPoster, summary,imdbRating, release
+            viewerRating, coverPoster, summary,imdbRating, release, directorName
             tags{
                 name, slug, genreTag, subgenreTag
             },
