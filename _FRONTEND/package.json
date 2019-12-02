@@ -179,10 +179,14 @@
       "/movie/me-before-you-2016",
       "/movie/troy-2004",
       "/movie/into-the-wild-2007",
-      "/movie/me-before-you-2016",
       "/movie/oblivion-2013",
-      "/movie/amelie-2001"
-
+      "/movie/amelie-2001",
+      "/person/jim-jarmusch-4429",
+      "/person/andrei-tarkovsky-8452",
+      "/person/darren-aronofsky-6431",
+      "/person/nuri-bilge-ceylan-56214",
+      "/person/michael-haneke-6011",
+      "/person/yorgos-lanthimos-122423"
 
     ],
     "publicPath": "/"
