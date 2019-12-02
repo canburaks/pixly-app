@@ -355,7 +355,6 @@ class ProfileHomeSitemap(Sitemap):
       "/movie/judy-2019",
       "/movie/jojo-rabbit-2019",
       "/movie/the-lobster-2015",
-
       "/movie/falling-inn-love-2019",
       "/movie/les-miserables-2019",
       "/movie/midway-2019",
