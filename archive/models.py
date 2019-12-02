@@ -240,6 +240,7 @@ class TmdbMovie(models.Model):
             if cover_url:
                 m.cover_poster.save(*url_image(cover_url, cover_filename))
                 print("cover was saved")
+            m.save()
             return m
 
     def create_poster(self):

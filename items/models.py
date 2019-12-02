@@ -487,11 +487,13 @@ class Movie(SocialMedia, SEO,MainPage):
     def full_update(self):
         self.update_from_tmdb_movie()
         #print("1")
+        self.set_seo_title()
+        self.save()
+        self.set_seo_description_keywords()
+        self.save()
         self.update_tags_from_data_keywords()
         #print("2")
         self.set_richdata()
-        self.set_seo_description_keywords()
-        self.set_seo_title()
 
     def generate_description(self):
         text = ""
@@ -590,8 +592,8 @@ class Movie(SocialMedia, SEO,MainPage):
         else:
             name = self.name.title() + " "
         title = name + text
-        print(f"title length: {len(title)}")
-        return title[:70]
+        print(f"title length: {len(title)}, title: {title}")
+        return title
 
 
     #in order to bulk update, does not save
@@ -1102,7 +1104,9 @@ class Tag( SEO, MainPage):
 
 
     poster = models.ImageField(blank=True, null=True, upload_to=tag_image_upload_path)
-
+    class Meta:
+        ordering = ["name"]
+        
     def __str__(self):
         return self.name
 

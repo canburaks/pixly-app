@@ -43,6 +43,7 @@
 
     ],
     "person":[
+        "/person/david-fincher-7467",
         "/person/ingmar-bergman-6648",
         "/person/alfred-hitchcock-2636",
         "/person/stanley-kubrick-240",
@@ -50,7 +51,6 @@
         "/person/martin-scorsese-1032",
         "/person/quentin-tarantino-138",
         "/person/francis-ford-coppola-1776",
-        "/person/david-fincher-7467",
         "/person/jean-luc-godard-3776",
         "/person/jim-jarmusch-4429",
         "/person/paul-thomas-anderson-4762",
@@ -83,6 +83,12 @@
         "/person/virginia-madsen-12519"
     ],
     "movie":[
+        "/movie/g-affairs",
+        "/movie/se7en",
+        "/movie/kagemusha",
+        "/movie/embrace-of-the-serpent",
+        "/movie/the-end-of-the-tour",
+        "/movie/a-bittersweet-life",
         "/movie/jumanji-the-next-level-2019",
         "/movie/a-tale-of-three-sisters-2019",
         "/movie/star-wars-the-rise-of-skywalker-2019",
