@@ -1797,8 +1797,9 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
             content_object = qs.first()
             similars = content_object.similars.all().defer("data", "director", "videos")
             min_one_tag =  [ContentSimilarityType(self.movie, x) for x in similars if len(self.movie.common_content_tags(x)) > 0 ] 
-            if len(min_one_tag) == 0:
-                return [ContentSimilarityType(self.movie, x) for x in similars]
+            return min_one_tag
+            #if len(min_one_tag) == 0:
+            #    return [ContentSimilarityType(self.movie, x) for x in similars]
 
 
     def resolve_richdata(self, info, *_):
