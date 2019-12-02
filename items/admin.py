@@ -88,7 +88,7 @@ class MovieAdmin(admin.ModelAdmin):
     search_fields = ('name', "tmdb_id", 'id', )
 
     #def get_data_director(self, obj):
-    #    if obj.data:
+    #    if obj.data:q  
     #        return obj.data.get("Director")
     #    else:
     #        return ""
