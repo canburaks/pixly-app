@@ -163,12 +163,6 @@
     "include": [
       "",
       "/",
-      "/explore",
-      "/advance-search",
-      "/topics",
-      "/topic/cyberpunk",
-      "/topic/dialogue-focused",
-      "/topic/thought-provoking",
       "/topic/feel-good-movies"
 
     ],
