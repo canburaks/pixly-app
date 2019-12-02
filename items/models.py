@@ -548,9 +548,9 @@ class Movie(SocialMedia, SEO,MainPage):
             sim_text = ""
             if self.have_content_similars:
                 if self.have_similars:
-                    sim_text += f" Find similar movies and good movie recommendations based on "
+                    sim_text += f" See similar movies and good movie recommendations based on "
                 else:
-                    sim_text += f" Find movies similar to "  
+                    sim_text += f" See similar movies like to "  
                 sim_text += f"{self.name[:14]}."
 
             sim_text_num = len(sim_text)
@@ -563,7 +563,7 @@ class Movie(SocialMedia, SEO,MainPage):
 
     def generate_title(self):
         #start with year, add name at the end
-        year_text = f"({self.year}) - " 
+        year_text = f"({self.year})- " 
         text = year_text
 
         # Similars, Recommendation
