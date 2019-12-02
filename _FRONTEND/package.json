@@ -168,7 +168,10 @@
       "/topics",
       "/film-lists",
       "/blog",
-      "/movie/bad-genius-2017"
+      "/movie/bad-genius-2017",
+      "/movie/lock-stock-two-smoking-barrels-1998",
+      "/movie/nothing-but-trouble-1991",
+      "/movie/all-ladies-do-it-1992"
     ],
     "publicPath": "/"
   }

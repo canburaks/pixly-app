@@ -82,6 +82,8 @@
         "/person/virginia-madsen-12519"
     ],
     "movie":[
+        "/movie/lock-stock-two-smoking-barrels-1998",
+        "/movie/nothing-but-trouble-1991",
         "/movie/bad-genius-2017",
         "/movie/gosford-park-2001",
         "/movie/lost-in-translation-2003",
@@ -510,6 +512,8 @@
         "/movie/the-pursuit-of-happyness-2006",
         "/movie/captain-phillips-2013",
         "/movie/intouchables-2011",
-        "/movie/bad-genius-2017"
+        "/movie/bad-genius-2017",
+        "/movie/lock-stock-two-smoking-barrels-1998",
+        "/movie/nothing-but-trouble-1991"
     ]
 }
