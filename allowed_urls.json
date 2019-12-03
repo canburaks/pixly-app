@@ -82,6 +82,9 @@
         "/person/virginia-madsen-12519"
     ],
     "movie":[
+        "/movie/the-guardian-2006",
+        "/movie/faster-2010",
+        "/movie/the-rich-mans-wife-1996",
         "/movie/mommy-2014",
         "/movie/the-interview-1998",
         "/movie/creep-2-2017",
@@ -529,6 +532,9 @@
         "/movie/troy-2004",
         "/movie/into-the-wild-2007",
         "/movie/oblivion-2013",
-        "/movie/amelie-2001"
+        "/movie/amelie-2001",
+        "/movie/the-rich-mans-wife-1996",
+        "/movie/faster-2010",
+        "/movie/the-guardian-2006"
     ]
 }
