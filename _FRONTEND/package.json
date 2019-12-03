@@ -166,17 +166,15 @@
       "/advance-search",
       "/topics",
       "/topic/controversial-films",
-      "/movie/mulholland-dr-1999",
-      "/movie/the-handmaiden-2016",
-      "/movie/three-colors-red-1994",
-      "/movie/paris-is-burning-1990",
-      "/movie/persona-1966",
-      "/movie/all-about-my-mother-1999",
-      "/movie/call-me-by-your-name-2017",
-      "/movie/blue-is-the-warmest-color-2013",
-      "/movie/the-bitter-tears-of-petra-von-kant-1972",
-      "/movie/victim-1961",
-      "/movie/happy-together-1997"
+      "/movie/satans-tango-1994",
+      "/movie/woman-in-the-dunes-1964",
+      "/movie/werckmeister-harmonies-2000",
+      "/movie/rashomon-1950",
+      "/movie/jetee-la-1962",
+      "/movie/andrei-rublev-1969",
+      "/movie/winter-sleep-2014",
+      "/movie/cries-and-whispers-1972",
+      "/movie/the-exterminating-angel-1962"
     ],
     "publicPath": "/"
   }
