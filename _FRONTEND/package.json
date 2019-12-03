@@ -176,8 +176,9 @@
       "/movie/who-am-i-1998",
       "/movie/when-marnie-was-there-2014",
       "/movie/booty-call-1997",
-      "/movie/mercenaries-2014"
-
+      "/movie/mercenaries-2014",
+      "/movie/sense-and-sensibility-1995",
+      "/movie/old-boy-2003"
     ],
     "publicPath": "/"
   }
