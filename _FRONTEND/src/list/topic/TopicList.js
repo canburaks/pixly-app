@@ -29,6 +29,7 @@ const TopicList = React.memo((props) => {
     const authStatus = useAuthCheck()
     const firstPart = topics.slice(0,4)
     const secondPart = topics.slice(4, 8)
+    const thirdPart = topics.slice(8, 12)
 
     return (
         <PageContainer>
@@ -65,6 +66,15 @@ const TopicList = React.memo((props) => {
                     
                 <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {secondPart.map( item => (
+                        <CollectionCard 
+                            item={item} key={"rec" + item.id} 
+                            link={`/topic/${item.slug}`} 
+                            text={item.seoShortDescription}  />
+                    ))}
+                </Grid>
+
+                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {thirdPart.map( item => (
                         <CollectionCard 
                             item={item} key={"rec" + item.id} 
                             link={`/topic/${item.slug}`} 
