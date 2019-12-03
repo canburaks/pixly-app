@@ -83,6 +83,14 @@
         "/person/virginia-madsen-12519"
     ],
     "movie":[
+        "/movie/how-to-train-your-dragon-the-hidden-world-2019",
+        "/movie/the-angry-birds-movie-2-2019",
+        "/movie/ma-2019",
+        "/movie/the-wailing-2016",
+        "/movie/shaft-1971",
+        "/movie/village-of-the-damned-1960",
+        "/movie/village-of-the-damned-1995",
+
         "/movie/the-guardian-2006",
         "/movie/faster-2010",
         "/movie/the-rich-mans-wife-1996",
@@ -537,6 +545,13 @@
         "/movie/amelie-2001",
         "/movie/the-rich-mans-wife-1996",
         "/movie/faster-2010",
-        "/movie/the-guardian-2006"
+        "/movie/the-guardian-2006",
+        "/movie/how-to-train-your-dragon-the-hidden-world-2019",
+        "/movie/the-angry-birds-movie-2-2019",
+        "/movie/ma-2019",
+        "/movie/the-wailing-2016",
+        "/movie/shaft-1971",
+        "/movie/village-of-the-damned-1960",
+        "/movie/village-of-the-damned-1995"
     ]
 }

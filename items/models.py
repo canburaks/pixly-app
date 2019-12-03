@@ -488,7 +488,6 @@ class Movie(SocialMedia, SEO,MainPage):
         self.update_from_tmdb_movie()
         #print("1")
         self.set_seo_title()
-        self.save()
         self.set_seo_description_keywords()
         self.save()
         self.update_tags_from_data_keywords()
@@ -550,7 +549,7 @@ class Movie(SocialMedia, SEO,MainPage):
                 if self.have_similars:
                     sim_text += f" See similar movies and good movie recommendations based on "
                 else:
-                    sim_text += f" See similar movies like to "  
+                    sim_text += f" See similar movies like "  
                 sim_text += f"{self.name[:14]}."
 
             sim_text_num = len(sim_text)
@@ -563,7 +562,7 @@ class Movie(SocialMedia, SEO,MainPage):
 
     def generate_title(self):
         #start with year, add name at the end
-        year_text = f"({self.year})- " 
+        year_text = f"({self.year}) - " 
         text = year_text
 
         # Similars, Recommendation
@@ -632,7 +631,7 @@ class Movie(SocialMedia, SEO,MainPage):
             self.save()
 
     def set_seo_title(self, save=True):
-        title = self.generate_title()
+        self.seoTitle = self.generate_title()
         if save:
             self.save()
 
