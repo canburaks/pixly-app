@@ -25,7 +25,6 @@ const PersonPanel = (props) =>{
                 {props.person && 
                     props.personData["birthday"] && <p className="t-xs t-color-dark t-bold op90">Born: {props.personData.birthday}</p>}
 
-                <FollowButton item={props.item} status={props.status} size={32} info />
                 <hr />
                 <SocialBox item={props.item}  />
             </div>

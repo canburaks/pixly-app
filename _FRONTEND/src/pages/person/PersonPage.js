@@ -16,7 +16,7 @@ import PersonPanel from "../elements/PersonPanel"
 import "../pages.css"
 
 
-import {  Box, MovieCoverBox, PageContainer, ContentContainer } from "../../styled-components"
+import {  Box, MovieCoverBox, PageContainer, ContentContainer, HeaderText, HeaderMini, SubHeaderText, Text } from "../../styled-components"
 
 //import "cbs-web-components";
 
@@ -116,17 +116,8 @@ const PersonPage = (props) => {
                     <Col xs={12} md={12} lg={12} 
                         className="fbox-c aifs jcfs pad-bt-5x" 
                         >
-                        <article>
-                            <h4 className="t-xl t-bold mar-b-2x">BIOGRAPHY</h4>
-                                <TextCollapse 
-                                    size={textLimit}                //default 400
-                                    className="my-classname"  //className for text element p
-                                    toggleOpenLabel={"MORE"}  //default "MORE"
-                                    toggleCloseLabel={"LESS"} //default "LESS"
-                                    >
-                                    {item.bio}
-                                </TextCollapse>
-                        </article>
+                        <SubHeaderText className="t-xl t-bold mar-b-2x">{item.name + " Biography"}</SubHeaderText>
+                        <Text>{item.bio}</Text>
                     </Col>}
 
         
@@ -139,8 +130,7 @@ const PersonPage = (props) => {
                     
                 <DirectorPageAd />
 
-
-                <h4 className="t-xl t-bold mar-b-2x t-color-dark">FILMOGRAPHY</h4>
+                <SubHeaderText className="t-xl t-bold mar-b-2x">{item.name + " Filmography"}</SubHeaderText>
                 <MovieCoverBox items={sortedMovies} />
 
                 
