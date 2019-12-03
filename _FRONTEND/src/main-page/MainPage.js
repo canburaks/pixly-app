@@ -330,7 +330,7 @@ const MainPage = React.memo(() => {
 								<LinkButton link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}
 									hoverScale hoverBg="#3633CC"
 								>
-									Advance Search
+									Browse Movies
 								</LinkButton>
 
 							</FlexBox>
