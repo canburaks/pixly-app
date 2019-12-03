@@ -165,7 +165,14 @@
       "/",
       "/advance-search",
       "/topics",
-      "/topic/controversial-films"
+      "/topic/controversial-films",
+      "/movie/how-to-train-your-dragon-the-hidden-world-2019",
+      "/movie/the-angry-birds-movie-2-2019",
+      "/movie/ma-2019",
+      "/movie/the-wailing-2016",
+      "/movie/shaft-1971",
+      "/movie/village-of-the-damned-1960",
+      "/movie/village-of-the-damned-1995"
 
     ],
     "publicPath": "/"
