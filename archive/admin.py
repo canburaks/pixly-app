@@ -12,5 +12,5 @@ class TmdbMovieAdmin(admin.ModelAdmin):
 # Register your models here.
 @admin.register(ContentSimilarity)
 class ContentSimilarityAdmin(admin.ModelAdmin):
-    list_display = ("movie__name",)
+    list_display = ("movie",)
     search_fields = ("movie__name", "movie__id", )
