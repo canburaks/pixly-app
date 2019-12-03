@@ -163,7 +163,6 @@
     "include": [
       "",
       "/",
-      "/explore",
       "/advance-search",
       "/topics",
       "/film-lists",
@@ -186,7 +185,10 @@
       "/person/darren-aronofsky-6431",
       "/person/nuri-bilge-ceylan-56214",
       "/person/michael-haneke-6011",
-      "/person/yorgos-lanthimos-122423"
+      "/person/yorgos-lanthimos-122423",
+      "/movie/the-rich-mans-wife-1996",
+      "/movie/faster-2010",
+      "/movie/the-guardian-2006"
 
     ],
     "publicPath": "/"
