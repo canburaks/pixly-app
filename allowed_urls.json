@@ -83,6 +83,17 @@
         "/person/virginia-madsen-12519"
     ],
     "movie":[
+        "/movie/mulholland-dr-1999",
+        "/movie/the-handmaiden-2016",
+        "/movie/three-colors-red-1994",
+        "/movie/paris-is-burning-1990",
+        "/movie/persona-1966",
+        "/movie/all-about-my-mother-1999",
+        "/movie/call-me-by-your-name-2017",
+        "/movie/blue-is-the-warmest-color-2013",
+        "/movie/the-bitter-tears-of-petra-von-kant-1972",
+        "/movie/victim-1961",
+        "/movie/happy-together-1997",
         "/movie/how-to-train-your-dragon-the-hidden-world-2019",
         "/movie/the-angry-birds-movie-2-2019",
         "/movie/ma-2019",
@@ -562,6 +573,17 @@
         "/movie/booty-call-1997",
         "/movie/mercenaries-2014",
         "/movie/sense-and-sensibility-1995",
-        "/movie/old-boy-2003"
+        "/movie/old-boy-2003",
+        "/movie/mulholland-dr-1999",
+        "/movie/the-handmaiden-2016",
+        "/movie/three-colors-red-1994",
+        "/movie/paris-is-burning-1990",
+        "/movie/persona-1966",
+        "/movie/all-about-my-mother-1999",
+        "/movie/call-me-by-your-name-2017",
+        "/movie/blue-is-the-warmest-color-2013",
+        "/movie/the-bitter-tears-of-petra-von-kant-1972",
+        "/movie/victim-1961",
+        "/movie/happy-together-1997"
     ]
 }
