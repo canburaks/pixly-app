@@ -90,7 +90,7 @@ const SearchPage = (props) =>{
                     <SearchInput type="text"   
                         px={[2,3,4,4,4]}
                         placeholder="Search.."
-                        autoFocus
+                        autoFocus={false}
                         value={keywords} 
                         onChange={keywordsHandler} 
                         minHeight="70px"
