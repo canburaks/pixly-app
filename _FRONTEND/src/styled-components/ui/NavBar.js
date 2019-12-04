@@ -41,23 +41,17 @@ const NB = props => {
 
 
     const MiddleBar = () => (
-		<FlexBox height={"auto"} minWidth={"100%"} justifyContent="space-around" alignItems="center" py={[1]}>
-			{window.innerWidth > 480 
-			? 	<>
-
-					<NewLink color="#f1f1f1 !important" link={"/film-lists"} fontSize={["12px", "12px", "12px", "16px"]}>
-						<UnderlineEffect >Film Lists</UnderlineEffect>
-					</NewLink>
-					<NewLink color="#f1f1f1 !important" link={"/topics"} fontSize={["12px", "12px", "12px", "16px"]}>
-						<UnderlineEffect >Topics</UnderlineEffect>
-					</NewLink>
-					<NewLink color="#f1f1f1 !important" link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]}>
-						<UnderlineEffect >Search</UnderlineEffect>
-					</NewLink>
-					<SearchQueryBox />
-				</>
-			: <SearchQueryBox />
-			}
+		<FlexBox height={"auto"} minWidth={"100%"} justifyContent="center" alignItems="center" py={[1]}>
+			<NewLink color="#f1f1f1 !important" link={"/film-lists"} fontSize={["12px", "12px", "12px", "16px"]}>
+				<UnderlineEffect >Film Lists</UnderlineEffect>
+			</NewLink>
+			<NewLink color="#f1f1f1 !important" link={"/topics"} fontSize={["12px", "12px", "12px", "16px"]}>
+				<UnderlineEffect >Topics</UnderlineEffect>
+			</NewLink>
+			<NewLink color="#f1f1f1 !important" link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]}>
+				<UnderlineEffect >Search</UnderlineEffect>
+			</NewLink>
+			{window.innerWidth > 480 && <SearchQueryBox />}
 		</FlexBox>
 	)
 	
@@ -73,7 +67,10 @@ const NB = props => {
             bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"} 
             height={navbarheight}
 			opacity={isTransparentBg ? 1 : 0.98}
-			src={!isTransparentBg ? "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/navbar-collage.jpg" : undefined}
+			src={!isTransparentBg 
+				? "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/navbar-collage.jpg" 
+				: undefined
+			}
 		>
             <Box width={"10vw"}>
                 <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
@@ -94,7 +91,7 @@ const NB = props => {
                         mr={[4]}
                         clickable
                     >
-                        Sign In
+                        Login
                     </Box>
                     }
 
