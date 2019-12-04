@@ -71,8 +71,7 @@ export const SearchQueryBox = (props) =>{
 
     return(
             <Box width={"auto"}>
-        
-                <FlexBox justifyContent="center" id="s-text-input" minWidth="100%" position="relative">
+                <FlexBox justifyContent="center" id="s-text-input" minWidth="100%" position="relative" ml={[4,4,4,5,5]}>
                     <SearchInput type="text"   
                         placeholder="Search"
                         value={keywords} 

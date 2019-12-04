@@ -39,14 +39,14 @@ import "./dist/css/style.css"
 
 
 const FeatureText = (props) => (
-	<FlexBox flexDirection="column" px={[3]} maxWidth={600}>
-		<SubHeaderText mr={[2]}
+	<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>
+		<SubHeaderText mr={[1,1,2]}
 			fontSize={["14px", "14px", "14px", "16px"]}
 			width={"auto"}
 		>
 			{props.header}
 		</SubHeaderText>
-		<Text mr={[2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>{props.text}</Text>
+		<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>{props.text}</Text>
 	</FlexBox>
 )
 
