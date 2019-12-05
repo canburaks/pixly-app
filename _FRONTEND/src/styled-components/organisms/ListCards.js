@@ -4,9 +4,61 @@ import { Text, Paragraph, HeaderMini,
         Box, FlexBox, SuperBox, TagBox,
         TextSection, Card, ImageCard, AspectRatioCard, MosaicCard,DarkCard,
         NewLink, Input, LinkButton,CoverLink, ImdbRatingIcon, YearClockIcon, 
-        BookmarkMutation, RatingMutation, Hr
+        BookmarkMutation, RatingMutation, Hr, SubHeaderText,ImageBox
 } from "../index"
+import { rgba } from "polished";
 
+export const ActiveDirectorCard = (props) => (
+<FlexBox 
+    mb={[3]}  width={"100%"} 
+    borderRadius={"6px"} 
+    bg={"rgba(0,0,0, 0.7)"}
+    border="1px solid"
+    borderColor="rgba(0,0,0,0.2)"
+    overflow="hidden"
+    flexDirection="column" 
+    boxShadow={"card"}
+    >
+    <SuperBox 
+        src={props.item.coverPoster} 
+        width={"100%"}
+        height={"auto"}
+        ratio={0.5625}
+        borderTopLeftRadius={"6px"}
+        borderBottomLeftRadius={"6px"}
+        display="flex"
+        flexDirection="column"
+        justifyContent="flex-end"
+    >
+        <SubHeaderText 
+            color="light" fontFamily={"playfair"} 
+            position="absolute" 
+            bottom={"5px"}
+            left={"5px"}
+        >
+            {props.item.name}
+        </SubHeaderText>
+    </SuperBox>
+    <FlexBox flexDirection="column" ml={[2]} minWidth={"50%"} pt={[3,3,3,4]} justifyContent="flex-end" height={"100%"}>
+
+        <FlexBox width={"100%"} height="auto" height={"120px"} overflow="hidden" justifyContent="flex-start" mt={"auto"}>
+            {props.item.previewMovies.map(movie => (
+                <SuperBox 
+                    position="relative" 
+                    src={movie.poster} 
+                    title={movie.name} 
+                    width={[ "30px", "30px","60px"]}
+                    height={[ "45px", "45px","90px"]}
+                    m={[2]}
+                    boxShadow="card"
+                >
+                    <CoverLink link={`/movie/${movie.slug}`}/>
+                </SuperBox>
+            ))}
+        </FlexBox>
+    </FlexBox>
+</FlexBox>
+) 
 
 export const CollectionCard = (props) => (
     <FlexBox flexDirection="column" mb={[5]} height={"100%"}>

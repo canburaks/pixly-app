@@ -8,6 +8,7 @@ export const ACTIVE_DIRECTORS = gql`
         slug
         name,
         poster,
+        coverPoster,
         movieQuantity,
         videoQuantity,
         listQuantity,
