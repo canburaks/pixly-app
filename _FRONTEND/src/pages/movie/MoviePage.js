@@ -70,7 +70,7 @@ const MoviePage = props => {
 			: `${item.name} (${item.year}) Trailer`
 		: `${item.name} (${item.year}) Videos`
 
-	console.log(item.videoTags)
+	console.log(item)
 
 	const directorFilter = item.crew
 		.filter(c => c.job == "D")

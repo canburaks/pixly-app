@@ -160,7 +160,7 @@ class TagAdmin(admin.ModelAdmin):
         "form_tag","genre_tag", "geo_tag","historical_person_tag",  
         "phenomenal_tag","series_tag", "subgenre_tag","theme_tag", "video_tag","parent_genres","adult_tag",)
 
-    readonly_fields = ("pk","related_movies")
+    readonly_fields = ("pk",)
     search_fields = ('name',"slug")
     raw_id_fields = ['related_movies',]
     list_filter = ('tag_type',"object_type","topic_tag",
