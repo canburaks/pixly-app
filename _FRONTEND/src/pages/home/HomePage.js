@@ -110,13 +110,11 @@ const HomePage = (props) => {
                         text="It looks like you did not activate your account. Please check your mailbox."
                 />}
 
-                <HomePageFeedAd />
-
                 {/* IF THERE IS NO RECOMMENDATION*/}
                 {!(persona.recommendations.length > 0) && 
                     <RecommendationsInfo points={profile.points}  
-                        verified={profile.cognitoVerified}  />}
-
+                        verified={profile.cognitoVerified}  
+                    />}
                 {profile.points < 40 &&
                     <>
                     <MessageBox header={"Low Points"} text={"You can start to give rating by looking the popular film list below"} />
@@ -135,7 +133,8 @@ const HomePage = (props) => {
                 }
 
                 <RenderElementContainer />
-                
+                <HomePageFeedAd />
+
                 <br />
 
                 <MessageBox

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+    <channel>
+        <title>The Great Mind Blowing / Thought Provoking Movies</title>
+        <link>https://pixly.app/rss/thought-provoking</link>
+        <description>The great thought-provoking movies that cause us to think seriously and deeply about what we ignored or what we already know.</description>
+        <atom:link href="https://pixly.app/rss/thought-provoking" rel="self" />
+        <docs>http://www.rssboard.org/rss-specification</docs>
+        <generator>python-feedgen</generator>
+        <language>en</language>
+        <lastBuildDate>Thu, 05 Dec 2019 01:28:21 +0000</lastBuildDate>
+    </channel>
+</rss>

@@ -30,6 +30,17 @@ const PixlyTwitterIcon = () => {
         : "noopener nofollow noreferrer"
     return(
     <div className="footer-twitter " >
+        <a 
+            target="_blank"
+            data-flip-widget="ico" 
+            href="https://flipboard.com/@pixlymovies?utm_campaign=tools&utm_medium=follow&action=follow"
+        >
+            <img 
+            src="https://cdn.flipboard.com/badges/flipboard_srsw.png" 
+            alt="Flipboard" 
+            />
+        </a>
+
         <a target="_blank" rel={anchorRelationship} href="https://twitter.com/pixlymovie" className="footer-link fbox-r jcfs aic">
             <svg 
                 aria-hidden="true" focusable="false" className="f-icon svg-inline--fa fa-twitter fa-w-16"
