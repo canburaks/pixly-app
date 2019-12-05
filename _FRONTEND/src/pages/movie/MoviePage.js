@@ -30,11 +30,13 @@ import {
 	Image,
 	ImageCard,
 	HiddenSpan,
+	RatingMutation,
 	HeaderText,Text,
 	Span,
 	NewLink,
 	TextSection,
-	MovieRichCardBox
+	MovieRichCardBox,
+	FlexBox
 } from "../../styled-components";
 
 import "../pages.css";
@@ -154,18 +156,35 @@ const MoviePage = props => {
 				cacheUpdate={cacheUpdate}
 				authStatus={authStatus}
 				isLargeScreen={isLargeScreen}
+				darken
 			/>
 
+			<FlexBox flexDirection="column" justifyContent="center" alignItems="center">
+				<Text fontWeight="bold" fontSize={["16px", "16px", "18px"]}>How much did you like the movie?</Text>
+				<RatingMutation item={item} size={50}/>
+			</FlexBox>
 			{/*<!-- Page Container --> */}
 
 			{/* SUMMARY */}
 			<ContentContainer zIndex={1} mt={[4]}>
+				
+				
 				{item.summary && item.summary.length > 50 && (
 					<>
 						<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{item.name}</HeaderText>
 						<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>{item.summary}</Text>
 					</>
 				)}
+				{/* VIDEO */}
+				{hasVideos && 
+					<>
+					<HeaderMini my={[2]} mt={[5]}>{videoText}</HeaderMini>
+					<YoutubePlayer
+						videos={item.videos}
+						title={item.name + " Videos"}
+					/>
+					</>
+				}
 
 				{/*<!--SIMILAR Section--> */}
 				{similarPlaceholder.length > 0 && (
@@ -253,17 +272,6 @@ const MoviePage = props => {
 				)}
 				
 				<br/>
-
-				{/* VIDEO */}
-				{hasVideos && 
-					<>
-					<HeaderMini my={[2]} mt={[5]}>{videoText}</HeaderMini>
-					<YoutubePlayer
-						videos={item.videos.reverse()}
-						title={item.name + " Videos"}
-					/>
-					</>
-				}
 
 			</ContentContainer>
 		</PageContainer>

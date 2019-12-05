@@ -154,6 +154,7 @@ export const RatingMutation = (props) => {
     }
 	const ratingSetter = useCallback((value) => setCurrentRating(value), [currentRating] )
 	const ratingSize = useValues([22,24,26,30,34])
+	const starSize = props.size ? props.size : ratingSize
 	const debouncedMutation = () => rating({ variables:{id:props.item.id, rate:debouncedRating}})
 	
 	useEffect(() =>{
@@ -171,7 +172,7 @@ export const RatingMutation = (props) => {
     return (
       <ReactStars half 
           edit={authStatus} 
-          color2={"#ffd700"} color1="grey" size={ratingSize} 
+          color2={"#ffd700"} color1="grey" size={starSize} 
           value={authStatus ? (currentRating || props.viewerRating) : null} 
           onChange={ratingSetter}
       />

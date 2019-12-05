@@ -38,8 +38,9 @@ export const MovieCoverPanel = (props) => (
         >
             <DirectorLinks directors={props.item.director}  color="lightDark1" fontSize="m" mb={[1,1,1,2]}/>
             <TagBox tags= {props.item.tags.filter(tag => tag.genreTag === true)} />
-            {/*console.log("movie cover")*/}
+            {/*console.log("movie cover")
             <RatingMutation  item={props.item}  />
+            */}
         </TopPanelCoverElement>
     </TopPanelBackElement>
 )

@@ -233,6 +233,7 @@ export const MOVIE = gql`
         seoKeywords,
         richdata,
         videoTags,
+        genres,
         release,
         quotes,
             director{
