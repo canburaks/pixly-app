@@ -11,6 +11,7 @@ export const ACTIVE_DIRECTORS = gql`
         movieQuantity,
         videoQuantity,
         listQuantity,
+        previewMovies{id, slug, name, poster}
         born, died,
       }
     }
