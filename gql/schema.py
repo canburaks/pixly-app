@@ -84,6 +84,15 @@ class ListQuery(object):
                     first=graphene.Int(default_value=None),
                     skip=graphene.Int(default_value=None))
 
+    active_directors = graphene.List(DirectorPersonMixType)
+
+
+
+    def resolve_active_directors(self, info, **kwargs):
+        result = Cache.active_directors()
+        return result
+
+
     def resolve_list_of_recent_movies(self, info, **kwargs):
         first = kwargs.get("first") if kwargs.get("first") else 20
         skip = kwargs.get("skip") if kwargs.get("skip") else 0
