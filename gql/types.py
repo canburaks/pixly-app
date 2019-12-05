@@ -981,8 +981,8 @@ class DirectorPersonMixType(DjangoObjectType, SocialMediaType, SEOType, Statisti
     
     def resolve_preview_movies(self, info, *_):
         cqs = Crew.objects.filter(person=self, job="d")
-        last_movie = cqs.order_by("-movie__year").values_list("id", flat=True)[:1]
-        highest_movies = cqs.order_by("-movie__imdb_rating").values_list("id", flat=True)[:3]
+        last_movie = cqs.order_by("-movie__year").values_list("movie__id", flat=True)[:1]
+        highest_movies = cqs.order_by("-movie__imdb_rating").values_list("movie__id", flat=True)[:3]
         movie_ids = set(list(last_movie) + list(highest_movies))
         return Movie.objects.filter(id__in=movie_ids)
 
