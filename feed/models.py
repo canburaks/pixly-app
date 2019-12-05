@@ -100,7 +100,6 @@ class FeedPost(models.Model):
         fg.image(url=self.cover_poster.url, title=f"{self.title} Image", link=self.cover_poster.url,
             width=900, height=500
         )
-        fg.enclosure(self.cover_poster.url, , 'audio/mpeg')
 
         #pub date
         if self.pub_date:
