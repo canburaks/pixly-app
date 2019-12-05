@@ -12,7 +12,7 @@ import JoinBanner from "../../components/JoinBanner.js"
 import {
     DirectorCard,HiddenHeader, Loading, 
     PageContainer, ContentContainer,
-    HeaderText, Error
+    HeaderText, Error, Grid, ActiveDirectorCard
 } from "../../styled-components"
 
 
@@ -29,7 +29,11 @@ const DirectorList = (props) =>{
             
             <ContentContainer>
                 <HeaderText>Directors Collection</HeaderText>
-                <DirectorPageAd />
+                <Grid columns={[1,1,1,1,2]} py={[4]} gridColumnGap={[2,2,3]}>
+                    {props.directors.map(director => (
+                        <ActiveDirectorCard item={director} key={director.id}  />
+                    ))}
+                </Grid>                
 
             </ContentContainer>
         </PageContainer>

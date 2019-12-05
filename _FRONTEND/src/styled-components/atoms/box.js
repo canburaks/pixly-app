@@ -101,7 +101,19 @@ export const SuperBox = styled.div`
     ${typography}
 `
 
+export const ImageBox = ({ratio,src, ...props}) => (
+    <SuperBox width={"100%"} position="relative" {...props} ratio={ratio} >
+        <Image 
+            src={src} 
+            position="absolute" 
+            top={0}
+            left={0}
+            right={0}
+            bottom={0}
 
+        />
+    </SuperBox>
+    )
 
 export const GridBox = styled(Box)`
     display: grid;
