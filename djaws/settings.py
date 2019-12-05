@@ -98,6 +98,7 @@ INSTALLED_APPS = [
     "persona",
     "blog",
     'pixly',
+    "feed",
 
     'django_hosts',
     'corsheaders',
