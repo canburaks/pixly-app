@@ -48,6 +48,9 @@ const NB = props => {
 			<NewLink color="#f1f1f1 !important" link={"/topics"} fontSize={["12px", "12px", "12px", "16px"]}>
 				<UnderlineEffect >Topics</UnderlineEffect>
 			</NewLink>
+			<NewLink color="#f1f1f1 !important" link={"/directors/1"} fontSize={["12px", "12px", "12px", "16px"]}>
+				<UnderlineEffect >Directors</UnderlineEffect>
+			</NewLink>
 			<NewLink color="#f1f1f1 !important" link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]}>
 				<UnderlineEffect >Search</UnderlineEffect>
 			</NewLink>

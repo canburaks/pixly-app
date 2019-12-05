@@ -1,6 +1,22 @@
 import gql from "graphql-tag";
 
 
+export const ACTIVE_DIRECTORS = gql`
+    query activeDirectors{
+        activeDirectors{
+        id,
+        slug
+        name,
+        poster,
+        movieQuantity,
+        videoQuantity,
+        listQuantity,
+        born, died,
+      }
+    }
+`;
+
+
 export const BLOG_QUERY = gql`
     query blogPosts{
         blogPosts{
