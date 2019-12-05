@@ -150,11 +150,17 @@ export const TopPanelCoverElement = React.memo((props) => (
         {props.Actions && <props.Actions item={props.item} authStatus={props.authStatus} />}
 
         {/*console.log("top panel", props.item.name) */}
-        <Box position={"absolute"} pl={[2,2,3]} py={[1,1,2]} pt={[2,3,4]} left={0} bottom={0} width={"100%"} height={"auto"} darken={props.darken}>
-            <HeaderText color="lightDark1" textShadow={"textDark"} fontSize={[16, 16, 20, 24, 28]} fontWeight="bold">{props.header}</HeaderText>
+        <Box position={"absolute"} 
+            pl={[2,2,3]} py={[1,1,2]} pt={[1,1,2]} 
+            left={0} bottom={0} 
+            width={"100%"} height={"auto"} maxHeight={"50%"}
+            darken={props.darken}
+            bg={"rgba(0,0,0, 0.5)"}
+        >
+            <HeaderText color="lightDark1" textShadow={"textDark"} fontSize={[14, 14, 20, 24, 28]} fontWeight="bold">{props.header}</HeaderText>
 
             {props.Header && <props.Header item={props.item} authStatus={props.authStatus} />}
-            {props.subheader && <HeaderText color="lightDark1" textShadow="dark" fontSize={[15, 15, 18, 20, 22]} fontWeight="500">{props.subheader}</HeaderText>}
+            {props.subheader && <HeaderText color="lightDark1" textShadow="dark" fontSize={[12, 12, 18, 20, 22]} fontWeight="500">{props.subheader}</HeaderText>}
             {/*console.log("il", props.isLargeScreen)*/}
             {(props.text && props.isLargeScreen) && <Paragraph color="lightDark1" textShadow={"textDark"} fontSize={[14, 14, 16, 16,18]}  maxWidth={"95%"}>{props.text}</Paragraph>}
             {props.children}
@@ -226,10 +232,10 @@ Grid.defaultProps = {
 }
 
 export const TagBox = ({tags, num=100, color}) => (
-    <FlexBox flexWrap="wrap" py={[1]} color={color || "light"}>
+    <FlexBox flexWrap="wrap" py={[0,0,1]} color={color || "light"}>
         {tags.slice(0, num).map(tag => (
             <TagText key={tag.name ? "tbox"+ tag.name : "tbox" + tag}  
-                fontSize={["10px","12px","12px", "12px", "12px", "14px"]}
+                fontSize={["10px","10px","12px", "12px", "12px", "14px"]}
                 fontFamily="header"
                 borderColor={color || "light"}
                 color={color || "light"}
