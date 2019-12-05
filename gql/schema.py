@@ -89,7 +89,9 @@ class ListQuery(object):
 
 
     def resolve_active_directors(self, info, **kwargs):
-        result = Cache.active_directors()
+        #result = Cache.active_directors()
+        result = Director.objects.filter(active=True)
+
         return result
 
 
