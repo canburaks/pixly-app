@@ -984,7 +984,7 @@ class DirectorPersonMixType(DjangoObjectType, SocialMediaType, SEOType, Statisti
         last_movie = cqs.order_by("-movie__year").values_list("id", flat=True)[:1]
         highest_movies = cqs.order_by("-movie__imdb_rating").values_list("id", flat=True)[:3]
         movie_ids = set(list(last_movie) + list(highest_movies))
-        return Movie.object.filter(id__in=movie_ids)
+        return Movie.objects.filter(id__in=movie_ids)
 
     def resolve_movie_quantity(self, info, *_):
         qs = Crew.objects.filter(person=self, job="d").count()
