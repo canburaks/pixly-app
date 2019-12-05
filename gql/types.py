@@ -966,6 +966,9 @@ class DirectorPersonMixType(DjangoObjectType, SocialMediaType, SEOType, Statisti
     related_lists = graphene.List(ListType)
     quotes = graphene.List(graphene.String)
 
+    movie_quantity = graphene.Int()
+    list_quantity = graphene.Int()
+    video_quantity = graphene.Int()
 
     class Meta:
         model = Person
