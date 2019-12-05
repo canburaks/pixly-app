@@ -976,6 +976,16 @@ class DirectorPersonMixType(DjangoObjectType, SocialMediaType, SEOType, Statisti
             self.watch_quantity = watch_quantity
     
 
+    def resolve_movie_quantity(self, info, *_):
+        return Crew.objects.filter(person=self, job="d").count()
+
+    def resolve_video_quantity(self, info, *_):
+        return Video.objects.filter(related_persons=self).count()
+    
+    def resolve_list_quantity(self, info, *_):
+        return List.objects.filter(related_persons=self).count()
+
+
     def resolve_quotes(self, info, *_):
         if self.quotes.exists():
             quote_list = [x.text for x in self.quotes.all()]
