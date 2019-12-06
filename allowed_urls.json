@@ -80,9 +80,13 @@
         "/person/anthony-hopkins-4173",
         "/person/gabrielle-union-17773",
         "/person/jared-leto-7499",
-        "/person/virginia-madsen-12519"
+        "/person/virginia-madsen-12519",
+        "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/the-nightingale-2019",
+        "/movie/the-key-1983",
+        "/movie/stretch-2014",
         "/movie/dogtooth-2009",
         "/movie/the-killing-of-a-sacred-deer-2017",
         "/movie/devils-on-the-doorstep-2000",
@@ -349,6 +353,7 @@
         "/list/december-2019/1",
         "/list/mike-leighs-favourite-films/1",
         "/list/david-lynchs-favorite-films/1",
+        "/person/joaquin-phoenix-73421",
         "/person/ingmar-bergman-6648",
         "/person/alfred-hitchcock-2636",
         "/person/stanley-kubrick-240",
@@ -613,6 +618,9 @@
         "/movie/mother-2017",
         "/movie/devils-on-the-doorstep-2000",
         "/movie/the-killing-of-a-sacred-deer-2017",
-        "/movie/dogtooth-2009"
+        "/movie/dogtooth-2009",
+        "/movie/stretch-2014",
+        "/movie/the-key-1983",
+        "/movie/the-nightingale-2019"
     ]
 }
