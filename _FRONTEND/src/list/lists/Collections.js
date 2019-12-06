@@ -44,7 +44,7 @@ const ListBoard = (props) => {
 
 
     //console.log(otherLists)
-
+    const buttonText = (name) => name.length > 20 ? name.slice(0,20) + "..." : name
     return (
         <PageContainer>
             <Head
@@ -65,17 +65,19 @@ const ListBoard = (props) => {
                     If you have any suggestions to add or in any case, please feel free to write it from the bottom part of the page.
                 </Text>    
                 <hr/>
-                <Grid columns={[1,1,2,2,2,2,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {firstPart.map( item => (
+                <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {allLists.map( item => (
                         <CollectionCard 
                             item={item} key={"rec" + item.id} 
                             link={`/list/${item.slug}/1`} 
                             text={item.seoShortDescription}
                             ratio={0.4}
+                            buttonText={`See ${buttonText(item.name)}`}
                         />
                     ))}
                 </Grid>
                 
+                {/*
                 <HomePageFeedAd />
 
                 <Grid columns={[1,1,2,2,2,2,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
@@ -88,6 +90,7 @@ const ListBoard = (props) => {
                         />
                     ))}
                 </Grid>
+
 
                 <MidPageAd />
 
@@ -102,7 +105,7 @@ const ListBoard = (props) => {
                     ))}
                 </Grid>
 
-                <ListBoardAd />
+                <ListBoardAd />*/}
 
 
             </ContentContainer>

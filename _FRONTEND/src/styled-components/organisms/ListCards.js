@@ -75,7 +75,7 @@ export const ActiveDirectorCard = (props) => (
                     display="flex"
                     to={`/person/${props.item.slug}#director-page-list`}
                     title={`Favourite films of ${props.item.name}`}
-                    ml={[3]}
+                    ml={[2]}
                 >        
                     <ListIcon size={18} />
                     <Text color="light" fontSize={"14px"} fontWeight="bold">{props.item.listQuantity}</Text>
@@ -113,7 +113,7 @@ export const ActiveDirectorCard = (props) => (
 ) 
 
 export const CollectionCard = (props) => (
-    <FlexBox flexDirection="column" mb={[5]} height={"100%"}>
+    <FlexBox flexDirection="column" mb={[5]} height={"100%"} mt={[2]}>
         <SuperBox 
             display="flex" flexDirection="column" 
             src={props.item.coverPoster || props.item.poster} 
