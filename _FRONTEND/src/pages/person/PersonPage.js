@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef, useContext, useMemo } from "react";
 import { withRouter, Link } from "react-router-dom";
 
 import { useAuthCheck,  useWindowSize, ScrollInto } from "../../functions";
@@ -45,6 +45,29 @@ const PersonPage = (props) => {
     }
     
     const hasVideos = item.videos && item.videos.length > 0 ? true : false
+
+    const videoHeaderText = useMemo(() => {
+        if (hasVideos){
+            var text = `${item.name} Videos`
+            const videoEssayNum = item.videos.filter(v => v.tags.includes("video-essay")).length 
+            const interviewNum = item.videos.filter(v => v.tags.includes("interview")).length 
+            const conversationNum = item.videos.filter(v => v.tags.includes("interview")).length
+            if (videoEssayNum > 0){
+                text += ", Video Essays"
+            }  
+            if (interviewNum > 0){
+                text += ", Interviews"
+            }  
+            if (conversationNum > 0){
+                text += ", Conversations"
+            }  
+            return text
+        }
+        return ""
+    },[item.slug])
+
+    //console.log(videoHeaderText)
+
     const screenSize = useWindowSize()
     const textLimit = screenSize === "S" 
                         ? 300
@@ -98,7 +121,6 @@ const PersonPage = (props) => {
             ScrollInto(props.location.hash.slice(1))
         }
     },[])
-
     return(
         <PageContainer>
             <Head
@@ -125,13 +147,12 @@ const PersonPage = (props) => {
 
         
                 </Row>
-                <FlexBox width={"100%"} height="auto" id="director-page-videos">
                     {item.videos && item.videos.length > 0 && 
-                        activeVideo 
-                            ? <YoutubePlayer activeVideo={activeVideo}  videos={item.videos} title={`${item.name} Videos`}/>
-                            : <YoutubePlayer videos={item.videos} title={`${item.name} Videos`}/>
+                        <FlexBox width={"100%"} height="auto" id="director-page-videos" flexDirection="column" mt={[4]}>
+                            <SubHeaderText fontWeight="bold" my={[2]}>{videoHeaderText}</SubHeaderText>
+                            <YoutubePlayer videos={item.videos} title={`${item.name} Videos`}/>
+                        </FlexBox>
                         }
-                </FlexBox>
                     
                 <DirectorPageAd />
 

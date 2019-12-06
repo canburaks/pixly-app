@@ -165,7 +165,11 @@
       "",
       "/",
       "/film-lists",
-      "/topics"
+      "/topics",
+      "/directors/1",
+      "/movie/mother-2017",
+      "/person/darren-aronofsky-6431",
+      "/person/ingmar-bergman-6648"
 
     ],
     "publicPath": "/"
