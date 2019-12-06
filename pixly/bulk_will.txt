@@ -1,3 +1,4 @@
-https://pixly.app/movie/191699/hezarpa-2018
-https://pixly.app/movie/43567
-https://pixly.app/person/nm4263213
+movie/191699/hezarpa-2018
+movie/43567
+person/nm4263213
+movie/493141-beats-2019
