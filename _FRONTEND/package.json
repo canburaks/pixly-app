@@ -164,7 +164,9 @@
     "include": [
       "",
       "/",
-      "/movie/devils-on-the-doorstep-2000"
+      "/movie/devils-on-the-doorstep-2000",
+      "/movie/dogtooth-2009",
+      "/movie/the-killing-of-a-sacred-deer-2017"
     ],
     "publicPath": "/"
   }
