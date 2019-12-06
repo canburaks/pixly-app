@@ -205,7 +205,7 @@ const PersonQuery = (props) => {
     const queryVariables = {}
     const slug = props.match.params.slug //slug can be imdb_id
     const id = props.match.params.id  //if id exists use id as slug
-    console.log(slug, id)
+    //console.log(slug, id)
     //case of-->  /person/nm0001676/
     if (slug.startsWith("nm") && !id){
         isImdbId = true
