@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { withRouter, Link } from "react-router-dom";
 
-import { useAuthCheck,  useWindowSize } from "../../functions/hooks";
+import { useAuthCheck,  useWindowSize, ScrollInto } from "../../functions";
 import { rgaPageView, Head, DirectorPageAd } from "../../functions/analytics"
 
 
@@ -16,7 +16,7 @@ import PersonPanel from "../elements/PersonPanel"
 import "../pages.css"
 
 
-import {  Box, MovieCoverBox, PageContainer, ContentContainer, HeaderText, HeaderMini, SubHeaderText, Text } from "../../styled-components"
+import {  Box, MovieCoverBox, PageContainer, ContentContainer, HeaderText, HeaderMini, SubHeaderText, Text, FlexBox } from "../../styled-components"
 
 //import "cbs-web-components";
 
@@ -94,7 +94,10 @@ const PersonPage = (props) => {
             if (vp){
                 window.scrollTo(0, vp.offsetTop) 
             }}
-    })
+        if (props.location.hash){
+            ScrollInto(props.location.hash.slice(1))
+        }
+    },[])
 
     return(
         <PageContainer>
@@ -122,21 +125,23 @@ const PersonPage = (props) => {
 
         
                 </Row>
-                {item.videos && item.videos.length > 0 && 
-                    activeVideo 
-                        ? <YoutubePlayer activeVideo={activeVideo}  videos={item.videos} title={`${item.name} Videos`}/>
-                        : <YoutubePlayer videos={item.videos} title={`${item.name} Videos`}/>
-                    }
+                <FlexBox width={"100%"} height="auto" id="director-page-videos">
+                    {item.videos && item.videos.length > 0 && 
+                        activeVideo 
+                            ? <YoutubePlayer activeVideo={activeVideo}  videos={item.videos} title={`${item.name} Videos`}/>
+                            : <YoutubePlayer videos={item.videos} title={`${item.name} Videos`}/>
+                        }
+                </FlexBox>
                     
                 <DirectorPageAd />
 
-                <SubHeaderText className="t-xl t-bold mar-b-2x">{item.name + " Filmography"}</SubHeaderText>
+                <SubHeaderText id="director-page-filmography">{item.name + " Filmography"}</SubHeaderText>
                 <MovieCoverBox items={sortedMovies} />
 
                 
 
                 {item.relatedLists && item.relatedLists.length>0 &&
-                <Box my={[1]}>
+                <Box my={[1]} id="director-page-list">
                     {item.relatedLists.map(list =>(
                         <Box key={list.id} my={[2]}>
                             <Link to={`/list/${list.slug}/1`} rel="nofollow">

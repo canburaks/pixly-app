@@ -134,6 +134,11 @@ themes.default.shadows = {
 themes.default.shadows.card = themes.default.shadows.diffuse2
 
 themes.default.gradients = {
+	bottomdark:{
+		colors: ["rgba(255,255,255, 0.01) 0%", "rgba(255,255,255, 0.01) 50%","rgba(0,0,0, 0.37) 100%"],
+		direction: "to bottom",
+		fallback: "rgba(0,0,0, 0.1)",
+	},
 	blue:{
 		colors: ["rgba(0,116,217,1) 0%", "rgba(0,65,122,1) 100%"],
 		direction: "to bottom",

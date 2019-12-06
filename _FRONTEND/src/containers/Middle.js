@@ -217,7 +217,6 @@ const PersonQuery = (props) => {
         return <Redirect to={`/person/${trueSlug}`} />
     }
     else queryVariables.slug = slug
-
     return (
         <Query query={DIRECTOR_PERSON_MIX} variables={queryVariables} partialRefetch={true}>
             {({ loading, data, error, refetch }) => {

@@ -132,7 +132,7 @@ export const HeaderText = styled('h1')({
     border
   )
 )
-export const SubHeaderText = styled('h2')({
+export const SubHeaderText0 = styled('h2')({
   width:"100% ",
   textTransform:"capitalize",
   fontWeight:"bold",
@@ -152,6 +152,8 @@ export const SubHeaderText = styled('h2')({
       border
   )
 )
+
+
 export const HM = styled("h4")`
     :hover {
       text-decoration:${props => props.hoverUnderline && "underline"};
@@ -166,7 +168,23 @@ export const HM = styled("h4")`
     ${position}
     ${typography}
 `
-
+export const SubHeaderText = styled("h2")`
+    :hover {
+      text-decoration:${props => props.hoverUnderline && "underline"};
+    };
+    text-transform:"capitalize";
+    font-weight:"bold";
+    color:"dark";
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
+`
 export const HeaderMini = styled(HM)({
     width:"100% ",
     textTransform:"capitalize",

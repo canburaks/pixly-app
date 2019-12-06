@@ -5,7 +5,30 @@ import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 import { UnderlineEffect, Box, HiddenSpan } from "../index"
 import { hideText } from 'polished'
+import { HashLink as HLink } from 'react-router-hash-link';
 
+export const HashLink = styled(HLink).attrs(props => props.rel ? {rel:props.rel} : {rel:"nofollow"} )`
+  color: unset !important;
+  color:${props => props.color ? props.color : themeGet("colors.light")};
+  :hover {
+      background-color:${props => props.hoverBg && props.hoverBg};
+      color:${props => props.hoverColor && props.hoverColor};
+      box-shadow:${props => props.hoverShadow && props.hoverShadow};
+      text-decoration:${props => props.hoverUnderline && "underline"};
+
+  };
+  text-decoration:initial;
+  transition: ${themeGet("transitions.medium")};
+  ${props => props.hidden && hideText()}
+
+  ${color}
+  ${space}
+  ${shadow}
+  ${layout}
+  ${border}
+  ${position}
+  ${typography}
+`
 
 const LinkNoFollow = ({ to,link, className, children, follow, ...props }) => (
 	<Link 
