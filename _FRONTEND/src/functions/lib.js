@@ -6,6 +6,10 @@ export function generateGradient(
         return `linear-gradient(${angle}deg, ${colors.join(", ")})`
 }
 
+export function ScrollInto(id){
+    var element = document.getElementById(id);
+    element.scrollIntoView({behavior: "smooth"});
+}
 
 export function lockBodyScroll(){
     document.body.style.position = 'fixed';

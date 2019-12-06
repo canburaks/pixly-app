@@ -4,15 +4,17 @@ import { Text, Paragraph, HeaderMini,
         Box, FlexBox, SuperBox, TagBox,
         TextSection, Card, ImageCard, AspectRatioCard, MosaicCard,DarkCard,
         NewLink, Input, LinkButton,CoverLink, ImdbRatingIcon, YearClockIcon, 
-        BookmarkMutation, RatingMutation, Hr, SubHeaderText,ImageBox
+        ListIcon, YoutubeIcon,FilmIcon,HashLink,
+        BookmarkMutation, RatingMutation, Hr, SubHeaderText,ImageBox,CoverBox
 } from "../index"
 import { rgba } from "polished";
+import { AbsoluteBox } from "../atoms";
 
 export const ActiveDirectorCard = (props) => (
 <FlexBox 
     mb={[3]}  width={"100%"} 
     borderRadius={"6px"} 
-    bg={"rgba(0,0,0, 0.7)"}
+    bg={"dark"}
     border="1px solid"
     borderColor="rgba(0,0,0,0.2)"
     overflow="hidden"
@@ -30,29 +32,79 @@ export const ActiveDirectorCard = (props) => (
         flexDirection="column"
         justifyContent="flex-end"
     >
-        <SubHeaderText 
-            color="light" fontFamily={"playfair"} 
+        <SuperBox 
+            gradient={"bottomdark"} 
             position="absolute" 
-            bottom={"5px"}
-            left={"5px"}
+            left={0}
+            top={0}
+            right={0}
+            bottom={0}
+            zIndex={0}
         >
-            {props.item.name}
-        </SubHeaderText>
-    </SuperBox>
-    <FlexBox flexDirection="column" ml={[2]} minWidth={"50%"} pt={[3,3,3,4]} justifyContent="flex-end" height={"100%"}>
+            <CoverLink to={`/person/${props.item.slug}`}/>
+        </SuperBox>
+        <NewLink to={`/person/${props.item.slug}`} zIndex={1}>
 
-        <FlexBox width={"100%"} height="auto" height={"120px"} overflow="hidden" justifyContent="flex-start" mt={"auto"}>
-            {props.item.previewMovies.map(movie => (
+            <SubHeaderText 
+                fontSize={["24px"]}
+                fontWeight="bold"
+                color="light" fontFamily={"playfair"} 
+                position="absolute" 
+                bottom={"5px"}
+                left={"5px"}
+                textShadow={"textDark"}
+                hoverUnderline
+            >
+                {props.item.name}
+            </SubHeaderText>
+        </NewLink>
+
+    </SuperBox>
+    <FlexBox flexDirection="column" ml={[2]} minWidth={"50%"} py={[2,2,]} justifyContent="flex-end" height={"100%"}>
+        <FlexBox width={"auto"} height="40px" justifyContent="flex-start" mt={"auto"} alignItems="center">
+            <HashLink 
+                display="flex"
+                to={`/person/${props.item.slug}#director-page-filmography`}
+                title={"See the filmography"}
+            >
+                <FilmIcon size={18} />
+                <Text color="light" fontSize={"14px"} fontWeight="bold">{props.item.movieQuantity}</Text>
+            </HashLink>
+            {props.item.listQuantity > 0 && 
+                <HashLink 
+                    display="flex"
+                    to={`/person/${props.item.slug}#director-page-list`}
+                    title={`Favourite films of ${props.item.name}`}
+                    ml={[3]}
+                >        
+                    <ListIcon size={18} />
+                    <Text color="light" fontSize={"14px"} fontWeight="bold">{props.item.listQuantity}</Text>
+                </HashLink>}
+            {props.item.videoQuantity > 0 &&
+                <HashLink 
+                    display="flex"
+                    to={`/person/${props.item.slug}#director-page-videos`}
+                    title={"See videos about " + props.item.name}
+                    ml={[2]}
+                >  
+                    <YoutubeIcon size={18} />
+                    <Text color="light" fontSize={"14px"} fontWeight="bold">{props.item.videoQuantity}</Text>
+                </HashLink>}
+        </FlexBox>
+        <FlexBox width={"100%"} height="auto" overflow="hidden" justifyContent="flex-start" mt={"auto"} >
+            {props.item.previewMovies.map((movie, i) => (
                 <SuperBox 
+                    key={movie.slug + i}
                     position="relative" 
                     src={movie.poster} 
                     title={movie.name} 
-                    width={[ "30px", "30px","60px"]}
-                    height={[ "45px", "45px","90px"]}
+                    width={[ "15vw", "15vw", "15vw",  "8vw",  "5vw"]}
+                    height={[ "22.5vw","22.5vw","22.5vw", "12vw",  "7.5vw"]}
                     m={[2]}
                     boxShadow="card"
+                    hoverShadow
                 >
-                    <CoverLink link={`/movie/${movie.slug}`}/>
+                    <CoverLink link={`/movie/${movie.slug}`}>{movie.name}</CoverLink>
                 </SuperBox>
             ))}
         </FlexBox>

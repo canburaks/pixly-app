@@ -123,6 +123,7 @@ export const GridBox = styled(Box)`
 
 export const FlexBox = props => <Box position="relative" display="flex" flexDirection="row" justifyContent="flex-start" alignItems="flex-start" {...props} />
 export const AbsoluteBox = props => <Box position="absolute" {...props} />
+export const CoverBox = props => <Box position="absolute" top={0} left={0} right={0} bottom={0} {...props} />
 
 
 export const ModalBox = styled.div`
