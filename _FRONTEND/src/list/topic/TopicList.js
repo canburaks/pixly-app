@@ -53,18 +53,18 @@ const TopicList = React.memo((props) => {
             </Text>          
             <hr/>
 
-                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {firstPart.map( item => (
+                <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {topics.map( item => (
                         <CollectionCard 
                             item={item} key={"rec" + item.id}  
                             link={`/topic/${item.slug}`} 
                             text={item.seoShortDescription} />
                     ))}
                 </Grid>
-
+{/*
                 <ListBoardAd />
                     
-                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {secondPart.map( item => (
                         <CollectionCard 
                             item={item} key={"rec" + item.id} 
@@ -73,14 +73,14 @@ const TopicList = React.memo((props) => {
                     ))}
                 </Grid>
 
-                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {thirdPart.map( item => (
                         <CollectionCard 
                             item={item} key={"rec" + item.id} 
                             link={`/topic/${item.slug}`} 
                             text={item.seoShortDescription}  />
                     ))}
-                </Grid>
+                </Grid>*/}
             </ContentContainer>
 
 
