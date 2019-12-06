@@ -9,13 +9,7 @@ person/nm0621699
 person/nm0262543
 person/nm0187811
 movie/502
-
-
-http://pixly.app/person/nm1093951
-https://www.pixly.app/movie/4424
-https://www.pixly.app/movie/3696
-https://pixly.app/person/nm0639122
-https://www.pixly.app/movie/1673
-https://www.pixly.app/movie/1011
-http://pixly.app/movie/6743
-https://pixly.app/movie/583/None
+person/nm1093951
+person/nm0639122
+movie/6743
+movie/583/None
