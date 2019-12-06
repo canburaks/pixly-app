@@ -164,6 +164,13 @@
     "include": [
       "",
       "/",
+
+      "/person/quentin-tarantino-138",
+      "/person/alfonso-cuaron-11218",
+      "/person/david-fincher-7467",
+      "/person/jean-luc-godard-3776",
+      "/list/our-selection/1",
+
       "/film-lists",
       "/topics",
       "/directors/1",
