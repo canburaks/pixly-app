@@ -83,6 +83,7 @@
         "/person/virginia-madsen-12519"
     ],
     "movie":[
+        "/movie/devils-on-the-doorstep-2000",
         "/movie/mother-2017",
         "/movie/company-man-2000",
         "/movie/satans-tango-1994",
@@ -607,6 +608,7 @@
         "/movie/cries-and-whispers-1972",
         "/movie/the-exterminating-angel-1962",
         "/movie/company-man-2000",
-        "/movie/mother-2017"
+        "/movie/mother-2017",
+        "/movie/devils-on-the-doorstep-2000"
     ]
 }
