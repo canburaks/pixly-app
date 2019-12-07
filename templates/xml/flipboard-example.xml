@@ -1,0 +1,41 @@
+<rss version="2.0">
+    <channel>
+        <title>The Perfect Feed</title>
+        <link>http://example.com/feed</link>
+        <description>
+    A great feed with great examples.
+    </description>
+        <language>en-us</language>
+        <item>
+            <title>Squirrel Resembling Abraham Lincoln Found</title>
+            <link>http://example.com/2017/10/02/squirrel-resembling-abraham-lincoln-found</link>
+            <guid>2fd4e1c67a2d28fced849ee1bb76e7391b93eb12</guid>
+            <pubDate>Mon, 02 Oct 2017 04:00:00 GMT</pubDate>
+            <dc:creator>Ralph Wiggum</dc:creator>
+            <description>
+                <![CDATA[
+    A local Springfield man has restored pride to Springfield by finding a squirrel
+    that resembles Abraham Lincoln. Authorities are on the lookout for any rodents
+    bearing resemblance to John Wilkes Booth.
+    ]]>
+            </description>
+            <enclosure url="http://media.example.com/2017/10/02/squirrel.jpg" length="1000" type="image/jpeg" />
+            <category>Squirrels</category>
+        </item>
+        <item>
+            <title>Burns Pays City 3 Mil!</title>
+            <link>http://example.com/2017/10/01/burns-pays-city-3-mil</link>
+            <guid>de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3</guid>
+            <pubDate>Sun, 01 Oct 2017 04:00:00 GMT</pubDate>
+            <dc:creator>Todd Flanders</dc:creator>
+            <description>
+                <![CDATA[
+    Wealthy resident Montgomery Burns was fined three million dollars after
+    being caught dumping nuclear waste in the Springfield city park.
+    ]]>
+            </description>
+            <enclosure url="http://media.example.com/2017/10/01/burns-pays-city.mp4" length="10000" type="video/mp4" />
+            <category>Springfield</category>
+        </item>
+    </channel>
+</rss>

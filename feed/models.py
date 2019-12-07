@@ -33,9 +33,7 @@ class FeedPost(models.Model):
     description = models.TextField(max_length=300,null=True, blank=True, help_text="It should " +
             "generally contain 300 or more characters to provide an attractive, informative summary. ")
     pub_date = models.DateTimeField(null=True, blank=True)
-
     xml_content = models.TextField(max_length=50000,null=True, blank=True)
-
     creator = models.CharField(max_length=400, null=True, blank=True)
 
     poster = models.ImageField(blank=True, upload_to=vertical_upload_path)
