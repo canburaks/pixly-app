@@ -1,13 +1,2 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
-    <channel>
-        <title>The Great Mind Blowing / Thought Provoking Movies</title>
-        <link>https://pixly.app/rss/thought-provoking</link>
-        <description>The great thought-provoking movies that cause us to think seriously and deeply about what we ignored or what we already know.</description>
-        <atom:link href="https://pixly.app/rss/thought-provoking" rel="self" />
-        <docs>http://www.rssboard.org/rss-specification</docs>
-        <generator>python-feedgen</generator>
-        <language>en</language>
-        <lastBuildDate>Thu, 05 Dec 2019 01:28:21 +0000</lastBuildDate>
-    </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Topic Film Lists</title><link>https://pixly.app/sitenews/</link><description>Updates on changes and additions to police beat central.</description><atom:link href="https://pixly.app/latest/feed/" rel="self"></atom:link><language>en-us</language><lastBuildDate>Sat, 07 Dec 2019 15:42:34 +0000</lastBuildDate><item><title>Pixly - The Great Art House Films</title><link>https://pixly.appart-house</link><description>Art House films are primarily concerned about aesthetic reasons rather than commercial profit. Typically, Unconventional narrative and elements are widely seen due to targeting a niche audience rather than the mass audience.</description><guid>https://pixly.appart-house</guid></item><item><title>The Most Controversial Movies of All Times</title><link>https://pixly.appcontroversial-films</link><description>The movies that shock,thrill, and  provoke the audiences and cause public disagreements on specific issue.</description><guid>https://pixly.appcontroversial-films</guid></item><item><title>Pixly - The Great Movies Based on True Stories</title><link>https://pixly.appbased-on-true-story</link><description>In this  list, which does not shift to alternative history scenarios when describing historicality, you will find many historically important and/or inspirational figures and also events such as victories, wars, and genocides.</description><guid>https://pixly.appbased-on-true-story</guid></item><item><title>The Great Feeling Good Movies That Leaves Warm Feeling On You</title><link>https://pixly.appfeel-good-movies</link><description>Some films remind us what is valuable, what we have is more valuable than what we don't have. Here, the movies leaves warm feelings and good vibes on you.</description><guid>https://pixly.appfeel-good-movies</guid></item><item><title>The Great Mind Blowing / Thought Provoking Movies</title><link>https://pixly.appthought-provoking</link><description>As the world's most complex art form, cinema offers us new ideas, new ways of thinking about something. Although it is very important to gaining a new ideas, the more important thing is to rethink what we assume is we already know.</description><guid>https://pixly.appthought-provoking</guid></item></channel></rss>
