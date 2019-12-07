@@ -1,2 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Topic Film Lists</title><link>https://pixly.app/sitenews/</link><description>Updates on changes and additions to police beat central.</description><atom:link href="https://pixly.app/latest/feed/" rel="self"></atom:link><language>en-us</language><lastBuildDate>Sat, 07 Dec 2019 15:42:34 +0000</lastBuildDate><item><title>Pixly - The Great Art House Films</title><link>https://pixly.appart-house</link><description>Art House films are primarily concerned about aesthetic reasons rather than commercial profit. Typically, Unconventional narrative and elements are widely seen due to targeting a niche audience rather than the mass audience.</description><guid>https://pixly.appart-house</guid></item><item><title>The Most Controversial Movies of All Times</title><link>https://pixly.appcontroversial-films</link><description>The movies that shock,thrill, and  provoke the audiences and cause public disagreements on specific issue.</description><guid>https://pixly.appcontroversial-films</guid></item><item><title>Pixly - The Great Movies Based on True Stories</title><link>https://pixly.appbased-on-true-story</link><description>In this  list, which does not shift to alternative history scenarios when describing historicality, you will find many historically important and/or inspirational figures and also events such as victories, wars, and genocides.</description><guid>https://pixly.appbased-on-true-story</guid></item><item><title>The Great Feeling Good Movies That Leaves Warm Feeling On You</title><link>https://pixly.appfeel-good-movies</link><description>Some films remind us what is valuable, what we have is more valuable than what we don't have. Here, the movies leaves warm feelings and good vibes on you.</description><guid>https://pixly.appfeel-good-movies</guid></item><item><title>The Great Mind Blowing / Thought Provoking Movies</title><link>https://pixly.appthought-provoking</link><description>As the world's most complex art form, cinema offers us new ideas, new ways of thinking about something. Although it is very important to gaining a new ideas, the more important thing is to rethink what we assume is we already know.</description><guid>https://pixly.appthought-provoking</guid></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Topic Film Lists</title>
+        <link>https://pixly.app/topics</link>
+        <description>Updates on changes and additions to police beat central.</description>
+        <atom:link href="https://pixly.app/feed/" rel="self"></atom:link>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 07 Dec 2019 16:04:45 +0000</lastBuildDate>
+        <item>
+            <title>The Most Controversial Movies of All Times</title>
+            <link>https://pixly.app/topic/controversial-films</link>
+            <description>The movies that shock,thrill, and  provoke the audiences and cause public disagreements on specific issue.</description>
+            <guid>https://pixly.app/topic/controversial-films</guid>
+        </item>
+        <item>
+            <title>The Best LGBTQ+ Movies of All Times</title>
+            <link>https://pixly.app/topic/lgbtq-plus-films</link>
+            <description>LGBT movement has gained their civil right in many countries, after many centuries of persecution, shame, suppression, and secrecy. We have entered a time which there is plenty of LGBT movies are releasing in mainstream. Starting from the 2010's, queer cinema's influence evolved towards a more unive</description>
+            <guid>https://pixly.app/topic/lgbtq-plus-films</guid>
+        </item>
+        <item>
+            <title>The Great Feeling Good Movies That Leaves Warm Feeling On You</title>
+            <link>https://pixly.app/topic/feel-good-movies</link>
+            <description>Some films remind us what is valuable, what we have is more valuable than what we don't have. Here, the movies leaves warm feelings and good vibes on you.</description>
+            <guid>https://pixly.app/topic/feel-good-movies</guid>
+        </item>
+        <item>
+            <title>Pixly- The Great Movies That Passed The Bechdel Test</title>
+            <link>https://pixly.app/topic/bechdel-test</link>
+            <description>Although it is not a perfect test or perfect indicator, it is a test that used as an indicator for the active presence of women in the fiction and to call attention to gender inequality.</description>
+            <guid>https://pixly.app/topic/bechdel-test</guid>
+        </item>
+        <item>
+            <title>The Great Mind Blowing / Thought Provoking Movies</title>
+            <link>https://pixly.app/topic/thought-provoking</link>
+            <description>As the world's most complex art form, cinema offers us new ideas, new ways of thinking about something. Although it is very important to gaining a new ideas, the more important thing is to rethink what we assume is we already know.</description>
+            <guid>https://pixly.app/topic/thought-provoking</guid>
+        </item>
+    </channel>
+</rss>
