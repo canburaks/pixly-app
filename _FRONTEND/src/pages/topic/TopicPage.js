@@ -76,7 +76,7 @@ const TopicPage = (props) =>{
                 <Head
                     richdata={queryData.topic.richdata}
                     title={queryData.topic.seoTitle}
-                    description={queryData.topic.seoShortDescription}
+                    description={queryData.topic.seoDescription}
                     keywords={queryData.topic.keywords}
                     image={queryData.topic.coverPoster ? queryData.topic.coverPoster : queryData.topic.poster ? queryData.topic.poster : null}
                     canonical={`https://pixly.app/topic/${queryData.topic.slug}`}
