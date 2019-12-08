@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useQuery } from "@apollo/react-hooks";
 import { ACTIVE_DIRECTORS } from "../../functions/query";
 
-import { rgaPageView, Head, DirectorPageAd } from "../../functions/analytics"
+import { rgaPageView, Head, MidPageAd, HomePageFeedAd } from "../../functions/analytics"
 import { GridBox, GridItem } from "../../components/GridBox" 
 import { useAuthCheck } from "../../functions/hooks";
 import JoinBanner from "../../components/JoinBanner.js"
@@ -21,7 +21,7 @@ const DirectorList = (props) =>{
     return(
         <PageContainer>
             <Head
-                title={"Filmographies, Favourite Films, Interviews and Reviews"}
+                title={"Director Filmographies, Favourite Films, Interviews and Reviews"}
                 description={"Famous directors' filmographies, favourite films, Interviews with directors, " +
                     "video-essays, conversations with directors and many video content."}
                 keywords={`Famous Directors List` }

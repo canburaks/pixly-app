@@ -164,21 +164,10 @@
     "include": [
       "",
       "/",
-      "/explore",
       "/advance-search",
       "/topics",
       "/film-lists",
-      "/blog",
-      "/directors/1",
-      "/topic/art-house",
-      "/topic/cyberpunk",
-      "/topic/based-on-true-story",
-      "/topic/dialogue-focused",
-      "/topic/thought-provoking",
-      "/topic/bechdel-test",
-      "/topic/feel-good-movies",
-      "/topic/lgbtq-plus-films",
-      "/topic/controversial-films"
+      "/directors/1"
   
     ],
     "publicPath": "/"
