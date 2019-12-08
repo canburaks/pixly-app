@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.syndication.views import Feed
 from items.models import List, Topic, Movie
-from feed.models import RSSFeed
+from rss.models import RSSFeed
 from persons.profile import Profile
 from django.urls import reverse
 from django_mysql.models import (JSONField, SetTextField, ListTextField, SetCharField)
@@ -10,7 +10,7 @@ from django.conf import settings
 from feedgen.feed import FeedGenerator
 
 
-class TopicFeed(Feed):
+class CollectionsFeed(Feed):
     title = "Great Film Collections and Lists"
     link = "/rss/great-film-collections"
     description = "Updates on changes and additions to police beat central."
@@ -19,7 +19,7 @@ class TopicFeed(Feed):
     author_link = 'https://pixly.app/user/canburaks' # Hard-coded author URL.
     item_author_name = 'Can Burak S.' # Hard-coded author name.
     item_author_link = 'https://pixly.app/user/canburaks' # Hard-coded author URL.
-    item_categories = ("movie", "movie list", "film collections") # Hard-coded categories.
+    item_categories = ("movies", "movie lists", "film collections") # Hard-coded categories.
 
     def items(self):
         return RSSFeed.objects.filter(is_published=True).exclude(cover_poster="")
@@ -48,3 +48,8 @@ class TopicFeed(Feed):
 
     def item_enclosure_mime_type(self, item):
         return "image/jpg"
+
+    def item_categories(self, item):
+        if len(item.tag)>0:
+            return item.tag
+        return ("movies", "movie lists", "film collections")
