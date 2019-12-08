@@ -6,7 +6,9 @@ import {  typography, color, space, shadow, layout, border, background, flexbox,
 
 export const AuthButton = ({onCompleted, onError,client, ...props}) =>  {
 	function loginfunction(){
-		client.login(function(response) {
+    if (client && client.login) var inclient = client
+    else if (window.FB) var inclient = window.FB
+		inclient.login(function(response) {
 			// handle the response
 			const responseData = {}
 			if (response.status === "connected"){
