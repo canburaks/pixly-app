@@ -164,6 +164,7 @@
     "include": [
       "",
       "/",
+      "/explore",
       "/advance-search",
       "/topics",
       "/film-lists",
