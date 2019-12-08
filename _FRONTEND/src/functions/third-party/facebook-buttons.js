@@ -34,8 +34,6 @@ export const AuthButton = ({onCompleted, onError,client, ...props}) =>  {
 		onClick={loginfunction}
 	>
         <FacebookContinueSvg />
-        {console.log("button", window.FB)}
-
     </Button>
 )}
 
