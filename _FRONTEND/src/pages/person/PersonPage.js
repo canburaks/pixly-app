@@ -13,6 +13,7 @@ import {  Col, Row } from 'react-flexbox-grid';
 
 import CoverPanel from "../elements/CoverPanel"
 import PersonPanel from "../elements/PersonPanel"
+import { twitter } from "../../functions/third-party/twitter"
 import "../pages.css"
 
 
@@ -35,6 +36,7 @@ const PersonPage = (props) => {
     const initialActive = activeVideoParse()
     const [activeVideo, setActiveVideo] = useState(initialActive)
     const authStatus = useAuthCheck()
+    const hasTwitter = useMemo(() => (item.twitter && item.twitter.length > 5) ? true : false,[])
     //rgaPageView();
     //print("person page", props)
     //const [follow, setFollow] = useState(item.isFollowed);
@@ -66,7 +68,7 @@ const PersonPage = (props) => {
         return ""
     },[item.slug])
 
-    //console.log(videoHeaderText)
+    //console.log(item)
 
     const screenSize = useWindowSize()
     const textLimit = screenSize === "S" 
@@ -94,9 +96,8 @@ const PersonPage = (props) => {
         contCon: { paddingBottom:50, paddingLeft:40, paddingRight:40 }
     }
 
-
     //console.log("rdf",item.richdata)
-
+    const Twitter = twitter()
     //console.log(directorKeywords(item))
     const TopPanel = () =>  item.hasCover 
         ? <CoverPanel 
@@ -121,6 +122,7 @@ const PersonPage = (props) => {
             ScrollInto(props.location.hash.slice(1))
         }
     },[])
+    console.log(item.name, item.twitter)
     return(
         <PageContainer>
             <Head
@@ -147,12 +149,12 @@ const PersonPage = (props) => {
 
         
                 </Row>
-                    {item.videos && item.videos.length > 0 && 
-                        <FlexBox width={"100%"} height="auto" id="director-page-videos" flexDirection="column" mt={[4]}>
-                            <SubHeaderText fontWeight="bold" my={[2]}>{videoHeaderText}</SubHeaderText>
-                            <YoutubePlayer videos={item.videos} title={`${item.name} Videos`}/>
-                        </FlexBox>
-                        }
+                {item.videos && item.videos.length > 0 && 
+                    <FlexBox width={"100%"} height="auto" id="director-page-videos" flexDirection="column" mt={[4]}>
+                        <SubHeaderText fontWeight="bold" my={[2]}>{videoHeaderText}</SubHeaderText>
+                        <YoutubePlayer videos={item.videos} title={`${item.name} Videos`}/>
+                    </FlexBox>
+                    }
                     
                 <DirectorPageAd />
 
@@ -172,6 +174,7 @@ const PersonPage = (props) => {
                         </Box>
                     ))}
                 </Box>}
+                {hasTwitter && <Twitter.Timeline name={item.name} link={item.twitter} />}
 
             </ContentContainer>
         </PageContainer>
