@@ -95,7 +95,9 @@ export const FaceBookAuthentication = React.memo((props) => {
 
           </FlexBox>
         </SimpleModal>
+		{console.log("5", window.FB)}
         <AuthButton onCompleted={authMutationHandler} onError={errorHandler} client={props.client} />
+		{console.log("6", window.FB)}
       </>
     )
   })
@@ -153,6 +155,7 @@ export const facebook = () => {
 		//console.log("loaded", loaded)
 		checkFbStatus()
 		if (loaded && window.FB){ fbClient = window.FB}
+		console.log("0", window.FB)
 		//print("fbClient", fbClient)
 	},[loaded])
 
@@ -166,6 +169,7 @@ export const facebook = () => {
 			//FB.AppEvents.logPageView();
 
 			if (window.FB) {
+				console.log("1", window.FB)
 				fbClient = window.FB
 				setScriptStatus(true)
 			}
@@ -180,10 +184,12 @@ export const facebook = () => {
 			script.src = "https://connect.facebook.net/en_US/sdk.js";
 			document.getElementsByTagName("head")[0].appendChild(script)
 			setTimeout(() => {if(window.FB){fbClient = window.FB; setScriptStatus(true)}},500 )
+			console.log("2", window.FB)
 		}
 		else if (window.FB){
 			fbClient = window.FB
 			setTimeout(() => setScriptStatus(true), 500)
+			console.log("3", window.FB)
 		}
 	},[loaded])
 	
