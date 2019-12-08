@@ -10,7 +10,7 @@ import {
 	SignupForm
 } from "../../styled-components"
 
-export const FaceBookAuthentication = React.memo((props) => {
+export const FaceBookAuthentication = (props) => {
   	const globalstate = useContext(GlobalContext)
 
     const [ fbData, setFbData ] = useState({})
@@ -98,7 +98,7 @@ export const FaceBookAuthentication = React.memo((props) => {
         <AuthButton onCompleted={authMutationHandler} onError={errorHandler} client={props.client} />
       </>
     )
-  })
+  }
 
 
 

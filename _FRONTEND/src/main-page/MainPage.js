@@ -288,7 +288,7 @@ const MainPage = React.memo(() => {
 										Join
 									</Button>
 								</Box>
-									{!authStatus  && <Fb.Auth />}
+									<Fb.Auth />
 								</FlexBox>
 
 									}
