@@ -64,11 +64,11 @@ class TopicSitemap(Sitemap):
     def items(self):
         slugs = [x.replace("topic/", "").strip() for x in topic__slugs]
         topics =  Topic.objects.filter(slug__in=slugs).only("id", "slug")
-        print(topics.count())
+        #print(topics.count())
         return topics
     
     def location(self, item):
-        print("/topic/{item.slug}")
+        #print("/topic/{item.slug}")
         return f"/topic/{item.slug}"
 
 
@@ -126,7 +126,7 @@ class StaticSitemap(Sitemap):
     priority = 0.4
     def items(self):
         stat_slug = [f"/{x}" for x in static__slugs]
-        print(stat_slug)
+        #print(stat_slug)
         statics = stat_slug + [
             "/rss/great-film-collections",
             "/termsofservice", "/privacy", "", "/"

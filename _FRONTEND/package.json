@@ -165,9 +165,7 @@
       "",
       "/",
       "/explore",
-      "/advance-search",
-      "/movie/his-secret-life-2001",
-      "/movie/troy-2004"
+      "/advance-search"
     ],
     "publicPath": "/"
   }
