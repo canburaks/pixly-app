@@ -137,7 +137,7 @@ export const facebook = () => {
 	//console.log("facebook: is loaded ",loaded, isLogged)
     const Login = useCallback(() => (loaded && fbClient) ? <ConnectButton onCompleted={fbLoginHandler} onError={errorHandler} client={fbClient} /> : <div></div>, [loaded])
     const Logout = useCallback(() =>  (loaded && fbClient) ? <LogoutButton onClick={logoutHandler} /> : <div></div>, [loaded])
-    const Auth = useCallback(() => (loaded && fbClient) ? <FaceBookAuthentication client={fbClient} /> :  <div></div>, [loaded])
+    const Auth = (loaded && fbClient) ? () => <FaceBookAuthentication client={fbClient} /> :() =>  <div></div>
     const Connect = isLogged ? Logout : Login
 
     const store = {
@@ -152,7 +152,7 @@ export const facebook = () => {
     useEffect(() => {
 		//console.log("loaded", loaded)
 		checkFbStatus()
-		if (loaded && window.FB){ fbClient = window.FB}
+		if (loaded && window.FB){ fbClient = window.FB; setLoaded(true)}
 		//print("fbClient", fbClient)
 	},[loaded])
 
@@ -166,8 +166,7 @@ export const facebook = () => {
 			//FB.AppEvents.logPageView();
 
 			if (window.FB) fbClient = this.window.FB
-			//setTimeout(() => setScriptStatus(true), 2000)
-			setScriptStatus(true)
+			setTimeout(() => setScriptStatus(true), 2000)
 			//setScriptStatus(true)
 		};
 		//console.log("window fb:", window.FB)
@@ -177,14 +176,13 @@ export const facebook = () => {
 			script.async = true;
 			script.src = "https://connect.facebook.net/en_US/sdk.js";
 			document.getElementsByTagName("head")[0].appendChild(script)
-			if(window.FB){fbClient = window.FB}
-			//setTimeout(() => {if(window.FB){fbClient = window.FB}},1000 )
+			setTimeout(() => {if(window.FB){fbClient = window.FB}},1000 )
 		}
 		else if (window.FB){
 			fbClient = window.FB
 			setTimeout(() => setScriptStatus(true), 2000)
 		}
-	},[window.FB])
+	},[])
 	
     return store
 }
