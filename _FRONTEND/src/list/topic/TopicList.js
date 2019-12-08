@@ -23,7 +23,7 @@ import {
 
 
 const TopicList = React.memo((props) => {
-    const topics = props.data.topics
+    const topics = props.data.topics.reverse()
     //console.log("topics", topics)
     const topicnames = topics.map(topic => topic.name).join(", ")
     const authStatus = useAuthCheck()
