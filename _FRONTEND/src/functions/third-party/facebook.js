@@ -10,7 +10,7 @@ import {
 	SignupForm
 } from "../../styled-components"
 
-export const FaceBookAuthentication = (props) => {
+export const FaceBookAuthentication = React.memo((props) => {
   	const globalstate = useContext(GlobalContext)
 
     const [ fbData, setFbData ] = useState({})
@@ -98,7 +98,7 @@ export const FaceBookAuthentication = (props) => {
         <AuthButton onCompleted={authMutationHandler} onError={errorHandler} client={props.client} />
       </>
     )
-  }
+  })
 
 
 
@@ -137,7 +137,7 @@ export const facebook = () => {
 	//console.log("facebook: is loaded ",loaded, isLogged)
     const Login = useCallback(() => (loaded && fbClient) ? <ConnectButton onCompleted={fbLoginHandler} onError={errorHandler} client={fbClient} /> : <div></div>, [loaded])
     const Logout = useCallback(() =>  (loaded && fbClient) ? <LogoutButton onClick={logoutHandler} /> : <div></div>, [loaded])
-    const Auth = (loaded && fbClient) ? () => <FaceBookAuthentication client={fbClient} /> :() =>  <div></div>
+    const Auth = useCallback(() => (loaded && fbClient) ? <FaceBookAuthentication client={fbClient} /> :  <div></div>, [loaded])
     const Connect = isLogged ? Logout : Login
 
     const store = {
@@ -166,8 +166,7 @@ export const facebook = () => {
 			//FB.AppEvents.logPageView();
 
 			if (window.FB) fbClient = this.window.FB
-			setTimeout(() => setScriptStatus(true), 2000)
-			setLoaded(true)
+			setTimeout(() => setScriptStatus(true), 500)
 			//setScriptStatus(true)
 		};
 		//console.log("window fb:", window.FB)
@@ -177,13 +176,13 @@ export const facebook = () => {
 			script.async = true;
 			script.src = "https://connect.facebook.net/en_US/sdk.js";
 			document.getElementsByTagName("head")[0].appendChild(script)
-			setTimeout(() => {if(window.FB){fbClient = window.FB}},1000 )
+			setTimeout(() => {if(window.FB){fbClient = window.FB; setScriptStatus(true)}},500 )
 		}
 		else if (window.FB){
 			fbClient = window.FB
-			setTimeout(() => setScriptStatus(true), 2000)
+			setTimeout(() => setScriptStatus(true), 500)
 		}
-	},[])
+	},[loaded])
 	
     return store
 }
