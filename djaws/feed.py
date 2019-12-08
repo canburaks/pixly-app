@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.syndication.views import Feed
 from items.models import List, Topic, Movie
+from feed.models import RSSFeed
 from persons.profile import Profile
 from django.urls import reverse
 from django_mysql.models import (JSONField, SetTextField, ListTextField, SetCharField)
@@ -10,31 +11,31 @@ from feedgen.feed import FeedGenerator
 
 
 class TopicFeed(Feed):
-    title = "Topic Film Lists"
-    link = "/topics"
+    title = "Great Film Collections and Lists"
+    link = "/rss"
     description = "Updates on changes and additions to police beat central."
     author_name = 'Can Burak S.' # Hard-coded author name.
     author_email = 'canburaks@pixly.app' # Hard-coded author email.
     author_link = 'https://pixly.app/user/canburaks' # Hard-coded author URL.
     item_author_name = 'Can Burak S.' # Hard-coded author name.
     item_author_link = 'https://pixly.app/user/canburaks' # Hard-coded author URL.
-    item_categories = ("movie", "film list") # Hard-coded categories.
+    item_categories = ("movie", "movie list", "film collections") # Hard-coded categories.
 
     def items(self):
-        return Topic.objects.order_by('-updated_at')[:5]
+        return RSSFeed.objects.all()[:5]
 
     def item_title(self, item):
-        return item.seo_title
+        return item.title
 
     def item_description(self, item):
-        return item.summary
+        return item.description
 
     def item_pub_date(self, item):
         return item.updated_at
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):
-        return f"/topic/{item.slug}"
+        return item.pathname
 
     def item_pubdate(self, item):
         return item.updated_at
@@ -47,8 +48,3 @@ class TopicFeed(Feed):
 
     def item_enclosure_mime_type(self, item):
         return "image/jpg"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['foo'] = 'bar'
-        return context
