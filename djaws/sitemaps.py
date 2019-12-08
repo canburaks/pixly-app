@@ -28,7 +28,6 @@ blog__slugs = [x[1:] for x in allowed_urls_dict.get("blog")]
 #print(movie__slugs,person__slugs,liste__slugs, topic__slugs, blog__slugs )
 #print(topic__slugs)
 static__slugs = blog__slugs + [
-    "rss/great-film-collections",
     "explore",
     "advance-search",
     "directors/1",
@@ -129,6 +128,7 @@ class StaticSitemap(Sitemap):
         stat_slug = [f"/{x}" for x in static__slugs]
         print(stat_slug)
         statics = stat_slug + [
+            "rss/great-film-collections",
             "/termsofservice", "/privacy", "", "/"
         ]
         return statics
