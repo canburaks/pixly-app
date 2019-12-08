@@ -165,8 +165,11 @@ export const facebook = () => {
 			});
 			//FB.AppEvents.logPageView();
 
-			if (window.FB) fbClient = this.window.FB
-			setTimeout(() => setScriptStatus(true), 500)
+			if (window.FB) {
+				fbClient = window.FB
+				setScriptStatus(true)
+			}
+			//setTimeout(() => setScriptStatus(true), 500)
 			//setScriptStatus(true)
 		};
 		//console.log("window fb:", window.FB)
