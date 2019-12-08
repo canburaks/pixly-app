@@ -12,7 +12,7 @@ from feedgen.feed import FeedGenerator
 
 class TopicFeed(Feed):
     title = "Great Film Collections and Lists"
-    link = "/rss"
+    link = "/rss/great-film-collections"
     description = "Updates on changes and additions to police beat central."
     author_name = 'Can Burak S.' # Hard-coded author name.
     author_email = 'canburaks@pixly.app' # Hard-coded author email.
