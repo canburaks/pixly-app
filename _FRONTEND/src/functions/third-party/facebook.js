@@ -135,8 +135,8 @@ export const facebook = (props) => {
 	const fbLoginHandler = (r) => {const newData= {...r};print(newData);  facebookConnect({variables:{data:JSON.stringify(newData)}}); setFbData(newData)}
 
 	//console.log("facebook: is loaded ",loaded, isLogged)
-    const Login = useCallback(() => (loaded && fbClient) ? <ConnectButton onCompleted={fbLoginHandler} onError={errorHandler} client={fbClient} /> : <div></div>, [loaded])
-    const Logout = useCallback(() =>  (loaded && fbClient) ? <LogoutButton onClick={logoutHandler} /> : <div></div>, [loaded])
+    const Login = useCallback(() => (loaded) ? <ConnectButton onCompleted={fbLoginHandler} onError={errorHandler} client={fbClient} /> : <div></div>, [loaded])
+    const Logout = useCallback(() =>  (loaded) ? <LogoutButton onClick={logoutHandler} /> : <div></div>, [loaded])
     const Auth = useCallback(() => loaded ? <FaceBookAuthentication client={fbClient} /> :  <div></div>, [loaded])
     const Connect = isLogged ? Logout : Login
 
