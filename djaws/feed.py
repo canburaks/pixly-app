@@ -22,7 +22,7 @@ class TopicFeed(Feed):
     item_categories = ("movie", "movie list", "film collections") # Hard-coded categories.
 
     def items(self):
-        return RSSFeed.objects.all()[:5]
+        return RSSFeed.objects.filter(is_published=True).exclude(cover_poster="")
 
     def item_title(self, item):
         return item.title

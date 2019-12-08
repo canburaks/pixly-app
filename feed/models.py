@@ -8,17 +8,9 @@ from django.conf import settings
 from feedgen.feed import FeedGenerator
 
 
-def vertical_upload_path(instance, filename):
-    return "rss/{0}/large-{1}".format(instance.id,filename)
 
 def horizontal_upload_path(instance, filename):
-    return "rss/{0}/cover/{1}".format(instance.id,filename)
-
-def item_vertical_upload_path(instance, filename):
-    return "rss/item/{0}/large-{1}".format(instance.id,filename)
-
-def item_horizontal_upload_path(instance, filename):
-    return "rss/item/{0}/cover/{1}".format(instance.id,filename)
+    return "rss/{0}/cover/{1}".format(instance.slug,filename)
 
 
 FEED_TYPE = (
