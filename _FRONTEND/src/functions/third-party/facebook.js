@@ -104,7 +104,7 @@ export const FaceBookAuthentication = React.memo((props) => {
 
 
 
-export const facebook = () => {
+export const facebook = (props) => {
     
 	//const [loaded, error] = useScript('https://connect.facebook.net/en_US/sdk.js');
 	const [loaded, setLoaded] = useState(false);
@@ -139,7 +139,7 @@ export const facebook = () => {
 	//console.log("facebook: is loaded ",loaded, isLogged)
     const Login = useCallback(() => (loaded && fbClient) ? <ConnectButton onCompleted={fbLoginHandler} onError={errorHandler} client={fbClient} /> : <div></div>, [loaded])
     const Logout = useCallback(() =>  (loaded && fbClient) ? <LogoutButton onClick={logoutHandler} /> : <div></div>, [loaded])
-    const Auth = useCallback(() => (loaded && fbClient) ? <FaceBookAuthentication client={fbClient} /> :  <div></div>, [loaded])
+    const Auth = useCallback(() => loaded ? <FaceBookAuthentication client={fbClient} /> :  <div></div>, [loaded])
     const Connect = isLogged ? Logout : Login
 
     const store = {
@@ -167,8 +167,8 @@ export const facebook = () => {
 			fbClient = window.FB; 
 			if(!loaded) {
 				setLoaded(true)
+				console.log("0.5", window.FB)
 			}
-			console.log("0.5", window.FB)
 
 		}
 		else if(window.FB === null || window.FB ==undefined){
