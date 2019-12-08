@@ -11,7 +11,7 @@
             <link>http://example.com/2017/10/02/squirrel-resembling-abraham-lincoln-found</link>
             <guid>2fd4e1c67a2d28fced849ee1bb76e7391b93eb12</guid>
             <pubDate>Mon, 02 Oct 2017 04:00:00 GMT</pubDate>
-            <dc:creator>Ralph Wiggum</dc:creator>
+            <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ralph Wiggum</dc:creator>
             <description>
                 <![CDATA[
     A local Springfield man has restored pride to Springfield by finding a squirrel
@@ -27,7 +27,7 @@
             <link>http://example.com/2017/10/01/burns-pays-city-3-mil</link>
             <guid>de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3</guid>
             <pubDate>Sun, 01 Oct 2017 04:00:00 GMT</pubDate>
-            <dc:creator>Todd Flanders</dc:creator>
+            <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Todd Flanders</dc:creator>
             <description>
                 <![CDATA[
     Wealthy resident Montgomery Burns was fined three million dollars after
