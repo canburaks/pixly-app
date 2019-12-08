@@ -152,6 +152,8 @@ const MainPage = (props) => {
 	//const insertJoinForm = useCallback(() => state.methods.insertAuthForm("signup"),[])
 	
 	const [isModalOpen, setModalOpen] = useState(false)
+	const [isFbLoaded, setFbLoaded] = useState(false)
+
 	const insertJoinForm = useCallback(() => state.methods.insertAuthForm("signup"),[])
 	const closeModal = () => setModalOpen(false)
 	rgaSetCloseTime("Landing Page")
@@ -288,7 +290,7 @@ const MainPage = (props) => {
 										Join
 									</Button>
 								</Box>
-									<Fb.Auth />
+									<Fb.Auth dispatchLoadedSignal={setFbLoaded}/>
 								</FlexBox>
 
 									}
