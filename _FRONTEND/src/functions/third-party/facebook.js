@@ -152,7 +152,7 @@ export const facebook = () => {
     useEffect(() => {
 		//console.log("loaded", loaded)
 		checkFbStatus()
-		if (loaded && window.FB){ fbClient = window.FB; setLoaded(true)}
+		if (loaded && window.FB){ fbClient = window.FB}
 		//print("fbClient", fbClient)
 	},[loaded])
 
@@ -167,6 +167,7 @@ export const facebook = () => {
 
 			if (window.FB) fbClient = this.window.FB
 			setTimeout(() => setScriptStatus(true), 2000)
+			setLoaded(true)
 			//setScriptStatus(true)
 		};
 		//console.log("window fb:", window.FB)
