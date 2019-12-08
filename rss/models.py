@@ -26,6 +26,9 @@ class RSSFeed(models.Model):
     topic = models.OneToOneField(Topic, related_name='feed', on_delete=models.CASCADE, null=True, blank=True)
     liste = models.OneToOneField(List, related_name='feed', on_delete=models.CASCADE, null=True, blank=True)
 
+    title = models.CharField(max_length=70, null=True, blank=True)
+    tag = ListTextField(default = list(),base_field=models.CharField(max_length=60), null=True, blank=True)
+
     feed_type = models.CharField(max_length=6, choices=FEED_TYPE, null=True, blank=True)
     pathname = models.CharField(max_length=50, null=True, blank=True,help_text="page url without domain part.")
     cover_poster = models.ImageField(blank=True, upload_to=horizontal_upload_path, help_text="minimum 500px for the shorter dimension")
@@ -43,11 +46,8 @@ class RSSFeed(models.Model):
         return 1
   
     @property
-    def title(self):
-        if self.feed_type.startswith("t"):
-            return self.topic.seo_title
-        elif self.feed_type.startswith("l"):
-            return self.liste.seo_title
+    def tags(self):
+        return self.tags
 
     @property
     def description(self):
@@ -73,6 +73,7 @@ class RSSFeed(models.Model):
             t = Topic.objects.filter(slug=t_slug).first()
             feed_post, created = cls.objects.update_or_create(slug=t_slug)
             feed_post.topic=t
+            feed_post.title=t.seo_title
             feed_post.feed_type="topic"
             feed_post.pathname=f"/topic/{t.slug}"
             feed_post.save()
@@ -90,6 +91,7 @@ class RSSFeed(models.Model):
             feed_post, created = cls.objects.update_or_create(slug=l_slug)
             feed_post.slug=l.slug
             feed_post.liste=l
+            feed_post.title=l.seo_title
             feed_post.feed_type="liste"
             feed_post.pathname=f"/list/{l.slug}"
             feed_post.save()
