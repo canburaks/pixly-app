@@ -33,7 +33,7 @@ class Cache():
         mqs = Movie.objects.filter(main_page=True).order_by("-created_at").values_list("slug", flat=True)
         return [CustomMovieType(slug=x) for x in mqs]
 
-    #@lru_cache(maxsize=100)
+    @lru_cache(maxsize=100)
     def main_page_lists():
         from gql.types import CustomListType
         lqs =  List.objects.filter(main_page=True).values_list("slug", flat=True)
@@ -44,7 +44,7 @@ class Cache():
         pqs = Person.objects.filter(main_page=True).values_list("slug", flat=True)
         return Person.objects.filter(slug__in=pqs)
 
-    #@lru_cache(maxsize=100)    
+    @lru_cache(maxsize=100)    
     def main_page_topics():
         pqs = Topic.objects.filter(main_page=True).values_list("slug", flat=True)
         return Topic.objects.filter(slug__in=pqs)
