@@ -14,6 +14,7 @@ import { GridBox, GridItem } from "../../components/GridBox";
 
 import CoverPanel from "../elements/CoverPanel";
 import PosterPanel from "../elements/PosterPanel";
+import { twitter } from "../../functions/third-party/twitter/twitter"
 
 
 import {
@@ -36,7 +37,8 @@ import {
 	NewLink,
 	TextSection,
 	MovieRichCardBox,
-	FlexBox
+	FlexBox,
+	Box
 } from "../../styled-components";
 
 import "../pages.css";
@@ -135,7 +137,12 @@ const MoviePage = props => {
 	//console.log(item.appears, isFavOfDirectors)
 	//console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
 	//console.log(item.seoShortDescription)
-	//console.log(keywords)
+    const hasTwitter = useMemo(() => (item.twitter && item.twitter.length > 5) ? true : false,[])
+    const SummaryElement = useMemo(() => hasTwitter 
+        ? () => <MovieSummaryWithTwitter item={item}/> 
+        : () =>  <MovieSummary name={item.name} summary={item.summary} />, [hasTwitter])
+ 
+
 	return (
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
 			<Head
@@ -169,12 +176,7 @@ const MoviePage = props => {
 			<ContentContainer zIndex={1} mt={[4]}>
 				
 				
-				{item.summary && item.summary.length > 50 && (
-					<>
-						<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{item.name}</HeaderText>
-						<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>{item.summary}</Text>
-					</>
-				)}
+				<SummaryElement />
 				{/* VIDEO */}
 				{hasVideos && 
 					<>
@@ -277,7 +279,27 @@ const MoviePage = props => {
 	);
 }
 
+const MovieSummary = ({name, summary}) => (
+    <>
+		<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{name}</HeaderText>
+		<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>{summary}</Text>
+    </>
+)
 
+const MovieSummaryWithTwitter = ({item}) => {
+    const Twitter = twitter()
+    return (
+        <>
+            <Box>
+				<Twitter.Timeline name={item.name} link={item.twitter} />
+				<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{item.name}</HeaderText>
+				<br/>
+				{item.summary}
+            </Box>
+
+        </>
+
+)}
 export default withRouter(MoviePage);
 
 /*

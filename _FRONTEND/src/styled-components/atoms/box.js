@@ -38,6 +38,7 @@ export const Section = styled.section`
 export const Box = styled.div`
     box-sizing: border-box;
     position: relative;
+    float:${props => props.float && props.float};
     :hover { 
         box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
         border: ${props => props.hoverBorder && '3px solid #3633CC' };

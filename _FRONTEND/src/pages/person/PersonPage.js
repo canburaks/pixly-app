@@ -13,7 +13,7 @@ import {  Col, Row } from 'react-flexbox-grid';
 
 import CoverPanel from "../elements/CoverPanel"
 import PersonPanel from "../elements/PersonPanel"
-import { twitter } from "../../functions/third-party/twitter"
+import { twitter } from "../../functions/third-party/twitter/twitter"
 import "../pages.css"
 
 
@@ -36,7 +36,6 @@ const PersonPage = (props) => {
     const initialActive = activeVideoParse()
     const [activeVideo, setActiveVideo] = useState(initialActive)
     const authStatus = useAuthCheck()
-    const hasTwitter = useMemo(() => (item.twitter && item.twitter.length > 5) ? true : false,[])
     //rgaPageView();
     //print("person page", props)
     //const [follow, setFollow] = useState(item.isFollowed);
@@ -122,7 +121,10 @@ const PersonPage = (props) => {
             ScrollInto(props.location.hash.slice(1))
         }
     },[])
-    console.log(item.name, item.twitter)
+    const hasTwitter = useMemo(() => (item.twitter && item.twitter.length > 5) ? true : false,[])
+    const BioElement = useMemo(() => hasTwitter 
+        ? () => <PersonBioWithTwitter item={item}/> 
+        : () =>  <PersonBio name={item.name} bio={item.bio} />, [hasTwitter])
     return(
         <PageContainer>
             <Head
@@ -137,14 +139,17 @@ const PersonPage = (props) => {
                 style={styles.contCon} 
             >
                 <TopPanel />
+
+                <BioElement />
+
                 <Row className="fbox-r jcc">
 
                     {item.bio && item.bio.length >50 &&
                     <Col xs={12} md={12} lg={12} 
                         className="fbox-c aifs jcfs pad-bt-5x" 
                         >
-                        <SubHeaderText className="t-xl t-bold mar-b-2x">{item.name + " Biography"}</SubHeaderText>
-                        <Text>{item.bio}</Text>
+                        
+
                     </Col>}
 
         
@@ -175,11 +180,32 @@ const PersonPage = (props) => {
                     ))}
                 </Box>}
                 {hasTwitter && <Twitter.Timeline name={item.name} link={item.twitter} />}
-
             </ContentContainer>
         </PageContainer>
 
     );
 }
+const PersonBio = ({name, bio}) => (
+    <>
+        <SubHeaderText width="100%">{name + " Biography"}</SubHeaderText>
+        <Text>{bio}</Text>
+    </>
+)
+
+const PersonBioWithTwitter = ({item}) => {
+    const Twitter = twitter()
+    return (
+        <>
+            <Box>
+
+            <Twitter.Timeline name={item.name} link={item.twitter} />
+            <SubHeaderText>{item.name + " Biography"}</SubHeaderText>
+            <br/>
+            {item.bio}
+            </Box>
+
+        </>
+
+)}
 
 export default withRouter(React.memo(PersonPage));
