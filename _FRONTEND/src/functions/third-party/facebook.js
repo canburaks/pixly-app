@@ -122,7 +122,7 @@ export const facebook = () => {
     });
 	var fbClient;
 	// Callback functions
-    const setScriptStatus = useCallback((bool) => bool !== isLogged ? setLoaded(bool) : null,[isLogged])
+    const setScriptStatus = useCallback((bool) => bool !== loaded ? setLoaded(bool) : null,[loaded])
     const setLoginStatus = useCallback((bool) => bool !== isLogged ? setIsLogged(bool) : null,[isLogged])
     const setFbStatus    = useCallback((status) => ((status==="connected") !== isLogged) ? (setIsLogged(status==="connected")) : null,[isLogged] )
     //const checkFbStatus  = useCallback(async () => {if(api){const r = await api.getLoginStatus(); setFbStatus(r.status)}}, [api])
@@ -150,47 +150,60 @@ export const facebook = () => {
         Function,
         Auth,
         data:fbData
-    }
-    useEffect(() => {
-		//console.log("loaded", loaded)
-		checkFbStatus()
-		if (loaded && window.FB){ fbClient = window.FB}
-		console.log("0", window.FB)
-		//print("fbClient", fbClient)
-	},[loaded])
+	}
+	
+    //useEffect(() => {
+	//	//console.log("loaded", loaded)
+	//	checkFbStatus()
+	//	if (loaded && window.FB){ fbClient = window.FB}
+	//	console.log("0", window.FB)
+	//	//print("fbClient", fbClient)
+	//},[loaded])
 
 	useEffect(() => {
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId: "371976677063927",
-				cookie: true,
-				version: "v5.0"
-			});
-			//FB.AppEvents.logPageView();
-
-			if (window.FB) {
-				console.log("1", window.FB)
-				fbClient = window.FB
-				setScriptStatus(true)
+		checkFbStatus()
+		console.log("0", window.FB)
+		if (window.FB){ 
+			fbClient = window.FB; 
+			if(!loaded) {
+				setLoaded(true)
 			}
-			//setTimeout(() => setScriptStatus(true), 500)
-			//setScriptStatus(true)
-		};
-		//console.log("window fb:", window.FB)
-		if(!window.FB){
-			var script = document.createElement("script");
-			script.type = "text/javascript";
-			script.async = true;
-			script.src = "https://connect.facebook.net/en_US/sdk.js";
-			document.getElementsByTagName("head")[0].appendChild(script)
-			setTimeout(() => {if(window.FB){fbClient = window.FB; setScriptStatus(true)}},500 )
-			console.log("2", window.FB)
+			console.log("0.5", window.FB)
+
 		}
-		else if (window.FB){
-			fbClient = window.FB
-			setTimeout(() => setScriptStatus(true), 500)
-			console.log("3", window.FB)
+		else if(window.FB === null || window.FB ==undefined){
+			window.fbAsyncInit = function() {
+				FB.init({
+					appId: "371976677063927",
+					cookie: true,
+					version: "v5.0"
+				});
+				//FB.AppEvents.logPageView();
+
+				if (window.FB) {
+					console.log("1", window.FB)
+					fbClient = window.FB
+					setScriptStatus(true)
+				}
+				//setTimeout(() => setScriptStatus(true), 500)
+				//setScriptStatus(true)
+			};
+			//console.log("window fb:", window.FB)
+			if(!window.FB){
+				var script = document.createElement("script");
+				script.type = "text/javascript";
+				script.async = true;
+				script.src = "https://connect.facebook.net/en_US/sdk.js";
+				document.getElementsByTagName("head")[0].appendChild(script)
+				setTimeout(() => {if(window.FB){fbClient = window.FB; setScriptStatus(true)}},500 )
+				console.log("2", window.FB)
+			}
+			else if (window.FB){
+				fbClient = window.FB
+				setTimeout(() => setScriptStatus(true), 500)
+				console.log("3", window.FB)
 		}
+	}
 	},[loaded])
 	
     return store
