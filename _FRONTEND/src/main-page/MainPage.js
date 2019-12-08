@@ -143,7 +143,7 @@ const MainPageImage = () => (
 
 
 
-const MainPage = React.memo(() => {
+const MainPage = (props) => {
 	//rgaPageView()
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
@@ -350,7 +350,7 @@ const MainPage = React.memo(() => {
 		</PageContainer>
 	</>
 	);
-}, () => true)
+}
 
 
 const PartyImage = (props) => (<Image 

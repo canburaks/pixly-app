@@ -166,7 +166,8 @@ export const facebook = () => {
 			//FB.AppEvents.logPageView();
 
 			if (window.FB) fbClient = this.window.FB
-			setTimeout(() => setScriptStatus(true), 2000)
+			//setTimeout(() => setScriptStatus(true), 2000)
+			setScriptStatus(true)
 			//setScriptStatus(true)
 		};
 		//console.log("window fb:", window.FB)
@@ -176,13 +177,14 @@ export const facebook = () => {
 			script.async = true;
 			script.src = "https://connect.facebook.net/en_US/sdk.js";
 			document.getElementsByTagName("head")[0].appendChild(script)
-			setTimeout(() => {if(window.FB){fbClient = window.FB}},1000 )
+			if(window.FB){fbClient = window.FB}
+			//setTimeout(() => {if(window.FB){fbClient = window.FB}},1000 )
 		}
 		else if (window.FB){
 			fbClient = window.FB
 			setTimeout(() => setScriptStatus(true), 2000)
 		}
-	},[])
+	},[window.FB])
 	
     return store
 }
