@@ -44,7 +44,7 @@ class TopicFeed(Feed):
         return item.cover_poster.url
 
     def item_enclosure_length(self, item):
-        return 1000
+        return item.cover_poster.size
 
     def item_enclosure_mime_type(self, item):
         return "image/jpg"
