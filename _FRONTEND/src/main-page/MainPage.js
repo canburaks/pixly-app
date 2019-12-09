@@ -43,6 +43,7 @@ const FeatureText = (props) => (
 		<SubHeaderText mr={[1,1,2]}
 			fontSize={["14px", "14px", "14px", "16px"]}
 			width={"auto"}
+			fontWeight="bold"
 		>
 			{props.header}
 		</SubHeaderText>

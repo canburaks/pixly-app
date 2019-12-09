@@ -20,15 +20,15 @@ export const twitter = () => {
     
 }
 
-const Timeline = ({link}) => {
+const Timeline = ({link, ...props}) => {
     const timelinewidth = useValues([280,300,350])
     const timelineheight = useValues([350,350,400, 450])
 
     const username = link.split("twitter.com/")[(link.split("twitter.com/").length - 1)]
 
-    const styles ={ float:"left", width:timelinewidth, marginRight:18, marginBottom:12}
+    const styles ={ float:"left", width:timelinewidth}
     return (
-        <Box style={styles}>
+        <Box style={styles} {...props}>
 
             <TimelineWidget
                 dataSource={{

@@ -33,13 +33,14 @@ export const Svg = styled("svg")`
     title:${props => props.title && props.title}
 	${layout};
 	${position};
+
 `
 
 
 
 export const MovieSvg = styled(Svg)`
     stroke:${props => props.active ? "white" : "white"};
-    stroke-width:${props => props.active ? 0.5 : 1};
+    stroke-width:${props => props.active ? 0.5 : 2};
     fill:${props => props.active ? "red" : "none"};
     cursor:pointer;
     :hover {

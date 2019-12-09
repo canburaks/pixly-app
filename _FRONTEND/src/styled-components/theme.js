@@ -102,8 +102,8 @@ themes.default.shadows = {
 	medium:"0px 15px 29px -8px rgba(0, 0, 0, 0.67)",
 	large: "0px 30px 69px 8px rgba(0, 0, 0, 0.77)",
 
-	duo:"0px 30px 69px 8px rgba(0, 0, 0, 0.77), " + 
-		"0 15px 30px -8px rgba(255,255,255, 0.37)", 
+	duo:"0px 10px 49px 8px rgba(0, 0, 0, 0.77), " + 
+		"0 15px 30px -8px rgba(255,255,255, 0.07)", 
 
 
 	mosaic: "8px 0px 9px -2px rgba(0, 0, 0, 0.57)",
