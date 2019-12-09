@@ -107,7 +107,7 @@ const ListBoard = (props) => {
 
                 <ListBoardAd />*/}
 
-
+                <MidPageAd />
             </ContentContainer>
             {!authStatus && <JoinBanner />}
             

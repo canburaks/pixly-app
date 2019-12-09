@@ -7,7 +7,7 @@ import { MAIN_PAGE } from "../../functions/query"
 
 import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../functions/hooks"
 
-import { rgaPageView, Head, ListBoardAd } from "../../functions/analytics"
+import { rgaPageView, Head, ListBoardAd, MidPageAd } from "../../functions/analytics"
 
 
 import { GlobalContext } from "../../";
@@ -81,6 +81,7 @@ const TopicList = React.memo((props) => {
                             text={item.seoShortDescription}  />
                     ))}
                 </Grid>*/}
+            <MidPageAd />
             </ContentContainer>
 
 
