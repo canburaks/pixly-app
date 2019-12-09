@@ -153,7 +153,7 @@ export const RatingMutation = (props) => {
 		movieCacheUpdate(data.rating.movie)
     }
 	const ratingSetter = useCallback((value) => setCurrentRating(value), [currentRating] )
-	const ratingSize = useValues([22,24,26,30,34])
+	const ratingSize = useValues([22,24,26,34,42])
 	const starSize = props.size ? props.size : ratingSize
 	const debouncedMutation = () => rating({ variables:{id:props.item.id, rate:debouncedRating}})
 	

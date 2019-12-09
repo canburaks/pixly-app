@@ -38,7 +38,9 @@ import {
 	TextSection,
 	MovieRichCardBox,
 	FlexBox,
-	Box
+	Box,
+	HashLink,
+	YoutubeIcon
 } from "../../styled-components";
 
 import "../pages.css";
@@ -163,10 +165,11 @@ const MoviePage = props => {
 				cacheUpdate={cacheUpdate}
 				authStatus={authStatus}
 				isLargeScreen={isLargeScreen}
+				Trailer={hasVideos && TrailerIcon}
 				darken
 			/>
 
-			<FlexBox flexDirection="column" justifyContent="center" alignItems="center">
+			<FlexBox flexDirection="column" justifyContent="center" alignItems="center" mt={["30px", "30px", "18px"]}>
 				<Text fontWeight="bold" fontSize={["16px", "16px", "18px"]}>How much did you like the movie?</Text>
 				<RatingMutation item={item} size={50}/>
 			</FlexBox>
@@ -175,23 +178,23 @@ const MoviePage = props => {
 			{/* SUMMARY */}
 			<ContentContainer zIndex={1} mt={[4]}>
 				
-				
 				<SummaryElement />
+
+				<MoviePageAd />
 				{/* VIDEO */}
 				{hasVideos && 
 					<>
-					<HeaderMini my={[1]} mt={[5]}>{videoText}</HeaderMini>
+					<HeaderMini my={[1]} mt={[5]} id="movie-page-video-header">{videoText}</HeaderMini>
 					<YoutubePlayer
 						videos={item.videos}
 						title={item.name + " Videos"}
 					/>
 					</>
 				}
-				<MoviePageAd />
 				{/*<!--SIMILAR Section--> */}
 				{similarPlaceholder.length > 0 && (
 					<>
-						<HeaderMini mt={[5]} fontSize={["18px", "18px", "22px", "24px","26px"]}>{`Movie Recommendations If You Like ${item.name}`}</HeaderMini>
+						<HeaderMini mt={[4]} fontSize={["18px", "18px", "22px", "24px","26px"]}>{`Movie Recommendations If You Like ${item.name}`}</HeaderMini>
 							<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>
 								People who like
 								<Span fontWeight="bold" opacity={1}> {item.name} </Span>
@@ -279,6 +282,22 @@ const MoviePage = props => {
 	);
 }
 
+const TrailerIcon = () => (
+	<HashLink 
+		display="flex"
+		to={`#movie-page-video-header`}
+		title={"See Video Section"}
+		position="absolute"
+		left={"45%"}
+		width={"10%"}
+		top={"45%"}
+		height={"45%"}
+		justifyContent="center"
+	>
+		<YoutubeIcon size={[40,40,50,60]} hoverScale boxShadow={"0 1px 1px 1px rgba(0,0,0, 0.35)"}/>
+	</HashLink>
+)
+
 const MovieSummary = ({name, summary}) => (
     <>
 		<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{name}</HeaderText>
@@ -291,7 +310,7 @@ const MovieSummaryWithTwitter = ({item}) => {
     return (
         <>
             <Box>
-				<Twitter.Timeline name={item.name} link={item.twitter} />
+				<Twitter.Timeline name={item.name} link={item.twitter} mr={[3,3,3,4]} mb={[3,3,3,4]} />
 				<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{item.name}</HeaderText>
 				<br/>
 				{item.summary}

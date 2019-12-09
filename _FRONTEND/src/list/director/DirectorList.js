@@ -6,7 +6,7 @@ import { ACTIVE_DIRECTORS } from "../../functions/query";
 
 import { rgaPageView, Head, MidPageAd, HomePageFeedAd } from "../../functions/analytics"
 import { GridBox, GridItem } from "../../components/GridBox" 
-import { useAuthCheck } from "../../functions/hooks";
+import { useAuthCheck, useValues } from "../../functions/hooks";
 import JoinBanner from "../../components/JoinBanner.js"
 //import { MaterialCard } from "../../comp-material/Card"
 import {
@@ -17,7 +17,11 @@ import {
 
 
 const DirectorList = (props) =>{
-    //console.log(props)
+    const firstPart = props.directors.slice(0, 6)
+    const secondPart = props.directors.slice(6, 12)
+    const thirdPart = props.directors.slice(12, 18)
+    const fourthPart = props.directors.slice(18, 50)
+
     return(
         <PageContainer>
             <Head
@@ -39,11 +43,34 @@ const DirectorList = (props) =>{
                     about them.
                  </Text>
                  <Hr/>
+
                 <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
-                    {props.directors.map(director => (
+                    {firstPart.map(director => (
                         <ActiveDirectorCard item={director} key={director.id}  />
                     ))}
-                </Grid>                
+                </Grid>      
+
+                <MidPageAd />
+                
+                <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
+                    {secondPart.map(director => (
+                        <ActiveDirectorCard item={director} key={director.id}  />
+                    ))}
+                </Grid>  
+                
+                <HomePageFeedAd />
+
+                <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
+                    {thirdPart.map(director => (
+                        <ActiveDirectorCard item={director} key={director.id}  />
+                    ))}
+                </Grid>  
+
+                <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
+                    {fourthPart.map(director => (
+                        <ActiveDirectorCard item={director} key={director.id}  />
+                    ))}
+                </Grid>           
 
             </ContentContainer>
         </PageContainer>

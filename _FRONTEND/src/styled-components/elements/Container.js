@@ -121,7 +121,7 @@ export const PostInfoBox = ({ post, children }) => (
 export const TopPanelBackElement = (props) => (
     <Box display="flex"
         flexDirection="column"
-        width={"105vw"} maxHeight={"100vh"} position={"relative"} py={[4,4,4]} mb={[3]} zIndex={2}
+        width={"105vw"} maxHeight={"100vh"} position={"relative"} py={[0,0,4]} mb={[3]} zIndex={2}
         {...props}
     >
         <BlurBox 
@@ -139,15 +139,16 @@ export const TopPanelBackElement = (props) => (
 export const TopPanelCoverElement = React.memo((props) => (
     <SuperBox src={props.item.largeCoverPoster || props.item.coverPoster || props.item.poster} 
         position={"relative"} 
-        top={0} left={["1vw", "1vw", "5vw"]} right={["1vw", "1vw", "5vw"]} maxWidth={["94vw", "95vw", "88vw"]}
-        height={["53vw","53vw", "45vw"]} maxHeight={"80vh"}
-        boxShadow="duo" 
+        top={0} left={["0px", "0px", "5vw"]} right={["0px", "0px", "5vw"]} maxWidth={["100vw", "100vw", "88vw"]}
+        height={["60vw","60vw", "45vw"]} maxHeight={"80vh"}
+        boxShadow="card" 
         zIndex={3}
-        borderRadius={8}
+        borderRadius={["0px","0px", "8px"]}
         overflow="hidden"
     >   
         <SocialBox size={24} item={props.item} position="absolute" top="20px" right="20px" />
         {props.Actions && <props.Actions item={props.item} authStatus={props.authStatus} />}
+        {props.Trailer && <props.Trailer />}
 
         {/*console.log("top panel", props.item.name) */}
         <Box position={"absolute"} 
