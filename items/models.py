@@ -547,15 +547,15 @@ class Movie(SocialMedia, SEO,MainPage):
             sim_text = ""
             if self.have_content_similars:
                 if self.have_similars:
-                    sim_text += f" See similar movies and good movie recommendations based on "
+                    sim_text += f" See similar movies {self.name} and good movie recommendations based on "
                 else:
-                    sim_text += f" See similar movies like "  
+                    sim_text += f" See similar movies like {self.name}"  
                 sim_text += f"{self.name[:14]}."
 
             sim_text_num = len(sim_text)
             current_num = len(text)
             available_num = 157 - (current_num + sim_text_num)
-            text += f" {self.summary[:available_num]}.."
+            #text += f" {self.summary[:available_num]}.."
             text += sim_text
         print(f"description length: {len(text)}")
         return text

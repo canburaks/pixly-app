@@ -84,6 +84,14 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/the-poughkeepsie-tapes-2007",
+        "/movie/life-of-pi-2012",
+        "/movie/end-of-watch-2012",
+        "/movie/the-perks-of-being-a-wallflower-2012",
+        "/movie/silver-linings-playbook-2012",
+        "/movie/little-miss-sunshine-2006",
+        "/movie/memento-2000",
+        
         "/movie/the-nightingale-2019",
         "/movie/the-key-1983",
         "/movie/stretch-2014",
@@ -621,6 +629,13 @@
         "/movie/dogtooth-2009",
         "/movie/stretch-2014",
         "/movie/the-key-1983",
-        "/movie/the-nightingale-2019"
+        "/movie/the-nightingale-2019",
+        "/movie/the-poughkeepsie-tapes-2007",
+        "/movie/life-of-pi-2012",
+        "/movie/end-of-watch-2012",
+        "/movie/the-perks-of-being-a-wallflower-2012",
+        "/movie/silver-linings-playbook-2012",
+        "/movie/little-miss-sunshine-2006",
+        "/movie/memento-2000"
     ]
 }
