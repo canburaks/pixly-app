@@ -28,6 +28,7 @@ export const HashLink = styled(HLink).attrs(props => props.rel ? {rel:props.rel}
   ${border}
   ${position}
   ${typography}
+  ${flexbox}
 `
 
 const LinkNoFollow = ({ to,link, className, children, follow,target, ...props }) => (

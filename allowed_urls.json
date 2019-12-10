@@ -84,6 +84,15 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/existenz-1999",
+        "/movie/the-babysitter-1995",
+        "/movie/cloak-and-dagger-1946",
+        "/movie/the-raven-2012",
+        "/movie/big-fat-liar-2002",
+        "/movie/hick-2011",
+        "/movie/wrecked-2010",
+        "/movie/bliss-1997",
+
         "/movie/belle-2013",
         "/movie/the-poughkeepsie-tapes-2007",
         "/movie/life-of-pi-2012",
@@ -92,7 +101,6 @@
         "/movie/silver-linings-playbook-2012",
         "/movie/little-miss-sunshine-2006",
         "/movie/memento-2000",
-        
         "/movie/the-nightingale-2019",
         "/movie/the-key-1983",
         "/movie/stretch-2014",
@@ -638,6 +646,14 @@
         "/movie/silver-linings-playbook-2012",
         "/movie/little-miss-sunshine-2006",
         "/movie/memento-2000",
-        "/movie/belle-2013"
+        "/movie/belle-2013",
+        "/movie/existenz-1999",
+        "/movie/the-babysitter-1995",
+        "/movie/cloak-and-dagger-1946",
+        "/movie/the-raven-2012",
+        "/movie/big-fat-liar-2002",
+        "/movie/hick-2011",
+        "/movie/wrecked-2010",
+        "/movie/bliss-1997"
     ]
 }

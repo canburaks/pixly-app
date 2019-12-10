@@ -7,7 +7,7 @@ import { Text, Paragraph,
         NewLink, StatefullLink, Input, HiddenText,
         TextSection, HeaderMini, FlexBox,LinkButton,
         BookmarkMutation, RatingMutation,TagBox,
-        ImdbRatingIcon, YearClockIcon, 
+        ImdbRatingIcon, YearClockIcon, FlexListItem,
 } from "../index"
 import { movieAutoComplete } from "../../functions/grec";
 
@@ -15,7 +15,7 @@ import { movieAutoComplete } from "../../functions/grec";
 
 export const MovieRichCard = (props) => {
     return (
-        <FlexBox 
+        <FlexListItem 
         flexDirection="column" justifyContent="flex-start" 
         width={"100%"} height={"100%"} 
         bg="dark" borderRadius={"8px"}
@@ -76,7 +76,7 @@ export const MovieRichCard = (props) => {
             </Text>
             <LinkButton link={`/movie/${props.item.slug}`} text={"Show More"} mt="auto"></LinkButton>
         </FlexBox>
-    </FlexBox>
+    </FlexListItem>
     )
 }
 

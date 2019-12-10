@@ -9,11 +9,13 @@ import {
 } from "../index"
 
 export const MovieRichCardBox = (props) => (
+    <ul>
     <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
         {props.items.map( item => (
             <MovieRichCard item={item} key={"rec" + item.id} follow={props.follow} />
         ))}
     </Grid>
+    </ul>
 )
 
 
