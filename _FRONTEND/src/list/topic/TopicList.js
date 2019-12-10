@@ -7,7 +7,7 @@ import { MAIN_PAGE } from "../../functions/query"
 
 import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../functions/hooks"
 
-import { rgaPageView, Head, ListBoardAd, MidPageAd,FeedGridItemAd, FeedMobileCollectionAd } from "../../functions/analytics"
+import { rgaPageView, Head, MoviePageAd, MidPageAd,HomePageFeedAd, FeedMobileCollectionAd } from "../../functions/analytics"
 
 
 import { GlobalContext } from "../../";
@@ -25,15 +25,18 @@ import {
 const TopicList = React.memo((props) => {
     const topics = props.data.topics.reverse()
     const partitionQuantity = useValues([4,4,4,4,3])
-    const isMobile = window.innerWidth < 480;
-    console.log("topics", partitionQuantity)
+    //console.log("topics", partitionQuantity)
     //const topicnames = topics.map(topic => topic.name).join(", ")
     //const authStatus = useAuthCheck()
     const firstPart = topics.slice(0,partitionQuantity)
     const secondPart = topics.slice(partitionQuantity, partitionQuantity * 2)
     const thirdPart = topics.slice(partitionQuantity * 2, partitionQuantity * 3)
     const fourthPart = topics.slice(partitionQuantity * 3, partitionQuantity * 4)
-    const ResponsiveAd = isMobile ? FeedMobileCollectionAd : FeedGridItemAd
+
+    const isMobile = window.innerWidth < 480;
+    const ResponsiveAd1 = isMobile ? FeedMobileCollectionAd : HomePageFeedAd
+    const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
+    const ResponsiveAd3 = isMobile ? FeedMobileCollectionAd : MoviePageAd
     return (
         <PageContainer>
             <Head
@@ -64,23 +67,27 @@ const TopicList = React.memo((props) => {
                                 link={`/topic/${item.slug}`} 
                                 text={item.seoShortDescription} />
                         ))}
-                        <ResponsiveAd />
+                    </Grid>
+                    <ResponsiveAd1 />
+                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {secondPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id}  
                                 link={`/topic/${item.slug}`} 
                                 text={item.seoShortDescription} />
                         ))}
-                        <ResponsiveAd />
-
+                    </Grid>
+                    <ResponsiveAd2 />
+                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {thirdPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id}  
                                 link={`/topic/${item.slug}`} 
                                 text={item.seoShortDescription} />
                         ))}
-                        <ResponsiveAd />
-
+                    </Grid>
+                    <ResponsiveAd3 />
+                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {fourthPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id}  

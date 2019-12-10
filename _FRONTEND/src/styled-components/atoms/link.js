@@ -30,8 +30,9 @@ export const HashLink = styled(HLink).attrs(props => props.rel ? {rel:props.rel}
   ${typography}
 `
 
-const LinkNoFollow = ({ to,link, className, children, follow, ...props }) => (
+const LinkNoFollow = ({ to,link, className, children, follow,target, ...props }) => (
 	<Link 
+    target={target}
 		rel={!follow ? "nofollow" : ""}  
 		className={className} 
 		to={link || to} 
@@ -93,7 +94,7 @@ export const NewLink = styled(LinkNoFollow)`
       text-decoration:${props => props.hoverUnderline && "underline"};
 
   };
-  text-decoration:initial;
+  text-decoration:${props => props.underline ? "underline" : "initial"};
   transition: ${themeGet("transitions.medium")};
   ${props => props.hidden && hideText()}
 

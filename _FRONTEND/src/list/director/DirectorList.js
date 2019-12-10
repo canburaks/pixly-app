@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useQuery } from "@apollo/react-hooks";
 import { ACTIVE_DIRECTORS } from "../../functions/query";
 
-import { rgaPageView, Head, MidPageAd, HomePageFeedAd, FeedMobileTopicPageAd } from "../../functions/analytics"
+import { rgaPageView, Head, MidPageAd, HomePageFeedAd, FeedMobileTopicPageAd, MoviePageAd } from "../../functions/analytics"
 import { GridBox, GridItem } from "../../components/GridBox" 
 import { useAuthCheck, useValues } from "../../functions/hooks";
 import JoinBanner from "../../components/JoinBanner.js"
@@ -21,7 +21,10 @@ const DirectorList = (props) =>{
     const secondPart = props.directors.slice(6, 12)
     const thirdPart = props.directors.slice(12, 18)
     const fourthPart = props.directors.slice(18, 50)
-    const isMobile = window.innerWidth<480
+    const isMobile = window.innerWidth < 480;
+    const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
+    const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
+    const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
     return(
         <PageContainer>
             <Head
@@ -50,7 +53,7 @@ const DirectorList = (props) =>{
                     ))}
                 </Grid>      
 
-                <MidPageAd />
+                <ResponsiveAd1 />
                 
                 <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
                     {secondPart.map(director => (
@@ -58,14 +61,14 @@ const DirectorList = (props) =>{
                     ))}
                 </Grid>  
                 
-                <HomePageFeedAd />
+                <ResponsiveAd2 />
 
                 <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
                     {thirdPart.map(director => (
                         <ActiveDirectorCard item={director} key={director.id}  />
                     ))}
                 </Grid>  
-                {isMobile && <FeedMobileTopicPageAd />}
+                <ResponsiveAd3 />
                 <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
                     {fourthPart.map(director => (
                         <ActiveDirectorCard item={director} key={director.id}  />

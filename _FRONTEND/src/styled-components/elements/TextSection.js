@@ -10,6 +10,14 @@ export const Stats = (props) => (
 
 export const Quote = (props) =>{
     const textWithBreak = props.quote.text.split("\n").filter(n => n.length > 2)
+    const belongsToPage = props.quote.movie !== null || props.quote.person !== null
+    const targetPath = belongsToPage 
+        ?  (props.quote.movie !== null) 
+            ? `/movie/${props.quote.movie.slug}`
+            : `/person/${props.quote.person.slug}`
+        : null
+
+    console.log(belongsToPage)
     return (
         <Blockquote cite={props.quote.ownerName}
             fontFamily="quote"
@@ -19,7 +27,13 @@ export const Quote = (props) =>{
             {...props}
         >
             {textWithBreak.map( t => <>{t}<br/></> )}
-            <Cite>{props.quote.ownerName}</Cite>
+            <Cite>
+                {!belongsToPage 
+                    ? props.quote.ownerName 
+                    : <NewLink target="_blank" link={targetPath} underline>
+                        {props.quote.ownerName}
+                    </NewLink>}
+            </Cite>
         </Blockquote>
 )}
 
