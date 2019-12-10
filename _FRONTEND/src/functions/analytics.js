@@ -207,7 +207,26 @@ ReactGA.timing({
 
 
 //--------------ADS------------------------------
-
+export const FeedMobileAd1 = () => {
+    const isProduction = window.location.href.includes("pixly.app")
+    useEffect(() => {
+        if (isProduction && window) {
+            //console.log("if true");
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }, [isProduction])
+    //if (!production) return <div className="hidden"></div>
+    return (
+        <ins className="adsbygoogle"
+            style={{ display: "block", width: "100%", minHeight: 90 }}
+            data-ad-format="fluid"
+            data-ad-layout-key="-6f+bs+35+1z+37"
+            data-ad-client="ca-pub-9259748524746137"
+            data-ad-slot="3449814710"
+            >
+        </ins>
+    )
+}
 
 export const BlogPostAd = () => {
     useEffect(() => {

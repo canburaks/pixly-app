@@ -79,7 +79,7 @@ const MovieList = (props) => {
                 <LıstHeader />
                 <Text mt={[3]}>{liste.summary}</Text>
                 <hr />
-
+                <ul>
                 <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {firstPart.map( item => (
                         <WhiteMovieCard item={item} key={"rec" + item.id} />
@@ -99,6 +99,7 @@ const MovieList = (props) => {
                         <WhiteMovieCard item={item} key={"rec" + item.id} />
                     ))}
                 </Grid>
+                </ul>
                 {haveThirdPart && <MoviePageAd />}
                 
                 

@@ -192,7 +192,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         //console.log("data", firstPart, secondPArt)
         dispatcher(willBeDispatched)
         return (
-            <>
+            <ul>
             <MoviePageAd />
             <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {firstPart.map( item => (
@@ -213,7 +213,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
             </Grid>
             <MoviePageAd />
             <br/>
-            </>
+            </ul>
 
         )}
 }, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.page === n.page) )

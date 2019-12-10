@@ -5,13 +5,14 @@ import { Text, Paragraph, HeaderMini,
         TextSection, Card, ImageCard, AspectRatioCard, MosaicCard,DarkCard,
         NewLink, Input, LinkButton,CoverLink, ImdbRatingIcon, YearClockIcon, 
         ListIcon, YoutubeIcon,FilmIcon,HashLink,
-        BookmarkMutation, RatingMutation, Hr, SubHeaderText,ImageBox,CoverBox
+        BookmarkMutation, RatingMutation, Hr, SubHeaderText,ImageBox,CoverBox,
+        FlexListItem
 } from "../index"
 import { rgba } from "polished";
 import { AbsoluteBox } from "../atoms";
 
 export const ActiveDirectorCard = (props) => (
-<FlexBox 
+<FlexListItem 
     mb={[3]}  width={"100%"} 
     borderRadius={"6px"} 
     bg={"dark"}
@@ -109,11 +110,11 @@ export const ActiveDirectorCard = (props) => (
             ))}
         </FlexBox>
     </FlexBox>
-</FlexBox>
+</FlexListItem>
 ) 
 
 export const CollectionCard = (props) => (
-    <FlexBox flexDirection="column" mb={[5]} height={"100%"} mt={[2]}>
+    <FlexListItem flexDirection="column" mb={[5]} height={"100%"} mt={[2]}>
         <SuperBox 
             display="flex" flexDirection="column" 
             src={props.item.coverPoster || props.item.poster} 
@@ -143,11 +144,11 @@ export const CollectionCard = (props) => (
             </NewLink>
             <Hr my={"8px"} />
         </Box>
-    </FlexBox>
+    </FlexListItem>
     )
 
 export const WhiteMovieCard = ({ item }) => (
-<FlexBox flexDirection="column" mb={[5]} height={"100%"}>
+<FlexListItem flexDirection="column" mb={[5]} height={"100%"}>
     <SuperBox 
         display="flex" flexDirection="column" 
         src={item.coverPoster || item.poster} 
@@ -197,8 +198,7 @@ export const WhiteMovieCard = ({ item }) => (
         </NewLink>
         <hr />
     </Box>
-
-</FlexBox>
+</FlexListItem>
 )
 
 export const LargeTopicMovieCard = ({ item }) => (
