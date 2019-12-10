@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useQuery } from "@apollo/react-hooks";
 import { ACTIVE_DIRECTORS } from "../../functions/query";
 
-import { rgaPageView, Head, MidPageAd, HomePageFeedAd, FeedMobileAd1 } from "../../functions/analytics"
+import { rgaPageView, Head, MidPageAd, HomePageFeedAd, FeedMobileTopicPageAd } from "../../functions/analytics"
 import { GridBox, GridItem } from "../../components/GridBox" 
 import { useAuthCheck, useValues } from "../../functions/hooks";
 import JoinBanner from "../../components/JoinBanner.js"
@@ -65,7 +65,7 @@ const DirectorList = (props) =>{
                         <ActiveDirectorCard item={director} key={director.id}  />
                     ))}
                 </Grid>  
-                {isMobile && <FeedMobileAd1 />}
+                {isMobile && <FeedMobileTopicPageAd />}
                 <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
                     {fourthPart.map(director => (
                         <ActiveDirectorCard item={director} key={director.id}  />

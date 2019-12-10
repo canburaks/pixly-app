@@ -273,3 +273,28 @@ export const Cite = styled("cite")`
   ${position}
   ${typography}
 `
+
+export const DD = styled.dd`
+    wordSpacing: ${props => props.wordSpacing ? props.wordSpacing : "normal"};
+    color:${themeGet("dark")};
+    font-weight:400;
+    margin:0;
+    margin-inline-start:0px;
+    white-space: "pre-line";
+    cursor:${props => props.clickable ? "pointer" : "inherit"};
+    white-space:${props => props.truncate && "nowrap"};
+    overflow:${props => props.truncate && "hidden"};
+    text-overflow:${props => props.truncate && "ellipsis"};
+    text-decoration:${props => props.underline && "underline"}
+    :hover {
+      text-decoration:${props => props.hoverUnderline && "underline"};
+    }
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${position}
+    ${typography}
+`
