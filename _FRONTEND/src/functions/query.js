@@ -731,7 +731,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                     coverPoster, createdAt, updatedAt, wiki, richdata,
                     searchable,
                     quotes{
-                        ownerName, text
+                        ownerName, text, movie{name, slug}, person{name, slug}
                     }
                 },
                 quantity

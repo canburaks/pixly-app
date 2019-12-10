@@ -6,8 +6,8 @@ import { useQuery } from '@apollo/react-hooks';
 
 import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../functions/hooks"
 
-import { rgaPageView, Head, MidPageAd, FeedGridItemAd, FeedMobileCollectionAd,
-    MAIN_PAGE, LIST_BOARD
+import { rgaPageView, Head, MidPageAd, HomePageFeedAd,  FeedMobileCollectionAd,
+    MAIN_PAGE, LIST_BOARD, MoviePageAd
 } from "../../functions"
 
 import { GlobalContext } from "../../";
@@ -46,7 +46,10 @@ const ListBoard = (props) => {
     const secondPart = allLists.slice(partitionQuantity, partitionQuantity * 2)
     const thirdPart = allLists.slice(partitionQuantity * 2, partitionQuantity * 3)
     const fourthPart = allLists.slice(partitionQuantity * 3, partitionQuantity * 4)
-    const ResponsiveAd = isMobile ? FeedMobileCollectionAd : FeedGridItemAd
+
+    const ResponsiveAd1 = isMobile ? FeedMobileCollectionAd : HomePageFeedAd
+    const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
+    const ResponsiveAd3 = isMobile ? FeedMobileCollectionAd : MoviePageAd
 
 
     //console.log(otherLists)
@@ -82,7 +85,10 @@ const ListBoard = (props) => {
                                 buttonText={`See ${buttonText(item.name)}`}
                             />
                         ))}
-                        <ResponsiveAd />
+                    </Grid>
+
+                    <ResponsiveAd1 />
+                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {secondPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id} 
@@ -92,7 +98,10 @@ const ListBoard = (props) => {
                                 buttonText={`See ${buttonText(item.name)}`}
                             />
                         ))}
-                        <ResponsiveAd />
+                    </Grid>
+
+                    <ResponsiveAd2 />
+                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {thirdPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id} 
@@ -102,7 +111,10 @@ const ListBoard = (props) => {
                                 buttonText={`See ${buttonText(item.name)}`}
                             />
                         ))}
-                        <ResponsiveAd />
+                    </Grid>
+
+                    <ResponsiveAd3 />
+                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {fourthPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id} 

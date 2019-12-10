@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 
-import { isEqualObj, Head, MidPageAd,HomePageFeedAd,MoviePageAd, useValues, useWindowSize} from "../../functions"
+import { isEqualObj, Head, MidPageAd,HomePageFeedAd,MoviePageAd, useValues, useWindowSize, FeedMobileTopicPageAd} from "../../functions"
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import * as SocialButtons from 'react-social-sharing'
 
@@ -189,30 +189,35 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         const firstPart = data.complexSearch.topicResult.slice(0, 4)
         const secondPArt = data.complexSearch.topicResult.slice(4, 8)
         const thirdPart = data.complexSearch.topicResult.slice( 8, 16)
+
+        const isMobile = window.innerWidth < 480;
+        const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
+        const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
+        const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
+
         //console.log("data", firstPart, secondPArt)
         dispatcher(willBeDispatched)
         return (
             <ul>
-            <MoviePageAd />
-            <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                {firstPart.map( item => (
-                    <WhiteMovieCard item={item} key={"rec" + item.id}/>
-                ))}
-            </Grid>
-            <HomePageFeedAd/>
-            <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                {secondPArt.map( item => (
-                    <WhiteMovieCard item={item} key={"rec" + item.id}/>
-                ))}
-            </Grid>
-            <MidPageAd />
-            <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                {thirdPart.map( item => (
-                    <WhiteMovieCard item={item} key={"rec" + item.id}/>
-                ))}
-            </Grid>
-            <MoviePageAd />
-            <br/>
+                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {firstPart.map( item => (
+                        <WhiteMovieCard item={item} key={"rec" + item.id}/>
+                    ))}
+                </Grid>
+                <ResponsiveAd1/>
+                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {secondPArt.map( item => (
+                        <WhiteMovieCard item={item} key={"rec" + item.id}/>
+                    ))}
+                </Grid>
+                <ResponsiveAd2 />
+                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    {thirdPart.map( item => (
+                        <WhiteMovieCard item={item} key={"rec" + item.id}/>
+                    ))}
+                </Grid>
+                <ResponsiveAd3 />
+                <br/>
             </ul>
 
         )}
