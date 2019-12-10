@@ -2,7 +2,7 @@
 import React from "react";
 import { useState, useContext, useMemo, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
-import { rgaPageView, Head, MoviePageAd, MidPageAd } from "../../functions/analytics";
+import { rgaPageView, Head, MoviePageAd, MidPageAd, HomePageFeedAd } from "../../functions/analytics";
 
 
 import { useAuthCheck } from "../../functions/hooks";
@@ -37,6 +37,7 @@ import {
 	NewLink,
 	TextSection,
 	MovieRichCardBox,
+	MovieRichCard,
 	FlexBox,
 	Box,
 	HashLink,
@@ -99,6 +100,7 @@ const MoviePage = props => {
 		[]
 	);
 
+
 	//const contentSimilarNonCover = contentSimilarPlaceholder.filter(m => m.movie.hasCover=== false)
 	const setkeywords = (name, slug, year, videoNum) => {
 		const keywords = [
@@ -145,6 +147,15 @@ const MoviePage = props => {
         : () =>  <MovieSummary name={item.name} summary={item.summary} />, [hasTwitter])
  
 
+	const firstPartContentSimilars = contentSimilarCover.slice(0,6)
+	const secondPartContentSimilars = contentSimilarCover.slice(6, 12)
+	const thirdPartContentSimilars = contentSimilarCover.slice(12,30)
+
+
+	const isMobile = window.innerWidth < 480;
+	const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
+	const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
+	const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
 	return (
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
 			<Head
@@ -203,19 +214,16 @@ const MoviePage = props => {
 								{item.name}' probably you will also like these
 								movies. We have advanced algorithms and fine tuned
 								filtering mechanisms that choose these movies
-								wisely. If you have any issues please feel free to
-								write us from the bottom part of the page.
+								wisely.
 							</Text>
 							<Text fontSize={["14px", "16px", "18px"]}>{invtext}</Text>
 						
 
 						<MovieRichCardBox items={similarPlaceholder} />
+						<ResponsiveAd1 />
 						<hr />
 					</>
 				)}
-
-				
-				<MidPageAd />
 				{/*<!--CONTENT SIMILAR Section--> */}
 				{contentSimilarCover.length > 0 && (
 					<>
@@ -224,14 +232,15 @@ const MoviePage = props => {
 							Those movies have content similarities with{" "}
 							<Span fontWeight="bold" opacity={1}> {item.name} </Span>. If
 							you like any topic or tag under the below movies,
-							you may also be interested them. You can also share
-							any topic or tag to add these movies, please feel
-							free to contact us. We are passionate about
-							improving our recommendation mechanism. Therefore
-							any feedback is welcome.
+							you may also be interested them. 
 						</Text>
 						<Text fontSize={["14px", "16px", "18px"]}>{vistext}</Text>
-						<MovieSimilarBox items={contentSimilarCover}  />
+						<MovieSimilarBox items={firstPartContentSimilars}  />
+						<ResponsiveAd2 />
+						<MovieSimilarBox items={secondPartContentSimilars}  />
+						{contentSimilarCover.length > 16 && <ResponsiveAd3 />}
+						<MovieSimilarBox items={thirdPartContentSimilars}  />
+
 						<hr />
 					</>
 				)}
@@ -242,7 +251,7 @@ const MoviePage = props => {
 					<TextSection header={"Movie Lists"} text={listsThatInvolveText} />
 					<Grid columns={[2,3,3,4]}>
 						{item.appears.map((liste, index) => (
-							<Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card"  maxWidth={"200px"}>
+							<Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card"  maxWidth={"200px"} key={liste.slug}>
 								<Image
 									src={liste.relatedPersons[0].poster} 
 									borderRadius={"8px"}
@@ -292,7 +301,7 @@ const TrailerIcon = () => (
 		width={"10%"}
 		top={"45%"}
 		height={"45%"}
-		justifyContent="center"
+		justifyContent={"center"}
 	>
 		<YoutubeIcon size={[40,40,50,60]} hoverScale boxShadow={"0 1px 1px 1px rgba(0,0,0, 0.35)"}/>
 	</HashLink>
