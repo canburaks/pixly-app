@@ -40,12 +40,13 @@ const ListBoard = (props) => {
     const listOfMonth = useMemo(() => lists.filter(l => l.listType === "mm"))
     //console.log(listOfMonth)
     const allLists = [...listOfMonth, ...otherLists, ...festivalWinners, ...directorsFavourite]
-
+    console.log(allLists)
 
     const firstPart = allLists.slice(0,partitionQuantity)
     const secondPart = allLists.slice(partitionQuantity, partitionQuantity * 2)
     const thirdPart = allLists.slice(partitionQuantity * 2, partitionQuantity * 3)
     const fourthPart = allLists.slice(partitionQuantity * 3, partitionQuantity * 4)
+    const fifthPart = allLists.slice(partitionQuantity * 4, partitionQuantity * 5)
 
     const ResponsiveAd1 = isMobile ? FeedMobileCollectionAd : HomePageFeedAd
     const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
@@ -116,6 +117,17 @@ const ListBoard = (props) => {
                     <ResponsiveAd3 />
                     <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {fourthPart.map( item => (
+                            <CollectionCard 
+                                item={item} key={"rec" + item.id} 
+                                link={`/list/${item.slug}/1`} 
+                                text={item.seoShortDescription}
+                                ratio={0.4}
+                                buttonText={`See ${buttonText(item.name)}`}
+                            />
+                        ))}
+                    </Grid>
+                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                        {fifthPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id} 
                                 link={`/list/${item.slug}/1`} 

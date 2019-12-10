@@ -165,8 +165,7 @@
     "include": [
       "",
       "/",
-      "/topic/art-house",
-      "/topic/based-on-true-story"
+      "/film-lists"
 
     ],
     "publicPath": "/"
