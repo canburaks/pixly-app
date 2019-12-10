@@ -165,8 +165,8 @@
     "include": [
       "",
       "/",
-      "/movie/belle-2013",
-      "/movie/city-of-god-2002"
+      "/topic/art-house",
+      "/topic/based-on-true-story"
 
     ],
     "publicPath": "/"
