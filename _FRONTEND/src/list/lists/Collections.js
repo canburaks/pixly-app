@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../functions/hooks"
 
-import { rgaPageView, Head, MidPageAd, HomePageFeedAd, ListBoardAd,
+import { rgaPageView, Head, MidPageAd, FeedGridItemAd, FeedMobileCollectionAd,
     MAIN_PAGE, LIST_BOARD
 } from "../../functions"
 
@@ -24,6 +24,9 @@ const ListBoard = (props) => {
     const authStatus = useAuthCheck();
     const state = useContext(GlobalContext);
     
+    const partitionQuantity = useValues([4,4,4,4,3])
+    const isMobile = window.innerWidth < 480;
+
     if (props.viewer){
         state.methods.updatePoints(props.viewer.points)
     }
@@ -37,10 +40,13 @@ const ListBoard = (props) => {
     const listOfMonth = useMemo(() => lists.filter(l => l.listType === "mm"))
     //console.log(listOfMonth)
     const allLists = [...listOfMonth, ...otherLists, ...festivalWinners, ...directorsFavourite]
-    const firstPart = allLists.slice(0,4)
-    const secondPart = allLists.slice(4, 8)
-    const thirdPart = allLists.slice(8, 18)
 
+
+    const firstPart = allLists.slice(0,partitionQuantity)
+    const secondPart = allLists.slice(partitionQuantity, partitionQuantity * 2)
+    const thirdPart = allLists.slice(partitionQuantity * 2, partitionQuantity * 3)
+    const fourthPart = allLists.slice(partitionQuantity * 3, partitionQuantity * 4)
+    const ResponsiveAd = isMobile ? FeedMobileCollectionAd : FeedGridItemAd
 
 
     //console.log(otherLists)
@@ -66,20 +72,50 @@ const ListBoard = (props) => {
                 </Text>    
                 <hr/>
                 <ul>
-                <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {allLists.map( item => (
-                        <CollectionCard 
-                            item={item} key={"rec" + item.id} 
-                            link={`/list/${item.slug}/1`} 
-                            text={item.seoShortDescription}
-                            ratio={0.4}
-                            buttonText={`See ${buttonText(item.name)}`}
-                        />
-                    ))}
-                </Grid>
+                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                        {firstPart.map( item => (
+                            <CollectionCard 
+                                item={item} key={"rec" + item.id} 
+                                link={`/list/${item.slug}/1`} 
+                                text={item.seoShortDescription}
+                                ratio={0.4}
+                                buttonText={`See ${buttonText(item.name)}`}
+                            />
+                        ))}
+                        <ResponsiveAd />
+                        {secondPart.map( item => (
+                            <CollectionCard 
+                                item={item} key={"rec" + item.id} 
+                                link={`/list/${item.slug}/1`} 
+                                text={item.seoShortDescription}
+                                ratio={0.4}
+                                buttonText={`See ${buttonText(item.name)}`}
+                            />
+                        ))}
+                        <ResponsiveAd />
+                        {thirdPart.map( item => (
+                            <CollectionCard 
+                                item={item} key={"rec" + item.id} 
+                                link={`/list/${item.slug}/1`} 
+                                text={item.seoShortDescription}
+                                ratio={0.4}
+                                buttonText={`See ${buttonText(item.name)}`}
+                            />
+                        ))}
+                        <ResponsiveAd />
+                        {fourthPart.map( item => (
+                            <CollectionCard 
+                                item={item} key={"rec" + item.id} 
+                                link={`/list/${item.slug}/1`} 
+                                text={item.seoShortDescription}
+                                ratio={0.4}
+                                buttonText={`See ${buttonText(item.name)}`}
+                            />
+                        ))}
+                    </Grid>
                 </ul>
                 {/*
-                <HomePageFeedAd />
+                <FeedGridItemAd />
 
                 <Grid columns={[1,1,2,2,2,2,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {secondPart.map( item => (

@@ -6,7 +6,7 @@ import { Text, Paragraph, HeaderMini,
         NewLink, Input, LinkButton,CoverLink, ImdbRatingIcon, YearClockIcon, 
         ListIcon, YoutubeIcon,FilmIcon,HashLink,
         BookmarkMutation, RatingMutation, Hr, SubHeaderText,ImageBox,CoverBox,
-        FlexListItem
+        FlexListItem, DD
 } from "../index"
 import { rgba } from "polished";
 import { AbsoluteBox } from "../atoms";
@@ -126,15 +126,18 @@ export const CollectionCard = (props) => (
             my={[2,2,3]}
             >
             <NewLink link={props.link}>
+            <dt>
+
                 {props.item.name}
+            </dt>
             </NewLink>
         </HeaderMini>
-        <Text  
+        <DD  
             color="dark"
             textAlign="justify"
         >
             {props.text.slice(0,200)}
-        </Text>
+        </DD>
         <Box position="absolute" bottom={"20px"} width={"100%"}>
             <NewLink link={props.link}  
                 fontWeight="bold" color="dark" 

@@ -80,27 +80,26 @@ const MovieList = (props) => {
                 <Text mt={[3]}>{liste.summary}</Text>
                 <hr />
                 <ul>
-                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {firstPart.map( item => (
-                        <WhiteMovieCard item={item} key={"rec" + item.id} />
-                    ))}
-                </Grid>
-                
-                <HomePageFeedAd/>
-                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {secondPArt.map( item => (
-                        <WhiteMovieCard item={item} key={"rec" + item.id} />
-                    ))}
-                </Grid>
-                <MidPageAd />
+                    <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                        {firstPart.map( item => (
+                            <WhiteMovieCard item={item} key={"rec" + item.id} />
+                        ))}
+                    </Grid>
+                    
+                    <HomePageFeedAd/>
+                    <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                        {secondPArt.map( item => (
+                            <WhiteMovieCard item={item} key={"rec" + item.id} />
+                        ))}
+                    </Grid>
+                    <MidPageAd />
 
-                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {thirdPart.map( item => (
-                        <WhiteMovieCard item={item} key={"rec" + item.id} />
-                    ))}
-                </Grid>
+                    <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                        {thirdPart.map( item => (
+                            <WhiteMovieCard item={item} key={"rec" + item.id} />
+                        ))}
+                    </Grid>
                 </ul>
-                {haveThirdPart && <MoviePageAd />}
                 
                 
                 {liste.numMovies > ppi && 
