@@ -35,6 +35,7 @@ export const Section = styled.section`
     ${typography}
 `
 
+
 export const Box = styled.div`
     box-sizing: border-box;
     position: relative;
@@ -90,6 +91,31 @@ export const SuperBox = styled.div`
         text-decoration: ${props => props.hoverUnderline && "underline"};
         background:${props => props.hoverLight && setLightness('0.45', 'rgba(204,205,100,0.7)')};
     }
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
+export const FlexListItem = styled.li`
+    box-sizing: border-box;
+    position: relative;
+    display:flex;
+    float:${props => props.float && props.float};
+    :hover { 
+        box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
+        border: ${props => props.hoverBorder && '3px solid #3633CC' };
+        text-decoration: ${props => props.hoverUnderline && "underline"};
+        background:${props => props.hoverLight && setLightness('0.15', `${props.hoverLight}`)};
+        }
+    transition: ${themeGet("transitions.fast")};
+    border: ${props => props.hoverBorder && "3px solid transparent"};
+    cursor: ${props => props.clickable ? "pointer" : "inherit"};
     ${color}
     ${space}
     ${shadow}

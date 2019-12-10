@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useQuery } from "@apollo/react-hooks";
 import { ACTIVE_DIRECTORS } from "../../functions/query";
 
-import { rgaPageView, Head, MidPageAd, HomePageFeedAd } from "../../functions/analytics"
+import { rgaPageView, Head, MidPageAd, HomePageFeedAd, FeedMobileAd1 } from "../../functions/analytics"
 import { GridBox, GridItem } from "../../components/GridBox" 
 import { useAuthCheck, useValues } from "../../functions/hooks";
 import JoinBanner from "../../components/JoinBanner.js"
@@ -21,7 +21,7 @@ const DirectorList = (props) =>{
     const secondPart = props.directors.slice(6, 12)
     const thirdPart = props.directors.slice(12, 18)
     const fourthPart = props.directors.slice(18, 50)
-
+    const isMobile = window.innerWidth<480
     return(
         <PageContainer>
             <Head
@@ -43,7 +43,7 @@ const DirectorList = (props) =>{
                     about them.
                  </Text>
                  <Hr/>
-
+                <ul>
                 <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
                     {firstPart.map(director => (
                         <ActiveDirectorCard item={director} key={director.id}  />
@@ -65,13 +65,13 @@ const DirectorList = (props) =>{
                         <ActiveDirectorCard item={director} key={director.id}  />
                     ))}
                 </Grid>  
-
+                {isMobile && <FeedMobileAd1 />}
                 <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
                     {fourthPart.map(director => (
                         <ActiveDirectorCard item={director} key={director.id}  />
                     ))}
                 </Grid>           
-
+            </ul>
             </ContentContainer>
         </PageContainer>
     );
