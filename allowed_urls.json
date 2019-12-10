@@ -84,6 +84,7 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/muhammad-the-messenger-of-god",
         "/movie/existenz-1999",
         "/movie/the-babysitter-1995",
         "/movie/cloak-and-dagger-1946",
@@ -92,7 +93,6 @@
         "/movie/hick-2011",
         "/movie/wrecked-2010",
         "/movie/bliss-1997",
-
         "/movie/belle-2013",
         "/movie/the-poughkeepsie-tapes-2007",
         "/movie/life-of-pi-2012",
@@ -654,6 +654,7 @@
         "/movie/big-fat-liar-2002",
         "/movie/hick-2011",
         "/movie/wrecked-2010",
-        "/movie/bliss-1997"
+        "/movie/bliss-1997",
+        "/movie/muhammad-the-messenger-of-god"
     ]
 }
