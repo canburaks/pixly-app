@@ -176,6 +176,8 @@ const SignupForm = (props) => {
                 getValue={(e) => updateLocalValues({name:e})}
                 getError={e => updateLocalErrors({name:e})}
                 validation={e => e.length>4}
+                minLength={3}
+                maxLength={40}
                 validationMessage={"Please enter a valid name"}
             />
             {/* USERNAME */}
@@ -187,6 +189,8 @@ const SignupForm = (props) => {
                 getError={e => updateLocalErrors({ username: e })}
                 validation={usernameValidator}
                 validationMessage={"Username can only be consist of alphanumeric characters."}
+                minLength={4}
+                maxLength={40}
             />
 
             {/* EMAIL */}
@@ -210,6 +214,7 @@ const SignupForm = (props) => {
                 getError={e => updateLocalErrors({ password: e })}
                 validation={passwordValidator}
                 validationMessage={"Password must be 8 alphanumeric-uupercase-lowercase."}
+                minLength={8}
                 />
             
             {/* PASSWORD 2 */}
@@ -220,6 +225,7 @@ const SignupForm = (props) => {
                 getError={e => updateLocalErrors({ password2: e })}
                 validation={e => values.password === e}
                 validationMessage={"Password doesn't match"}
+                minLength={8}
                 />
             <p className="form-validation">{formError}</p>
 
