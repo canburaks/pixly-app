@@ -3167,10 +3167,10 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-cbs-react-components@^0.13.17:
-  version "0.13.17"
-  resolved "https://registry.yarnpkg.com/cbs-react-components/-/cbs-react-components-0.13.17.tgz#16bef1fbe7a9f55e7b3a975c0ffc083242bf5610"
-  integrity sha512-HK3SfytmKmidpFjLBDAHJATUlBTJUHYXqsP1pXjFfXQy4n+uTB776WhMfxpaW/rRcH335BGoJIqSNynkluDm9g==
+cbs-react-components@^0.13.22:
+  version "0.13.22"
+  resolved "https://registry.yarnpkg.com/cbs-react-components/-/cbs-react-components-0.13.22.tgz#d8a7bcb7c74664b05d8f39b26d25e916db2afe78"
+  integrity sha512-7ZR7F/AS1xDY2nSEtlq5f8HN+WUF7io6sWajirlqMjkguj9ciA/iOfBNYPMHGtS0uDy4CvWxOZlrYpgXDAxwWA==
 
 cbs-web-components@^0.4.0:
   version "0.4.0"

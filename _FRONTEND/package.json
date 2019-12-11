@@ -68,7 +68,7 @@
     "apollo-client": "^2.5.1",
     "apollo-link-context": "^1.0.9",
     "apollo-upload-client": "^10.0.0",
-    "cbs-react-components": "^0.13.17",
+    "cbs-react-components": "^0.13.22",
     "cbs-web-components": "^0.4.0",
     "core-js": "3",
     "fast-async": "^6.3.8",
