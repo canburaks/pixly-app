@@ -77,7 +77,6 @@ const TopicList = (props) => {
                                 text={item.seoShortDescription} />
                         ))}
                     </Grid>
-                    <ResponsiveAd2 />
                     <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {thirdPart.map( item => (
                             <CollectionCard 
