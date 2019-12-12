@@ -16,7 +16,8 @@
         "/topic/feel-good-movies",
         "/topic/bechdel-test",
         "/topic/lgbtq-plus-films",
-        "/topic/controversial-films"
+        "/topic/controversial-films",
+        "/topic/historical-figures"
     ],
     "blog":[
         "/blog",
@@ -352,6 +353,7 @@
         "/topic/feel-good-movies",
         "/topic/lgbtq-plus-films",
         "/topic/controversial-films",
+        "/topic/historical-figures",
         "/blog/a-brief-introduction-to-collaborative-filtering",
         "/blog/django-graphql-react-integration-tutorial-part-1",
         "/blog/django-graphql-react-integration-tutorial-part-2",
