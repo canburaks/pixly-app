@@ -163,7 +163,7 @@ const MainPage = (props) => {
 	const Fb = facebook()
 	//console.log("main", isModalOpen)
 	//const listAndTopics = [...topics, ...lists]
-	const heroMainText = "Discover Best Movies that Fit Your Cinema Taste."
+	const heroMainText = "Discover Best Movies That Fit Your Taste"
 	const heroHeaderText = "Improve your experience in discovering movies"
 	const heroSubheaderText = "Don't waste your time by browsing endless cycles. " + 
 		"With our AI-based personalized recommendation systems, we are guiding you through multiple universes " + 
@@ -255,6 +255,7 @@ const MainPage = (props) => {
 									color="light" maxWidth={"500px"}
 									fontWeight="bold"
 									textShadow="-1px 1px 1px rgba(40, 40, 40, 0.8)"
+									textAlign="justify"
 								>
 									{heroSubheaderText}
 								</Text>
@@ -307,37 +308,7 @@ const MainPage = (props) => {
 					</Section>
 
 
-					<Section 
-						display="flex" flexDirection="column" alignItems="center" 
-						position="relative" top={-60}
-						py={[4]} 
-						mb={[4]}
-						width={"100%"}
-						borderTop="1px solid"
-						borderBottom="1px solid"
-						borderColor="rgba(80,80,80, 0.4)"
-					
-					>
-							<HeaderMini textAlign="center" my={[2,3]}>Let me Show</HeaderMini>
-							<FlexBox>
-								<LinkButton link="/film-lists" color="light" bg="dark" borderRadius="4px" height={"50px"}
-									hoverScale hoverBg="#3633CC"
-								>
-									Film Lists
-								</LinkButton>
-								<LinkButton link="/topics" color="light" bg="dark" borderRadius="4px" height={"50px"}
-									hoverScale hoverBg="#3633CC"
-								>
-									Topics
-								</LinkButton>
-								<LinkButton link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}
-									hoverScale hoverBg="#3633CC"
-								>
-									Browse Movies
-								</LinkButton>
 
-							</FlexBox>
-					</Section>
 
 					</ContentContainer>
 
