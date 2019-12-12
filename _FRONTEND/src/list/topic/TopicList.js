@@ -22,8 +22,8 @@ import {
 
 
 
-const TopicList = React.memo((props) => {
-    const topics = props.data.topics.reverse()
+const TopicList = (props) => {
+    const topics = useMemo(() => props.data.topics.sort((a,b) => b.id - a.id),[])
     const partitionQuantity = useValues([4,4,4,4,3])
     //console.log("topics", partitionQuantity)
     //const topicnames = topics.map(topic => topic.name).join(", ")
@@ -122,7 +122,7 @@ const TopicList = React.memo((props) => {
 
         </PageContainer>
     );
-})
+}
 
 
 const ExploreQuery = props => {
