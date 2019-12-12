@@ -24,7 +24,9 @@ import {
 
 const TopicList = (props) => {
     const topics = useMemo(() => props.data.topics.sort((a,b) => b.id - a.id),[])
-    const partitionQuantity = useValues([4,4,4,4,3])
+    //const partitionQuantity = useValues([4,4,4,4,3])
+    const partitionQuantity = 6
+
     //console.log("topics", partitionQuantity)
     //const topicnames = topics.map(topic => topic.name).join(", ")
     //const authStatus = useAuthCheck()
@@ -58,6 +60,7 @@ const TopicList = (props) => {
                         }
             </Text>          
             <hr/>
+            <ResponsiveAd1 />
 
                 <dl>
                     <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
@@ -68,7 +71,8 @@ const TopicList = (props) => {
                                 text={item.seoShortDescription} />
                         ))}
                     </Grid>
-                    <ResponsiveAd1 />
+                    <ResponsiveAd3 />
+
                     <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {secondPart.map( item => (
                             <CollectionCard 
@@ -77,23 +81,7 @@ const TopicList = (props) => {
                                 text={item.seoShortDescription} />
                         ))}
                     </Grid>
-                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                        {thirdPart.map( item => (
-                            <CollectionCard 
-                                item={item} key={"rec" + item.id}  
-                                link={`/topic/${item.slug}`} 
-                                text={item.seoShortDescription} />
-                        ))}
-                    </Grid>
-                    <ResponsiveAd3 />
-                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                        {fourthPart.map( item => (
-                            <CollectionCard 
-                                item={item} key={"rec" + item.id}  
-                                link={`/topic/${item.slug}`} 
-                                text={item.seoShortDescription} />
-                        ))}
-                    </Grid>
+
                 </dl>
 {/*
                 <ListBoardAd />
