@@ -85,6 +85,11 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/bird-box-2018",
+        "/movie/black-panther-2017",
+        "/movie/okja-2017",
+
+
         "/movie/muhammad-the-messenger-of-god",
         "/movie/existenz-1999",
         "/movie/the-babysitter-1995",
@@ -657,6 +662,9 @@
         "/movie/hick-2011",
         "/movie/wrecked-2010",
         "/movie/bliss-1997",
-        "/movie/muhammad-the-messenger-of-god"
+        "/movie/muhammad-the-messenger-of-god",
+        "/movie/bird-box-2018",
+        "/movie/black-panther-2017",
+        "/movie/okja-2017"
     ]
 }

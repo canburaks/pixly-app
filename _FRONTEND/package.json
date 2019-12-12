@@ -165,8 +165,9 @@
     "include": [
       "",
       "/",
-      "/topics",
-      "/topic/historical-figures"
+      "/movie/bird-box-2018",
+      "/movie/black-panther-2017",
+      "/movie/okja-2017"
  
     ],
     "publicPath": "/"
