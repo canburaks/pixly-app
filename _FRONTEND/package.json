@@ -164,8 +164,9 @@
     },
     "include": [
       "",
-      "/"
-
+      "/",
+      "/topics",
+      "/topic/historical-figures"
     ],
     "publicPath": "/"
   }
