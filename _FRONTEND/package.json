@@ -165,8 +165,7 @@
     "include": [
       "",
       "/",
-      "/topics"
-
+      "/film-lists"
  
     ],
     "publicPath": "/"
