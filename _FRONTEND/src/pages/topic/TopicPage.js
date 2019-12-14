@@ -186,9 +186,9 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         //const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2) + 1)
         //const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2) + 1, 30)
 
-        const firstPart = data.complexSearch.topicResult.slice(0, 4)
-        const secondPArt = data.complexSearch.topicResult.slice(4, 8)
-        const thirdPart = data.complexSearch.topicResult.slice( 8, 16)
+        const firstPart = data.complexSearch.topicResult.slice(0, 6)
+        const secondPArt = data.complexSearch.topicResult.slice(6, 12)
+        const thirdPart = data.complexSearch.topicResult.slice( 12, 24)
 
         const isMobile = window.innerWidth < 480;
         const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
@@ -199,19 +199,19 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         dispatcher(willBeDispatched)
         return (
             <ul>
-                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={[1,1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {firstPart.map( item => (
                         <WhiteMovieCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <ResponsiveAd1/>
-                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={[1,1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {secondPArt.map( item => (
                         <WhiteMovieCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <ResponsiveAd2 />
-                <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={[1,1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {thirdPart.map( item => (
                         <WhiteMovieCard item={item} key={"rec" + item.id}/>
                     ))}
