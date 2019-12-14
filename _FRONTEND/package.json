@@ -165,8 +165,9 @@
     "include": [
       "",
       "/",
-      "/film-lists"
- 
+      "/topic/lgbtq-plus-films",
+      "/topic/controversial-films",
+      "/topic/historical-figures" 
     ],
     "publicPath": "/"
   }
