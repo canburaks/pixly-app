@@ -63,7 +63,7 @@ const TopicList = (props) => {
             <ResponsiveAd1 />
 
                 <dl>
-                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {firstPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id}  
@@ -73,7 +73,7 @@ const TopicList = (props) => {
                     </Grid>
                     <ResponsiveAd3 />
 
-                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {secondPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id}  

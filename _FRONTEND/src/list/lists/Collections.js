@@ -102,7 +102,7 @@ const ListBoard = (props) => {
                     </Grid>
 
                     <ResponsiveAd2 />
-                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {thirdPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id} 
@@ -115,7 +115,7 @@ const ListBoard = (props) => {
                     </Grid>
 
                     <ResponsiveAd3 />
-                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {fourthPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id} 
@@ -126,7 +126,7 @@ const ListBoard = (props) => {
                             />
                         ))}
                     </Grid>
-                    <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                    <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {fifthPart.map( item => (
                             <CollectionCard 
                                 item={item} key={"rec" + item.id} 
