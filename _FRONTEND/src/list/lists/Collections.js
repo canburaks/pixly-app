@@ -113,8 +113,6 @@ const ListBoard = (props) => {
                             />
                         ))}
                     </Grid>
-
-                    <ResponsiveAd3 />
                     <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {fourthPart.map( item => (
                             <CollectionCard 
