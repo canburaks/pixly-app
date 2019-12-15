@@ -216,7 +216,6 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
                         <WhiteMovieCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
-                <ResponsiveAd3 />
                 <br/>
             </ul>
 
