@@ -83,27 +83,6 @@ const TopicList = (props) => {
                     </Grid>
 
                 </dl>
-{/*
-                <ListBoardAd />
-                    
-                <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {secondPart.map( item => (
-                        <CollectionCard 
-                            item={item} key={"rec" + item.id} 
-                            link={`/topic/${item.slug}`} 
-                            text={item.seoShortDescription}  />
-                    ))}
-                </Grid>
-
-                <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {thirdPart.map( item => (
-                        <CollectionCard 
-                            item={item} key={"rec" + item.id} 
-                            link={`/topic/${item.slug}`} 
-                            text={item.seoShortDescription}  />
-                    ))}
-                </Grid>*/}
-            <MidPageAd />
             </ContentContainer>
 
 

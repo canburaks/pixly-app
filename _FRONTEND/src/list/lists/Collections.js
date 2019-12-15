@@ -136,37 +136,6 @@ const ListBoard = (props) => {
                         ))}
                     </Grid>
                 </ul>
-                {/*
-                <FeedGridItemAd />
-
-                <Grid columns={[1,1,2,2,2,2,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {secondPart.map( item => (
-                        <CollectionCard 
-                            item={item} key={"rec" + item.id} 
-                            link={`/list/${item.slug}/1`} 
-                            text={item.seoShortDescription}
-                            ratio={0.4}
-                        />
-                    ))}
-                </Grid>
-
-
-                <MidPageAd />
-
-                <Grid columns={[1,1,2,2,2,2,4]} py={[4]} gridColumnGap={[3,3,3,4]}>
-                    {thirdPart.map( item => (
-                        <CollectionCard 
-                            item={item} key={"rec" + item.id} 
-                            link={`/list/${item.slug}/1`} 
-                            text={item.seoShortDescription}
-                            ratio={0.4}
-                        />
-                    ))}
-                </Grid>
-
-                <ListBoardAd />*/}
-
-                <MidPageAd />
             </ContentContainer>
             {!authStatus && <JoinBanner />}
             

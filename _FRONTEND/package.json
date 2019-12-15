@@ -163,10 +163,20 @@
       "width": 730
     },
     "include": [
-      "",
-      "/",
-      "/movie/below-her-mouth-2017",
-      "/movie/all-ladies-do-it-1992"
+        "",
+        "/",
+        "/film-lists",
+        "/topics",
+        "/topic/art-house",
+        "/topic/based-on-true-story",
+        "/topic/cyberpunk",
+        "/topic/dialogue-focused",
+        "/topic/thought-provoking",
+        "/topic/feel-good-movies",
+        "/topic/bechdel-test",
+        "/topic/lgbtq-plus-films",
+        "/topic/controversial-films",
+        "/topic/historical-figures"
 
     ],
     "publicPath": "/"
