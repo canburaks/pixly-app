@@ -182,14 +182,8 @@ class RichData:
         template["url"] = topic_url
         #print(liste.name)
         #print(sanitize(liste.name))
-        template["name"] = sanitize(topic.name)
-
-        if len(topic.summary) < 300:
-            template["description"] = sanitize(topic.summary)
-        elif len(topic.summary) > 300 and topic.seo_short_description and len(topic.seo_short_description) > 20:
-            template["description"] = sanitize(topic.seo_short_description)
-        else:
-            template["description"] = sanitize(topic.name)
+        template["name"] = sanitize(topic.seo_title)
+        template["description"] = sanitize(topic.seo_description)
 
 
         template["author"] = {"@type": "Person",  "url":"https://pixly.app/user/canburaks", "name":"Can Burak Sofyalioglu"}
