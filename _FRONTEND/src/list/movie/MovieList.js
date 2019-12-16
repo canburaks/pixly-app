@@ -51,7 +51,7 @@ const MovieList = (props) => {
     const secondPArt = orderedMovies.slice(4, 8)
     const thirdPart = orderedMovies.slice(8, 18)
     const haveThirdPart = orderedMovies.length > 8;
-    //console.log("liste", liste.richdata)
+    //console.log("liste",firstPart)
     return(
         <PageContainer>
             <Head
@@ -82,21 +82,21 @@ const MovieList = (props) => {
                 <ul>
                     <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {firstPart.map( item => (
-                            <WhiteMovieCard item={item} key={"rec" + item.id} />
+                            <WhiteMovieCard item={item} key={"rec" + item.id} authStatus={authStatus} />
                         ))}
                     </Grid>
                     
                     <HomePageFeedAd/>
                     <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {secondPArt.map( item => (
-                            <WhiteMovieCard item={item} key={"rec" + item.id} />
+                            <WhiteMovieCard item={item} key={"rec" + item.id} authStatus={authStatus} />
                         ))}
                     </Grid>
                     <MidPageAd />
 
                     <Grid columns={[1,1,1,2]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {thirdPart.map( item => (
-                            <WhiteMovieCard item={item} key={"rec" + item.id} />
+                            <WhiteMovieCard item={item} key={"rec" + item.id} authStatus={authStatus} />
                         ))}
                     </Grid>
                 </ul>

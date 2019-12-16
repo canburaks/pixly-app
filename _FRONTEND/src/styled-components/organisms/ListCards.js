@@ -163,7 +163,6 @@ export const CollectionCard = (props) => (
             >
             <NewLink link={props.link}>
             <dt>
-
                 {props.item.name}
             </dt>
             </NewLink>
@@ -186,7 +185,7 @@ export const CollectionCard = (props) => (
     </FlexListItem>
     )
 
-export const WhiteMovieCard = ({ item }) => (
+export const WhiteMovieCard = ({ item, authStatus }) => (
 <FlexListItem flexDirection="column" mb={[5]} height={"100%"}>
     <SuperBox 
         display="flex" flexDirection="column" 
@@ -219,6 +218,11 @@ export const WhiteMovieCard = ({ item }) => (
         </FlexBox>
         <CoverLink link={`/movie/${item.slug}`} color="transparent">{item.name}</CoverLink>
     </SuperBox>
+    {authStatus && 
+        <FlexBox justifyContent="center">
+            <RatingMutation item={item} />
+        </FlexBox>}
+
         <HeaderMini width={"75%"} fontFamily={"playfair"} color="dark" hoverUnderline
             my={[2,2,3]}
             >
