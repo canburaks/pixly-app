@@ -42,8 +42,8 @@ const NB = props => {
 
     const MiddleBar = () => (
 		<FlexBox height={"auto"} minWidth={"100%"} justifyContent="center" alignItems="center" py={[1]}>
-			<NewLink color="#f1f1f1 !important" link={"/film-lists"} fontSize={["12px", "12px", "12px", "16px"]}>
-				<UnderlineEffect >Film Lists</UnderlineEffect>
+			<NewLink color="#f1f1f1 !important" link={"/film-lists"} fontSize={["11px", "11px", "12px", "16px"]}>
+				<UnderlineEffect >{window.innerWidth > 480 ? "Film Lists" : "Lists"}</UnderlineEffect>
 			</NewLink>
 			<NewLink color="#f1f1f1 !important" link={"/topics"} fontSize={["12px", "12px", "12px", "16px"]}>
 				<UnderlineEffect >Topics</UnderlineEffect>
@@ -84,7 +84,7 @@ const NB = props => {
                 <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
             </Box>
             
-            <Box width={"80vw"} flexGrow={1} maxWidth={"80vw"}>
+            <Box width={"85vw"} flexGrow={1} maxWidth={"80vw"}>
 				      <MiddleBar />
             {/*isSearchPage ? <LinkBar /> : <SearchAndLinkBar />*/}
             </Box>

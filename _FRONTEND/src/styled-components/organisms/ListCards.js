@@ -20,18 +20,22 @@ export const ActivePeopleCard = ({ profile, ...props }) => (
         width={"100%"} 
         border="1px solid" 
         borderColor="rgba(0,0,0, 0.2)" 
+        flexWrap="wrap"
     
     >
-        <FlexBox alignItems="center">
-            <Image 
-                src={profile.avatar} alt={profile.username + "avatart"}
-                borderRadius={"50%"}
-                width={"60px"} height={"60px"}
-            />
-            <NewLink hoverUnderline ml={[3]} to={`/user/${profile.username}`}><Text fontWeight="bold">{profile.username}</Text></NewLink>
+        <FlexBox alignItems="center"  my={[3, 3, 2]}>
+            <NewLink to={`/user/${profile.username}`}>
+                <Image 
+                    src={profile.avatar} alt={profile.username + "avatart"}
+                    borderRadius={"50%"}
+                    width={["50px", "50px","60px"]} height={["50px", "50px","60px"]}
+                />
+            </NewLink>
+            <NewLink hoverUnderline ml={[3]} to={`/user/${profile.username}`}>
+                <Text fontWeight="bold" >{profile.username}</Text>
+            </NewLink>
         </FlexBox>
-        <FlexBox alignItems="center">
-
+        <FlexBox alignItems="center" justifyContent="space-between" width={["100%", "100%", "40%"]}>
             <UserStatsIcon 
                 points={profile.points} 
                 lenBookmarks={profile.lenBookmarks} 
