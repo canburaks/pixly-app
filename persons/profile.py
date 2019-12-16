@@ -255,10 +255,7 @@ class Profile(SocialMedia, SEO):
             #MyQueue.put(self.promote)
 
             print("<--------PROMOTING---------------->")
-            MyQueue.put(self.sync_movie_archives)
-            MyQueue.put(self.sync_persona, full=True, create=True)
-            MyQueue.put(self.scan_movies_by_rating, 5)
-            MyQueue.put(self.scan_movies_by_rating, 4.5)
+            self.promote()
             self.sync_active_status()
             print("<----------------------------------->")
         #<--------------------------------------------------------------->
