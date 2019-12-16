@@ -20,6 +20,9 @@ import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, Ima
 
 const PeoplePage = (props) => {
     const people = props.data
+    const firstPart = people.slice(0,5)
+    const secondPart = people.slice(5, 10)
+
     console.log("props", props)
     const authStatus = useAuthCheck();
     const state = useContext(GlobalContext);
@@ -44,7 +47,7 @@ const PeoplePage = (props) => {
                 canonical={`https://pixly.app/people`}
             />
 
-            <ContentContainer mb={[3,3,3,3,4]}>
+            <ContentContainer mb={[3,3,3,3,4]} pb={[3]}>
                 <HeaderText width={"75%"} fontFamily={"playfair"} color="dark" mt={[4,4,5]}>
                     Pixly Neighbours
                 </HeaderText>  
@@ -53,19 +56,32 @@ const PeoplePage = (props) => {
                 </Text>    
                 <hr/>
                 <FlexBox flexDirection="column">
-                    {people.map(profile => (
+                    {firstPart.map(profile => (
                         <ActivePeopleCard key={profile.username}
                             profile={profile} 
 
                         />
                     ))}
+
+                    <ResponsiveAd1 />
+
+                    {secondPart.map(profile => (
+                        <ActivePeopleCard key={profile.username}
+                            profile={profile} 
+
+                        />
+                    ))}
+
+                    <ResponsiveAd2 />
                 </FlexBox>
+
+
                 <PaginationBox 
                     currentPage={currentPage} 
                     nextPage={nextPage} 
                     prevPage={prevPage} 
                     totalPage={20} 
-                    />}
+                    />
             </ContentContainer>
             
         </PageContainer>

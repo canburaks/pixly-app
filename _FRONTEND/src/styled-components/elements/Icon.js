@@ -56,13 +56,13 @@ const Path = styled.path`
 
 export const UserStatsIcon = (props) => (
 	<FlexBox {...props} alignItems="center">
-		<FilmIcon title="Points" fill="rgba(0,0,0, 0.7)"/>
+		<FilmIcon title="Points" fill="rgba(0,0,0, 0.9)"/>
 		<Text mr={[2]} fontWeight="bold" minWidth={"8px"}>{props.points}</Text>
 
-		<RegularBookmarkIcon title="Number of movies in the watchlist" fill="grey"/>
+		<RegularBookmarkIcon title="Number of movies in the watchlist" fill="rgba(255,20,20, 0.7)"/>
 		<Text mr={[2]} fontWeight="bold" minWidth={"8px"}>{props.lenBookmarks}</Text>
 
-		<RegularHeartIcon title="Number favourite movies" fill="grey"/>
+		<RegularHeartIcon title="Number favourite movies" fill="rgba(255,0,0, 0.7)"/>
 		<Text mr={[2]} fontWeight="bold" minWidth={"8px"}>{props.lenLikes}</Text>
 	</FlexBox>
 )

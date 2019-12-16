@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext, useMemo, useCallback } from "react"
+import { useState, useContext, useMemo, useCallback, useEffect } from "react"
 
 import SimilarityPanel from "../../components/SimilarityPanel"
 import { rgaPageView, Head, ProfilePageAd, calculateSimilarity } from "../../functions"
@@ -58,7 +58,9 @@ const ProfilePage = (props) => {
 
     const seoName = useMemo(() => item.profile.name ? item.profile.name : item.profile.username)
     const RenderElementContainer = React.memo(() => <ElementListContainer items={renderitems.items} type={renderitems.type} />, [state])
-
+    useEffect(() => {
+        window.scrollTo(0,0)
+    },[])
     return (
         <PageContainer>
             {/*<!-- Page Container -->*/}
@@ -79,9 +81,9 @@ const ProfilePage = (props) => {
 
             <ContentContainer>
                 
-                { authStatus === true && (profile.ratingset && viewer.ratingset && isSelf===false) &&
+                {/* authStatus === true && (profile.ratingset && viewer.ratingset && isSelf===false) &&
                      <SimilarityPanel profile1={profile} profile2={viewer} />
-                     }
+                     */}
 
                 <RenderElementContainer />
 

@@ -44,9 +44,11 @@ export const FollowUserMutation = (props) => {
 		<FlexBox 
 			clickable
 			border="1px solid" 
+			borderRadius="6px"
 			borderColor={active ? "rgba(0,255,0, 0.7)" :"rgba(0,0,0, 0.7)" }
 			color={active ? "rgba(0,255,0, 0.7)" :"rgba(0,0,0, 0.7)" }
 			minWidth={"86px"}
+			px={[2]} py={[1]}
 			mx={[2]}
 			justifyContent="center"
 			alignItems="center"
