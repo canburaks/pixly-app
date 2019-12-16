@@ -54,6 +54,39 @@ const Path = styled.path`
 	${color};
 `
 
+export const UserStatsIcon = (props) => (
+	<FlexBox {...props} alignItems="center">
+		<FilmIcon title="Points" fill="rgba(0,0,0, 0.7)"/>
+		<Text mr={[2]} fontWeight="bold" minWidth={"8px"}>{props.points}</Text>
+
+		<RegularBookmarkIcon title="Number of movies in the watchlist" fill="grey"/>
+		<Text mr={[2]} fontWeight="bold" minWidth={"8px"}>{props.lenBookmarks}</Text>
+
+		<RegularHeartIcon title="Number favourite movies" fill="grey"/>
+		<Text mr={[2]} fontWeight="bold" minWidth={"8px"}>{props.lenLikes}</Text>
+	</FlexBox>
+)
+const RegularHeartIcon = (props) => (
+	<Svg xmlns="http://www.w3.org/2000/svg" 
+		viewBox="0 0 24 24"
+		strokeLinecap="square" strokeLinejoin="arcs"
+		strokeWidth="2"
+		{...props}
+	>   
+		{props.title && <title>{props.title}</title>}
+		<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+	</Svg>
+)
+const RegularBookmarkIcon = (props) => (
+	<Svg xmlns="http://www.w3.org/2000/svg" 
+		viewBox="0 0 24 24" 
+		strokeLinecap="square" strokeLinejoin="arcs"
+		{...props}
+	>  
+		{props.title && <title>{props.title}</title>}
+		<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+	</Svg>
+)
 export const FilmIcon = (props) => (
 <Svg 
 	viewBox="0 0 24 24" 

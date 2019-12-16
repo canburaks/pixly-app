@@ -14,7 +14,7 @@ import { GlobalContext } from "../../";
 import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
-    Loading, HeaderText, Text
+    Loading, HeaderText, Text, 
 } from "../../styled-components"
 
 

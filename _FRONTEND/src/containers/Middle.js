@@ -16,11 +16,10 @@ import TopicList from "../list/topic/TopicList";
 
 
 import HomePage from "../pages/home/HomePage.js";
-
-
 import Collections from "../list/lists/Collections";
-
 import MovieList from "../list/movie/MovieList";
+import PeoplePage from "../list/people/PeoplePage";
+
 //import BarSearch from "../list/search/BarSearch";
 
 //import SearchMovieList from "../list/search/BarSearchList";
@@ -76,10 +75,8 @@ const Middle = (props) => {
             <Route exact path="/blog" component={Blog} />
             <Route exact path="/blog/:slug" component={Blog} />
 
-            <Route exact path="/list/:slug/:page/" component={MovieListQuery} 
-
-                
-            />
+            <Route exact path="/list/:slug/:page/" component={MovieListQuery} />
+            <Route exact path="/people/:page/" component={PeoplePage} />
 
 
             

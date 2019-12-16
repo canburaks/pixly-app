@@ -1,5 +1,18 @@
 import gql from "graphql-tag";
 
+export const PEOPLE_LIST = gql`
+query listOfPeople($page:Int!){
+    listOfPeople(page:$page){
+        username,
+        name,
+        points
+        avatar,
+        lenBookmarks,
+        lenLikes,
+        isFollowed
+    }
+}
+`;
 
 export const ACTIVE_DIRECTORS = gql`
     query activeDirectors{

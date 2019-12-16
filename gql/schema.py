@@ -86,7 +86,17 @@ class ListQuery(object):
 
     active_directors = graphene.List(DirectorPersonMixType)
 
+    list_of_people = graphene.List(ProfileType, page=graphene.Int(default_value=1))
 
+
+    def resolve_list_of_people(self, info, **kwargs):
+        current_user = info.context.user
+        if current_user.is_authenticated:
+            per_page_user = 10
+            page = kwargs.get("page") if kwargs.get("page") else 1
+            pall = Profile.objects.exclude(username=current_user.profile.username).order_by("-ratings", "id")
+            return pall[(page - 1)*per_page_user : page*per_page_user]
+        return None
 
     def resolve_active_directors(self, info, **kwargs):
         result = Cache.active_directors()
