@@ -93,7 +93,11 @@ class ListQuery(object):
         current_user = info.context.user
         per_page_user = 10
         page = kwargs.get("page") if kwargs.get("page") else 1
-        pall = Profile.objects.exclude(username=current_user.profile.username).order_by("-ratings", "id")
+        if current_user.is_authenticated:
+            pall = Profile.objects.exclude(username=current_user.profile.username).order_by("-ratings", "id")
+        else:
+            pall = Profile.objects.order_by("-ratings", "id")
+
         return pall[(page - 1)*per_page_user : page*per_page_user]
 
     def resolve_active_directors(self, info, **kwargs):
