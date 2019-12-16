@@ -128,6 +128,7 @@ class StaticSitemap(Sitemap):
         stat_slug = [f"/{x}" for x in static__slugs]
         #print(stat_slug)
         statics = stat_slug + [
+            "/people/1",
             "/rss/great-film-collections",
             "/termsofservice", "/privacy", "", "/"
         ]
