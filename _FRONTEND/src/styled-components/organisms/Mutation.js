@@ -21,7 +21,45 @@ import { GlobalContext } from "../../";
 import { FlexBox } from "../atoms";
 
 
+export const FollowUserMutation = (props) => {
+	const [active, setActive ] = useState(props.active)
+	const authStatus = useAuthCheck()
+    const [follow, { data }] = useMutation(FOLLOW_MUTATION, {onCompleted(data){ completedCallback(data)}} );
 
+	const usermutation = useCallback(() => follow({ variables:{ username:props.username, obj:"user" } }),[props.username])
+    //check if following a user or list ?
+	const mutation = usermutation
+
+	const completedCallback = (data) => {
+		var response = props.id ? data.follow.liste.isFollowed : data.follow.targetProfile.isFollowed
+		if (active !== response) setActive(response)
+	}
+
+	const title = !authStatus ?  "Please Login to Continue" : (active ? "Unfollow" : "Follow")
+	
+	//const Icon = (props) => ((data && data.follow.liste.isFollowed===true) || active===true) 
+    //    ? <FollowSuccessAnimateIcon {...props}  title={title} />
+	//	    : <FollowIcon {...props}  title={title} />
+	const Identifier = (props) =>(
+		<FlexBox 
+			clickable
+			border="1px solid" 
+			borderColor={active ? "rgba(0,255,0, 0.7)" :"rgba(0,0,0, 0.7)" }
+			color={active ? "rgba(0,255,0, 0.7)" :"rgba(0,0,0, 0.7)" }
+			minWidth={"86px"}
+			mx={[2]}
+			justifyContent="center"
+			alignItems="center"
+			fontWeight="bold"
+			onClick={authStatus ? mutation : null}
+			title={title}
+			{...props}
+		>
+		{active ? "Following" : "Follow"}
+		</FlexBox>
+	)
+	return <Identifier />
+}
 
 export const SignupMutation = (props) => {
 	const globalstate = useContext(GlobalContext)

@@ -6,10 +6,42 @@ import { Text, Paragraph, HeaderMini,
         NewLink, Input, LinkButton,CoverLink, ImdbRatingIcon, YearClockIcon, 
         ListIcon, YoutubeIcon,FilmIcon,HashLink,
         BookmarkMutation, RatingMutation, Hr, SubHeaderText,ImageBox,CoverBox,
-        FlexListItem, DD
+        FlexListItem, DD, UserStatsIcon, FollowMutation,FollowUserMutation
 } from "../index"
 import { rgba } from "polished";
 import { AbsoluteBox } from "../atoms";
+
+
+export const ActivePeopleCard = ({ profile, ...props }) => (
+    <FlexBox 
+        justifyContent="space-between"
+        alignItems="center"
+        p={[2]} 
+        width={"100%"} 
+        border="1px solid" 
+        borderColor="rgba(0,0,0, 0.2)" 
+    
+    >
+        <FlexBox alignItems="center">
+            <Image 
+                src={profile.avatar} alt={profile.username + "avatart"}
+                borderRadius={"50%"}
+                width={"60px"} height={"60px"}
+            />
+            <NewLink hoverUnderline ml={[3]} to={`/user/${profile.username}`}><Text fontWeight="bold">{profile.username}</Text></NewLink>
+        </FlexBox>
+        <FlexBox alignItems="center">
+
+            <UserStatsIcon 
+                points={profile.points} 
+                lenBookmarks={profile.lenBookmarks} 
+                lenLikes={profile.lenLikes} 
+                mr={[3]}
+            />
+            <FollowUserMutation username={profile.username} active={profile.isFollowed}/>
+        </FlexBox>
+    </FlexBox>
+)
 
 export const ActiveDirectorCard = (props) => (
 <FlexListItem 

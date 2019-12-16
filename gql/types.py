@@ -1249,8 +1249,18 @@ class ProfileType(DjangoObjectType, SocialMediaType, SEOType):
     cognito_status = graphene.Boolean()
     is_verified =  graphene.Boolean()
 
+    len_bookmarks = graphene.Int()
+    len_likes = graphene.Int()
+
+
     class Meta:
         model = Profile
+
+    def resolve_len_bookmarks(self, info, *_):
+        return self.bookmarks.count()
+
+    def resolve_len_likes(self, info, *_):
+        return self.liked_movies.count()
 
     def resolve_is_verified(self, info, *_):
         return self.is_verified
