@@ -52,7 +52,7 @@ const PeoplePage = (props) => {
                     Pixly Neighbours
                 </HeaderText>  
                 <Text mt={[3]} textAlign="justify"> 
-                    The people who are the most active.
+                    The people who are the most active. You can check and compare your cinema taste with people.
                 </Text>    
                 <hr/>
                 <FlexBox flexDirection="column">
