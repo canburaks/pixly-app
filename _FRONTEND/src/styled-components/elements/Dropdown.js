@@ -128,7 +128,7 @@ export const ProfileTextIcon = ({username, size=20, ...props}) =>(
     <DropItem {...props}>
         <ProfileIcon size={size}/>
         <Text ml={"8px"} color="light" fontSize={`${size - 4}px`}>Profile</Text>
-        <CoverLink link={`/${username}/dashboard`}></CoverLink>
+        <CoverLink link={`/${localStorage.getItem("USERNAME")}/dashboard`}></CoverLink>
     </DropItem>
 )
 //Only SVG Icons
