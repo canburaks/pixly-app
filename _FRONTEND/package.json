@@ -165,7 +165,16 @@
     "include": [
       "",
       "/",
-      "/movie/persona-1966"
+      "/topic/art-house",
+      "/topic/cyberpunk",
+      "/topic/based-on-true-story",
+      "/topic/dialogue-focused",
+      "/topic/thought-provoking",
+      "/topic/bechdel-test",
+      "/topic/feel-good-movies",
+      "/topic/lgbtq-plus-films",
+      "/topic/controversial-films",
+      "/topic/historical-figures"
     ],
     "publicPath": "/"
   }
