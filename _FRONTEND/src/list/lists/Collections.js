@@ -38,8 +38,10 @@ const ListBoard = (props) => {
     const festivalWinners = useMemo(() => lists.filter(l => l.listType === "fw"))
     const otherLists = useMemo(() => lists.filter(l => l.listType === "ms"))
     const listOfMonth = useMemo(() => lists.filter(l => l.listType === "mm"))
+    const listOfYear = useMemo(() => lists.filter(l => l.listType === "my"))
+
     //console.log(listOfMonth)
-    const allLists = [...listOfMonth, ...otherLists, ...festivalWinners, ...directorsFavourite]
+    const allLists = [...listOfYear, ...listOfMonth, ...otherLists, ...festivalWinners, ...directorsFavourite]
     console.log(allLists)
 
     const firstPart = allLists.slice(0,partitionQuantity)
