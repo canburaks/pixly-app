@@ -12,6 +12,18 @@ import { rgba } from "polished";
 import { AbsoluteBox } from "../atoms";
 
 
+export const NewestCollectionCard = ({link, coverPoster}) => (
+    <SuperBox
+        width={"100%"}
+        height={"auto"}
+        ratio={0.5625}
+        borderRadius={"6px"}
+        src={coverPoster}
+    >
+        <CoverLink link={link}/>
+    </SuperBox>
+)
+
 export const ActivePeopleCard = ({ profile, ...props }) => (
     <FlexBox 
         justifyContent="space-between"

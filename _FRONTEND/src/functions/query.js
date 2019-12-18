@@ -125,8 +125,8 @@ query persona($username:String!){
             },
         },
         starterLists{ id, slug, name, coverPoster},
-        newestLists{ id, slug, name, coverPoster},
-        newestTopics{ id, slug, name, coverPoster},
+        newestLists{ id, slug, name, coverPoster, link},
+        newestTopics{ id, slug, name, coverPoster, link},
         recentMovies{
             id, name,slug, poster, coverPoster
         },

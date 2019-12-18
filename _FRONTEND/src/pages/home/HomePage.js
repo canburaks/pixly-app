@@ -6,7 +6,7 @@ import { useAuthCheck, useWindowSize } from "../../functions/hooks";
 import { RESEND_REGISTRATION_MAIL } from "../../functions/mutations";
 import { Mutation } from 'react-apollo'
 
-import { rgaPageView, Head, HomePageFeedAd, print } from "../../functions"
+import { rgaPageView, Head, HomePageFeedAd, print,FeedMobileCollectionAd, MidPageAd } from "../../functions"
 import { GlobalContext } from "../../";
 import { GlobeIcon, HomeIcon, SettingsIcon } from "../../assets/f-icons"
 //import {UncompletedTask, BackGroundSvg } from "../../assets/illustrations"
@@ -26,7 +26,7 @@ import {
     ListCard, DirectorCard, CoverCard , HeaderMini, FlexBox, MovieCoverCard, Stats,
     ImageCard, Grid, ElementListContainer, MovieCoverBox,
     Menu, MenuItem, PageContainer, ContentContainer,
-    ProfileCoverPanel,PlaceIcon, MessageBox
+    ProfileCoverPanel,PlaceIcon, MessageBox,NewestCollectionCard
 } from "../../styled-components"
 
 const UpdateForm = React.memo(({profile, refetch}) => (
@@ -90,9 +90,13 @@ const HomePage = (props) => {
 /*----------------------------------------------------------------*/
      
     //console.log(recommendationmovies)
-    const newestfilms = persona.newestLists.forEach(l => l.link=`/list/${l.slug}/1`)
+    //const newestfilms = persona.newestLists.forEach(l => l.link=`/list/${l.slug}`)
     //<CoverPanel profile={profile} settingsHandler={insertModal} ProfileMenuPanel={ProfileMenuPanel} />
-    print("homepage", newestfilms)
+    const newestcollections = [ ...persona.newestLists, ...persona.newestTopics ]
+    const isMobile = window.innerWidth < 480;
+    const ResponsiveAd1 = isMobile ? FeedMobileCollectionAd : HomePageFeedAd
+    const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
+    print("homepage", persona)
     return(
         <PageContainer>
             <ProfileCoverPanel 
@@ -141,16 +145,24 @@ const HomePage = (props) => {
                         text={"Your very personal weekly film recommendations. "}
                     />}
                 <RenderElementContainer />
+                <ResponsiveAd1 />
 
+
+                {/* Newest Collections*/}
                 <MessageBox
                         header={"The Newest Film Lists and Topics"}
                         text={""}
                     />
-                <Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
+                <Grid columns={[2, 2, 2, 2,2,4]} py={[4]}>
+                    {newestcollections.map(c => (
+                        <NewestCollectionCard 
+                            link={c.link}
+                            coverPoster={c.coverPoster}
+                            key={c.slug}
+                        />
+                    ))}
                 </Grid>
-
-
-                <HomePageFeedAd />
+                <ResponsiveAd2 />
                 <br />
 
                 <MessageBox
