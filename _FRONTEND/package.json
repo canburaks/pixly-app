@@ -165,16 +165,8 @@
     "include": [
       "",
       "/",
-      "/topic/art-house",
-      "/topic/cyberpunk",
-      "/topic/based-on-true-story",
-      "/topic/dialogue-focused",
-      "/topic/thought-provoking",
-      "/topic/bechdel-test",
-      "/topic/feel-good-movies",
-      "/topic/lgbtq-plus-films",
-      "/topic/controversial-films",
-      "/topic/historical-figures"
+      "/movie/faster-2010"
+
     ],
     "publicPath": "/"
   }

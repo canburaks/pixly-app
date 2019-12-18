@@ -31,6 +31,9 @@ class CustomPersonaType(graphene.ObjectType, SocialMediaType, SEOType):
     most_directors = graphene.List(DirectorPersonMixType)
     most_lists = graphene.List(CustomListType)
     starter_lists = graphene.List(CustomListType)
+    newest_lists = graphene.List(CustomListType)
+    newest_topics = graphene.List(TopicType)
+
     most_genres = graphene.List(TagType)
 
     #feed_unique_profiles = graphene.List(ProfileType)
@@ -43,6 +46,13 @@ class CustomPersonaType(graphene.ObjectType, SocialMediaType, SEOType):
         self.first = first
         self.skip = skip
 
+    def resolve_newest_lists(self, info):
+        movie_list_ids = List.objects.filter(is_newest=True).values_list("id", flat=True)
+        return [CustomListType(id=x) for x in movie_list_ids]
+
+    def resolve_newest_topics(self, info):
+        tqs = Topic.objects.filter(is_newest=True).only("slug", "id", "name", "summary", "cover_poster")
+        return tqs
 
     def resolve_most_actors(self, info, *_):
         m_actors = self.profile.get_statistics_object().most_actors()
