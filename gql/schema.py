@@ -247,7 +247,7 @@ class ListQuery(object):
         page = kwargs.get("page")
         list_type = kwargs.get("list_type")
         admin = kwargs.get("admin")
-        model_types = ["df", "fw", "ms", "gr", "mm"]
+        model_types = ["df", "fw", "ms", "gr", "mm", "my"]
         qs = List.objects.filter(list_type__in=model_types, public=True).only("id").values_list("id", flat=True)
         return [CustomListType(id=x) for x in qs  if len(CustomListType(id=x).liste.summary) > settings.LIST_MIN_SUMMARY ]
         #return [CustomListType(id=x) for x in qs]
