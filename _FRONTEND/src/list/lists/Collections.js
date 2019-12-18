@@ -42,7 +42,7 @@ const ListBoard = (props) => {
 
     //console.log(listOfMonth)
     const allLists = [...listOfYear, ...listOfMonth, ...otherLists, ...festivalWinners, ...directorsFavourite]
-    console.log(allLists)
+    //console.log(allLists)
 
     const firstPart = allLists.slice(0,partitionQuantity)
     const secondPart = allLists.slice(partitionQuantity, partitionQuantity * 2)
