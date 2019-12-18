@@ -55,7 +55,8 @@ LIST_RELATION_TYPE = (
     ("fw", "Festival Winner Movies"),
     ("gr", "Genre Related"),
     ("ms", "Miscellaneous"),
-    ("mm", "Movies of the Month")
+    ("mm", "Movies of the Month"),
+    ("my", "Movies of the Year")
 )
 
 
@@ -681,6 +682,7 @@ class List(SEO,MainPage):
     updated_at = models.DateTimeField(auto_now=True, null=True, blank = True)
 
     is_published = models.BooleanField(default=False, help_text="True for RSS publishing, leave it False if you are unsure")
+    is_newest = models.BooleanField(default=False, help_text="True for displaying in the latest section")
 
     def __str__(self):
         return self.name
@@ -988,6 +990,7 @@ class Topic(SEO, MainPage):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False, help_text="True for RSS publishing, leave it False if you are unsure")
+    is_newest = models.BooleanField(default=False, help_text="True for displaying in the latest section")
 
     def __str__(self):
         return self.name

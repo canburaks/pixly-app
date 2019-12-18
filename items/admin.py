@@ -70,7 +70,7 @@ class ArticleMovieInline(admin.TabularInline):
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ("id", "main_page" ,"slug",'name', "summary", "content", "searchable",)
+    list_display = ("id", "main_page" ,"slug",'name', "summary", "content", "searchable","is_newest")
 
     inlines = [TagTopicInline,]
     raw_id_fields = ['movies', 'persons', 'lists',"tags", "quotes"]
@@ -99,7 +99,7 @@ class ListAdmin(admin.ModelAdmin):
     list_display = ("id",'name', "owner", "updated_at", "content")
     raw_id_fields = ['movies', "owner", "related_persons"]
     list_select_related = ('owner',)
-    list_filter = ('list_type',)
+    list_filter = ('list_type', "is_newest")
     #exclude = ('related_persons',)
     autocomplete_lookup_fields = {
         'm2m': ['movies', ],
