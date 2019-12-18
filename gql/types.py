@@ -835,9 +835,13 @@ class TopicType(DjangoObjectType, SEOType):
 
     created_at = graphene.String()
     updated_at = graphene.String()
+    link = graphene.String()
 
     class Meta:
         model = Topic
+
+    def resolve_link(self, info, *_):
+        return f"/topic/{self.slug}"
 
     def resolve_searchable(self, info, *_):
         return self.searchable
@@ -1597,6 +1601,7 @@ class CustomListType(graphene.ObjectType, SocialMediaType, SEOType,StatisticsTyp
     large_cover_poster = graphene.String()
 
     slug = graphene.String()
+    link = graphene.String()
 
     def __init__(self,id=None,slug=None,page=None, first=None, skip=None, viewer=None, watch_quantity=None):
         if page:
@@ -1619,6 +1624,8 @@ class CustomListType(graphene.ObjectType, SocialMediaType, SEOType,StatisticsTyp
         self.viewer = viewer
         self.summary = self.liste.summary
 
+    def resolve_link(self, info, *_):
+        return f"/list/{self.liste.slug}/1"
 
     def resolve_richdata(self, info, *_):
         if not self.liste.richdata:
