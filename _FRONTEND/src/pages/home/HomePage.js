@@ -90,9 +90,9 @@ const HomePage = (props) => {
 /*----------------------------------------------------------------*/
      
     //console.log(recommendationmovies)
-
+    const newestfilms = persona.newestLists.forEach(l => l.link=`/list/${l.slug}/1`)
     //<CoverPanel profile={profile} settingsHandler={insertModal} ProfileMenuPanel={ProfileMenuPanel} />
-    print("homepage", props.data)
+    print("homepage", newestfilms)
     return(
         <PageContainer>
             <ProfileCoverPanel 
@@ -115,6 +115,8 @@ const HomePage = (props) => {
                     <RecommendationsInfo points={profile.points}  
                         verified={profile.cognitoVerified}  
                     />}
+
+                {/* IF THERE ARE LESS THAN 40 POINTS */}
                 {profile.points < 40 &&
                     <>
                     <MessageBox header={"Low Points"} text={"You can start to give rating by looking the popular film list below"} />
@@ -132,9 +134,23 @@ const HomePage = (props) => {
                     </>
                 }
 
+                {/* Recommendation Header */}
+                {persona.recommendations.length > 0 && state==="home" &&
+                    <MessageBox
+                        header={"Your Weekly Recommendations"}
+                        text={"Your very personal weekly film recommendations. "}
+                    />}
                 <RenderElementContainer />
-                <HomePageFeedAd />
 
+                <MessageBox
+                        header={"The Newest Film Lists and Topics"}
+                        text={""}
+                    />
+                <Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
+                </Grid>
+
+
+                <HomePageFeedAd />
                 <br />
 
                 <MessageBox
