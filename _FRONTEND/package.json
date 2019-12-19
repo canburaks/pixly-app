@@ -165,6 +165,18 @@
     "include": [
       "",
       "/",
+      "/topics",
+      "/topic/art-house",
+      "/topic/based-on-true-story",
+      "/topic/cyberpunk",
+      "/topic/dialogue-focused",
+      "/topic/thought-provoking",
+      "/topic/feel-good-movies",
+      "/topic/bechdel-test",
+      "/topic/lgbtq-plus-films",
+      "/topic/controversial-films",
+      "/topic/historical-figures",
+      "/topic/the-best-mystery-movies-of-all-time",
       "/movie/the-silence-of-the-lambs-1991",
       "/movie/shutter-island-2010",
       "/movie/gone-girl-2014"

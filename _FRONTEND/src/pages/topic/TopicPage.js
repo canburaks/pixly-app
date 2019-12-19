@@ -104,13 +104,13 @@ const TopicPage = (props) =>{
                             <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={queryData.topic.htmlContent} />
                         </SchemaArticle>
 
-                        <FlexBox my={[4,4,4,5]} width={"100%"} overflow="hidden" flexWrap="wrap" className="social-share-box" flexDirection="row">
+                        {/*<FlexBox my={[4,4,4,5]} width={"100%"} overflow="hidden" flexWrap="wrap" className="social-share-box" flexDirection="row">
                             <SocialButtons.Twitter className="social-share" link={"https://pixly.app/" + window.location.pathname} />
                             <SocialButtons.Facebook className="social-share" link={"https://pixly.app/" + window.location.pathname} />
                             <SocialButtons.Linkedin className="social-share" link={"https://pixly.app/" + window.location.pathname} />
                             <SocialButtons.Tumblr className="social-share" link={"https://pixly.app/" + window.location.pathname} />
                             <SocialButtons.Pinterest className="social-share" link={"https://pixly.app/" + window.location.pathname} />
-                        </FlexBox> 
+                        </FlexBox> */}
                         </>
                         }   
                 </FlexBox>
