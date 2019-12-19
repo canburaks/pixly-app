@@ -258,10 +258,10 @@ const MoviePage = props => {
 									alt={liste.name + " image"}
 									title={liste.name}
 								/>
-								<NewLink to={`/list/${liste.name}/1`} hoverUnderline>
+								<NewLink to={`/list/${liste.slug}/1`} hoverUnderline>
 									<Text fontSize={["xs", "xs", "s"]} fontWeight="bold" >{liste.name}</Text>
 								</NewLink>
-								<NewLink to={`/person/${liste.relatedPersons[0].name}`} hoverUnderline>
+								<NewLink to={`/person/${liste.relatedPersons[0].slug}`} hoverUnderline>
 									<Text fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"} >{liste.relatedPersons[0].name}</Text>
 								</NewLink>
 							</Card>))}

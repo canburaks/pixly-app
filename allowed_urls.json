@@ -87,7 +87,6 @@
     ],
     "movie":[
         "/movie/below-her-mouth-2017",
-
         "/movie/bird-box-2018",
         "/movie/black-panther-2017",
         "/movie/okja-2017",
@@ -339,7 +338,10 @@
         "/movie/ford-v-ferrari-2019",
         "/movie/sorry-we-missed-you-2019",
         "/movie/the-predator-2018",
-        "/movie/proof-1991"
+        "/movie/proof-1991",
+        "/movie/the-silence-of-the-lambs-1991",
+        "/movie/shutter-island-2010",
+        "/movie/gone-girl-2014"
     ],
     "all":[
         "",
@@ -668,7 +670,9 @@
         "/movie/bird-box-2018",
         "/movie/black-panther-2017",
         "/movie/okja-2017",
-        "/movie/below-her-mouth-2017"
-
+        "/movie/below-her-mouth-2017",
+        "/movie/the-silence-of-the-lambs-1991",
+        "/movie/shutter-island-2010",
+        "/movie/gone-girl-2014"
     ]
 }
