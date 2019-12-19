@@ -164,7 +164,8 @@
     },
     "include": [
       "",
-      "/"
+      "/",
+      "/topic/the-best-mystery-movies-of-all-time"
     ],
     "publicPath": "/"
   }
