@@ -17,7 +17,8 @@
         "/topic/bechdel-test",
         "/topic/lgbtq-plus-films",
         "/topic/controversial-films",
-        "/topic/historical-figures"
+        "/topic/historical-figures",
+        "/topic/the-best-mystery-movies-of-all-time"
     ],
     "blog":[
         "/blog",
@@ -362,6 +363,7 @@
         "/topic/lgbtq-plus-films",
         "/topic/controversial-films",
         "/topic/historical-figures",
+        "/topic/the-best-mystery-movies-of-all-time",
         "/blog/a-brief-introduction-to-collaborative-filtering",
         "/blog/django-graphql-react-integration-tutorial-part-1",
         "/blog/django-graphql-react-integration-tutorial-part-2",
