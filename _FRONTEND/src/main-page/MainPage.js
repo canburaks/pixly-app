@@ -293,8 +293,39 @@ const MainPage = (props) => {
 									</Button>
 								</Box>
 									<Fb.Auth dispatchLoadedSignal={setFbLoaded}/>
-								</FlexBox>
+									<Section 
+										display="flex" flexDirection="column" alignItems="center" 
+										position="relative" top={-60}
+										borderRadius={"18px"}
+										py={[4]} px={[4,4,5]}
+										mb={[4]} mt={"120px"}
+										width={"100%"}
+										borderTop="1px solid"
+										borderBottom="1px solid"
+										borderColor="rgba(80,80,80, 0.4)"
+										bg={"rgba(180,180,180, 0.7)"}
+									>
+									<HeaderMini fontWeight="bold" color="dark" my={[3]}>Let Me Discover First</HeaderMini>
+										<FlexBox>
+											<LinkButton px={[3,3,4]} link="/film-lists" color="light" bg="dark" borderRadius="4px" height={"50px"}
+												hoverScale hoverBg="#3633CC" boxShadow="card"
+											>
+												Film Lists
+											</LinkButton>
+											<LinkButton px={[3,3,4]} link="/topics" color="light" bg="dark" borderRadius="4px" height={"50px"}
+												hoverScale hoverBg="#3633CC" boxShadow="card"
+											>
+												Topics
+											</LinkButton>
+											<LinkButton px={[3,3,4]} link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}
+												hoverScale hoverBg="#3633CC" boxShadow="card"
+											>
+												Advance Search
+											</LinkButton>
 
+										</FlexBox>
+									</Section>
+								</FlexBox>
 									}
 
 							</FlexBox>
@@ -306,7 +337,36 @@ const MainPage = (props) => {
 					<Section mt={[3]} position="relative" top={-60}>
 						<Features />
 					</Section>
+					<Section 
+						display="flex" flexDirection="column" alignItems="center" 
+						position="relative" top={-60}
+						py={[4]} 
+						mb={[4]}
+						width={"100%"}
+						borderTop="1px solid"
+						borderBottom="1px solid"
+						borderColor="rgba(80,80,80, 0.4)"
+					>
+							<HeaderMini textAlign="center" my={[2,3]}>Let me Show</HeaderMini>
+							<FlexBox>
+								<LinkButton link="/film-lists" color="light" bg="dark" borderRadius="4px" height={"50px"}
+									hoverScale hoverBg="#3633CC"
+								>
+									Film Lists
+								</LinkButton>
+								<LinkButton link="/topics" color="light" bg="dark" borderRadius="4px" height={"50px"}
+									hoverScale hoverBg="#3633CC"
+								>
+									Topics
+								</LinkButton>
+								<LinkButton link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}
+									hoverScale hoverBg="#3633CC"
+								>
+									Advance Search
+								</LinkButton>
 
+							</FlexBox>
+					</Section>
 
 
 
