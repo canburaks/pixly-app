@@ -13,6 +13,7 @@ import { Input} from "cbs-react-components"
 import { GlobalContext } from "../";
 import { emailValidator, passwordValidator, usernameValidator } from "../functions/form"
 import { EnvelopeIcon, WarningIcon, InfoIcon, SuccessIcon } from "../assets/f-icons"
+import { facebook } from "../functions"
 
 import "./AuthForms.css"
 
@@ -250,6 +251,10 @@ const SignupForm = (props) => {
 }
 
 const LoginForm = (props) => {
+	const Fb = facebook()
+	const [isFbLoaded, setFbLoaded] = useState(false)
+
+
     const state = useContext(GlobalContext)
     const [values, setValues] = useState({username:"", password:""})
     const [formError, setFormError] = useState("")
@@ -344,6 +349,7 @@ const LoginForm = (props) => {
             </button>
                 )}
             </Mutation>
+            <Fb.Auth dispatchLoadedSignal={setFbLoaded}/>
 
         </div>
     )

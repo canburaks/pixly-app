@@ -1,5 +1,5 @@
 import React  from "react";
-import { useState, useContext, useMemo, useCallback } from "react"
+import { useState, useContext, useMemo, useCallback, useEffect } from "react"
 import { withRouter, Link } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 
@@ -57,6 +57,7 @@ const ListBoard = (props) => {
 
     //console.log(otherLists)
     const buttonText = (name) => name.length > 20 ? name.slice(0,20) + "..." : name
+    useEffect(() => window.scrollTo(0,0), [])
     return (
         <PageContainer>
             <Head

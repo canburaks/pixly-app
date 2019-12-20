@@ -164,15 +164,7 @@
     },
     "include": [
       "",
-      "/",
-      "/movie/fame-1980",
-      "/movie/room-in-rome-2010",
-      "/movie/two-brothers-2004",
-      "/movie/the-faculty-1998",
-      "/movie/chungking-express-1994",
-      "/movie/mirrormask-2005",
-      "/movie/london-2005",
-      "/movie/scent-of-a-woman-1992"
+      "/"
     ],
     "publicPath": "/"
   }

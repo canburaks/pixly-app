@@ -18,6 +18,8 @@ import { NavBar } from "./styled-components"
 import Middle from "./containers/Middle"
 import LandingPage from "./auth/LandingPage"
 import MainPage from "./main-page/MainPage";
+import MainPage2 from "./main-page/MainPage2";
+
 import ExploreQuery from "./list/Explore";
 
 import { AuthForm, ForgetForm } from "./forms/AuthForm"
@@ -39,7 +41,7 @@ const App = (props) => {
     //var cookie = document.cookie;
     //console.log("cookie", cookie)
     const authStatus = useAuthCheck()
-    const MainPageRedirect =() => authStatus ? <Redirect to="/explore" /> : <MainPage />
+    const MainPageRedirect =() => authStatus ? <Redirect to="/explore" /> : <MainPage2 />
 
     useEffect(() => {
         rgaStart()

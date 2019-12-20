@@ -1,76 +1,195 @@
 import React from "react";
-import {
-	useContext,
-	useState,
-	useReducer,
-	useEffect,
-	lazy,
-	Suspense,
-	useRef
-} from "react";
+import { useContext, useState, useReducer, useEffect, useMemo, useCallback, useRef} from "react";
+
 import { Route, Switch, Link, withRouter } from "react-router-dom";
 import { MAIN_PAGE } from "../functions/query";
 import { Query } from "react-apollo";
 import { useQuery, useApolloClient, useLazyQuery } from "@apollo/react-hooks";
 
 import { rgaPageView, rgaStart, Head, MidPageAd } from "../functions/analytics";
+import { useScript } from "../functions/hooks";
+
 import {
 	useWindowSize,
 	useAuthCheck,
 	useClientWidth,
+	rgaSetCloseTime,
 	useValues
-} from "../functions/hooks";
+} from "../functions";
+import { GlobalContext } from "../";
 
 import JoinBanner from "../components/JoinBanner.js";
+import { facebook } from "../functions"
+
 
 import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
-import {
-	MovieCoverBox,
-	DirectorCard,
-	MovieCoverCard,
-	ImageCard,
-	Grid,
-	PageContainer,
-	ContentContainer,
-	Loading,
-	SuperBox,
-	HiddenText,
-	HiddenHeader,
-	HiddenSubHeader,
-	HeaderText,
-	HeaderMini,
-	Text,
-	NewLink,
-	CoverLink,
-	CoverCard
+import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
+	PageContainer,ContentContainer,Loading,Section, 
+	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text, SubHeaderText, NewLink,
+	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
+	GradientAnimationBox,SignupForm, SignupFormModal, production, PulseButton,
+	ScaleButton
+	
 } from "../styled-components";
+import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon, RateIcon} from "./icons"
 
 import "./MainPage.css";
+import "./dist/css/style.css"
 
-const ExplorePage = React.memo(props => {
-	rgaPageView()
-	const { movies, lists, topics} = props.data
+
+const FeatureText = (props) => (
+	<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>
+		<SubHeaderText mr={[1,1,2]}
+			fontSize={["14px", "14px", "14px", "16px"]}
+			width={"auto"}
+			fontWeight="bold"
+		>
+			{props.header}
+		</SubHeaderText>
+		<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>{props.text}</Text>
+	</FlexBox>
+)
+
+const Features = () => {
+	const screenSize = useWindowSize()
+	const isLargeScreen = useMemo(() => screenSize.includes("XL"), [screenSize] )
+
+	const flexDirection = isLargeScreen ? "row" : "column"
+	const maxWidth = isLargeScreen ? "50%" : "100%"
+	//console.log("screen size", screenSize,flexDirection)
+
+	return (
+		<FlexBox 
+			flexDirection={flexDirection}  flexWrap="wrap"
+			px={["5vw", "5vw", ]}
+			pt={"20px"} pb={"40px"}
+			alignItems="flex-start"
+		
+		>
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
+					<RecommendationIcon />
+					<FeatureText 
+						header={"Personal Movie Recommendations"}
+						text={"We will analyze " + 
+							"your cinema taste with AI-Based algorithmns after you rated 40 movies " +
+							"then we will make very personalized movie " +
+							"suggestions every week."}
+					/>
+				</FlexBox>
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
+					<SearchIcon />
+					<FeatureText 
+						header={"Advance Film Search"}
+						text={"You can search movies within your favourite genre or subgenre" + 
+							" and filter them with IMDb rating or release year."}
+					/>
+				</FlexBox>
+
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
+					<RateIcon />
+					<FeatureText 
+						header={"Movie Rating Website"}
+						text={"You can rate any movie in order to get good film recommendations or " + 
+							" reflect your opinion about this movie. It can also be your public opinion. "}
+					/>
+				</FlexBox>
+
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
+					<ActionsIcon />
+					<FeatureText 
+						header={"Watchlist and Likes"}
+						text={"Keep and track your personal cinema history " + 
+							"by adding movies to watchlist, or liking them. Then You can share movies from there"}
+					/>
+				</FlexBox>
+
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
+					<CollectionsIcon />
+					<FeatureText 
+						header={"Curated and Collected Movie Lists"}
+						text={"Handpicked and collected lists of movies; " + 
+							"director's favorite films, grand prize winners of prestigious " +
+							"film festivals. Topics lists like; " + 
+							" arthouse, cyberpunk, based on true story, rich dialogues and really good movies."}
+					/>
+				</FlexBox>
+
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
+					<PeopleIcon />
+					<FeatureText 
+						header={"Discover People and Share Movie"}
+						text={"Find people whose cinema taste is similar " + 
+							"to you. See which movies are currently watched " + 
+							"by your friends, and also check your cinema taste " +
+							"similarity with your friends."}
+					/>
+			</FlexBox>
+			<SubHeaderText></SubHeaderText>
+		</FlexBox>
+	)
+}
+
+const MainPageImage = () => (
+	<Image 
+		src="https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"
+		info={"Discover Best Movies that Fit Your Cinema Taste"}
+		minWidth={"100vw"}
+		height={"auto"}
+		position="absolute"
+		top={0}
+		left={0}
+	/>
+)
+
+
+
+const MainPage = (props) => {
+	//rgaPageView()
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
+	const state = useContext(GlobalContext)
+	const insertLoginForm = useCallback(() => state.methods.insertAuthForm("login"),[])
+	//const insertJoinForm = useCallback(() => state.methods.insertAuthForm("signup"),[])
+	
+	const [isModalOpen, setModalOpen] = useState(false)
+	const [isFbLoaded, setFbLoaded] = useState(false)
 
+	const insertJoinForm = useCallback(() => state.methods.insertAuthForm("signup"),[])
+	const closeModal = () => setModalOpen(false)
+	rgaSetCloseTime("Landing Page")
+	
+
+	const Fb = facebook()
+	//console.log("main", isModalOpen)
 	//const listAndTopics = [...topics, ...lists]
-	return (
-		<PageContainer>
+	const heroMainText = "Discover Best Movies That Fit Your Taste"
+	const heroHeaderText = "Improve your experience in discovering movies"
+	const heroSubheaderText = "Don't waste your time by browsing endless cycles. " + 
+		"With our AI-based personalized recommendation systems, we are guiding you through multiple universes " + 
+		"of the art of film."
+
+
+		return (
+		<>
 			<Head
 				description={
-					"Personalized Movie Recommendations. Find similar movies. Discover Movie Lists, New Films and People with Similar Cinema Taste."
+					"Discover best movies that fit your cinema taste with our movie recommendation. " + 
+					"Find out similar movies, curated movie lists. A Film website. pixly.app"
+
 				}
 				title={
-					"Pixly - Movie Recommendations, Similar Movies, Personal Cinema History, AI Based Movie Recommendation."
+					"Pixly - AI Assisted Movie Recommendation, Similar Movies, Film Website"
 				}
 				keywords={
-					"discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation"
+					"pixly.app ,discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
 				}
+				image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"}
 				canonical={`https://pixly.app`}
-			>
+				twitterdescription={"AI-Based Film Recommendations, Movie Lists, Topics, Popular and Upcoming Movies."}
+
+				>
 				<meta name="twitter:card" content="app" />
-				<meta name="twitter:site" content="@pixlymovie" />
 				<meta
 					name="twitter:description"
 					content="Personal Movie Recommendation and Social Movie Discovering Platform"
@@ -78,7 +197,6 @@ const ExplorePage = React.memo(props => {
 				<meta name="twitter:app:name:iphone" content="Pixly" />
 				<meta name="twitter:app:name:ipad" content="Pixly" />
 				<meta name="twitter:app:name:googleplay" content="Pixly" />
-				<meta property="og:type" content="business.business" />
 				<meta property="og:url" content="https://pixly.app" />
 				<meta
 					property="og:image"
@@ -106,163 +224,320 @@ const ExplorePage = React.memo(props => {
 				/>
 			</Head>
 
-			<ContentContainer alignItems="center" mb={"100px"} pt={"80px"}>
-				<HiddenHeader>Pixly Movies</HiddenHeader>
-				{/*<HeaderText textAlign="center">Welcome to Pixly</HeaderText>*/}
-				<HeaderMini textAlign="center">Find Your Next Movie</HeaderMini>
+			<PageContainer >
+					<SuperBox 
+						src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"} 
+						top={-75} 
+						py={["30px", "30px", "45px", "45px","45px", "90px","120px"]} mx={"0px"} 
+						width={"100vw"} 
+						position="relative"
+						borderBottom="3px solid"
+						borderColor="rgba(40,40,40, 0.7)"
+						minHeight={"650px"}
+					>
+						<Box  mr={[5]}>
+							<FlexBox flexDirection="column" zIndex={9}  px={[2,3,3,4]} ml={[3,3,4,5]}>
+								<HeaderText fontSize={["40px", "40px", "48px"]} 
+									mt={[5,5]}
+									uncapitalize 
+									textShadow="-3px 3px 2px rgba(40, 40, 40, 0.8)" 
+									zIndex={8} 
+									color="light"
+									maxWidth={"800px"}
+								>
+									{heroMainText}
+								</HeaderText>
 
 
-				<Grid columns={[1,1, 2, 2,2,3]} py={[4]}>
-					{topics.map(topic => (
-						<CoverCard 
-							key={topic.slug}
-							item={topic}
-							notext
-							link={"/topic/" + topic.slug}
-						/>
-					))}
-				</Grid>
+								<Text 
+									my={[2,2,2,3]} 
+									fontSize={["16px", "16px"]}  
+									color="light" maxWidth={"500px"}
+									fontWeight="bold"
+									textShadow="-1px 1px 1px rgba(40, 40, 40, 0.8)"
+									textAlign="justify"
+								>
+									{heroSubheaderText}
+								</Text>
+								
+								<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />
+								{/*
+								*/}
+								
+								{!authStatus && 
+								<FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
 
-				<Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
-					{lists.map(list => (
-						<CoverCard 
-							key={list.slug}
-							notext
-							ratio={0.41}
-							item={list}
-							link={"/list/" + list.slug + "/1"}
-						/>
-					))}
-				</Grid>
+								<Box  my={[3]} py={[3]}>
+									<Button borderRadius={"6px"}   mx={[2]}
+										onClick={insertLoginForm} 
+										width={"120px"} height={"50px"} 
+										color={"light"}
+										fontWeight="bold"
+										boxShadow="xs"
+										gradient="navy"
+										hoverScale
+									>
+										Login
+									</Button>
+									<Button px={[2]} mx={[2]}
+										onClick={setModalOpen} 
+										width={"120px"} height={"50px"}
+										color="light" 
+										borderRadius="4px" 
+										gradient="pinkish"
+										boxShadow={"card"} 
+										fontWeight="bold" hoverBg={"dark"}
+										hoverScale={1.1}
+										>
+										Join
+									</Button>
+								</Box>
+									<Fb.Auth dispatchLoadedSignal={setFbLoaded}/>
+									<Section 
+										display="flex" flexDirection="column" alignItems="center" 
+										position="relative" top={-60}
+										borderRadius={"18px"}
+										py={[4]} px={[4,4,5]}
+										mb={[4]} mt={"120px"}
+										width={"100%"}
+										borderTop="1px solid"
+										borderBottom="1px solid"
+										borderColor="rgba(80,80,80, 0.4)"
+										bg={"rgba(180,180,180, 0.7)"}
+									>
+									<HeaderMini fontWeight="bold" color="dark" my={[3]}>Let Me Discover First</HeaderMini>
+										<FlexBox>
+											<LinkButton px={[3,3,4]} link="/film-lists" color="light" bg="dark" borderRadius="4px" height={"50px"}
+												hoverScale hoverBg="#3633CC" boxShadow="card"
+											>
+												Film Lists
+											</LinkButton>
+											<LinkButton px={[3,3,4]} link="/topics" color="light" bg="dark" borderRadius="4px" height={"50px"}
+												hoverScale hoverBg="#3633CC" boxShadow="card"
+											>
+												Topics
+											</LinkButton>
+											<LinkButton px={[3,3,4]} link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}
+												hoverScale hoverBg="#3633CC" boxShadow="card"
+											>
+												Advance Search
+											</LinkButton>
+
+										</FlexBox>
+									</Section>
+								</FlexBox>
+									}
+
+							</FlexBox>
+							
+						</Box>
+					</SuperBox>
+					<ContentContainer>
+
+					<Section mt={[3]} position="relative" top={-60}>
+						<Features />
+					</Section>
+					<Section 
+						display="flex" flexDirection="column" alignItems="center" 
+						position="relative" top={-60}
+						py={[4]} 
+						mb={[4]}
+						width={"100%"}
+						borderTop="1px solid"
+						borderBottom="1px solid"
+						borderColor="rgba(80,80,80, 0.4)"
+					>
+							<HeaderMini textAlign="center" my={[2,3]}>Let me Show</HeaderMini>
+							<FlexBox>
+								<LinkButton link="/film-lists" color="light" bg="dark" borderRadius="4px" height={"50px"}
+									hoverScale hoverBg="#3633CC"
+								>
+									Film Lists
+								</LinkButton>
+								<LinkButton link="/topics" color="light" bg="dark" borderRadius="4px" height={"50px"}
+									hoverScale hoverBg="#3633CC"
+								>
+									Topics
+								</LinkButton>
+								<LinkButton link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}
+									hoverScale hoverBg="#3633CC"
+								>
+									Advance Search
+								</LinkButton>
+
+							</FlexBox>
+					</Section>
 
 
-				{/*<FeatureBox />*/}
-				<HeaderMini>Latest Update</HeaderMini>
-				<MovieCoverBox items={movies} columns={[1,2, 2, 3,3,3,4]} fontSize={["12px", "14px", "14px"]}  />
 
+					</ContentContainer>
 
-			</ContentContainer>
+					<SuperBox  
+						display="flex" flexDirection="column" 
+						width={"100%"} mx={"0px"} py={[5]} px={["5vw", "5vw", "5vw", "8vw"]} 
+						gradient="blueish" 
+					>
+						<HeaderMini color={"light"} my={[3]} fontSize={["22px", "22px", "26px", "30px", "32px"]} textAlign="center">We have just started</HeaderMini>
+						<Message />
+					</SuperBox>
 
-			{!authStatus && <JoinBanner />}
 		</PageContainer>
+	</>
 	);
-}, () => true)
+}
 
-const ExploreQuery = props => {
-	const { loading, error, data } = useQuery(MAIN_PAGE, {
-		partialRefetch: true
-	});
-	if (loading) return <Loading />;
-	if (error) return <div>{error.message}</div>;
-	if (data) return <MainPage data={data.mainPage} {...props} />;
-};
 
-const FeatureBox = () => (
-	<Grid columns={[1, 1, 2, 2 ,2,]} width={"100%"} my={[3]} mb={[5,5,5,6]} maxWidth={"900px"}>
-		<DirectorsFeature />
-		<CollectionsFeature />
-		<TopicsFeature />
-		<SearchFeature />
-	</Grid>
+const PartyImage = (props) => (<Image 
+	src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/partying.png"}
+	info={"We have just started."}
+	{...props}
+/>)
+
+const MiniMovies = () => <Image info="pixly main page movies collage" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/movies.jpg"} style={{width:"100%", height:"100%", boxShadow:"-2px 2px 4px 1px rgba(40,40,40, 0.6)"}} />
+
+const SpaceOddysey = () => <Image info="space oddysey mini image" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/space-oddysey.png"} style={{width:"100%", height:"auto"}} />
+
+const SkinILive = () => <Image info="the skin i live in image" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/skin.png"} style={{width:"100%", height:"auto"}} />
+
+
+const Feature1 = ({onClick}) => (
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" minHeight={"450px"} flexDirection="column" justifyContent="space-between">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-01.svg"} info="Pixly main page Feature 01" />
+			</div>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Personal Recommendations - <Span fontSize={["14px"]} fontWeight="bold">BETA</Span></SubHeaderText>
+			<Text>After rating 40 movies, we can analyze your cinema taste with artifical intelligence then we will make very personalized movie recommendations every week.</Text>
+		</div>
+			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
+				<BubbleButton px={[1]} py={[1]}  mt={[4]} 
+					width={"150px"} height={"40px"}
+					bg="transparent"
+					color="dark" 
+					borderRadius="4px" 
+					border="2px solid"
+					borderColor="rgba(40,40,40, 0.8)"
+					fontWeight="bold"
+					onClick={onClick}
+					>
+					Join Now
+				</BubbleButton>
+			</FlexBox>
+	</FlexBox>
+)
+const Feature2 = () => (
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" minHeight={"450px"} flexDirection="column" justifyContent="space-between">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-02.svg"} info="Pixly main page Feature 01" />
+			</div>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Curated and Collected Movie Lists</SubHeaderText>
+			<Text>Handpicked selected lists of movies by Pixly Editors, beside well known collected movie lists all around the world including favorite film lists of directors and festival awarded movies. Special lists that we call topics that find movies that treat specific topics or subjects.</Text>
+
+		</div>
+			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
+				<LinkButton px={[1]} py={[1]}  mt={[4]} 
+					width={"150px"} height={"40px"}
+					color="dark" 
+					borderRadius="4px" 
+					border="2px solid"
+					borderColor="rgba(40,40,40, 0.8)"
+					link="/explore" 
+					fontWeight="bold"
+					zIndex={0}
+					>
+					Show Me
+				</LinkButton>
+			</FlexBox>
+	</FlexBox>
+)
+const Feature3 = () => (
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" height={"450px"} flexDirection="column" justifyContent="space-between">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-03.svg"} info="Pixly main page Feature 01" />
+			</div>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Advance Film Search</SubHeaderText>
+			<Text>Advance Search and Filter mechanism with respect to IMDb rating and release year of movies.</Text>
+		</div>
+			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
+				<LinkButton px={[1]} py={[1]}  mt={[4]} 
+					width={"150px"} height={"40px"}
+					color="dark" 
+					borderRadius="4px" 
+					border="2px solid"
+					borderColor="rgba(40,40,40, 0.8)"
+					link="/advance-search" 
+					fontWeight="bold"
+					zIndex={0}
+					>
+					Let's Search
+				</LinkButton>
+			</FlexBox>
+	</FlexBox>
+)
+const Feature4 = ({onClick}) => (
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" height={"450px"} flexDirection="column" justifyContent="space-between">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-04.svg"} info="Pixly main page Feature 01" />
+			</div>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Watchlist, Likes, Ratings</SubHeaderText>
+			<Text>Keep and track your personal cinema history by adding movies to watchlist, liking them and giving ratings in one film website. </Text>
+		</div>
+			<FlexBox justifyContent="center"  mt={"auto"} width={"100%"}>
+				<BubbleButton px={[1]} py={[1]}  mt={[4]} 
+					width={"150px"} height={"40px"}
+					bg="transparent"
+					color="dark" 
+					borderRadius="4px" 
+					border="2px solid"
+					borderColor="rgba(40,40,40, 0.8)"
+					fontWeight="bold"
+					onClick={onClick}
+					>
+					Join Now
+				</BubbleButton>
+			</FlexBox>
+	</FlexBox>
+)
+const Feature5 = () => (
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" height={"450px"} flexDirection="column" justifyContent="space-between">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-05.svg"} info="Pixly main page Feature 01" />
+			</div>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Discover People and Share Movies</SubHeaderText>
+			<Text>Find people whose cinema taste is similar to you. See which movies are currently watched by your friends, and also check your cinema taste similarity with your friends. </Text>
+		</div>
+	</FlexBox>
 )
 
-const CollectionsFeature = React.memo(() => (
-	<SuperBox maxHeight={"255px"}
-		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/collections.jpg"}
-		hoverShadow
-		ratio={0.5625}
-		borderRadius={"6px"}
-		boxShadow="card"
-	>
-		<HiddenHeader>Collections</HiddenHeader>
-		<HiddenSubHeader>
-			Curated and Collected Best Movie Lists
-		</HiddenSubHeader>
-		<CoverLink link={"/collections"} text={"Visit Collections"} />
-	</SuperBox>
-));
-const DirectorsFeature = React.memo(() => (
-	<SuperBox maxHeight={"255px"}
-		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/directors.jpg"}
-		hoverShadow
-		ratio={0.5625}
-		borderRadius={"6px"}
-		boxShadow="card"
-	>
-		<HiddenHeader>Directors</HiddenHeader>
-		<HiddenSubHeader>
-			Famous Directors Favorite Film Lists and Directors Filmographies
-		</HiddenSubHeader>
-		<CoverLink link={"/directors/1"} text={"Visit Famous Directors"} />
-	</SuperBox>
-));
-const SearchFeature = React.memo(() => (
-	<SuperBox maxHeight={"255px"}
-		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/search.jpg"}
-		hoverShadow
-		ratio={0.5625}
-		borderRadius={"6px"}
-		boxShadow="card"
-	>
-		<HiddenHeader>Search</HiddenHeader>
-		<HiddenSubHeader>
-			Search Movies with IMDb Rating and Release Year.
-		</HiddenSubHeader>
-		<CoverLink
-			link={"/advance-search"}
-			text={
-				"Visit Advance Movie Search Page and Search Movies by IMDb Rating"
-			}
-		/>
-	</SuperBox>
-));
-const TopicsFeature = React.memo(() => (
-	<SuperBox maxHeight={"255px"}
-		src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/figma/topics.jpg"}
-		hoverShadow
-		ratio={0.5625}
-		borderRadius={"6px"}
-		boxShadow="card"
-	>
-		<HiddenHeader>Topics</HiddenHeader>
-		<HiddenSubHeader>
-			Explore Movies by their specific subjects
-		</HiddenSubHeader>
-		<CoverLink
-			link={"/topics"}
-			text={"Visit Topic Page and Explore Movies with topics"}
-		/>
-	</SuperBox>
-));
+const Feature6 = () => (
+	<FlexBox className="feature text-center is-revealing" borderBottom="1px solid" borderColor="rgba(0,0,0, 0.3)" height={"450px"} flexDirection="column" justifyContent="space-between">
+		<div className="feature-inner">
+			<div className="feature-icon">
+				<Image src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-icon-06.svg"} info="Pixly main page Feature 01" />
+			</div>
+			<SubHeaderText fontSize={["18px", "18px", "20px"]}>Filmography & Content</SubHeaderText>
+			<Text>Filmographies of the directors, actors, and actress'. The favorite film lists of the famous directors that impressed them. Conversations, interviews and movie essays about directors</Text>
+		</div>
+	</FlexBox>
+)
+
+const Message = () =>(
+	<Text fontSize={["14px", "14px", "16px", "18px"]} color={"light"} mt={[2]} textAlign="justify">
+	As Pixly, We have just started. We work passionately to make our business your favorite film website.<br/>
+	Our AI algorithm is currently in a beta phase, and we've collect several movie lists and topics to enrich your discovery experience.
+	These include films that have won major awards (Grand Prize) from prestigious film festivals like cannes film festival, 
+	favorite movies and  lists from some famous directors such as Quentin Tarantino and Stanley Kubrick, and various topicals such as art-house, 
+	cyberpunk or based on true story movies. <br/>In addition, we have gather together the best popular movies that are up to date and the upcoming
+	cinema works that we are looking forward to. We constantly try to keep our content up to date. Your intellectual support and suggestions are 
+	always welcome. Please send us any questions and suggestions in the message box at the bottom of the page or email us at pixly@pixly.app
+	</Text>
+) 
 
 
-export default ExploreQuery;
 
-/*
-const MainPageQuery2 = (props) =>{
-    const client = useApolloClient();
+export default MainPage;
 
-    const cachedata = client.readQuery({query:MAIN_PAGE})
-    const [mainPage, { loading, error, data, refetch }] = useLazyQuery(MAIN_PAGE)
-
-    const [ pageData, setPageData ] = useState(null)
-
-    if (pageData){
-        return  <MainPage data={pageData.mainPage} />
-    }
-    if (pageData === null){
-        if (cachedata && cachedata.mainPage){
-            console.log("cache data is setting")
-            setPageData(cachedata)
-        }
-        else if (data && data.mainPage){
-            console.log("lazy query data is setting")
-            setPageData(data)
-        }
-        
-        else if (!cachedata){
-            console.log("no data: querying lazily")
-            mainPage()
-        }
-    }
-*/

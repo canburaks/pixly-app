@@ -4,7 +4,7 @@ import {  useWindowSize, useValues, print } from "../../functions"
 import useForm from "react-hook-form";
 import { useMutation } from "react-apollo";
 
-import { passwordValidator } from "../../functions"
+import { passwordValidator, facebook } from "../../functions"
 import { 
     Box, Text, NewLink, TopPanelBackElement, TopPanelCoverElement,
     DirectorLink, DirectorLinks,FlexBox, TagText,
@@ -13,7 +13,6 @@ import {
     Input, Form,FormInput,  ActionButton, SignupMutation
 } from "../index"
 import { SimpleModal } from "../elements";
-
 
 export const SignupForm = (props) => {
     const { register, handleSubmit, errors, getValues, formState, watch, triggerValidation, validate } = useForm();
@@ -123,12 +122,17 @@ export const SignupForm = (props) => {
     )
 }
 
-export const SignupFormModal = (props) => (
+export const SignupFormModal = (props) => {
+	const [isFbLoaded, setFbLoaded] = useState(false)
+	const Fb = facebook()
+    return (
     <SimpleModal 
         isOpen={props.isOpen} closeModal={props.closeModal} 
         width={["90vw","90vw","80vw", "60vw"]} maxWidth={"400px"}
         bg="light" color="dark" zIndex={100} over
     >
         <SignupForm {...props} />
+        <Fb.Auth dispatchLoadedSignal={setFbLoaded}/>
+
     </SimpleModal>
-)
+)}
