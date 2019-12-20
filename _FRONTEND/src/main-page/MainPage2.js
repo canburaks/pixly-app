@@ -187,17 +187,17 @@ const MainPage = (props) => {
 						</HeaderMini>
 						<FlexBox flexWrap="wrap" width={"100%"} alignItems="center">
 							<LinkButton px={[3,3,4]} link="/film-lists" color="light" bg="dark" borderRadius="4px" height={"50px"}
-								hoverScale hoverBg="#3633CC" boxShadow="card" width={"45%"} 
+								hoverScale hoverBg="#3633CC" boxShadow="card" width={"45%"} follow
 							>
 								Film Lists
 							</LinkButton>
 							<LinkButton px={[3,3,4]} link="/topics" color="light" bg="dark" borderRadius="4px" height={"50px"}
-								hoverScale hoverBg="#3633CC" boxShadow="card" width={"45%"} 
+								hoverScale hoverBg="#3633CC" boxShadow="card" width={"45%"} follow
 							>
 								Topics
 							</LinkButton>
 							<LinkButton px={[3,3,4]} link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}
-								hoverScale hoverBg="#3633CC" boxShadow="card" width={"45%"} 
+								hoverScale hoverBg="#3633CC" boxShadow="card" width={"45%"} follow
 							>
 								Advance Search
 							</LinkButton>
