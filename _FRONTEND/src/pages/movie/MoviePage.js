@@ -275,7 +275,7 @@ const MoviePage = props => {
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
 					<>
-					<HeaderMini my={[2]} mt={[5]}>Cast & Crew</HeaderMini>
+					<HeaderMini my={[2]} mt={[5]}>{item.name} Cast & Crew</HeaderMini>
 					<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>
 						{allCrews.map((crew, i) => (
 							<CrewCard crew={crew} key={crew.person.name} />
