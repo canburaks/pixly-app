@@ -30,7 +30,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
 
 #GLOBAL VARIABLES
-PER_PAGE_ITEM = 18
+PER_PAGE_ITEM = 16
 BRAND_IMAGE = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/pixly-wide-zip.jpg"
 LIST_MIN_SUMMARY = 200
 
