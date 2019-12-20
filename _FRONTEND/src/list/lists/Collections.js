@@ -61,16 +61,16 @@ const ListBoard = (props) => {
     return (
         <PageContainer>
             <Head
-                title={"Pixly Film Lists"}
-                description={"Collections of festival awarded films, famous director's favorite " +
-                            "movie lists, curated and recommended films and lists to watch. "}
+                title={"Pixly - List Of Films, Curated and Collected Movie Lists"}
+                description={"Great List of Films - Collections of festival awarded films, famous director's favorite " +
+                            "curated and recommended films and lists to watch. "}
                 image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"}
 
                 canonical={`https://pixly.app/film-lists`}
             />
 
             <ContentContainer mb={[3,3,3,3,4]}>
-                <HeaderText width={"75%"} fontFamily={"playfair"} color="dark" mt={[4,4,5]}>Pixly Film Lists: Curated and Collected Movie Lists</HeaderText>  
+                <HeaderText width={"75%"} fontFamily={"playfair"} color="dark" mt={[4,4,5]}>Pixly Film Lists: Curated and Collected List of Films</HeaderText>  
                 <Text mt={[3]} textAlign="justify"> 
                     Pixly Selections is edited and curated by us. If you are wondering what are the favorite films of famous directors, you will find it in there. 
                     You can also find movies that are awarded by very prestigious film festivals like Cannes, Berlin and Venice. 

@@ -164,7 +164,9 @@
     },
     "include": [
       "",
-      "/"
+      "/",
+      "/movie/homegrown-1998",
+      "/film-lists"
     ],
     "publicPath": "/"
   }
