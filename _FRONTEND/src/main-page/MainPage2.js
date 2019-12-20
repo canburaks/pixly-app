@@ -302,7 +302,7 @@ const Features = () => {
 						text={"Handpicked and collected lists of movies; " + 
 							"director's favorite films, grand prize winners of prestigious " +
 							"film festivals. Topics lists like; " + 
-							" arthouse, cyberpunk, based on true story, rich dialogues and really good movies."}
+							" arthouse, cyberpunk, based on true story, rich dialogues and best mystery movies."}
 					/>
 				</FlexBox>
 
