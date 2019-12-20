@@ -98,6 +98,7 @@ const NB = props => {
                         color="light"
                         mr={[4]}
                         clickable
+                        fontSize={["12px", "12px", "12px", "16px"]}
                     >
                         Login
                     </Box>

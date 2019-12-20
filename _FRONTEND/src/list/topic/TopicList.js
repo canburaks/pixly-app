@@ -1,5 +1,5 @@
 import React  from "react";
-import { useState, useContext, useMemo, useCallback } from "react"
+import { useState, useContext, useMemo, useCallback, useEffect } from "react"
 
 import { withRouter, Link } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
@@ -39,6 +39,7 @@ const TopicList = (props) => {
     const ResponsiveAd1 = isMobile ? FeedMobileCollectionAd : HomePageFeedAd
     const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
     const ResponsiveAd3 = isMobile ? FeedMobileCollectionAd : MoviePageAd
+    useEffect(() => window.scrollTo(0,0), [])
     return (
         <PageContainer>
             <Head

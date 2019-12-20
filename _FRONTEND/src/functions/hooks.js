@@ -260,6 +260,29 @@ function ResponsiveSize(width,xs=370, s=480, m=736, l=980, xl=1280 ){
     else return "XXXL"
 }
 
+export function useWindowWidth() {
+  const [screenSize, setScreenSize] = useState(ResponsiveSize(window.innerWidth))//      S | M | L
+  
+  const screenListener = () => {
+      const currentSize = window.innerWidth;
+      //if size (not width) is changed, then change state
+      if (screenSize != currentSize) {
+          setScreenSize(currentSize);
+      }
+  }
+
+  useEffect(() => {
+      // Once screenSize changed this will be fired
+      window.addEventListener("resize", screenListener);
+      // for removing repeatedly rendering
+      return () => {
+          window.removeEventListener("resize", screenListener);
+      }
+  })
+
+
+  return screenSize
+}
 export function useWindowSize() {
     const [screenSize, setScreenSize] = useState(ResponsiveSize(window.innerWidth))//      S | M | L
     
