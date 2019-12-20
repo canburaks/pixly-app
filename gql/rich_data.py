@@ -175,7 +175,7 @@ class RichData:
     @classmethod
     def create_topic_data(cls, topic):
         template = {"@context": "http://schema.org", "@type": ["ItemList", "CreativeWork"]}
-        all_topics = topic.movies.all().only("id","imdb_id", "name", "slug", "imdb", "wiki", "imdb_rating").order_by("-imdb_rating")[:20]
+        all_topics = topic.movies.all().only("id","imdb_id", "name", "slug", "imdb", "wiki", "imdb_rating").order_by("-imdb_rating")[:12]
 
         #----- Creation of rich data-------------------->
         topic_url = f"https://pixly.app/topic/{topic.slug}"
@@ -201,7 +201,7 @@ class RichData:
             "@type": ["Movie", "ItemList"],
             "name": sanitize(topic.name),
             "image": topic_image,
-            "dateCreated": topic.created_at.isoformat()
+            "dateCreated": topic.updated_at.isoformat()
             }
         template["about"] = about_data 
         
