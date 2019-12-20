@@ -165,7 +165,8 @@
     "include": [
       "",
       "/",
-      "/topic/the-best-mystery-movies-of-all-time"
+      "/movie/fame-1980",
+      "/movie/room-in-rome-2010"
     ],
     "publicPath": "/"
   }

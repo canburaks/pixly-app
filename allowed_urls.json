@@ -87,6 +87,10 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/fame-1980",
+        "/movie/room-in-rome-2010",
+
+        
         "/movie/below-her-mouth-2017",
         "/movie/bird-box-2018",
         "/movie/black-panther-2017",
@@ -675,6 +679,8 @@
         "/movie/below-her-mouth-2017",
         "/movie/the-silence-of-the-lambs-1991",
         "/movie/shutter-island-2010",
-        "/movie/gone-girl-2014"
+        "/movie/gone-girl-2014",
+        "/movie/fame-1980",
+        "/movie/room-in-rome-2010"
     ]
 }
