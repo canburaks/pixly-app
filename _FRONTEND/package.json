@@ -165,8 +165,6 @@
     "include": [
       "",
       "/",
-      "/movie/homegrown-1998",
-      "/film-lists",
       "/topic/the-best-mystery-movies-of-all-time"
     ],
     "publicPath": "/"
