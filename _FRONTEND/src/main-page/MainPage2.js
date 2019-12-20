@@ -74,12 +74,12 @@ const MainPage = (props) => {
     <>
         <Head
             description={
-                "Discover best movies that fit your cinema taste with our movie recommendation. " + 
-                "Find out similar movies, curated movie lists. A Film website. pixly.app"
+                "Pixly - AI-assisted movie recommendation app & Similar Movie Finder & " + 
+                "Great List Of Films Curator & Movie Rating Website & Watchlist and Personal Archive Page"
 
             }
             title={
-                "Pixly - AI Assisted Movie Recommendation, Similar Movies, Film Website"
+                "Pixly - AI Movie Recommendation & Similar Movies & List of Best Films"
             }
             keywords={
                 "pixly.app ,discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
@@ -298,7 +298,7 @@ const Features = () => {
 				<FlexBox mt={[4]} maxWidth={maxWidth}>
 					<CollectionsIcon />
 					<FeatureText 
-						header={"Curated and Collected Movie Lists"}
+						header={"Curated and Collected Lists Of Films"}
 						text={"Handpicked and collected lists of movies; " + 
 							"director's favorite films, grand prize winners of prestigious " +
 							"film festivals. Topics lists like; " + 
