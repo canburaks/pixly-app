@@ -165,10 +165,7 @@
     "include": [
       "",
       "/",
-      "/topic/the-best-mystery-movies-of-all-time",
-      "/movie/a-nos-amours-1983",
-      "/movie/mulan-ii-2004",
-      "/movie/little-black-book-2004"
+      "/topic/the-best-mystery-movies-of-all-time"
 
     ],
     "publicPath": "/"
