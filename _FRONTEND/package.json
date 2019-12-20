@@ -166,7 +166,8 @@
       "",
       "/",
       "/movie/homegrown-1998",
-      "/film-lists"
+      "/film-lists",
+      "/topic/the-best-mystery-movies-of-all-time"
     ],
     "publicPath": "/"
   }
