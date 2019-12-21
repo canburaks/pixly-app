@@ -2,7 +2,7 @@
 import React from "react";
 import { useState, useContext, useMemo, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
-import { rgaPageView, Head, MoviePageAd, MidPageAd, HomePageFeedAd } from "../../functions/analytics";
+import { rgaPageView, Head, MoviePageAd, MidPageAd, FeedMobileTopicPageAd, HomePageFeedAd } from "../../functions/analytics";
 
 
 import { useAuthCheck } from "../../functions/hooks";
@@ -225,7 +225,6 @@ const MoviePage = props => {
 							</Text>
 							<Text fontSize={["14px", "16px", "18px"]}>{invtext}</Text>
 						
-						{console.log(similarPlaceholder)}
 						<MovieRecommendationBox items={similarPlaceholder} />
 						<ResponsiveAd1 />
 						<hr />
@@ -317,7 +316,7 @@ const MovieRecommendationCard = ({ item }) => (
 			bottom={0} left={0}
 			width={"100%"} height={"auto"}
 			flexDirection="column" p={[2]}
-			bg={"rgba(0,0,0, 0.85)"}
+			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"}
 		>
 			<Text color="light" fontWeight="bold">{item.name} ({item.year})</Text>
 			<TagBox tags={item.tags || []} num={6} color={"light"}/>
@@ -328,7 +327,7 @@ const MovieRecommendationCard = ({ item }) => (
 )
 
 
-const MovieContentSimilarCardBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], ...props }) => (
+const MovieContentSimilarCardBox = React.memo(({ items, columns=[2,2,3,3,4], ...props }) => (
     <Grid columns={columns} py={[4]}>
         {items.map( item => <ContentSimilarMovieCard item={item} />)}
     </Grid>
@@ -356,8 +355,9 @@ const ContentSimilarMovieCard = ({ item }) => (
 			position="absolute" 
 			bottom={0} left={0}
 			width={"100%"} height={"auto"}
-			flexDirection="column" p={[2]}
-			bg={"rgba(0,0,0, 0.85)"}
+			flexDirection="column"  justifyContent="space-between"
+			p={[2]}
+			bg={"rgba(0,0,0, 0.85)"} minHeight={"100px"}
 		>
 			<Text color="light" fontWeight="bold">{item.movie.name} ({item.movie.year})</Text>
 			<TagBox tags={item.commonTags || []} num={6} color={"light"}/>
