@@ -69,7 +69,7 @@ const TopicPage = (props) =>{
         }
     }
     useEffect(() => window.scrollTo(0,0),[])
-
+    console.log(queryData)
     return(
         <PageContainer>
             
