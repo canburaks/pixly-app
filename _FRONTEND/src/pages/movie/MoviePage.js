@@ -244,7 +244,6 @@ const MoviePage = props => {
 						<MovieContentSimilarCardBox items={firstPartContentSimilars}  />
 						<ResponsiveAd2 />
 						<MovieContentSimilarCardBox items={secondPartContentSimilars}  />
-						{contentSimilarCover.length > 16 && <ResponsiveAd3 />}
 						<MovieContentSimilarCardBox items={thirdPartContentSimilars}  />
 
 						<hr />
@@ -309,7 +308,8 @@ const MovieRecommendationCard = ({ item }) => (
 	<SuperBox
 		src={item.coverPoster}
 		width="100%"
-		ratio={0.5625}
+		ratio={0.625}
+		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
 	>	
 		<FlexBox 
 			position="absolute" 
@@ -338,6 +338,7 @@ const ContentSimilarMovieCard = ({ item }) => (
 		src={item.movie.poster}
 		width="100%"
 		ratio={1.5}
+		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
 	>	
 		{/*item.movie.imdbRating && 
 			<AbsoluteBox top={"5px"} right={"5px"} 
@@ -360,7 +361,7 @@ const ContentSimilarMovieCard = ({ item }) => (
 			bg={"rgba(0,0,0, 0.85)"} minHeight={"100px"}
 		>
 			<Text color="light" fontWeight="bold">{item.movie.name} ({item.movie.year})</Text>
-			<TagBox tags={item.commonTags || []} num={6} color={"light"}/>
+			<TagBox tags={item.commonTags || []} num={4} color={"light"}/>
 		</FlexBox>
 		<CoverLink link={`/movie/${item.movie.slug}`} />
 	</SuperBox>
