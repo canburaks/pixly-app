@@ -165,8 +165,7 @@
     "include": [
       "",
       "/",
-      "/movie/the-silence-of-the-lambs-1991",
-      "/movie/shutter-island-2010",
+      "/topics",
       "/topic/the-best-mystery-movies-of-all-time"
 
     ],
