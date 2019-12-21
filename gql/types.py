@@ -342,6 +342,8 @@ class MovieType(DjangoObjectType):
     isFaved = graphene.Boolean()
     prediction_history = graphene.Float()
     cover_poster = graphene.String()
+    topic_poster = graphene.String()
+
     large_poster = graphene.String()
 
     has_cover = graphene.Boolean()
@@ -387,6 +389,10 @@ class MovieType(DjangoObjectType):
     def resolve_cover_poster(self, info, *_):
         if self.cover_poster and hasattr(self.cover_poster, "url"):
             return self.cover_poster.url
+
+    def resolve_topic_poster(self, info, *_):
+        if self.topic_poster and hasattr(self.topic_poster, "url"):
+            return self.topic_poster.url
 
     def resolve_prediction_history(self, info):
         if info.context.user.is_authenticated:
