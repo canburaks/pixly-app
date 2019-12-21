@@ -77,7 +77,7 @@ class TopicAdmin(admin.ModelAdmin):
 
 @admin.register(Oscar)
 class OscarAdmin(admin.ModelAdmin):
-    list_display = ("year", "award" ,"movie",)
+    list_display = ("year", "award" ,"movie","person")
 
     raw_id_fields = ["movie",'movies', "person", 'persons',]
 
