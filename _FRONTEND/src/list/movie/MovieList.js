@@ -76,7 +76,7 @@ const MovieList = (props) => {
             />
             
             <ContentContainer>
-                <LıstHeader />
+                <HeaderText>{liste.name}</HeaderText> 
                 <Text mt={[3]}>{liste.summary}</Text>
                 <hr />
                 <ul>

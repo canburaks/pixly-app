@@ -165,7 +165,8 @@
     "include": [
       "",
       "/",
-      "/topic/the-best-mystery-movies-of-all-time"
+      "/topic/the-best-mystery-movies-of-all-time",
+      "/list/our-selection/1"
 
     ],
     "publicPath": "/"
