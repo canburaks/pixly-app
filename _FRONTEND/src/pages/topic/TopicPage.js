@@ -15,7 +15,7 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, 
-    LargeTopicMovieCard, WhiteMovieCard, HeaderMini,
+    LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink
 } from "../../styled-components"
 
 
@@ -84,7 +84,7 @@ const TopicPage = (props) =>{
                 />
             }
             <ContentContainer>
-                <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"}>
+                <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"} pb={[4,4,5]}>
                     {isReady &&
                         <>
                         <SchemaArticle 
@@ -206,19 +206,19 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
             <ul>
                 <Grid columns={[1,1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {firstPart.map( item => (
-                        <WhiteMovieCard item={item} key={"rec" + item.id}/>
+                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <ResponsiveAd1/>
                 <Grid columns={[1,1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {secondPArt.map( item => (
-                        <WhiteMovieCard item={item} key={"rec" + item.id}/>
+                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <ResponsiveAd2 />
                 <Grid columns={[1,1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                     {thirdPart.map( item => (
-                        <WhiteMovieCard item={item} key={"rec" + item.id}/>
+                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <br/>
@@ -227,6 +227,29 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         )}
 }, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.page === n.page) )
 
+
+
+const MovieRecommendationCard = ({ item }) => (
+	<SuperBox
+		src={item.coverPoster}
+		width="100%"
+		ratio={0.7}
+		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
+	>	
+		<FlexBox 
+			position="absolute" 
+			bottom={0} left={0}
+			width={"100%"} height={"auto"}
+			flexDirection="column" px={[2]} pt={[2]}
+			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"}
+		>
+			<Text color="light" fontWeight="bold">{item.name} ({item.year})</Text>
+			<TagBox tags={item.tags || []} num={6} color={"light"}/>
+		</FlexBox>
+		<CoverLink link={`/movie/${item.slug}`} />
+
+	</SuperBox>
+)
 
 const FeatureMovie = ({ movie }) => (
     <FlexBox flexDirection="column" mt={[3,3,4]}>
