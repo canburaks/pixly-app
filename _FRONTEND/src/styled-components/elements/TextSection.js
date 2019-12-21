@@ -17,7 +17,6 @@ export const Quote = (props) =>{
             : `/person/${props.quote.person.slug}`
         : null
 
-    console.log(belongsToPage)
     return (
         <Blockquote cite={props.quote.ownerName}
             fontFamily="quote"
