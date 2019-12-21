@@ -115,12 +115,9 @@ class RichData:
         #print(sanitize(liste.name))
         template["name"] = sanitize(liste.name)
 
-        if len(liste.summary) < 300:
-            template["description"] = sanitize(liste.summary)
-        elif len(liste.summary) > 300 and liste.seo_short_description and len(liste.seo_short_description) > 20:
-            template["description"] = sanitize(liste.seo_short_description)
-        else:
-            template["description"] = sanitize(liste.name)
+
+        template["description"] = sanitize(liste.seo_description)
+
 
 
         template["author"] = {"@type": "Person",  "url":"https://pixly.app/user/canburaks", "name":"Can Burak Sofyalioglu"}
@@ -175,7 +172,7 @@ class RichData:
     @classmethod
     def create_topic_data(cls, topic):
         template = {"@context": "http://schema.org", "@type": ["ItemList", "CreativeWork"]}
-        all_topics = topic.movies.all().only("id","imdb_id", "name", "slug", "imdb", "wiki", "imdb_rating").order_by("-imdb_rating")[:12]
+        all_topics = topic.movies.all().only("id","imdb_id", "name", "slug", "imdb", "wiki", "imdb_rating").order_by("-imdb_rating")[:20]
 
         #----- Creation of rich data-------------------->
         topic_url = f"https://pixly.app/topic/{topic.slug}"
@@ -201,7 +198,7 @@ class RichData:
             "@type": ["Movie", "ItemList"],
             "name": sanitize(topic.name),
             "image": topic_image,
-            "dateCreated": topic.updated_at.isoformat()
+            "dateCreated": topic.created_at.isoformat()
             }
         template["about"] = about_data 
         
