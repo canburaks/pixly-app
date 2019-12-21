@@ -1220,13 +1220,13 @@ class Oscar(models.Model):
     persons = models.ManyToManyField(Person, null=True, blank=True, related_name="oscars")
 
     #best movie and nominees
-    movie = models.ForeignKey(Movie, related_name="oscars_won", on_delete=models.CASCADE)
-    movies = models.ManyToManyField(Movie,null=True, blank=True,  related_name="oscars")
+    movie = models.ForeignKey(Movie, related_name="oscars_won", on_delete=models.CASCADE, help_text="winner of the award's movie.")
+    movies = models.ManyToManyField(Movie,null=True, blank=True,  related_name="oscars", help_text="Nominees. If the award is personal award leave it")
 
     note = models.TextField(max_length=500,null=True, blank=True)
 
     def __str__(self):
-        return self.award + self.year
+        return f"{self.year} - {self.award}"
 
 
 class Quote(models.Model):
