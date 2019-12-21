@@ -165,21 +165,8 @@
     "include": [
       "",
       "/",
-      "/list/all-palme-dor-winners-cannes-film-festival/1",
-      "/list/all-golden-bear-winners-berlin-film-festival/1",
-      "/list/all-golden-lion-winners-venice-film-festival/1",
-      "/list/pixly-selections--good-movies-to-watch/1",
-      "/list/imdb-top-250/1",
-      "/list/sight-sounds-legendary-list-directors-top-100/1",
-      "/list/the-guardian-best-films-of-the-21st-century/1",
-      "/list/quentin-tarantinos-favourite-movies-from-1992-to-2009/1",
-      "/list/stanley-kubricks-list-of-top-10-films/1",
-      "/list/nuri-bilge-ceylans-top-10-favorite-films/1",
-      "/list/david-finchers-26-favorite-films/1",
-      "/list/december-2019/1",
-      "/list/mike-leighs-favourite-films/1",
-      "/list/david-lynchs-favorite-films/1",
-      "/list/horror-movies-2019/1",
+      "/movie/the-silence-of-the-lambs-1991",
+      "/movie/shutter-island-2010",
       "/topic/the-best-mystery-movies-of-all-time"
 
     ],
