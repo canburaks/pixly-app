@@ -349,13 +349,13 @@ class MovieType(DjangoObjectType):
     short_summary = graphene.String()
     release = graphene.types.datetime.Date()
     director_name = graphene.String()
-    htmlContent = graphene.String()
+    html_content = graphene.String()
 
     class Meta:
         model = Movie
 
-    def resolve_content_html(self, info):
-        return self.htmlContent
+    def resolve_html_content(self, info):
+        return self.html_content
 
     def resolve_director_name(self, info):
         dn = self.director_names
