@@ -250,6 +250,8 @@ export const MOVIE = gql`
             poster,
             hasCover,
             coverPoster,
+            widePoster,
+            htmlContent,
             summary,
             prediction,
             imdbRating,
@@ -736,7 +738,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                 topicResult{
                         id, name,slug, year, hasCover, poster,isBookmarked, isFaved,
                         viewerRating, coverPoster, summary,imdbRating
-                        htmlContent, topicPoster,
+                        htmlContent, widePoster,
                         tags{
                             name, slug, genreTag, subgenreTag
                     },
@@ -745,7 +747,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                     name, summary,content, htmlContent, isArticle, slug, poster, 
                     seoTitle, seoShortDescription, seoKeywords,
                     coverPoster, createdAt, updatedAt, wiki, richdata,
-                    featureMovies{slug, name, year, topicPoster, htmlContent},
+                    featureMovies{slug, name, year, widePoster, htmlContent},
                     searchable,
                     quotes{
                         ownerName, text, movie{name, slug}, person{name, slug}, 

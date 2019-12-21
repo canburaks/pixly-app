@@ -232,7 +232,7 @@ const FeatureMovie = ({ movie }) => (
     <FlexBox flexDirection="column" mt={[3,3,4]}>
         <HeaderMini>{movie.name} ({movie.year})</HeaderMini>
         <Image 
-            src={movie.topicPoster} 
+            src={movie.widePoster} 
             alt={movie.name + " scene"} title={movie.name + " scene"} 
             width={"100%"} height="auto" minHeight="50px" 
             my={[2]}    

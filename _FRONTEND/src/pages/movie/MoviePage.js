@@ -41,7 +41,8 @@ import {
 	FlexBox,
 	Box,
 	HashLink,
-	YoutubeIcon
+	YoutubeIcon,
+	HtmlContainer
 } from "../../styled-components";
 
 import "../pages.css";
@@ -191,6 +192,8 @@ const MoviePage = props => {
 				
 				<SummaryElement />
 
+				{item.htmlContent && <HtmlContent movie={item} />}
+
 				<MoviePageAd />
 				{/* VIDEO */}
 				{hasVideos && 
@@ -290,6 +293,18 @@ const MoviePage = props => {
 		</PageContainer>
 	);
 }
+
+const HtmlContent = ({ movie }) => (
+    <FlexBox flexDirection="column" mt={[3,3,4]}>
+        <Image 
+            src={movie.widePoster} 
+            alt={movie.name + " scene"} title={movie.name + " scene"} 
+            width={"100%"} height="auto" minHeight="50px" maxHeight="300px"
+            my={[3]}    
+        />
+        <HtmlContainer my={[3]} html={movie.htmlContent} />
+    </FlexBox>
+)
 
 const TrailerIcon = () => (
 	<HashLink 
