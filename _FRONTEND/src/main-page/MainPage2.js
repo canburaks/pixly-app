@@ -68,7 +68,7 @@ const MainPage = (props) => {
     const isSmallScreen = useMemo(() => !screenSize.includes("XL"), [screenSize])
     const responsivePosterUrl = isSmallScreen 
         ? "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-v.jpg"
-        : "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-square.jpg"
+        : "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"
     
     return (
     <>
@@ -124,17 +124,17 @@ const MainPage = (props) => {
             />
         </Head>
 
-        <PageContainer>
+        <PageContainer >
             <SuperBox display="flex" position="relative"
-                flexDirection="column" justifyContent="center" alignItems="center"
+                flexDirection="column" justifyContent="flex-end" alignItems="center"
                 top={-75} 
-                width={"100%"} 
+                width={"100%"} pt={[3,3,5]} pb={[3,3,4]}
                 position="relative"
                 borderBottom="3px solid"
                 borderColor="rgba(40,40,40, 0.7)"
             >
-			<Image src={responsivePosterUrl} position="absolute" top={0} left={0} width={"100%"} />
-                <FlexBox flexDirection="column" zIndex={9}  px={[2,2,3,4]} alignItems="center">
+				<Image src={responsivePosterUrl} position="absolute" top={0} left={0} width={"100%"} />
+            	<FlexBox flexDirection="column" zIndex={9}  px={[2,2,3,4]} height={"100%"} alignItems="center" justifyContent="flex-end">
                     <HeaderText 
                         mt={[6,6,6]} mb={[2]}
                         fontSize={["24px","24px","40px", "40px", "44px"]} 
@@ -150,7 +150,7 @@ const MainPage = (props) => {
                     </HeaderText>
 					<Text mt={[2]}
 						mb={[3,3,4]} px={[3,3,4]}
-						fontSize={["14px", "14px"]}  
+						fontSize={["14px", "14px", "16px", "16px", "18px"]}  
 						color="light" maxWidth={"800px"}
 						textShadow="-1px 1px 1px rgba(40, 40, 40, 0.8)"
 					>
@@ -158,7 +158,7 @@ const MainPage = (props) => {
 					</Text>
 					<Button px={[2]} mx={[4]} my={[3]}
 						onClick={setModalOpen} 
-						width={"100px"} height={"40px"}
+						width={"200px"} height={"40px"}
 						color="light" 
 						borderRadius="4px" 
 						gradient="pinkish"
@@ -168,49 +168,16 @@ const MainPage = (props) => {
 						>
 						Join
 					</Button>
-					<Hr/>
-					<Section 
-						display="flex" flexDirection="column" alignItems="center" 
-						position="relative"
-						borderRadius={"18px"}
-						my={[5]} 
-						width={"100%"}
-					>
-						<HeaderMini fontWeight="bold" 
-							color="dark" 
-							my={[4]} 
-							textAlign="center" 
-							color="light"  textShadow="textDark"
-							fontSize={["20px","20px","26px", "26px", "30px"]} 
-							>
-							Let Me Discover First
-						</HeaderMini>
-						<FlexBox flexWrap="wrap" width={"100%"} alignItems="center">
-							<LinkButton px={[3,3,4]} link="/film-lists" color="light" bg="dark" borderRadius="4px" height={"50px"}
-								hoverScale hoverBg="#3633CC" boxShadow="card" width={"45%"} follow
-							>
-								Film Lists
-							</LinkButton>
-							<LinkButton px={[3,3,4]} link="/topics" color="light" bg="dark" borderRadius="4px" height={"50px"}
-								hoverScale hoverBg="#3633CC" boxShadow="card" width={"45%"} follow
-							>
-								Topics
-							</LinkButton>
-							<LinkButton px={[3,3,4]} link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}
-								hoverScale hoverBg="#3633CC" boxShadow="card" width={"45%"} follow
-							>
-								Advance Search
-							</LinkButton>
-							<LinkButton px={[3,3,4]} link="/advance-search" color="light" bg="dark" borderRadius="4px" height={"50px"}
-								hoverScale hoverBg="#3633CC" boxShadow="card" width={"45%"} 
-							>
-								Similar Movies
-							</LinkButton>
-						</FlexBox>
-					</Section>
+					{isSmallScreen && <Hr/>}
+					{isSmallScreen && <ExploreSection isSmallScreen={isSmallScreen} />}
                 </FlexBox>
             </SuperBox>
-			<Section mt={[3]} position="relative" top={-60}>
+			
+
+
+			{!isSmallScreen && <ExploreSection isSmallScreen={isSmallScreen} />}
+
+			<Section mt={[4]} position="relative" top={-60}>
 				<Features />
 			</Section>
 			<SuperBox  
@@ -226,6 +193,60 @@ const MainPage = (props) => {
     </>
     );
 }
+
+const ExploreSection = ({ isSmallScreen }) => (
+<Section 
+	display="flex" flexDirection="column" alignItems="center" 
+	position="relative"
+	borderRadius={"18px"}
+	my={[3]}  pb={[4]}
+	width={"100%"}
+>
+	<HeaderMini fontWeight="bold" 
+		color="dark" 
+		my={[2]}
+		textAlign="center" 
+		color={isSmallScreen ? "light" : "dark"}
+		fontSize={["20px","20px","26px", "26px", "30px"]} 
+		>
+		Let Me Discover First
+	</HeaderMini>
+	<FlexBox flexWrap="wrap" width={"100%"} alignItems="center" justifyContent="center">
+		<LinkButton px={[3,3,4]} m={[2]}
+			follow link="/film-lists" 
+			color="light" bg="dark" borderRadius="4px" 
+			height={"50px"} width={"40%"} maxWidth={"400px"} 
+			hoverScale hoverBg="#3633CC" boxShadow="card" 
+		>
+			Film Lists
+		</LinkButton>
+		<LinkButton px={[3,3,4]} m={[2]}
+			follow link="/topics" color=
+			"light" bg="dark" borderRadius="4px" 
+			height={"50px"} width={"40%"} maxWidth={"400px"} 
+			hoverScale hoverBg="#3633CC" boxShadow="card" 
+		>
+			Topics
+		</LinkButton>
+		<LinkButton px={[3,3,4]} m={[2]}
+			follow link="/advance-search" 
+			color="light" bg="dark" borderRadius="4px" 
+			height={"50px"} width={"40%"} maxWidth={"400px"} 
+			hoverScale hoverBg="#3633CC" boxShadow="card" 
+		>
+			Advance Search
+		</LinkButton>
+		<LinkButton px={[3,3,4]} m={[2]}
+			follow link="/advance-search" 
+			color="light" bg="dark" borderRadius="4px" 
+			height={"50px"} width={"40%"} maxWidth={"400px"} 
+			hoverScale hoverBg="#3633CC" boxShadow="card" 
+		>
+			Similar Movies
+		</LinkButton>
+	</FlexBox>
+</Section>
+)
 
 const FeatureText = (props) => (
 	<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>

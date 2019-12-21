@@ -164,9 +164,7 @@
     },
     "include": [
       "",
-      "/",
-      "/topic/the-best-mystery-movies-of-all-time",
-      "/list/pixly-selections--good-movies-to-watch/1"
+      "/"
 
     ],
     "publicPath": "/"
