@@ -50,7 +50,7 @@ class CrewStackInline(admin.StackedInline):
     fields = ("job","person",  )
     exclude = ("data",)
     def get_person_name(self, obj):
-        print(obj)
+        #print(obj)
         return "retrun"
 
 class ListMovieInline(admin.TabularInline):
