@@ -27,6 +27,9 @@ def movie_large_poster_upload_path(instance, filename):
 def movie_cover_poster_upload_path(instance, filename):
     return "posters/{0}/cover/{1}".format(instance.id,filename)
 
+def movie_topic_poster_upload_path(instance, filename):
+    return "posters/{0}/topic-poster/{1}".format(instance.id,filename)
+
 def topic_image_upload_path(instance, filename):
     return "topics/{0}/{1}".format(instance.name, filename)
 
@@ -69,7 +72,8 @@ class Movie(SocialMedia, SEO,MainPage):
     name = models.CharField(max_length=100)
     year = models.IntegerField(null=True)
     release = models.DateField(null=True, blank=True)
-    summary = models.TextField(max_length=5000,null=True)
+    summary = models.TextField(max_length=1000,null=True)
+    html_content = RichTextField(max_length=1000,null=True, blank=True, help_text="For Feature Movies that will show on Topic Page.")
     slug = models.SlugField(db_index=True, max_length=100, null=True, blank=True, unique=True, )
 
     imdb_rating = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
@@ -77,8 +81,9 @@ class Movie(SocialMedia, SEO,MainPage):
 
     poster = models.ImageField(blank=True, upload_to=movie_poster_upload_path)
     large_poster = models.ImageField(blank=True, upload_to=movie_large_poster_upload_path)
-
     cover_poster = models.ImageField(blank=True, upload_to=movie_cover_poster_upload_path)
+    topic_poster = models.ImageField(blank=True, upload_to=movie_topic_poster_upload_path)
+
     #cover_mini = ImageSpecField(source='cover_poster',
     #                                  processors=[ResizeToFill(300, 168.75)],
     #                                  format='JPEG',
@@ -974,6 +979,8 @@ class Topic(SEO, MainPage):
     wiki = models.URLField(blank=True, null=True)
     
     movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="topics")
+    feature_movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="feature_topics", help_text="For starring movies that will show on top of the page.")
+
     lists = models.ManyToManyField(List,null=True, blank=True, related_name="topics")
     tags = models.ManyToManyField("items.Tag",null=True, blank=True, related_name="topics")
     persons = models.ManyToManyField(Person,null=True, blank=True, related_name="topics")
@@ -1209,9 +1216,12 @@ AWARD_TYPE = (
     ("best_original_song", "Best International Film"),
     ("best_adapted_screenplay", "Best Adapted Screenplay"),
     ("best_original_screenplay", "Best Original Screenplay"),
+    ("golden_palm", "Cannes Film Festival - Golden Palm"),
+    ("golden_bear", "Berlin Film Festival - Golden Bear"),
+    ("golden_lion", "Venice Film Festival - Golden Lion"),
 )
 
-class Oscar(models.Model):
+class Award(models.Model):
     award = models.CharField(max_length=25, choices=AWARD_TYPE, null=True)
     year = models.IntegerField()
 

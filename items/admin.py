@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from .models import Video, VideoList, List, Movie, Topic, Article, Rating, Prediction, Tag, Oscar, Quote
+from .models import Video, VideoList, List, Movie, Topic, Article, Rating, Prediction, Tag, Award, Quote
 from persons.models import Crew
 from items.resources import TagResource, VideoResource
 from django import forms
@@ -75,8 +75,8 @@ class TopicAdmin(admin.ModelAdmin):
     inlines = [TagTopicInline,]
     raw_id_fields = ['movies', 'persons', 'lists',"tags", "quotes"]
 
-@admin.register(Oscar)
-class OscarAdmin(admin.ModelAdmin):
+@admin.register(Award)
+class AwardAdmin(admin.ModelAdmin):
     list_display = ("year", "award" ,"movie","person")
 
     raw_id_fields = ["movie",'movies', "person", 'persons',]
