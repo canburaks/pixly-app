@@ -70,7 +70,6 @@ const TopicPage = (props) =>{
     }
     useEffect(() => window.scrollTo(0,0),[])
     const featuremovies = isReady ? queryData.topic.featureMovies : [];
-    console.log(queryData)
     return(
         <PageContainer>
             
@@ -124,7 +123,7 @@ const TopicPage = (props) =>{
                         minHeight={["80px", "80px", "80px", "100%"]}
                         justifyContent="space-around"
                         flexWrap="wrap"
-                        px={[3]}
+                        px={[3]} mt={[3]}
                         borderBottom="1px solid"
                         borderTop="1px solid"
                     >
@@ -189,9 +188,12 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         //const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2) + 1)
         //const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2) + 1, 30)
 
-        const firstPart = data.complexSearch.topicResult.slice(0, 6)
-        const secondPArt = data.complexSearch.topicResult.slice(6, 12)
-        const thirdPart = data.complexSearch.topicResult.slice( 12, 24)
+        const featuremovieslugs = data.complexSearch.topic.featureMovies.map(fm => fm.slug)
+        const renderMovies = data.complexSearch.topicResult.filter(mv => !featuremovieslugs.includes(mv.slug))
+
+        const firstPart = renderMovies.slice(0, 6)
+        const secondPArt = renderMovies.slice(6, 12)
+        const thirdPart = renderMovies.slice(12, 24)
 
         const isMobile = window.innerWidth < 480;
         const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
@@ -227,12 +229,13 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
 
 
 const FeatureMovie = ({ movie }) => (
-    <FlexBox flexDirection="column">
+    <FlexBox flexDirection="column" mt={[3,3,4]}>
         <HeaderMini>{movie.name} ({movie.year})</HeaderMini>
         <Image 
             src={movie.topicPoster} 
             alt={movie.name + " scene"} title={movie.name + " scene"} 
-            width={"100%"} height="auto" minHeight="50px"     
+            width={"100%"} height="auto" minHeight="50px" 
+            my={[2]}    
         />
         <HtmlContainer my={[3]} html={movie.htmlContent} />
     </FlexBox>
