@@ -1195,6 +1195,40 @@ class Tag( SEO, MainPage):
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
 
+AWARD_TYPE = (
+    ("best_picture", "Best Picture"),
+    ("best_director", "Best Director"),
+    ("best_actor", "Best Actor"),
+    ("best_actress", "Best Actress"),
+    ("supporting_actor", "Best Actor in Supporting Role"),
+    ("supporting_actress", "Best Actress in Supporting Role"),
+    ("best_cinematography", "Best Cinematography"),
+    ("best_animated", "Best Animated Feature Film"),
+    ("best_international", "Best International Film"),
+    ("best_visual_effects", "Best International Film"),
+    ("best_original_song", "Best International Film"),
+    ("best_adapted_screenplay", "Best Adapted Screenplay"),
+    ("best_original_screenplay", "Best Original Screenplay"),
+)
+
+class Oscar(models.Model):
+    award = models.CharField(max_length=25, choices=AWARD_TYPE, null=True)
+    year = models.IntegerField()
+
+    #best person and nominees
+    person = models.ForeignKey(Person, null=True, blank=True, related_name="oscars_won", on_delete=models.CASCADE)
+    persons = models.ManyToManyField(Person, null=True, blank=True, related_name="oscars")
+
+    #best movie and nominees
+    movie = models.ForeignKey(Movie, related_name="oscars_won", on_delete=models.CASCADE)
+    movies = models.ManyToManyField(Movie,null=True, blank=True,  related_name="oscars")
+
+    note = models.TextField(max_length=500,null=True, blank=True)
+
+    def __str__(self):
+        return self.award + self.year
+
+
 class Quote(models.Model):
     id = models.IntegerField(primary_key=True)
     text = models.TextField(max_length=2000)
