@@ -42,7 +42,11 @@ import {
 	Box,
 	HashLink,
 	YoutubeIcon,
-	HtmlContainer
+	HtmlContainer,
+	SuperBox,
+	TagBox,
+	AbsoluteBox,
+	CoverLink
 } from "../../styled-components";
 
 import "../pages.css";
@@ -221,8 +225,8 @@ const MoviePage = props => {
 							</Text>
 							<Text fontSize={["14px", "16px", "18px"]}>{invtext}</Text>
 						
-
-						<MovieRichCardBox items={similarPlaceholder} />
+						{console.log(similarPlaceholder)}
+						<MovieRecommendationBox items={similarPlaceholder} />
 						<ResponsiveAd1 />
 						<hr />
 					</>
@@ -238,11 +242,11 @@ const MoviePage = props => {
 							you may also be interested them. 
 						</Text>
 						<Text fontSize={["14px", "16px", "18px"]}>{vistext}</Text>
-						<MovieSimilarBox items={firstPartContentSimilars}  />
+						<MovieContentSimilarCardBox items={firstPartContentSimilars}  />
 						<ResponsiveAd2 />
-						<MovieSimilarBox items={secondPartContentSimilars}  />
+						<MovieContentSimilarCardBox items={secondPartContentSimilars}  />
 						{contentSimilarCover.length > 16 && <ResponsiveAd3 />}
-						<MovieSimilarBox items={thirdPartContentSimilars}  />
+						<MovieContentSimilarCardBox items={thirdPartContentSimilars}  />
 
 						<hr />
 					</>
@@ -293,6 +297,74 @@ const MoviePage = props => {
 		</PageContainer>
 	);
 }
+
+const MovieRecommendationBox = (props) => (
+    <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
+        {props.items.map( item => (
+            <MovieRecommendationCard item={item} key={"rec" + item.id}/>
+        ))}
+    </Grid>
+)
+
+const MovieRecommendationCard = ({ item }) => (
+	<SuperBox
+		src={item.coverPoster}
+		width="100%"
+		ratio={0.5625}
+	>	
+		<FlexBox 
+			position="absolute" 
+			bottom={0} left={0}
+			width={"100%"} height={"auto"}
+			flexDirection="column" p={[2]}
+			bg={"rgba(0,0,0, 0.85)"}
+		>
+			<Text color="light" fontWeight="bold">{item.name} ({item.year})</Text>
+			<TagBox tags={item.tags || []} num={6} color={"light"}/>
+		</FlexBox>
+		<CoverLink link={`/movie/${item.slug}`} />
+
+	</SuperBox>
+)
+
+
+const MovieContentSimilarCardBox = React.memo(({ items, columns=[1,1,2,2,3,3,4], ...props }) => (
+    <Grid columns={columns} py={[4]}>
+        {items.map( item => <ContentSimilarMovieCard item={item} />)}
+    </Grid>
+), (p,n) => (p.key ? (p.key === n.key) : (p.items.length === n.items.length)))
+
+const ContentSimilarMovieCard = ({ item }) => (
+	<SuperBox
+		src={item.movie.poster}
+		width="100%"
+		ratio={1.5}
+	>	
+		{/*item.movie.imdbRating && 
+			<AbsoluteBox top={"5px"} right={"5px"} 
+				borderRadius={"50%"} 
+				bg={"rgba(0,0,0, 0.9)"} 
+				color="light" 
+				fontWeight="bold"
+				fontSize={["12px", "12px", "14px"]}
+				p={"2px"}
+			>
+				{item.movie.imdbRating}
+			</AbsoluteBox>
+			*/}
+		<FlexBox 
+			position="absolute" 
+			bottom={0} left={0}
+			width={"100%"} height={"auto"}
+			flexDirection="column" p={[2]}
+			bg={"rgba(0,0,0, 0.85)"}
+		>
+			<Text color="light" fontWeight="bold">{item.movie.name} ({item.movie.year})</Text>
+			<TagBox tags={item.commonTags || []} num={6} color={"light"}/>
+		</FlexBox>
+		<CoverLink link={`/movie/${item.movie.slug}`} />
+	</SuperBox>
+) 
 
 const HtmlContent = ({ movie }) => (
     <FlexBox flexDirection="column" mt={[3,3,4]}>
