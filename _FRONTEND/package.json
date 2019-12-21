@@ -164,7 +164,8 @@
     },
     "include": [
       "",
-      "/"
+      "/",
+      "/advance-search"
 
     ],
     "publicPath": "/"

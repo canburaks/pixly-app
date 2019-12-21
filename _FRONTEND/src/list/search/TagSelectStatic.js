@@ -32,6 +32,7 @@ const TagSelectStatic = React.memo((props) =>{
             ...base,
             minHeight:50,
             padding: 5,
+            color:"white",
             zIndex:12
         }),
         control: base => ({...base,
@@ -45,6 +46,8 @@ const TagSelectStatic = React.memo((props) =>{
         }),
         valueContainer: base => ({...base,
             minHeight:40,
+            color:"white"
+
             //backgroundColor:"white"
         }),
         menu: base => ({...base,
@@ -110,9 +113,8 @@ const TagSelectStatic = React.memo((props) =>{
 
     return(
         <Select
-            closeMenuOnSelect={false}
+            closeMenuOnSelect={true}
             defaultValue={[]}
-            isMulti
             options={tagOptions}
             onChange={e => selectHandler(e)}
 
