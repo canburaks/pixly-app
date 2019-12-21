@@ -736,6 +736,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                 topicResult{
                         id, name,slug, year, hasCover, poster,isBookmarked, isFaved,
                         viewerRating, coverPoster, summary,imdbRating
+                        htmlContent, topicPoster,
                         tags{
                             name, slug, genreTag, subgenreTag
                     },
@@ -746,7 +747,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                     coverPoster, createdAt, updatedAt, wiki, richdata,
                     searchable,
                     quotes{
-                        ownerName, text, movie{name, slug}, person{name, slug}
+                        ownerName, text, movie{name, slug}, person{name, slug}, 
                     }
                 },
                 quantity
