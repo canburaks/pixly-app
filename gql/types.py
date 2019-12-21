@@ -342,7 +342,7 @@ class MovieType(DjangoObjectType):
     isFaved = graphene.Boolean()
     prediction_history = graphene.Float()
     cover_poster = graphene.String()
-    topic_poster = graphene.String()
+    wide_poster = graphene.String()
 
     large_poster = graphene.String()
 
@@ -390,9 +390,9 @@ class MovieType(DjangoObjectType):
         if self.cover_poster and hasattr(self.cover_poster, "url"):
             return self.cover_poster.url
 
-    def resolve_topic_poster(self, info, *_):
-        if self.topic_poster and hasattr(self.topic_poster, "url"):
-            return self.topic_poster.url
+    def resolve_wide_poster(self, info, *_):
+        if self.wide_poster and hasattr(self.wide_poster, "url"):
+            return self.wide_poster.url
 
     def resolve_prediction_history(self, info):
         if info.context.user.is_authenticated:
@@ -1774,6 +1774,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     large_poster = graphene.String()
     has_cover = graphene.Boolean()
     cover_poster = graphene.String()
+    wide_poster = graphene.String()
 
 
     data = graphene.types.json.JSONString()
@@ -1805,6 +1806,8 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     genres = graphene.List(graphene.String)
 
     release = graphene.types.datetime.Date()
+    html_content = graphene.String()
+
 
     def __init__(self, id=None, slug=None, viewer=None):
         #print(self,  id, slug)
@@ -1825,6 +1828,13 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_html_content(self, info):
+        return self.movie.html_content
+
+    def resolve_wide_poster(self, info, *_):
+        if self.movie.wide_poster and hasattr(self.movie.wide_poster, "url"):
+            return self.movie.wide_poster.url
 
     def resolve_release(self, info):
         if self.movie.release:

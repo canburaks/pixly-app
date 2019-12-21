@@ -82,7 +82,8 @@ class Movie(SocialMedia, SEO,MainPage):
     poster = models.ImageField(blank=True, upload_to=movie_poster_upload_path)
     large_poster = models.ImageField(blank=True, upload_to=movie_large_poster_upload_path)
     cover_poster = models.ImageField(blank=True, upload_to=movie_cover_poster_upload_path)
-    topic_poster = models.ImageField(blank=True, upload_to=movie_topic_poster_upload_path)
+    #1280x300px
+    wide_poster = models.ImageField(blank=True, upload_to=movie_topic_poster_upload_path)
 
     #cover_mini = ImageSpecField(source='cover_poster',
     #                                  processors=[ResizeToFill(300, 168.75)],

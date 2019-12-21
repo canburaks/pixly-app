@@ -57,7 +57,7 @@ class Cache():
             return []
         topic = qs.first()
         topic.html_content
-        qs = topic.movies.all().only("id", "slug", "name", "poster", "cover_poster", "year", "imdb_rating", "html_content", "topic_poster").order_by("-imdb_rating")
+        qs = topic.movies.all().only("id", "slug", "name", "poster", "cover_poster", "year", "imdb_rating", "html_content", "wide_poster").order_by("-imdb_rating")
 
 
         #YEAR FILTERING
