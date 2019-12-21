@@ -11,11 +11,11 @@ import * as SocialButtons from 'react-social-sharing'
 
 import { 
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
-    ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,
+    ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,Image,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, 
-    LargeTopicMovieCard, WhiteMovieCard,
+    LargeTopicMovieCard, WhiteMovieCard, HeaderMini,
 } from "../../styled-components"
 
 
@@ -69,6 +69,7 @@ const TopicPage = (props) =>{
         }
     }
     useEffect(() => window.scrollTo(0,0),[])
+    const featuremovies = isReady ? queryData.topic.featureMovies : [];
     console.log(queryData)
     return(
         <PageContainer>
@@ -103,6 +104,7 @@ const TopicPage = (props) =>{
                         >   
                             <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={queryData.topic.htmlContent} />
                         </SchemaArticle>
+                        {isReady && featuremovies.map(fm => <FeatureMovie movie={fm} /> )}
 
                         {/*<FlexBox my={[4,4,4,5]} width={"100%"} overflow="hidden" flexWrap="wrap" className="social-share-box" flexDirection="row">
                             <SocialButtons.Twitter className="social-share" link={"https://pixly.app/" + window.location.pathname} />
@@ -223,6 +225,18 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         )}
 }, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.page === n.page) )
 
+
+const FeatureMovie = ({ movie }) => (
+    <FlexBox flexDirection="column">
+        <HeaderMini>{movie.name} ({movie.year})</HeaderMini>
+        <Image 
+            src={movie.topicPoster} 
+            alt={movie.name + " scene"} title={movie.name + " scene"} 
+            width={"100%"} height="auto" minHeight="50px"     
+        />
+        <HtmlContainer my={[3]} html={movie.htmlContent} />
+    </FlexBox>
+)
 
 
 export default withRouter(TopicPage);
