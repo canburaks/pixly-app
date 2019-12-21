@@ -832,6 +832,8 @@ class TopicType(DjangoObjectType, SEOType):
     tag = graphene.Field("gql.types.TagType")
 
     movies = graphene.List("gql.types.CustomMovieType")
+    feature_movies = graphene.List(MovieType)
+
     tags = graphene.List("gql.types.TagType")
     quotes = graphene.List(QuoteType)
 
@@ -922,6 +924,9 @@ class TopicType(DjangoObjectType, SEOType):
         mid = self.movies.all().values_list("id", flat=True)
         return [CustomMovieType(id=x) for x in mid ]
 
+    def resolve_feature_movies(self, info, *_):
+        return self.feature_movies.all()
+        
 
     def resolve_cover_poster(self, info, *_):
         if self.cover_poster:
