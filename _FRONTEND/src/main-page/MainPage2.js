@@ -202,7 +202,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 	my={[3]}  pb={[4]}
 	width={"100%"}
 >
-	<HeaderMini fontWeight="bold" 
+	<Text fontWeight="bold" 
 		color="dark" 
 		my={[2]}
 		textAlign="center" 
@@ -210,7 +210,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 		fontSize={["20px","20px","26px", "26px", "30px"]} 
 		>
 		Let Me Discover First
-	</HeaderMini>
+	</Text>
 	<FlexBox flexWrap="wrap" width={"100%"} alignItems="center" justifyContent="center">
 		<LinkButton px={[3,3,4]} m={[2]}
 			follow link="/film-lists" 
