@@ -165,17 +165,11 @@
     "include": [
       "",
       "/",
-      "/topic/art-house",
-      "/topic/based-on-true-story",
-      "/topic/cyberpunk",
-      "/topic/dialogue-focused",
-      "/topic/thought-provoking",
-      "/topic/feel-good-movies",
-      "/topic/bechdel-test",
-      "/topic/lgbtq-plus-films",
-      "/topic/controversial-films",
-      "/topic/historical-figures",
-      "/topic/the-best-mystery-movies-of-all-time"
+      "/movie/the-babysitter-1995",
+      "/movie/blade-runner-2049-2017",
+      "/movie/the-broken-2008",
+      "/movie/loser-2000"
+
     ],
     "publicPath": "/"
   }
