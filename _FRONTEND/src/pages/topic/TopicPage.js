@@ -256,7 +256,7 @@ const FeatureMovie = ({ movie }) => (
         <HeaderMini>{movie.name} ({movie.year})</HeaderMini>
         <Image 
             src={movie.widePoster} 
-            alt={movie.name + " scene"} title={movie.name + " scene"} 
+            alt={"The Best Mystery Movies: " + movie.name} title={"The Best Mystery Movies: " + movie.name} 
             width={"100%"} height="auto" minHeight="50px" 
             my={[2]}    
         />
