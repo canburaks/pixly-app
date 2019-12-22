@@ -1227,12 +1227,12 @@ class Award(models.Model):
     year = models.IntegerField()
 
     #best person and nominees
-    person = models.ForeignKey(Person, null=True, blank=True, related_name="oscars_won", on_delete=models.CASCADE)
-    persons = models.ManyToManyField(Person, null=True, blank=True, related_name="oscars")
+    person = models.ForeignKey(Person, null=True, blank=True, related_name="awards", on_delete=models.CASCADE)
+    persons = models.ManyToManyField(Person, null=True, blank=True, related_name="awards_nominee")
 
     #best movie and nominees
-    movie = models.ForeignKey(Movie, related_name="oscars_won", on_delete=models.CASCADE, help_text="winner of the award's movie.")
-    movies = models.ManyToManyField(Movie,null=True, blank=True,  related_name="oscars", help_text="Nominees. If the award is personal set movies that the person play in.")
+    movie = models.ForeignKey(Movie, related_name="awards", on_delete=models.CASCADE, help_text="winner of the award's movie.")
+    movies = models.ManyToManyField(Movie,null=True, blank=True,  related_name="awards_nominee", help_text="Nominees. If the award is personal set movies that the person play in.")
 
     note = models.TextField(max_length=500,null=True, blank=True)
 
