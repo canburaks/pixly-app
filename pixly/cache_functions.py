@@ -33,7 +33,7 @@ class Cache():
         mqs = Movie.objects.filter(main_page=True).order_by("-created_at").values_list("slug", flat=True)
         return [CustomMovieType(slug=x) for x in mqs]
 
-    #@lru_cache(maxsize=100)
+    @lru_cache(maxsize=100)
     def main_page_lists():
         from gql.types import CustomListType
         lqs =  List.objects.filter(main_page=True).values_list("slug", flat=True)
@@ -50,7 +50,7 @@ class Cache():
         return Topic.objects.filter(slug__in=pqs)
 
     # ------ Complex Search ---------gql.complex_search 
-    #@lru_cache(maxsize=200)    
+    @lru_cache(maxsize=200)    
     def complex_search_topic_result(topic_slug, min_year, max_year, min_rating, max_rating):
         qs = Topic.objects.filter(slug=topic_slug)
         if not qs.exists():
