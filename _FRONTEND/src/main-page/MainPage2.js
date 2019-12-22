@@ -213,7 +213,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 	</Text>
 	<FlexBox flexWrap="wrap" width={"100%"} alignItems="center" justifyContent="center">
 		<LinkButton px={[3,3,4]} m={[2]}
-			follow link="/film-lists" 
+			link="/film-lists" 
 			color="light" bg="dark" borderRadius="4px" 
 			height={"50px"} width={"40%"} maxWidth={"400px"} 
 			hoverScale hoverBg="#3633CC" boxShadow="card" 
@@ -221,7 +221,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 			Film Lists
 		</LinkButton>
 		<LinkButton px={[3,3,4]} m={[2]}
-			follow link="/topics" color=
+			link="/topics" color=
 			"light" bg="dark" borderRadius="4px" 
 			height={"50px"} width={"40%"} maxWidth={"400px"} 
 			hoverScale hoverBg="#3633CC" boxShadow="card" 
@@ -229,7 +229,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 			Topics
 		</LinkButton>
 		<LinkButton px={[3,3,4]} m={[2]}
-			follow link="/advance-search" 
+			link="/advance-search" 
 			color="light" bg="dark" borderRadius="4px" 
 			height={"50px"} width={"40%"} maxWidth={"400px"} 
 			hoverScale hoverBg="#3633CC" boxShadow="card" 
@@ -237,7 +237,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 			Advance Search
 		</LinkButton>
 		<LinkButton px={[3,3,4]} m={[2]}
-			follow link="/advance-search" 
+			link="/advance-search" 
 			color="light" bg="dark" borderRadius="4px" 
 			height={"50px"} width={"40%"} maxWidth={"400px"} 
 			hoverScale hoverBg="#3633CC" boxShadow="card" 

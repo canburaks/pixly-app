@@ -306,28 +306,30 @@ const MovieRecommendationBox = (props) => (
 
 const MovieRecommendationCard = ({ item }) => (
 	<SuperBox
-		src={item.coverPoster}
+		src={item.coverPoster || item.poster}
 		width="100%"
-		ratio={0.625}
+		ratio={0.7}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
 	>	
+        <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
 		<FlexBox 
 			position="absolute" 
 			bottom={0} left={0}
 			width={"100%"} height={"auto"}
-			flexDirection="column" p={[2]}
-			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"}
+			flexDirection="column" px={[2]} pt={[2]}
+			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"} zIndex={1}
 		>
-			<Text color="light" fontWeight="bold">{item.name} ({item.year})</Text>
+			<Text color="light" fontWeight="bold">
+                <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
+            </Text>
 			<TagBox tags={item.tags || []} num={6} color={"light"}/>
 		</FlexBox>
-		<CoverLink link={`/movie/${item.slug}`} />
 
 	</SuperBox>
 )
 
 
-const MovieContentSimilarCardBox = React.memo(({ items, columns=[2,2,3,3,4], ...props }) => (
+const MovieContentSimilarCardBox = React.memo(({ items, columns=[2,2,3,3,3,4,6], ...props }) => (
     <Grid columns={columns} py={[4]}>
         {items.map( item => <ContentSimilarMovieCard item={item} />)}
     </Grid>
@@ -352,15 +354,18 @@ const ContentSimilarMovieCard = ({ item }) => (
 				{item.movie.imdbRating}
 			</AbsoluteBox>
 			*/}
+		<CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
 		<FlexBox 
 			position="absolute" 
 			bottom={0} left={0}
 			width={"100%"} height={"auto"}
 			flexDirection="column"  justifyContent="space-between"
-			p={[2]}
+			p={[2]} zIndex={1}
 			bg={"rgba(0,0,0, 0.85)"} minHeight={"100px"}
 		>
-			<Text color="light" fontWeight="bold">{item.movie.name} ({item.movie.year})</Text>
+			<Text color="light" fontWeight="bold">
+                <NewLink link={`/movie/${item.movie.slug}`} hoverUnderline>{item.movie.name} ({item.movie.year})</NewLink>
+            </Text>
 			<TagBox tags={item.commonTags || []} num={4} color={"light"}/>
 		</FlexBox>
 		<CoverLink link={`/movie/${item.movie.slug}`} />

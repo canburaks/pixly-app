@@ -15,7 +15,7 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, 
-    LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink
+    LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink
 } from "../../styled-components"
 
 
@@ -236,17 +236,19 @@ const MovieRecommendationCard = ({ item }) => (
 		ratio={0.7}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
 	>	
+        <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
 		<FlexBox 
 			position="absolute" 
 			bottom={0} left={0}
 			width={"100%"} height={"auto"}
 			flexDirection="column" px={[2]} pt={[2]}
-			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"}
+			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"} zIndex={1}
 		>
-			<Text color="light" fontWeight="bold">{item.name} ({item.year})</Text>
+			<Text color="light" fontWeight="bold">
+                <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
+            </Text>
 			<TagBox tags={item.tags || []} num={6} color={"light"}/>
 		</FlexBox>
-		<CoverLink link={`/movie/${item.slug}`} />
 
 	</SuperBox>
 )
