@@ -745,7 +745,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                 }
                 topic{
                     name, summary,content, htmlContent, isArticle, slug, poster, 
-                    seoTitle, seoShortDescription, seoKeywords,
+                    seoTitle, seoShortDescription, seoKeywords,seoDescription,
                     coverPoster, createdAt, updatedAt, wiki, richdata,
                     featureMovies{slug, name, year, widePoster, htmlContent},
                     searchable,
