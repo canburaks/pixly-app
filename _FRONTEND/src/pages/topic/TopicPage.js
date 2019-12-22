@@ -231,7 +231,7 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
 
 const MovieRecommendationCard = ({ item }) => (
 	<SuperBox
-		src={item.coverPoster}
+		src={item.coverPoster || item.poster}
 		width="100%"
 		ratio={0.7}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
