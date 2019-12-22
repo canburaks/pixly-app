@@ -376,7 +376,7 @@ const HtmlContent = ({ movie }) => (
     <FlexBox flexDirection="column" mt={[3,3,4]}>
         <Image 
             src={movie.widePoster} 
-            alt={movie.name + " scene"} title={movie.name + " scene"} 
+            alt={movie.name + " shots"} title={movie.name + " shots"} 
             width={"100%"} height="auto" minHeight="50px" maxHeight="300px"
             my={[3]}    
         />
