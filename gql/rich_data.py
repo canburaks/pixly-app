@@ -258,7 +258,9 @@ class RichData:
             template["jobTitle"] = job_list if len(job_list) > 1 else job_list
         
         #Description - Bio
-        if person.seo_short_description:
+        if person.seo_description:
+            template["description"] = sanitize(person.seo_description)
+        elif person.seo_short_description:
             template["description"] = sanitize(person.seo_short_description)
         elif person.bio and len(person.bio) > 20:
             text = person.bio[:200] + "..." if len(person.bio) > 200 else person.bio[:200]
