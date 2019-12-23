@@ -129,7 +129,7 @@ const PersonPage = (props) => {
         <PageContainer>
             <Head
                 title={item.seoTitle}
-                description={item.seoShortDescription ?  item.seoShortDescription : item.seoDescription}
+                description={item.seoDescription ?  item.seoDescription : item.seoShortDescription}
                 richdata={item.richdata}
                 keywords={item.seoKeywords}
                 image={item.coverPoster ? item.coverPoster : item.poster}
