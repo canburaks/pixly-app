@@ -64,6 +64,7 @@ export const ContactForm = (props) =>{
 
     function formValidation() {
         //Check Empty inputs
+        console.log(name, email, message)
         if (name.length === 0 || message.length === 0 || email.length === 0 ){
             setFormError(`You didn't fill all places. `)
             return false
@@ -81,6 +82,7 @@ export const ContactForm = (props) =>{
     }
     function submitHandler(mutation) {
         const isValid = formValidation()
+        console.log(isValid)
         if (isValid) {
             //props.dispatchValues(values)
             setLoading(true)
@@ -101,7 +103,7 @@ export const ContactForm = (props) =>{
                 placeholder={"Your Name"}
                 getValue={(e) => setName(e)}
                 getError={e => updateLocalErrors({name:e})}
-                validation={e => e.length>4}
+                validation={e => e.length>2}
                 validationMessage={"Please enter a valid name"}
             />
             <Input
