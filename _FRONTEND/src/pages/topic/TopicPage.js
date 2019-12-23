@@ -83,8 +83,18 @@ const TopicPage = (props) =>{
                     canonical={`https://pixly.app/topic/${queryData.topic.slug}`}
                 />
             }
+            {isReady && queryData.topic.heroPoster && 
+                <Image 
+                    src={queryData.topic.heroPoster} 
+                    width="100vw" height="auto" minHeight="100px" 
+                    alt={queryData.topic.name} 
+                    title={queryData.topic.name} 
+                />
+                }
             <ContentContainer>
+
                 <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"} pb={[4,4]}>
+
                     {isReady &&
                         <>
                         <SchemaArticle 
