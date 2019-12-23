@@ -36,6 +36,9 @@ def topic_image_upload_path(instance, filename):
 def topic_cover_poster_upload_path(instance, filename):
     return "topics/{0}/cover/{1}".format(instance.id,filename)
     
+def topic_hero_poster_upload_path(instance, filename):
+    return "topics/{0}/hero/{1}".format(instance.id,filename)
+
 def tag_image_upload_path(instance, filename):
     return "tags/{0}/{1}".format(instance.name, filename)
 
@@ -994,6 +997,7 @@ class Topic(SEO, MainPage):
 
     poster = models.ImageField(blank=True, upload_to=topic_image_upload_path)
     cover_poster = models.ImageField(blank=True, upload_to=topic_cover_poster_upload_path)
+    hero_poster = models.ImageField(blank=True, upload_to=topic_hero_poster_upload_path)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

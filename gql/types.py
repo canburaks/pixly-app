@@ -832,6 +832,7 @@ class TopicType(DjangoObjectType, SEOType):
 
     poster = graphene.String()
     cover_poster = graphene.String()
+    hero_poster = graphene.String()
 
     tag = graphene.Field("gql.types.TagType")
 
@@ -935,6 +936,11 @@ class TopicType(DjangoObjectType, SEOType):
     def resolve_cover_poster(self, info, *_):
         if self.cover_poster:
             return self.cover_poster.url
+        return None
+
+    def resolve_hero_poster(self, info, *_):
+        if self.hero_poster:
+            return self.hero_poster.url
         return None
 
     def resolve_poster(self, info, *_):

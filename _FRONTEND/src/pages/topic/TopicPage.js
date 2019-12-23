@@ -14,7 +14,7 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,Image,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
-    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, 
+    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, Hr,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink
 } from "../../styled-components"
 
@@ -84,7 +84,7 @@ const TopicPage = (props) =>{
                 />
             }
             <ContentContainer>
-                <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"} pb={[4,4,5]}>
+                <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"} pb={[4,4]}>
                     {isReady &&
                         <>
                         <SchemaArticle 
@@ -143,7 +143,7 @@ const TopicPage = (props) =>{
                         </Button>
                     </FlexBox>
                 </Form>}
-
+                <Hr />
                 
                 <Box id="search-rresult-box"  
                         borderColor="rgba(40,40,40, 0.3)"
