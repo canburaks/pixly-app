@@ -165,11 +165,7 @@
     "include": [
       "",
       "/",
-      "/film-lists",
-      "/topics",
-      "/advance-search",
-      "/topic/mystery",
-      "/person/quentin-tarantino-138"
+      "/movie/instant-family-2018"
     ],
     "publicPath": "/"
   }
