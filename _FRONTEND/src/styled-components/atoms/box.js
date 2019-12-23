@@ -72,6 +72,7 @@ export const SuperBox = styled.div`
     ${props => props.src && backgroundImages(`url(${props.src})`)};
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 
     ${props => props.gradient && themeGet(`gradients.${props.gradient}.colors`)(props) 
         && linearGradient({

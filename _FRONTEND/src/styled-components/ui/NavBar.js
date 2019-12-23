@@ -37,6 +37,7 @@ const NB = props => {
     const isSearchPage = window.location.pathname.includes("advance-search")
     const isTransparentBg = (window.location.pathname.includes("/list/") 
         || window.location.pathname.includes("/movie/")  
+        || window.location.pathname.includes("/topics") 
         || window.location.pathname === "/"  )
 
 
@@ -75,10 +76,7 @@ const NB = props => {
             bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"} 
             height={navbarheight}
 			opacity={isTransparentBg ? 1 : 0.98}
-			src={!isTransparentBg 
-				? "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/navbar-collage.jpg" 
-				: undefined
-			}
+
 		>
             <Box width={"10vw"}>
                 <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
