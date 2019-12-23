@@ -14,7 +14,7 @@ import { GlobalContext } from "../../";
 import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
-    Loading, HeaderText, Text, 
+    Loading, HeaderText, Text, FlexBox
 } from "../../styled-components"
 
 
@@ -68,16 +68,8 @@ const ListBoard = (props) => {
 
                 canonical={`https://pixly.app/film-lists`}
             />
-
+            <Hero />
             <ContentContainer mb={[3,3,3,3,4]}>
-                <HeaderText width={"75%"} fontFamily={"playfair"} color="dark" mt={[4,4,5]}>Pixly Film Lists: Curated and Collected List of Films</HeaderText>  
-                <Text mt={[3]} textAlign="justify"> 
-                    Pixly Selections is edited and curated by us. If you are wondering what are the favorite films of famous directors, you will find it in there. 
-                    You can also find movies that are awarded by very prestigious film festivals like Cannes, Berlin and Venice. 
-                    We are still collecting and improving our database for you. 
-                    If you have any suggestions to add or in any case, please feel free to write it from the bottom part of the page.
-                </Text>    
-                <hr/>
                 <ul>
                     <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {firstPart.map( item => (
@@ -147,6 +139,34 @@ const ListBoard = (props) => {
     );
 };
 
+
+const Hero = () => (
+    <FlexBox className="unmatched-orange"
+        width="100%"
+        height="auto"
+        display="flex" flexDirection="column"
+        px={["5vw", "5vw", "8vw"]} pt={[5,5,5,6]}  pb={[4,4]}
+        top={-75}
+    >
+
+        <HeaderText  
+            fontFamily={"playfair"} fontWeight="bold"
+            fontSize={["30px", "30px", "36px", "42px", "48px", "54px"]}
+            color="white" my={[3]} pt={[3]}
+            textAlign="center" 
+        
+        >
+            Pixly Film Lists: Curated and Collected List of Films
+        </HeaderText>  
+        <Text mt={[3]} textAlign="justify" color="white">
+            Pixly Selections is edited and curated by us. If you are wondering what are the favorite films of famous directors, you will find it in there. 
+            You can also find movies that are awarded by very prestigious film festivals like Cannes, Berlin and Venice. 
+            We are still collecting and improving our database for you. 
+            If you have any suggestions to add or in any case, please feel free to write it from the bottom part of the page.
+        </Text> 
+</FlexBox>
+)
+ 
 const ExploreQuery = props => {
 	const { loading, error, data } = useQuery(MAIN_PAGE, {
 		partialRefetch: true

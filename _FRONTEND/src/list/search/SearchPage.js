@@ -84,8 +84,13 @@ const SearchPage = (props) =>{
         <PageContainer  p={[0]}>
             <Header />
 
-            <Form flexWrap="wrap" onSubmit={submitHandler} gradient={"blueish"} py={[4]} width="100vw">
-                <HeaderText textAlign="center" color="rgba(255,255,255, 0.9)" my={[5]}>Search Movies by Genre, Rating and Year</HeaderText>
+            <Form flexWrap="wrap" onSubmit={submitHandler} className="unmatched-purple" py={[4]} width="100vw">
+                <HeaderText 
+                    textAlign="center" color="rgba(255,255,255, 0.9)" my={[5]} 
+                    fontSize={["30px", "30px", "36px", "42px", "48px", "54px"]}
+                >
+                    Search Movies by Genre, Rating and Year
+                </HeaderText>
                 <Text textAlign="center" color="rgba(255,255,255, 0.9)" my={[3]}>See Similar Movies, Recommendations Based On People Who Like The Movie, Watch Trailer and See the Cast</Text>
                 <FlexBox justifyContent="center" id="s-text-input" minWidth="100%"  position="relative">
                     <SearchInput type="text"   

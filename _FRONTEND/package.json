@@ -165,8 +165,11 @@
     "include": [
       "",
       "/",
+      "/film-lists",
       "/topics",
-      "/topic/mystery"
+      "/advance-search",
+      "/topic/mystery",
+      "/person/quentin-tarantino-138"
     ],
     "publicPath": "/"
   }
