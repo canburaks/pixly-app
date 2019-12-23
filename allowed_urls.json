@@ -18,7 +18,6 @@
         "/topic/lgbtq-plus-films",
         "/topic/controversial-films",
         "/topic/historical-figures",
-        "/topic/the-best-mystery-movies-of-all-time",
         "/topic/mystery"
     ],
 
@@ -378,7 +377,6 @@
         "/topic/lgbtq-plus-films",
         "/topic/controversial-films",
         "/topic/historical-figures",
-        "/topic/the-best-mystery-movies-of-all-time",
         "/topic/mystery",
         "/blog/a-brief-introduction-to-collaborative-filtering",
         "/blog/django-graphql-react-integration-tutorial-part-1",
