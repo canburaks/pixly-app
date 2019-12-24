@@ -44,12 +44,10 @@ const TopicList = (props) => {
     return (
         <PageContainer>
             <Head
-                title={"Pixly Topics: Art House, Controversial, Biopic, LGBT Films ..."}
-                description={`Pixly topics are theme based movie collections that could not be classified as traditional genres. "
-                    "Such as the best examples of arthouse, cyberpunk, feeling-good movies, controversial films, ` +
-                     "movies based on true stories, movies focus on rich dialogues, and mystery movies. You can " + 
-                     "discover many movies considering your mood. " 
-                        }
+                title={"Archive-wide list of films - Topics: Art house, Cyberpunk, Mystery..."}
+                description={`Great archive-wide list of films that includes the best artworks of cyberpunk, art house, " + 
+                    "feeling-good movies, controversial films, LGBT and biography movies.`}
+
                 canonical={`https://pixly.app/topics`}
 				image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"}
             />
