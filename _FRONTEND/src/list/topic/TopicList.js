@@ -56,7 +56,6 @@ const TopicList = (props) => {
 
             <ContentContainer >
          
-                <ResponsiveAd1 />
                 <dl>
                     <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {firstPart.map( item => (
@@ -66,7 +65,8 @@ const TopicList = (props) => {
                                 text={item.seoShortDescription} />
                         ))}
                     </Grid>
-                    <ResponsiveAd3 />
+                    <ResponsiveAd1 />
+
 
                     <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {secondPart.map( item => (
@@ -76,7 +76,7 @@ const TopicList = (props) => {
                                 text={item.seoShortDescription} />
                         ))}
                     </Grid>
-
+                    <ResponsiveAd3 />
                 </dl>
             </ContentContainer>
 
