@@ -133,7 +133,7 @@ const MainPage = (props) => {
                 borderBottom="3px solid"
                 borderColor="rgba(40,40,40, 0.7)"
             >
-				<Image src={responsivePosterUrl} position="absolute" top={0} left={0} width={"100%"} />
+				<Image src={responsivePosterUrl} position="absolute" top={0} left={0} width={"100%"} alt={"Pixly AI Movie Recommendation and Movie Rating Website"}/>
             	<FlexBox flexDirection="column" zIndex={9}  px={[2,2,3,4]} height={"100%"} alignItems="center" justifyContent="flex-end">
                     <HeaderText 
                         mt={[6,6,6]} mb={[2]}
