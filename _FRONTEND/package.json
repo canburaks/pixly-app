@@ -165,7 +165,8 @@
     "include": [
       "",
       "/",
-       "/topics"
+       "/topics",
+        "/person/stanley-kubrick-240"
     ],
     "publicPath": "/"
   }
