@@ -195,34 +195,34 @@ export const Grid = styled(GridBox)`
     grid-template-rows: minmax(50px, 400px;);
 
     @media screen and (min-width: 200px){
-        grid-template-columns: repeat(${props => props.columns[0]}, 1fr);
+        grid-template-columns: repeat(${props => props.columns[0]}, 1fr) !important;
     }
     @media screen and (min-width: ${themeGet("breakpoints.xs")}){
-        grid-template-columns: repeat(${props => props.columns[1]}, 1fr);
+        grid-template-columns: repeat(${props => props.columns[1]}, 1fr) !important;
 
     }
     @media screen and (min-width: ${themeGet("breakpoints.sm")}){
-        grid-template-columns: repeat(${props => props.columns[2]}, 1fr);
+        grid-template-columns: repeat(${props => props.columns[2]}, 1fr) !important;
 
     }
     @media screen and (min-width: ${themeGet("breakpoints.md")}){
-        grid-template-columns: repeat(${props => props.columns[3]}, 1fr);
+        grid-template-columns: repeat(${props => props.columns[3]}, 1fr) !important;
 
     }
     @media screen and (min-width: ${themeGet("breakpoints.lg")}){
-        grid-template-columns: repeat(${props => props.columns[4]}, 1fr);
+        grid-template-columns: repeat(${props => props.columns[4]}, 1fr) !important;
 
     }
     @media screen and (min-width: ${themeGet("breakpoints.xl")}){
-        grid-template-columns: repeat(${props => props.columns[5]}, 1fr);
+        grid-template-columns: repeat(${props => props.columns[5]}, 1fr) !important;
 
     }
     @media screen and (min-width: ${themeGet("breakpoints.xxl")}){
-        grid-template-columns: repeat(${props => props.columns[6]}, 1fr);
+        grid-template-columns: repeat(${props => props.columns[6]}, 1fr) !important;
 
     }
     @media screen and (min-width: ${themeGet("breakpoints.xxxl")}){
-        grid-template-columns: repeat(${props => props.columns[7]}, 1fr);
+        grid-template-columns: repeat(${props => props.columns[7]}, 1fr) !important;
 
     }
     transition: ${themeGet("transitions.medium")};

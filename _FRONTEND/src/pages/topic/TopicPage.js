@@ -243,6 +243,7 @@ const MovieRecommendationCard = ({ item }) => (
 	<SuperBox
 		src={item.coverPoster || item.poster}
 		width="100%"
+        maxWidth={"600px"}
 		ratio={0.7}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
 	>	
