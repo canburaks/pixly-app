@@ -60,6 +60,7 @@
     "@apollo/react-hooks": "^3.0.1",
     "@babel/runtime": "^7.6.3",
     "@glidejs/glide": "^3.3.0",
+    "@sentry/browser": "5.10.2",
     "@styled-system/css": "^5.0.23",
     "@styled-system/theme-get": "^5.1.2",
     "@welldone-software/why-did-you-render": "^3.3.8",
@@ -165,8 +166,8 @@
     "include": [
       "",
       "/",
-       "/topics",
-        "/person/stanley-kubrick-240"
+      "/topics",
+      "/person/stanley-kubrick-240"
     ],
     "publicPath": "/"
   }
