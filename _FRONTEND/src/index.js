@@ -25,7 +25,6 @@ import "core-js";
 import { development, production } from "./styled-components"
 import { Store } from "./store/store"
 import { rgaStart , usePageViews} from "./functions"
-import * as Sentry from '@sentry/browser';
 
 //import { GET_DIRECTOR_LIST } from "./functions/gql"
 
@@ -116,10 +115,6 @@ const whyDidYouRender = require('@welldone-software/why-did-you-render');
 whyDidYouRender(React);
 
 const Pixly = (props) =>{
-    Sentry.init({ dsn: 'https://a7e21dc56a4c4ab5a8d48edc194bb5f2@sentry.io/1865994',
-    release: 'my-project-name@2.3.12'
-
-});
     //let history = useHistory();
     const state = Store()
     rgaStart()
