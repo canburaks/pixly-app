@@ -542,7 +542,7 @@ class Movie(SocialMedia, SEO,MainPage):
 
             #-------------MOVIES----------------
             #Imdb Rating based text
-            if self.year == 2018 or self.year == 2019:
+            if self.year == 2018 or self.year >= 2019:
                 if self.imdb_rating and self.imdb_rating > 7.5:
                     if self.imdb_rating and self.imdb_rating > 8:
                         text += f"One of the best {definition} movies of {self.year} directed by {director_name}."
@@ -557,11 +557,9 @@ class Movie(SocialMedia, SEO,MainPage):
             sim_text = ""
             if self.have_content_similars:
                 if self.have_similars:
-                    sim_text += f" See similar movies {self.name} and good movie recommendations based on "
+                    sim_text += f" See similar movies {self.name} and film recommendations based on it."
                 else:
                     sim_text += f" See similar movies like {self.name}"  
-                sim_text += f"{self.name[:14]}."
-
             sim_text_num = len(sim_text)
             current_num = len(text)
             available_num = 157 - (current_num + sim_text_num)
@@ -577,7 +575,7 @@ class Movie(SocialMedia, SEO,MainPage):
 
         # Similars, Recommendation
         if self.have_content_similars:
-            text += "Similars, Recommendations, "
+            text += "Similar Movies, Plot, "
 
         # Trailer
         video_tags = set(self.video_tags)
@@ -608,29 +606,29 @@ class Movie(SocialMedia, SEO,MainPage):
     #in order to bulk update, does not save
     def set_seo_description_keywords(self, save=True):
         description_text = self.generate_description()
-        keywords = [self.name, self.slug, "movie rating website", "user ratings", *self.tag_names]
+        keywords = [self.name,f"{self.name} {self.year}", self.slug, "movie rating website", "user ratings"]
         #KEYWORDS
         #video part
         mvqs = self.videos.filter(tags__isnull=False)
         if mvqs.count() > 0:
-            keywords.append("Videos")
+            keywords.append(f"{self.name} Videos")
             video_tags = Tag.objects.filter(related_videos__in=mvqs).values_list("slug", flat=True)
             if "trailer" in video_tags:
-                keywords.append("Trailer")
+                keywords.append(f"{self.name} Trailer")
 
             if "behind-the-scene" in video_tags:
-                keywords.append("Behind The Scene")
+                keywords.append(f"{self.name} Behind The Scene")
 
             if "film-review" in video_tags:
-                keywords.append("Review")
+                keywords.append(f"{self.name} Review")
 
             if "video-essay" in video_tags:
-                keywords.append("Video Essays")
+                keywords.append(f"{self.name} Video Essays")
 
             if "video-clip" in video_tags:
-                keywords.append("Video Clips")
+                keywords.append(f"{self.name} Video Clips")
             if "film-critic" in video_tags:
-                keywords.append("Film Critic")
+                keywords.append(f"{self.name} Film Critic")
 
 
         self.seo_description = description_text
@@ -641,9 +639,8 @@ class Movie(SocialMedia, SEO,MainPage):
             self.save()
 
     def set_seo_title(self, save=True):
-        self.seoTitle = self.generate_title()
-        if save:
-            self.save()
+        self.seo_title = self.generate_title()
+        self.save()
 
 
     def save(self, *args, **kwargs):

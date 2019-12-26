@@ -89,6 +89,10 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/little-women-2019",
+        "/movie/jumanji-the-next-level-2019",
+        "/movie/frozen-ii-2019",
+
         "/movie/tumbleweeds-1999",
         "/movie/synecdoche-new-york-2008",
         "/movie/the-story-of-o-1975",
@@ -720,6 +724,9 @@
         "/movie/magnolia-1999",
         "/movie/divergent-2014",
         "/movie/limitless-2011",
-        "/movie/cq-2001"
+        "/movie/cq-2001",
+        "/movie/little-women-2019",
+        "/movie/jumanji-the-next-level-2019",
+        "/movie/frozen-ii-2019"
     ]
 }

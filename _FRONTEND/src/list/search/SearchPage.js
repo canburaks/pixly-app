@@ -41,7 +41,7 @@ const SearchPage = (props) =>{
     const [ keywords, setKeywords ] = useState(initialKeywords)
     const [ skip, setSkip ] = useState(initialSkip)
     const [ tags, setTags ] = useState([])
-    const [yearData, setYearData ] = useState({minYear:1950, maxYear:2019})
+    const [yearData, setYearData ] = useState({minYear:1950, maxYear:2020})
     const [ratingData, setRatingData ] = useState({minRating:5.0, maxRating:9.9})
     const [lazyvariables, setLazyVariables ] = useState({keywords})
     const [ message, setMessage ] = useState(null)
