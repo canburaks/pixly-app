@@ -7,10 +7,10 @@ const YearSelect = (props) =>{
         {value:props.minyear ? props.minyear : 1980, label:props.minyear ? props.minyear : 1980})
     
     const [maxYearObject, setMaxYearObject ] = useState(
-        {value:props.maxyear ? props.maxyear : 2019, label:props.maxyear ? props.maxyear : 2019})
+        {value:props.maxyear ? props.maxyear : 2020, label:props.maxyear ? props.maxyear : 2020})
     
     const yearCollection = []
-    for (let i=1920; i<2020; i++ ){ yearCollection.push(i)}
+    for (let i=1920; i<2021; i++ ){ yearCollection.push(i)}
 
     const minYearOptions = yearCollection.map(year => ({value:year, label:year})).filter(x => x.value <= maxYearObject.value)
     const maxYearOptions = yearCollection.map(year => ({value:year, label:year})).filter(x => x.value >= minYearObject.value)
