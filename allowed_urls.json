@@ -97,6 +97,7 @@
         "/movie/magnolia-1999",
         "/movie/divergent-2014",
         "/movie/limitless-2011",
+        "/movie/cq-2001",
 
         "/movie/loser-2000",
         "/movie/a-nos-amours-1983",
@@ -718,6 +719,7 @@
         "/movie/300-2007",
         "/movie/magnolia-1999",
         "/movie/divergent-2014",
-        "/movie/limitless-2011"
+        "/movie/limitless-2011",
+        "/movie/cq-2001"
     ]
 }
