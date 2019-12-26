@@ -166,6 +166,7 @@
     "include": [
       "",
       "/",
+      "/topic/mystery",
       "/movie/tumbleweeds-1999"
 
     ],
