@@ -76,7 +76,7 @@ class Movie(SocialMedia, SEO,MainPage):
     year = models.IntegerField(null=True)
     release = models.DateField(null=True, blank=True)
     summary = models.TextField(max_length=1000,null=True)
-    html_content = RichTextField(max_length=1000,null=True, blank=True, help_text="For Feature Movies that will show on Topic Page.")
+    html_content = RichTextField(max_length=3000,null=True, blank=True, help_text="For Feature Movies that will show on Topic Page.")
     slug = models.SlugField(db_index=True, max_length=100, null=True, blank=True, unique=True, )
 
     imdb_rating = models.DecimalField(max_digits=3, decimal_places=2, blank=True, null=True)
