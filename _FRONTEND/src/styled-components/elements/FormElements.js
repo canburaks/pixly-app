@@ -31,7 +31,7 @@ export const FormInput = (props) => (
 
 export const YearSlider = (props) => {
     const min = props.min || 1950
-    const max = props.max || 2019
+    const max = props.max || 2020
     const [selectedYears, setSelectedYears ] = useState({min:min, max:max})
     const yearSelectHandler = (e) => setSelectedYears(e)
 

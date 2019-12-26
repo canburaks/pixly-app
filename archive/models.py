@@ -29,7 +29,9 @@ def url_image(url, filename):
     fp.write(response.content)
     return filename, files.File(fp)
 
-
+def sim_add(movie, movie2):
+    movie.content_similar_object.first().similars.add(movie2)
+    movie.content_similar_object.first().save() 
 
 
 class TmdbMovie(models.Model):
