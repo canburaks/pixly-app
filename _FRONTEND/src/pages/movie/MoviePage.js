@@ -212,16 +212,13 @@ const MoviePage = props => {
 				{/*<!--SIMILAR Section--> */}
 				{similarPlaceholder.length > 0 && (
 					<>
-						<HeaderMini mt={[4]} fontSize={["18px", "18px", "22px", "24px","26px"]}>{`Movie Recommendations If You Like ${item.name}`}</HeaderMini>
+						<HeaderMini mt={[4]} fontSize={["18px", "18px", "22px", "24px","26px"]}>{`Recommendations: Movies Like ${item.name}`}</HeaderMini>
 							<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>
 								People who like
 								<Span fontWeight="bold" opacity={1}> {item.name} </Span>
 								also like and give high ratings below movies. This
 								can be a good indicator that if you like '
-								{item.name}' probably you will also like these
-								movies. We have advanced algorithms and fine tuned
-								filtering mechanisms that choose these movies
-								wisely.
+								{item.name}' probably you will also like them. Here the movies like {item.name} {item.year}.
 							</Text>
 							<Text fontSize={["14px", "16px", "18px"]}>{invtext}</Text>
 						

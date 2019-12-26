@@ -166,8 +166,13 @@
     "include": [
       "",
       "/",
-      "/topic/mystery",
-      "/movie/tumbleweeds-1999"
+      "/movie/synecdoche-new-york-2008",
+      "/movie/the-story-of-o-1975",
+      "/movie/sicario-2015",
+      "/movie/300-2007",
+      "/movie/magnolia-1999",
+      "/movie/divergent-2014",
+      "/movie/limitless-2011"
 
     ],
     "publicPath": "/"
