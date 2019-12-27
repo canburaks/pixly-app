@@ -49,6 +49,32 @@ class Cache():
         pqs = Topic.objects.filter(main_page=True).values_list("slug", flat=True)
         return Topic.objects.filter(slug__in=pqs)
 
+
+    # ------ Similar Movies --------- gql.schema.list_of_similar_movies 
+    @lru_cache(maxsize=200)    
+    def similar_movie_list(slug):
+        movie_qs = Movie.objects.filter(slug=slug)
+        if movie_qs.exists():
+            movie = movie_qs.first()
+            self_similars = movie.cso_similars
+            print(len(self_similars))
+            similars_of_other = movie.cso_similars_of
+            print(len(similars_of_other))
+            
+            # merge movies
+            all_similars = self_similars.union(similars_of_other)
+            for ms in all_similars:
+                common_tags = movie.common_nongenre_tags(ms)
+                #ms.common_tags = common_tags
+                ms.common_tag_quantity = len(common_tags)
+
+            #sort according to common tag quantity
+            list(all_similars).sort(key=lambda r: r.common_tag_quantity, reverse=True)
+            print(len(all_similars))
+            return all_similars
+
+
+
     # ------ Complex Search ---------gql.complex_search 
     @lru_cache(maxsize=200)    
     def complex_search_topic_result(topic_slug, min_year, max_year, min_rating, max_rating):
