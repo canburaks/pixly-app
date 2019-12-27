@@ -166,10 +166,9 @@
     "include": [
       "",
       "/",
-      "/advance-search",
-      "/movie/cheeky-2000",
-      "/movie/the-key-1983",
-      "/movie/all-ladies-do-it-1992"
+      "/topics",
+      "/topic/video-game"
+
 
 
     ],

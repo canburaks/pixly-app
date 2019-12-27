@@ -86,7 +86,7 @@ const TopicPage = (props) =>{
             {isReady && queryData.topic.heroPoster && 
                 <Image 
                     src={queryData.topic.heroPoster} 
-                    width="100vw" height="auto" minHeight="100px" 
+                    width="100vw" height="auto" minHeight="100px"
                     alt={queryData.topic.name} 
                     title={queryData.topic.name} 
                 />
