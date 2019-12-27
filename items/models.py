@@ -106,6 +106,68 @@ class Movie(SocialMedia, SEO,MainPage):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def common_content_tags_of_movies(cls,movie_1, movie_2):
+        Q_TAG = Q(genre_tag=False) & (Q(subgenre_tag=True) | Q(theme_tag=True) | Q(character_tag=True) | Q(base_tag=True) | Q(phenomenal_tag=True))
+        tags_1 = movie_1.tags.filter(Q_TAG).values_list("name", flat=True)
+        tags_2 = movie_2.tags.filter(Q_TAG).values_list("name", flat=True)
+        return set(tags_1).intersection(set(tags_2))
+    
+    def common_content_tags(self, movie_2):
+        Q_TAG = (Q(subgenre_tag=True) | Q(theme_tag=True) | Q(character_tag=True) | Q(base_tag=True) | Q(phenomenal_tag=True))
+        tags_1 = self.tags.filter(Q_TAG).values_list("name", flat=True)
+        tags_2 = movie_2.tags.filter(Q_TAG).values_list("name", flat=True)
+        return set(tags_1).intersection(set(tags_2))
+
+    def common_nongenre_tags(self, movie_2):
+        return list(set(self.nongenre_tag_names).intersection(set(movie_2.nongenre_tag_names)))
+
+    #-------------CONTENT SIMILARS------------------------
+    @property
+    def cso(self):
+        if self.content_similar_object.exists():
+            return self.content_similar_object.first()
+        return None
+
+    @property
+    def cso_similars(self):
+        if self.cso:
+            return self.cso.similars.all().only(
+                "id", "slug", "name", "year", "poster",
+                "cover_poster", "imdb_rating",
+                ).prefetch_related("tags")
+        return None
+    
+    @property
+    def cso_similars_of(self):
+        if self.cso:
+            return self.cso.similars.all().only(
+                "id", "slug", "name", "year", "poster",
+                "cover_poster", "imdb_rating",
+                ).prefetch_related("tags")
+        return None
+
+    @property
+    def cso_add(self, movie):
+        if self.cso:
+            self.cso.similars.add(movie)
+            self.cso.save()
+            print(f"{movie.name} added as similars to {self.name}.")
+            return True
+        print(f"Error: {self.name} has no content similar object. First Create, than add")
+        return False
+
+    @property
+    def cso_remove(self, movie):
+        if self.cso:
+            self.cso.similars.remove(movie)
+            self.cso.save()
+            print(f"{movie.name} removed from similars of {self.name}.")
+            return True
+        print(f"Error: {self.name} has no content similar object. First Create, than remove")
+        return False
+    #-------------------------------------
+
     @property
     def genre_names(self):
         return self.tags.filter(genre_tag=True).values_list("slug", flat=True)
@@ -113,6 +175,15 @@ class Movie(SocialMedia, SEO,MainPage):
     @property
     def tag_names(self):
         return self.tags.all().values_list("slug", flat=True)
+
+    @property
+    def nongenre_tag_names(self, include_mix_tags=True):
+        if include_mix_tags:
+            mix_tags = self.tags.filter(genre_tag=True, theme_tag=True).values_list("slug", flat=True)
+            nongenres =  set(self.tag_names).difference(self.genre_names)
+            return list(set(mix_tags).union(nongenres))
+        return list(set(self.tag_names).difference(self.genre_names))
+
 
     @property
     def video_tags(self):
@@ -156,10 +227,16 @@ class Movie(SocialMedia, SEO,MainPage):
     def get_content_similar_object(self):
         return self.content_similar_object.all()[0]
     
-    def get_similar_ids(self):
+    def __old_get_similar_ids(self):
         from archive.models import MovSim
         return MovSim.objects.filter(base_id=self.id, pearson__gte=0.3, 
             commons__gte=200).values_list("target_id", flat=True)
+
+    def get_similar_ids(self, min_similarity=0.25):
+        from archive.models import MovSim
+        Q_SIM = Q(commons__gte=200) & (Q(pearson__gte=min_similarity) | Q(acs__gte=min_similarity)) 
+        return MovSim.objects.filter(Q_SIM, base_id=self.id
+                ).order_by("pearson").values_list("target_id", flat=True)
 
     def get_short_summary(self):
         if len(self.summary) < 200:
@@ -171,18 +248,7 @@ class Movie(SocialMedia, SEO,MainPage):
             else:
                 return self.summary[:200] + "..."
 
-    @classmethod
-    def common_content_tags_of_movies(cls,movie_1, movie_2):
-        Q_TAG = Q(genre_tag=False) & (Q(subgenre_tag=True) | Q(theme_tag=True) | Q(character_tag=True) | Q(base_tag=True) | Q(phenomenal_tag=True))
-        tags_1 = movie_1.tags.filter(Q_TAG).values_list("name", flat=True)
-        tags_2 = movie_2.tags.filter(Q_TAG).values_list("name", flat=True)
-        return set(tags_1).intersection(set(tags_2))
-    
-    def common_content_tags(self, movie_2):
-        Q_TAG = Q(genre_tag=False) & (Q(subgenre_tag=True) | Q(theme_tag=True) | Q(character_tag=True) | Q(base_tag=True) | Q(phenomenal_tag=True))
-        tags_1 = self.tags.filter(Q_TAG).values_list("name", flat=True)
-        tags_2 = movie_2.tags.filter(Q_TAG).values_list("name", flat=True)
-        return set(tags_1).intersection(set(tags_2))
+
 
     def set_summary_from_omdb(self):
         import requests

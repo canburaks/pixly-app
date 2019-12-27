@@ -1,5 +1,17 @@
 import gql from "graphql-tag";
 
+export const SIMILAR_FINDER = gql`
+query similars($slug:String!, $page:Int!){
+    listOfSimilarMovies(slug:$slug, page:$page){
+        slug, name, year, poster, coverPoster, tagNames
+    },
+    listOfContentSimilarMovies(slug:$slug, page:$page){
+        slug, name, year, poster, coverPoster, tagNames
+    }
+}
+`;
+
+
 export const PEOPLE_LIST = gql`
 query listOfPeople($page:Int!){
     listOfPeople(page:$page){

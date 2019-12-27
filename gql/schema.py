@@ -88,6 +88,39 @@ class ListQuery(object):
 
     list_of_people = graphene.List(ProfileType, page=graphene.Int(default_value=1))
 
+    list_of_similar_movies = graphene.List(MovieType, 
+            slug=graphene.String(),
+            page=graphene.Int(default_value=1))
+
+    list_of_content_similar_movies = graphene.List(MovieType, 
+            slug=graphene.String(),
+            page=graphene.Int(default_value=1))
+
+
+    def resolve_list_of_similar_movies(self, info, **kwargs):
+        slug = kwargs.get("slug")
+        page = kwargs.get("page") if kwargs.get("page") else 1
+
+        #pagination
+        first = (page - 1) * settings.PER_PAGE_ITEM
+        last = first + settings.PER_PAGE_ITEM
+
+        movie_qs = Movie.objects.filter(slug=slug)
+        if movie_qs.exists():
+            movie = movie_qs.first()
+            similar_ids = movie.get_similar_ids()
+            return Movie.objects.filter(id__in=similar_ids)[first:last]
+        return []
+
+    def resolve_list_of_content_similar_movies(self, info, **kwargs):
+        slug = kwargs.get("slug")
+        page = kwargs.get("page") if kwargs.get("page") else 1
+        similar_movies = Cache.similar_movie_list(slug=slug)
+        
+        #pagination
+        first = (page - 1) * settings.PER_PAGE_ITEM
+        last = first + settings.PER_PAGE_ITEM
+        return similar_movies[first:last]
 
     def resolve_list_of_people(self, info, **kwargs):
         current_user = info.context.user
