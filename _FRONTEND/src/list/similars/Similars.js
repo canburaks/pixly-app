@@ -63,17 +63,17 @@ const SimilarFinder = (props) => {
     const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
     const ResponsiveAd3 = isMobile ? FeedMobileCollectionAd : MoviePageAd
 
-    console.log("router",isMoviePage, location, slug, page)
+    //console.log("router",isMoviePage, location, slug, page)
     if (location.pathname !== "/similar-movie-finder" && searchResult.length > 0){
         //clean autocomplete items
         setSearchResult([])
     } 
-    console.log(props)
+    //console.log(props)
 
-    //console.log(otherLists)
+    ////console.log(otherLists)
     useEffect(() => window.scrollTo({top:0,left:0, behavior:"smooth"}), [])
     const canonical = `https://pixly.app/${props.location.pathname}`
-    //console.log("canonical", canonical, heroImageHeight)
+    ////console.log("canonical", canonical, heroImageHeight)
     return (
         <PageContainer>
             <Head
@@ -165,7 +165,7 @@ const SimilarFinderQuery = props => {
 
 
 	if (loading) return <Loading />;
-	console.log("main", data)
+	//console.log("main", data)
 	if (error) return <div>{error.message}</div>;
 	if (data) return (
         <FlexBox width={"100%"} flexDirection="column" bg={"rgba(215,215,215, 1)"}
