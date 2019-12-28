@@ -15,7 +15,7 @@ import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
     Loading, HeaderText, Text, FlexBox, RegularInput, MovieAutoComplete, SuperBox, CoverLink, TagBox,
-    NewLink, Image, SubHeaderText
+    NewLink, Image, SubHeaderText, LinkButton
 } from "../../styled-components"
 
 
@@ -46,6 +46,7 @@ const SimilarFinder = (props) => {
     const partitionQuantity = useValues([4,4,4,4,3])
     const isMobile = window.innerWidth < 480;
     const isSmallScreen = useMemo(() => !screenSize.includes("L"), [screenSize]) 
+    const isMoviePage = (page !== undefined && slug !== undefined)
 
     /* Hero Image */
     const horizontalurl = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/similar-finder-page/black-silk.jpg"
@@ -62,7 +63,7 @@ const SimilarFinder = (props) => {
     const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
     const ResponsiveAd3 = isMobile ? FeedMobileCollectionAd : MoviePageAd
 
-    console.log("router",location, slug, page)
+    console.log("router",isMoviePage, location, slug, page)
     if (location.pathname !== "/similar-movie-finder" && searchResult.length > 0){
         //clean autocomplete items
         setSearchResult([])
@@ -108,17 +109,29 @@ const SimilarFinder = (props) => {
                         and discover similar movies.
                     </Text>
                     {/* Search Input*/}
-                    <MovieAutoComplete dispatch={searchdispatcher} mt={[3,3,4]} position="relative" />
+                    {isMoviePage 
+                        ?<LinkButton px={[3,3,4]} m={[2]}
+                            to={{pathname:"/similar-movie-finder" }} 
+                            color="light" bg="dark" borderRadius="4px" 
+                            height={"50px"} width={"60%"} maxWidth={"400px"} 
+                            hoverScale hoverBg="#3633CC" boxShadow="card" zIndex={1}
+                        >
+                            Look For Another Movie
+                        </LinkButton>
+                        :<MovieAutoComplete dispatch={searchdispatcher} mt={[3,3,4]} position="relative" />
+                        }
                 </FlexBox>
+
+                {isMoviePage &&
+                        <SimilarFinderQuery />
+                        }
 
                 <ContentContainer display="flex" flexDirection="column" alignItems="center" justifyContent="flex-start">
                     {searchResult && searchResult.length>0 &&
                         <FlexBox flexDirection="column" alignItems="center" width="100%" justifyContent="flex-start" pb={[4]}>
                             {searchResult.map(movie => <MovieSearchCard item={movie} />)}
                         </FlexBox>}
-                    {slug !== undefined && page !== undefined &&
-                        <SimilarFinderQuery />
-                        }
+         
                 </ContentContainer>
 
 
@@ -135,16 +148,22 @@ const SimilarFinderQuery = props => {
 	const { loading, error, data } = useQuery(SIMILAR_FINDER, {
         variables:{slug:slug, page:page},
 		partialRefetch: true
-	});
+    });
+
+
 	if (loading) return <Loading />;
 	console.log("main", data)
 	if (error) return <div>{error.message}</div>;
 	if (data) return (
         <FlexBox width={"100%"} flexDirection="columns">
-            <MovieInfoCard item={data.movie} />
+            <MovieInfoCard item={data.film} />
 
         </FlexBox>
     );
+    useEffect(() => {
+        const banner = document.getElementById("similar-banner-movie")
+        if (banner) window.scrollTo(0, banner.offsetTop)
+    })
 };
 
 const MovieSearchCard = ({ item }) => (
@@ -175,14 +194,17 @@ const MovieSearchCard = ({ item }) => (
         <Text fontWeight="bold" ml={[2,2,3,4]}>{item.name} ({item.year})</Text>
 	</FlexBox>
 )
-const MovieInfoCard = ({ item }) => (
+//When Movie selected from auto complete, this is the banner and identifier of which movies
+const MovieInfoCard = ({ item, ...props }) => (
 	<FlexBox
 		width="100%" 
 		boxShadow="0 6px 8px -4px rgba(0,0,0, 0.4)"
         bg={"rgba(215,215,215, 0.9)"}
         maxHeight={["200px"]} alignItems="center"
-        m={[3,3,3]}
+        p={[3,3,3]}
         className="movie-search-card"
+        id="similar-banner-movie"
+        {...props}
 	>	
 
         <NewLink link={`/movie/${item.slug}`}>

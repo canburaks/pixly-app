@@ -3,13 +3,13 @@ import gql from "graphql-tag";
 export const SIMILAR_FINDER = gql`
 query similars($slug:String!, $page:Int!){
     listOfSimilarMovies(slug:$slug, page:$page){
-        slug, name, year, poster, coverPoster, tagNames
+        slug, name, year, poster, coverPoster, nongenreTags
     },
     listOfContentSimilarMovies(slug:$slug, page:$page){
-        slug, name, year, poster, coverPoster, tagNames
+        slug, name, year, poster, coverPoster, nongenreTags
     }
     film(slug:$slug){
-        id, slug, name, year, summary, poster, coverPoster, tagNames
+        id, slug, name, year, summary, poster, coverPoster, nongenreTags
     }
 }
 `;
@@ -429,7 +429,7 @@ query searchMovie($search:String!, $first:Int, $skip:Int){
         name,
         slug,
         year,
-        poster, summary
+        poster
     }
 }`
 

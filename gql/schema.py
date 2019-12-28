@@ -421,6 +421,7 @@ class SearchQuery(object):
                 first=graphene.Int(default_value=None),
                 skip=graphene.Int(default_value=None))
 
+    search_similar_movie = graphene.List(MovieType, search=graphene.String())
 
     search_list = graphene.List(CustomListType,
                 search=graphene.String(),
@@ -451,6 +452,36 @@ class SearchQuery(object):
                 skip=graphene.Int(default_value=None))
 
     discovery_lists = graphene.List(MovieListType)
+
+    def resolve_search_similar_movie(self, info, **kwargs):
+
+        search = kwargs.get("search")
+        words = multi_word_search(search)
+        if len(words)==1:
+            filter = ( Q(name__icontains=words[0]) )
+            qs = Movie.objects.defer(*movie_defer).filter(filter)
+            result = [x for x in qs if (x.have_similars or x.have_content_similars) ]
+            return result 
+        elif len(words)>1:
+            term1 = " ".join(words)
+            filter1 = ( Q(name__icontains=term1))
+            qs1 = Movie.objects.defer(*movie_defer).filter(filter1)
+            result = [x for x in qs1 if (x.have_similars or x.have_content_similars)]
+
+
+            filter2 = (Q(name__icontains=words[0]))
+            qs2 = Movie.objects.defer(*movie_defer).filter(filter2)
+
+            for i in range(1, len(words)):
+                kw = words[i]
+                qs2 = qs2.filter(Q(name__icontains=kw))
+
+            for mov in qs2:
+                if mov.have_similars or mov.have_content_similars:
+                    result.append(mov)
+
+            result = list(set(result))
+            return result
 
 
     def resolve_filter_page(self, info, **kwargs):

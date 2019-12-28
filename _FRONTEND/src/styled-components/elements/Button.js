@@ -3,7 +3,7 @@ import { useMemo, useCallback } from 'react';
 
 import { Text, Paragraph, 
         Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
-        Box, AbsoluteBox, Spinner,
+        Box, AbsoluteBox, Spinner, FlexBox,
         NewLink, Input, Button, BubbleButton
 } from "../"
 
@@ -33,7 +33,7 @@ export const ActionButton = ({onClick,isLoading, borderRadius="6px", ...props}) 
 )
 
 export const LinkButton = (props) => (
-    <Button type="button"
+    <FlexBox type="button" alignItems="center" justifyContent="center"
         fontSize={[12,14]} fontWeight="bold"
         bg="transparent" color={"light"}
         alignSelf="center"
@@ -44,11 +44,11 @@ export const LinkButton = (props) => (
         borderRadius={"8px"}
         {...props}
     >
-        <NewLink link={props.link} follow={props.follow}>
+        <NewLink link={props.link} follow={props.follow} to={props.to}>
             {props.text}
             {props.children}
         </NewLink>
-    </Button>
+    </FlexBox>
 )
 
 
