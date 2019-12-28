@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext, useCallback } from "react";
+import React, { useEffect, useState, useContext, useCallback, useMemo } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
-
-import { useAuthCheck, useValues } from "../../functions/hooks";
-
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import { useAuthCheck, useValues, useDebounce, AUTOCOMPLETE_MOVIE, isEqualObj } from "../../functions";
+import { movieAutoCompleteQuery } from "../../functions/requests"
 import {  SearchBox} from "cbs-react-components"
 
 
@@ -21,72 +21,109 @@ import {
     BookmarkMutation, RatingMutation,TagBox,
     ImdbRatingIcon, YearClockIcon, ProfileIcon, LogoutIcon,
     HomeIcon,ListIcon,
-    LogoutMutation,SearchQueryBox,
+    LogoutMutation,SearchQueryBox,RegularInput,
     navbarheight
 
 } from "../"
 import "./AutoComplete.css"
 
-export const AutoComplete = (props) => {
-    new autoComplete({
-        data: {                              // Data src [Array, Function, Async] | (REQUIRED)
-          src: async () => {
-            // API key token
-            const token = "this_is_the_API_token_number";
-            // User search query
-            const query = document.querySelector("#autoComplete").value;
-            // Fetch External Data Source
-            const source = await fetch(`https://www.food2fork.com/api/search?key=${token}&q=${query}`);
-            // Format data into JSON
-            const data = await source.json();
-            // Return Fetched data
-            return data.recipes;
-          },
-          key: ["title"],
-          cache: false
-        },
-        query: {                               // Query Interceptor               | (Optional)
-              manipulate: (query) => {
-                return query.replace("pizza", "burger");
-              }
-        },
-        sort: (a, b) => {                    // Sort rendered results ascendingly | (Optional)
-            if (a.match < b.match) return -1;
-            if (a.match > b.match) return 1;
-            return 0;
-        },
-        placeHolder: "Food & Drinks...",     // Place Holder text                 | (Optional)
-        selector: "#autoComplete",           // Input field selector              | (Optional)
-        threshold: 3,                        // Min. Chars length to start Engine | (Optional)
-        debounce: 300,                       // Post duration for engine to start | (Optional)
-        searchEngine: "strict",              // Search Engine type/mode           | (Optional)
-        resultsList: {                       // Rendered results list object      | (Optional)
-            render: true,
-            container: source => {
-                source.setAttribute("id", "food_list");
-            },
-            destination: document.querySelector("#autoComplete"),
-            position: "afterend",
-            element: "ul"
-        },
-        maxResults: 5,                         // Max. number of rendered results | (Optional)
-        highlight: true,                       // Highlight matching results      | (Optional)
-        resultItem: {                          // Rendered result item            | (Optional)
-            content: (data, source) => {
-                source.innerHTML = data.match;
-            },
-            element: "li"
-        },
-        noResults: () => {                     // Action script on noResults      | (Optional)
-            const result = document.createElement("li");
-            result.setAttribute("class", "no_result");
-            result.setAttribute("tabindex", "1");
-            result.innerHTML = "No Results";
-            document.querySelector("#autoComplete_list").appendChild(result);
-        },
-        onSelection: feedback => {             // Action script onSelection event | (Optional)
-            console.log(feedback.selection.value.image_url);
-        }
-    });
+export const AutoCompleteInput = ({ query, variableSetter, dispatch, min=3, ...props }) => {
+    const [search, setSearch ] = useState("")
+    const searchSetter = (e) => setSearch(e.target.value)
+
+    const [queryResult, setQueryResult ] = useState([])
+    const debouncedValue = useDebounce(search, 1000)
+
+    const [queryFunction, {data, loading}] = useLazyQuery(query);
     
+    //When data arrives
+    if (data && Object.keys(data).length > 0 && data[Object.keys(data)[0]]){
+        //console.log("iiin-data", data)
+        const results = data[Object.keys(data)[0]]
+        if (queryResult===null || !isEqualObj(results, queryResult)){
+            setQueryResult(results)
+        }
+    }
+    //console.log("asd", variableSetter("asd"))
+
+
+
+    //Make request if passes the requirements
+    useEffect(() => {
+        const vars = variableSetter(debouncedValue)
+        //console.log("vars", vars)
+        if (debouncedValue.length > min){
+            queryFunction({variables:vars})
+        }
+        if (debouncedValue.length < min && queryResult.length > 0){
+            setQueryResult([])
+        }
+    },[debouncedValue])
+
+    //dispatch the queryResult
+    useEffect(() => {
+        var oldResult = []
+        if (queryResult.length > 0 && !isEqualObj(oldResult, queryResult)){
+            dispatch(queryResult)
+        }
+    },[queryResult])
+
+    return (
+        <input 
+            id="autoComplete" 
+            tabIndex="1" 
+            onChange={searchSetter}
+            {...props}
+        />
+    )
 }
+
+export const MovieAutoComplete = ({dispatch, ...props }) => {
+    function variableSetter(term){
+        return {search:term}
+    }
+    return <AutoCompleteInput query={AUTOCOMPLETE_MOVIE} variableSetter={variableSetter} dispatch={dispatch}  />
+}
+
+
+
+// It is working , I leave it as a backup
+/*
+export const MovieAutoComplete2 = ({dispatch, min=3, ...props }) => {
+    const [search, setSearch ] = useState("")
+    const [queryResult, setQueryResult ] = useState(null)
+    const debouncedValue = useDebounce(search, 1000)
+
+    const [searchMovie, {data, loading}] = useLazyQuery(AUTOCOMPLETE_MOVIE);
+    
+
+    if (data && data.searchMovie){
+        //console.log("iiin-data", data)
+        const results = data.searchMovie
+        if (queryResult===null || !isEqualObj(results, queryResult)){
+            setQueryResult(results)
+        }
+    }
+
+    useEffect(() => {
+        searchMovie({variables:{search:debouncedValue}})
+    },[debouncedValue])
+
+    useEffect(() => {
+        if (queryResult !== null && queryResult !== undefined){
+            dispatch(queryResult)
+        }
+    })
+
+    const searchSetter = (e) => setSearch(e.target.value)
+    console.log("debounce", debouncedValue)
+    return (
+        <input 
+            id="autoComplete" 
+            tabIndex="1" 
+            onChange={searchSetter}
+            {...props}
+        />
+    )
+}
+*/

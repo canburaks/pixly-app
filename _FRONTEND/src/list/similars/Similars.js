@@ -1,10 +1,10 @@
 import React  from "react";
 import { useState, useContext, useMemo, useCallback, useEffect } from "react"
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, useParams, useLocation } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 
 
-import { useWindowSize, useAuthCheck, useClientWidth, useValues } from "../../functions/hooks"
+import { useWindowSize, useAuthCheck, useClientWidth, useClientHeight, useValues } from "../../functions/hooks"
 
 import { rgaPageView, Head, MidPageAd, HomePageFeedAd,  FeedMobileCollectionAd,
     SIMILAR_FINDER, LIST_BOARD, MoviePageAd
@@ -14,44 +14,113 @@ import { GlobalContext } from "../..";
 import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
-    Loading, HeaderText, Text, FlexBox
+    Loading, HeaderText, Text, FlexBox, RegularInput, MovieAutoComplete, SuperBox, CoverLink, TagBox,
+    NewLink, Image, SubHeaderText
 } from "../../styled-components"
 
 
 
 const SimilarFinder = (props) => {
-    const lists = props.data.similars
+
+
+
+
+    const { slug, page } = useParams();
+    let location = useLocation();
+    // This is autocomplete search result, not similars
+    const [searchResult, setSearchResult ] = useState([])
+
+    const searchdispatcher = (resultedMovies) => {
+        if (searchResult.length === 0 || searchResult.length !== resultedMovies.length){
+            setSearchResult(resultedMovies)
+            const searchinput = document.getElementById("autoComplete")
+            window.scrollTo(0, searchinput.offsetTop)
+
+        }
+    }
+
     const state = useContext(GlobalContext);
+    const screenSize = useWindowSize()
+    const heroImageHeight = useClientHeight("similar-finder-hero-image")
     
     const partitionQuantity = useValues([4,4,4,4,3])
     const isMobile = window.innerWidth < 480;
+    const isSmallScreen = useMemo(() => !screenSize.includes("L"), [screenSize]) 
 
+    /* Hero Image */
+    const horizontalurl = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/similar-finder-page/black-silk.jpg"
+    const verticalurl = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/similar-finder-page/black-silk-vertical.jpg"
+    const responsiveurl = isSmallScreen ? verticalurl : horizontalurl
 
-
-    const firstPart = allLists.slice(0,partitionQuantity)
-    const secondPart = allLists.slice(partitionQuantity, partitionQuantity * 2)
-    const thirdPart = allLists.slice(partitionQuantity * 2, partitionQuantity * 3)
-    const fourthPart = allLists.slice(partitionQuantity * 3, partitionQuantity * 4)
-    const fifthPart = allLists.slice(partitionQuantity * 4, partitionQuantity * 5)
+    //const firstPart = allLists.slice(0,partitionQuantity)
+    //const secondPart = allLists.slice(partitionQuantity, partitionQuantity * 2)
+    //const thirdPart = allLists.slice(partitionQuantity * 2, partitionQuantity * 3)
+    //const fourthPart = allLists.slice(partitionQuantity * 3, partitionQuantity * 4)
+    //const fifthPart = allLists.slice(partitionQuantity * 4, partitionQuantity * 5)
 
     const ResponsiveAd1 = isMobile ? FeedMobileCollectionAd : HomePageFeedAd
     const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
     const ResponsiveAd3 = isMobile ? FeedMobileCollectionAd : MoviePageAd
 
+    console.log("router",location, slug, page)
+    if (location.pathname !== "/similar-movie-finder" && searchResult.length > 0){
+        //clean autocomplete items
+        setSearchResult([])
+    } 
+    console.log(props)
 
     //console.log(otherLists)
     useEffect(() => window.scrollTo(0,0), [])
+    const canonical = `https://pixly.app/${props.location.pathname}`
+    //console.log("canonical", canonical, heroImageHeight)
     return (
         <PageContainer>
             <Head
-                title={"Pixly - List Of Films, Curated and Collected Movie Lists"}
-                description={"Great List of Films - Collections of festival awarded films, famous director's favorite " +
-                            "curated and recommended films and lists to watch. "}
+                title={"Pixly - Similar Movie Finder. Find Movies Similar To Your Favourites."}
+                description={"Pixly.App offers free similar movie finder service. Find similar movies " +
+                            "to your favourite films. Discover movies that has similar topic and tags."}
                 image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"}
 
-                canonical={`https://pixly.app/film-lists`}
+                canonical={canonical}
             />
-            <Hero />
+                {/* HERO */}
+                <FlexBox className="similar-finder-hero"
+                    position="relative"
+                    width="100%" height={"auto"}
+                    display="flex" flexDirection="column" alignItems="center"
+                    top={-75} px={[3,3,4]}
+                >
+                    <Image className="similar-finder-hero-image"
+                        src={responsiveurl} 
+                        width={"100vw"} height="auto" alt="similar movie finder" minHeight="250px"
+                        position="absolute" top={0} left={0}
+                    />
+                    <HeaderText  
+                        fontFamily={"playfair"} fontWeight="bold"
+                        fontSize={["36px", "36px", "42px", "48px", "54px", "60px"]}
+                        color="white" my={[3]} pt={[3]} mt={["150px", "150px", "125px"]}
+                        textAlign="center" position="relative"
+                    >
+                        Similar Movie Finder
+                    </HeaderText>  
+                    <Text color="white" position="relative" my={[3,3,4]}>
+                        Are you looking a good movies to watch and can't decide? Let search your favourite film 
+                        and discover similar movies.
+                    </Text>
+                    {/* Search Input*/}
+                    <MovieAutoComplete dispatch={searchdispatcher} mt={[3,3,4]} position="relative" />
+                </FlexBox>
+
+                <ContentContainer display="flex" flexDirection="column" alignItems="center" justifyContent="flex-start">
+                    {searchResult && searchResult.length>0 &&
+                        <FlexBox flexDirection="column" alignItems="center" width="100%" justifyContent="flex-start" pb={[4]}>
+                            {searchResult.map(movie => <MovieSearchCard item={movie} />)}
+                        </FlexBox>}
+                    {slug !== undefined && page !== undefined &&
+                        <SimilarFinderQuery />
+                        }
+                </ContentContainer>
+
 
             
         </PageContainer>
@@ -60,42 +129,77 @@ const SimilarFinder = (props) => {
 };
 
 
-const Hero = () => (
-    <FlexBox className="unmatched-orange"
-        width="100%"
-        height="auto"
-        display="flex" flexDirection="column"
-        px={["5vw", "5vw", "8vw"]} pt={[5,5,5,6]}  pb={[4,4]}
-        top={-75}
-    >
 
-        <HeaderText  
-            fontFamily={"playfair"} fontWeight="bold"
-            fontSize={["30px", "30px", "36px", "42px", "48px", "54px"]}
-            color="white" my={[3]} pt={[3]}
-            textAlign="center" 
-        
-        >
-            Pixly Film Lists: Curated and Collected List of Films
-        </HeaderText>  
-        <Text mt={[3]} textAlign="justify" color="white">
-            Pixly Selections is edited and curated by us. If you are wondering what are the favorite films of famous directors, you will find it in there. 
-            You can also find movies that are awarded by very prestigious film festivals like Cannes, Berlin and Venice. 
-            We are still collecting and improving our database for you. 
-            If you have any suggestions to add or in any case, please feel free to write it from the bottom part of the page.
-        </Text> 
-</FlexBox>
-)
- 
 const SimilarFinderQuery = props => {
+    const { slug, page } = useParams();
 	const { loading, error, data } = useQuery(SIMILAR_FINDER, {
-        variables:{slug:props.match.location.params.slug, page:props.match.location.params.page},
+        variables:{slug:slug, page:page},
 		partialRefetch: true
 	});
 	if (loading) return <Loading />;
-	//console.log("main", data)
+	console.log("main", data)
 	if (error) return <div>{error.message}</div>;
-	if (data) return <SimilarFinder data={data} {...props} />;
+	if (data) return (
+        <FlexBox width={"100%"} flexDirection="columns">
+            <MovieInfoCard item={data.movie} />
+
+        </FlexBox>
+    );
 };
 
-export default withRouter(SimilarFinderQuery);
+const MovieSearchCard = ({ item }) => (
+	<FlexBox
+		width="100%" maxWidth={"600px"}
+		boxShadow="0 6px 8px -4px rgba(0,0,0, 0.4)"
+        bg={"rgba(215,215,215, 0.9)"}
+        maxHeight={["200px"]} alignItems="center"
+        m={[3,3,3]}
+        className="movie-search-card"
+	>	
+        <CoverLink 
+            to={{
+                pathname:`/similar-movie-finder/${item.slug}/1`,
+                state:{movie:item}
+                }} 
+            title={item.name} 
+            zIndex={0}
+        />
+        <NewLink link={`/movie/${item.slug}`} zIndex={1}>
+            <Image 
+                src={item.poster} 
+                alt={item.name} title={"Visit " + item.name + ` - ${item.year} Page`} 
+                height={["52px","52px","86px"]}
+                width={["34px", "34px","56px"]}
+            />
+        </NewLink>
+        <Text fontWeight="bold" ml={[2,2,3,4]}>{item.name} ({item.year})</Text>
+	</FlexBox>
+)
+const MovieInfoCard = ({ item }) => (
+	<FlexBox
+		width="100%" 
+		boxShadow="0 6px 8px -4px rgba(0,0,0, 0.4)"
+        bg={"rgba(215,215,215, 0.9)"}
+        maxHeight={["200px"]} alignItems="center"
+        m={[3,3,3]}
+        className="movie-search-card"
+	>	
+
+        <NewLink link={`/movie/${item.slug}`}>
+            <Image 
+                src={item.poster} 
+                alt={item.name} title={"Visit " + item.name + ` - ${item.year} Page`} 
+                height={["52px","52px","86px"]}
+                width={["34px", "34px","56px"]}
+            />
+        </NewLink>
+        <SubHeaderText fontWeight="bold" ml={[2,2,3,4]}>
+            <NewLink link={`/movie/${item.slug}`} hoverUnderline>
+                {item.name} ({item.year})
+            </NewLink>
+        </SubHeaderText>
+	</FlexBox>
+)
+
+
+export default withRouter(SimilarFinder);

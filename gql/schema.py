@@ -615,6 +615,7 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
                 id=graphene.Int(default_value = None),
                 slug=graphene.String(default_value = None))
 
+    film = graphene.Field(MovieType,slug=graphene.String())
 
     check_redis_key =  graphene.String(key=graphene.String())
 
@@ -646,6 +647,15 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
                 slug=graphene.String(default_value = None))
 
     tag_movies = graphene.List(CustomMovieType,slug=graphene.String(default_value = None))
+
+    def resolve_film(self, info, **kwargs):
+        slug = kwargs.get("slug")
+        #ip = info.context.META.get('REMOTE_ADDR')
+        if slug:
+            mqs = Movie.objects.filter(slug=slug)
+            if  mqs.exists():
+                return mqs.first()
+        return None
 
     def resolve_tag_movies(self, info, **kwargs):
         slug = kwargs.get("slug")

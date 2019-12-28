@@ -20,10 +20,12 @@ export function useGql(query, variables){
     return response
 }
 
+export const movieAutoCompleteQuery = (search) => {
+    return useGql(AUTOCOMPLETE_MOVIE, {search})
+}
 
 
-
-export const AUTOCOMPLETE_MOVIE = gql`
+const AUTOCOMPLETE_MOVIE = gql`
 query searchMovie($search:String!, $first:Int, $skip:Int){
     searchMovie(search:$search first:$first, skip:$skip ){
         id,slug,

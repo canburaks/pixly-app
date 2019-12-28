@@ -37,6 +37,7 @@ import DraftPage from "../pages/DraftPage"
 import SearchPage from "../list/search/SearchPage";
 import ExploreQuery from "../list/Explore";
 import TagMovies from "../list/TagMovies";
+import SimilarFinder from "../list/similars/Similars.js";
 
 //import AdvanceSearch from "../list/advance-search/AdvanceSearch";
 
@@ -65,8 +66,10 @@ const Middle = (props) => {
 
             <Route exact path="/advance-search" component={AdvanceSearchQuery} />
         */}
+            <Route exact path="/similar-movie-finder/:slug/:page" component={SimilarFinder} />
+            <Route exact path="/similar-movie-finder" component={SimilarFinder} />
+        
             <Route exact path="/explore" component={ExploreQuery} />
-
             <Route exact path="/advance-search" component={SearchPage} />
 
             <Route exact path="/topics" component={TopicList} />

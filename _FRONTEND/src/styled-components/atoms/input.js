@@ -3,7 +3,17 @@ import { themeGet } from '@styled-system/theme-get'
 import {  styled } from "../"
 import { linearGradient, backgrounds, backgroundImages, setLightness } from 'polished'
 
-
+export const RegularInput = styled("input")`
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
+`
 export const Input = styled("input")`
     width: 100%;
     padding: 4px 0;
