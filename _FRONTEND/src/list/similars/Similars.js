@@ -108,7 +108,7 @@ const SimilarFinder = (props) => {
                             collaborative filtering mechanism. 
                         </NewLink>
                     </Text>
-                    <Text color="white" position="relative" my={[3,3,4]}>Let First Search A Movie. Select It. See Similar Films.</Text>
+                    {!isMoviePage && <Text color="white" position="relative" my={[3,3,4]}>Let First Search A Movie. Select It. See Similar Films.</Text>}
                     {/* Search Input*/}
                     {isMoviePage 
                         ?<LinkButton px={[3,3,4]} m={[2]}
@@ -123,7 +123,7 @@ const SimilarFinder = (props) => {
                             dispatch={searchdispatcher} 
                             mt={[3,3,4]} 
                             position="relative" 
-                            placeholder="Let search" 
+                            placeholder="Search a movie" 
 
                             />
                         }
