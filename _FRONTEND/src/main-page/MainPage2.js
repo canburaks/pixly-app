@@ -236,11 +236,11 @@ const ExploreSection = ({ isSmallScreen }) => (
 		>
 			Advance Search
 		</LinkButton>
-		<LinkButton px={[3,3,4]} m={[2]}
+		<LinkButton px={[2,2,4]} m={[2]}
 			link="/similar-movie-finder" 
 			color="light" bg="dark" borderRadius="4px" 
 			height={"50px"} width={"40%"} maxWidth={"400px"} 
-			hoverScale hoverBg="#3633CC" boxShadow="card" 
+			hoverScale hoverBg="#3633CC" boxShadow="card" textAlign="center"
 		>
 			Similar Movie Finder
 		</LinkButton>

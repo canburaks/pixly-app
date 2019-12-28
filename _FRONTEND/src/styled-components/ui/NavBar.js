@@ -73,7 +73,7 @@ const NB = props => {
 		<LinkBar />
 	</FlexBox>
 	)
-
+	const insertform = useCallback(() => state.methods.insertAuthForm("login"),[])
     return (
         <NavBarBox 
             bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"} 
@@ -86,7 +86,7 @@ const NB = props => {
             </Box>
             
             <Box width={"85vw"} flexGrow={1} maxWidth={"80vw"}>
-				      <MiddleBar />
+				<MiddleBar />
             {/*isSearchPage ? <LinkBar /> : <SearchAndLinkBar />*/}
             </Box>
 
@@ -94,7 +94,7 @@ const NB = props => {
                 {authStatus 
                 ?   <ProfileDropdown username={state.username}/>
 
-                :   <Box onClick={() => state.methods.insertAuthForm("login")} 
+                :   <Box onClick={insertform} 
                         rel="nofollow" 
                         color="light"
                         mr={[4]}
