@@ -166,6 +166,7 @@
     "include": [
       "",
       "/",
+      "/similar-movie-finder",
       "/topics",
       "/topic/video-game"
     ],

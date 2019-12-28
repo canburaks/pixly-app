@@ -2,6 +2,7 @@
     "base":[    
         "",
         "/",
+        "/similar-movie-finder",
         "/explore",
         "/advance-search",
         "/directors/1"
@@ -376,6 +377,7 @@
     "all":[
         "",
         "/",
+        "/similar-movie-finder",
         "/explore",
         "/advance-search",
         "/topics",

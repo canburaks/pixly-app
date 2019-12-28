@@ -9,6 +9,7 @@ import { Text, Paragraph,
 
 import { TextSection } from "./TextSection"
 import { useScrollPosition } from "../../functions/hooks"
+import { CoverLink } from "../atoms";
 
 
 
@@ -35,7 +36,7 @@ export const ActionButton = ({onClick,isLoading, borderRadius="6px", ...props}) 
 export const LinkButton = (props) => (
     <FlexBox type="button" alignItems="center" justifyContent="center"
         fontSize={[12,14]} fontWeight="bold"
-        bg="transparent" color={"light"}
+        bg="transparent" color={"light"} hoverBg={"rgba(255,255,255, 0.2)"}
         alignSelf="center"
         px={[4,4,5]} py={[2]} 
         my={[2]} mt={"auto"}
@@ -44,10 +45,9 @@ export const LinkButton = (props) => (
         borderRadius={"8px"}
         {...props}
     >
-        <NewLink link={props.link} follow={props.follow} to={props.to}>
+        <CoverLink link={props.link} follow={props.follow} to={props.to} />
             {props.text}
             {props.children}
-        </NewLink>
     </FlexBox>
 )
 

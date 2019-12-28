@@ -6,6 +6,7 @@
  */
 #autoComplete_wrapper {
 	position: relative;
+	padding-left: 6px;
 	display: inline-block;
 }
 #autoComplete {
@@ -13,23 +14,23 @@
 	padding: 0 2rem 0 3.5rem;
 	height: 2.1rem;
 	width: 20rem;
-	font-size: 1.2rem;
+	font-size: 28px;
 	outline: 0;
 	border-radius: 50rem;
-	border: 0.05rem solid #ff7a7a;
+	border: 3px solid #ff7a7a !important;
 	caret-color: #ff7a7a;
 	color: rgba(255, 255, 255, 0);
 	background-image: url(../others/search-icon.svg);
 	background-repeat: no-repeat;
 	background-size: 1.2rem;
 	background-origin: border-box;
-	background-position: center;
+	background-position: left 1rem top 0.5rem;
 	transition: all 0.4s ease;
 	-webkit-transition: all -webkit-transform 0.4s ease;
 	text-overflow: ellipsis;
 }
 #autoComplete::placeholder {
-	color: rgba(255, 122, 122, 0);
+	color: rgba(255, 122, 122, 0.5) !important;
 	transition: all 0.3s ease;
 }
 #autoComplete:hover::placeholder {
@@ -68,7 +69,7 @@
 	color: rgba(255, 122, 122, 1);
 	height: 3rem;
 	width: 16.5rem;
-	border: 0.05rem solid #ff7a7a;
+	border: 2px solid #ff7a7a;
 	background-image: url(../others/search-icon.svg);
 	background-size: 1.5rem;
 	background-position: left 1.05rem top 0.8rem;

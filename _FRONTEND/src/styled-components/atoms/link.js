@@ -79,6 +79,7 @@ export const CoverLink = (props) => (
         position={"absolute"}
         top={0} left={0} right={0} bottom={0}
         zIndex={3}
+        className="cover-link"
         {...props} 
     >
       {props.text && <HiddenSpan>{props.text}</HiddenSpan>}
@@ -96,7 +97,7 @@ export const NewLink = styled(LinkNoFollow)`
 
   };
   text-decoration:${props => props.underline ? "underline" : "initial"};
-  transition: ${themeGet("transitions.medium")};
+  transition: ${themeGet("transitions.fast")};
   ${props => props.hidden && hideText()}
 
   ${color}

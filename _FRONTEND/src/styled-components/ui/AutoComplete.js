@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useContext, useCallback, useMemo } from "react";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
-import { useAuthCheck, useValues, useDebounce, AUTOCOMPLETE_MOVIE, isEqualObj } from "../../functions";
+import { useAuthCheck, useValues, useDebounce, AUTOCOMPLETE_MOVIE, isEqualObj,
+    AUTOCOMPLETE_MOVIE_ONLY_HAVE_SIMILARS
+ } from "../../functions";
 import { movieAutoCompleteQuery } from "../../functions/requests"
 import {  SearchBox} from "cbs-react-components"
 
@@ -82,7 +84,7 @@ export const MovieAutoComplete = ({dispatch, ...props }) => {
     function variableSetter(term){
         return {search:term}
     }
-    return <AutoCompleteInput query={AUTOCOMPLETE_MOVIE} variableSetter={variableSetter} dispatch={dispatch}  />
+    return <AutoCompleteInput query={AUTOCOMPLETE_MOVIE_ONLY_HAVE_SIMILARS} variableSetter={variableSetter} dispatch={dispatch} {...props}  />
 }
 
 

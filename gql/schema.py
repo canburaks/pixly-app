@@ -454,7 +454,6 @@ class SearchQuery(object):
     discovery_lists = graphene.List(MovieListType)
 
     def resolve_search_similar_movie(self, info, **kwargs):
-
         search = kwargs.get("search")
         words = multi_word_search(search)
         if len(words)==1:

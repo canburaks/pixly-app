@@ -13,6 +13,16 @@ query similars($slug:String!, $page:Int!){
     }
 }
 `;
+export const AUTOCOMPLETE_MOVIE_ONLY_HAVE_SIMILARS = gql`
+query searchSimilarMovie($search:String!){
+    searchSimilarMovie(search:$search){
+        id,
+        name,
+        slug,
+        year,
+        poster
+    }
+}`
 
 
 export const PEOPLE_LIST = gql`

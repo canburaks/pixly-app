@@ -237,12 +237,12 @@ const ExploreSection = ({ isSmallScreen }) => (
 			Advance Search
 		</LinkButton>
 		<LinkButton px={[3,3,4]} m={[2]}
-			link="/advance-search" 
+			link="/similar-movie-finder" 
 			color="light" bg="dark" borderRadius="4px" 
 			height={"50px"} width={"40%"} maxWidth={"400px"} 
 			hoverScale hoverBg="#3633CC" boxShadow="card" 
 		>
-			Similar Movies
+			Similar Movie Finder
 		</LinkButton>
 	</FlexBox>
 </Section>
