@@ -100,7 +100,7 @@ const SimilarFinder = (props) => {
                     >
                         Similar Movie Finder
                     </HeaderText>  
-                    <Text color="white" position="relative" my={[3,3,4]}>
+                    <Text color="white" position="relative" my={[3,3,4]} px={[3,3,4,4,5]}>
                         Are you looking a good movies to watch and can't decide? Let search your favourite film 
                         and discover similar movies. Besides, "People also like" section can provide good movie recommendations. 
                         The movies of "People also like" section are recommended by&nbsp;
