@@ -31,6 +31,7 @@ static__slugs = blog__slugs + [
     "explore",
     "advance-search",
     "directors/1",
+    "similar-movie-finder"
 ]
 
 
