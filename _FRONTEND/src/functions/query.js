@@ -8,7 +8,7 @@ query similars($slug:String!, $page:Int!){
     listOfContentSimilarMovies(slug:$slug, page:$page){
         slug, name, year, poster, coverPoster, tagNames
     }
-    movie(slug:$slug){
+    film(slug:$slug){
         id, slug, name, year, summary, poster, coverPoster, tagNames
     }
 }

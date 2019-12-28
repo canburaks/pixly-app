@@ -352,9 +352,13 @@ class MovieType(DjangoObjectType):
     release = graphene.types.datetime.Date()
     director_name = graphene.String()
     html_content = graphene.String()
+    nongenre_tags = graphene.List(graphene.String)
 
     class Meta:
         model = Movie
+
+    def resolve_nongenre_tags(self, info):
+        return self.nongenre_tag_names
 
     def resolve_html_content(self, info):
         return self.html_content
