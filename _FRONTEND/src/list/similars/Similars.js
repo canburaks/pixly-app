@@ -101,14 +101,14 @@ const SimilarFinder = (props) => {
                         Similar Movie Finder
                     </HeaderText>  
                     <Text color="white" position="relative" my={[3,3,4]} px={[3,3,4,4,5]}>
-                        Are you looking a good movies to watch and can't decide? Let search your favourite film 
-                        and discover similar movies. Besides, "People also like" section can provide good movie recommendations. 
+                        Are you looking good movies to watch and can't decide? Let search your favourite film 
+                        and discover similar movies like it. Besides, "People also like" section can provide good movie recommendations. 
                         The movies of "People also like" section are recommended by&nbsp;
                         <NewLink to="/blog/a-brief-introduction-to-collaborative-filtering" target="_blank" underline> 
                             collaborative filtering mechanism. 
                         </NewLink>
                     </Text>
-                    {!isMoviePage && <Text color="white" position="relative" my={[3,3,4]}>Let First Search A Movie. Select It. See Similar Films.</Text>}
+                    {!isMoviePage && <SubHeaderText color="white" position="relative" my={[3,3,4]}>First Search A Movie. Select It. See Similar Movies Like It.</SubHeaderText>}
                     {/* Search Input*/}
                     {isMoviePage 
                         ?<LinkButton px={[3,3,4]} m={[2]}
