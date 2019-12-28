@@ -167,8 +167,10 @@
       "",
       "/",
       "/similar-movie-finder",
-      "/topics",
-      "/topic/video-game"
+      "/movie/me-before-you-2016",
+      "/movie/the-maze-runner-2014",
+      "/movie/life-2017"
+
     ],
     "publicPath": "/"
   }
