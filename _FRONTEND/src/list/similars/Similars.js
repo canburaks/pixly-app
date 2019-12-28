@@ -21,10 +21,6 @@ import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, Ima
 
 
 const SimilarFinder = (props) => {
-
-
-
-
     const { slug, page } = useParams();
     let location = useLocation();
     // This is autocomplete search result, not similars
@@ -44,7 +40,6 @@ const SimilarFinder = (props) => {
     const heroImageHeight = useClientHeight("similar-finder-hero-image")
     
     const partitionQuantity = useValues([4,4,4,4,3])
-    const isMobile = window.innerWidth < 480;
     const isSmallScreen = useMemo(() => !screenSize.includes("L"), [screenSize]) 
     const isMoviePage = (page !== undefined && slug !== undefined)
 
@@ -53,15 +48,16 @@ const SimilarFinder = (props) => {
     const verticalurl = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/similar-finder-page/black-silk-vertical.jpg"
     const responsiveurl = isSmallScreen ? verticalurl : horizontalurl
 
+
+    const ResponsiveAd1 = window.innerWidth ? FeedMobileCollectionAd : HomePageFeedAd
+
     //const firstPart = allLists.slice(0,partitionQuantity)
     //const secondPart = allLists.slice(partitionQuantity, partitionQuantity * 2)
     //const thirdPart = allLists.slice(partitionQuantity * 2, partitionQuantity * 3)
     //const fourthPart = allLists.slice(partitionQuantity * 3, partitionQuantity * 4)
     //const fifthPart = allLists.slice(partitionQuantity * 4, partitionQuantity * 5)
 
-    const ResponsiveAd1 = isMobile ? FeedMobileCollectionAd : HomePageFeedAd
-    const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
-    const ResponsiveAd3 = isMobile ? FeedMobileCollectionAd : MoviePageAd
+
 
     //console.log("router",isMoviePage, location, slug, page)
     if (location.pathname !== "/similar-movie-finder" && searchResult.length > 0){
@@ -142,6 +138,7 @@ const SimilarFinder = (props) => {
                             bg="rgba(255,255,255, 0.9)" boxShadow="0 6px 8px -4px rgba(0,0,0, 0.4)"
                             pb={[4]} px={[3,3,4]} borderRadius={6}
                         >
+                            <Text color="dark" textAlign="center" fontWeight="bold">Choose Your Movie</Text>
                             {searchResult.map(movie => <MovieSearchCard item={movie} key={movie.slug} />)}
                         </FlexBox>}
          
@@ -163,6 +160,8 @@ const SimilarFinderQuery = props => {
 		partialRefetch: true
     });
 
+    const ResponsiveAd2 = window.innerWidth ? FeedMobileCollectionAd : MidPageAd
+    const ResponsiveAd3 = window.innerWidth ? FeedMobileCollectionAd : MoviePageAd
 
 	if (loading) return <Loading />;
 	//console.log("main", data)
@@ -172,10 +171,15 @@ const SimilarFinderQuery = props => {
         >
             <MovieInfoCard item={data.film} />
             {data.listOfContentSimilarMovies && 
-                <MovieContentSimilarCardBox items={data.listOfContentSimilarMovies} />
+                <>
+                    <ResponsiveAd2 />
+                    <MovieContentSimilarCardBox items={data.listOfContentSimilarMovies.slice(0,12)} />
+
+                </>
                 }
-                {data.listOfSimilarMovies && 
+                {data.listOfSimilarMovies && data.listOfSimilarMovies.length > 0 && 
                     <FlexBox flexDirection="column" px={[2]}>
+                        <ResponsiveAd3 />
                         <HeaderMini>People also like</HeaderMini>
                         <Text mt={[2]} fontSize={["14px", "16px", "18px"]}>
 								People who like
@@ -254,15 +258,16 @@ const MovieInfoCard = ({ item, ...props }) => (
             <Image 
                 src={item.poster} 
                 alt={item.name} title={"Visit " + item.name + ` - ${item.year} Page`} 
-                height={[ "129px"]}
-                width={[ "84px", ]}
+                height={[ "129px", "129px", "129px", "172px"]}
+                width={[ "84px","84px","84px","112px" ]}
             />
         </NewLink>
         <SubHeaderText fontWeight="bold" my={[2,2,3,4]} ml={3} title={`Click for visit ${item.name} page.`}
-            fontSize={[ "24px", "24px","30px", "36px", "46px"]} textAlign="center"
+            fontSize={[ "24px", "24px","30px", "36px", "46px"]} textAlign="center" width="100%"
         >
             <NewLink link={`/movie/${item.slug}`} hoverUnderline>
-                The Similar Movies Like
+                The Similar Movies Like&nbsp;
+                <br/>
                 {item.name} ({item.year})
             </NewLink>
         </SubHeaderText>
