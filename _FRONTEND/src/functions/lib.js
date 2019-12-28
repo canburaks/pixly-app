@@ -22,6 +22,7 @@ export function unlockBodyScroll(){
 }
 
 export const capitalize = (text) => text.replace(/\b\w/g, l => l.toUpperCase())
+
 export function isEqualObj(a,b){
    // Create arrays of property names
    var aProps = Object.getOwnPropertyNames(a);

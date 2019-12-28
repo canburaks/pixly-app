@@ -375,7 +375,23 @@ export function useClientWidth(clsname){
     return width
 }
 
+export function useClientHeight(clsname){
+  const [ height, setHeight] = useState(null)//      
+  
+  const heightListener = () =>{
+      const currentWidth = document.getElementsByClassName(clsname)[0].clientHeight
+      if(height!=currentWidth){
+          setHeight(currentWidth)
+      }
+  }
+  
 
+  useEffect(() =>{
+      heightListener()
+  })
+
+  return height
+}
 
 //const [loaded, error] = useScript('https://pm28k14qlj.codesandbox.io/test-external-script.js');
 let cachedScripts = [];

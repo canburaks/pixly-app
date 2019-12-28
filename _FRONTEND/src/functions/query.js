@@ -8,6 +8,9 @@ query similars($slug:String!, $page:Int!){
     listOfContentSimilarMovies(slug:$slug, page:$page){
         slug, name, year, poster, coverPoster, tagNames
     }
+    movie(slug:$slug){
+        id, slug, name, year, summary, poster, coverPoster, tagNames
+    }
 }
 `;
 
@@ -426,9 +429,11 @@ query searchMovie($search:String!, $first:Int, $skip:Int){
         name,
         slug,
         year,
-        poster
+        poster, summary
     }
 }`
+
+
 export const LIST_SEARCH = gql`
 query searchList($search:String!, $first:Int, $skip:Int){
     searchList(search:$search first:$first, skip:$skip ){

@@ -52,6 +52,9 @@ const NB = props => {
 			<NewLink color="#f1f1f1 !important" link={"/directors/1"} fontSize={["12px", "12px", "12px", "16px"]}>
 				<UnderlineEffect >Directors</UnderlineEffect>
 			</NewLink>
+			<NewLink color="#f1f1f1 !important" link={"/similar-movie-finder"} fontSize={["12px", "12px", "12px", "16px"]}>
+				<UnderlineEffect >Similars</UnderlineEffect>
+			</NewLink>
 			{authStatus && 
       <NewLink color="#f1f1f1 !important" link={"/people/1"} fontSize={["12px", "12px", "12px", "16px"]}>
 				<UnderlineEffect >People</UnderlineEffect>

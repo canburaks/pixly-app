@@ -12,14 +12,14 @@
 	position: relative;
 	padding: 0 2rem 0 3.5rem;
 	height: 2.1rem;
-	width: 6rem;
+	width: 20rem;
 	font-size: 1.2rem;
 	outline: 0;
 	border-radius: 50rem;
 	border: 0.05rem solid #ff7a7a;
 	caret-color: #ff7a7a;
 	color: rgba(255, 255, 255, 0);
-	background-image: url(./images/magnifier.svg);
+	background-image: url(../others/search-icon.svg);
 	background-repeat: no-repeat;
 	background-size: 1.2rem;
 	background-origin: border-box;
@@ -55,8 +55,9 @@
 	padding: 0 2rem 0 3.5rem;
 	color: rgba(255, 122, 122, 1);
 	height: 3rem;
-	width: 16.5rem;
-	background-image: url(./images/magnifier.svg);
+    width: 24rem;
+    max-width: 90%;
+	background-image: url(../others/search-icon.svg);
 	background-size: 1.7rem;
 	background-position: left 1.05rem top 0.7rem;
 	transition: all 0.3s ease;
@@ -68,7 +69,7 @@
 	height: 3rem;
 	width: 16.5rem;
 	border: 0.05rem solid #ff7a7a;
-	background-image: url(./images/magnifier.svg);
+	background-image: url(../others/search-icon.svg);
 	background-size: 1.5rem;
 	background-position: left 1.05rem top 0.8rem;
 	box-shadow: rgba(255, 122, 122, 0.1) 0 0 20px 5px;
@@ -140,10 +141,11 @@
 }
 @media only screen and (max-width: 600px) {
 	#autoComplete {
-		width: 5rem;
+		width: 16rem;
 	}
 	#autoComplete:focus {
-		width: 11rem;
+        width: 24rem;
+        max-width: 80%;
 		background-size: 1.6rem;
 		background-position: left 1.1rem top 0.75rem;
 	}
