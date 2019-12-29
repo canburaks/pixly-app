@@ -4,7 +4,9 @@ import { withRouter, Link, useParams, useLocation } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 
 
-import { useWindowSize, useAuthCheck, useClientWidth, useClientHeight, useValues } from "../../functions/hooks"
+import { useWindowSize, useAuthCheck, useClientWidth, useClientHeight, useValues,
+    FeedMobileTopicPageAd
+} from "../../functions/hooks"
 
 import { rgaPageView, Head, MidPageAd, HomePageFeedAd,  FeedMobileCollectionAd,
     SIMILAR_FINDER, LIST_BOARD, MoviePageAd
