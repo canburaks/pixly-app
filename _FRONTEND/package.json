@@ -166,11 +166,7 @@
     "include": [
       "",
       "/",
-      "/similar-movie-finder",
-      "/movie/me-before-you-2016",
-      "/movie/the-maze-runner-2014",
-      "/movie/life-2017"
-
+      "/similar-movie-finder"
     ],
     "publicPath": "/"
   }

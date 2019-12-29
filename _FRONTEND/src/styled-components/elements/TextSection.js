@@ -25,7 +25,7 @@ export const Quote = (props) =>{
             color={"dark"} 
             {...props}
         >
-            {textWithBreak.map( t => <>{t}<br/></> )}
+            {textWithBreak.map( (t,i) => <div key={"quote" + i}>{t}<br/></div> )}
             <Cite>
                 {!belongsToPage 
                     ? props.quote.ownerName 

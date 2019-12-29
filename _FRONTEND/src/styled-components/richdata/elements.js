@@ -58,9 +58,9 @@ export const SchemaPost = ({ post , ...props}) =>(
 
 
 export const SchemaArticle = (props) =>(
-    <Box itemScope itemType="http://schema.org/NewsArticle"
-        display="flex" flexDirection="column" justifyContent="flex-start"
-        py={[3]} my={[3,3,4]}
+    <FlexBox itemScope itemType="http://schema.org/NewsArticle"
+        flexDirection="column" justifyContent="flex-start"
+        py={[3]} my={[3,3,4]} 
         {...props} 
     >
         {/* Schema Image Object*/}
@@ -119,7 +119,11 @@ export const SchemaArticle = (props) =>(
             </HeaderMini>}
         
         {/* Article Body*/}
-        <Box width={"100%"} height="auto" itemProp="articleBody" mt={[3]}>
+        <Box 
+            width={"100%"} maxWidth={"100%"} height={"auto" }
+            itemProp="articleBody" 
+            mt={[3]} 
+        >
             {/*<Text fontSize={props.textSize} mt={[2]}>
                 {props.summary}
             </Text>*/}
@@ -131,7 +135,7 @@ export const SchemaArticle = (props) =>(
             {props.children}
         </Box>
 
-    </Box>
+    </FlexBox>
 )
 
 export const SchemaPublisher = () => (

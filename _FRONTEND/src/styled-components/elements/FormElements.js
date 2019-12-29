@@ -53,6 +53,7 @@ export const YearSlider = (props) => {
             borderRadius={"8px"}
             zIndex={10}
             color="black"
+            {...props}
         >
             <WatchIcon title="Release Year" stroke={props.iconColor || "white"}  size={30}/>
             <InputRange
@@ -93,6 +94,7 @@ export const RatingSlider = (props) => {
             border="0.5px solid"
             borderColor="rgba(80,80,80, 0.4)"
             borderRadius={"8px"}
+            {...props}
         >
         <ImdbIcon title="IMDb Rating" fill={props.iconColor || "#fac539"}  size="30px !important;" imdb/>
         <InputRange

@@ -58,7 +58,7 @@ export const HtmlContainer = ({ html, ...props }) => {
     }
     parseTest()
     return (
-        <HtmlBox maxWidth={"100%"} overflowX="hidden">
+        <HtmlBox maxWidth={"100%"} overflowX="hidden" {...props}>
             {parseTest()}
         </HtmlBox>
     )
@@ -232,8 +232,8 @@ Grid.defaultProps = {
     gridRowGap: "32px"
 }
 
-export const TagBox = ({tags, num=100, color}) => (
-    <FlexBox flexWrap="wrap" py={[0,0,1]} color={color || "light"}>
+export const TagBox = ({tags, num=100, color, ...props}) => (
+    <FlexBox flexWrap="wrap" py={[0,0,1]} color={color || "light"} {...props}>
         {tags.slice(0, num).map(tag => (
             <TagText key={tag.name ? "tbox"+ tag.name : "tbox" + tag}  
                 fontSize={["10px","10px","12px", "12px", "12px", "12px"]}
