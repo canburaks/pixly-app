@@ -76,7 +76,7 @@ const TopicPage = (props) =>{
         if (page === undefined || parseInt(page)===1){
             window.scrollTo({left:0, top:0, behavior:"smooth"})
         }
-        else if (parseInt(page) > 1) {
+        else if (parseInt(page) > 1){
             const resultbox = document.getElementById("search-rresult-box")
             window.scrollTo({left:0, top:resultbox.offsetTop, behavior:"smooth"})
         }
@@ -242,9 +242,9 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
         const thirdPart = renderMovies.slice(12, 24)
 
         const isMobile = window.innerWidth < 480;
-        const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
-        const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
-        const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
+        //const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
+        //const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
+        //const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
 
         //console.log("data", firstPart, secondPArt)
         dispatcher(willBeDispatched)
@@ -255,13 +255,13 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
                         <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
-                <ResponsiveAd1/>
+                <HomePageFeedAd/>
                 <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]}>
                     {secondPArt.map( item => (
                         <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
-                <ResponsiveAd2 />
+                <MoviePageAd />
                 <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]}>
                     {thirdPart.map( item => (
                         <MovieRecommendationCard item={item} key={"rec" + item.id}/>
