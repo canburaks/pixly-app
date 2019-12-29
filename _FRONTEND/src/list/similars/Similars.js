@@ -5,11 +5,11 @@ import { useQuery } from '@apollo/react-hooks';
 
 
 import { useWindowSize, useAuthCheck, useClientWidth, useClientHeight, useValues,
-    FeedMobileTopicPageAd
+    
 } from "../../functions/hooks"
 
 import { rgaPageView, Head, MidPageAd, HomePageFeedAd,  FeedMobileCollectionAd,
-    SIMILAR_FINDER, LIST_BOARD, MoviePageAd
+    SIMILAR_FINDER, LIST_BOARD, MoviePageAd,FeedMobileTopicPageAd
 } from "../../functions"
 
 import { GlobalContext } from "../..";
@@ -93,7 +93,7 @@ const SimilarFinder = (props) => {
                     position="relative"
                     width="100%" height={"auto"}
                     display="flex" flexDirection="column" alignItems="center"
-                    px={[4,4,5]}
+                    px={[2,2,3]}
                     src={responsiveurl} pb={[6,6,7]}
                 >
                     <Image className="similar-finder-hero-image"
@@ -302,13 +302,21 @@ const MovieInfoCard = ({ item, summaryChar, ...props }) => (
                         The Similar Movies Like&nbsp;{item.name} ({item.year})
                     </NewLink>
                 </SubHeaderText>
-                <Text fontSize={["12px", "12px", "16px", "18px"]} lineHeight={["16px", "16px", "24px", "26px"]}>{item.summary.length > summaryChar ? item.summary.slice(0,summaryChar) + "..." : item.summary}</Text>
+                <Text 
+                    fontSize={["12px", "12px", "16px", "18px"]} 
+                    lineHeight={["16px", "16px", "24px", "26px"]}
+                >
+                    {item.summary.length > summaryChar 
+                        ? item.summary.slice(0,summaryChar) + "..." 
+                        : item.summary}
+                    <NewLink underline link={`/movie/${item.slug}`} ml={[2]}>Details</NewLink>
+                </Text>
             </FlexBox>
         </FlexBox>
 
         <TagBox 
             tags={item.nongenreTags.slice(0,8)} 
-            px={[2,2,4]} mt={[3]} 
+            px={[1,1,2,4]} mt={[3]} 
             width={"100%"} 
             color="dark" 
             justifyContent="center"
