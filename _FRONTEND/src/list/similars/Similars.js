@@ -174,13 +174,18 @@ const SimilarFinderQuery = props => {
     const ResponsiveAd2 = window.innerWidth ? FeedMobileCollectionAd : MidPageAd
     const ResponsiveAd3 = window.innerWidth ? FeedMobileCollectionAd : MoviePageAd
 
+    useEffect(() => {
+        const banner = document.getElementById("similar-movie-finder-result-box")
+        if (banner) window.scrollTo({left:0, top:banner.offsetTop, behavior:"smooth"})
+    },[])
+
 	if (loading) return <Loading />;
 	//console.log("main", data)
 	if (error) return <div>{error.message}</div>;
 	if (data) return (
         <FlexBox 
             width={"100%"} px={[2,2,3]}
-            flexDirection="column" 
+            flexDirection="column" id="similar-movie-finder-result-box"
             bg={"rgba(215,215,215, 1)"}
         >
             <MovieInfoCard item={data.film} summaryChar={summaryChar}/>
@@ -209,10 +214,7 @@ const SimilarFinderQuery = props => {
 
         </FlexBox>
     );
-    useEffect(() => {
-        const banner = document.getElementById("similar-banner-movie")
-        if (banner) window.scrollTo({left:0, top:banner.offsetTop, behavior:"smooth"})
-    })
+
 };
 const MovieRecommendationBox = (props) => (
     <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
