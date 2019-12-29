@@ -283,7 +283,7 @@ export const PageContainer = (props) => (
 export const ContentContainer = (props) => (
     <Container  id="content-container" display="flex"
         width={"100%"} minHeight={"70vh"}
-        px={"5vw"}
+        pl={"5vw"} pr={"6vw"}
         {...props}
     />
 )

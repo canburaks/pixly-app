@@ -39,6 +39,7 @@ animation: spin 2s linear infinite;
     display: block;
     width: 15%;
     height: 15%;
+    background-color: var(--sk-color);
     border-radius: 100%;
     animation: sk-circle-fade 1.2s infinite ease-in-out both; 
   }
