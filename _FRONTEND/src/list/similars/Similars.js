@@ -181,8 +181,9 @@ const SimilarFinderQuery = props => {
     });
     const summaryChar = useValues([150, 200,300,350,400, 600])
 
-    const ResponsiveAd2 = window.innerWidth ? FeedMobileCollectionAd : MidPageAd
-    const ResponsiveAd3 = window.innerWidth ? FeedMobileCollectionAd : MoviePageAd
+    const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
+    const ResponsiveAd2 = window.innerWidth ? FeedMobileTopicPageAd : MidPageAd
+    const ResponsiveAd3 = window.innerWidth ? FeedMobileTopicPageAd : MoviePageAd
 
 
 
@@ -198,7 +199,7 @@ const SimilarFinderQuery = props => {
             <MovieInfoCard item={data.film} summaryChar={summaryChar}/>
             {data.listOfContentSimilarMovies && 
                 <>
-                    <ResponsiveAd2 />
+                    <ResponsiveAd1 />
                     <MovieContentSimilarCardBox items={data.listOfContentSimilarMovies.slice(0,12)} />
 
                 </>
