@@ -202,11 +202,11 @@ const MoviePage = props => {
 				{/* VIDEO */}
 				{hasVideos && 
 					<>
-					<HeaderMini my={[1]} mt={[5]} id="movie-page-video-header">{videoText}</HeaderMini>
-					<YoutubePlayer
-						videos={item.videos}
-						title={item.name + " Videos"}
-					/>
+						<HeaderMini my={[1]} mt={[5]} id="movie-page-video-header">{videoText}</HeaderMini>
+						<YoutubePlayer
+							videos={item.videos}
+							title={item.name + " Videos"}
+						/>
 					</>
 				}
 				{/*<!--SIMILAR Section--> */}

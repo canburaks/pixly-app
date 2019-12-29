@@ -1,5 +1,5 @@
 import React, { useState, useRef,useEffect, useCallback, useMemo } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, useParams, useHistory } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
@@ -15,7 +15,8 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, Hr,
-    LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink
+    LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
+    Ul,
 } from "../../styled-components"
 
 
@@ -29,9 +30,8 @@ export const ResponsiveTopicCard = ({ item }) => {
 }
 
 const TopicPage = (props) =>{
-    const topicSlug = props.match.params.slug 
-
-    const [page, setPage] = useState(1)
+    let history = useHistory();
+    const { slug:topicSlug, page=1 } = useParams();
 
     const [yearData, setYearData ] = useState({minYear:1950, maxYear:2019})
     const [ratingData, setRatingData ] = useState({minRating:5.0, maxRating:9.9})
@@ -50,9 +50,9 @@ const TopicPage = (props) =>{
     const dataDispatcher = useCallback((data) => (queryData===null || queryData===undefined) && setQueryData(data), [queryData])
     const yearDispatcher = useCallback((data) => setYearData(data), [yearData])
     const ratingDispatcher = useCallback((data) => setRatingData(data), [ratingData])
-
-    const nextPage = () => setPage(page => page + 1)
-    const prevPage = () => setPage(page => page - 1)
+    const nextPage = () => history.push(`/topic/${topicSlug}/${parseInt(page) + 1}`)
+    const prevPage = () => history.push(`/topic/${topicSlug}${
+            parseInt(page)===2 ? "" : `/${parseInt(page) - 1}`}`)
     
     if (lazyvariables === null) setLazyVariables({...yearData, ...ratingData})
 
@@ -68,7 +68,17 @@ const TopicPage = (props) =>{
             setPage(1);
         }
     }
-    useEffect(() => window.scrollTo(0,0),[])
+    // Page Scroll
+    useEffect(() => {
+        if (page === undefined || page===1){
+            window.scrollTo({left:0, top:0, behavior:"smooth"})
+        }
+        else {
+            const resultbox = document.getElementById("search-rresult-box")
+            window.scrollTo({left:0, top:resultbox.offsetTop, behavior:"smooth"})
+        }
+    },[page])
+    
     const featuremovies = isReady ? queryData.topic.featureMovies : [];
     return(
         <PageContainer>
@@ -93,7 +103,12 @@ const TopicPage = (props) =>{
                 }
             <ContentContainer>
 
-                <FlexBox flexDirection="column" px={[2,3,4]} alignItems="flex-start" minHeight={"150px"} pb={[4,4]}>
+                <FlexBox 
+                    flexDirection="column" 
+                    px={[2,3,4]} pb={[4,4]}
+                    alignItems="flex-start" 
+                    minHeight={"150px"} maxWidth={"100%"}
+                    >
 
                     {isReady &&
                         <>
@@ -111,9 +126,13 @@ const TopicPage = (props) =>{
                             updatedAt={queryData.topic.updatedAt}
                             wiki={queryData.topic.wiki}
                         >   
-                            <HtmlContainer my={[3]} fontSize={["14px","16px", "16px", "18px"]} html={queryData.topic.htmlContent} />
+                            <HtmlContainer 
+                                my={[3]} 
+                                fontSize={["14px","16px", "16px", "18px"]} 
+                                html={queryData.topic.htmlContent}     
+                            />
                         </SchemaArticle>
-                        {isReady && featuremovies.map(fm => <FeatureMovie movie={fm} /> )}
+                        {isReady && featuremovies.map((fm,i )=> <FeatureMovie movie={fm} key={`feature${i}`} /> )}
 
                         {/*<FlexBox my={[4,4,4,5]} width={"100%"} overflow="hidden" flexWrap="wrap" className="social-share-box" flexDirection="row">
                             <SocialButtons.Twitter className="social-share" link={"https://pixly.app/" + window.location.pathname} />
@@ -126,33 +145,47 @@ const TopicPage = (props) =>{
                         }   
                 </FlexBox>
 
-                {queryData && queryData.topic.searchable && <Form flexWrap="wrap" onSubmit={submitHandler}>
-                    <FlexBox id="search-settings-box" className="topic-page"
-                        flexDirection={["row", "row"]} 
-                        width={["100%", "100%", "100%"]}  
-                        minHeight={["80px", "80px", "80px", "100%"]}
-                        justifyContent="space-around"
-                        flexWrap="wrap"
-                        px={[3]} mt={[3]}
-                        borderBottom="1px solid"
-                        borderTop="1px solid"
-                    >
-
-                    <YearSlider dispatcher={yearDispatcher}  iconColor="black" />
-                    <RatingSlider dispatcher={ratingDispatcher} iconColor="black"/>
-
-
-                        <Button type="submit" 
-                            display="flex" justifyContent="center" alignItems="center"
-                            p={0} width={[30, 35, 40,45]} height={[30, 35, 40,45]} 
-                            hoverBg={"blue"}
-                            borderRadius="50%" 
-                            bg="dark"
+                {queryData && queryData.topic.searchable && 
+                    <Form flexWrap="wrap" onSubmit={submitHandler}>
+                        <FlexBox id="search-settings-box" className="topic-page"
+                             
+                            width={["100%", "100%", "100%"]}  
+                            minHeight={["80px", "80px", "80px", "100%"]}
+                            justifyContent="space-around"
+                            alignItems="center"
+                            flexWrap="wrap"
+                            px={[3]} mt={[3]}
+                            borderBottom="1px solid"
+                            borderTop="1px solid"
                         >
-                            <SearchIcon  stroke="white" strokeWidth="3" size={20} />
-                        </Button>
-                    </FlexBox>
-                </Form>}
+
+                        <FlexBox 
+                            width={["80%","80%","80%","90%"]} 
+                            flexDirection={["column", "column", "column", "row"]}
+                        >
+                            <YearSlider 
+                                dispatcher={yearDispatcher}  iconColor="black" 
+                                width={["100%"]} 
+                                />
+                            <RatingSlider 
+                                dispatcher={ratingDispatcher} iconColor="black"
+                                width={["100%"]} 
+                                />
+                        </FlexBox>
+
+
+                            <Button type="submit" 
+                                display="flex" justifyContent="center" alignItems="center"
+                                p={0} width={[30, 35, 40,45]} height={[30, 35, 40,45]} 
+                                hoverBg={"blue"}
+                                borderRadius="50%" 
+                                bg="dark"
+                            >
+                                <SearchIcon  stroke="white" strokeWidth="3" size={20} />
+                            </Button>
+                        </FlexBox>
+                    </Form>
+                    }
                 <Hr />
                 
                 <Box id="search-rresult-box"  
@@ -162,7 +195,6 @@ const TopicPage = (props) =>{
                     >
                     <SearchQueryBox 
                         topicSlug={topicSlug} 
-                        page={page} 
                         lazyvariables={lazyvariables} 
                         dispatcher={dataDispatcher} 
                     />
@@ -179,7 +211,8 @@ const TopicPage = (props) =>{
     );
 }
 
-const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher}) =>{
+const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
+    const { slug, page=1 } = useParams();
     const variables = lazyvariables ? lazyvariables : {minYear:1950, maxYear:2019, minRating:5.0, maxRating:9.9}
     const { loading, data, } = useQuery(TOPIC_SEARCH_QUERY,{variables:{
         topicSlug, page, ...variables
@@ -213,26 +246,26 @@ const SearchQueryBox = React.memo(({topicSlug, page, lazyvariables, dispatcher})
         //console.log("data", firstPart, secondPArt)
         dispatcher(willBeDispatched)
         return (
-            <ul>
-                <Grid columns={[1,1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+            <Ul>
+                <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]} className="asdasd">
                     {firstPart.map( item => (
                         <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <ResponsiveAd1/>
-                <Grid columns={[1,1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]}>
                     {secondPArt.map( item => (
                         <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <ResponsiveAd2 />
-                <Grid columns={[1,1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]}>
                     {thirdPart.map( item => (
                         <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <br/>
-            </ul>
+            </Ul>
 
         )}
 }, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.page === n.page) )

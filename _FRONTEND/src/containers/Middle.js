@@ -66,7 +66,7 @@ const Middle = (props) => {
 
             <Route exact path="/advance-search" component={AdvanceSearchQuery} />
         */}
-            <Route exact path="/similar-movie-finder/:slug/:page" component={SimilarFinder} />
+            <Route exact path="/similar-movie-finder/:slug" component={SimilarFinder} />
             <Route exact path="/similar-movie-finder" component={SimilarFinder} />
         
             <Route exact path="/explore" component={ExploreQuery} />
@@ -74,6 +74,7 @@ const Middle = (props) => {
 
             <Route exact path="/topics" component={TopicList} />
             <Route exact path="/topic/:slug" component={TopicPage} />
+            <Route exact path="/topic/:slug/:page" component={TopicPage} />
 
             <Route exact path="/blog" component={Blog} />
             <Route exact path="/blog/:slug" component={Blog} />

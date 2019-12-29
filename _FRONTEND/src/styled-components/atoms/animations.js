@@ -7,6 +7,7 @@ import {
 } from "../index"
 
 
+
 export const GradientAnimationModal = (props) => {
     return (
         <FlexBox 

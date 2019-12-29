@@ -12,6 +12,7 @@ import { themeGet } from '@styled-system/theme-get'
 export const Image = styled('img').attrs(
         (props) =>( props.info ? {alt:props.info , title:props.info + " image"} : null)
     )`
+    transition: all ${themeGet("transitions.medium")};
     ${space}
     ${shadow}
     ${layout}

@@ -214,6 +214,7 @@ export const NavBarBox = styled.nav`
 export const HtmlBox = styled.div`
     box-sizing: border-box;
     position: relative;
+    overflow-x:hidden;
     :hover { 
         box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
         border: ${props => props.hoverBorder && '3px solid #3633CC' };

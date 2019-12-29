@@ -24,7 +24,7 @@ import {
     ImdbRatingIcon, YearClockIcon, ProfileIcon, LogoutIcon,
     HomeIcon,ListIcon,
     LogoutMutation,SearchQueryBox,RegularInput,
-    navbarheight
+    navbarheight,SpinnerFade
 
 } from "../"
 import "./AutoComplete.css"
@@ -71,12 +71,12 @@ export const AutoCompleteInput = ({ query, variableSetter, dispatch, min=3, ...p
     },[queryResult])
 
     return (
-        <input 
-            id="autoComplete" 
-            tabIndex="1" 
-            onChange={searchSetter}
-            {...props}
-        />
+            <input
+                id="autoComplete" 
+                tabIndex="1" 
+                onChange={searchSetter}
+                {...props}
+            />
     )
 }
 
@@ -84,7 +84,13 @@ export const MovieAutoComplete = ({dispatch, ...props }) => {
     function variableSetter(term){
         return {search:term}
     }
-    return <AutoCompleteInput query={AUTOCOMPLETE_MOVIE_ONLY_HAVE_SIMILARS} variableSetter={variableSetter} dispatch={dispatch} {...props}  />
+    return (
+        <AutoCompleteInput 
+            query={AUTOCOMPLETE_MOVIE_ONLY_HAVE_SIMILARS} 
+            variableSetter={variableSetter} 
+            dispatch={dispatch} {...props} 
+        />
+    )
 }
 
 
