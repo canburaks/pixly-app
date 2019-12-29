@@ -73,10 +73,10 @@ const TopicPage = (props) =>{
     }
     // Page Scroll
     useEffect(() => {
-        if (page === undefined || page===1){
+        if (page === undefined || parseInt(page)===1){
             window.scrollTo({left:0, top:0, behavior:"smooth"})
         }
-        else {
+        else if (parseInt(page) > 1) {
             const resultbox = document.getElementById("search-rresult-box")
             window.scrollTo({left:0, top:resultbox.offsetTop, behavior:"smooth"})
         }
