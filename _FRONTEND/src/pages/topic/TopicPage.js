@@ -4,7 +4,10 @@ import { useQuery } from '@apollo/react-hooks';
 import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 
-import { isEqualObj, Head, MidPageAd,HomePageFeedAd,MoviePageAd, useValues, useWindowSize, FeedMobileTopicPageAd} from "../../functions"
+import { isEqualObj, Head, MidPageAd,HomePageFeedAd,MoviePageAd,
+    useValues, useWindowSize, FeedMobileTopicPageAd
+} from "../../functions"
+
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import * as SocialButtons from 'react-social-sharing'
 
