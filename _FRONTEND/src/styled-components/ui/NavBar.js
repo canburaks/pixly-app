@@ -78,7 +78,7 @@ const NB = props => {
         <NavBarBox 
             bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"} 
             height={navbarheight}
-			opacity={isTransparentBg ? 1 : 0.98}
+			  opacity={isTransparentBg ? 1 : 0.98}
 
 		>
             <Box width={"10vw"}>

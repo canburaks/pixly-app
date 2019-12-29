@@ -77,7 +77,7 @@ const SimilarFinder = (props) => {
     const canonical = `https://pixly.app/${props.location.pathname}`
     ////console.log("canonical", canonical, heroImageHeight)
     return (
-        <PageContainer top={-75} position="relative">
+        <PageContainer top={-75} position="relative" >
             <Head
                 title={"Pixly - Similar Movie Finder. Find Movies Similar To Your Favourites."}
                 description={"Pixly.App offers free similar movie finder service. Find similar movies " +
@@ -91,8 +91,8 @@ const SimilarFinder = (props) => {
                     position="relative"
                     width="100%" height={"auto"}
                     display="flex" flexDirection="column" alignItems="center"
-                    px={[3,3,4]}
-                    src={responsiveurl} pb={[3,4]}
+                    px={[4,4,5]}
+                    src={responsiveurl} pb={[4,4,5]}
                 >
                     <Image className="similar-finder-hero-image"
                         src={responsiveurl} 
@@ -102,7 +102,7 @@ const SimilarFinder = (props) => {
                     <HeaderText  
                         fontFamily={"playfair"} fontWeight="bold"
                         fontSize={["36px", "36px", "42px", "48px", "54px", "60px"]}
-                        color="white" my={[3]} pt={[3]} mt={["150px", "150px", "125px"]}
+                        color="white" my={[2]} pt={[2]} mt={["150px", "150px", "125px"]}
                         textAlign="center" position="relative"
                     >
                         Similar Movie Finder
@@ -128,7 +128,7 @@ const SimilarFinder = (props) => {
                     {/* Search Input*/}
                     {isMoviePage 
                         ?<LinkButton px={[3,3,4]} m={[2]}
-                            to={{pathname:"/similar-movie-finder" }} 
+                            link={"/similar-movie-finder" }
                             color="light" bg="dark" borderRadius="4px" 
                             height={"50px"} width={"60%"} maxWidth={"400px"} 
                             hoverScale hoverBg="#3633CC" boxShadow="card" zIndex={1}
@@ -137,9 +137,8 @@ const SimilarFinder = (props) => {
                         </LinkButton>
                         :<MovieAutoComplete 
                             dispatch={searchdispatcher} 
-                            mt={[3,3,4]} 
                             position="relative" 
-                            placeholder="Search any movie; The Matrix " 
+                            placeholder="E.g. Matrix " 
 
                             />
                         }
@@ -147,14 +146,19 @@ const SimilarFinder = (props) => {
 
                 {isMoviePage && <SimilarFinderQuery />}
 
-                <ContentContainer display="flex" flexDirection="column" alignItems="center" justifyContent="flex-start">
+                <ContentContainer 
+                    display="flex" flexDirection="column" 
+                    alignItems="center" justifyContent="flex-start" 
+                    bg={"rgba(120,120,120, 0.7)"}
+                    height="100%"
+                >
                     {searchResult && searchResult.length>0 &&
                         <FlexBox flexDirection="column" alignItems="center" width="auto" 
-                            justifyContent="flex-start" 
-                            bg="rgba(255,255,255, 0.9)" boxShadow="0 6px 8px -4px rgba(0,0,0, 0.4)"
-                            pb={[4]} px={[3,3,4]} borderRadius={6}
+                            justifyContent="flex-start" display="relative" top={-50} zIndex={1}
+                            bg="rgba(255,255,255, 1)" boxShadow="0 6px 18px -8px rgba(0,0,0, 0.4)"
+                            pb={[4]} pt={[2]} px={[3,3,4]} borderRadius={6}
                         >
-                            <Text color="dark" textAlign="center" fontWeight="bold">Choose Your Movie</Text>
+                            <Text color="dark" textAlign="center" fontWeight="bold" underline>Choose Your Movie</Text>
                             {searchResult.map(movie => <MovieSearchCard item={movie} key={movie.slug} />)}
                         </FlexBox>}
          
@@ -175,7 +179,7 @@ const SimilarFinderQuery = props => {
         variables:{slug:slug, page:page},
 		partialRefetch: true
     });
-    const summaryChar = useValues([100,150, 200,200,250,300, 400])
+    const summaryChar = useValues([150, 200,300,350,400, 600])
 
     const ResponsiveAd2 = window.innerWidth ? FeedMobileCollectionAd : MidPageAd
     const ResponsiveAd3 = window.innerWidth ? FeedMobileCollectionAd : MoviePageAd
@@ -189,7 +193,7 @@ const SimilarFinderQuery = props => {
         <FlexBox 
             width={"100%"} px={[2,2,3]}
             flexDirection="column" id="similar-movie-finder-result-box"
-            bg={"rgba(215,215,215, 1)"}
+            bg={"rgba(255,255,255, 1)"}
         >
             <MovieInfoCard item={data.film} summaryChar={summaryChar}/>
             {data.listOfContentSimilarMovies && 
@@ -236,10 +240,10 @@ const MovieContentSimilarCardBox = React.memo(({ items, columns=[2,2,3,3,3,4,6],
 const MovieSearchCard = ({ item }) => (
 	<FlexBox
 		width="100%" maxWidth={"600px"}
-		boxShadow="0 6px 8px -4px rgba(0,0,0, 0.4)"
-        bg={"rgba(215,215,215, 0.9)"}
+		boxShadow="0 4px 8px -4px rgba(0,0,0, 0.1)"
+        bg={"rgba(255,255,255, 0.9)"}
         maxHeight={["200px"]} alignItems="center"
-        mx={[3,3,3]} my={[2]}
+        px={[3,3,3]} my={[2]}
         className="movie-search-card"
 	>	
         <CoverLink 
@@ -272,6 +276,7 @@ const MovieInfoCard = ({ item, summaryChar, ...props }) => (
         flexDirection="column"
         p={[2]} 
         id="similar-banner-movie"
+        bg="rgba(235, 235, 235, 0.9)"
         {...props}
 	>	
         <FlexBox width="100%"  pt={[3,3,4]}>
@@ -290,22 +295,21 @@ const MovieInfoCard = ({ item, summaryChar, ...props }) => (
                     title={`Click for visit ${item.name} page.`}
                     textAlign="center" width="100%"
                 >
-                    <NewLink link={`/movie/${item.slug}`} hoverUnderline>
+                    <NewLink link={`/movie/${item.slug}`} underline>
                         The Similar Movies Like&nbsp;{item.name} ({item.year})
                     </NewLink>
                 </SubHeaderText>
-                <Text>{item.summary.length > summaryChar ? item.summary.slice(0,summaryChar) + "..." : item.summary}</Text>
+                <Text fontSize={["12px", "12px", "16px", "18px"]} lineHeight={["16px", "16px", "24px", "26px"]}>{item.summary.length > summaryChar ? item.summary.slice(0,summaryChar) + "..." : item.summary}</Text>
             </FlexBox>
         </FlexBox>
 
         <TagBox 
             tags={item.nongenreTags.slice(0,8)} 
-            px={[2,3,4]} mt={[3]} 
+            px={[2,2,4]} mt={[3]} 
             width={"100%"} 
             color="dark" 
             justifyContent="center"
         />
-
 
 	</FlexBox>
 )
@@ -317,6 +321,7 @@ const ContentSimilarMovieCard = ({ item }) => (
 		ratio={1.5}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
         className="content-similar-movie-card"
+        title={"Visit " + item.name + ` - ${item.year} Page`} 
 	>	
 
 		<CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0} />
@@ -327,13 +332,13 @@ const ContentSimilarMovieCard = ({ item }) => (
 			flexDirection="column"  justifyContent="space-between"
 			p={[2]} zIndex={1}
 			bg={"rgba(0,0,0, 0.85)"} minHeight={"100px"}
+            className="content-similar-movie-card-info"
 		>
-			<Text color="light" fontWeight="bold" zIndex={1}>
+			<Text color="light" fontWeight="bold" zIndex={1} mb={[2]}>
                 <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
             </Text>
 			<TagBox tags={item.nongenreTags || []} num={4} color={"light"}/>
 		</FlexBox>
-		<CoverLink link={`/movie/${item.slug}`} />
 	</SuperBox>
 )
 
@@ -343,16 +348,18 @@ const MovieRecommendationCard = ({ item }) => (
 		width="100%"
 		ratio={0.7}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
+        className="recommendation-similar-movie-card"
 	>	
         <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
 		<FlexBox 
 			position="absolute" 
 			bottom={0} left={0}
 			width={"100%"} height={"auto"}
-			flexDirection="column" px={[2]} pt={[2]}
+			flexDirection="column" px={[2]} py={[2]}
+            className="recommendation-similar-movie-card-info"
 			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"} zIndex={1}
 		>
-			<Text color="light" fontWeight="bold">
+			<Text color="light" fontWeight="bold" mb={[2]}>
                 <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
             </Text>
 			<TagBox tags={item.nongenreTags || []} num={6} color={"light"}/>

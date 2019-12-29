@@ -236,8 +236,9 @@ export const TagBox = ({tags, num=100, color, ...props}) => (
     <FlexBox flexWrap="wrap" py={[0,0,1]} color={color || "light"} {...props}>
         {tags.slice(0, num).map(tag => (
             <TagText key={tag.name ? "tbox"+ tag.name : "tbox" + tag}  
-                fontSize={["10px","10px","12px", "12px", "12px", "12px"]}
+                fontSize={["12px", "12px", "12px", "14px"]}
                 fontFamily="header"
+                px={["6px", "6px", "8px"]}
                 borderColor={color || "light"}
                 color={color || "light"}
             >

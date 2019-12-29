@@ -3887,6 +3887,11 @@ css-select@^2.0.0:
     domutils "^1.7.0"
     nth-check "^1.0.2"
 
+css-spinners-react@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/css-spinners-react/-/css-spinners-react-1.0.2.tgz#718534b5f8d323fb92734743342db7b4e97baf0d"
+  integrity sha512-8hmYiVIwVo0P2qhdaYxG7+jQLN28sPXbD+lfkpY5m4FGoAHaxvd8h9Q5FxPnT/TzblH7nEh0a9DlyFERbjH3eQ==
+
 css-to-react-native@^2.2.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-2.3.2.tgz#e75e2f8f7aa385b4c3611c52b074b70a002f2e7d"
