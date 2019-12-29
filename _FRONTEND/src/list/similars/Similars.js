@@ -92,7 +92,7 @@ const SimilarFinder = (props) => {
                     width="100%" height={"auto"}
                     display="flex" flexDirection="column" alignItems="center"
                     px={[4,4,5]}
-                    src={responsiveurl} pb={[4,4,5]}
+                    src={responsiveurl} pb={[6,6,7]}
                 >
                     <Image className="similar-finder-hero-image"
                         src={responsiveurl} 
@@ -102,7 +102,7 @@ const SimilarFinder = (props) => {
                     <HeaderText  
                         fontFamily={"playfair"} fontWeight="bold"
                         fontSize={["36px", "36px", "42px", "48px", "54px", "60px"]}
-                        color="white" my={[2]} pt={[2]} mt={["150px", "150px", "125px"]}
+                        color="white" my={[2]} pt={[2]} mt={[ "100px"]}
                         textAlign="center" position="relative"
                     >
                         Similar Movie Finder
@@ -119,7 +119,7 @@ const SimilarFinder = (props) => {
                         <SubHeaderText 
                             fontWeight="bold" color="white" 
                             position="relative" 
-                            mt={[3,3,4]} mb={[2,2,3]}  textAlign="center"
+                            mt={[4,4,5]} mb={[2,2,3]}  textAlign="center"
                             fontSize={["18px","18px","24px", "28px", "32px"]}
                         >
                             Search A Movie. Select It. See Similar Movies Like It.
@@ -150,11 +150,11 @@ const SimilarFinder = (props) => {
                     display="flex" flexDirection="column" 
                     alignItems="center" justifyContent="flex-start" 
                     bg={"rgba(120,120,120, 0.7)"}
-                    height="100%"
+                    height="100%" minHeight={"0"}
                 >
                     {searchResult && searchResult.length>0 &&
                         <FlexBox flexDirection="column" alignItems="center" width="auto" 
-                            justifyContent="flex-start" display="relative" top={-50} zIndex={1}
+                            justifyContent="flex-start" display="relative" top={"-120px"} zIndex={1}
                             bg="rgba(255,255,255, 1)" boxShadow="0 6px 18px -8px rgba(0,0,0, 0.4)"
                             pb={[4]} pt={[2]} px={[3,3,4]} borderRadius={6}
                         >
