@@ -1,7 +1,7 @@
 import { compose,typography, color, space, shadow, layout, border, background, flexbox, position, system } from 'styled-system'
 import { themeGet } from '@styled-system/theme-get'
 import {  styled } from "../"
-import { linearGradient, backgrounds, backgroundImages, setLightness } from 'polished'
+import { linearGradient, backgrounds, backgroundImages, setLightness, lighten } from 'polished'
 
 export const RegularInput = styled("input")`
     ${color}

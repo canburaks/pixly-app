@@ -36,7 +36,6 @@ export const EyeIcon = (props) => <Eye {...props} />
 export const LogoutIcon = (props) => <Logout size={props.size || 24} {...props} />
 export const CloseIcon = (props) => <Close {...props} />
 export const WatchIcon = (props) => <Watch {...props} />
-export const SearchIcon = (props) => <Search {...props} />
 export const ClockIcon = (props) => <Clock {...props} />
 
 export const YearIcon = (props) => <ClockYear title="Release Year" {...props} />
@@ -505,10 +504,10 @@ const Watch = (props) => (
 </Svg>
 )
 
-export const Search = (props) => (
+export const SearchIcon = (props) => (
 <Svg xmlns="http://www.w3.org/2000/svg" 
 	viewBox="0 0 24 24" fill="none" 
-	strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+	strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"
 	{...props}
 >
 	{props.title && <title>{props.title}</title>}

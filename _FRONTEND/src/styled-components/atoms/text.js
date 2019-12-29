@@ -226,7 +226,7 @@ export const TagText = styled('p')({
     borderStyle: "solid",
     borderWidth: "1px",
     borderRadius: "4px",
-    padding: "0px 4px !important",
+    lineHeight:"16px",
     margin: "2px 4px 2px 0px !important",
     borderColor: "rgb(210, 210, 210)",
     color: "rgb(210, 210, 210) ",
