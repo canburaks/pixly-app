@@ -68,6 +68,12 @@ const SimilarFinder = (props) => {
 
     ////console.log(otherLists)
     useEffect(() => window.scrollTo({top:0,left:0, behavior:"smooth"}), [])
+
+    useEffect(() => {
+        const banner = document.getElementById("similar-movie-finder-result-box")
+        if (banner) window.scrollTo({left:0, top:banner.offsetTop, behavior:"smooth"})
+    },[slug])
+
     const canonical = `https://pixly.app/${props.location.pathname}`
     ////console.log("canonical", canonical, heroImageHeight)
     return (
@@ -174,10 +180,7 @@ const SimilarFinderQuery = props => {
     const ResponsiveAd2 = window.innerWidth ? FeedMobileCollectionAd : MidPageAd
     const ResponsiveAd3 = window.innerWidth ? FeedMobileCollectionAd : MoviePageAd
 
-    useEffect(() => {
-        const banner = document.getElementById("similar-movie-finder-result-box")
-        if (banner) window.scrollTo({left:0, top:banner.offsetTop, behavior:"smooth"})
-    },[])
+
 
 	if (loading) return <Loading />;
 	//console.log("main", data)
