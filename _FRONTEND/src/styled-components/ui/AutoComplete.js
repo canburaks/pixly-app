@@ -114,7 +114,6 @@ export const AutoCompleteInput = ({ query, variableSetter, dispatch, min=3, ...p
                 <SearchAutoInput
                     height={"100%"}
                     fontSize={["16px","16px", "22px"]} 
-                    borderRadius={"160px"}
                     tabIndex="1" 
                     onChange={searchSetter}
                     {...props}
@@ -138,13 +137,15 @@ export const SearchAutoInput = styled("input")`
 	-webkit-transition: all -webkit-transform 0.4s ease;
     border:0px solid;
     box-sizing:border-box;
-    box-shadow: 0px 2px 6px rgba(6, 28, 63, 0.1);
     padding:4px 4px;
     padding-left: 16px;
     text-align:center;
     margin:0;
+    border-radius:160px;
+    box-shadow: inset 0px 2px 6px 1px rgba(0,0,0, 0.2) ;
     :hover {
         background: ${lighten(0.4, `rgba(255, 255,255, 1)`)};
+        box-shadow: 0px 2px 4px rgba(255,255,255, 0.1) ;
         text-align:center;
         padding-left: 0;
 
@@ -154,7 +155,7 @@ export const SearchAutoInput = styled("input")`
         text-align:center;
         padding-left: 0;
         color:rgba(0,0,0, 0.85);
-
+        box-shadow: 0px 2px 4px rgba(255,255,255, 0.1) ;
         width:100%;
         ::placeholder {
             display:none;
@@ -186,6 +187,8 @@ export const SearchAutoInputBox = styled("div")`
     border:0px solid;
     box-sizing:border-box;
 	transition: all 0.4s ease;
+    border-radius:160px;
+
 	-webkit-transition: all -webkit-transform 0.4s ease;
     :hover {
         transform:scale(1.1);
