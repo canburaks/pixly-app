@@ -181,9 +181,9 @@ const SimilarFinderQuery = props => {
     });
     const summaryChar = useValues([150, 200,300,350,400, 600])
 
-    const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
-    const ResponsiveAd2 = window.innerWidth ? FeedMobileTopicPageAd : MidPageAd
-    const ResponsiveAd3 = window.innerWidth ? FeedMobileTopicPageAd : MoviePageAd
+    const ResponsiveAd1 = window.innerWidth < 480 ? FeedMobileTopicPageAd : HomePageFeedAd
+    const ResponsiveAd2 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MidPageAd
+    const ResponsiveAd3 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MoviePageAd
 
 
 
