@@ -261,19 +261,19 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
             <Ul>
                 <Grid columns={networkSensitiveColumns} py={[3]} gridColumnGap={[3,3,3,4]} className="asdasd">
                     {firstPart.map( item => (
-                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
+                        <MovieRecommendationCard item={item} key={"rec" + item.id} speed={speed} />
                     ))}
                 </Grid>
                 <HomePageFeedAd/>
                 <Grid columns={networkSensitiveColumns} py={[3]} gridColumnGap={[3,3,3,4]}>
                     {secondPArt.map( item => (
-                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
+                        <MovieRecommendationCard item={item} key={"rec" + item.id} speed={speed} />
                     ))}
                 </Grid>
                 <MoviePageAd />
                 <Grid columns={networkSensitiveColumns} py={[3]} gridColumnGap={[3,3,3,4]}>
                     {thirdPart.map( item => (
-                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
+                        <MovieRecommendationCard item={item} key={"rec" + item.id} speed={speed} />
                     ))}
                 </Grid>
                 <br/>
