@@ -17,7 +17,7 @@ import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
     Loading, HeaderText, Text, FlexBox, RegularInput, MovieAutoComplete, SuperBox, CoverLink, TagBox,
-    NewLink, Image, SubHeaderText, LinkButton, HeaderMini, Span
+    NewLink, Image, SubHeaderText, LinkButton, HeaderMini, Span, Box, Hr
 } from "../../styled-components"
 
 
@@ -39,11 +39,12 @@ const SimilarFinder = (props) => {
 
     const state = useContext(GlobalContext);
     const screenSize = useWindowSize()
-    const heroImageHeight = useClientHeight("similar-finder-hero-image")
+    //const heroImageHeight = useClientHeight("similar-finder-hero-image")
     
     const partitionQuantity = useValues([4,4,4,4,3])
     const isSmallScreen = useMemo(() => !screenSize.includes("L"), [screenSize]) 
     const isMoviePage = slug !== undefined
+    const [ showInfoText, setInfoVisibility] = useState(true) 
 
     /* Hero Image */
     const horizontalurl = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/similar-finder-page/black-silk.jpg"
@@ -74,6 +75,9 @@ const SimilarFinder = (props) => {
     useEffect(() => {
         const banner = document.getElementById("similar-movie-finder-result-box")
         if (banner) window.scrollTo({left:0, top:banner.offsetTop, behavior:"smooth"})
+        // clear info text except the first time
+        if (slug!== undefined && showInfoText === true) setInfoVisibility(false)
+
     },[slug])
 
     const canonical = `https://pixly.app/${props.location.pathname}`
@@ -93,31 +97,32 @@ const SimilarFinder = (props) => {
                     position="relative"
                     width="100%" height={"auto"}
                     display="flex" flexDirection="column" alignItems="center"
-                    px={[2,2,3]}
-                    src={responsiveurl} pb={[6,6,7]}
+                    px={[2,2,3]} className="unmatched-red"
+                    pb={!showInfoText ? [3,3,4] :[6,6,7]}
                 >
-                    <Image className="similar-finder-hero-image"
+                    {/*<Image className="similar-finder-hero-image"
                         src={responsiveurl} 
                         width={"100vw"} height="auto" alt="similar movie finder" minHeight="600px"
                         position="absolute" top={0} left={0}
-                    />
+                    />*/}
                     <HeaderText  
                         fontFamily={"playfair"} fontWeight="bold"
-                        fontSize={["36px", "36px", "42px", "48px", "54px", "60px"]}
-                        color="white" my={[2]} pt={[2]} mt={[ "100px"]}
+                        fontSize={["24px", "24px","30px", "36px", "42px", "48px", ]}
+                        color="white" my={[2]} pt={[2]} mt={showInfoText ? [ "100px"] : ["100px"]}
                         textAlign="center" position="relative"
                     >
                         Similar Movie Finder
                     </HeaderText>  
-                    <Text color="white" position="relative" my={[3,3,4]} px={[3,3,4,4,5]}>
-                        Are you looking good movies to watch and can't decide? Let search your favourite film 
-                        and discover similar movies like it. Besides, "People also like" section may provide good movie recommendations. 
-                        The movies of "People also like" section are selected with&nbsp;
-                        <NewLink to="/blog/a-brief-introduction-to-collaborative-filtering" target="_blank" underline> 
-                            collaborative filtering mechanism. 
-                        </NewLink>
-                    </Text>
-                    {!isMoviePage && 
+                    {showInfoText && 
+                        <Text color="white" position="relative" my={[3,3,4]} px={[3,3,4,4,5]}>
+                            Are you looking good movies to watch and can't decide? Let search your favourite film 
+                            and discover similar movies like it. Besides, "People also like" section may provide good movie recommendations. 
+                            The movies of "People also like" section are selected with&nbsp;
+                            <NewLink to="/blog/a-brief-introduction-to-collaborative-filtering" target="_blank" underline> 
+                                collaborative filtering mechanism. 
+                            </NewLink>
+                        </Text>}
+                    {!isMoviePage && showInfoText &&
                         <SubHeaderText 
                             fontWeight="bold" color="white" 
                             position="relative" 
@@ -181,7 +186,7 @@ const SimilarFinderQuery = props => {
         variables:{slug:slug, page:page},
 		partialRefetch: true
     });
-    const summaryChar = useValues([150, 200,300,350,400, 600])
+    const summaryChar = useValues([250, 300,400,500,600,700])
 
     //const ResponsiveAd1 = window.innerWidth < 480 ? FeedMobileTopicPageAd : HomePageFeedAd
     //const ResponsiveAd2 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MidPageAd
@@ -199,40 +204,61 @@ const SimilarFinderQuery = props => {
             bg={"rgba(255,255,255, 1)"}
         >
             <MovieInfoCard item={data.film} summaryChar={summaryChar}/>
-            {data.listOfContentSimilarMovies && 
-                <>
-                    <MoviePageAd />
-                    <MovieContentSimilarCardBox items={data.listOfContentSimilarMovies.slice(0,12)} />
-
-                </>
-                }
-                {data.listOfSimilarMovies && data.listOfSimilarMovies.length > 0 && 
-                    <FlexBox flexDirection="column" px={[2]}>
-                        <MidPageAd />
-                        <HeaderMini>People also like</HeaderMini>
-                        <Text mt={[2]} fontSize={["14px", "16px", "18px"]}>
-								People who like
-								<Span fontWeight="bold" opacity={1}> {data.film.name} </Span>
-								also like and give high ratings below movies. If you like 
-                                '{data.film.name}' the chance of you will like below movies are highly probable.
-                                Here the movies like {data.film.name} {data.film.year}.
-						</Text>
-                        <MovieRecommendationBox items={data.listOfSimilarMovies} />
-                    </FlexBox>
-                }
+            <StatefulSimilars data={data} />
 
 
         </FlexBox>
     );
 
 };
-const MovieRecommendationBox = (props) => (
+
+
+const StatefulSimilars = (props) => {
+    const { data } = props;
+    const film = data.film
+    const csMovies = data.listOfContentSimilarMovies;
+    const rcMovies = data.listOfSimilarMovies;
+    const similarQuantity = csMovies.length + rcMovies.length
+    //console.log("data",similarQuantity,  data)
+    return (
+        <>
+            <MoviePageAd />
+
+            <SubHeaderText fontSize={["22px","22px","28px", "34px", "40px"]}
+                fontWeight="bold"
+                mb={[3,3,4]} mt={[4,4,5]}
+            >
+                Movies Like {film.name}
+            </SubHeaderText>
+            <HeaderMini>Movies Like {film.name}: Similar Contents</HeaderMini>
+            <Text>{csMovies.length} number of movies in this section have common tags with {film.name}.</Text>
+            {csMovies && <MovieContentSimilarCardBox items={csMovies.slice(0,12)} />}
+
+                {rcMovies && rcMovies.length > 0 && 
+                    <FlexBox flexDirection="column" px={[2]}>
+                        <MidPageAd />
+                        <HeaderMini>Film Recommendations</HeaderMini>
+                        <Text mt={[2]} fontSize={["14px", "16px", "18px"]}>
+								People who like
+								<Span fontWeight="bold" opacity={1}> {film.name} </Span>
+								also like and give high ratings below movies. If you like 
+                                '{film.name}' the chance of you will like below movies are highly probable.
+                                Here the movies like {film.name} {film.year}.
+						</Text>
+                        <MovieRecommendationBox items={rcMovies} />
+                    </FlexBox>
+                }
+        </>
+    )
+}
+
+const MovieRecommendationBox = React.memo((props) => (
     <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
         {props.items.map( item => (
             <MovieRecommendationCard item={item} key={"rec" + item.slug}/>
         ))}
     </Grid>
-)
+), (p,n) => (p.key ? (p.key === n.key) : (p.items.length === n.items.length)))
 
 const MovieContentSimilarCardBox = React.memo(({ items, columns=[2,2,3,3,3,4,6], ...props }) => (
     <Grid columns={columns} py={[4]} px={[2]}>
@@ -282,37 +308,40 @@ const MovieInfoCard = ({ item, summaryChar, ...props }) => (
         bg="rgba(235, 235, 235, 0.9)"
         {...props}
 	>	
-        <FlexBox width="100%"  pt={[3,3,4]}>
-            <NewLink link={`/movie/${item.slug}`}>
-                <Image 
+        <Box width="100%"  pt={[3,3,4]}>
+            <HeaderMini fontSize={["18px","18px","24px", "28px", "32px"]}
+                fontWeight="bold" 
+                pb={[2,2,3]} 
+                title={`Click for visit ${item.name} page.`}
+                width="100%"
+            >
+                <NewLink link={`/movie/${item.slug}`} underline>
+                    {item.name}
+                </NewLink>
+                ({item.year})
+            </HeaderMini>
+            <Hr bg="transparent" />
+
+            <NewLink link={`/movie/${item.slug}`} >
+                <Image style={{float:"left"}}
                     src={item.poster} 
                     alt={item.name} title={"Visit " + item.name + ` - ${item.year} Page`} 
                     height={[ "129px", "129px",  "172px", "258px"]}
                     width={[ "84px","84px","112px",  "168px" ]}
+                    mr={[3]} mt={[3]}
                 />
             </NewLink>
-            <FlexBox flexDirection="column" px={[3,3,4]}>
-                <SubHeaderText 
-                    fontWeight="bold" 
-                    mb={[2,2,3]}
-                    title={`Click for visit ${item.name} page.`}
-                    textAlign="center" width="100%"
-                >
-                    <NewLink link={`/movie/${item.slug}`} underline>
-                        The Similar Movies Like&nbsp;{item.name} ({item.year})
-                    </NewLink>
-                </SubHeaderText>
-                <Text 
-                    fontSize={["12px", "12px", "16px", "18px"]} 
-                    lineHeight={["16px", "16px", "24px", "26px"]}
-                >
-                    {item.summary.length > summaryChar 
-                        ? item.summary.slice(0,summaryChar) + "..." 
-                        : item.summary}
-                    <NewLink underline link={`/movie/${item.slug}`} ml={[2]}>Details</NewLink>
-                </Text>
-            </FlexBox>
-        </FlexBox>
+            <Text mt={[3]}
+                fontSize={["12px", "12px", "16px", "18px"]} 
+                lineHeight={["16px", "16px", "24px", "26px"]}
+            >
+                {item.summary.length > summaryChar 
+                    ? item.summary.slice(0,summaryChar) + "..." 
+                    : item.summary}
+                <NewLink underline link={`/movie/${item.slug}`} ml={[2]}>Details</NewLink>
+            </Text>
+
+        </Box>
 
         <TagBox 
             tags={item.nongenreTags.slice(0,8)} 
@@ -345,7 +374,12 @@ const ContentSimilarMovieCard = ({ item }) => (
 			bg={"rgba(0,0,0, 0.85)"} minHeight={"100px"}
             className="content-similar-movie-card-info"
 		>
-			<Text color="light" fontWeight="bold" zIndex={1} mb={[2]}>
+			<Text fontSize={["14px", "14px", "16px"]}
+                fontWeight="bold" 
+                color="light" 
+                zIndex={1} 
+                mb={[2]} 
+            >
                 <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
             </Text>
 			<TagBox tags={item.nongenreTags || []} num={4} color={"light"}/>
