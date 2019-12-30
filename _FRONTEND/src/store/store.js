@@ -94,7 +94,7 @@ export const Store = () => {
     //let connectionType = connection ? connection.effectiveType : null //'slow-2g', '2g', '3g', or '4g'.
     const { effectiveConnectionType } = useNetworkStatus();
     let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
-    console.log("effectiveConnectionType",effectiveConnectionType, speed)
+    //console.log("effectiveConnectionType",effectiveConnectionType, speed)
 
     const state = {
         screenSize,

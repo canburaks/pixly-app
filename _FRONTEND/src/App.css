@@ -205,6 +205,7 @@ h3 {
 .content-similar-movie-card:hover .content-similar-movie-card-info {
     background-color: rgba(40,40,40, 0.85);
 }
+
 .recommendation-similar-movie-card:hover .recommendation-similar-movie-card-info {
     background-color: rgba(40,40,40, 0.85);
 }

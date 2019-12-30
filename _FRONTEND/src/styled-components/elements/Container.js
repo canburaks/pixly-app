@@ -64,9 +64,9 @@ export const HtmlContainer = ({ html, ...props }) => {
     )
 }
 
-export const MessageBox = ({ header,Header, text, Image, children, ...props}) => (
+export const MessageBox = ({ header,Header,subheader, text, Image, children, ...props}) => (
     <FlexBox 
-        fontFamily="paragraph" overflow="hidden"
+        overflow="hidden"
         border="1px solid" borderColor="rgba(40,40,40, 0.4)" 
         boxShadow="1px 5px 8px -8px rgba(0,0,0, 0.9)" 
         bg="#e1e1e1"
@@ -75,6 +75,7 @@ export const MessageBox = ({ header,Header, text, Image, children, ...props}) =>
     >
         <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
             {Header && <Header />}
+            {subheader && <SubHeaderText fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold">{subheader}</SubHeaderText>}
             {header && <HeaderMini fontSize={["16px", "16px", "18px", "20px"]}>{header}</HeaderMini>}
             <Text>{text}</Text>
             {children}

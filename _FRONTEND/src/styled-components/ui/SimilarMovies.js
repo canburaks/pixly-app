@@ -27,27 +27,35 @@ import { useNetworkStatus } from 'react-adaptive-hooks/network';
 
 
 export const SimilarMovies = (props) => {
-    const { movie } = props;
-    const location = useLocation();
 
     //console.log("props", location, props)
     const state = useContext(GlobalContext);
-    const speed = state.speed
     ////console.log("data",speed, similarQuantity,  data)
-
+    
+    const ResponsiveAd1 = window.innerWidth < 480 ? FeedMobileTopicPageAd : HomePageFeedAd
+    const ResponsiveAd2 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MoviePageAd
+    const ResponsiveAd3 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MidPageAd
     return (
         <Section className="similar-movies-section" display="flex" flexDirection="column">
-            <ContentSimilarSection movie={movie} speed={speed} />
+            <ResponsiveAd1 />
+            <ContentSimilarSection  />
 
-            <RecommendationSection movie={movie} speed={speed} />
+            <ResponsiveAd2 />
+            <RecommendationSection  />
+
+            <ResponsiveAd3 />
         </Section>
     )
 }
 
-const ContentSimilarSection = ({num=21, speed="slow"}) => {
+const ContentSimilarSection = (props) => {
     const { slug } = useParams();
+
+    const { effectiveConnectionType } = useNetworkStatus();
+    let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
+
     const [ page, setPage ] = useState(1)
-    const requestQuantity = speed === "fast" ? num : 8 // if slow network request less movie
+    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 21 :12) : 6 // if slow network request less movie
 
 
 	const { loading, error, data } = useQuery(CONTENT_SIMILAR_FINDER, {variables:{
@@ -74,13 +82,13 @@ const ContentSimilarSection = ({num=21, speed="slow"}) => {
             {data.listOfContentSimilarMovies && 
                 <>
                 <MessageBox 
-                    header={`Similar Movies like ${data.movie.name.trim()} (${data.movie.year})`}
+                    subheader={`Similar Movies like ${data.movie.name.trim()} (${data.movie.year})`}
                     text={
-                        `The movies in this part have common topics, tags or sub-genres with ${data.movie.name.trim()}. ` +
+                        `The movies in this part have common topics, tags or sub-genres with ${data.movie.name.trim()} movie. ` +
                         `These are highly similar movies to ${data.movie.name.trim()} in a manner of only the content elements. `
                     }
                 />
-                <Grid columns={[2,2,3,3,3,4,6]} py={[4]} px={[2]}>
+                <Grid columns={[2,2,3,3,3,4,6]} py={[4]}>
                     {data.listOfContentSimilarMovies.map( item => (
                         <ContentSimilarMovieCard item={item} key={item.slug + "cs"} />
                     ))}
@@ -96,12 +104,17 @@ const ContentSimilarSection = ({num=21, speed="slow"}) => {
     )
 }
 
-const RecommendationSection = ({num=18, speed="slow"}) => {
+const RecommendationSection = ({num=19}) => {
     const { slug } = useParams();
     const [ page, setPage ] = useState(1)
     
+    //Network
+    const { effectiveConnectionType } = useNetworkStatus();
+    let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
+    
+    
     // Network sensitive settings
-    const requestQuantity = speed === "fast" ? num : 8 // if slow network request less movie
+    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 19 : 12) : 8 // if slow network request less movie
     const networkSensitiveColumns = speed === "fast" ? [1,1,1,2,2,2,2,3,4] : [2,2,3,3,3,4,6]
 
 	const { loading, error, data } = useQuery(RECOMMENDATION_FINDER, {
@@ -111,7 +124,7 @@ const RecommendationSection = ({num=18, speed="slow"}) => {
         },
 		partialRefetch: true
     });
-
+    //console.log(loading, error, data)
 
     const nextPage = useCallback(() => setPage(page + 1), [page])
     const prevPage = useCallback(() => setPage(page - 1), [page])
@@ -129,18 +142,18 @@ const RecommendationSection = ({num=18, speed="slow"}) => {
             {data.listOfSimilarMovies && 
                 <>
                 <MessageBox 
-                    header={`Film Recommendations Based on ${data.movie.name.trim()}`}
+                    subheader={`Film Recommendations Based on ${data.movie.name.trim()}`}
                     text={
                         `Our AI-assisted algorithm found that those movies are showing high similarity to ${data.movie.name.trim()}. ` +
-                        `The movies like ${data.movie.name.trim()} in this section not only considerthe common content elements, ` + 
+                        `The movies like ${data.movie.name.trim()} in this section not only consider the common content elements, ` + 
                         `but also the personality of people who watch them. ` +
                         `People who like ${data.movie.name.trim()} also like and give high ratings below movies. ` + 
                         `The chance of you will like them are highly probable, if you like ${data.movie.name.trim()}.`
                     }
                 />
-                <Grid columns={networkSensitiveColumns} py={[4]} px={[2]}>
+                <Grid columns={networkSensitiveColumns} py={[4]} >
                     {data.listOfSimilarMovies.map( item => (
-                        <MovieRecommendationCard item={item} key={item.slug + "rm"} />
+                        <MovieRecommendationCard item={item} key={item.slug + "rm"} speed={speed}/>
                     ))}
                 </Grid>
                 {haveManyPages(data.listOfSimilarMovies.length) && <PaginationBox 
@@ -163,13 +176,17 @@ const ContentSimilarMovieCard = ({ item }) => (
         className="content-similar-movie-card"
         title={"Visit " + item.name + ` - ${item.year} Page`} 
 	>	
-		<NewLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}>
+		<NewLink 
+            link={`/movie/${item.slug}`} 
+            title={item.name} 
+            zIndex={0} 
+        >
             <Image 
                 src={item.poster} 
                 alt={`${item.name} (${item.year}) Poster`}
                 title={"Visit " + item.name + ` - ${item.year} Page`} 
                 position="absolute" top={0} left={0} right={0} bottom={0}
-                minWidth="100%"
+                minWidth="100%" 
             />
         </NewLink>
 		<FlexBox 
@@ -181,8 +198,8 @@ const ContentSimilarMovieCard = ({ item }) => (
 			bg={"rgba(0,0,0, 0.85)"} minHeight={"100px"}
             className="content-similar-movie-card-info"
 		>
-			<Text fontSize={["14px", "14px", "16px"]}
-                fontWeight="bold" 
+			<Text fontSize={["12px", "12px", "14px", "16px"]}
+                fontWeight="bold" lineHeight={["16px", "16px", "18px"]}
                 color="light" 
                 zIndex={1} 
                 mb={[2]} 
@@ -218,7 +235,7 @@ const MovieRecommendationCard = ({ item, speed="slow" }) => (
             className="recommendation-similar-movie-card-info"
 			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"} zIndex={1}
 		>
-			<Text color="light" fontWeight="bold" mb={[2]}>
+			<Text color="light" fontWeight="bold" mb={[2]} lineHeight={["16px", "16px", "18px"]}>
                 <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
             </Text>
 			<TagBox tags={item.nongenreTags || []} num={6} color={"light"}/>
@@ -227,19 +244,19 @@ const MovieRecommendationCard = ({ item, speed="slow" }) => (
 	</SuperBox>
 )
 
-export const CONTENT_SIMILAR_FINDER = gql`
+const CONTENT_SIMILAR_FINDER = gql`
 query similars($slug:String!, $page:Int!, $num:Int){
     listOfContentSimilarMovies(slug:$slug, page:$page, num:$num){
         slug, name, year, poster, coverPoster, nongenreTags
     },
-    movie {slug, name, year}
+    movie(slug:$slug){id, slug, name, year}
 }
 `;
-export const RECOMMENDATION_FINDER = gql`
+const RECOMMENDATION_FINDER = gql`
 query similars($slug:String!, $page:Int!, $num:Int){
     listOfSimilarMovies(slug:$slug, page:$page, num:$num){
         slug, name, year, poster, coverPoster, nongenreTags
     },
-    movie {slug, name, year}
+    movie(slug:$slug){id, slug, name, year}
 }
 `;
