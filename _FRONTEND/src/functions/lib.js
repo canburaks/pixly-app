@@ -8,7 +8,9 @@ export function generateGradient(
 
 export function ScrollInto(id){
     var element = document.getElementById(id);
-    element.scrollIntoView({behavior: "smooth"});
+    if (element){
+        element.scrollIntoView({behavior: "smooth"});
+    }
 }
 
 export function lockBodyScroll(){
