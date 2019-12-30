@@ -14,13 +14,11 @@ export const MOVIE = gql`
             summary,
             prediction,
             imdbRating,
-
             homepage,
             imdb,
             facebook,
             twitter,
             instagram,
-
             seoTitle,
             seoDescription,
             seoShortDescription,
@@ -30,19 +28,9 @@ export const MOVIE = gql`
             genres,
             release,
             quotes,
-                director{
-                    id,
-                    name,
-                    slug
-                },
-            crew{
-                job, character, person{
-                    id,name, poster, slug,
-                }
-            },
-            tags{
-                name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag
-            },
+            director{id,name,slug},
+            crew{job, character, person{id,name, poster, slug}},
+            tags{name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag},
             videos{id,title,summary,link,duration,tags,isFaved,ytId,thumb},
             isBookmarked,
             isFaved,

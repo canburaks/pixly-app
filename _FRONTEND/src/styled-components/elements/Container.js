@@ -71,7 +71,7 @@ export const MessageBox = ({ header,Header, text, Image, children, ...props}) =>
         boxShadow="1px 5px 8px -8px rgba(0,0,0, 0.9)" 
         bg="#e1e1e1"
         p={[2]} mt={[4, 4,5]}
-        width={"100%"}
+        width={"100%"} {...props}
     >
         <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
             {Header && <Header />}
