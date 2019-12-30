@@ -79,7 +79,7 @@ const ContentSimilarSection = (props) => {
     if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"/>
     if (data) return (
         <Section display="flex" flexDirection="column" px={[2]} width="100%" className="content-similar-movies-section">
-            {data.listOfContentSimilarMovies && 
+            {data.listOfContentSimilarMovies && data.listOfContentSimilarMovies.length > 0 &&
                 <>
                 <MessageBox 
                     subheader={`Similar Movies like ${data.movie.name.trim()} (${data.movie.year})`}
@@ -139,7 +139,7 @@ const RecommendationSection = ({num=19}) => {
     if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"/>
     if (data) return (
         <Section display="flex" flexDirection="column" px={[2]} width="100%" className="content-similar-movies-section">
-            {data.listOfSimilarMovies && 
+            {data.listOfSimilarMovies && data.listOfSimilarMovies.length > 0 &&
                 <>
                 <MessageBox 
                     subheader={`Film Recommendations Based on ${data.movie.name.trim()}`}
