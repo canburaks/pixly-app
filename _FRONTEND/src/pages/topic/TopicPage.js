@@ -21,7 +21,6 @@ import {
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
     Ul,
 } from "../../styled-components"
-import { useNetworkStatus } from 'react-adaptive-hooks/network';
 
 
 export const ResponsiveTopicCard = ({ item }) => {
@@ -222,12 +221,6 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
         topicSlug, page, ...variables
     },partialRefetch:true})
 
-    //Network Settings
-    const { effectiveConnectionType } = useNetworkStatus();
-    let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
-    const networkSensitiveColumns = speed === "fast" ? [1,1,1,2,2,2,2,3,4] : [2,2,3,3,3,4,6]
-
-
     const screenSize = useWindowSize()
     const isLargeScreen = useMemo(() => screenSize.includes("L"), [screenSize])
     const TopicCard = (props) => isLargeScreen ? <LargeTopicMovieCard {...props} /> : <WhiteMovieCard {...props} />
@@ -238,8 +231,6 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
     if (data && data.complexSearch) {
         const willBeDispatched = {topic:data.complexSearch.topic, quantity:data.complexSearch.quantity}
         const pageQuantity = data.complexSearch.topicResult.length 
-
-
         //const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2) + 1)
         //const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2) + 1, 30)
 
@@ -259,21 +250,21 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
         dispatcher(willBeDispatched)
         return (
             <Ul>
-                <Grid columns={networkSensitiveColumns} py={[3]} gridColumnGap={[3,3,3,4]} className="asdasd">
+                <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]} className="asdasd">
                     {firstPart.map( item => (
-                        <MovieRecommendationCard item={item} key={"rec" + item.id} speed={speed} />
+                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <HomePageFeedAd/>
-                <Grid columns={networkSensitiveColumns} py={[3]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]}>
                     {secondPArt.map( item => (
-                        <MovieRecommendationCard item={item} key={"rec" + item.id} speed={speed} />
+                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <MoviePageAd />
-                <Grid columns={networkSensitiveColumns} py={[3]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]}>
                     {thirdPart.map( item => (
-                        <MovieRecommendationCard item={item} key={"rec" + item.id} speed={speed} />
+                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
                     ))}
                 </Grid>
                 <br/>
@@ -284,12 +275,12 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
 
 
 
-const MovieRecommendationCard = ({ item, speed }) => (
+const MovieRecommendationCard = ({ item }) => (
 	<SuperBox
-		src={speed === "fast" ? item.coverPoster : item.poster}
+		src={item.coverPoster || item.poster}
 		width="100%"
         maxWidth={"600px"}
-		ratio={speed === "fast" ? 0.7 : 1.5}
+		ratio={0.7}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
 	>	
         <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
