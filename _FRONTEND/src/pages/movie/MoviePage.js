@@ -46,7 +46,8 @@ import {
 	SuperBox,
 	TagBox,
 	AbsoluteBox,
-	CoverLink
+	CoverLink,
+	SimilarMovies
 } from "../../styled-components";
 
 import "../pages.css";
@@ -202,50 +203,28 @@ const MoviePage = props => {
 				{/* VIDEO */}
 				{hasVideos && 
 					<>
-						<HeaderMini my={[1]} mt={[5]} id="movie-page-video-header">{videoText}</HeaderMini>
-						<YoutubePlayer
-							videos={item.videos}
-							title={item.name + " Videos"}
-						/>
+					<HeaderMini my={[1]} mt={[5]} id="movie-page-video-header">{videoText}</HeaderMini>
+					<YoutubePlayer
+						videos={item.videos}
+						title={item.name + " Videos"}
+					/>
 					</>
 				}
-				{/*<!--SIMILAR Section--> */}
-				{similarPlaceholder.length > 0 && (
-					<>
-						<HeaderMini mt={[4]} fontSize={["18px", "18px", "22px", "24px","26px"]}>{`Recommendations: Movies Like ${item.name}`}</HeaderMini>
-							<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>
-								People who like
-								<Span fontWeight="bold" opacity={1}> {item.name} </Span>
-								also like and give high ratings below movies. This
-								can be a good indicator that if you like '
-								{item.name}' probably you will also like them. Here the movies like {item.name} {item.year}.
-							</Text>
-							<Text fontSize={["14px", "16px", "18px"]}>{invtext}</Text>
-						
-						<MovieRecommendationBox items={similarPlaceholder} />
-						<ResponsiveAd1 />
-						<hr />
-					</>
-				)}
-				{/*<!--CONTENT SIMILAR Section--> */}
-				{contentSimilarCover.length > 0 && (
-					<>
-						<HeaderMini mt={[5]} fontSize={["18px", "18px", "22px", "24px","26px"]}>Similar Movies like {item.name}</HeaderMini>
-						<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>
-							Those movies have content similarities with{" "}
-							<Span fontWeight="bold" opacity={1}> {item.name} </Span>. If
-							you like any topic or tag under the below movies,
-							you may also be interested them. 
-						</Text>
-						<Text fontSize={["14px", "16px", "18px"]}>{vistext}</Text>
-						<MovieContentSimilarCardBox items={firstPartContentSimilars}  />
-						<ResponsiveAd2 />
-						<MovieContentSimilarCardBox items={secondPartContentSimilars}  />
-						<MovieContentSimilarCardBox items={thirdPartContentSimilars}  />
 
-						<hr />
+				{/*<!--CAST Section--> */}
+				{item.crew.length > 0 && (
+					<>
+					<HeaderMini my={[2]} mt={[5]}>{item.name} Cast & Crew</HeaderMini>
+					<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>
+						{allCrews.map((crew, i) => (
+							<CrewCard crew={crew} key={crew.person.name} />
+								))}
+					</Grid>
 					</>
 				)}
+
+				{/*<!--SIMILAR Section--> */}
+				<SimilarMovies movie={item} />
 
 				{/*<!--APPEARS IN  LIST Section--> */}
 				{item.appears.length > 0 && (
@@ -270,24 +249,6 @@ const MoviePage = props => {
 					</Grid>
 					</>
 				)}
-
-
-
-				<br/>
-				{/*<!--CAST Section--> */}
-				{item.crew.length > 0 && (
-					<>
-					<HeaderMini my={[2]} mt={[5]}>{item.name} Cast & Crew</HeaderMini>
-					<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>
-						{allCrews.map((crew, i) => (
-							<CrewCard crew={crew} key={crew.person.name} />
-								))}
-					</Grid>
-					</>
-				)}
-				
-				<br/>
-
 			</ContentContainer>
 		</PageContainer>
 	);

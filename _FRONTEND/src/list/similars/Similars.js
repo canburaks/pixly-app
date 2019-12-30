@@ -41,7 +41,6 @@ const SimilarFinder = (props) => {
 
     // If direct url access movie info requires
     const { loading, error, data } = useQuery(MOVIE_MINI, {variables:{slug:slug}, skip:!isMoviePage});
-    console.log("data",data)
     if (data && data.movie.slug !== selectedMovie.slug) setSelectedMovie(data.movie)
     
     const searchdispatcher = (resultedMovies) => {
@@ -166,12 +165,7 @@ const SimilarFinder = (props) => {
                         }
                 </SuperBox>
 
-                {(isMoviePage && selectedMovie.slug) && 
-                    <>
-                    <MovieInfoCard item={selectedMovie} summaryChar={summaryChar}/>
-                    <SimilarMovies  movie={selectedMovie} />
-                    </>
-                }
+
 
                 <ContentContainer 
                     display="flex" flexDirection="column" 
@@ -189,6 +183,13 @@ const SimilarFinder = (props) => {
                             {searchResult.map(movie => <MovieSearchCard item={movie} key={movie.slug} />)}
                         </FlexBox>}
          
+                    {(isMoviePage && selectedMovie.slug) && 
+                        <>
+                        <MovieInfoCard item={selectedMovie} summaryChar={summaryChar}/>
+                        <SimilarMovies  movie={selectedMovie} />
+                        </>
+                }
+
                 </ContentContainer>
 
 
