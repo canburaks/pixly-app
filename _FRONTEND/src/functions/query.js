@@ -1,5 +1,64 @@
 import gql from "graphql-tag";
 
+export const MOVIE = gql`
+    query getMovie($id:Int, $slug:String){
+        movie(id:$id, slug:$slug){
+            id,
+            name,
+            year, slug,
+            poster,
+            hasCover,
+            coverPoster,
+            widePoster,
+            htmlContent,
+            summary,
+            prediction,
+            imdbRating,
+
+            homepage,
+            imdb,
+            facebook,
+            twitter,
+            instagram,
+
+            seoTitle,
+            seoDescription,
+            seoShortDescription,
+            seoKeywords,
+            richdata,
+            videoTags,
+            genres,
+            release,
+            quotes,
+                director{
+                    id,
+                    name,
+                    slug
+                },
+            crew{
+                job, character, person{
+                    id,name, poster, slug,
+                }
+            },
+            tags{
+                name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag
+            },
+            videos{id,title,summary,link,duration,tags,isFaved,ytId,thumb},
+            isBookmarked,
+            isFaved,
+            viewerRating,
+            viewerPoints,
+            appears{
+                id, name,slug, owner{id, username},
+                relatedPersons{
+                    id, name, poster, coverPoster, hasCover, slug
+                }
+            }
+            },
+            viewer{id,username,points, lists{id,name, numMovies}}
+    }
+`
+
 export const SIMILAR_FINDER = gql`
 query similars($slug:String!, $page:Int!){
     listOfSimilarMovies(slug:$slug, page:$page){
@@ -266,7 +325,7 @@ export const DIRECTOR = gql`
 `
 
 
-export const MOVIE = gql`
+export const MOVIE2 = gql`
     query getMovie($id:Int, $slug:String){
         movie(id:$id, slug:$slug){
             id,
@@ -287,58 +346,58 @@ export const MOVIE = gql`
             twitter,
             instagram,
 
-        seoTitle,
-        seoDescription,
-        seoShortDescription,
-        seoKeywords,
-        richdata,
-        videoTags,
-        genres,
-        release,
-        quotes,
-            director{
+            seoTitle,
+            seoDescription,
+            seoShortDescription,
+            seoKeywords,
+            richdata,
+            videoTags,
+            genres,
+            release,
+            quotes,
+                director{
+                    id,
+                    name,
+                    slug
+                },
+            crew{
+                job, character, person{
+                    id,name, poster, slug,
+                }
+            },
+            similars{
+            id, name,year,imdbRating slug, poster, coverPoster, hasCover, tags{slug, name}
+            },
+            contentSimilars{
+                commonTags, movie{id, name, year,imdbRating  slug, poster, coverPoster, hasCover tags{slug, name}}
+            },
+            tags{
+                name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag
+            },
+            videos{
                 id,
-                name,
-                slug
-            },
-        crew{
-            job, character, person{
-                id,name, poster, slug,
-            }
-        },
-        similars{
-          id, name,year,imdbRating slug, poster, coverPoster, hasCover, tags{slug, name}
-        },
-        contentSimilars{
-            commonTags, movie{id, name, year,imdbRating  slug, poster, coverPoster, hasCover tags{slug, name}}
-        },
-        tags{
-            name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag
-        },
-        videos{
-            id,
-            title,
-            summary,
-            link,
-            duration,
-            tags,
+                title,
+                summary,
+                link,
+                duration,
+                tags,
+                isFaved,
+                ytId,
+                thumb
+                },
+            isBookmarked,
             isFaved,
-            ytId,
-            thumb
-            },
-        isBookmarked,
-        isFaved,
-        viewerRating,
-        viewerPoints,
-        appears{
-            id, name,slug, owner{
-                id, username
-            },relatedPersons{
-                id, name, poster, coverPoster, hasCover, slug
+            viewerRating,
+            viewerPoints,
+            appears{
+                id, name,slug, owner{
+                    id, username
+                },relatedPersons{
+                    id, name, poster, coverPoster, hasCover, slug
+                }
             }
-        }
-        },
-        viewer{id,username,points, lists{id,name, numMovies}}
+            },
+            viewer{id,username,points, lists{id,name, numMovies}}
     }
 `
 
