@@ -23,7 +23,7 @@ const PeoplePage = (props) => {
     const firstPart = people.slice(0,5)
     const secondPart = people.slice(5, 10)
 
-    console.log("props", props)
+    //console.log("props", props)
     const authStatus = useAuthCheck();
     const state = useContext(GlobalContext);
     
@@ -31,14 +31,14 @@ const PeoplePage = (props) => {
     const nextPage = useCallback(() => props.history.push(`/people/${currentPage + 1}`),[currentPage] )
     const prevPage = useCallback(() => props.history.push(`/people/${currentPage - 1}`),[currentPage] )
 
-    console.log("curr", currentPage)
+    //console.log("curr", currentPage)
 
     const isMobile = window.innerWidth < 480;
     const ResponsiveAd1 = isMobile ? FeedMobileCollectionAd : HomePageFeedAd
     const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
 
 
-    //console.log(otherLists)
+    ////console.log(otherLists)
     return (
         <PageContainer>
             <Head
@@ -92,8 +92,8 @@ const PeoplePage = (props) => {
 const PeopleQuery = props => {
     const location = useLocation()
     const page = location.pathname.split("people/")[1]
-    console.log("p", page)
-    console.log("location", location)
+    //console.log("p", page)
+    //console.log("location", location)
 	const { loading, error, data } = useQuery(PEOPLE_LIST, {
         variables:{page: parseInt(page)},
 		partialRefetch: true

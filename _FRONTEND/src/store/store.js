@@ -6,6 +6,7 @@ import { ContactForm } from "../forms/ContactForm"
 
 import { useWindowSize, useScript } from "../functions"
 import { client, cache } from "../index"
+import { useNetworkStatus } from 'react-adaptive-hooks/network';
 
 
 
@@ -88,11 +89,12 @@ export const Store = () => {
         }
     })
 
-    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
-    let connectionType = connection ? connection.effectiveType : null //'slow-2g', '2g', '3g', or '4g'.
-    let speed = connectionType ? connectionType === "4g" ? "fast" : "slow" : "fast"
-    //console.log("Client Speed", speed)
-
+    // NETWORK STATUS
+    //var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
+    //let connectionType = connection ? connection.effectiveType : null //'slow-2g', '2g', '3g', or '4g'.
+    const { effectiveConnectionType } = useNetworkStatus();
+    let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
+    console.log("effectiveConnectionType",effectiveConnectionType, speed)
 
     const state = {
         screenSize,

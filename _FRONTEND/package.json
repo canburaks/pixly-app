@@ -84,6 +84,7 @@
     "postcss-js": "^2.0.3",
     "query-string": "^6.7.0",
     "react": "^16.12.0",
+    "react-adaptive-hooks": "^0.0.8",
     "react-adsense": "^0.0.6",
     "react-apollo": "^3.0.1",
     "react-color-extractor": "^1.1.2",
@@ -196,7 +197,6 @@
       "/list/mike-leighs-favourite-films/1",
       "/list/david-lynchs-favorite-films/1",
       "/list/horror-movies-2019/1"
-
     ],
     "publicPath": "/"
   }

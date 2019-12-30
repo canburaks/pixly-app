@@ -90,20 +90,23 @@ class ListQuery(object):
 
     list_of_similar_movies = graphene.List(MovieType, 
             slug=graphene.String(),
-            page=graphene.Int(default_value=1))
+            page=graphene.Int(default_value=1),
+            num=graphene.Int(default_value=settings.PER_PAGE_ITEM))
 
     list_of_content_similar_movies = graphene.List(MovieType, 
             slug=graphene.String(),
-            page=graphene.Int(default_value=1))
+            page=graphene.Int(default_value=1),
+            num=graphene.Int(default_value=settings.PER_PAGE_ITEM))
 
 
     def resolve_list_of_similar_movies(self, info, **kwargs):
         slug = kwargs.get("slug")
         page = kwargs.get("page") if kwargs.get("page") else 1
+        num = kwargs.get("num") if kwargs.get("num") else settings.PER_PAGE_ITEM
 
         #pagination
-        first = (page - 1) * settings.PER_PAGE_ITEM
-        last = first + settings.PER_PAGE_ITEM
+        first = (page - 1) * num
+        last = first + num
 
         movie_qs = Movie.objects.filter(slug=slug)
         if movie_qs.exists():
@@ -115,11 +118,13 @@ class ListQuery(object):
     def resolve_list_of_content_similar_movies(self, info, **kwargs):
         slug = kwargs.get("slug")
         page = kwargs.get("page") if kwargs.get("page") else 1
+        num = kwargs.get("num") if kwargs.get("num") else settings.PER_PAGE_ITEM
+
         similar_movies = Cache.similar_movie_list(slug=slug)
         
         #pagination
-        first = (page - 1) * settings.PER_PAGE_ITEM
-        last = first + settings.PER_PAGE_ITEM
+        first = (page - 1) * num
+        last = first + num
         return similar_movies[first:last]
 
     def resolve_list_of_people(self, info, **kwargs):

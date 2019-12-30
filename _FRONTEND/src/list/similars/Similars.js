@@ -17,7 +17,8 @@ import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
     Loading, HeaderText, Text, FlexBox, RegularInput, MovieAutoComplete, SuperBox, CoverLink, TagBox,
-    NewLink, Image, SubHeaderText, LinkButton, HeaderMini, Span, Box, Hr
+    NewLink, Image, SubHeaderText, LinkButton, HeaderMini, Span, Box, Hr,
+    SimilarMovies
 } from "../../styled-components"
 
 
@@ -204,7 +205,12 @@ const SimilarFinderQuery = props => {
             bg={"rgba(255,255,255, 1)"}
         >
             <MovieInfoCard item={data.film} summaryChar={summaryChar}/>
-            <StatefulSimilars data={data} />
+            <SimilarMovies 
+                data={data} 
+                movie={data.film} 
+                contentSimilars={data.listOfContentSimilarMovies}
+                recommendations={data.listOfSimilarMovies}
+            />
 
 
         </FlexBox>
@@ -212,59 +218,6 @@ const SimilarFinderQuery = props => {
 
 };
 
-
-const StatefulSimilars = (props) => {
-    const { data } = props;
-    const film = data.film
-    const csMovies = data.listOfContentSimilarMovies;
-    const rcMovies = data.listOfSimilarMovies;
-    const similarQuantity = csMovies.length + rcMovies.length
-    //console.log("data",similarQuantity,  data)
-    return (
-        <>
-            <MoviePageAd />
-
-            <SubHeaderText fontSize={["22px","22px","28px", "34px", "40px"]}
-                fontWeight="bold"
-                mb={[3,3,4]} mt={[4,4,5]}
-            >
-                Movies Like {film.name}
-            </SubHeaderText>
-            <HeaderMini>Movies Like {film.name}: Similar Contents</HeaderMini>
-            <Text>{csMovies.length} number of movies in this section have common tags with {film.name}.</Text>
-            {csMovies && <MovieContentSimilarCardBox items={csMovies.slice(0,12)} />}
-
-                {rcMovies && rcMovies.length > 0 && 
-                    <FlexBox flexDirection="column" px={[2]}>
-                        <MidPageAd />
-                        <HeaderMini>Film Recommendations</HeaderMini>
-                        <Text mt={[2]} fontSize={["14px", "16px", "18px"]}>
-								People who like
-								<Span fontWeight="bold" opacity={1}> {film.name} </Span>
-								also like and give high ratings below movies. If you like 
-                                '{film.name}' the chance of you will like below movies are highly probable.
-                                Here the movies like {film.name} {film.year}.
-						</Text>
-                        <MovieRecommendationBox items={rcMovies} />
-                    </FlexBox>
-                }
-        </>
-    )
-}
-
-const MovieRecommendationBox = React.memo((props) => (
-    <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
-        {props.items.map( item => (
-            <MovieRecommendationCard item={item} key={"rec" + item.slug}/>
-        ))}
-    </Grid>
-), (p,n) => (p.key ? (p.key === n.key) : (p.items.length === n.items.length)))
-
-const MovieContentSimilarCardBox = React.memo(({ items, columns=[2,2,3,3,3,4,6], ...props }) => (
-    <Grid columns={columns} py={[4]} px={[2]}>
-        {items.map( item => <ContentSimilarMovieCard item={item} key={item.slug + "cs"} />)}
-    </Grid>
-), (p,n) => (p.key ? (p.key === n.key) : (p.items.length === n.items.length)))
 
 const MovieSearchCard = ({ item }) => (
 	<FlexBox
@@ -354,63 +307,5 @@ const MovieInfoCard = ({ item, summaryChar, ...props }) => (
 	</FlexBox>
 )
 
-const ContentSimilarMovieCard = ({ item }) => (
-	<SuperBox
-		src={item.poster}
-		width="100%"
-		ratio={1.5}
-		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
-        className="content-similar-movie-card"
-        title={"Visit " + item.name + ` - ${item.year} Page`} 
-	>	
-
-		<CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0} />
-		<FlexBox 
-			position="absolute" 
-			bottom={0} left={0}
-			width={"100%"} height={"auto"}
-			flexDirection="column"  justifyContent="space-between"
-			p={[2]} zIndex={1}
-			bg={"rgba(0,0,0, 0.85)"} minHeight={"100px"}
-            className="content-similar-movie-card-info"
-		>
-			<Text fontSize={["14px", "14px", "16px"]}
-                fontWeight="bold" 
-                color="light" 
-                zIndex={1} 
-                mb={[2]} 
-            >
-                <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
-            </Text>
-			<TagBox tags={item.nongenreTags || []} num={4} color={"light"}/>
-		</FlexBox>
-	</SuperBox>
-)
-
-const MovieRecommendationCard = ({ item }) => (
-	<SuperBox
-		src={item.coverPoster || item.poster}
-		width="100%"
-		ratio={0.7}
-		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
-        className="recommendation-similar-movie-card"
-	>	
-        <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
-		<FlexBox 
-			position="absolute" 
-			bottom={0} left={0}
-			width={"100%"} height={"auto"}
-			flexDirection="column" px={[2]} py={[2]}
-            className="recommendation-similar-movie-card-info"
-			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"} zIndex={1}
-		>
-			<Text color="light" fontWeight="bold" mb={[2]}>
-                <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
-            </Text>
-			<TagBox tags={item.nongenreTags || []} num={6} color={"light"}/>
-		</FlexBox>
-
-	</SuperBox>
-)
 
 export default withRouter(SimilarFinder);
