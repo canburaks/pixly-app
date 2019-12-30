@@ -18,7 +18,7 @@ import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
     Loading, HeaderText, Text, FlexBox, RegularInput, MovieAutoComplete, SuperBox, CoverLink, TagBox,
-    NewLink, Image, SubHeaderText, LinkButton, HeaderMini, Span, Box, Hr,
+    NewLink, Image, SubHeaderText, LinkButton, HeaderMini, Span, Box, Hr, HashLink,
     SimilarMovies
 } from "../../styled-components"
 
@@ -207,26 +207,22 @@ const MovieSearchCard = ({ item }) => (
 		boxShadow="0 4px 8px -4px rgba(0,0,0, 0.1)"
         bg={"rgba(255,255,255, 0.9)"}
         maxHeight={["200px"]} alignItems="center"
-        px={[3,3,3]} my={[2]}
+        px={[3,3,3]} my={[2]} position="relative"
         className="movie-search-card"
 	>	
-        <CoverLink 
-            to={{
-                pathname:`/similar-movie-finder/${item.slug}`,
-                state:{movie:item}
-                }} 
-            title={item.name} 
-            zIndex={0}
+        <Image 
+            src={item.poster} 
+            alt={item.name} title={"Visit " + item.name + ` - ${item.year} Page`} 
+            height={["52px","52px","86px"]}
+            width={["34px", "34px","56px"]}
         />
-        <NewLink link={`/movie/${item.slug}`} zIndex={1}>
-            <Image 
-                src={item.poster} 
-                alt={item.name} title={"Visit " + item.name + ` - ${item.year} Page`} 
-                height={["52px","52px","86px"]}
-                width={["34px", "34px","56px"]}
-            />
-        </NewLink>
         <Text fontWeight="bold" ml={[2,2,3,4]}>{item.name} ({item.year})</Text>
+        <HashLink 
+            to={`/movie/${item.slug}#similar-movies`} 
+            title={item.name} position="absolute" 
+            top={0} left={0} right={0} bottom={0} clickable
+            zIndex={1}
+        />
 	</FlexBox>
 )
 //When Movie selected from auto complete, this is the banner and identifier of which movies

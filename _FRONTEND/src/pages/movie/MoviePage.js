@@ -7,6 +7,7 @@ import { rgaPageView, Head, MoviePageAd, MidPageAd, FeedMobileTopicPageAd, HomeP
 
 import { useAuthCheck } from "../../functions/hooks";
 import { Col } from "react-flexbox-grid";
+import { ScrollInto } from "../../functions";
 
 import { YoutubePlayer } from "cbs-react-components";
 import { GlobalContext } from "../../";
@@ -162,6 +163,12 @@ const MoviePage = props => {
 	const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
 	const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
 	const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
+
+    useEffect(()=>{
+        if (props.location.hash){
+            ScrollInto(props.location.hash.slice(1))
+        }
+    },[])
 	return (
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
 			<Head

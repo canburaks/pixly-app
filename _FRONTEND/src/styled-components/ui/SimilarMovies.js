@@ -36,7 +36,11 @@ export const SimilarMovies = (props) => {
     const ResponsiveAd2 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MoviePageAd
     const ResponsiveAd3 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MidPageAd
     return (
-        <Section className="similar-movies-section" display="flex" flexDirection="column">
+        <Section 
+            className="similar-movies-section" 
+            display="flex" flexDirection="column"
+            id="similar-movies"
+        >
             <ResponsiveAd1 />
             <ContentSimilarSection  />
 
@@ -138,7 +142,12 @@ const RecommendationSection = ({num=19}) => {
     )
     if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"/>
     if (data) return (
-        <Section display="flex" flexDirection="column" px={[2]} width="100%" className="content-similar-movies-section">
+        <Section 
+            display="flex" flexDirection="column" 
+            px={[2]} 
+            width="100%" 
+            className="content-similar-movies-section"
+        >
             {data.listOfSimilarMovies && data.listOfSimilarMovies.length > 0 &&
                 <>
                 <MessageBox 
