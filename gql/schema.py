@@ -112,7 +112,7 @@ class ListQuery(object):
         if movie_qs.exists():
             movie = movie_qs.first()
             similar_ids = movie.get_similar_ids()
-            return Movie.objects.filter(id__in=similar_ids)[first:last]
+            return Movie.objects.filter(id__in=similar_ids).order_by("id")[first:last]
         return []
 
     def resolve_list_of_content_similar_movies(self, info, **kwargs):

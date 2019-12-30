@@ -69,7 +69,7 @@ class Cache():
                 ms.common_tag_quantity = len(common_tags)
 
             #sort according to common tag quantity
-            list(all_similars).sort(key=lambda r: r.common_tag_quantity, reverse=True)
+            list(all_similars).sort(key=lambda r: r.id, reverse=True)
             print(len(all_similars))
             return all_similars
 
