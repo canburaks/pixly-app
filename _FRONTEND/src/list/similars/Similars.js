@@ -2,6 +2,7 @@ import React  from "react";
 import { useState, useContext, useMemo, useCallback, useEffect } from "react"
 import { withRouter, Link, useParams, useLocation } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
+import gql from "graphql-tag";
 
 
 import { useWindowSize, useAuthCheck, useClientWidth, useClientHeight, useValues,
@@ -9,7 +10,7 @@ import { useWindowSize, useAuthCheck, useClientWidth, useClientHeight, useValues
 } from "../../functions/hooks"
 
 import { rgaPageView, Head, MidPageAd, HomePageFeedAd,  FeedMobileCollectionAd,
-    SIMILAR_FINDER, LIST_BOARD, MoviePageAd,FeedMobileTopicPageAd
+    SIMILAR_FINDER, MOVIE, MoviePageAd,FeedMobileTopicPageAd
 } from "../../functions"
 
 import { GlobalContext } from "../..";
@@ -22,15 +23,31 @@ import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, Ima
 } from "../../styled-components"
 
 
+const MOVIE_MINI = gql`
+query movie($slug:String){
+    movie (slug:$slug){slug, name, year, poster, summary, nongenreTags}
+}
+`;
+
+
 
 const SimilarFinder = (props) => {
     const { slug } = useParams();
+    const isMoviePage = slug !== undefined
     let location = useLocation();
     // This is autocomplete search result, not similars
-    const [searchResult, setSearchResult ] = useState([])
+    const [ searchResult, setSearchResult ] = useState([])
+    const [ selectedMovie, setSelectedMovie ] = useState({})
 
+    // If direct url access movie info requires
+    const { loading, error, data } = useQuery(MOVIE_MINI, {variables:{slug:slug}, skip:!isMoviePage});
+    console.log("data",data)
+    if (data && data.movie.slug !== selectedMovie.slug) setSelectedMovie(data.movie)
+    
     const searchdispatcher = (resultedMovies) => {
         if (searchResult.length === 0 || searchResult.length !== resultedMovies.length){
+            const currentMovie = resultedMovies.filter(m => m.slug === slug)
+
             setSearchResult(resultedMovies)
             const searchinput = document.getElementById("autoComplete")
             window.scrollTo({left:0, top:searchinput.offsetTop - 20, behavior:"smooth"})
@@ -38,13 +55,11 @@ const SimilarFinder = (props) => {
         }
     }
 
-    const state = useContext(GlobalContext);
     const screenSize = useWindowSize()
     //const heroImageHeight = useClientHeight("similar-finder-hero-image")
     
     const partitionQuantity = useValues([4,4,4,4,3])
     const isSmallScreen = useMemo(() => !screenSize.includes("L"), [screenSize]) 
-    const isMoviePage = slug !== undefined
     const [ showInfoText, setInfoVisibility] = useState(true) 
 
     /* Hero Image */
@@ -80,9 +95,8 @@ const SimilarFinder = (props) => {
         if (slug!== undefined && showInfoText === true) setInfoVisibility(false)
 
     },[slug])
-
+    const summaryChar = useValues([250, 300,400,500,600,700])
     const canonical = `https://pixly.app/${props.location.pathname}`
-    ////console.log("canonical", canonical, heroImageHeight)
     return (
         <PageContainer top={-75} position="relative" >
             <Head
@@ -152,7 +166,12 @@ const SimilarFinder = (props) => {
                         }
                 </SuperBox>
 
-                {isMoviePage && <SimilarFinderQuery />}
+                {(isMoviePage && selectedMovie.slug) && 
+                    <>
+                    <MovieInfoCard item={selectedMovie} summaryChar={summaryChar}/>
+                    <SimilarMovies  movie={selectedMovie} />
+                    </>
+                }
 
                 <ContentContainer 
                     display="flex" flexDirection="column" 
@@ -179,44 +198,6 @@ const SimilarFinder = (props) => {
     );
 };
 
-
-
-const SimilarFinderQuery = props => {
-    const { slug, page=1 } = useParams();
-	const { loading, error, data } = useQuery(SIMILAR_FINDER, {
-        variables:{slug:slug, page:page},
-		partialRefetch: true
-    });
-    const summaryChar = useValues([250, 300,400,500,600,700])
-
-    //const ResponsiveAd1 = window.innerWidth < 480 ? FeedMobileTopicPageAd : HomePageFeedAd
-    //const ResponsiveAd2 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MidPageAd
-    //const ResponsiveAd3 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MoviePageAd
-
-
-
-	if (loading) return <Loading />;
-	//console.log("main", data)
-	if (error) return <div>{error.message}</div>;
-	if (data) return (
-        <FlexBox 
-            width={"100%"} px={[2,2,3]}
-            flexDirection="column" id="similar-movie-finder-result-box"
-            bg={"rgba(255,255,255, 1)"}
-        >
-            <MovieInfoCard item={data.film} summaryChar={summaryChar}/>
-            <SimilarMovies 
-                data={data} 
-                movie={data.film} 
-                contentSimilars={data.listOfContentSimilarMovies}
-                recommendations={data.listOfSimilarMovies}
-            />
-
-
-        </FlexBox>
-    );
-
-};
 
 
 const MovieSearchCard = ({ item }) => (

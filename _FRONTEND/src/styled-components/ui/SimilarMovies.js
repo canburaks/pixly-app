@@ -2,6 +2,7 @@ import React  from "react";
 import { useState, useContext, useMemo, useCallback, useEffect } from "react"
 import { withRouter, Link, useParams, useLocation } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
+import gql from "graphql-tag";
 
 
 import { useWindowSize, useAuthCheck, useClientWidth, useClientHeight, useValues,
@@ -17,73 +18,160 @@ import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
     Loading, HeaderText, Text, FlexBox, RegularInput, MovieAutoComplete, SuperBox, CoverLink, TagBox,
-    NewLink, Image, SubHeaderText, LinkButton, HeaderMini, Span, Box, Hr, Section,MessageBox
-} from ".."
+    NewLink, Image, SubHeaderText, LinkButton, HeaderMini, Span, Box, Hr, Section,MessageBox,
+    PaginationBox
+} from "../"
+import { useNetworkStatus } from 'react-adaptive-hooks/network';
 
 
 
 
 export const SimilarMovies = (props) => {
-    const { data, movie, contentSimilars, recommendations  } = props;
-    const similarQuantity = contentSimilars.length + recommendations.length
-    console.log("data",similarQuantity,  data)
+    const { movie } = props;
+    const location = useLocation();
+
+    //console.log("props", location, props)
+    const state = useContext(GlobalContext);
+    const speed = state.speed
+    ////console.log("data",speed, similarQuantity,  data)
+
     return (
         <Section className="similar-movies-section" display="flex" flexDirection="column">
-            <SubHeaderText fontSize={["22px","22px","28px", "34px", "40px"]}
-                fontWeight="bold"
-                mb={[3,3,4]} mt={[4,4,5]}
-            >
-                Similar Movies Like <em>{movie.name}</em>
-            </SubHeaderText>
-            <MessageBox 
-                header={`Similar Movies like ${movie.name}`}
-                text={`${contentSimilars.length} number of movies in this section have common tags with ${movie.name}`}
-            />
-            {contentSimilars && <MovieContentSimilarCardBox items={contentSimilars.slice(0,12)} />}
+            <ContentSimilarSection movie={movie} speed={speed} />
 
-                {recommendations && recommendations.length > 0 && 
-                    <FlexBox flexDirection="column" px={[2]}>
-                        <MessageBox 
-                            header={`Film Recommendations`}
-                            text={
-                                `People who like ${movie.name} also like and give high ratings below movies. ` + 
-                                `Our AI-assisted algorithm found that those movies are showing high similarity to ${movie.name}` +
-                                `The chance of you will like them are highly probable, if you like the film.`
-                            }
-                        />
-                        <MovieRecommendationBox items={recommendations} />
-                    </FlexBox>
-                }
+            <RecommendationSection movie={movie} speed={speed} />
         </Section>
     )
 }
 
-const MovieRecommendationBox = React.memo((props) => (
-    <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
-        {props.items.map( item => (
-            <MovieRecommendationCard item={item} key={"rec" + item.slug}/>
-        ))}
-    </Grid>
-), (p,n) => (p.key ? (p.key === n.key) : (p.items.length === n.items.length)))
+const ContentSimilarSection = ({num=21, speed="slow"}) => {
+    const { slug } = useParams();
+    const [ page, setPage ] = useState(1)
+    const requestQuantity = speed === "fast" ? num : 8 // if slow network request less movie
 
-const MovieContentSimilarCardBox = React.memo(({ items, columns=[2,2,3,3,3,4,6], ...props }) => (
-    <Grid columns={columns} py={[4]} px={[2]}>
-        {items.map( item => <ContentSimilarMovieCard item={item} key={item.slug + "cs"} />)}
-    </Grid>
-), (p,n) => (p.key ? (p.key === n.key) : (p.items.length === n.items.length)))
+
+	const { loading, error, data } = useQuery(CONTENT_SIMILAR_FINDER, {variables:{
+            slug:slug,
+            page:page,
+            num: requestQuantity
+        },
+		partialRefetch: true
+    });
+
+    const nextPage = useCallback(() => setPage(page + 1), [page])
+    const prevPage = useCallback(() => setPage(page - 1), [page])
+    //quantity is resulted element number from query
+    const haveManyPages = (quantity) => (page === 1 && quantity < requestQuantity ) ? false :true
+
+    if (error) return (
+        <FlexBox minHeight={"200px"} justifyContent="center" width="100%">
+            We can't show the similar movies rightnow. We are trying to fix it.
+        </FlexBox>
+    )
+    if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"/>
+    if (data) return (
+        <Section display="flex" flexDirection="column" px={[2]} width="100%" className="content-similar-movies-section">
+            {data.listOfContentSimilarMovies && 
+                <>
+                <MessageBox 
+                    header={`Similar Movies like ${data.movie.name.trim()} (${data.movie.year})`}
+                    text={
+                        `The movies in this part have common topics, tags or sub-genres with ${data.movie.name.trim()}. ` +
+                        `These are highly similar movies to ${data.movie.name.trim()} in a manner of only the content elements. `
+                    }
+                />
+                <Grid columns={[2,2,3,3,3,4,6]} py={[4]} px={[2]}>
+                    {data.listOfContentSimilarMovies.map( item => (
+                        <ContentSimilarMovieCard item={item} key={item.slug + "cs"} />
+                    ))}
+                </Grid>
+                {haveManyPages(data.listOfContentSimilarMovies.length) && <PaginationBox 
+                    currentPage={page} 
+                    totalPage={data.listOfContentSimilarMovies.length >= requestQuantity ? page + 1 : page} 
+                    nextPage={nextPage} prevPage={prevPage} 
+                />}
+                </>
+            }
+        </Section>
+    )
+}
+
+const RecommendationSection = ({num=18, speed="slow"}) => {
+    const { slug } = useParams();
+    const [ page, setPage ] = useState(1)
+    
+    // Network sensitive settings
+    const requestQuantity = speed === "fast" ? num : 8 // if slow network request less movie
+    const networkSensitiveColumns = speed === "fast" ? [1,1,1,2,2,2,2,3,4] : [2,2,3,3,3,4,6]
+
+	const { loading, error, data } = useQuery(RECOMMENDATION_FINDER, {
+            variables:{slug:slug,
+            page:page, 
+            num:requestQuantity
+        },
+		partialRefetch: true
+    });
+
+
+    const nextPage = useCallback(() => setPage(page + 1), [page])
+    const prevPage = useCallback(() => setPage(page - 1), [page])
+    //quantity is resulted element number from query
+    const haveManyPages = (quantity) => (page === 1 && quantity< requestQuantity ) ? false :true
+
+    if (error) return (
+        <FlexBox minHeight={"200px"} justifyContent="center" width="100%">
+            We can't show the similar movies rightnow. We are trying to fix it.
+        </FlexBox>
+    )
+    if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"/>
+    if (data) return (
+        <Section display="flex" flexDirection="column" px={[2]} width="100%" className="content-similar-movies-section">
+            {data.listOfSimilarMovies && 
+                <>
+                <MessageBox 
+                    header={`Film Recommendations Based on ${data.movie.name.trim()}`}
+                    text={
+                        `Our AI-assisted algorithm found that those movies are showing high similarity to ${data.movie.name.trim()}. ` +
+                        `The movies like ${data.movie.name.trim()} in this section not only considerthe common content elements, ` + 
+                        `but also the personality of people who watch them. ` +
+                        `People who like ${data.movie.name.trim()} also like and give high ratings below movies. ` + 
+                        `The chance of you will like them are highly probable, if you like ${data.movie.name.trim()}.`
+                    }
+                />
+                <Grid columns={networkSensitiveColumns} py={[4]} px={[2]}>
+                    {data.listOfSimilarMovies.map( item => (
+                        <MovieRecommendationCard item={item} key={item.slug + "rm"} />
+                    ))}
+                </Grid>
+                {haveManyPages(data.listOfSimilarMovies.length) && <PaginationBox 
+                    currentPage={page} 
+                    totalPage={data.listOfSimilarMovies.length >= requestQuantity ? page + 1 : page} 
+                    nextPage={nextPage} prevPage={prevPage} 
+                />}
+                </>
+            }
+        </Section>
+    )
+}
 
 
 const ContentSimilarMovieCard = ({ item }) => (
 	<SuperBox
-		src={item.poster}
 		width="100%"
 		ratio={1.5}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
         className="content-similar-movie-card"
         title={"Visit " + item.name + ` - ${item.year} Page`} 
 	>	
-
-		<CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0} />
+		<NewLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}>
+            <Image 
+                src={item.poster} 
+                alt={`${item.name} (${item.year}) Poster`}
+                title={"Visit " + item.name + ` - ${item.year} Page`} 
+                position="absolute" top={0} left={0} right={0} bottom={0}
+                minWidth="100%"
+            />
+        </NewLink>
 		<FlexBox 
 			position="absolute" 
 			bottom={0} left={0}
@@ -106,15 +194,22 @@ const ContentSimilarMovieCard = ({ item }) => (
 	</SuperBox>
 )
 
-const MovieRecommendationCard = ({ item }) => (
+const MovieRecommendationCard = ({ item, speed="slow" }) => (
 	<SuperBox
-		src={item.coverPoster || item.poster}
 		width="100%"
-		ratio={0.7}
+		ratio={speed === "slow" ? 1.5 : 0.7}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
         className="recommendation-similar-movie-card"
 	>	
-        <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
+		<NewLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}>
+            <Image 
+                src={speed === "slow" ? item.poster : item.coverPoster} 
+                alt={`${item.name} (${item.year}) Poster`}
+                title={"Visit " + item.name + ` - ${item.year} Page`} 
+                position="absolute" top={0} left={0} right={0} bottom={0}
+                minWidth="100%"
+            />
+        </NewLink>
 		<FlexBox 
 			position="absolute" 
 			bottom={0} left={0}
@@ -132,3 +227,19 @@ const MovieRecommendationCard = ({ item }) => (
 	</SuperBox>
 )
 
+export const CONTENT_SIMILAR_FINDER = gql`
+query similars($slug:String!, $page:Int!, $num:Int){
+    listOfContentSimilarMovies(slug:$slug, page:$page, num:$num){
+        slug, name, year, poster, coverPoster, nongenreTags
+    },
+    movie {slug, name, year}
+}
+`;
+export const RECOMMENDATION_FINDER = gql`
+query similars($slug:String!, $page:Int!, $num:Int){
+    listOfSimilarMovies(slug:$slug, page:$page, num:$num){
+        slug, name, year, poster, coverPoster, nongenreTags
+    },
+    movie {slug, name, year}
+}
+`;

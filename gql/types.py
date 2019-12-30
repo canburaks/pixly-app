@@ -1815,7 +1815,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
 
     release = graphene.types.datetime.Date()
     html_content = graphene.String()
-
+    nongenre_tags = graphene.List(graphene.String)
 
     def __init__(self, id=None, slug=None, viewer=None):
         #print(self,  id, slug)
@@ -1836,6 +1836,9 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_nongenre_tags(self, info):
+        return self.movie.nongenre_tag_names
 
     def resolve_html_content(self, info):
         return self.movie.html_content
