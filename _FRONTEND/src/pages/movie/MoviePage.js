@@ -212,7 +212,7 @@ const MoviePage = props => {
 				{/* VIDEO */}
 				{hasVideos && 
 					<>
-					<MessageBox mb={[2]} header={videoText} />
+					<MessageBox mb={[2]} header={videoText} id="movie-page-video-header"/>
 					<YoutubePlayer
 						videos={item.videos}
 						title={item.name + " Videos"}
@@ -223,7 +223,7 @@ const MoviePage = props => {
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
 					<>
-					<MessageBox mb={[2]} 
+					<MessageBox mb={[2]} id="movie-page-header"
 						header={`${item.name} Cast & Crew`}
 					/>
 					<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>
