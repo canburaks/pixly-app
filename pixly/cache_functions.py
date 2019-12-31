@@ -57,20 +57,18 @@ class Cache():
         if movie_qs.exists():
             movie = movie_qs.first()
             self_similars = movie.cso_similars
-            print(len(self_similars))
             similars_of_other = movie.cso_similars_of
-            print(len(similars_of_other))
-            
             # merge movies
-            all_similars = self_similars.union(similars_of_other)
+            all_similars = list(set(self_similars).union(set(similars_of_other)))
             for ms in all_similars:
                 common_tags = movie.common_nongenre_tags(ms)
-                #ms.common_tags = common_tags
-                ms.common_tag_quantity = len(common_tags)
+                if common_tags:
+                    #ms.common_tags = common_tags
+                    ms.common_tag_quantity = len(common_tags)
 
             #sort according to common tag quantity
             list(all_similars).sort(key=lambda r: r.id, reverse=True)
-            print(len(all_similars))
+            #print(len(all_similars))
             return all_similars
 
 

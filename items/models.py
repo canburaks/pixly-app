@@ -136,7 +136,7 @@ class Movie(SocialMedia, SEO,MainPage):
                 "id", "slug", "name", "year", "poster",
                 "cover_poster", "imdb_rating",
                 ).prefetch_related("tags")
-        return None
+        return []
     
     @property
     def cso_similars_of(self):
@@ -145,7 +145,7 @@ class Movie(SocialMedia, SEO,MainPage):
                 "id", "slug", "name", "year", "poster",
                 "cover_poster", "imdb_rating",
                 ).prefetch_related("tags")
-        return None
+        return []
 
     @property
     def cso_add(self, movie):
