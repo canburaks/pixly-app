@@ -91,9 +91,12 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/nymphomaniac-volume-ii-2013",
+        "/movie/the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005",
+        "/movie/the-blind-side-2009",
+        "/movie/spirited-away-2001",
         "/movie/life-2017",
         "/movie/the-maze-runner-2014",
-
         "/movie/little-women-2019",
         "/movie/jumanji-the-next-level-2019",
         "/movie/frozen-ii-2019",
@@ -734,6 +737,10 @@
         "/movie/jumanji-the-next-level-2019",
         "/movie/frozen-ii-2019",
         "/movie/life-2017",
-        "/movie/the-maze-runner-2014"
+        "/movie/the-maze-runner-2014",
+        "/movie/nymphomaniac-volume-ii-2013",
+        "/movie/the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005",
+        "/movie/the-blind-side-2009",
+        "/movie/spirited-away-2001"
     ]
 }
