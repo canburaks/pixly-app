@@ -147,17 +147,20 @@ class Movie(SocialMedia, SEO,MainPage):
                 ).prefetch_related("tags")
         return []
 
-    @property
     def cso_add(self, movie):
         if self.cso:
             self.cso.similars.add(movie)
             self.cso.save()
             print(f"{movie.name} added as similars to {self.name}.")
             return True
-        print(f"Error: {self.name} has no content similar object. First Create, than add")
-        return False
+        else:
+            from archive.models import ContentSimilarity
+            print(f"{self.name} has no content similar object. It will be created now.")
+            new_cso = ContentSimilarity.objects.create(movie=self)
+            new_cso.similars.add(movie)
+            new_cso.save()
+        return True
 
-    @property
     def cso_remove(self, movie):
         if self.cso:
             self.cso.similars.remove(movie)
@@ -166,6 +169,7 @@ class Movie(SocialMedia, SEO,MainPage):
             return True
         print(f"Error: {self.name} has no content similar object. First Create, than remove")
         return False
+
     #-------------------------------------
 
     @property

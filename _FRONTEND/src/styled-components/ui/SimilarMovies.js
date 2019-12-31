@@ -1,5 +1,5 @@
 import React  from "react";
-import { useState, useContext, useMemo, useCallback, useEffect } from "react"
+import { useState, useContext, useMemo, useCallback, useEffect, useRef } from "react"
 import { withRouter, Link, useParams, useLocation } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 import gql from "graphql-tag";
@@ -32,8 +32,7 @@ export const SimilarMovies = (props) => {
     const state = useContext(GlobalContext);
     ////console.log("data",speed, similarQuantity,  data)
     
-    const ResponsiveAd1 = window.innerWidth < 480 ? FeedMobileTopicPageAd : HomePageFeedAd
-    const ResponsiveAd2 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MoviePageAd
+    
     const ResponsiveAd3 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MidPageAd
     return (
         <Section 
@@ -41,12 +40,8 @@ export const SimilarMovies = (props) => {
             display="flex" flexDirection="column"
             id="similar-movies"
         >
-            <ResponsiveAd1 />
             <ContentSimilarSection  />
-
-            <ResponsiveAd2 />
             <RecommendationSection  />
-
             <ResponsiveAd3 />
         </Section>
     )
@@ -54,12 +49,13 @@ export const SimilarMovies = (props) => {
 
 const ContentSimilarSection = (props) => {
     const { slug } = useParams();
+    const node = useRef(null)
 
     const { effectiveConnectionType } = useNetworkStatus();
     let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
 
     const [ page, setPage ] = useState(1)
-    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 21 :12) : 6 // if slow network request less movie
+    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 12 : 6) : 6 // if slow network request less movie
 
 
 	const { loading, error, data } = useQuery(CONTENT_SIMILAR_FINDER, {variables:{
@@ -67,6 +63,7 @@ const ContentSimilarSection = (props) => {
             page:page,
             num: requestQuantity
         },
+        onCompleted:() => onCompleted(),
 		partialRefetch: true
     });
 
@@ -74,6 +71,17 @@ const ContentSimilarSection = (props) => {
     const prevPage = useCallback(() => setPage(page - 1), [page])
     //quantity is resulted element number from query
     const haveManyPages = (quantity) => (page === 1 && quantity < requestQuantity ) ? false :true
+    const isDocumentary = (nongenreTags) => nongenreTags.includes("documentary")
+
+    const ResponsiveAd1 = window.innerWidth < 480 ? FeedMobileTopicPageAd : HomePageFeedAd
+
+    const onCompleted = () => {
+        //console.log(1)
+        if(page > 1 && node.current){
+            node.current.scrollIntoView({behavior: "smooth"});
+        }
+    }
+
 
     if (error) return (
         <FlexBox minHeight={"200px"} justifyContent="center" width="100%">
@@ -82,17 +90,18 @@ const ContentSimilarSection = (props) => {
     )
     if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"/>
     if (data) return (
-        <Section display="flex" flexDirection="column" px={[2]} width="100%" className="content-similar-movies-section">
+        <Section display="flex" flexDirection="column" px={[2]} width="100%" id="cso-section" className="content-similar-movies-section">
             {data.listOfContentSimilarMovies && data.listOfContentSimilarMovies.length > 0 &&
                 <>
+                <ResponsiveAd1 />
                 <MessageBox 
-                    subheader={`Similar Movies like ${data.movie.name.trim()} (${data.movie.year})`}
+                    subheader={`Similar ${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Movies" : "Movies" } like ${data.movie.name.trim()} (${data.movie.year})`}
                     text={
                         `The movies in this part have common topics, tags or sub-genres with ${data.movie.name.trim()} movie. ` +
                         `These are highly similar movies to ${data.movie.name.trim()} in a manner of only the content elements. `
                     }
                 />
-                <Grid columns={[2,2,3,3,3,4,6]} py={[4]}>
+                <Grid columns={[2,2,3,3,3,4,6]} py={[4]} ref={node}>
                     {data.listOfContentSimilarMovies.map( item => (
                         <ContentSimilarMovieCard item={item} key={item.slug + "cs"} />
                     ))}
@@ -111,14 +120,14 @@ const ContentSimilarSection = (props) => {
 const RecommendationSection = ({num=19}) => {
     const { slug } = useParams();
     const [ page, setPage ] = useState(1)
-    
+    const node = useRef(null)
     //Network
     const { effectiveConnectionType } = useNetworkStatus();
     let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
     
     
     // Network sensitive settings
-    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 19 : 12) : 8 // if slow network request less movie
+    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 12 : 6) : 6 // if slow network request less movie
     const networkSensitiveColumns = speed === "fast" ? [1,1,1,2,2,2,2,3,4] : [2,2,3,3,3,4,6]
 
 	const { loading, error, data } = useQuery(RECOMMENDATION_FINDER, {
@@ -126,6 +135,7 @@ const RecommendationSection = ({num=19}) => {
             page:page, 
             num:requestQuantity
         },
+        onCompleted:() => onCompleted(),
 		partialRefetch: true
     });
     //console.log(loading, error, data)
@@ -135,6 +145,14 @@ const RecommendationSection = ({num=19}) => {
     //quantity is resulted element number from query
     const haveManyPages = (quantity) => (page === 1 && quantity< requestQuantity ) ? false :true
 
+    const onCompleted = () => {
+        //console.log(1)
+        if(page > 1 && node.current){
+            node.current.scrollIntoView({behavior: "smooth"});
+        }
+    }
+
+    const ResponsiveAd2 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MoviePageAd
     if (error) return (
         <FlexBox minHeight={"200px"} justifyContent="center" width="100%">
             We can't show the similar movies rightnow. We are trying to fix it.
@@ -146,10 +164,13 @@ const RecommendationSection = ({num=19}) => {
             display="flex" flexDirection="column" 
             px={[2]} 
             width="100%" 
+            id="rm-section"
+            
             className="content-similar-movies-section"
         >
             {data.listOfSimilarMovies && data.listOfSimilarMovies.length > 0 &&
                 <>
+                <ResponsiveAd2 />
                 <MessageBox 
                     subheader={`Film Recommendations Based on ${data.movie.name.trim()}`}
                     text={
@@ -258,7 +279,7 @@ query similars($slug:String!, $page:Int!, $num:Int){
     listOfContentSimilarMovies(slug:$slug, page:$page, num:$num){
         slug, name, year, poster, coverPoster, nongenreTags
     },
-    movie(slug:$slug){id, slug, name, year}
+    movie(slug:$slug){id, slug, name, year, nongenreTags}
 }
 `;
 const RECOMMENDATION_FINDER = gql`
@@ -266,6 +287,6 @@ query similars($slug:String!, $page:Int!, $num:Int){
     listOfSimilarMovies(slug:$slug, page:$page, num:$num){
         slug, name, year, poster, coverPoster, nongenreTags
     },
-    movie(slug:$slug){id, slug, name, year}
+    movie(slug:$slug){id, slug, name, year, nongenreTags}
 }
 `;

@@ -278,14 +278,14 @@ export const Clippy = styled(Container)`
 
 export const PageContainer = (props) => (
     <Container  id={"page-container"}
-        minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"70vh"} pt={0}
+        minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"70vh"} pt={0} 
         {...props}
     />
 )
 
 export const ContentContainer = (props) => (
     <Container  id="content-container" display="flex"
-        width={"100%"} minHeight={"70vh"}
+        width={"100%"} minHeight={"70vh"} pb={[3]}
         pl={"5vw"} pr={"6vw"}
         {...props}
     />

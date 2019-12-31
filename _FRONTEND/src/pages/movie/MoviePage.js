@@ -48,7 +48,8 @@ import {
 	TagBox,
 	AbsoluteBox,
 	CoverLink,
-	SimilarMovies
+	SimilarMovies,
+	MessageBox
 } from "../../styled-components";
 
 import "../pages.css";
@@ -167,7 +168,8 @@ const MoviePage = props => {
     useEffect(()=>{
         if (props.location.hash){
             ScrollInto(props.location.hash.slice(1))
-        }
+		}
+		else (window.scrollTo({left:0, top:0, behavior:"smooth"}))
     },[])
 	return (
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
@@ -210,7 +212,7 @@ const MoviePage = props => {
 				{/* VIDEO */}
 				{hasVideos && 
 					<>
-					<HeaderMini my={[1]} mt={[5]} id="movie-page-video-header">{videoText}</HeaderMini>
+					<MessageBox mb={[2]} header={videoText} />
 					<YoutubePlayer
 						videos={item.videos}
 						title={item.name + " Videos"}
@@ -221,7 +223,9 @@ const MoviePage = props => {
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
 					<>
-					<HeaderMini my={[2]} mt={[5]}>{item.name} Cast & Crew</HeaderMini>
+					<MessageBox mb={[2]} 
+						header={`${item.name} Cast & Crew`}
+					/>
 					<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>
 						{allCrews.map((crew, i) => (
 							<CrewCard crew={crew} key={crew.person.name} />
@@ -236,7 +240,10 @@ const MoviePage = props => {
 				{/*<!--APPEARS IN  LIST Section--> */}
 				{item.appears.length > 0 && (
 					<>
-					<TextSection header={"Movie Lists"} text={listsThatInvolveText} />
+					<MessageBox mb={[2]} 
+						header={`Film Lists`}
+						text={listsThatInvolveText}
+					/>
 					<Grid columns={[2,3,3,4]}>
 						{item.appears.map((liste, index) => (
 							<Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card"  maxWidth={"200px"} key={liste.slug}>
