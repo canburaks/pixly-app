@@ -220,18 +220,7 @@ const MoviePage = props => {
 				{item.htmlContent && <HtmlContent movie={item} />}
 
 				<MoviePageAd />
-				{/* VIDEO */}
-				{hasVideos && 
-					<>
-						<MessageBox mb={[2]} header={videoText} id="movie-page-video-header"/>
-						<LazyLoadComponent>
-							<YoutubePlayer
-								videos={item.videos}
-								title={item.name + " Videos"}
-							/>
-						</LazyLoadComponent>
-					</>
-				}
+
 
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
@@ -278,6 +267,18 @@ const MoviePage = props => {
 					</Grid>
 					</>
 				)}
+				{/* VIDEO */}
+				{hasVideos && 
+					<>
+						<MessageBox mb={[2]} header={videoText} id="movie-page-video-header"/>
+						<LazyLoadComponent>
+							<YoutubePlayer
+								videos={item.videos}
+								title={item.name + " Videos"}
+							/>
+						</LazyLoadComponent>
+					</>
+				}
 			</ContentContainer>
 		</PageContainer>
 	);

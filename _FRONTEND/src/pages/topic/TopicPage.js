@@ -303,18 +303,12 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
 const MovieRecommendationCard = ({ item, poster, ratio }) => (
 	<SuperBox
 		width="100%"
+        src={poster}
         maxWidth={"600px"}
 		ratio={ratio}
         position="relative"
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
 	>	
-        <Image 
-            src={poster} 
-            alt={`${item.name} - Poster`} 
-            title={`Visit ${item.name}`}
-            position="absolute" top={0} left={0} right={0} bottom={0}
-            width="100%" 
-        />
         <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0} title={`Visit ${item.name}`}/>
 		<FlexBox 
 			position="absolute" 
