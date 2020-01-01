@@ -105,9 +105,7 @@ const ContentSimilarSection = (props) => {
                     />
                     <Grid columns={[2,2,3,3,3,4,6]} py={[4]} >
                         {data.listOfContentSimilarMovies.map( item => (
-                            <LazyLoadComponent key={item.slug + "cs"} >
-                                <ContentSimilarMovieCard item={item} />
-                            </LazyLoadComponent>
+                                <ContentSimilarMovieCard item={item} key={item.slug + "cs"}/>
                         ))}
                     </Grid>
                 </Dl>

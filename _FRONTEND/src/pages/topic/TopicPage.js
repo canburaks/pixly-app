@@ -255,15 +255,13 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
             <Ul>
                 <Grid columns={networkResponsiveColumn} py={[3]} gridColumnGap={[3,3,3,4]} className="asdasd">
                     {firstPart.map( item => (
-                        <LazyLoadComponent key={"rec" + item.id}>
-                            <Li>
+                            <Li key={"rec" + item.id}>
                             <MovieRecommendationCard 
                                 item={item}  
                                 ratio={networkResponsiveRatio} 
                                 poster={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
                             />
                             </Li>
-                        </LazyLoadComponent>
                     ))}
                 </Grid>
                 <HomePageFeedAd/>
