@@ -6,7 +6,7 @@ import { Text, Paragraph, HeaderMini,
         NewLink, Input, LinkButton,CoverLink, ImdbRatingIcon, YearClockIcon, 
         ListIcon, YoutubeIcon,FilmIcon,HashLink,
         BookmarkMutation, RatingMutation, Hr, SubHeaderText,ImageBox,CoverBox,
-        FlexListItem, Dt,Dl,Dd, UserStatsIcon, FollowMutation,FollowUserMutation
+        FlexListItem,DD, Dt,Dl,Dd, UserStatsIcon, FollowMutation,FollowUserMutation
 } from "../index"
 import { rgba } from "polished";
 import { AbsoluteBox } from "../atoms";
