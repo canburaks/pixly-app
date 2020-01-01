@@ -22,6 +22,8 @@ import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, Ima
     PaginationBox, Dl,Dt,Dd
 } from "../"
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
+import { Plus } from 'css-spinners-react'
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 
 
@@ -38,10 +40,13 @@ export const SimilarMovies = (props) => {
         <Section 
             className="similar-movies-section" 
             display="flex" flexDirection="column"
-            id="similar-movies"
+            id="similar-movies" pt={50}
         >
             <ContentSimilarSection  />
-            <RecommendationSection  />
+
+            <LazyLoadComponent>
+                <RecommendationSection  />
+            </LazyLoadComponent>
             <ResponsiveAd3 />
         </Section>
     )
@@ -84,13 +89,13 @@ const ContentSimilarSection = (props) => {
 
 
     if (error) return (<div></div>)
-    if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"/>
+    if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"><Plus id="plus-loader-container" /></FlexBox>
     if (data) return (
         <Section display="flex" flexDirection="column" px={[2]} width="100%" id="cso-section" className="content-similar-movies-section">
             {data.listOfContentSimilarMovies && data.listOfContentSimilarMovies.length > 0 &&
                 <>
                 <ResponsiveAd1 />
-                <Dl>
+                <Dl ref={node}>
                     <MessageBox 
                         subheader={`Similar ${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Movies" : "Movies" } like ${data.movie.name.trim()} (${data.movie.year})`}
                         text={
@@ -98,9 +103,11 @@ const ContentSimilarSection = (props) => {
                             `These are highly similar movies to ${data.movie.name.trim()} in a manner of only the content elements. `
                         }
                     />
-                    <Grid columns={[2,2,3,3,3,4,6]} py={[4]} ref={node}>
+                    <Grid columns={[2,2,3,3,3,4,6]} py={[4]} >
                         {data.listOfContentSimilarMovies.map( item => (
-                            <ContentSimilarMovieCard item={item} key={item.slug + "cs"} />
+                            <LazyLoadComponent key={item.slug + "cs"} >
+                                <ContentSimilarMovieCard item={item} />
+                            </LazyLoadComponent>
                         ))}
                     </Grid>
                 </Dl>
@@ -154,7 +161,7 @@ const RecommendationSection = ({num=19}) => {
     if (error) return (
         <div></div>
     )
-    if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"/>
+    if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"><Plus id="plus-loader-container" /></FlexBox>
     if (data) return (
         <Section 
             display="flex" flexDirection="column" 
@@ -241,20 +248,21 @@ const ContentSimilarMovieCard = ({ item }) => (
 	</SuperBox>
 )
 
-const MovieRecommendationCard = ({ item, speed="slow" }) => (
+const MovieRecommendationCard = ({ item, speed }) => (
 	<SuperBox
 		width="100%"
 		ratio={speed === "slow" ? 1.5 : 0.7}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
         className="recommendation-similar-movie-card"
 	>	
+        {console.log(speed)}
 		<NewLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}>
             <Image 
-                src={speed === "slow" ? item.poster : item.coverPoster} 
+                src={speed === "fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.coverPoster} 
                 alt={`${item.name} (${item.year}) Poster`}
                 title={"Visit " + item.name + ` - ${item.year} Page`} 
                 position="absolute" top={0} left={0} right={0} bottom={0}
-                minWidth="100%"
+                width="100%"
             />
         </NewLink>
 		<FlexBox 

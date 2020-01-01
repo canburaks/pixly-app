@@ -22,7 +22,19 @@ export const Ul = styled("ul")`
     ${grid}
     ${typography}
 `
-
+export const Li = styled("ul")`
+    padding:0;
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
 export const Dl = styled("dl")`
     padding:0;
     ${color}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext, useCallback, useMemo } from "react";
-import { Link, Redirect, withRouter } from "react-router-dom";
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import { useAuthCheck, useValues, useDebounce, AUTOCOMPLETE_MOVIE, isEqualObj,
     AUTOCOMPLETE_MOVIE_ONLY_HAVE_SIMILARS
@@ -11,26 +10,8 @@ import {  styled } from "../"
 import { lighten } from 'polished'
 
 
-import { movieAutoComplete } from "../../functions/grec";
-import { GlobalContext } from "../../";
-import { AuthForm, ForgetForm } from "../../forms/AuthForm"
-import { development } from "../../index"
-
-import { 
-    UnderlineEffect, NewLink,Box, HomeDropdown, ProfileDropdown,
-    Text, Paragraph, NavBarBox,
-    Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
-    FlexBox, ListBox,SuperBox, AbsoluteBox, 
-    CoverLink,Input, HiddenText, 
-    TextSection, HeaderMini, LinkButton,
-    BookmarkMutation, RatingMutation,TagBox,
-    ImdbRatingIcon, YearClockIcon, ProfileIcon, LogoutIcon,
-    HomeIcon,ListIcon,SearchIcon,
-    LogoutMutation,SearchQueryBox,RegularInput,
-    navbarheight,SpinnerFade
-
-} from "../"
-import { Plus, Wobblebar } from 'css-spinners-react'
+import { SearchIcon } from "../"
+import { Plus } from 'css-spinners-react'
 
 import "./AutoComplete.css"
 
