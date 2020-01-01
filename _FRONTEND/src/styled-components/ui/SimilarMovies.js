@@ -166,7 +166,6 @@ const RecommendationSection = ({num=19}) => {
             px={[2]} 
             width="100%" 
             id="rm-section"
-            
             className="content-similar-movies-section"
         >
             {data.listOfSimilarMovies && data.listOfSimilarMovies.length > 0 &&
@@ -249,20 +248,12 @@ const ContentSimilarMovieCard = ({ item }) => (
 const MovieRecommendationCard = ({ item, speed }) => (
 	<SuperBox
 		width="100%"
+        src={speed === "fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.coverPoster} 
 		ratio={speed === "slow" ? 1.5 : 0.7}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
         className="recommendation-similar-movie-card"
 	>	
-        {console.log(speed)}
-		<NewLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}>
-            <Image 
-                src={speed === "fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.coverPoster} 
-                alt={`${item.name} (${item.year}) Poster`}
-                title={"Visit " + item.name + ` - ${item.year} Page`} 
-                position="absolute" top={0} left={0} right={0} bottom={0}
-                width="100%"
-            />
-        </NewLink>
+        <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0} title={`Visit ${item.name}`}/>
 		<FlexBox 
 			position="absolute" 
 			bottom={0} left={0}
