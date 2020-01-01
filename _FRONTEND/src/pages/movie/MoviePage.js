@@ -49,7 +49,8 @@ import {
 	AbsoluteBox,
 	CoverLink,
 	SimilarMovies,
-	MessageBox
+	MessageBox,
+	Dl,Dt,Dd
 } from "../../styled-components";
 
 import "../pages.css";
@@ -226,11 +227,13 @@ const MoviePage = props => {
 					<MessageBox mb={[2]} id="movie-page-header"
 						header={`${item.name} Cast & Crew`}
 					/>
-					<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>
-						{allCrews.map((crew, i) => (
-							<CrewCard crew={crew} key={crew.person.name} />
-								))}
-					</Grid>
+					<Dl>
+						<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>
+							{allCrews.map((crew, i) => (
+								<CrewCard crew={crew} key={crew.person.name} />
+									))}
+						</Grid>
+					</Dl>
 					</>
 				)}
 
