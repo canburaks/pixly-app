@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { useState, useContext, useMemo, useEffect } from "react";
+import { useState, useContext, useMemo, useEffect, useRef } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { rgaPageView, Head, MoviePageAd, MidPageAd, FeedMobileTopicPageAd, HomePageFeedAd } from "../../functions/analytics";
 
@@ -52,6 +52,7 @@ import {
 	MessageBox,
 	Dl,Dt,Dd
 } from "../../styled-components";
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 import "../pages.css";
 
@@ -59,6 +60,8 @@ const MoviePage = props => {
 	//rgaPageView();
 	const { movie: item, viewer } = props.item;
 	const { cacheUpdate } = props;
+    const nodeSimilarMovies = useRef(null)
+    const nodeVideoSection = useRef(null)
 
 	//up()
 
@@ -168,7 +171,14 @@ const MoviePage = props => {
 
     useEffect(()=>{
         if (props.location.hash){
-            ScrollInto(props.location.hash.slice(1))
+			var hashId = props.location.hash.slice(1) 
+			if (hashId === "similar-movies" && nodeSimilarMovies.current){
+				nodeSimilarMovies.current.scrollIntoView({behavior: "smooth"})
+			}
+			else if (hashId === "movie-page-video-header" && nodeVideoSection.current){
+				nodeVideoSection.current.scrollIntoView({behavior: "smooth"})
+			}
+			//ScrollInto()
 		}
 		else (window.scrollTo({left:0, top:0, behavior:"smooth"}))
     },[])
@@ -213,11 +223,13 @@ const MoviePage = props => {
 				{/* VIDEO */}
 				{hasVideos && 
 					<>
-					<MessageBox mb={[2]} header={videoText} id="movie-page-video-header"/>
-					<YoutubePlayer
-						videos={item.videos}
-						title={item.name + " Videos"}
-					/>
+						<MessageBox mb={[2]} header={videoText} id="movie-page-video-header"/>
+						<LazyLoadComponent>
+							<YoutubePlayer
+								videos={item.videos}
+								title={item.name + " Videos"}
+							/>
+						</LazyLoadComponent>
 					</>
 				}
 
@@ -238,7 +250,7 @@ const MoviePage = props => {
 				)}
 
 				{/*<!--SIMILAR Section--> */}
-				<SimilarMovies movie={item} />
+				<SimilarMovies movie={item} ref={nodeSimilarMovies} />
 
 				{/*<!--APPEARS IN  LIST Section--> */}
 				{item.appears.length > 0 && (

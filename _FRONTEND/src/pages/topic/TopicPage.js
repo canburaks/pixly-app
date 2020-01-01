@@ -19,8 +19,10 @@ import {
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, Hr,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
-    Ul,
+    Ul,Li
 } from "../../styled-components"
+import { useNetworkStatus } from 'react-adaptive-hooks/network';
+import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
 
 
 export const ResponsiveTopicCard = ({ item }) => {
@@ -221,11 +223,12 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
         topicSlug, page, ...variables
     },partialRefetch:true})
 
-    const screenSize = useWindowSize()
-    const isLargeScreen = useMemo(() => screenSize.includes("L"), [screenSize])
-    const TopicCard = (props) => isLargeScreen ? <LargeTopicMovieCard {...props} /> : <WhiteMovieCard {...props} />
-    //console.log("topic query")
 
+    //Network
+    const { effectiveConnectionType } = useNetworkStatus();
+    let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
+    const networkResponsiveRatio = useMemo(() => speed==="fast" ? 0.7 : 1.5)
+    const networkResponsiveColumn = useMemo(() => speed==="fast" ? [1,1,1,2,2,2,3] : [2,2,3,3,3,4,6])
 
     if (loading) return <Loading />
     if (data && data.complexSearch) {
@@ -250,21 +253,45 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
         dispatcher(willBeDispatched)
         return (
             <Ul>
-                <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]} className="asdasd">
+                <Grid columns={networkResponsiveColumn} py={[3]} gridColumnGap={[3,3,3,4]} className="asdasd">
                     {firstPart.map( item => (
-                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
+                        <LazyLoadComponent key={"rec" + item.id}>
+                            <Li>
+                            <MovieRecommendationCard 
+                                item={item}  
+                                ratio={networkResponsiveRatio} 
+                                poster={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
+                            />
+                            </Li>
+                        </LazyLoadComponent>
                     ))}
                 </Grid>
                 <HomePageFeedAd/>
-                <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={networkResponsiveColumn} py={[3]} gridColumnGap={[3,3,3,4]}>
                     {secondPArt.map( item => (
-                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
+                        <LazyLoadComponent key={"rec" + item.id}>
+                            <Li>
+                            <MovieRecommendationCard 
+                                item={item}  
+                                ratio={networkResponsiveRatio} 
+                                poster={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
+                            />
+                            </Li>
+                        </LazyLoadComponent>
                     ))}
                 </Grid>
                 <MoviePageAd />
-                <Grid columns={[1,1,1,2,2,2,3]} py={[3]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={networkResponsiveColumn} py={[3]} gridColumnGap={[3,3,3,4]}>
                     {thirdPart.map( item => (
-                        <MovieRecommendationCard item={item} key={"rec" + item.id}/>
+                        <LazyLoadComponent key={"rec" + item.id}>
+                            <Li>
+                            <MovieRecommendationCard 
+                                item={item}  
+                                ratio={networkResponsiveRatio} 
+                                poster={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
+                            />
+                            </Li>
+                        </LazyLoadComponent>
                     ))}
                 </Grid>
                 <br/>
@@ -275,15 +302,22 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
 
 
 
-const MovieRecommendationCard = ({ item }) => (
+const MovieRecommendationCard = ({ item, poster, ratio }) => (
 	<SuperBox
-		src={item.coverPoster || item.poster}
 		width="100%"
         maxWidth={"600px"}
-		ratio={0.7}
+		ratio={ratio}
+        position="relative"
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
 	>	
-        <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
+        <Image 
+            src={poster} 
+            alt={`${item.name} - Poster`} 
+            title={`Visit ${item.name}`}
+            position="absolute" top={0} left={0} right={0} bottom={0}
+            width="100%" 
+        />
+        <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0} title={`Visit ${item.name}`}/>
 		<FlexBox 
 			position="absolute" 
 			bottom={0} left={0}

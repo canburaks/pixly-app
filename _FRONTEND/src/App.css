@@ -209,3 +209,7 @@ h3 {
 .recommendation-similar-movie-card:hover .recommendation-similar-movie-card-info {
     background-color: rgba(40,40,40, 0.85);
 }
+#plus-loader-container {
+    width:20vw;
+    height:20vw;
+}
