@@ -23,3 +23,43 @@ export const Ul = styled("ul")`
     ${typography}
 `
 
+export const Dl = styled("dl")`
+    padding:0;
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
+export const Dt = styled("dt")`
+    padding:0;
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
+export const Dd = styled("dd")`
+    padding:0;
+    margin:0;
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`

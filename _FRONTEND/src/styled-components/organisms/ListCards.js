@@ -6,7 +6,7 @@ import { Text, Paragraph, HeaderMini,
         NewLink, Input, LinkButton,CoverLink, ImdbRatingIcon, YearClockIcon, 
         ListIcon, YoutubeIcon,FilmIcon,HashLink,
         BookmarkMutation, RatingMutation, Hr, SubHeaderText,ImageBox,CoverBox,
-        FlexListItem, DD, UserStatsIcon, FollowMutation,FollowUserMutation
+        FlexListItem, Dt,Dl,Dd, UserStatsIcon, FollowMutation,FollowUserMutation
 } from "../index"
 import { rgba } from "polished";
 import { AbsoluteBox } from "../atoms";
@@ -417,12 +417,12 @@ export const CrewCard = (props) => (
             title={props.crew.person.name}
         />
         <NewLink link={`/person/${props.crew.person.slug}`} hoverUnderline>
-            <Text fontSize={["xs", "xs", "s"]} fontWeight="bold">
+            <Dt fontSize={["xs", "xs", "s"]} fontWeight="bold">
                 {props.crew.person.name}
-            </Text>
+            </Dt>
         </NewLink>
         {props.crew.character && 
-            <Text fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"}>{props.crew.character.slice(0,20)}</Text>
+            <Dd fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"}>{props.crew.character.slice(0,20)}</Dd>
             }
     </Card>
 )
