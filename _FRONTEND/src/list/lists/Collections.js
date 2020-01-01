@@ -83,7 +83,7 @@ const ListBoard = (props) => {
                         ))}
                     </Grid>
 
-                    <ResponsiveAd1 />
+                    <HomePageFeedAd />
                     <Grid columns={[1,1,1,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {secondPart.map( item => (
                             <CollectionCard 
@@ -96,7 +96,7 @@ const ListBoard = (props) => {
                         ))}
                     </Grid>
 
-                    <ResponsiveAd2 />
+                    <MoviePageAd />
                     <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                         {thirdPart.map( item => (
                             <CollectionCard 

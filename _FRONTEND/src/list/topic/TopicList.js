@@ -65,7 +65,7 @@ const TopicList = (props) => {
                                 text={item.seoShortDescription} />
                         ))}
                     </Grid>
-                    <ResponsiveAd1 />
+                    <HomePageFeedAd />
 
 
                     <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
@@ -76,7 +76,7 @@ const TopicList = (props) => {
                                 text={item.seoShortDescription} />
                         ))}
                     </Grid>
-                    <ResponsiveAd3 />
+                    <MoviePageAd />
                 </dl>
             </ContentContainer>
 
