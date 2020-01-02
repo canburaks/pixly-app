@@ -228,7 +228,7 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
     const { effectiveConnectionType } = useNetworkStatus();
     let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
     const networkResponsiveRatio = useMemo(() => speed==="fast" ? 0.7 : 1.5)
-    const networkResponsiveColumn = useMemo(() => speed==="fast" ? [1,1,1,2,2,2,3] : [2,2,3,3,3,4,6])
+    const networkResponsiveColumn = useMemo(() => speed==="fast" ? [1,1,1,2,2,2,3] : [2,2,3,3,3,4,4,6])
 
     if (loading) return <Loading />
     if (data && data.complexSearch) {
