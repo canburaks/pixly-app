@@ -131,7 +131,7 @@ const RecommendationSection = ({num=19}) => {
     
     // Network sensitive settings
     const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 12 : 6) : 6 // if slow network request less movie
-    const networkSensitiveColumns = speed === "fast" ? [1,1,1,2,2,2,2,3,4] : [2,2,3,3,3,4,4,6]
+    const networkSensitiveColumns = speed === "fast" ? [1,1,1,2,2,2,2,3,4] : [2,2,3,3,3,4,6]
 
 	const { loading, error, data } = useQuery(RECOMMENDATION_FINDER, {
             variables:{slug:slug,

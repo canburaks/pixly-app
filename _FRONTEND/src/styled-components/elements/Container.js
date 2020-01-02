@@ -163,7 +163,7 @@ export const TopPanelCoverElement = React.memo((props) => (
             <HeaderText color="lightDark1" textShadow={"textDark"} fontSize={[14, 14, 20, 24, 28]} fontWeight="bold">{props.header}</HeaderText>
 
             {props.Header && <props.Header item={props.item} authStatus={props.authStatus} />}
-            {props.subheader && <HeaderText color="lightDark1" textShadow="dark" fontSize={[12, 12, 18, 20, 22]} fontWeight="500">{props.subheader}</HeaderText>}
+            {props.subheader && <HeaderText color="lightDark1" textShadow="dark" fontSize={[16, 16, 18, 20, 22]} fontWeight="500">{props.subheader}</HeaderText>}
             {/*console.log("il", props.isLargeScreen)*/}
             {(props.text && props.isLargeScreen) && <Paragraph color="lightDark1" textShadow={"textDark"} fontSize={[14, 14, 16, 16,18]}  maxWidth={"95%"}>{props.text}</Paragraph>}
             {props.children}

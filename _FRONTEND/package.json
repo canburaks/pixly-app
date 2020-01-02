@@ -169,16 +169,11 @@
     "include": [
       "",
       "/",
-      "/topic/art-house",
-      "/topic/cyberpunk",
-      "/topic/based-on-true-story",
-      "/topic/dialogue-focused",
-      "/topic/thought-provoking",
-      "/topic/bechdel-test",
-      "/topic/feel-good-movies",
-      "/topic/lgbtq-plus-films",
-      "/topic/controversial-films",
-      "/topic/historical-figures"
+      "/movie/john-wick-2014",
+      "/movie/gone-girl-2014",
+      "/movie/us-2019",
+      "/movie/get-out-2017"
+
     ],
     "publicPath": "/"
   }
