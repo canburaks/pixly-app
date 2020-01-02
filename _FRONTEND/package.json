@@ -27,18 +27,30 @@
     ],
     "plugins": [
       "@babel/plugin-proposal-object-rest-spread",
-      "@babel/plugin-transform-runtime"
+      "@babel/plugin-transform-runtime",
+      "@babel/plugin-transform-property-mutators",
+      "@babel/plugin-transform-template-literals",
+      "@babel/plugin-transform-literals",
+      "@babel/plugin-transform-spread"
     ]
   },
   "browserslist": [
-    "> 0.25%",
+    "> 0.01%",
     "safari > 4",
     "android > 3",
-    "chrome > 20",
-    "firefox > 6",
-    "opera > 24",
-    "ie >= 5",
-    "iOS >= 7",
+    "and_chr >= 61",
+    "and_uc >= 11.4",
+    "and_qq >= 1.2",
+    "edge >= 16",
+    "and_ff >= 56",
+    "chrome > 37",
+    "firefox >= 43",
+    "opera > 48",
+    "samsung >= 4",
+    "baidu >= 7.12",
+    "bb >= 10",
+    "ie >= 8",
+    "ios_saf >= 8",
     "last 20 versions"
   ],
   "postcss": {
@@ -46,9 +58,21 @@
       "postcss-preset-env": {
         "browsers": [
           "safari > 5",
-          "ie >= 11",
-          "iOS >= 9",
-          "last 20 versions"
+          "safari > 4",
+          "android > 3",
+          "and_chr >= 61",
+          "and_uc >= 11.4",
+          "and_qq >= 1.2",
+          "edge >= 16",
+          "and_ff >= 56",
+          "chrome > 37",
+          "firefox >= 43",
+          "opera > 48",
+          "samsung >= 4",
+          "baidu >= 7.12",
+          "bb >= 10",
+          "ie >= 8",
+          "ios_saf >= 8"
         ],
         "autoprefixer": {
           "grid": true
@@ -115,7 +139,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.3",
+    "@babel/plugin-transform-literals": "^7.7.4",
+    "@babel/plugin-transform-property-literals": "^7.7.4",
+    "@babel/plugin-transform-property-mutators": "^7.7.4",
     "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/plugin-transform-shorthand-properties": "^7.7.4",
+    "@babel/plugin-transform-spread": "^7.7.4",
+    "@babel/plugin-transform-template-literals": "^7.7.4",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "autoprefixer": "^9.6.5",
@@ -169,11 +199,7 @@
     "include": [
       "",
       "/",
-      "/movie/john-wick-2014",
-      "/movie/gone-girl-2014",
-      "/movie/us-2019",
-      "/movie/get-out-2017"
-
+      "/similar-movie-finder"
     ],
     "publicPath": "/"
   }
