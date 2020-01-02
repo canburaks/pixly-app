@@ -5,24 +5,23 @@ import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 
 import { isEqualObj, Head, MidPageAd,HomePageFeedAd,MoviePageAd,
-    useValues, useWindowSize, FeedMobileTopicPageAd
+    useValues, useWindowSize, 
 } from "../../functions"
 
-import { renderToStaticMarkup, renderToString } from 'react-dom/server';
-import * as SocialButtons from 'react-social-sharing'
+
 
 
 import { 
-    Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
+    Box, FlexBox, Text, Form,Loading, Button,
     ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,Image,
-    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
-    TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
+    PageContainer, ContentContainer,  PaginationBox, 
+    SchemaArticle, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, Hr,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
     Ul,Li
 } from "../../styled-components"
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
-import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 
 export const ResponsiveTopicCard = ({ item }) => {

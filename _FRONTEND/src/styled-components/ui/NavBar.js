@@ -1,32 +1,18 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
-import { Link, Redirect, withRouter } from "react-router-dom";
+import {  withRouter } from "react-router-dom";
 
 import { useAuthCheck, useValues } from "../../functions/hooks";
 
-import {  SearchBox} from "cbs-react-components"
 
 
-import { movieAutoComplete } from "../../functions/grec";
 import { GlobalContext } from "../../";
-import { AuthForm, ForgetForm } from "../../forms/AuthForm"
-import { development } from "../../index"
+
 
 import { 
-    UnderlineEffect, NewLink,Box, HomeDropdown, ProfileDropdown,
-    Text, Paragraph, NavBarBox,SearchInput,
-    Image, ImageShim,ImagePlaceholder, //AspectRatioImage, 
-    FlexBox, ListBox,SuperBox, AbsoluteBox, 
-    CoverLink,Input, HiddenText, 
-    TextSection, HeaderMini, LinkButton,
-    BookmarkMutation, RatingMutation,TagBox,
-    ImdbRatingIcon, YearClockIcon, ProfileIcon, LogoutIcon,
-    HomeIcon,ListIcon,
-    LogoutMutation,SearchQueryBox,
-    navbarheight
+    UnderlineEffect, NewLink,Box,ProfileDropdown,NavBarBox, FlexBox,
+    LogoutMutation,SearchQueryBox,navbarheight
+  } from "../"
 
-} from "../"
-
-const BgTexture = React.memo(() => <div style={{backgroundImage:`url(https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/navbar-collage.jpg)`, backgroundSize:"cover", width:"100%", height:60, position:"absolute", top:-2, left:-2, zIndex:-1}}></div>)
 
 const NB = props => {
     const { username, history, isAuthenticated, logoutDispatcher } = props;
@@ -63,7 +49,7 @@ const NB = props => {
 			<NewLink color="#f1f1f1 !important" link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]}>
 				<UnderlineEffect >Search</UnderlineEffect>
 			</NewLink>
-			{window.innerWidth > 800 && <SearchQueryBox />}
+			{window.innerWidth > 1080 && <SearchQueryBox />}
 		</FlexBox>
 	)
 	

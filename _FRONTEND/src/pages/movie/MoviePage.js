@@ -95,11 +95,6 @@ const MoviePage = props => {
 	const actorFilter = item.crew.filter(c => c.job == "A");
 	const allCrews = [...directorFilter, ...actorFilter];
 
-	// SIMILAR MOVIES
-	const similarPlaceholder = item.similars ? item.similars : [];
-	//const similarCover = similarPlaceholder.filter(m => m.hasCover===true)
-	//const similarNonCover = similarPlaceholder.filter(m => m.hasCover=== false)
-
 	// CONTENT SIMILARS
 	const contentSimilarPlaceholder = item.contentSimilars
 		? item.contentSimilars
@@ -113,33 +108,6 @@ const MoviePage = props => {
 	);
 
 
-	//const contentSimilarNonCover = contentSimilarPlaceholder.filter(m => m.movie.hasCover=== false)
-	const setkeywords = (name, slug, year, videoNum) => {
-		const keywords = [
-			name,
-			`similar movies of ${name}`,
-			`movies like ${name}`,
-			slug,
-			`best movies of ${year}`
-		];
-		if (videoNum === 1) keywords.push(`${name} trailer`);
-		else if (videoNum > 1) {
-			keywords.push(`${name} trailer`);
-			keywords.push(`Videos about ${name}`);
-		}
-		return keywords;
-	};
-	const keywords = useMemo(() =>
-		setkeywords(item.name, item.slug, item.year, item.videos.length)
-	);
-	const similarnames =
-		contentSimilarCover
-			.slice(0, 10)
-			.map(item => item.movie.name.trim())
-			.join(", ") + ".";
-
-	const invtext = `Some of the movies like '${item.name} - ${item.year}' are  ${similarnames}`;
-	const vistext = `Some similar movies  of '${item.name} - ${item.year}' are  ${similarnames}`;
 
 	const listsThatInvolveText = useMemo(() => {
 		if(item.appears.length > 0){
@@ -150,24 +118,15 @@ const MoviePage = props => {
 		return null
 	},[item.slug] )
 
-	//console.log(item.appears, isFavOfDirectors)
-	//console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
-	//console.log(item.seoShortDescription)
+
     const hasTwitter = useMemo(() => (item.twitter && item.twitter.length > 5) ? true : false,[])
     const SummaryElement = useMemo(() => hasTwitter 
         ? () => <MovieSummaryWithTwitter item={item}/> 
         : () =>  <MovieSummary name={item.name} summary={item.summary} />, [hasTwitter])
  
 
-	const firstPartContentSimilars = contentSimilarCover.slice(0,6)
-	const secondPartContentSimilars = contentSimilarCover.slice(6, 12)
-	const thirdPartContentSimilars = contentSimilarCover.slice(12,30)
 
 
-	const isMobile = window.innerWidth < 480;
-	const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
-	const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
-	const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
 
     useEffect(()=>{
         if (props.location.hash){
@@ -181,14 +140,13 @@ const MoviePage = props => {
 			//ScrollInto()
 		}
 		else (window.scrollTo({left:0, top:0, behavior:"smooth"}))
-    },[])
+	},[])
 	return (
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
 			<Head
 				title={item.seoTitle}
 				description={item.seoDescription}
 				richdata={item.richdata}
-				keywords={keywords ? keywords : item.seoKeywords}
 				image={item.coverPoster ? item.coverPoster : item.poster}
 				canonical={`https://pixly.app/movie/${item.slug}`}
 			/>
@@ -284,81 +242,7 @@ const MoviePage = props => {
 	);
 }
 
-const MovieRecommendationBox = (props) => (
-    <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
-        {props.items.map( item => (
-            <MovieRecommendationCard item={item} key={"rec" + item.id}/>
-        ))}
-    </Grid>
-)
 
-const MovieRecommendationCard = ({ item }) => (
-	<SuperBox
-		src={item.coverPoster || item.poster}
-		width="100%"
-		ratio={0.7}
-		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
-	>	
-        <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
-		<FlexBox 
-			position="absolute" 
-			bottom={0} left={0}
-			width={"100%"} height={"auto"}
-			flexDirection="column" px={[2]} pt={[2]}
-			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"} zIndex={1}
-		>
-			<Text color="light" fontWeight="bold">
-                <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
-            </Text>
-			<TagBox tags={item.tags || []} num={6} color={"light"}/>
-		</FlexBox>
-
-	</SuperBox>
-)
-
-
-const MovieContentSimilarCardBox = React.memo(({ items, columns=[2,2,3,3,3,4,6], ...props }) => (
-    <Grid columns={columns} py={[4]}>
-        {items.map( item => <ContentSimilarMovieCard item={item} />)}
-    </Grid>
-), (p,n) => (p.key ? (p.key === n.key) : (p.items.length === n.items.length)))
-
-const ContentSimilarMovieCard = ({ item }) => (
-	<SuperBox
-		src={item.movie.poster}
-		width="100%"
-		ratio={1.5}
-		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
-	>	
-		{/*item.movie.imdbRating && 
-			<AbsoluteBox top={"5px"} right={"5px"} 
-				borderRadius={"50%"} 
-				bg={"rgba(0,0,0, 0.9)"} 
-				color="light" 
-				fontWeight="bold"
-				fontSize={["12px", "12px", "14px"]}
-				p={"2px"}
-			>
-				{item.movie.imdbRating}
-			</AbsoluteBox>
-			*/}
-		<CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
-		<FlexBox 
-			position="absolute" 
-			bottom={0} left={0}
-			width={"100%"} height={"auto"}
-			flexDirection="column"  justifyContent="space-between"
-			p={[2]} zIndex={1}
-			bg={"rgba(0,0,0, 0.85)"} minHeight={"100px"}
-		>
-			<Text color="light" fontWeight="bold">
-                <NewLink link={`/movie/${item.movie.slug}`} hoverUnderline>{item.movie.name} ({item.movie.year})</NewLink>
-            </Text>
-			<TagBox tags={item.commonTags || []} num={4} color={"light"}/>
-		</FlexBox>
-		<CoverLink link={`/movie/${item.movie.slug}`} />
-	</SuperBox>
-) 
 
 const HtmlContent = ({ movie }) => (
     <FlexBox flexDirection="column" mt={[3,3,4]}>

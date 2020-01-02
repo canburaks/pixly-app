@@ -11,6 +11,7 @@ import { allowedUrls } from "../styled-components/constants"
 export const Head = React.memo((props) => {
     const titleText = props.title ? props.title.slice(0,70) :"Pixly - Movie Recommendation and Social Cinema Platform "
     const descriptionText = props.description ? props.description.slice(0,160) : "Personalized Movie Recommendation, Social Cinema Platform, Movie Discovery, and Cultural Content"
+    
     //"Pixly - Discover Best Movies that Fit Your Cinema Taste."
     const url = props.canonical ? props.canonical : "https://pixly.app" + window.location.pathname 
     const image =  props.image ? props.image : "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/pixly-wide-zip.jpg"
@@ -42,7 +43,7 @@ export const Head = React.memo((props) => {
         <meta name="description" content={descriptionText} />
         {!isAllowedUrls && <meta name="googlebot" content="nofollow noindex" />}
         {/* KEYWORDS */}
-        <meta name="keywords" content={keywordsText} />
+        {keywordsText && <meta name="keywords" content={keywordsText} />}
 
 
         {/* FACEBOOK */}
