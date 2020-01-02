@@ -25,10 +25,13 @@ const ListBoard = (props) => {
     const state = useContext(GlobalContext);
     
     const partitionQuantity = useValues([4,4,4,4,3])
+    const isMobile = window.innerWidth < 480;
 
     if (props.viewer){
         state.methods.updatePoints(props.viewer.points)
     }
+    const pixlyselection = useMemo(() => lists.filter(l => l.slug === "our-selection")[0])
+    const nonpixlyselection = useMemo(() => lists.filter(l => l.slug !== "our-selection"))
 
 
     const directorsFavourite = useMemo(() => lists.filter( l => l.listType==="df"))
@@ -47,6 +50,9 @@ const ListBoard = (props) => {
     const fourthPart = allLists.slice(partitionQuantity * 3, partitionQuantity * 4)
     const fifthPart = allLists.slice(partitionQuantity * 4, partitionQuantity * 5)
 
+    const ResponsiveAd1 = isMobile ? FeedMobileCollectionAd : HomePageFeedAd
+    const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
+    const ResponsiveAd3 = isMobile ? FeedMobileCollectionAd : MoviePageAd
 
 
     //console.log(otherLists)

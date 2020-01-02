@@ -20,6 +20,7 @@ export const HashLink = styled(HLink).attrs(props => props.rel ? {rel:props.rel}
   text-decoration:initial;
   transition: ${themeGet("transitions.medium")};
   ${props => props.hidden && hideText()}
+
   ${color}
   ${space}
   ${shadow}

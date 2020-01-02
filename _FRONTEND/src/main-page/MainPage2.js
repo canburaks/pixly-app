@@ -79,7 +79,7 @@ const MainPage = (props) => {
 
             }
             title={
-                "Pixly - AI Movie Recommendation & Similar Movies & Lists of Film Lists"
+                "Pixly - AI Movie Recommendation & Similar Movies & List of Best Films"
             }
             keywords={
                 "pixly.app ,discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"

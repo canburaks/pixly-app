@@ -1,20 +1,24 @@
 import React  from "react";
-import { useState,  useCallback,  useRef } from "react"
-import { useParams,  } from "react-router-dom";
+import { useState, useContext, useMemo, useCallback, useEffect, useRef } from "react"
+import { withRouter, Link, useParams, useLocation } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 import gql from "graphql-tag";
 
 
-import { useWindowSize} from "../../functions/hooks"
+import { useWindowSize, useAuthCheck, useClientWidth, useClientHeight, useValues,
+    
+} from "../../functions/hooks"
 
-import { rgaPageView, Head, MidPageAd, HomePageFeedAd, 
-     MoviePageAd,FeedMobileTopicPageAd
+import { rgaPageView, Head, MidPageAd, HomePageFeedAd,  FeedMobileCollectionAd,
+    SIMILAR_FINDER, LIST_BOARD, MoviePageAd,FeedMobileTopicPageAd
 } from "../../functions"
 
+import { GlobalContext } from "../..";
+import JoinBanner from "../../components/JoinBanner.js"
 
-
-import {  Grid, FlexBox, SuperBox, CoverLink, TagBox,
-    NewLink, Image,  Section,MessageBox,
+import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
+    Loading, HeaderText, Text, FlexBox, RegularInput, MovieAutoComplete, SuperBox, CoverLink, TagBox,
+    NewLink, Image, SubHeaderText, LinkButton, HeaderMini, Span, Box, Hr, Section,MessageBox,
     PaginationBox, Dl,Dt,Dd
 } from "../"
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
@@ -24,7 +28,13 @@ import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 
 
-export const SimilarMovies = (props) => {    
+export const SimilarMovies = (props) => {
+
+    //console.log("props", location, props)
+    const state = useContext(GlobalContext);
+    ////console.log("data",speed, similarQuantity,  data)
+    
+    
     const ResponsiveAd3 = window.innerWidth < 480 ? FeedMobileTopicPageAd : MidPageAd
     return (
         <Section 
