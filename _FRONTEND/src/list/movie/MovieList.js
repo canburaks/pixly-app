@@ -39,6 +39,9 @@ const MovieList = (props) => {
     const ppi = 20
     const currentPage = parseInt(props.match.params.page)
     const isLargeScreen = screenSize.includes("L")
+    const LıstHeader = liste.slug==="our-selection" 
+        ? () => <HeaderText>A Curated Movie List: <em>{liste.name}</em></HeaderText> 
+        : () => <HeaderText>{liste.name}</HeaderText> 
     //console.log(liste.summary)
 
     const pageQuantity = liste.movies.length 
@@ -108,7 +111,7 @@ const MovieList = (props) => {
                     />}
                 
 
-                {/* FOLLOWERS PANEL
+                {/* FOLLOWERS PANEL*/}
                 {liste.followers.length > 0 &&
                     <div className="fbox-c jcfs pad-lr-5x w100">
                         <h6>Followers</h6>
@@ -118,7 +121,7 @@ const MovieList = (props) => {
                         <ProfileCircleBox  items={liste.followers} columns={[4,6,8,10,12]} />
 
                         </div>
-                    </div>}*/}
+                    </div>}
 
 
                 {/* REFERENCE */}
