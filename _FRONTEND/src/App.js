@@ -4,7 +4,7 @@ import { useContext, useState, useReducer, useEffect } from 'react';
 
 
 import ReactGA from 'react-ga';
-import { Route, Switch, Redirect, withRouter, useHistory,StaticRouter } from "react-router-dom"
+import { Route, Switch, Redirect, withRouter } from "react-router-dom"
 
 
 
@@ -16,17 +16,17 @@ import { NavBar } from "./styled-components"
 
 
 import Middle from "./containers/Middle"
-import LandingPage from "./auth/LandingPage"
-import MainPage from "./main-page/MainPage";
+//import LandingPage from "./auth/LandingPage"
+//import MainPage from "./main-page/MainPage";
 import MainPage2 from "./main-page/MainPage2";
 
-import ExploreQuery from "./list/Explore";
 
-import { AuthForm, ForgetForm } from "./forms/AuthForm"
-import ContactForm from "./forms/ContactForm"
+//import ExploreQuery from "./list/Explore";
+//import { AuthForm, ForgetForm } from "./forms/AuthForm"
+//import ContactForm from "./forms/ContactForm"
+//import { client, cache } from "./index"
 
-import { client, cache } from "./index"
-import { useWindowSize,  usePageViews, rgaStart, useAuthCheck} from "./functions"
+import {  usePageViews, rgaStart, useAuthCheck} from "./functions"
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
