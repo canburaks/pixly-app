@@ -91,6 +91,7 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/after-2019",
         "/movie/nymphomaniac-volume-ii-2013",
         "/movie/the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005",
         "/movie/the-blind-side-2009",
@@ -376,7 +377,8 @@
         "/movie/proof-1991",
         "/movie/the-silence-of-the-lambs-1991",
         "/movie/shutter-island-2010",
-        "/movie/gone-girl-2014"
+        "/movie/gone-girl-2014",
+        "/movie/after-2019"
     ],
     "all":[
         "",
