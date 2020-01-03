@@ -315,7 +315,7 @@ const HtmlContent = ({ movie }) => (
         <Image 
             src={movie.widePoster} 
             alt={movie.name + " shots"} title={movie.name + " shots"} 
-            width={"100%"} height="auto" minHeight="50px" maxHeight="300px"
+            width={"100%"} height="auto" minHeight="50px" maxHeight="450px"
             my={[3]}    
         />
         <HtmlContainer my={[3]} html={movie.htmlContent} />
