@@ -19,7 +19,7 @@ import {
     RatingSlider, YearSlider, HeaderText,
 } from "../../styled-components"
 import "./Search.css"
-import "react-input-range/lib/css/index.css"
+
 
 const Header = () => (
     <Head
