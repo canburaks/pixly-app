@@ -12,6 +12,7 @@ import {
     Input,InputRange,Label
 } from "../index"
 import "./slider.css"
+import "react-input-range/lib/css/index.css"
 
 export const FormInput = (props) => (
     <FlexBox flexDirection="column" width={"100%"} px={[2]} mt={[2]}>
