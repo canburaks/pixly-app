@@ -31,14 +31,14 @@ class CollectionsFeed(Feed):
         return item.description
 
     def item_pub_date(self, item):
-        return item.updated_at
+        return item.created_at
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):
         return item.pathname
 
     def item_pubdate(self, item):
-        return item.updated_at
+        return item.created_at
 
     def item_enclosure_url(self, item):
         return item.cover_poster.url

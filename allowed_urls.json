@@ -378,7 +378,8 @@
         "/movie/the-silence-of-the-lambs-1991",
         "/movie/shutter-island-2010",
         "/movie/gone-girl-2014",
-        "/movie/after-2019"
+        "/movie/after-2019",
+        "/movie/hard-candy-2005"
     ],
     "all":[
         "",
@@ -744,6 +745,7 @@
         "/movie/the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005",
         "/movie/the-blind-side-2009",
         "/movie/spirited-away-2001",
-        "/movie/after-2019"
+        "/movie/after-2019",
+        "/movie/hard-candy-2005"
     ]
 }
