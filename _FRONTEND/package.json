@@ -199,8 +199,13 @@
     "include": [
       "",
       "/",
-      "/advance-search",
-      "/movie/hard-candy-2005"
+      "/movie/jury-duty-1995",
+      "/movie/the-raven-2012",
+      "/movie/kopps-2003",
+      "/movie/hard-candy-2005",
+      "/movie/matthias-maxime-2019",
+      "/movie/cheeky-2000",
+      "/movie/loser-2000"
 
     ],
     "publicPath": "/"

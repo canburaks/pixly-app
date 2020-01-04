@@ -91,6 +91,8 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/kopps-2003",
+        "/movie/jury-duty-1995",
         "/movie/after-2019",
         "/movie/nymphomaniac-volume-ii-2013",
         "/movie/the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005",
@@ -746,6 +748,8 @@
         "/movie/the-blind-side-2009",
         "/movie/spirited-away-2001",
         "/movie/after-2019",
-        "/movie/hard-candy-2005"
+        "/movie/hard-candy-2005",
+        "/movie/jury-duty-1995",
+        "/movie/kopps-2003"
     ]
 }
