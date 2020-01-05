@@ -65,7 +65,7 @@ class Cache():
                 if common_tags:
                     #ms.common_tags = common_tags
                     ms.common_tag_quantity = len(common_tags)
-                    ms.common_tags = common_tags
+                    
 
             #sort according to common tag quantity
             list(all_similars).sort(key=lambda r: r.id, reverse=True)

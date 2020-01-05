@@ -87,20 +87,23 @@ const ContentSimilarSection = (props) => {
         }
     }
 
-    {console.log(data)}
     
     function commonGenres(filmTags, similarsMovieList){
-        var commons = []
-        var allSimilarTags = new Set()
+        var commons = new Set()
         similarsMovieList.map(m => {
-            allSimilarTags.add(...m.nongenreTags)
+            m.tagNames.map(t => {
+                if (filmTags.includes(t)){
+                    commons.add(t)
+                }
+            })
         })
-        allSimilarTags.map(t => {
-            if (filmTags.includes.t){
-                commons.push(t)
-            }
-        })
-        console.log(commons)
+        const uniques =  Array.from(commons)
+        if (uniques.length > 0){
+            const tagtext =  uniques.join(", ")
+            return `The most common genres you will find below are ${tagtext}.`
+
+        }
+        return ""
     }
 
     if (error) return (<div></div>)
@@ -109,14 +112,14 @@ const ContentSimilarSection = (props) => {
         <Section display="flex" flexDirection="column" px={[2]} width="100%" id="cso-section" className="content-similar-movies-section">
             {data.listOfContentSimilarMovies && data.listOfContentSimilarMovies.length > 0 &&
                 <>
-                {commonGenres(data.movie.tagNames, data.listOfContentSimilarMovies)}
                 <ResponsiveAd1 />
                 <Dl ref={node}>
                     <MessageBox 
                         subheader={`Similar ${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Movies" : "Movies" } like ${data.movie.name.trim()} (${data.movie.year})`}
                         text={
+                            `These are highly similar movies to ${data.movie.name.trim()} in a manner of only the content elements. ` +
                             `The movies in this part have common topics, tags or sub-genres with ${data.movie.name.trim()} movie. ` +
-                            `These are highly similar movies to ${data.movie.name.trim()} in a manner of only the content elements. `
+                            `${commonGenres(data.movie.tagNames, data.listOfContentSimilarMovies)}`
                         }
                     />
                     <Grid columns={[2,2,3,3,3,4,6]} py={[4]} >
@@ -189,7 +192,7 @@ const RecommendationSection = ({num=19}) => {
                 <ResponsiveAd2 />
                 <Dl>
                     <MessageBox 
-                        subheader={`Film Recommendations Based on ${data.movie.name.trim()}`}
+                        subheader={`Film Recommendations: Movies Similar to ${data.movie.name.trim()}`}
                         text={
                             `Our AI-assisted algorithm found that those movies are showing high similarity to ${data.movie.name.trim()}. ` +
                             `The movies like ${data.movie.name.trim()} in this section not only consider the common content elements, ` + 
@@ -292,7 +295,7 @@ const MovieRecommendationCard = ({ item, speed }) => (
 const CONTENT_SIMILAR_FINDER = gql`
 query similars($slug:String!, $page:Int!, $num:Int){
     listOfContentSimilarMovies(slug:$slug, page:$page, num:$num){
-        slug, name, year, poster, coverPoster, nongenreTags, tagNames, commonTags,
+        slug, name, year, poster, coverPoster, nongenreTags, tagNames,
     },
     movie(slug:$slug){id, slug, name, year, nongenreTags, tagNames}
 }
