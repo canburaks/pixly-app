@@ -87,6 +87,7 @@ const ContentSimilarSection = (props) => {
         }
     }
 
+    {console.log(data)}
 
     if (error) return (<div></div>)
     if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"><Plus id="plus-loader-container" /></FlexBox>

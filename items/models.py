@@ -609,7 +609,6 @@ class Movie(SocialMedia, SEO,MainPage):
             tags_wo_doc = set(tag_names).difference({"documentary"})
             text += f"A {self.year} documentary which has {', '.join(tags_wo_doc)} topics."
         else:
-
             #-------------MOVIES----------------
             #Imdb Rating based text
             if self.year == 2018 or self.year >= 2019:
@@ -626,10 +625,7 @@ class Movie(SocialMedia, SEO,MainPage):
             # Similars, Recommendation
             sim_text = ""
             if self.have_content_similars:
-                if self.have_similars:
-                    sim_text += f" See similar movies {self.name} and film recommendations based on it."
-                else:
-                    sim_text += f" See similar movies like {self.name}"  
+                sim_text += f" See similar movies like {self.name} {self.year}, {self.name} cast and the trailer." 
             sim_text_num = len(sim_text)
             current_num = len(text)
             available_num = 157 - (current_num + sim_text_num)
@@ -641,11 +637,14 @@ class Movie(SocialMedia, SEO,MainPage):
     def generate_title(self):
         #start with year, add name at the end
         year_text = f"({self.year}) - " 
-        text = year_text
+        text = f"{self.name[:20]} ({self.year}) - "
 
         # Similars, Recommendation
-        if self.have_content_similars:
-            text += "Similar Movies, Plot, "
+        if len(self.name) > 14:
+            text += f"Movies Like {self.name[:15]}, "
+        else:
+            text += f"Movies Like {self.name[:15]}, Similar Films, "
+                    
 
         # Trailer
         video_tags = set(self.video_tags)
@@ -659,16 +658,9 @@ class Movie(SocialMedia, SEO,MainPage):
 
         # Crew
         if self.have_crew:
-            text += "Cast."
-
-        #-------ADD NAME TO BEGINNING---------------
-        added_text_length = len(text)
-        available_chars = 67 - added_text_length
-        if len(self.name) > available_chars - 1:
-            name = self.name[:available_chars - 2].title() + ".."
-        else:
-            name = self.name.title() + " "
-        title = name + text
+            text += "Cast"
+        title = text[:70]
+            
         print(f"title length: {len(title)}, title: {title}")
         return title
 
