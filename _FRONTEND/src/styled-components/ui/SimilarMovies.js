@@ -255,7 +255,7 @@ const ContentSimilarMovieCard = ({ item }) => (
                     <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
             </Dt>
             <Dd>
-			    <TagBox tags={item.nongenreTags || []} num={4} color={"light"}/>
+			    <TagBox tags={item.tagNames || []} num={4} color={"light"}/>
             </Dd>
 		</FlexBox>
 	</SuperBox>
@@ -292,7 +292,7 @@ const MovieRecommendationCard = ({ item, speed }) => (
 const CONTENT_SIMILAR_FINDER = gql`
 query similars($slug:String!, $page:Int!, $num:Int){
     listOfContentSimilarMovies(slug:$slug, page:$page, num:$num){
-        slug, name, year, poster, coverPoster, nongenreTags, tagNames
+        slug, name, year, poster, coverPoster, nongenreTags, tagNames, commonTags,
     },
     movie(slug:$slug){id, slug, name, year, nongenreTags, tagNames}
 }
