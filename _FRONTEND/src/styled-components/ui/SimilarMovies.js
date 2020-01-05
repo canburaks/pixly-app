@@ -89,10 +89,16 @@ const ContentSimilarSection = (props) => {
 
     {console.log(data)}
     
-    function commonGenres(similarsMovieList){
-        var commons = new Set()
+    function commonGenres(filmTags, similarsMovieList){
+        var commons = []
+        var allSimilarTags = new Set()
         similarsMovieList.map(m => {
-            commons.add(...m.nongenreTags)
+            allSimilarTags.add(...m.nongenreTags)
+        })
+        allSimilarTags.map(t => {
+            if (filmTags.includes.t){
+                commons.push(t)
+            }
         })
         console.log(commons)
     }
@@ -103,7 +109,7 @@ const ContentSimilarSection = (props) => {
         <Section display="flex" flexDirection="column" px={[2]} width="100%" id="cso-section" className="content-similar-movies-section">
             {data.listOfContentSimilarMovies && data.listOfContentSimilarMovies.length > 0 &&
                 <>
-                {commonGenres(data.listOfContentSimilarMovies)}
+                {commonGenres(data.movie.tagNames, data.listOfContentSimilarMovies)}
                 <ResponsiveAd1 />
                 <Dl ref={node}>
                     <MessageBox 
@@ -288,7 +294,7 @@ query similars($slug:String!, $page:Int!, $num:Int){
     listOfContentSimilarMovies(slug:$slug, page:$page, num:$num){
         slug, name, year, poster, coverPoster, nongenreTags, tagNames
     },
-    movie(slug:$slug){id, slug, name, year, nongenreTags, genres}
+    movie(slug:$slug){id, slug, name, year, nongenreTags, tagNames}
 }
 `;
 const RECOMMENDATION_FINDER = gql`
@@ -296,6 +302,6 @@ query similars($slug:String!, $page:Int!, $num:Int){
     listOfSimilarMovies(slug:$slug, page:$page, num:$num){
         slug, name, year, poster, coverPoster, nongenreTags, tagNames
     },
-    movie(slug:$slug){id, slug, name, year, nongenreTags, genres}
+    movie(slug:$slug){id, slug, name, year, nongenreTags, tagNames}
 }
 `;
