@@ -5,6 +5,7 @@
         "/similar-movie-finder",
         "/explore",
         "/advance-search",
+        "/lists-of-films",
         "/directors/1"
     ],
     "topic":[
@@ -91,8 +92,8 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/hereditary-2018",
         "/movie/national-treasure-2004",
-
         "/movie/burlesque-2010",
         "/movie/522681-escape-room-2019",
         "/movie/booksmart-2019",
@@ -392,6 +393,7 @@
         "",
         "/",
         "/similar-movie-finder",
+        "/lists-of-films",
         "/explore",
         "/advance-search",
         "/topics",
@@ -759,6 +761,7 @@
         "/movie/burlesque-2010",
         "/movie/522681-escape-room-2019",
         "/movie/booksmart-2019",
-        "/movie/national-treasure-2004"
+        "/movie/national-treasure-2004",
+        "/movie/hereditary-2018"
     ]
 }

@@ -41,7 +41,7 @@ const App = (props) => {
     //var cookie = document.cookie;
     //console.log("cookie", cookie)
     const authStatus = useAuthCheck()
-    const MainPageRedirect =() => authStatus ? <Redirect to="/explore" /> : <MainPage2 />
+    const MainPageRedirect =() => authStatus ? <Redirect to="/lists-of-films" /> : <MainPage2 />
 
     useEffect(() => {
         rgaStart()
