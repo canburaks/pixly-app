@@ -121,7 +121,9 @@ class Movie(SocialMedia, SEO,MainPage):
 
     def common_nongenre_tags(self, movie_2):
         return list(set(self.nongenre_tag_names).intersection(set(movie_2.nongenre_tag_names)))
-
+        
+    def common_tags(self, movie_2):
+        return list(set(self.tag_names).intersection(set(movie_2.tag_names)))
     #-------------CONTENT SIMILARS------------------------
     @property
     def cso(self):
