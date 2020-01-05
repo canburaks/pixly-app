@@ -189,7 +189,10 @@ const MoviePage = props => {
 				)}
 
 				{/*<!--SIMILAR Section--> */}
-				<SimilarMovies movie={item} ref={nodeSimilarMovies} />
+				<Box width="100%" ref={nodeSimilarMovies}>
+					<SimilarMovies movie={item} />
+
+				</Box>
 
 				{/*<!--APPEARS IN  LIST Section--> */}
 				{item.appears.length > 0 && (

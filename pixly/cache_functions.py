@@ -51,7 +51,7 @@ class Cache():
 
 
     # ------ Similar Movies --------- gql.schema.list_of_similar_movies 
-    @lru_cache(maxsize=200)    
+    #@lru_cache(maxsize=200)    
     def similar_movie_list(slug):
         movie_qs = Movie.objects.filter(slug=slug)
         if movie_qs.exists():
