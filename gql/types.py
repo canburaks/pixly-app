@@ -354,15 +354,11 @@ class MovieType(DjangoObjectType):
     html_content = graphene.String()
     nongenre_tags = graphene.List(graphene.String)
     tag_names = graphene.List(graphene.String)
-    common_tags = graphene.List(graphene.String, default_value=[])
 
     class Meta:
         model = Movie
 
-    def resolve_common_tags(self, info):
-        if self.common_tags:
-            return self.common_tags
-        return []
+
     def resolve_tag_names(self, info):
         return self.tag_names
 
