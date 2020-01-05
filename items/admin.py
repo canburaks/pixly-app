@@ -1,6 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .models import Video, VideoList, List, Movie, Topic, Article, Rating, Prediction, Tag, Award, Quote
+from archive.models import ContentSimilarity
 from persons.models import Crew
 from items.resources import TagResource, VideoResource
 from django import forms
@@ -41,6 +42,15 @@ class CrewInline(admin.TabularInline):
     def get_person_name(self, obj):
         print(obj)
         return "retrun"
+
+class ContentSimilarInline(admin.TabularInline):
+    model = ContentSimilarity
+    #readonly_fields = ('get_person_name',)
+    raw_id_fields = ("similars",)
+    #list_display = ("person__name",)
+    #fields = ("job","person",  )
+    #exclude = ("data",)
+
 
 class CrewStackInline(admin.StackedInline):
     model = Crew
@@ -88,7 +98,7 @@ class MovieAdmin(admin.ModelAdmin):
     readony_fields = ("homepage", "twitter","facebook", "instagram", "imdb",)
     exclude = ('data', "director")
     list_filter = ("main_page", )
-    inlines = [TagInline,CrewStackInline,]
+    inlines = [TagInline,CrewStackInline,ContentSimilarInline]
     search_fields = ('name', "tmdb_id", 'id', )
 
     #def get_data_director(self, obj):
