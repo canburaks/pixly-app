@@ -359,8 +359,8 @@ class MovieType(DjangoObjectType):
         model = Movie
 
     def resolve_tag_names(self, info):
-        return self.movie.tag_names
-        
+        return self.tag_names
+
     def resolve_nongenre_tags(self, info):
         return self.nongenre_tag_names
 
