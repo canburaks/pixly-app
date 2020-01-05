@@ -43,27 +43,44 @@ const NB = props => {
 
     const MiddleBar = () => (
 		<FlexBox height={"auto"} minWidth={"100%"} justifyContent="center" alignItems="center" py={[1]}>
-			<NewLink color="#f1f1f1 !important" link={"/film-lists"} fontSize={["11px", "11px", "12px", "16px"]}>
-				<UnderlineEffect >{window.innerWidth > 480 ? "Film Lists" : "Lists"}</UnderlineEffect>
+			<NewLink 
+				color="#f1f1f1 !important" 
+				link={"/lists-of-films"} fontSize={["12px", "12px", "12px", "16px"]} 
+				ml={[2]} px={[1,1,2]}
+				>
+				<UnderlineEffect >List Of Films</UnderlineEffect>
 			</NewLink>
-			<NewLink color="#f1f1f1 !important" link={"/topics"} fontSize={["12px", "12px", "12px", "16px"]}>
-				<UnderlineEffect >Topics</UnderlineEffect>
-			</NewLink>
-			<NewLink color="#f1f1f1 !important" link={"/directors/1"} fontSize={["12px", "12px", "12px", "16px"]}>
+			<NewLink 
+				color="#f1f1f1 !important" 
+				link={"/directors/1"} fontSize={["12px", "12px", "12px", "16px"]} 
+				ml={[2]} px={[1,1,2]}
+				>
 				<UnderlineEffect >Directors</UnderlineEffect>
 			</NewLink>
-			<NewLink color="#f1f1f1 !important" link={"/similar-movie-finder"} fontSize={["12px", "12px", "12px", "16px"]}>
+			<NewLink 
+				color="#f1f1f1 !important" 
+				link={"/similar-movie-finder"} fontSize={["12px", "12px", "12px", "16px"]} 
+				ml={[2]} px={[1,1,2]}
+				>
 				<UnderlineEffect >Similars</UnderlineEffect>
 			</NewLink>
 			{authStatus && 
-      <NewLink color="#f1f1f1 !important" link={"/people/1"} fontSize={["12px", "12px", "12px", "16px"]}>
+      <NewLink 
+	  	color="#f1f1f1 !important" 
+		  link={"/people/1"} fontSize={["12px", "12px", "12px", "16px"]} 
+	  	ml={[2]} px={[1,1,2]}
+		  >
 				<UnderlineEffect >People</UnderlineEffect>
 			</NewLink>}
 
-			<NewLink color="#f1f1f1 !important" link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]}>
+			<NewLink 
+				color="#f1f1f1 !important" 
+				link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]} 
+				ml={[2]} px={[1,1,2]}
+				>
 				<UnderlineEffect >Search</UnderlineEffect>
 			</NewLink>
-			{window.innerWidth > 800 && <SearchQueryBox />}
+			{window.innerWidth > 900 && <SearchQueryBox />}
 		</FlexBox>
 	)
 	
