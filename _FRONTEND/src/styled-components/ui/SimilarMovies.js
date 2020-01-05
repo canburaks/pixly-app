@@ -286,7 +286,7 @@ const MovieRecommendationCard = ({ item, speed }) => (
 const CONTENT_SIMILAR_FINDER = gql`
 query similars($slug:String!, $page:Int!, $num:Int){
     listOfContentSimilarMovies(slug:$slug, page:$page, num:$num){
-        slug, name, year, poster, coverPoster, nongenreTags
+        slug, name, year, poster, coverPoster, nongenreTags, tagNames
     },
     movie(slug:$slug){id, slug, name, year, nongenreTags, genres}
 }
@@ -294,7 +294,7 @@ query similars($slug:String!, $page:Int!, $num:Int){
 const RECOMMENDATION_FINDER = gql`
 query similars($slug:String!, $page:Int!, $num:Int){
     listOfSimilarMovies(slug:$slug, page:$page, num:$num){
-        slug, name, year, poster, coverPoster, nongenreTags
+        slug, name, year, poster, coverPoster, nongenreTags, tagNames
     },
     movie(slug:$slug){id, slug, name, year, nongenreTags, genres}
 }
