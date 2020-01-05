@@ -88,6 +88,14 @@ const ContentSimilarSection = (props) => {
     }
 
     {console.log(data)}
+    
+    function commonGenres(similarsMovieList){
+        var commons = new Set()
+        similarsMovieList.map(m => {
+            commons.add(...m.nongenreTags)
+        })
+        console.log(commons)
+    }
 
     if (error) return (<div></div>)
     if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"><Plus id="plus-loader-container" /></FlexBox>
@@ -95,6 +103,7 @@ const ContentSimilarSection = (props) => {
         <Section display="flex" flexDirection="column" px={[2]} width="100%" id="cso-section" className="content-similar-movies-section">
             {data.listOfContentSimilarMovies && data.listOfContentSimilarMovies.length > 0 &&
                 <>
+                {commonGenres(data.listOfContentSimilarMovies)}
                 <ResponsiveAd1 />
                 <Dl ref={node}>
                     <MessageBox 
@@ -279,7 +288,7 @@ query similars($slug:String!, $page:Int!, $num:Int){
     listOfContentSimilarMovies(slug:$slug, page:$page, num:$num){
         slug, name, year, poster, coverPoster, nongenreTags
     },
-    movie(slug:$slug){id, slug, name, year, nongenreTags}
+    movie(slug:$slug){id, slug, name, year, nongenreTags, genres}
 }
 `;
 const RECOMMENDATION_FINDER = gql`
@@ -287,6 +296,6 @@ query similars($slug:String!, $page:Int!, $num:Int){
     listOfSimilarMovies(slug:$slug, page:$page, num:$num){
         slug, name, year, poster, coverPoster, nongenreTags
     },
-    movie(slug:$slug){id, slug, name, year, nongenreTags}
+    movie(slug:$slug){id, slug, name, year, nongenreTags, genres}
 }
 `;

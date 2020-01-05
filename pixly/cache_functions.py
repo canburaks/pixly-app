@@ -61,7 +61,7 @@ class Cache():
             # merge movies
             all_similars = list(set(self_similars).union(set(similars_of_other)))
             for ms in all_similars:
-                common_tags = movie.common_nongenre_tags(ms)
+                common_tags = movie.common_tags(ms)
                 if common_tags:
                     #ms.common_tags = common_tags
                     ms.common_tag_quantity = len(common_tags)
