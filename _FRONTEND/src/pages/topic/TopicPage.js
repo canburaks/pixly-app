@@ -249,7 +249,7 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
         //const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
         //const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
 
-        console.log("data", data.complexSearch.topicResult)
+        //console.log("data", data.complexSearch.topicResult)
         dispatcher(willBeDispatched)
         return (
             <Ul>
