@@ -199,7 +199,8 @@
     "include": [
       "",
       "/",
-      "/movie/hereditary-2018"
+      "/advance-search",
+      "/lists-of-films"
     ],
     "publicPath": "/"
   }

@@ -8,7 +8,7 @@ import {
     Box, Text, NewLink, TopPanelBackElement, TopPanelCoverElement,
     DirectorLink, DirectorLinks,FlexBox, TagText,
     LikeMutation,BookmarkMutation, RatingMutation, FollowMutation,
-    UsersIcon, EyeIcon,UserIcon,
+    UsersIcon, EyeIcon,UserIcon,Select, Option,
     Input,
 } from "../index"
 
@@ -38,3 +38,16 @@ export const InputText = (props) => (
     />
 )
 
+export const InputSelect = ({options, selected=null, onChange, ...props}) => (
+    <Select 
+        onChange={onChange}
+        value={selected}
+        {...props} 
+    >
+        {options.map((value,i) => (
+            <Option key={"options" + i + value} value={value}>
+                {value}
+            </Option>
+        ))}
+    </Select>
+)

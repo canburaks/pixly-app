@@ -89,7 +89,8 @@ const TopicSection = ({topics, partitionQuantity=4}) => (
         {`Pixly topics are kind of collections that are more specific than genre based collections. ` + 
             `Topic movies can focus on some specific issue, or can include the topic as an element of the narrative ` +
             `such as art house, cyberpunk films or movies that focus on rich dialogues or movies passed the Bechdel test. ` +
-            `We added a filter mechanism to some topics which you can filter the films by IMDb rating or release year. ` 
+            `We added a filter mechanism to some topics which you can filter the films by IMDb rating or release year. ` + 
+            `By doing this, you can also look for the best movies in a year that you choose.` 
             }
         </Text>
         <dl>
@@ -235,7 +236,7 @@ const Hero = () => (
         </HeaderText>  
         <SubHeaderText zIndex={1}
             fontFamily={"playfair"} minWidth={"100%"}
-            fontSize={["18px", "18px", "20px", "24px", "26px", "28px", "34px"]}
+            fontSize={["16px", "16px", "18px", "20px", "22px", "24px", "26px"]}
             color="white"  fontWeight={400} mt={[4,4,5]}
             textAlign="center" opacity={1}
         >

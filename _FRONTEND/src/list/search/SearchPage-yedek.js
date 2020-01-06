@@ -6,7 +6,7 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { COMPLEX_SEARCH,TAG_LIST } from "../../functions/query"
 
 import { Head, MidPageAd, HomePageFeedAd, rgaSetEvent } from "../../functions/analytics"
-//import TagSelectStatic from "./TagSelectStatic"
+import TagSelectStatic from "./TagSelectStatic"
 import {  isEqualObj} from "../../functions"
 
 //import "react-input-range/lib/css/index.css"
@@ -16,7 +16,7 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox,
-    RatingSlider, YearSlider,TagSlider, HeaderText,
+    RatingSlider, YearSlider, HeaderText,
 } from "../../styled-components"
 import "./Search.css"
 
@@ -40,7 +40,7 @@ const SearchPage = (props) =>{
     //Variables
     const [ keywords, setKeywords ] = useState(initialKeywords)
     const [ skip, setSkip ] = useState(initialSkip)
-    const [ tag, setTag ] = useState("")
+    const [ tags, setTags ] = useState([])
     const [yearData, setYearData ] = useState({minYear:1950, maxYear:2020})
     const [ratingData, setRatingData ] = useState({minRating:5.0, maxRating:9.9})
     const [lazyvariables, setLazyVariables ] = useState({keywords})
@@ -59,18 +59,15 @@ const SearchPage = (props) =>{
     //handlers
     const keywordsHandler = useCallback((e) => setKeywords(e.target.value), [keywords])
     const yearDispatcher = useCallback((data) => setYearData(data), [yearData])
-    const tagDispatcher = useCallback((t) => setTag(t), [tag])
     const ratingDispatcher = useCallback((data) => setRatingData(data), [ratingData])
+
 
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (keywords.length < 3 && (tag===null || tag.length === 0)) setMessage("Your should provide search keywords or choose a genre please")
+        if (keywords.length < 3 && tags.length === 0) setMessage("Your should provide search keywords or choose a genre please")
         else {
-            const vars = {keywords, ...yearData, ...ratingData}
-            if (tag && tag.length > 0){
-                vars.tags = [tag]
-            }
+            const vars = {tags:tags.map(tag=>tag.value), keywords, ...yearData, ...ratingData}
             if (skip === true ) setSkip(false)
             setLazyVariables(vars)
 
@@ -81,14 +78,13 @@ const SearchPage = (props) =>{
             if (message && message.length > 0) setMessage("")
         } 
     }
-    //console.log("main", tag, lazyvariables)
 
     //console.log("qv",variables)
     return(
         <PageContainer  p={[0]}>
             <Header />
 
-            <Form flexWrap="wrap" onSubmit={submitHandler} className="unmatched-purple" py={[4]} width="100%">
+            <Form flexWrap="wrap" onSubmit={submitHandler} className="unmatched-purple" py={[4]} width="100vw">
                 <HeaderText 
                     textAlign="center" color="rgba(255,255,255, 0.9)" my={[5]} 
                     fontSize={["30px", "30px", "36px", "42px", "48px", "54px"]}
@@ -121,29 +117,26 @@ const SearchPage = (props) =>{
 
 
                 <FlexBox id="search-settings-box" 
-                    flexDirection={"column"} 
-                    width={"100%"}  
-                    height={"auto"}
+                    flexDirection={["row", "row"]} 
+                    width={["100%", "100%", "100%"]}  
+                    minHeight={["80px", "80px", "80px", "100%"]}
                     justifyContent="space-around"
                     flexWrap="wrap"
                     px={[3]} mt={[3,3,3]}
                 >
-
-                    <TagSlider dispatcher={tagDispatcher}/>
-                    <YearSlider dispatcher={yearDispatcher} />
+                    <FlexBox 
+                        flexDirection={["row"]} 
+                        alignItems={"flex-start"} 
+                        my={[3]} px={[3,3,3, 3]} 
+                        width={"100%"}
+                        flexGrow={1,1,1, 0}
+                    >
+                        <TagSelectStatic tags={tags} tagSetter={setTags} />
+                    </FlexBox>
+                    <YearSlider dispatcher={yearDispatcher} classname="cbssss" />
                     <RatingSlider dispatcher={ratingDispatcher} />
                 </FlexBox>
-                <Text fontSize={[14,14,16]} fontWeight={"bold"} textAlign="center" color="red">{message}</Text>
-                <Button 
-                    onClick={submitHandler} 
-                    width="auto" height={"40px"}
-                    fontWeight="bold" 
-                    color="light" bg="#282828"
-                    mx={[4,4,5]} borderRadius={"8px"}
-                    hoverBg="#181818" boxShadow="card"
-                >
-                    Search
-                </Button>
+                <Text fontSize={[14,14,16]} fontWeight={"bold"}>{message}</Text>
             </Form>
 
             <Box id="search-rresult-box"  
@@ -164,7 +157,7 @@ const SearchPage = (props) =>{
 const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
     const [page, setPage] = useState(1)
     const { loading, data, error } = useQuery(COMPLEX_SEARCH, {variables:{page:page, ...lazyvariables}, skip:skip});
-    //console.log(lazyvariables)
+
     const prevPage = useCallback(() => setPage(page - 1), [page])
     const nextPage = useCallback(() => setPage(page + 1), [page])
     //console.log(loading, error, data)
