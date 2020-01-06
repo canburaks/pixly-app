@@ -18,6 +18,7 @@ const themes = {default:{}}
 themes.default.fonts = {
 	primary: 'Helvetica Neue, Helvetica, Roboto, sans-serif',
 	header: "'Nunito', sans-serif",
+	hammersmith:"'Hammersmith One', sans-serif",
 	paragraph: "'Montserrat', sans-serif",
 	quote: 'Georgia, serif',
 	playfair: "'Playfair Display', serif",

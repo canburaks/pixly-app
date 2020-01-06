@@ -138,13 +138,13 @@ export const ImdbRatingIconLink = (props) => (
 )
 export const ImdbRatingIcon = (props) => (
 <FlexBox mr={[1]} display="flex" alignItems="flex-end" follow={props.follow}>
-	<ImdbIcon imdb title="See IMDb Page" fill="#f1f1f1" {...props} className="no-click"/>
+	<ImdbIcon title="See IMDb Page" fill="#f1f1f1" {...props} className="no-click"/>
 	{props.rating && 
 	<Text 
 		fontWeight="bold"
 		fontSize={["14px"]}
 		color="light"
-		textShadow="textDark"
+		textShadow="-2px 2px 1px rgba(0,0,0, 0.6)"
 		position="relative"
 		m={[0]} p={[0]}
 		ml={[1]}

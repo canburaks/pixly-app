@@ -14,12 +14,12 @@ import * as SocialButtons from 'react-social-sharing'
 
 import { 
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
-    ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,Image,
+    ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,Image,CoverImage,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, Hr,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
-    Ul,Li
+    Ul,Li,ImdbRatingIcon, AbsoluteBox,BookmarkMutation
 } from "../../styled-components"
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
 import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
@@ -228,7 +228,7 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
     const { effectiveConnectionType } = useNetworkStatus();
     let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
     const networkResponsiveRatio = useMemo(() => speed==="fast" ? 0.7 : 1.5)
-    const networkResponsiveColumn = useMemo(() => speed==="fast" ? [1,1,1,2,2,2,3] : [2,2,3,3,3,4,4,6])
+    const networkResponsiveColumn = useMemo(() => speed==="fast" ? [1,1,1,2,2,2,3] : [1,1,2,2,3,3,4])
 
     if (loading) return <Loading />
     if (data && data.complexSearch) {
@@ -249,7 +249,7 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
         //const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
         //const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
 
-        //console.log("data", firstPart, secondPArt)
+        console.log("data", data.complexSearch.topicResult)
         dispatcher(willBeDispatched)
         return (
             <Ul>
@@ -299,8 +299,62 @@ const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
 }, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.page === n.page) )
 
 
-
 const MovieRecommendationCard = ({ item, poster, ratio }) => (
+	<FlexBox
+		width="100%"
+        maxWidth={"600px"}
+        position="relative"
+		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
+        overflow="hidden" 
+	>	
+        <CoverImage 
+            src={poster} title={"Visit " + item.name}
+            alt={`${item.name} poster`} 
+            ratio={ratio}  
+            link={`/movie/${item.slug}`} 
+        />
+        <AbsoluteBox top={"20px"} right={"20px"}>
+            <ImdbRatingIcon rating={item.imdbRating} />
+        </AbsoluteBox>
+        <AbsoluteBox top={"20px"} left={"20px"}>
+            <BookmarkMutation active={item.isBookmarked} id={item.id}/>
+        </AbsoluteBox>
+
+		<FlexBox 
+			flexDirection="column" justifyContent="space-between"
+            px={[2]} pt={[2]} pb={[1]}
+            minHeight={"80px"} 
+            maxHeight={["50%", "50%", "50%", "45%","35%"]}
+			width={"100%"} 
+			position="absolute" 
+			bottom={0} left={0}
+			bg={"rgba(0,0,0, 0.85)"} zIndex={1}
+		>
+			<HeaderMini fontSize={["14px","14px","14px", "16px"]} 
+                color="light"  
+                pb={[1]}
+            >
+                <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name.trim()}</NewLink>
+                &nbsp;({item.year})
+            </HeaderMini>
+            <Text fontSize={["12px","12px","14px", "14px"]} 
+                color="rgba(255,255,255, 0.75)" 
+                lineHeight={["14px","14px","16px", "16px"]}
+                maxHeight={"60px"} pb={[1]}
+            >
+                {item.summary.length > 120 ? item.summary.slice(0,115) + ".." : item.summary}
+            </Text>
+			<TagBox tags={item.tags || []}
+                num={6} 
+                color={"rgba(255,255,255, 0.75)"} 
+                fontSize={["10px", "10px", "10px", "10px"]} 
+                flexWrap="nowrap" overflow="hidden"    
+            />
+		</FlexBox>
+
+	</FlexBox>
+)
+const MovieRecommendationCard2 = ({ item, poster, ratio }) => (
 	<SuperBox
 		width="100%"
         src={poster}
@@ -309,7 +363,7 @@ const MovieRecommendationCard = ({ item, poster, ratio }) => (
         position="relative"
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
 	>	
-        <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0} title={`Visit ${item.name}`}/>
+        <CoverLink link={`/movie/${item.slug}`} alt={item.name + "poster"} zIndex={0} title={`Visit ${item.name}`}/>
 		<FlexBox 
 			position="absolute" 
 			bottom={0} left={0}

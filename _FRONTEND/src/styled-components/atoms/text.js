@@ -230,6 +230,8 @@ export const TagText = styled('p')({
     margin: "2px 4px 2px 0px !important",
     borderColor: "rgb(210, 210, 210)",
     color: "rgb(210, 210, 210) ",
+    whiteSpace:"nowrap",
+    textOverflow:"ellipsis"
     },
     compose(
       typography,
