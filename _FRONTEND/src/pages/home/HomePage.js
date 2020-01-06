@@ -96,7 +96,7 @@ const HomePage = (props) => {
     const isMobile = window.innerWidth < 480;
     const ResponsiveAd1 = isMobile ? FeedMobileCollectionAd : HomePageFeedAd
     const ResponsiveAd2 = isMobile ? FeedMobileCollectionAd : MidPageAd
-    print("homepage", persona)
+    //print("homepage", persona)
     return(
         <PageContainer>
             <ProfileCoverPanel 

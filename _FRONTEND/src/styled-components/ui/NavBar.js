@@ -46,21 +46,21 @@ const NB = props => {
 			<NewLink 
 				color="#f1f1f1 !important" 
 				link={"/lists-of-films"} fontSize={["12px", "12px", "12px", "16px"]} 
-				ml={[2]} px={[1,1,2]}
+				ml={[1,1,1,2]} px={[1,1,2]}
 				>
 				<UnderlineEffect >List Of Films</UnderlineEffect>
 			</NewLink>
 			<NewLink 
 				color="#f1f1f1 !important" 
 				link={"/directors/1"} fontSize={["12px", "12px", "12px", "16px"]} 
-				ml={[2]} px={[1,1,2]}
+				ml={[1,1,1,2]} px={[1,1,2]}
 				>
 				<UnderlineEffect >Directors</UnderlineEffect>
 			</NewLink>
 			<NewLink 
 				color="#f1f1f1 !important" 
 				link={"/similar-movie-finder"} fontSize={["12px", "12px", "12px", "16px"]} 
-				ml={[2]} px={[1,1,2]}
+				ml={[1,1,1,2]} px={[1,1,2]}
 				>
 				<UnderlineEffect >Similars</UnderlineEffect>
 			</NewLink>
@@ -68,7 +68,7 @@ const NB = props => {
       <NewLink 
 	  	color="#f1f1f1 !important" 
 		  link={"/people/1"} fontSize={["12px", "12px", "12px", "16px"]} 
-	  	ml={[2]} px={[1,1,2]}
+	  	ml={[1,1,1,2]} px={[1,1,2]}
 		  >
 				<UnderlineEffect >People</UnderlineEffect>
 			</NewLink>}
@@ -76,7 +76,7 @@ const NB = props => {
 			<NewLink 
 				color="#f1f1f1 !important" 
 				link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]} 
-				ml={[2]} px={[1,1,2]}
+				ml={[1,1,1,2]} px={[1,1,2]}
 				>
 				<UnderlineEffect >Search</UnderlineEffect>
 			</NewLink>

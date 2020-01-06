@@ -2,12 +2,41 @@ import React from 'react';
 import { compose,typography, color, space, shadow, layout, border, background, flexbox, position, system } from 'styled-system'
 
 import {  styled } from "../"
-import { Box } from "./box"
+import { Box, CoverLink } from "../"
 //import { Spinner } from "../others"
 
 import { themeGet } from '@styled-system/theme-get'
+import { NewLink } from './link';
 
 //import ImgShim from 'react-shimmer'
+
+
+export const CoverImage = ({src, ratio, alt, title, link, ...props }) => (
+    <Box position="relative" width="100%" pt={`${ratio*100}%`}  {...props}>
+        {link 
+            ? <NewLink link={link} ><AbsoluteImage src={src} alt={alt} title={title} /></NewLink>
+            : <AbsoluteImage src={src} alt={alt} title={title} />
+        }
+    </Box>
+)
+
+export const AbsoluteImage = styled("img")`
+    position:absolute;
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+    min-width:100%;
+    height:100%;
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+`
 
 export const Image = styled('img').attrs(
     (props) =>( props.info 
