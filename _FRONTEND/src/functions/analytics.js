@@ -59,7 +59,10 @@ export const Head = React.memo((props) => {
         {twitter("description", props.twitterdescription || descriptionText.slice(0,125))}
         {twitter("site", "@pixlymovie")}
         {twitter("creator", "@canburaks")}
-
+        <meta name="twitter:app:name:iphone" content="Pixly" />
+        <meta name="twitter:app:name:ipad" content="Pixly" />
+        <meta name="twitter:app:name:googleplay" content="Pixly" />
+        
         {twitter("image", image)}
         {twitter("url", url)}
         <meta property={`fb:app_id`} content={`371976677063927`}/>
