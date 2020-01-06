@@ -61,7 +61,7 @@ const MainPage = (props) => {
 	const heroMainText = "Discover Best Movies That Fit Your Cinema Taste"
 	const heroHeaderText = "Improve your experience in discovering movies"
 	const heroSubheaderText = "Don't waste your time by browsing endless cycles. " + 
-		"With our AI-based personalized recommendation systems, we are guiding you through multiple universes " + 
+		"With our AI-based personalized movie recommendation system, we are guiding you through multiple universes " + 
         "of the art of film."
         
     const screenSize = useWindowSize()
@@ -74,12 +74,12 @@ const MainPage = (props) => {
     <>
         <Head
             description={
-                "Pixly - AI-assisted movie recommendation app & Similar Movie Finder & " + 
-                "Great List Of Films Curator & Movie Rating Website & Watchlist and Personal Archive Page"
+                "We provide personalized AI-assisted movie recommendations, " + 
+                "great lists of films, similar movie finder, advance film search, and great film recommendations."
 
             }
             title={
-                "Pixly - AI Movie Recommendation & Similar Movies & List of Best Films"
+                "Pixly - Movie Recommendations & Find Similar Movies & Lists of Films"
             }
             keywords={
                 "pixly.app ,discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
@@ -211,39 +211,32 @@ const ExploreSection = ({ isSmallScreen }) => (
 		>
 		Let Me Discover First
 	</Text>
-	<FlexBox flexWrap="wrap" width={"100%"} alignItems="center" justifyContent="center">
+	<FlexBox flexWrap="wrap" width={"100%"} alignItems="center" justifyContent="center" flexDirection={["column", "column","column", "row"]}>
 		<LinkButton px={[3,3,4]} m={[2]}
-			link="/film-lists" 
+			link="/lists-of-films" textAlign="center"
 			color="light" bg="dark" borderRadius="4px" 
-			height={"50px"} width={"40%"} maxWidth={"400px"} 
-			hoverScale hoverBg="#3633CC" boxShadow="card" 
+			height={"50px"} width={["60%","60%","60%","28%"]} maxWidth={"400px"} 
+			hoverScale hoverBg="#3633CC" boxShadow="card" fontSize={["14px", "14px", "16px"]}
 		>
-			Film Lists
-		</LinkButton>
-		<LinkButton px={[3,3,4]} m={[2]}
-			link="/topics" color=
-			"light" bg="dark" borderRadius="4px" 
-			height={"50px"} width={"40%"} maxWidth={"400px"} 
-			hoverScale hoverBg="#3633CC" boxShadow="card" 
-		>
-			Topics
-		</LinkButton>
-		<LinkButton px={[3,3,4]} m={[2]}
-			link="/advance-search" 
-			color="light" bg="dark" borderRadius="4px" 
-			height={"50px"} width={"40%"} maxWidth={"400px"} 
-			hoverScale hoverBg="#3633CC" boxShadow="card" 
-		>
-			Advance Search
+			Lists of Films
 		</LinkButton>
 		<LinkButton px={[2,2,4]} m={[2]}
-			link="/similar-movie-finder" 
+			link="/similar-movie-finder" textAlign="center"
 			color="light" bg="dark" borderRadius="4px" 
-			height={"50px"} width={"40%"} maxWidth={"400px"} 
-			hoverScale hoverBg="#3633CC" boxShadow="card" textAlign="center"
+			height={"50px"} width={["60%","60%","60%","28%"]} maxWidth={"400px"} 
+			hoverScale hoverBg="#3633CC" boxShadow="card" fontSize={["14px", "14px", "16px"]}
 		>
 			Similar Movie Finder
 		</LinkButton>
+		<LinkButton px={[3,3,4]} m={[2]}
+			link="/advance-search" textAlign="center"
+			color="light" bg="dark" borderRadius="4px" 
+			height={"50px"} width={["60%","60%","60%","28%"]} maxWidth={"400px"} 
+			hoverScale hoverBg="#3633CC" boxShadow="card" fontSize={["14px", "14px", "16px"]}
+		>
+			Advance Search
+		</LinkButton>
+
 	</FlexBox>
 </Section>
 )
@@ -286,7 +279,7 @@ const Features = () => {
 						text={"We will analyze " + 
 							"your cinema taste with AI-Based algorithmns after you rated 40 movies " +
 							"then we will make very personalized movie " +
-							"suggestions every week."}
+							"recommendations every week."}
 					/>
 				</FlexBox>
 				<FlexBox mt={[4]} maxWidth={maxWidth}>
@@ -344,13 +337,18 @@ const Features = () => {
 
 const Message = () =>(
 	<Text fontSize={["14px", "14px", "16px", "18px"]} color={"light"} mt={[2]} textAlign="justify">
-	As Pixly, We have just started. We work passionately to make our business your favorite film website.<br/>
-	Our AI algorithm is currently in a beta phase, and we've collect several movie lists and topics to enrich your discovery experience.
-	These include films that have won major awards (Grand Prize) from prestigious film festivals like cannes film festival, 
-	favorite movies and  lists from some famous directors such as Quentin Tarantino and Stanley Kubrick, and various topicals such as art-house, 
-	cyberpunk or based on true story movies. <br/>In addition, we have gather together the best popular movies that are up to date and the upcoming
+	As Pixly, We have just started. We work passionately to make our business your favorite film website.
+	<br/>
+	Our AI algorithm is currently in a beta phase, and we've collect several lists of movies and topic collections to enrich your discovery experience.
+	These include films that have won major awards (Grand Prize) from prestigious film festivals like Cannes Film Festival, 
+	favorite lists of movies from the famous directors such as Quentin Tarantino and Stanley Kubrick. 
+	<br/>
+	Also, you will find topic list that have the best artworks of aforomentioned category such as art-house films, 
+	cyberpunk movies, films that are based on true stories or video games.
+	<br/>
+	In addition, we have gather together the best popular movies that are up to date and the upcoming
 	cinema works that we are looking forward to. We constantly try to keep our content up to date. Your intellectual support and suggestions are 
-	always welcome. Please send us any questions and suggestions in the message box at the bottom of the page or email us at pixly@pixly.app
+	always welcome. Please send us any questions and suggestions in the message box at the bottom of the page or email us at <em>pixly@pixly.app</em>
 	</Text>
 ) 
 

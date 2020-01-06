@@ -124,3 +124,44 @@ export const Label = styled("label")`
     ${position}
     ${typography}
 `
+export const Select = styled("select")`
+    opacity:0.9;
+    font-weight:bold;
+    height:25px;
+    padding:4px 16px;
+    border-radius:6px;
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
+`
+export const Option = styled("option")`
+    opacity:0.9;
+    height:35px;
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
+`
+export const Datalist = styled("datalist")`
+    font-weight:bold;
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
+`
