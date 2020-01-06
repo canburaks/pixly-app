@@ -91,36 +91,8 @@ const MainPage = (props) => {
             >
             <meta name="twitter:card" content="app" />
             <meta
-                name="twitter:description"
-                content="Personal Movie Recommendation and Social Movie Discovering Platform"
-            />
-            <meta name="twitter:app:name:iphone" content="Pixly" />
-            <meta name="twitter:app:name:ipad" content="Pixly" />
-            <meta name="twitter:app:name:googleplay" content="Pixly" />
-            <meta property="og:url" content="https://pixly.app" />
-            <meta
                 property="og:image"
                 content="https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/brand/pixly-hare-circle.png"
-            />
-            <meta
-                property="business:contact_data:street_address"
-                content="."
-            />
-            <meta
-                property="business:contact_data:locality"
-                content="Istanbul"
-            />
-            <meta
-                property="business:contact_data:region"
-                content="Europe"
-            />
-            <meta
-                property="business:contact_data:postal_code"
-                content="34430"
-            />
-            <meta
-                property="business:contact_data:country_name"
-                content="Turkey"
             />
         </Head>
 
