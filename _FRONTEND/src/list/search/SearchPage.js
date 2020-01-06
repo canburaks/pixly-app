@@ -18,6 +18,7 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox,
     RatingSlider, YearSlider,TagSlider, HeaderText,
 } from "../../styled-components"
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import "./Search.css"
 
 
@@ -177,13 +178,17 @@ const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
             <>
             <Grid columns={[1,2,2,3,3,3]} pb={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
                 {firstPart.map( item => (
-                    <MovieCoverCard item={item} key={"rec" + item.id} borderRadius={[0]}/>
+                    <LazyLoadComponent key={"rec" + item.id} >
+                        <MovieCoverCard item={item} borderRadius={[0]}/>
+                    </LazyLoadComponent>
                 ))}
             </Grid>
             <HomePageFeedAd />
             <Grid columns={[1,2,2,3,3,3]} py={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
                 {secondPArt.map( item => (
-                    <MovieCoverCard item={item} key={"rec" + item.id} borderRadius={[0]}/>
+                    <LazyLoadComponent key={"rec" + item.id} >
+                        <MovieCoverCard item={item} borderRadius={[0]}/>
+                    </LazyLoadComponent>
                 ))}
             </Grid>
             <MidPageAd/>

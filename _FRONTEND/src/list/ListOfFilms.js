@@ -19,6 +19,7 @@ import {
     TopicCoverCard, TextSection,Image, SuperBox,FlexListItem, Dt, Dd, CoverLink, Hr,
     Loading, HeaderText, HeaderMini, NewLink, Text,Box, FlexBox, Span, CoverBox, SubHeaderText
 } from "../styled-components"
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 
 const ListOfFilms = (props) => {
@@ -247,13 +248,16 @@ const Hero = () => (
 
 const CollectionCard = (props) => (
     <FlexBox flexDirection="column" mb={[5]} height={"100%"} mt={[2]}>
-        <SuperBox 
-            display="flex" flexDirection="column" 
-            src={props.item.coverPoster || props.item.poster} 
-            ratio={props.ratio || 0.5625} borderRadius={"8px"}
-            width={"100%"}
-        ><CoverLink link={props.link} color="transparent">{props.link}</CoverLink>
-        </SuperBox>
+        <LazyLoadComponent>
+            <SuperBox 
+                display="flex" flexDirection="column" 
+                src={props.item.coverPoster || props.item.poster} 
+                ratio={props.ratio || 0.5625} borderRadius={"8px"}
+                width={"100%"}
+            >
+                <CoverLink link={props.link} color="transparent">{props.link}</CoverLink>
+            </SuperBox>
+        </LazyLoadComponent>
         <HeaderMini width={"75%"} fontFamily={"playfair"} color="dark" hoverUnderline
             my={[2,2,3]}
             >
