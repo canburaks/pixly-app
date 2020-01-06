@@ -67,7 +67,7 @@ def set_configs(file_name):
             'ContentEncoding': 'br',
             'ACL':'public-read'}
         if "vendor" in file_name:
-            props["CacheControl"] = "max-age=180"
+            props["CacheControl"] = "max-age=1800"
 
     #Brotli compressed css file
     elif file_name.endswith("css.br"):
@@ -76,17 +76,17 @@ def set_configs(file_name):
             'ContentEncoding': 'br',
             'ACL':'public-read'}
         if "vendor" in file_name:
-            props["CacheControl"] = "max-age=180"
+            props["CacheControl"] = "max-age=1800"
     #js file
     elif file_name.endswith("js"):
         props = {'ContentType': 'application/javascript', 'ACL':'public-read'}
         if "vendor" in file_name:
-            props["CacheControl"] = "max-age=180"
+            props["CacheControl"] = "max-age=1800"
     #css file
     elif file_name.endswith("css"):
         props = {'ContentType': 'text/css', 'ACL':'public-read'}
         if "vendor" in file_name:
-            props["CacheControl"] = "max-age=180"
+            props["CacheControl"] = "max-age=1800"
     else: 
         props = None
     return props

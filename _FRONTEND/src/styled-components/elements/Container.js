@@ -279,7 +279,7 @@ export const Clippy = styled(Container)`
 `
 
 export const PageContainer = (props) => (
-    <Container  id={"page-container"}
+    <Container  id={"page-container"} 
         minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"70vh"} pt={0} 
         {...props}
     />
