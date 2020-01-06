@@ -46,7 +46,7 @@ export const Head = React.memo((props) => {
 
 
         {/* FACEBOOK */}
-        {opengraph("title", titleText)}
+        <meta property={`og:title`} content={titleText} />
         {opengraph("type", "website")}
         {opengraph("sitename", "Pixly")}
         {opengraph("url", url)}
@@ -62,6 +62,7 @@ export const Head = React.memo((props) => {
 
         {twitter("image", image)}
         {twitter("url", url)}
+        <meta property={`fb:app_id`} content={`371976677063927`}/>
 
 
         {props.richdata && <script type="application/ld+json">{richdata}</script> }
