@@ -49,6 +49,13 @@ const App = (props) => {
     },[])
     usePageViews()
     const isPathIncludes = (pathname) => window.location.pathname.includes(pathname)
+
+    const checkFooter = () => {
+        let blacklist = ["lists-of-films", "topic", "list/", "/dashboard", "advance-search"]
+        return !blacklist.some(e => window.location.pathname.includes(e))
+        
+    }
+    const haveFooter = checkFooter()
     return (
     <ThemeProvider theme={themes.default}>
         <div className="App" theme="palette-1"  id="app-container">
@@ -64,7 +71,7 @@ const App = (props) => {
                     {globalstate.modalComponent}
                 </Modal>
             </Box>
-            {!isPathIncludes("topic/") && <Footer />}
+            {haveFooter && <Footer />}
             <ScrollTopButton />
         </div>
     </ThemeProvider>
