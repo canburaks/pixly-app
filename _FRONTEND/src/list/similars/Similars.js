@@ -107,11 +107,11 @@ const SimilarFinder = (props) => {
                 canonical={canonical}
             />
                 {/* HERO */}
-                <SuperBox className="similar-finder-hero"
+                <SuperBox className="similar-finder-hero unmatched-red"
                     position="relative"
                     width="100%" height={"auto"}
                     display="flex" flexDirection="column" alignItems="center"
-                    px={[2,2,3]} className="unmatched-red"
+                    px={[2,2,3]}
                     pb={!showInfoText ? [3,3,4] :[6,6,7]}
                 >
                     {/*<Image className="similar-finder-hero-image"
