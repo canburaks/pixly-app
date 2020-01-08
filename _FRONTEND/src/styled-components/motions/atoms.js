@@ -5,14 +5,12 @@ import { themeGet } from '@styled-system/theme-get'
 
 //import { motion } from "framer-motion"
 import { linearGradient, backgrounds, backgroundImages, setLightness } from 'polished'
-import { motion, AnimatePresence } from "framer-motion"
+//import { motion, AnimatePresence } from "framer-motion"
 
 export const ModalMotionBox = (props) => (
-    <AnimatePresence>
+    <div>
     {props.isOpen && (
       <ModalMotion
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         width={"100%"}
         height="auto"
@@ -20,10 +18,10 @@ export const ModalMotionBox = (props) => (
         {...props}
       />
     )}
-  </AnimatePresence>
+  </div>
 )
 
-export const ModalMotion = styled(motion.div)`
+export const ModalMotion = styled("div")`
     position: fixed;
     display:flex;
     justify-content:center;
