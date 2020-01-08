@@ -22,7 +22,6 @@ import JoinBanner from "../components/JoinBanner.js";
 import { facebook } from "../functions"
 
 
-import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
 import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
 	PageContainer,ContentContainer,Loading,Section, 

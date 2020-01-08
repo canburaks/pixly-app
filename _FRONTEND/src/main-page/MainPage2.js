@@ -22,17 +22,16 @@ import JoinBanner from "../components/JoinBanner.js";
 import { facebook } from "../functions"
 
 
-import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
 import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,Grid,
 	PageContainer,ContentContainer,Loading,Section, 
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text, SubHeaderText, NewLink,
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
 	GradientAnimationBox,SignupForm, SignupFormModal, production, PulseButton,
-	ScaleButton, Hr
+	ScaleButton, Hr, Popup,KeyIcon,LinkIcon
 	
 } from "../styled-components";
-import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon, RateIcon} from "./icons"
+import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon, RateIcon, SimilarFinderIcon} from "./icons"
 
 import "./MainPage.css";
 import "./dist/css/style.css"
@@ -150,7 +149,7 @@ const MainPage = (props) => {
 			{!isSmallScreen && <ExploreSection isSmallScreen={isSmallScreen} />}
 
 			<Section mt={[4]} position="relative" top={-60}>
-				<Features />
+				<Features setModalOpen={setModalOpen} />
 			</Section>
 			<SuperBox  
 				display="flex" flexDirection="column" 
@@ -226,9 +225,67 @@ const FeatureText = (props) => (
 	</FlexBox>
 )
 
+const FeatureAuthPopup = ({ text, popupText, actionOne }) => {
+	const state = useContext(GlobalContext)
+	const insertform = useCallback(() => state.methods.insertAuthForm("login"),[])
+	return (
+		<Popup
+			Text={
+				<FlexBox alignItems="center" >
+					<SubHeaderText 
+						fontSize={["14px", "14px", "14px", "16px"]}
+						width={"auto"} fontWeight="bold"
+						underline
+					>
+						{text}
+					</SubHeaderText>
+					<KeyIcon 
+						width={"16px"} 
+						height={"16px"} 
+						title="You should login to get personalized recommendations"
+					/>
+				</FlexBox>
+			}
+		>
+		<FlexBox flexDirection="column" p={[2]} pt={[4]} position="relative">
+			<Text position="absolute" top={"5px"} right={"10px"} fontWeight="bold" hoverScale>X</Text>
+			<Text>{popupText}</Text>
+			<FlexBox width={"auto"} px={[2]}>
+				<Button px={[2]} m={[2,2,3]}
+					zIndex={3}
+					onClick={insertform} 
+					width={"120px"} height={"32px"}
+					color="light" 
+					borderRadius="4px" 
+					gradient="blueish"
+					boxShadow={"card"} 
+					fontWeight="bold" hoverBg={"dark"}
+					hoverScale={1.1}
+					>
+					Login
+				</Button>
+				<Button px={[2]} m={[2,2,3]}
+					zIndex={3}
+					onClick={actionOne} 
+					width={"120px"} height={"32px"}
+					color="light" 
+					borderRadius="4px" 
+					gradient="pinkish"
+					boxShadow={"card"} 
+					fontWeight="bold" hoverBg={"dark"}
+					hoverScale={1.1}
+					>
+					Join
+				</Button>
+			</FlexBox>
+		</FlexBox>
+	</Popup>
+
+	)
+}
 
 
-const Features = () => {
+const Features = ({ setModalOpen }) => {
 	const screenSize = useWindowSize()
 	const isLargeScreen = useMemo(() => screenSize.includes("XL"), [screenSize] )
 
@@ -242,66 +299,135 @@ const Features = () => {
 			px={["5vw", "5vw", ]}
 			pt={"20px"} pb={"40px"}
 			alignItems="flex-start"
-		
 		>
 				<FlexBox mt={[4]} maxWidth={maxWidth}>
 					<RecommendationIcon />
-					<FeatureText 
-						header={"Personal Movie Recommendations"}
-						text={"We will analyze " + 
+					<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>
+						<FeatureAuthPopup 
+							actionOne={setModalOpen} 
+							text={"Personal Movie Recommendations"} 
+							popupText="In order to get personalized recommendations please login."
+						/>
+						<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>
+							{"We will analyze " + 
 							"your cinema taste with AI-Based algorithmns after you rated 40 movies " +
 							"then we will make very personalized movie " +
 							"recommendations every week."}
-					/>
-				</FlexBox>
-				<FlexBox mt={[4]} maxWidth={maxWidth}>
-					<SearchIcon />
-					<FeatureText 
-						header={"Advance Film Search"}
-						text={"You can search movies within your favourite genre or subgenre" + 
-							" and filter them with IMDb rating or release year."}
-					/>
+						</Text>
+					</FlexBox>
 				</FlexBox>
 
 				<FlexBox mt={[4]} maxWidth={maxWidth}>
+					<SearchIcon />
+					<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>
+						<SubHeaderText mr={[1,1,2]}
+							fontSize={["14px", "14px", "14px", "16px"]}
+							width={"auto"}
+							fontWeight="bold"
+						>
+							<NewLink underline link="/advance-search"><Span underline>Advance Film Search</Span>
+								<LinkIcon size={16} position="relative" bottom={-6} hoverScale/>
+							</NewLink>
+						</SubHeaderText>
+						<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>
+							You can search movies within your favourite genre or subgenre&nbsp;
+							and filter them with IMDb rating or release year.
+						</Text>
+					</FlexBox>
+				</FlexBox>
+
+
+
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
 					<RateIcon />
-					<FeatureText 
-						header={"Movie Rating Website"}
-						text={"You can rate any movie in order to get good film recommendations or " + 
+					<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>
+						<FeatureAuthPopup 
+							actionOne={setModalOpen} 
+							text={"Movie Rating Website"} 
+							popupText="Create a profile then start to rate films according to your taste."
+						/>
+						<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>
+						{"You can rate any movie in order to get good film recommendations or " + 
 							" reflect your opinion about this movie. It can also be your public opinion. "}
-					/>
+						</Text>
+					</FlexBox>
+				</FlexBox>
+
+				<FlexBox mt={[4]} maxWidth={maxWidth}>
+					<SimilarFinderIcon />
+					<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>
+						<SubHeaderText mr={[1,1,2]}
+							fontSize={["14px", "14px", "14px", "16px"]}
+							width={"auto"}
+							fontWeight="bold"
+						>
+							<NewLink link="/similar-movie-finder"><Span underline>Find Similar Movies</Span>
+								<LinkIcon size={16} position="relative" bottom={-6} hoverScale/>
+							</NewLink>
+						</SubHeaderText>
+						<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>
+							Let search your favourite film and discover movies that have similar genre, tag, or theme.
+							Besides, You may also film recommendations like your favourite film based on our AI-assisted algorithms. 
+						</Text>
+					</FlexBox>
 				</FlexBox>
 
 				<FlexBox mt={[4]} maxWidth={maxWidth}>
 					<ActionsIcon />
-					<FeatureText 
-						header={"Watchlist and Likes"}
-						text={"Keep and track your personal cinema history " + 
+					<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>
+						<FeatureAuthPopup 
+							actionOne={setModalOpen} 
+							text={"Watch List and Likes"} 
+							popupText="You can save your favourite films, and add movies to your watch list that is not watched yet."
+						/>
+						<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>
+						{"Keep and track your personal cinema history " + 
 							"by adding movies to watchlist, or liking them. Then You can share movies from there"}
-					/>
+						</Text>
+					</FlexBox>
 				</FlexBox>
+
 
 				<FlexBox mt={[4]} maxWidth={maxWidth}>
 					<CollectionsIcon />
-					<FeatureText 
-						header={"Curated and Collected Lists Of Films"}
-						text={"Handpicked and collected lists of movies; " + 
-							"director's favorite films, grand prize winners of prestigious " +
-							"film festivals. Topics lists like; " + 
-							" arthouse, cyberpunk, based on true story, rich dialogues and best mystery movies."}
-					/>
+
+					<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>
+						<SubHeaderText mr={[1,1,2]}
+							fontSize={["14px", "14px", "14px", "16px"]}
+							width={"auto"}
+							fontWeight="bold"
+						>
+							<NewLink underline link="/lists-of-films"><Span underline>Curated and Collected Lists Of Films</Span>
+								<LinkIcon size={16} position="relative" bottom={-6} hoverScale/>
+							</NewLink>
+						</SubHeaderText>
+						<Text mr={[1,1,2]}  fontSize={["14px", "14px", "14px", "14px"]}>
+							Handpicked and collected lists of movies such as the favourite list of films of the famous
+							directors, the grand prize winner movies of the prestigious film festivals. Also, categorical lists such as
+							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/art-house">arthouse</NewLink>,
+							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/cyberpunk">cyberpunk</NewLink>,
+							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/controversial">controversial</NewLink>,
+							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/thought-provoking">thought-provoking</NewLink>, 
+							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/mystery">mystery movies</NewLink> etc.
+
+						</Text>
+					</FlexBox>
 				</FlexBox>
 
 				<FlexBox mt={[4]} maxWidth={maxWidth}>
 					<PeopleIcon />
-					<FeatureText 
-						header={"Discover People and Share Movie"}
-						text={"Find people whose cinema taste is similar " + 
-							"to you. See which movies are currently watched " + 
-							"by your friends, and also check your cinema taste " +
-							"similarity with your friends."}
-					/>
-			</FlexBox>
+					<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>
+						<FeatureAuthPopup 
+							actionOne={setModalOpen} 
+							text={"Discover People and Share Movie"} 
+							popupText="Create a profile to see other users. After then, you can discover people and compare your cinema taste with them"
+						/>
+						<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>
+						{"Keep and track your personal cinema history " + 
+							"by adding movies to watchlist, or liking them. Then You can share movies from there"}
+						</Text>
+					</FlexBox>
+				</FlexBox>
 			<SubHeaderText></SubHeaderText>
 		</FlexBox>
 	)

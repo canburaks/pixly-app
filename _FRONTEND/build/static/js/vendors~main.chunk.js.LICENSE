@@ -25,12 +25,6 @@ object-assign
   * (c) Dustin Diaz 2014 | License MIT
   */
 
-/*!
- * Glide.js v3.4.1
- * (c) 2013-2019 Jędrzej Chałubek <jedrzej.chalubek@gmail.com> (http://jedrzejchalubek.com/)
- * Released under the MIT License.
- */
-
 /** @license React v16.12.0
  * react.production.min.js
  *

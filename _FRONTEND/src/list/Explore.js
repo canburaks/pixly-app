@@ -21,7 +21,6 @@ import {
 
 import JoinBanner from "../components/JoinBanner.js";
 
-import { GlideBox } from "../components2/Glide.js";
 //import { motion, useViewportScroll } from "framer-motion"
 import {
 	MovieRichCardBox,

@@ -60,7 +60,7 @@ export const SchemaPost = ({ post , ...props}) =>(
 export const SchemaArticle = (props) =>(
     <FlexBox itemScope itemType="http://schema.org/NewsArticle"
         flexDirection="column" justifyContent="flex-start"
-        py={[3]} my={[3,3,4]} 
+        py={[3]} my={[3,3,4]} maxWidth={"100%"}
         {...props} 
     >
         {/* Schema Image Object*/}
