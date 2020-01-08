@@ -94,14 +94,6 @@ export const Modal = (props) => {
 	useOnClickOutside(innerModalRef, () => props.closeModal())
 
 
-    
-    //useEffect(() => {
-    //    if (props.isOpen){
-    //        lockBodyScroll()
-    //    }
-    //    return () => unlockBodyScroll()
-    //},[props.isOpen])
-
 	return(	
 		<ModalMotionBox isOpen={props.isOpen} top={"120px"} >
 			<Box ref={innerModalRef} 
