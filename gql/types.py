@@ -354,10 +354,14 @@ class MovieType(DjangoObjectType):
     html_content = graphene.String()
     nongenre_tags = graphene.List(graphene.String)
     tag_names = graphene.List(graphene.String)
+    content_similars_summary = graphene.String()
+
 
     class Meta:
         model = Movie
 
+    def resolve_content_similars_summary(self, info):
+        return self.content_similars_summary
 
     def resolve_tag_names(self, info):
         return self.tag_names
@@ -1815,6 +1819,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     social_media = graphene.types.json.JSONString()
     quotes = graphene.List(graphene.String)
     short_summary = graphene.String()
+    content_similars_summary = graphene.String()
     video_tags = graphene.List(graphene.String)
     genres = graphene.List(graphene.String)
 
@@ -1842,6 +1847,9 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_content_similars_summary(self, info):
+        return self.movie.content_similars_summary
 
     def resolve_tag_names(self, info):
         return self.movie.tag_names
