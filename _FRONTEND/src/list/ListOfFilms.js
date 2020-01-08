@@ -24,7 +24,7 @@ import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 const ListOfFilms = (props) => {
     const data = props.data
-    console.log(data)
+    //console.log(data)
     
     //LISTS
     

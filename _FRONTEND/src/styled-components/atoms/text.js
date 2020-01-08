@@ -54,8 +54,9 @@ export const HiddenSubHeader = styled("h4")`
 `
 export const Span = styled("span")`
     color: ${themeGet("colors.dark")};
-    opacity:0.75;
-    visibility: ${props => props.invisible ? "hidden" : "visible"}
+    opacity:1;
+    visibility: ${props => props.invisible ? "hidden" : "visible"};
+    text-decoration:${props => props.underline && "underline"};
     ${typography}
     ${color}
     ${space}
@@ -172,6 +173,7 @@ export const SubHeaderText = styled("h2")`
     :hover {
       text-decoration:${props => props.hoverUnderline && "underline"};
     };
+    text-decoration:${props => props.underline && "underline"};
     text-transform:"capitalize";
     font-weight:"bold";
     color:"dark";

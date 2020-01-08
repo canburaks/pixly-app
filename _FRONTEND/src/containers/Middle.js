@@ -35,7 +35,7 @@ import PersonPage from "../pages/person/PersonPage";
 import ProfilePage from "../pages/profil/ProfilePage";
 import DraftPage from "../pages/DraftPage"
 import SearchPage from "../list/search/SearchPage";
-import ExploreQuery from "../list/Explore";
+//import ExploreQuery from "../list/Explore";
 import ListOfFilms from "../list/ListOfFilms";
 
 import TagMovies from "../list/TagMovies";
@@ -72,7 +72,7 @@ const Middle = (props) => {
             <Route exact path="/similar-movie-finder" component={SimilarFinder} />
 
             <Route exact path="/lists-of-films" component={ListOfFilms} />
-            <Route exact path="/explore" component={ExploreQuery} />
+            <Route exact path="/explore" component={ListOfFilms} />
             <Route exact path="/advance-search" component={SearchPage} />
 
             <Route exact path="/topics" component={TopicList} />

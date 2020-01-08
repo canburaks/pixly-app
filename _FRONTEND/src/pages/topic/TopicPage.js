@@ -165,29 +165,23 @@ const TopicPage = (props) =>{
                         >
 
                         <FlexBox 
-                            width={["80%","80%","80%","90%"]} 
-                            flexDirection={["column", "column", "column", "row"]}
+                            width={["100%"]} 
+                            flexDirection={["column"]}
                         >
-                            <YearSlider 
-                                dispatcher={yearDispatcher}  iconColor="black" 
-                                width={["100%"]} 
-                                />
-                            <RatingSlider 
-                                dispatcher={ratingDispatcher} iconColor="black"
-                                width={["100%"]} 
-                                />
+                            <YearSlider dispatcher={yearDispatcher}  iconColor="black" />
+                            <RatingSlider dispatcher={ratingDispatcher} />
+                            <Button 
+                                type="submit" 
+                                width="100%" height={"40px"}
+                                fontWeight="bold" 
+                                color="light" bg="#282828"
+                                px={[4,4,5]} borderRadius={"8px"}
+                                hoverBg="#181818" boxShadow="card"
+                            >
+                                <SearchIcon  stroke="white" strokeWidth="3" size={16} position="relative" bottom={-3}/>Search
+                            </Button>
                         </FlexBox>
 
-
-                            <Button type="submit" 
-                                display="flex" justifyContent="center" alignItems="center"
-                                p={0} width={[30, 35, 40,45]} height={[30, 35, 40,45]} 
-                                hoverBg={"blue"}
-                                borderRadius="50%" 
-                                bg="dark"
-                            >
-                                <SearchIcon  stroke="white" strokeWidth="3" size={20} />
-                            </Button>
                         </FlexBox>
                     </Form>
                     }

@@ -111,7 +111,7 @@ export const YearSlider = (props) => {
     return(
         <FlexBox boxShadow={"mini"}
             alignItems={"center"}
-            m={[1]}  p={[1]} py={[1]}
+            m={[1]}  p={[1]} py={[3]}
             width={"100%"}
             flexGrow={1,1,1, 0}
             border="0.5px solid"
@@ -125,7 +125,7 @@ export const YearSlider = (props) => {
             <WatchIcon title="Release Year" stroke={props.iconColor || "white"}  size={40}/>
             <FlexBox flexWrap="wrap" width={["80%", "80%", "90%", "90%", "94%"]} pb={[3]}>
 
-                <Text textAlign="center" width={"100%"} color="light" fontWeight="bold">Released Between Years</Text>
+                <Text textAlign="center" width={"100%"} color="dark" fontWeight="bold">Released Between Years</Text>
                 <InputSelect 
                     options={minYearOptions} 
                     selected={minYear} 
@@ -189,7 +189,7 @@ export const RatingSlider = (props) => {
         >
         <ImdbIcon title="IMDb Rating" fill={props.iconColor || "#fac539"}  size="40px !important;" imdb/>
         <FlexBox flexWrap="wrap" width={["80%", "80%", "90%", "90%", "94%"]} pb={[3]}>
-            <Text textAlign="center" width={"100%"} color="light" fontWeight="bold">Min and Max IMDb Rating</Text>
+            <Text textAlign="center" width={"100%"} color="dark" fontWeight="bold">Min and Max IMDb Rating</Text>
             <InputSelect 
                 options={minRatingOptions} 
                 selected={minRating} 
