@@ -177,7 +177,7 @@ const MoviePage = props => {
 					<>
 					<MessageBox mb={[2]} id="movie-page-header"
 						header={`${item.name} Cast & Crew`}
-						text={item.crew.length > 4 ? `Here the list of director, actors and actresses of ${item.name} and their character names.` : null}
+						text={item.crew.length > 4 ? `Here the list of director, actors and actresses of ${item.name} (${item.year}) and their character names.` : null}
 					/>
 					<Dl>
 						<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>

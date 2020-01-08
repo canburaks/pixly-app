@@ -116,7 +116,7 @@ const ContentSimilarSection = (props) => {
                 <Dl ref={node}>
                     <MessageBox 
                         subheader={`Similar ${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Movies" : "Movies" } like ${data.movie.name.trim()} (${data.movie.year})`}
-                        text={
+                        text={data.movie.contentSimilarsSummary ? data.movie.contentSimilarsSummary :
                             `These are highly similar movies to ${data.movie.name.trim()} in a manner of only the content elements. ` +
                             `The movies in this part have common topics, tags or sub-genres with ${data.movie.name.trim()} movie. ` +
                             `${commonGenres(data.movie.tagNames, data.listOfContentSimilarMovies)}`
@@ -297,7 +297,7 @@ query similars($slug:String!, $page:Int!, $num:Int){
     listOfContentSimilarMovies(slug:$slug, page:$page, num:$num){
         slug, name, year, poster, coverPoster, nongenreTags, tagNames,
     },
-    movie(slug:$slug){id, slug, name, year, nongenreTags, tagNames}
+    movie(slug:$slug){id, slug, name, year, nongenreTags, tagNames, contentSimilarsSummary}
 }
 `;
 const RECOMMENDATION_FINDER = gql`
