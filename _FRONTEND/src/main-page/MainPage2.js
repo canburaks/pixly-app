@@ -310,9 +310,9 @@ const Features = ({ setModalOpen }) => {
 						/>
 						<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>
 							{"We will analyze " + 
-							"your cinema taste with AI-Based algorithmns after you rated 40 movies " +
-							"then we will make very personalized movie " +
-							"recommendations every week."}
+							"your cinema taste with our AI-Based film recommendation engine after you rated 40 movies. " +
+							"After then, we will make very personalized movie " +
+							"recommendations based on movies you like."}
 						</Text>
 					</FlexBox>
 				</FlexBox>
@@ -366,8 +366,9 @@ const Features = ({ setModalOpen }) => {
 							</NewLink>
 						</SubHeaderText>
 						<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>
-							Let search your favourite film and discover movies that have similar genre, tag, or theme.
-							Besides, You may also film recommendations like your favourite film based on our AI-assisted algorithms. 
+							Let search your movies you like and discover movies that have similar genre, tag, or theme with our 
+							<em> similar movie finder</em>.
+							Besides, You may also find film recommendations like your favourite film which are suggested by our AI-assisted recommendation engine. 
 						</Text>
 					</FlexBox>
 				</FlexBox>
@@ -402,8 +403,9 @@ const Features = ({ setModalOpen }) => {
 							</NewLink>
 						</SubHeaderText>
 						<Text mr={[1,1,2]}  fontSize={["14px", "14px", "14px", "14px"]}>
-							Handpicked and collected lists of movies such as the favourite list of films of the famous
-							directors, the grand prize winner movies of the prestigious film festivals. Also, categorical lists such as
+							We are also collecting and curating lists of movies that fit your mood or cinema taste such as the favourite list of films of the famous
+							directors, the grand prize winner movies of the prestigious film festivals. Also, there are
+							topic lists that include the best artworks of its category such as
 							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/art-house">arthouse</NewLink>,
 							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/cyberpunk">cyberpunk</NewLink>,
 							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/controversial">controversial</NewLink>,
