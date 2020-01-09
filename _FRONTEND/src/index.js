@@ -26,16 +26,6 @@ import { development, production } from "./styled-components"
 import { Store } from "./store/store"
 import { rgaStart , usePageViews} from "./functions"
 
-//import { GET_DIRECTOR_LIST } from "./functions/gql"
-
-//import "slick-carousel/slick/slick.css";
-//import "slick-carousel/slick/slick-theme.css";
-//import "../node_modules/tachyons/css/tachyons.min.css";
-
-//import './App.scss';
-
-
-//import "./modernscale.css"
 
 
 const UriSwitcher = (uriType) =>{

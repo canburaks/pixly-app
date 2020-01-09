@@ -36,6 +36,7 @@ import { Clippy } from './styled-components'
 import { GlobalContext } from "./";
 
 
+
 const App = (props) => {
     const globalstate = useContext(GlobalContext)
     //var cookie = document.cookie;

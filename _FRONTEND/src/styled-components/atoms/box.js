@@ -245,7 +245,12 @@ export const BlurBox = styled(SuperBox)`
     z-index:2;
     overflow: hidden;
 `
-export const ListBox = styled(Box)`
+export const ListBox = styled(Box)`    
+    :hover { 
+        . p{
+            font-weight:bold;
+        }
+    }
     :first-child {
         border-top-left-radius:8px;
         border-top-right-radius:8px
