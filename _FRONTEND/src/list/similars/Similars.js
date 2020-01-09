@@ -127,8 +127,17 @@ const SimilarFinder = (props) => {
                     >
                         Similar Movie Finder
                     </HeaderText>  
+                    <SubHeaderText  
+                        fontFamily={"playfair"} fontWeight="bold"
+                        fontSize={["18px", "18px","24px", "24px","30px", "36px"]}
+                        color="white" 
+                        textAlign="center" position="relative"
+                    >
+                        Discover <em>Movies Like</em> Your Favourites.
+                    </SubHeaderText>  
                     {showInfoText && 
                         <Text color="white" position="relative" my={[3,3,4]} px={[3,3,4,4,5]}>
+                            Discover <em>movies like</em> your favourites.
                             Are you looking good movies to watch and can't decide? Let search your favourite film 
                             and discover similar movies like it. Besides, "People also like" section may provide good movie recommendations. 
                             The movies of "People also like" section are selected with&nbsp;
@@ -141,9 +150,9 @@ const SimilarFinder = (props) => {
                             fontWeight="bold" color="white" 
                             position="relative" 
                             mt={[4,4,5]} mb={[2,2,3]}  textAlign="center"
-                            fontSize={["18px","18px","24px", "28px", "32px"]}
+                            fontSize={["12px","12px","14px", "18px"]}
                         >
-                            Search A Movie. Select It. See Similar Movies Like It.
+                            Search A Movie. Select It. Find Similar Movies You Like It.
                         </SubHeaderText>
                         }
                     {/* Search Input*/}
@@ -159,7 +168,7 @@ const SimilarFinder = (props) => {
                         :<MovieAutoComplete 
                             dispatch={searchdispatcher} 
                             position="relative" 
-                            placeholder="E.g. Matrix " 
+                            placeholder="Movies like .... " 
 
                             />
                         }
