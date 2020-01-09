@@ -361,7 +361,7 @@ const Features = ({ setModalOpen }) => {
 							width={"auto"}
 							fontWeight="bold"
 						>
-							<NewLink link="/similar-movie-finder"><Span underline>Find Similar Movies</Span>
+							<NewLink link="/similar-movie-finder" follow={true} ><Span underline>Find Similar Movies</Span>
 								<LinkIcon size={16} position="relative" bottom={-6} hoverScale/>
 							</NewLink>
 						</SubHeaderText>
@@ -383,7 +383,7 @@ const Features = ({ setModalOpen }) => {
 						/>
 						<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>
 						{"Keep and track your personal cinema history " + 
-							"by adding movies to watchlist, or liking them. Then You can share movies from there"}
+							"by adding movies to watchlist, or liking them. Then You can share movies from there."}
 						</Text>
 					</FlexBox>
 				</FlexBox>
@@ -398,7 +398,7 @@ const Features = ({ setModalOpen }) => {
 							width={"auto"}
 							fontWeight="bold"
 						>
-							<NewLink underline link="/lists-of-films"><Span underline>Curated and Collected Lists Of Films</Span>
+							<NewLink underline link="/lists-of-films" follow={true}><Span underline>Curated and Collected Lists Of Films</Span>
 								<LinkIcon size={16} position="relative" bottom={-6} hoverScale/>
 							</NewLink>
 						</SubHeaderText>
@@ -406,12 +406,11 @@ const Features = ({ setModalOpen }) => {
 							We are also collecting and curating lists of movies that fit your mood or cinema taste such as the favourite list of films of the famous
 							directors, the grand prize winner movies of the prestigious film festivals. Also, there are
 							topic lists that include the best artworks of its category such as
-							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/art-house">arthouse</NewLink>,
-							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/cyberpunk">cyberpunk</NewLink>,
-							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/controversial">controversial</NewLink>,
-							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/thought-provoking">thought-provoking</NewLink>, 
-							<NewLink ml={[1]} underline fontWeight="bold" link="/topic/mystery">mystery movies</NewLink> etc.
-
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Arthouse Movies"} link="/topic/art-house">arthouse</NewLink>,
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Cyberpunk Movies"} link="/topic/cyberpunk">cyberpunk</NewLink>,
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Controversial Movies"} link="/topic/controversial">controversial</NewLink>,
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Thought-Provoking Movies"} link="/topic/thought-provoking">thought-provoking</NewLink>, 
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Mystery Movies"} link="/topic/mystery">mystery</NewLink> movies etc.
 						</Text>
 					</FlexBox>
 				</FlexBox>
@@ -426,7 +425,7 @@ const Features = ({ setModalOpen }) => {
 						/>
 						<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]}>
 						{"Keep and track your personal cinema history " + 
-							"by adding movies to watchlist, or liking them. Then You can share movies from there"}
+							"by adding movies to watchlist, or liking them. Then You can share movies from there."}
 						</Text>
 					</FlexBox>
 				</FlexBox>

@@ -99,6 +99,7 @@ export const NewLink = styled(LinkNoFollow)`
   text-decoration:${props => props.underline ? "underline" : "initial"};
   transition: ${themeGet("transitions.fast")};
   ${props => props.hidden && hideText()}
+  ${flexbox}
 
   ${color}
   ${space}

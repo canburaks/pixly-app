@@ -52,6 +52,46 @@ const Path = styled.path`
 	${position};
 	${color};
 `
+export const FourSquareIcon = (props) => (
+<Svg viewBox="0 0 24 24" 
+	fill="none" stroke="#000000" 
+	strokeWidth="2" strokeLinecap="round" 
+	strokeLinejoin="round"
+	{...props}
+>
+	<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect>
+	<rect x="14" y="14" width="7" height="7"></rect>
+	<rect x="3" y="14" width="7" height="7"></rect>
+</Svg>
+
+)
+
+export const ListItemCaret = (props) => (
+<Svg viewBox="0 0 24 24" 
+	fill="none" stroke="#000000" 
+	strokeWidth="2" strokeLinecap="round" 
+	strokeLinejoin="round"
+	{...props}
+>
+	<path d="M9 18l6-6-6-6"/>
+</Svg>
+
+)
+
+export const DropdownCaretIcon = (props) => (
+	<Svg 
+		viewBox="0 0 24 24" 
+		fill="none" 
+		stroke="#000000" 
+		strokeWidth="2" 
+		strokeLinecap="round" 
+		strokeLinejoin="round"
+		{...props}
+	>
+		<path d="M6 9l6 6 6-6"/>
+	</Svg>
+)
+
 export const LinkIcon = ({ title,  ...props }) =>  (
 <Svg xmlns="http://www.w3.org/2000/svg" 
 	viewBox="0 0 24 24" 

@@ -172,13 +172,14 @@ const TopicPage = (props) =>{
                             <RatingSlider dispatcher={ratingDispatcher} />
                             <Button 
                                 type="submit" 
+                                display="flex" alignItems="center" justifyContent="center"
                                 width="100%" height={"40px"}
                                 fontWeight="bold" 
                                 color="light" bg="#282828"
                                 px={[4,4,5]} borderRadius={"8px"}
-                                hoverBg="#181818" boxShadow="card"
+                                hoverBg="#181818" boxShadow="card" 
                             >
-                                <SearchIcon  stroke="white" strokeWidth="3" size={16} position="relative" bottom={-3}/>Search
+                                <SearchIcon  stroke="white" strokeWidth="3" size={16} position="relative" bottom={0}/>Search
                             </Button>
                         </FlexBox>
 
@@ -193,7 +194,6 @@ const TopicPage = (props) =>{
                         p={[1,2,3]}
                     >
                     <SearchQueryBox 
-                        topicSlug={topicSlug} 
                         lazyvariables={lazyvariables} 
                         dispatcher={dataDispatcher} 
                     />
@@ -210,11 +210,11 @@ const TopicPage = (props) =>{
     );
 }
 
-const SearchQueryBox = React.memo(({topicSlug, lazyvariables, dispatcher}) =>{
+const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
     const { slug, page=1 } = useParams();
     const variables = lazyvariables ? lazyvariables : {minYear:1950, maxYear:2019, minRating:5.0, maxRating:9.9}
     const { loading, data, } = useQuery(TOPIC_SEARCH_QUERY,{variables:{
-        topicSlug, page, ...variables
+        topicSlug:slug, page, ...variables
     },partialRefetch:true})
 
 
