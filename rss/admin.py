@@ -5,7 +5,7 @@ from .models import RSSFeed
 @admin.register(RSSFeed)
 class RSSFeedAdmin(admin.ModelAdmin):
     list_display = ('slug', "pathname","is_published",)
-    fields = ("slug", "topic", "liste", "title", "tag", "feed_type", "pathname", "cover_poster","is_published")
+    fields = ("slug", "topic", "liste", "title", "tag", "feed_type", "pathname", "cover_poster","is_published", "updated_at", "created_at")
 
 
 # Register your models here.

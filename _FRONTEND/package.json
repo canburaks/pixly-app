@@ -197,8 +197,12 @@
     "include": [
       "",
       "/",
-      "/topic/mystery",
-      "/movie/the-raven-2012"
+      "/movie/tumbleweeds-1999",
+      "/movie/little-black-book-2004",
+      "/movie/her-2013",
+      "/movie/good-will-hunting-1997",
+      "/movie/extremis-2016"
+
     ],
     "publicPath": "/"
   }
