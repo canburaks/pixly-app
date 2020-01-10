@@ -40,6 +40,7 @@ const TopicPage = (props) =>{
 
     const [yearData, setYearData ] = useState({minYear:1950, maxYear:2019})
     const [ratingData, setRatingData ] = useState({minRating:5.0, maxRating:9.9})
+    const node = useRef(null)
 
     const [lazyvariables,setLazyVariables] = useState(null)
     const [queryData, setQueryData] = useState(null)
@@ -78,9 +79,8 @@ const TopicPage = (props) =>{
         if (page === undefined || parseInt(page)===1){
             window.scrollTo({left:0, top:0, behavior:"smooth"})
         }
-        else if (parseInt(page) > 1){
-            const resultbox = document.getElementById("search-rresult-box")
-            window.scrollTo({left:0, top:resultbox.offsetTop, behavior:"smooth"})
+        else if (parseInt(page) > 1 && node && node.current){
+            window.scrollTo({left:0, top:node.current.offsetTop, behavior:"smooth"})
         }
     },[page])
     
@@ -188,7 +188,7 @@ const TopicPage = (props) =>{
                     }
                 <Hr />
                 
-                <Box id="search-rresult-box"  
+                <Box id="search-rresult-box"  ref={node}
                         borderColor="rgba(40,40,40, 0.3)"
                         minWidth={["100%", "100%", "100%", "100%", "100%"]} height={["100vw"]}
                         p={[1,2,3]}
