@@ -48,7 +48,7 @@ const BlogPage = (props) =>{
                 canonical={`https://pixly.app/blog`}
             />
             <ContentContainer pb={"80px"}>
-            {props.posts.map(post => <PostInfoBox post={post} key={post.slug} />)}
+            {props.posts.map(post => <PostInfoBox post={post} key={post.slug} follow/>)}
 
             </ContentContainer>
         </PageContainer>
@@ -101,10 +101,12 @@ const TopicLinkList = (props) => {
             <FlexBox flexDirection="column" width="100%" my={[4]}>
             <MessageBox mb={[2]} id="movie-page-topic-section"
                 header={"The movie lists below might interest you"}
-                text={
-                    "Topics are film list collections that include many great examples of its category and curated by us."
-                }
-            />
+            >
+                <Text>
+                    Topics are film list collections that include many great examples of its category and curated by us.
+                    If you are interested, you can check our <NewLink link={"/lists-of-films"} follow underline title="Film List Collections">movie list collections</NewLink>.
+                </Text>
+            </MessageBox>
                 <Grid columns={[2,2,2,2,2,4]} width={"100%"} mt={[3]}>
                     {topics.map((topic, i) => (
                         <CoverImage  

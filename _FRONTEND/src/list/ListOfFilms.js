@@ -99,6 +99,7 @@ const TopicSection = ({topics, partitionQuantity=4}) => (
             <Grid columns={[1,1,2,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {topics.slice(0, partitionQuantity).map( item => (
                     <CollectionCard 
+                        follow={item.isImportantPage ? true : undefined}
                         item={item} key={"rec" + item.id}  
                         link={`/topic/${item.slug}`} 
                         text={item.seoShortDescription} />
@@ -110,6 +111,7 @@ const TopicSection = ({topics, partitionQuantity=4}) => (
             <Grid columns={[1,1,2,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {topics.slice(partitionQuantity, partitionQuantity*2).map( item => (
                     <CollectionCard 
+                        follow={item.isImportantPage ? true : undefined}
                         item={item} key={"rec" + item.id}  
                         link={`/topic/${item.slug}`} 
                         text={item.seoShortDescription} />
@@ -120,6 +122,7 @@ const TopicSection = ({topics, partitionQuantity=4}) => (
             <Grid columns={[1,1,2,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {topics.slice(partitionQuantity*2, partitionQuantity*3).map( item => (
                     <CollectionCard 
+                        follow={item.isImportantPage ? true : undefined}
                         item={item} key={"rec" + item.id}  
                         link={`/topic/${item.slug}`} 
                         text={item.seoShortDescription} />
@@ -259,15 +262,15 @@ const CollectionCard = (props) => (
                 <CoverLink link={props.link} color="transparent">{props.link}</CoverLink>
             </SuperBox>
         </LazyLoadComponent>
+            <Dt>
         <HeaderMini width={"75%"} fontFamily={"playfair"} color="dark" hoverUnderline
             my={[2,2,3]}
             >
-            <NewLink link={props.link}>
-            <Dt>
+            <NewLink link={props.link} follow={props.follow}>
                 {props.item.name}
-            </Dt>
             </NewLink>
         </HeaderMini>
+            </Dt>
         <Dd  
             color="dark"
             textAlign="justify"
