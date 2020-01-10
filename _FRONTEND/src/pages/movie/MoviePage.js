@@ -129,7 +129,6 @@ const MoviePage = props => {
 				`It appears in ${item.topics.length}  topic movie ${item.topics.length > 1 ? "collections" : "collections"}. ` + 
 				`You will find many great artworks of ${mappedTopicNames} films below.`
 
-	console.log(mappedTopicNames)
 
     useEffect(()=>{
         if (props.location.hash){
@@ -209,11 +208,12 @@ const MoviePage = props => {
 						<Grid columns={[1,2,2,3,3,3,4]} width={"100%"}>
 							{item.topics.map((topic, i) => (
 								<CoverImage  
+									borderRadius={"4px"}
 									boxShadow="card"
 									hoverShadow="hover" translateY
 									src={topic.coverPoster}
 									ratio={0.55}
-									link={`/topic/${topic.slug}`}
+									link={`/topic/${topic.slug}`} follow={item.isImportantPage ? true : undefined}
 									title={`${topic.name} Movies`}
 									alt={`${topic.name} Movies: ${item.name}`}
 									key={topic.name} 
