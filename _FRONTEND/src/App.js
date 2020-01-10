@@ -52,7 +52,7 @@ const App = (props) => {
     const isPathIncludes = (pathname) => window.location.pathname.includes(pathname)
 
     const checkFooter = () => {
-        let blacklist = ["lists-of-films", "topic", "list/", "/dashboard", "advance-search", "similar-movie-finder"]
+        let blacklist = ["lists-of-films", "topic", "list/",  "advance-search", "similar-movie-finder"]
         return !blacklist.some(e => window.location.pathname.includes(e))
         
     }
