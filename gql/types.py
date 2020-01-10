@@ -362,7 +362,7 @@ class MovieType(DjangoObjectType):
         model = Movie
 
     def resolve_topics(self, info):
-        return self.topics.all()
+        return self.topics.all().exclude(cover_poster="")
 
     def resolve_content_similars_summary(self, info):
         return self.content_similars_summary
@@ -1860,7 +1860,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         self.viewer = viewer #Profile
 
     def resolve_topics(self, info):
-        return self.movie.topics.all()
+        return self.movie.topics.all().exclude(cover_poster="")
 
     def resolve_content_similars_summary(self, info):
         return self.movie.content_similars_summary
