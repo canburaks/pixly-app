@@ -14,7 +14,7 @@ import { NewLink } from './link';
 export const CoverImage = ({src, ratio, alt, title, link, ...props }) => (
     <Box position="relative" width="100%" pt={`${ratio*100}%`}  {...props}>
         {link 
-            ? <NewLink link={link} ><AbsoluteImage src={src} alt={alt} title={title} /></NewLink>
+            ? <NewLink link={link} title={title}><AbsoluteImage src={src} alt={alt} title={title} /></NewLink>
             : <AbsoluteImage src={src} alt={alt} title={title} />
         }
     </Box>

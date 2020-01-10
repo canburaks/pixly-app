@@ -50,6 +50,7 @@ import {
 	CoverLink,
 	SimilarMovies,
 	MessageBox,
+	CoverImage,
 	Dl,Dt,Dd
 } from "../../styled-components";
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
@@ -120,6 +121,16 @@ const MoviePage = props => {
 
 	const isMobile = window.innerWidth < 480;
 
+	// TOPIC SECTION TEXTS
+
+	const mappedTopicNames = item.topics.map(t => t.shortName).join(", ")
+	const messageBoxTopicHeader = `Topic Movie ${item.topics.length > 1 ? "Lists" : "List"}: ${mappedTopicNames}`
+	const messageBoxTopicText = `This section shows the topic film collection that includes ${item.name}. ` +
+				`It appears in ${item.topics.length}  topic movie ${item.topics.length > 1 ? "collections" : "collections"}. ` + 
+				`You will find many great artworks of ${mappedTopicNames} films below.`
+
+	console.log(mappedTopicNames)
+
     useEffect(()=>{
         if (props.location.hash){
 			var hashId = props.location.hash.slice(1) 
@@ -167,10 +178,8 @@ const MoviePage = props => {
 				
 				<SummaryElement />
 
+				{/* OPTIONAL HTML CONTENT*/}
 				{item.htmlContent && <HtmlContent movie={item} />}
-
-				<MoviePageAd />
-
 
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
@@ -182,8 +191,34 @@ const MoviePage = props => {
 					<Dl>
 						<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>
 							{allCrews.map((crew, i) => (
-								<CrewCard crew={crew} key={crew.person.name} />
+								<CrewCard crew={crew} key={i + crew.person.name} translateY/>
 									))}
+						</Grid>
+					</Dl>
+					</>
+				)}
+
+				{/*<!--TOPICS Section--> */}
+				{item.topics.length > 0 && (
+					<>
+					<MessageBox mb={[2]} id="movie-page-topic-section"
+						header={messageBoxTopicHeader}
+						text={messageBoxTopicText}
+					/>
+					<Dl>
+						<Grid columns={[1,2,2,3,3,3,4]} width={"100%"}>
+							{item.topics.map((topic, i) => (
+								<CoverImage  
+									boxShadow="card"
+									hoverShadow="hover" translateY
+									src={topic.coverPoster}
+									ratio={0.55}
+									link={`/topic/${topic.slug}`}
+									title={`${topic.name} Movies`}
+									alt={`${topic.name} Movies: ${item.name}`}
+									key={topic.name} 
+								/>
+								))}
 						</Grid>
 					</Dl>
 					</>
@@ -238,81 +273,7 @@ const MoviePage = props => {
 	);
 }
 
-const MovieRecommendationBox = (props) => (
-    <Grid columns={[1,1,1,2,2,2,2,3,4]} py={[4]}>
-        {props.items.map( item => (
-            <MovieRecommendationCard item={item} key={"rec" + item.id}/>
-        ))}
-    </Grid>
-)
 
-const MovieRecommendationCard = ({ item }) => (
-	<SuperBox
-		src={item.coverPoster || item.poster}
-		width="100%"
-		ratio={0.7}
-		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
-	>	
-        <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
-		<FlexBox 
-			position="absolute" 
-			bottom={0} left={0}
-			width={"100%"} height={"auto"}
-			flexDirection="column" px={[2]} pt={[2]}
-			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"} zIndex={1}
-		>
-			<Text color="light" fontWeight="bold">
-                <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
-            </Text>
-			<TagBox tags={item.tags || []} num={6} color={"light"}/>
-		</FlexBox>
-
-	</SuperBox>
-)
-
-
-const MovieContentSimilarCardBox = React.memo(({ items, columns=[2,2,3,3,3,4,6], ...props }) => (
-    <Grid columns={columns} py={[4]}>
-        {items.map( item => <ContentSimilarMovieCard item={item} />)}
-    </Grid>
-), (p,n) => (p.key ? (p.key === n.key) : (p.items.length === n.items.length)))
-
-const ContentSimilarMovieCard = ({ item }) => (
-	<SuperBox
-		src={item.movie.poster}
-		width="100%"
-		ratio={1.5}
-		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
-	>	
-		{/*item.movie.imdbRating && 
-			<AbsoluteBox top={"5px"} right={"5px"} 
-				borderRadius={"50%"} 
-				bg={"rgba(0,0,0, 0.9)"} 
-				color="light" 
-				fontWeight="bold"
-				fontSize={["12px", "12px", "14px"]}
-				p={"2px"}
-			>
-				{item.movie.imdbRating}
-			</AbsoluteBox>
-			*/}
-		<CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0}/>
-		<FlexBox 
-			position="absolute" 
-			bottom={0} left={0}
-			width={"100%"} height={"auto"}
-			flexDirection="column"  justifyContent="space-between"
-			p={[2]} zIndex={1}
-			bg={"rgba(0,0,0, 0.85)"} minHeight={"100px"}
-		>
-			<Text color="light" fontWeight="bold">
-                <NewLink link={`/movie/${item.movie.slug}`} hoverUnderline>{item.movie.name} ({item.movie.year})</NewLink>
-            </Text>
-			<TagBox tags={item.commonTags || []} num={4} color={"light"}/>
-		</FlexBox>
-		<CoverLink link={`/movie/${item.movie.slug}`} />
-	</SuperBox>
-) 
 
 const HtmlContent = ({ movie }) => (
     <FlexBox flexDirection="column" mt={[3,3,4]}>

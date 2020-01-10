@@ -206,15 +206,15 @@ h3 {
     background-color: rgba(180,180,180, 0.9);
 }
 .cover-link:hover {
-    background-color: rgba(255,255,255, 0.1) !important;
+    background-color: rgba(255,255,255, 0.01) !important;
 }
 
 .content-similar-movie-card:hover .content-similar-movie-card-info {
-    background-color: rgba(40,40,40, 0.85);
+    text-decoration: underline;
 }
 
-.recommendation-similar-movie-card:hover .recommendation-similar-movie-card-info {
-    background-color: rgba(40,40,40, 0.85);
+.recommendation-similar-movie-card:hover .recommendation-similar-movie-card-info dt {
+    text-decoration: underline;
 }
 #plus-loader-container {
     width:20vw;

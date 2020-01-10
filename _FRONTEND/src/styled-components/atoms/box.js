@@ -44,7 +44,8 @@ export const Box = styled.div`
         box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
         border: ${props => props.hoverBorder && '3px solid #3633CC' };
         text-decoration: ${props => props.hoverUnderline && "underline"};
-        background:${props => props.hoverLight && setLightness('0.15', `${props.hoverLight}`)};
+        background:${props => props.hoverLight && setLightness('0.05', `${props.hoverLight}`)};
+        transform:${props => props.translateY && `translateY(-4px)`};
         }
     transition: ${themeGet("transitions.fast")};
     border: ${props => props.hoverBorder && "3px solid transparent"};
@@ -85,12 +86,14 @@ export const SuperBox = styled.div`
     cursor: ${props => props.clickable ? "pointer" : "inherit"};
     overflow: hidden;
     z-index:1;
-    transition: background-image 5s ease-in-out !important;
+    transition: ${themeGet("transitions.medium")};
+    transition: background-image 2s ease-in-out !important;
     :hover { 
         box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
         border: ${props => props.hoverBorder && '3px solid #3633CC' };
         text-decoration: ${props => props.hoverUnderline && "underline"};
         background:${props => props.hoverLight && setLightness('0.45', 'rgba(204,205,100,0.7)')};
+        transform:${props => props.translateY && `translateY(-4px)`};
     }
     ${color}
     ${space}

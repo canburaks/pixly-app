@@ -81,6 +81,7 @@ themes.default.transitions  = {
 
 
 themes.default.shadows = {
+
 	light:"0px 2px 4px rgba(255, 255, 255, 1)",
 	dark: "-1px 1px 1px rgba(20, 20, 20, 0.87)",
 
@@ -119,12 +120,23 @@ themes.default.shadows = {
 			"0 4px 4px rgba(0,0,0,0.16), " +
 			"0 6px 6px rgba(0,0,0,0.20) " ,
 	
+	crew:"0 1px 1px rgba(0,0,0,0.08), " +
+			"0 2px 2px rgba(0,0,0,0.12), " +
+			"0 4px 4px rgba(0,0,0,0.16), " +
+			"0 6px 6px rgba(0,0,0,0.20) " ,
+
 	diffuse3:"0 1px 1px rgba(0,0,0,0.18), " +
 			"0 2px 2px -4px rgba(0,0,0,0.20), " +
 			"0 3px 4px -4px rgba(0,0,0,0.24), " +
 			"0 4px 6px -4px rgba(0,0,0,0.26) " ,
 
-	hover: "8px 30px 20px -8px rgba(0, 0, 0, 0.57)"
+
+	latest:"0 6.8px 17.5px rgba(0, 0, 0, 0.07), " +
+		   "0 54px 140px rgba(0, 0, 0, 0.035)",
+
+	hover: "0 12px 16px -4px rgba(0,0,0, 0.7)",
+	crewHover: "0 12px 16px -4px rgba(0,0,0, 0.4)"
+
 	//hover:  "0 1px 1px   rgba(0, 0, 0,   0.22), " +
 	//		"0 2px 2px   rgba(0, 0, 0,   0.22), " + 
 	//		"0 4px 4px   rgba(0, 0, 0,   0.22), " + 
