@@ -92,7 +92,8 @@ const TopicLinkList = (props) => {
     const topics = [
         {name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk.jpg"},
         {name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking.jpg"},
-        {name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery.jpg"}
+        {name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery.jpg"},
+        {name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures.jpg"}
     ]
 
     return (
@@ -103,7 +104,7 @@ const TopicLinkList = (props) => {
                     "Topics are film list collections that include many great examples of its category and curated by us."
                 }
             />
-                <Grid columns={[1,2,2,3,3,3,4]} width={"100%"} mt={[3]}>
+                <Grid columns={[2,2,2,2,2,4]} width={"100%"} mt={[3]}>
                     {topics.map((topic, i) => (
                         <CoverImage  
                             borderRadius={"4px"}
