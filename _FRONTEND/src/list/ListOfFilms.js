@@ -44,7 +44,7 @@ const ListOfFilms = (props) => {
     const topics = useMemo(() => props.data.topics.sort((a,b) => b.id - a.id),[])
 
     
-    //console.log("data",topics, allLists)
+    console.log("data",topics, allLists)
     useEffect(() => window.scrollTo(0,0), [])
     return (
         <PageContainer top={-75}>
