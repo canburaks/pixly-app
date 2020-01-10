@@ -38,7 +38,7 @@ const BlogQuery = (props) => {
 
 
 const BlogPage = (props) =>{
-    //print("blog props", props)
+    useEffect(() => window.scrollTo({top:0, left:0, behavior:"smooth"}))
     return(
         <PageContainer>
             <Head
@@ -68,6 +68,7 @@ const PostPage = (props) =>{
     //    return {__html: props.post.text};
     //  }
     //const InnerHtml = () => <div dangerouslySetInnerHTML={createMarkup()} />;
+    useEffect(() => window.scrollTo({top:0, left:0, behavior:"smooth"}))
     return(
         <PageContainer>
             <Head

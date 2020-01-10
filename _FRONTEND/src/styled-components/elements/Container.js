@@ -88,7 +88,7 @@ export const MessageBox = ({ header,Header,subheader, text, Image, children, ...
     </FlexBox>
 )
 
-export const PostInfoBox = ({ post, children }) => (
+export const PostInfoBox = ({ post, follow, children }) => (
     <FlexBox 
         fontFamily="paragraph" overflow="hidden"
         border="1px solid" borderColor="rgba(40,40,40, 0.4)" 
@@ -108,7 +108,7 @@ export const PostInfoBox = ({ post, children }) => (
                 <CoverLink to={`/blog/${post.slug}`} width={"100%"}/>
             </SuperBox>
 
-            <NewLink to={`/blog/${post.slug}`}>
+            <NewLink to={`/blog/${post.slug}`} follow={follow ? true : undefined}>
                 <HeaderMini fontSize={["18px", "18px", "20px", "22px"]} hoverUnderline>{post.header}</HeaderMini>
             </NewLink>
             <Text fontWeight="bold" color={"rgba(40,40,40, 0.7)"} mt={[1]}>{post.summary}</Text>
