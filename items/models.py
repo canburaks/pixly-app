@@ -1037,7 +1037,9 @@ class Topic(SEO, MainPage):
     id = models.IntegerField(primary_key=True)
     slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
     tag = models.OneToOneField("items.Tag", null=True, blank=True, on_delete=models.CASCADE)
+    
     name = models.CharField(max_length=400)
+    short_name = models.CharField(max_length=50, null=True, blank=True, help_text="This will be used in a situation that requires short name rather than 'The Best ....'")
     summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic. max: 300 characters")
     content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
     html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")

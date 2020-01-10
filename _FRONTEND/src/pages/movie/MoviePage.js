@@ -336,7 +336,6 @@ const TrailerIcon = () => (
 		width={"10%"}
 		top={"45%"}
 		height={"45%"}
-		justifyContent={"center"}
 	>
 		<YoutubeIcon size={[40,40,50,60]} hoverScale boxShadow={"0 1px 1px 1px rgba(0,0,0, 0.35)"}/>
 	</HashLink>
