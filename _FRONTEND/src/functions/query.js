@@ -29,6 +29,7 @@ export const MOVIE = gql`
             release,
             quotes,
             director{id,name,slug},
+            topics{id,name,slug,coverPoster, summary},
             crew{job, character, person{id,name, poster, slug}},
             tags{name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag},
             videos{id,title,summary,link,duration,tags,isFaved,ytId,thumb},

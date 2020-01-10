@@ -865,8 +865,13 @@ class TopicType(DjangoObjectType, SEOType):
     updated_at = graphene.String()
     link = graphene.String()
 
+    short_name = graphene.String()
+
     class Meta:
         model = Topic
+
+    def resolve_short_name(self, info, *_):
+        return self.short_name
 
     def resolve_link(self, info, *_):
         return f"/topic/{self.slug}"

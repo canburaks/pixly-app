@@ -15,12 +15,11 @@ export const HashLink = styled(HLink).attrs(props => props.rel ? {rel:props.rel}
       color:${props => props.hoverColor && props.hoverColor};
       box-shadow:${props => props.hoverShadow && props.hoverShadow};
       text-decoration:${props => props.hoverUnderline && "underline"};
-
   };
   text-decoration:initial;
   transition: ${themeGet("transitions.medium")};
-  ${props => props.hidden && hideText()}
-
+  ${props => props.hidden && hideText()};
+  ${flexbox}
   ${color}
   ${space}
   ${shadow}
@@ -28,7 +27,6 @@ export const HashLink = styled(HLink).attrs(props => props.rel ? {rel:props.rel}
   ${border}
   ${position}
   ${typography}
-  ${flexbox}
 `
 
 const LinkNoFollow = ({ to,link, className, children, follow,target, ...props }) => (
