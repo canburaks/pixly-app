@@ -214,8 +214,8 @@ const MoviePage = props => {
 									src={topic.coverPoster}
 									ratio={0.55}
 									link={`/topic/${topic.slug}`} follow={item.isImportantPage ? true : undefined}
-									title={`${topic.name} Movies`}
-									alt={`${topic.name} Movies: ${item.name}`}
+									title={`${topic.shortName} Movies`}
+									alt={`${topic.shortName} Movies: ${item.name}`}
 									key={topic.name} 
 								/>
 								))}
