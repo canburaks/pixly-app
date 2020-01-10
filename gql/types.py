@@ -356,10 +356,14 @@ class MovieType(DjangoObjectType):
     tag_names = graphene.List(graphene.String)
     content_similars_summary = graphene.String()
     topics = graphene.List("gql.types.TopicType")
+    is_important_page = graphene.Boolean()
 
 
     class Meta:
         model = Movie
+
+    def resolve_is_important_page(self, info):
+        return self.important_page
 
     def resolve_topics(self, info):
         return self.topics.all().exclude(cover_poster="")
@@ -1837,6 +1841,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     nongenre_tags = graphene.List(graphene.String)
     tag_names = graphene.List(graphene.String)
     topics = graphene.List(TopicType)
+    is_important_page = graphene.Boolean()
 
 
     def __init__(self, id=None, slug=None, viewer=None):
@@ -1858,6 +1863,9 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_is_important_page(self, info):
+        return self.movie.important_page
 
     def resolve_topics(self, info):
         return self.movie.topics.all().exclude(cover_poster="")
