@@ -34,6 +34,7 @@ class DateRecords(models.Model):
 
 class MainPage(models.Model):
     main_page = models.BooleanField(default=False, help_text="Selected item will be showed on welcome screen")
+    important_page = models.BooleanField(default=False, help_text="Selected item page can be allowed make dofollow links.")
     class Meta:
         abstract = True
 
