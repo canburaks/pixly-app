@@ -870,9 +870,13 @@ class TopicType(DjangoObjectType, SEOType):
     link = graphene.String()
 
     short_name = graphene.String()
+    is_important_page = graphene.Boolean()
 
     class Meta:
         model = Topic
+    
+    def resolve_is_important_page(self, info):
+        return self.important_page
 
     def resolve_short_name(self, info, *_):
         return self.short_name
