@@ -220,7 +220,7 @@ const RecommendationSection = ({num=19}) => {
 
 
 const ContentSimilarMovieCard = ({ item }) => (
-	<SuperBox
+	<SuperBox borderRadius={"4px"}
 		width="100%"
 		ratio={1.5}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
@@ -265,7 +265,7 @@ const ContentSimilarMovieCard = ({ item }) => (
 )
 
 const MovieRecommendationCard = ({ item, speed }) => (
-	<SuperBox
+	<SuperBox borderRadius={"4px"}
 		width="100%"
         src={speed === "fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.coverPoster} 
 		ratio={speed === "slow" ? 1.5 : 0.7}

@@ -3,7 +3,7 @@ import { BlogPostAd } from "../../functions"
 import { 
     Text, Image, HeaderMini,HeaderText, NewLink,
     Box, FlexBox,Quote, OuterLink, Cite, Span, Meta,
-    HtmlContainer, 
+    HtmlContainer, Hr
 } from "../index"
 
 const capitalize = (text) => text.replace(/\b\w/g, l => l.toUpperCase())
@@ -46,13 +46,13 @@ export const SchemaPost = ({ post , ...props}) =>(
         >
             {post.header}
         </HeaderText>
-        <Text>{post.updatedAt.slice(0,10)}</Text>
+        <Text>Published at {post.createdAt.slice(0,10)}. (update: {post.updatedAt.slice(0,10)})</Text>
         <BlogPostAd />
         {/* Article Body*/}
         <Box width={"100%"} height="auto" itemProp="articleBody" mt={[5]}>
             <HtmlContainer my={[3]} fontSize={["16px","16px", "16px", "18px"]} html={post.text} />
         </Box>
-
+        <Hr/>
     </Box>
 )
 

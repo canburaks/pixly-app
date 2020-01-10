@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { BLOG_QUERY } from "../../functions/query"
 
 
-import { isEqualObj, Head, MidPageAd,HomePageFeedAd, print, useAuthCheck} from "../../functions"
+import { isEqualObj, Head, MidPageAd,MoviePageAd, print, useAuthCheck} from "../../functions"
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import * as SocialButtons from 'react-social-sharing'
 
@@ -15,7 +15,7 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaPost,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, HeaderMini, NewLink,
-    PostInfoBox
+    PostInfoBox,  Dl, Dt, CoverImage, Hr
 } from "../../styled-components"
 
 
@@ -76,10 +76,49 @@ const PostPage = (props) =>{
                 canonical={`https://pixly.app/blog/${post.slug}`}
             />
             <ContentContainer  pb={40} px={["5vw", "5vw", "8vw", "10vw", "15vw"]} maxWidth={"100%"}  overFlowX={"hidden"}>
+                <NewLink link={"/blog"} position="absolute" top={"10px"} left={"16px"} underline>&lt; Back to Blog Page</NewLink>
                 <SchemaPost post={post}/>
+
+                <TopicLinkList />
+                <MoviePageAd />
+    
             </ContentContainer>
+
         </PageContainer>
     );
+}
+
+const TopicLinkList = (props) => {
+    const topics = [
+        {name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk.jpg"},
+        {name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking.jpg"},
+        {name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery.jpg"}
+    ]
+
+    return (
+            <FlexBox flexDirection="column" width="100%" my={[4]}>
+            <MessageBox mb={[2]} id="movie-page-topic-section"
+                header={"The movie lists below might interest you"}
+                text={
+                    "Topics are film list collections that include many great examples of its category and curated by us."
+                }
+            />
+                <Grid columns={[1,2,2,3,3,3,4]} width={"100%"} mt={[3]}>
+                    {topics.map((topic, i) => (
+                        <CoverImage  
+                            borderRadius={"4px"}
+                            boxShadow="card"
+                            src={topic.coverPoster}
+                            ratio={0.55}
+                            link={`/topic/${topic.slug}`} follow
+                            title={`Visit ${topic.name} Movies`}
+                            alt={`${topic.name} Film List Image`}
+                            key={topic.name} 
+                        />
+                        ))}
+                </Grid>
+            </FlexBox>
+    )
 }
 
 export default withRouter(BlogQuery);

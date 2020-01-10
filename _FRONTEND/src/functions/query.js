@@ -28,6 +28,7 @@ export const MOVIE = gql`
             genres,
             release,
             quotes,
+            isImportantPage,
             director{id,name,slug},
             topics{id,name,slug,coverPoster, summary, shortName},
             crew{job, character, person{id,name, poster, slug}},
