@@ -7,18 +7,24 @@ import { COMPLEX_SEARCH,TAG_LIST } from "../../functions/query"
 
 import { Head, MidPageAd, HomePageFeedAd, rgaSetEvent } from "../../functions/analytics"
 //import TagSelectStatic from "./TagSelectStatic"
-import {  isEqualObj} from "../../functions"
+import {  isEqualObj, useWindowSize } from "../../functions"
 
 //import "react-input-range/lib/css/index.css"
 
 import { 
     Box, FlexBox,SuperBox, Text,Input,SearchInput, Form,Loading, Button,
-    ImdbIcon, WatchIcon, SearchIcon,
+    ImdbIcon, WatchIcon, SearchIcon,Image,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox,
-    RatingSlider, YearSlider,TagSlider, HeaderText,
+    //RatingSlider, 
+    //YearSlider,
+    TagSlider,
+    HeaderText,
 } from "../../styled-components"
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
+
+import { YearSlider, RatingSlider, TagSelect, SearchInputMaterial } from "../../styled-material"
+
 import "./Search.css"
 
 
@@ -46,6 +52,7 @@ const SearchPage = (props) =>{
     const [ratingData, setRatingData ] = useState({minRating:5.0, maxRating:9.9})
     const [lazyvariables, setLazyVariables ] = useState({keywords})
     const [ message, setMessage ] = useState(null)
+    const screenSize = useWindowSize()
 
 
 
@@ -83,76 +90,86 @@ const SearchPage = (props) =>{
         } 
     }
     //console.log("main", tag, lazyvariables)
-
-    //console.log("qv",variables)
+    const isSmallScreen = useMemo(() => !screenSize.includes("L"), [screenSize])
+    const responsivePosterUrl = isSmallScreen 
+        ? "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-v.jpg"
+        : "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"
+    
     return(
         <PageContainer  p={[0]}>
-            <Header />
 
-            <Form flexWrap="wrap" onSubmit={submitHandler} className="unmatched-purple" py={[4]} width="100%">
-                <HeaderText 
-                    textAlign="center" color="rgba(255,255,255, 0.9)" my={[5]} 
-                    fontSize={["30px", "30px", "36px", "42px", "48px", "54px"]}
-                >
-                    Search Movies by Genre, Rating and Year
-                </HeaderText>
-                <Text textAlign="center" color="rgba(255,255,255, 0.9)" my={[3]}>See Similar Movies, Recommendations Based On People Who Like The Movie, Watch Trailer and See the Cast</Text>
-                <FlexBox justifyContent="center" id="s-text-input" minWidth="100%"  position="relative">
-                    <SearchInput type="text"   
-                        px={[2,3,4,4,4]}
-                        placeholder="Search.."
-                        autoFocus={false}
-                        value={keywords} 
-                        onChange={keywordsHandler} 
-                        minHeight="70px"
-                        width={"100%"}
-                    />
-                    <Button type="submit" 
-                        position="absolute" 
-                        display="flex" justifyContent="center" alignItems="center"
-                        right={40} top={12} p={0} 
-                        width={50} height={50} 
-                        hoverBg={"blue"}
-                        borderRadius="50%" 
-                        bg="dark"
+            <FlexBox overflow="hidden" flexDirection="column" position="relative" top={-65}>
+                <Image src={responsivePosterUrl} position="absolute" 
+                    top={-75} left={-10} right={10} blur={8}
+                    minWidth={"100%"} 
+                    alt={"Pixly AI Movie Recommendation and Movie Rating Website"} zIndex={0}
+                />
+                <Form flexWrap="wrap" onSubmit={submitHandler} py={[5]} maxWidth="100%"  zIndex={1} px={[4]}>
+                    <HeaderText 
+                        textAlign="center" color="rgba(255,255,255, 0.9)" 
+                        my={[3]} 
+                        fontSize={["30px", "30px", "36px", "42px", "48px", "54px"]}
                     >
-                        <SearchIcon  stroke="white" strokeWidth="3" size={30} />
-                    </Button>
-                </FlexBox>
+                        Search Movies by Genre, Rating and Year
+                    </HeaderText>
 
+                    
+                    <FlexBox flexDirection={["column", "column", "row"]} width={"100%"}>
+                        <YearSlider dispatcher={yearDispatcher} />
+                        <RatingSlider dispatcher={ratingDispatcher} />
+                    </FlexBox>
 
-                <FlexBox id="search-settings-box" 
-                    flexDirection={"column"} 
-                    width={"100%"}  
-                    height={"auto"}
-                    justifyContent="space-around"
-                    flexWrap="wrap"
-                    px={[3]} mt={[3,3,3]}
-                >
+                    <FlexBox flexDirection={["column","column","column","row"]} alignItems="center">
 
-                    <TagSlider dispatcher={tagDispatcher}/>
-                    <YearSlider dispatcher={yearDispatcher} />
-                    <RatingSlider dispatcher={ratingDispatcher} />
-                </FlexBox>
-                <Text fontSize={[14,14,16]} fontWeight={"bold"} textAlign="center" color="red">{message}</Text>
-                <Button 
-                    onClick={submitHandler} 
-                    width="auto" height={"40px"}
-                    fontWeight="bold" 
-                    color="light" bg="#282828"
-                    mx={[4,4,5]} borderRadius={"8px"}
-                    hoverBg="#181818" boxShadow="card"
-                >
-                    Search
-                </Button>
-            </Form>
+                        <TagSlider 
+                            dispatcher={tagDispatcher}  
+                            height={["30px","30px","30px","50px"]} 
+                            width={["100%","100%","100%","20%"]}
+                            minWidth="100px"
+                            px={[0,0,0,2]}     mb={[2,2,2,0]}                       
+                        />
+                        <FlexBox justifyContent="center" id="s-text-input" 
+                            minWidth={["100%","100%","100%","80%"]} alignItems="center" position="relative" 
+                            >
+                            <SearchInput type="text"   
+                                px={[2,3,4,4,4]}
+                                placeholder="Search.."
+                                autoFocus={false}
+                                value={keywords} 
+                                onChange={keywordsHandler} 
+                                minHeight="50px"
+                                width={"100%"}
+                                border="1px solid"
+                                borderColor="rgba(0,0,0, 0.15)"
+                                color="#181818"
+                                bg="rgba(255,255,255,0.45)"
+                            />
+                            <Button type="submit" 
+                                onClick={submitHandler} 
+                                position="absolute" 
+                                display="flex" justifyContent="center" alignItems="center"
+                                right={["4vw", "4vw", "2vw", "2vw"]} top={"2px"} p={0} 
+                                width={40} height={40} 
+                                hoverBg={"rgba(40,40,40,0.4)"}
+                                borderRadius="50%" 
+                                title="Click for Search"
+                                bg="dark"
+                            >
+                                <SearchIcon  stroke="white" strokeWidth="3" size={24} />
+                            </Button>
+                        </FlexBox>
+                    </FlexBox>
 
+                    <Text fontSize={[14,14,16]} fontWeight={"bold"} textAlign="center" color="red">{message}</Text>
+
+                </Form>
+            </FlexBox>
             <Box id="search-rresult-box"  
                 borderLeft="2px solid" 
                 borderColor="rgba(40,40,40, 0.3)"
                 width="101vw"
                 minWidth={["100%"]} minHeight={["60vw"]}
-                left={"-1vw"}
+                left={"-1vw"} top={-75}
                 p={[0]}
             >
                 

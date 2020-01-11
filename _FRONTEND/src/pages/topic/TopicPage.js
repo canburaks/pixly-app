@@ -17,13 +17,15 @@ import {
     ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,Image,CoverImage,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
-    YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, Hr,
+    //YearSlider,RatingSlider,
+    HtmlBox, HtmlContainer, MessageBox, Hr,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
     Ul,Li,ImdbRatingIcon, AbsoluteBox,BookmarkMutation
 } from "../../styled-components"
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
 import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
 
+import { YearSlider, RatingSlider, TagSelect, SearchInputMaterial } from "../../styled-material"
 
 export const ResponsiveTopicCard = ({ item }) => {
     const screenSize = useWindowSize()
@@ -166,10 +168,16 @@ const TopicPage = (props) =>{
 
                         <FlexBox 
                             width={["100%"]} 
-                            flexDirection={["column"]}
+                            flexDirection={"column"}
                         >
-                            <YearSlider dispatcher={yearDispatcher}  iconColor="black" />
-                            <RatingSlider dispatcher={ratingDispatcher} />
+                            <FlexBox 
+                                width={["100%"]} 
+                                flexDirection={["column", "column", "column", "row"]}
+                            >
+
+                                <YearSlider dispatcher={yearDispatcher}  iconColor="black" />
+                                <RatingSlider dispatcher={ratingDispatcher} />
+                            </FlexBox>
                             <Button 
                                 type="submit" 
                                 display="flex" alignItems="center" justifyContent="center"

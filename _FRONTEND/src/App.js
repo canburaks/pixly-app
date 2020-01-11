@@ -61,7 +61,6 @@ const App = (props) => {
     <ThemeProvider theme={themes.default}>
         <div className="App" theme="palette-1"  id="app-container">
             <NavBar />
-            <Clippy />
             <Box minHeight="90vh" height="auto" mt={navbarheight} >
                 <Switch>
                     <Route exact path="/" component={MainPageRedirect} />

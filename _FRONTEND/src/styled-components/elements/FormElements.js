@@ -46,27 +46,20 @@ export const TagSlider = (props) => {
     },[tag])
     props.dispatcher(selectedTagSlug)
 
-    //console.log("options", tag, selectedTagSlug)
-    //console.log(minYear, maxYear, selectedYears)
-
-    props.dispatcher(selectedTagSlug)
     return( 
         <FlexBox boxShadow={"mini"}
             alignItems={"center"} flexDirection="column"
-            m={[1]}  py={[3]} px={[3,3,4]}
             width={"100%"}
-            flexGrow={1,1,1, 0}
-            border="0.5px solid"
-            borderColor="rgba(80,80,80, 0.5)"
+            flexGrow={1,1,1, 0}            
             borderRadius={"8px"}
             zIndex={10} 
             color="black"
-            bg={"rgba(0,0,0,0.2)"}
             {...props}
         >
 
-            <Text textAlign="center" width={"100%"} color="light" fontWeight="bold">Select Genre</Text>
+            {/*<Text textAlign="center" width={"100%"} color="light" fontWeight="bold">Select Genre</Text>*/}
             <InputSelect
+                bg={"rgba(255,255,255,0.4)"}
                 options={tagOptions} 
                 selected={tag} 
                 onChange={tagHandler} 
@@ -107,11 +100,11 @@ export const YearSlider = (props) => {
     //console.log("options",minYearOptions, maxYearOptions)
     //console.log(minYear, maxYear, selectedYears)
 
-    props.dispatcher()
+    props.dispatcher({minYear:1950, maxYear:2020})
     return(
         <FlexBox boxShadow={"mini"}
             alignItems={"center"}
-            m={[1]}  p={[1]} py={[3]}
+            m={[1]}  p={[1]} py={[1]}
             width={"100%"}
             flexGrow={1,1,1, 0}
             border="0.5px solid"
@@ -122,8 +115,8 @@ export const YearSlider = (props) => {
             bg={"rgba(0,0,0,0.2)"}
             {...props}
         >
-            <WatchIcon title="Release Year" stroke={props.iconColor || "white"}  size={40}/>
-            <FlexBox flexWrap="wrap" width={["80%", "80%", "90%", "90%", "94%"]} pb={[3]}>
+            <WatchIcon title="Release Year" stroke={props.iconColor || "white"}  size={30}/>
+            <FlexBox flexWrap="wrap" width={["80%", "80%", "90%", "90%", "94%"]} pb={[2]}>
 
                 <Text textAlign="center" width={"100%"} color="dark" fontWeight="bold">Released Between Years</Text>
                 <InputSelect 
@@ -178,16 +171,18 @@ export const RatingSlider = (props) => {
     return(
         <FlexBox boxShadow={"mini"}
             alignItems={"center"}
-            m={[1]}  p={[1]} py={[3]}
+            m={[1]}  p={[1]} py={[1]}
             width={"100%"}
             flexGrow={1,1,1, 0}
             border="0.5px solid"
-            borderColor="rgba(80,80,80, 0.4)"
+            borderColor="rgba(80,80,80, 0.5)"
             borderRadius={"8px"}
+            zIndex={10} 
+            color="black"
             bg={"rgba(0,0,0,0.2)"}
             {...props}
         >
-        <ImdbIcon title="IMDb Rating" fill={props.iconColor || "#fac539"}  size="40px !important;" imdb/>
+        <ImdbIcon title="IMDb Rating" fill={props.iconColor || "#fac539"}  size="30px !important;" imdb/>
         <FlexBox flexWrap="wrap" width={["80%", "80%", "90%", "90%", "94%"]} pb={[3]}>
             <Text textAlign="center" width={"100%"} color="dark" fontWeight="bold">Min and Max IMDb Rating</Text>
             <InputSelect 

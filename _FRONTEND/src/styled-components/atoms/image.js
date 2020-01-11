@@ -49,6 +49,7 @@ export const Image = styled('img').attrs(
         )
     )`
     transition: all ${themeGet("transitions.medium")};
+    filter:${props => props.blur && `blur(${props.blur}px)`};
     ${space}
     ${shadow}
     ${layout}

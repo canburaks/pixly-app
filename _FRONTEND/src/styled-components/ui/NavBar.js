@@ -26,6 +26,7 @@ import {
 
 } from "../"
 
+//import { SearchAppBar, SearchAppBar2 } from "../../styled-material"
 
 const NB = props => {
     const { username, history, isAuthenticated, logoutDispatcher } = props;
@@ -84,7 +85,7 @@ const NB = props => {
 				>
 				<UnderlineEffect >Search</UnderlineEffect>
 			</NewLink>
-			{window.innerWidth > 900 && <SearchQueryBox />}
+			{(window.innerWidth > 900 && !window.location.pathname.includes("search")) && <SearchQueryBox />}
 		</FlexBox>
 	)
 	
@@ -93,7 +94,7 @@ const NB = props => {
         <NavBarBox 
             bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"} 
             height={navbarheight}
-			  opacity={isTransparentBg ? 1 : 0.98}
+			opacity={isTransparentBg ? 1 : 0.98}
 
 		>
             <Box width={"10vw"}>

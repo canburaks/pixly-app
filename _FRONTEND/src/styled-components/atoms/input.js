@@ -76,7 +76,6 @@ export const SearchInput = styled("input")`
     height:70%;
     min-height:60px;
     padding:8px 16px;
-    margin:2px 16px;
     font-size:26px;
     font-weight: bold;
     font-style: italic;
@@ -91,15 +90,15 @@ export const SearchInput = styled("input")`
     box-sizing:border-box;
     box-shadow: 0px 2px 6px rgba(6, 28, 63, 0.1);
     :focus {
-        background-color: rgba(180, 180, 180, 0.4);
-        color:white;
+        color:${props => props.focusColor && props.focusColor};
+        background-color:${props => props.focusBg ? props.focusBg : "rgba(255,255,255,0.8)"};
     }
     :focus  ::placeholder {
         color: ${themeGet("colors.active")} ;
         border-color:white;
     }
     ::placeholder {
-        color: rgba(180,180,180, 0,9);
+        color: rgba(40,40,40, 0,9);
     }
     ${color}
     ${space}
@@ -130,6 +129,7 @@ export const Select = styled("select")`
     height:25px;
     padding:4px 16px;
     border-radius:6px;
+    outline: none;
     ${color}
     ${space}
     ${shadow}

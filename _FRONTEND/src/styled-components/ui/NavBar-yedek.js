@@ -7,7 +7,7 @@ import {  SearchBox} from "cbs-react-components"
 
 
 import { movieAutoComplete } from "../../functions/grec";
-import { GlobalContext } from "../..";
+import { GlobalContext } from "../../";
 import { AuthForm, ForgetForm } from "../../forms/AuthForm"
 import { development } from "../../index"
 
@@ -20,13 +20,12 @@ import {
     TextSection, HeaderMini, LinkButton,
     BookmarkMutation, RatingMutation,TagBox,
     ImdbRatingIcon, YearClockIcon, ProfileIcon, LogoutIcon,
-    HomeIcon,ListIcon,
+    HomeIcon,ListIcon,FilmListMenu,
     LogoutMutation,SearchQueryBox,
     navbarheight
 
-} from ".."
+} from "../"
 
-const BgTexture = React.memo(() => <div style={{backgroundImage:`url(https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/navbar-collage.jpg)`, backgroundSize:"cover", width:"100%", height:60, position:"absolute", top:-2, left:-2, zIndex:-1}}></div>)
 
 const NB = props => {
     const { username, history, isAuthenticated, logoutDispatcher } = props;
@@ -43,40 +42,45 @@ const NB = props => {
 
     const MiddleBar = () => (
 		<FlexBox height={"auto"} minWidth={"100%"} justifyContent="center" alignItems="center" py={[1]}>
+			{/*
 			<NewLink 
 				color="#f1f1f1 !important" 
 				link={"/lists-of-films"} fontSize={["12px", "12px", "12px", "16px"]} 
-				ml={[1,1,1,2]} px={[1,1,2]}
+				px={[1,1,2]}
 				>
 				<UnderlineEffect >List Of Films</UnderlineEffect>
 			</NewLink>
-			<NewLink 
+<NewLink 
 				color="#f1f1f1 !important" 
 				link={"/directors/1"} fontSize={["12px", "12px", "12px", "16px"]} 
-				ml={[1,1,1,2]} px={[1,1,2]}
+				px={[1,1,2]} title="The List of the Famous Directors"
 				>
 				<UnderlineEffect >Directors</UnderlineEffect>
 			</NewLink>
+			*/}
+
+			<FilmListMenu />
+			
 			<NewLink 
 				color="#f1f1f1 !important" 
 				link={"/similar-movie-finder"} fontSize={["12px", "12px", "12px", "16px"]} 
-				ml={[1,1,1,2]} px={[1,1,2]}
+				px={[1,1,2]} title="Find Similar Movies" fontWeight="bold"
 				>
-				<UnderlineEffect >Similars</UnderlineEffect>
+				<UnderlineEffect >Similar Finder</UnderlineEffect>
 			</NewLink>
 			{authStatus && 
       <NewLink 
-	  	color="#f1f1f1 !important" 
+	  	color="#f1f1f1 !important" fontWeight="bold"
 		  link={"/people/1"} fontSize={["12px", "12px", "12px", "16px"]} 
-	  	ml={[1,1,1,2]} px={[1,1,2]}
+	  	px={[1,1,2]}
 		  >
 				<UnderlineEffect >People</UnderlineEffect>
 			</NewLink>}
 
 			<NewLink 
-				color="#f1f1f1 !important" 
+				color="#f1f1f1 !important" fontWeight="bold"
 				link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]} 
-				ml={[1,1,1,2]} px={[1,1,2]}
+				px={[1,1,2]}
 				>
 				<UnderlineEffect >Search</UnderlineEffect>
 			</NewLink>
@@ -84,18 +88,12 @@ const NB = props => {
 		</FlexBox>
 	)
 	
-	const SearchAndLinkBar = () => (
-	<FlexBox flexDirection="column" justifyContent="flex-start">
-		<SearchQueryBox />
-		<LinkBar />
-	</FlexBox>
-	)
 	const insertform = useCallback(() => state.methods.insertAuthForm("login"),[])
     return (
         <NavBarBox 
             bg={isTransparentBg ? "rgba(40,40,40, 0.3)" : "rgba(40, 40, 40, 0.8)"} 
             height={navbarheight}
-			  opacity={isTransparentBg ? 1 : 0.98}
+			opacity={isTransparentBg ? 1 : 0.98}
 
 		>
             <Box width={"10vw"}>
@@ -112,7 +110,7 @@ const NB = props => {
                 ?   <ProfileDropdown username={state.username}/>
 
                 :   <Box onClick={insertform} 
-                        rel="nofollow" 
+                        rel="nofollow" fontWeight="bold"
                         color="light"
                         mr={[4]}
                         clickable

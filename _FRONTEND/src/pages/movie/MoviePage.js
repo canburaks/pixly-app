@@ -34,7 +34,7 @@ import "../pages.css";
 
 const MoviePage = props => {
 	//rgaPageView();
-	console.log("props", props)
+	//console.log("props", props)
 	const { movie: item, viewer } = props.item;
 	const { cacheUpdate } = props;
     const nodeSimilarMovies = useRef(null)
@@ -304,7 +304,6 @@ const MovieQuery = (props) => {
 	const slug = props.match.params.slug;
 
 	const { loading, error, data, client, refetch } = useQuery(MOVIE, { variables:{slug}, partialRefetch:true})
-
 	const movieCacheUpdate = (newData) => {
         const oldData = client.readQuery({ query: MOVIE, variables:{slug:slug} });
         const newMovieData = {...oldData.movie, ...newData}
@@ -312,7 +311,7 @@ const MovieQuery = (props) => {
         client.writeQuery({ query: MOVIE, variables:{slug:queryVariables.slug}, data: oldData});
         return null
 	}
-	console.log(data)
+	//console.log(data)
     if (loading) return <Loading />
     if (error) return <Error>{console.log("error",error.message)}</Error>
     if (data) {
