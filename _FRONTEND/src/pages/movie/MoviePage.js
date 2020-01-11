@@ -1,8 +1,13 @@
 /* eslint-disable */
 import React from "react";
 import { useState, useContext, useMemo, useEffect, useRef } from "react";
-import { withRouter, Link } from "react-router-dom";
-import { rgaPageView, Head, MoviePageAd, MidPageAd, FeedMobileTopicPageAd, HomePageFeedAd } from "../../functions/analytics";
+import { withRouter, Link, Redirect } from "react-router-dom";
+import {
+	rgaPageView, Head, MoviePageAd, MidPageAd, 
+	FeedMobileTopicPageAd, HomePageFeedAd 
+} from "../../functions/analytics";
+import { MOVIE } from "../../functions/query";
+import { useQuery } from '@apollo/react-hooks';
 
 
 import { useAuthCheck } from "../../functions/hooks";
@@ -16,49 +21,20 @@ import { GridBox, GridItem } from "../../components/GridBox";
 import CoverPanel from "../elements/CoverPanel";
 import PosterPanel from "../elements/PosterPanel";
 import { twitter } from "../../functions/third-party/twitter/twitter"
-
-
-import {
-	CrewCard,
-	MovieSimilarBox,
-	PageContainer,
-	ContentContainer,
-	MovieCoverBox,
-	MovieCoverPanel,
-	HiddenHeader,
-	HeaderMini,
-	Grid,
-	Card,
-	Image,
-	ImageCard,
-	HiddenSpan,
-	RatingMutation,
-	HeaderText,Text,
-	Span,
-	NewLink,
-	TextSection,
-	MovieRichCardBox,
-	MovieRichCard,
-	FlexBox,
-	Box,
-	HashLink,
-	YoutubeIcon,
-	HtmlContainer,
-	SuperBox,
-	TagBox,
-	AbsoluteBox,
-	CoverLink,
-	SimilarMovies,
-	MessageBox,
-	CoverImage,
-	Dl,Dt,Dd
+import { CrewCard, MovieSimilarBox, PageContainer, ContentContainer, MovieCoverBox, MovieCoverPanel,
+	HiddenHeader,HeaderMini,Grid,Card,Image,ImageCard,HiddenSpan,RatingMutation,HeaderText,Text,Span,NewLink,TextSection,
+	MovieRichCardBox, MovieRichCard, FlexBox, Box, HashLink, YoutubeIcon,
+	HtmlContainer, SuperBox, TagBox, AbsoluteBox, CoverLink,
+	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading
 } from "../../styled-components";
+
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 import "../pages.css";
 
 const MoviePage = props => {
 	//rgaPageView();
+	console.log("props", props)
 	const { movie: item, viewer } = props.item;
 	const { cacheUpdate } = props;
     const nodeSimilarMovies = useRef(null)
@@ -323,7 +299,28 @@ const MovieSummaryWithTwitter = ({item}) => {
         </>
 
 )}
-export default withRouter(MoviePage);
+
+const MovieQuery = (props) => {
+	const slug = props.match.params.slug;
+
+	const { loading, error, data, client, refetch } = useQuery(MOVIE, { variables:{slug}, partialRefetch:true})
+
+	const movieCacheUpdate = (newData) => {
+        const oldData = client.readQuery({ query: MOVIE, variables:{slug:slug} });
+        const newMovieData = {...oldData.movie, ...newData}
+        oldData.movie = newMovieData;
+        client.writeQuery({ query: MOVIE, variables:{slug:queryVariables.slug}, data: oldData});
+        return null
+	}
+	console.log(data)
+    if (loading) return <Loading />
+    if (error) return <Error>{console.log("error",error.message)}</Error>
+    if (data) {
+        return <MoviePage item={data} viewer={data.viewer} cacheUpdate={movieCacheUpdate} {...props}/>
+    }
+}
+
+export default withRouter(MovieQuery);
 
 /*
 const TopPanel = React.memo(({ item, authStatus, screenSize }) =>
