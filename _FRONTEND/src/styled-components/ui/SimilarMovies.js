@@ -99,7 +99,7 @@ const ContentSimilarSection = (props) => {
         })
         const uniques =  Array.from(commons)
         if (uniques.length > 0){
-            const tagtext =  uniques.join(", ")
+            const tagtext =  uniques.slice(0,5).join(", ")
             return `The most common genres you will find below are ${tagtext}.`
 
         }

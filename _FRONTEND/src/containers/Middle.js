@@ -143,7 +143,7 @@ const MovieQuery = (props) => {
         return /^\d+$/.test(str);
     }
     const notfound = useMemo(() => is_numeric(slug), [slug])
-    console.log(notfound, "notfound")
+    //console.log(notfound, "notfound")
     if (notfound) return <Redirect to="/404" status={404}/>
     return <MoviePage {...props} />
 }

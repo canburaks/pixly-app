@@ -81,7 +81,8 @@ export const SearchQueryBox = (props) =>{
                         width={"100%"}
                         bg={"rgba(20,20,20, 0.4)"}
                         fontWeight="500"
-                        color="white"
+                        focusBg="rgba(20,20,20, 0.2)"
+
                         maxWidth={["40vw", "40vw", "30vw", "200px"]}
                     /><Label position="absolute" color="transparent" height="1px" width="1px" fontSize="1px">Search</Label>
                     {debouncedkeywords.length > 2 && 
