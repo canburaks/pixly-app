@@ -7,7 +7,7 @@ import { Query } from "react-apollo";
 import { useQuery } from '@apollo/react-hooks';
 
 import { PERSONA, MOVIE, DIRECTOR_PERSON_MIX, PROFILE, LIST_BOARD, LISTE, MOVIE_SEARCH, MOVIE_BOARD, TAG_LIST } from "../functions/query";
-
+import { Head } from "../functions/analytics";
 
 
 import DirectorList from "../list/director/DirectorList";
@@ -25,7 +25,7 @@ import PeoplePage from "../list/people/PeoplePage";
 //import SearchMovieList from "../list/search/BarSearchList";
 
 
-import  { print, authCheck, useLocation } from "../functions"
+import  { useLocation } from "../functions"
 import  { rgaSetUser } from "../functions/analytics"
 import TopicPage from "../pages/topic/TopicPage"
 import Blog from "../pages/blog/BlogPage"
@@ -41,16 +41,11 @@ import ListOfFilms from "../list/ListOfFilms";
 import TagMovies from "../list/TagMovies";
 import SimilarFinder from "../list/similars/Similars.js";
 
-//import AdvanceSearch from "../list/advance-search/AdvanceSearch";
 
-//import MovieQuery from "../pages/movie/MovieQuery.js";
-//import MoviePage from "../pages/movie/MoviePage"
-import { Loading,Error, PageContainer, Image } from "../styled-components"
+import { Loading, Error, PageContainer, Image } from "../styled-components"
 
 import { GlobalContext } from "../";
-//import { client, cache } from "../index"
 
-//const QueryRouter = lazy(() => import("../pages/QueryRouter.js"));
 
 
 
@@ -126,6 +121,9 @@ const StaticRoute = () => (<StaticRouter context={{status:"404"}}><Route path="*
 
 const NotFoundPage = (props) => (
     <PageContainer>
+        <Head>
+            <meta name="googlebot" content="nofollow noindex" />
+        </Head>
         <Image width={"100vw"} height="auto" info="404 Not Found Image" src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/404.jpg"} />
     </PageContainer>
 )
@@ -139,38 +137,15 @@ const HomeQuery = () => {
 };
 
 const MovieQuery = (props) => {
-    let shouldReplaceUrl = false
-    let identifier = props.match.params.slug;
-    const queryVariables = {}
+    const slug = props.match.params.slug;
+
     function is_numeric(str){
         return /^\d+$/.test(str);
     }
-    if (is_numeric(identifier) && identifier.length < 6){
-        queryVariables.id = identifier
-        shouldReplaceUrl = true
-    }
-    else {
-        queryVariables.slug = identifier
-    }
-    const { loading, error, data, client, refetch } = useQuery(MOVIE, { variables:queryVariables, partialRefetch:true})
-    
-    const movieCacheUpdate = (newData) => {
-        const oldData = client.readQuery({ query: MOVIE, variables:{slug:queryVariables.slug} });
-        const newMovieData = {...oldData.movie, ...newData}
-        oldData.movie = newMovieData;
-        client.writeQuery({ query: MOVIE, variables:{slug:queryVariables.slug}, data: oldData});
-        return null
-    }
-
-    if (loading) return <Loading />
-    if (error) return <Error>{console.log("error",error.message)}</Error>
-    if (data) {
-        if (data.movie && shouldReplaceUrl){
-            props.history.replace(`/movie/${data.movie.slug}`)
-        }
-        if (data == null || data.length === 0) return <div>{(console.log("zero"), refetch())}</div>
-        return <MoviePage item={data} viewer={data.viewer} cacheUpdate={movieCacheUpdate} />
-    }
+    const notfound = useMemo(() => is_numeric(slug), [slug])
+    console.log(notfound, "notfound")
+    if (notfound) return <Redirect to="/404" status={404}/>
+    return <MoviePage {...props} />
 }
 
 
