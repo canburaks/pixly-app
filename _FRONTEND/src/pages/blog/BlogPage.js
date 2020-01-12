@@ -48,8 +48,7 @@ const BlogPage = (props) =>{
                 canonical={`https://pixly.app/blog`}
             />
             <ContentContainer pb={"80px"}>
-            {props.posts.map(post => <PostInfoBox post={post} key={post.slug} follow/>)}
-
+                {props.posts.map(post => <PostInfoBox post={post} key={post.slug} follow/>)}
             </ContentContainer>
         </PageContainer>
     );
