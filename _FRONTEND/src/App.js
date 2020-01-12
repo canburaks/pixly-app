@@ -30,7 +30,7 @@ import { useWindowSize,  usePageViews, rgaStart, useAuthCheck} from "./functions
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
-import { Box, ScrollTopButton, navbarheight, PageContainer, Image } from "./styled-components"
+import { Box, ScrollTopButton, navbarheight, PageContainer, Image, SignupFormModal } from "./styled-components"
 import themes from './styled-components/theme'
 import { Clippy } from './styled-components'
 import { GlobalContext } from "./";

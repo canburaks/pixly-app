@@ -33,6 +33,8 @@ export const Store = () => {
     const [showModal, setModal] = useState(false)
     const [modalComponent, setModalComponent] = useState(null)
 
+
+
     const { isOpen, toggle } = useModal();
     //console.log("actual lcoation: ", location)
 
@@ -119,8 +121,8 @@ export const Store = () => {
 
             updatePoints,
 
-
             insertAuthForm,
+
             insertContactForm,
             updateToken,
             updateUsername,

@@ -1,36 +1,48 @@
-import React, { useEffect, useState, useContext, useCallback } from "react";
-import clsx from 'clsx';
-import { makeStyles, useTheme, fade } from '@material-ui/core/styles';
+import React, { useEffect, useState, useContext, useCallback, useMemo, useRef } from "react";
+import { useQuery } from '@apollo/react-hooks';
+import { COMPLEX_SEARCH } from "../functions/query"
+import { GlobalContext } from "../";
+import { makeStyles, fade } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 
 
-import { FlexBox, NewLink, Box, } from "../styled-components"
+import { 
+	FlexBox, NewLink, Box,LogoutIcon, LogoutMutation, Text,CloseIcon,
+	CoverLink, SignupFormModal,MoviePosterCard, PlaceHolderCard, Grid,  Button,
+	HomeIcon, UsersIcon, SearchIcon as SearchIconStyled, FourSquareIcon,
+	SimilarMovieIcon, CameraIcon, LoginIcon, JoinIcon
+} from "../styled-components"
+import { useAuthCheck, useValues, useOnClickOutside, useDebounce, useLocation, useWindowSize } from "../functions/hooks";
+
+import { SimpleDialog } from "./Dialog"
+import { Loading } from "./Loading"
+
+import "./AppBar.css"
+import { rgba } from "polished";
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
+	  appbar:{
+		background:"rgba(80,80,80, 0.7)"
+	  },
+	  listitem:{
+        '&:hover': {
+			backgroundColor: "rgba(180,180,180,0.4)",
+		  },
+	  },
       menuButton: {
         marginRight: theme.spacing(2),
       },
@@ -72,7 +84,7 @@ const useStyles = makeStyles(theme => ({
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
-          width: 200,
+          width: "100%",
         },
       },
       sectionDesktop: {
@@ -83,24 +95,20 @@ const useStyles = makeStyles(theme => ({
       },
       sectionMobile: {
         display: 'flex',
-        [theme.breakpoints.up('md')]: {
-          display: 'none',
-        },
-      },
-      sectionLinks:{
-        display: 'none',
         [theme.breakpoints.up('sm')]: {
-          display: 'flex',
+          display: 'none',
         },
       },
   hide: {
     display: 'none',
   },
   drawer: {
-    width: drawerWidth,
+	width: drawerWidth,
+	background:"rgba(80,80,80,0.8)",
     flexShrink: 0,
   },
   drawerPaper: {
+	background:"transparent",
     width: drawerWidth,
   },
   drawerHeader: {
@@ -108,43 +116,73 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+	justifyContent: 'flex-end',
+  },
+  drawercloseicon:{
+	color:"#f1f1f1",
+	backgroundColor: "rgba(255,255,255,0.3)",
+	'&:hover': {
+		backgroundColor: "rgba(255,255,255,0.7)",
+	  },
+  },
+  divider:{
+	  background:"rgba(255,255,255,0.15)"
   }
 }));
 
 
 export const SearchAppBar = (props) => {
-    const classes = useStyles();
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-    const [open, setOpen] = useState(false);
+	//Globals
+	const classes = useStyles();
+	const state = useContext(GlobalContext)
+    const authStatus = useAuthCheck()
 
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  
+	//Search Bar
+	const [ keywords, setKeywords ] = useState("")
+	const ref = useRef()
+	useOnClickOutside(ref, () => setKeywords(""));
+	const debouncedkeywords = useDebounce(keywords, 500);
+
+
+	const keywordsHandler = useCallback((e) => setKeywords(e.target.value), [keywords])
+	const keywordsCleaner = useCallback(() => setKeywords(""))
+
+
+
+
+	//Side Bar Status
+	const [open, setOpen] = useState(false);
+	
+	
+	// Right Dropdown
+	const [anchorEl, setAnchorEl] = useState(null);
+	const isMenuOpen = Boolean(anchorEl);
+
+	// Signup Form Modal Status
+	const [isJoinModalOpen, setJoinModal] = useState(false)
+	const closeJoinModal = () => setJoinModal(false)
+
+	const insertLoginForm = useCallback(() => state.methods.insertAuthForm("login"),[])
+	const insertJoinForm = useCallback(() => setJoinModal(true),[])
+
+	//Callback and Handlers of Navbar
     const handleProfileMenuOpen = event => {
       setAnchorEl(event.currentTarget);
     };
   
-    const handleMobileMenuClose = () => {
-      setMobileMoreAnchorEl(null);
-    };
+    const handleMobileMenuClose = () => setMobileMoreAnchorEl(null);
+    const handleMobileMenuOpen = event => setMobileMoreAnchorEl(event.currentTarget);
   
-    const handleMenuClose = () => {
-      setAnchorEl(null);
-      handleMobileMenuClose();
-    };
-  
-    const handleMobileMenuOpen = event => {
-      setMobileMoreAnchorEl(event.currentTarget);
-    };
-
+    const handleMenuClose = () => (setAnchorEl(null), handleMobileMenuClose())
+	
     const handleDrawerOpen = () => setOpen(true)
     const handleDrawerClose = () => setOpen(false)
 
 
-    const menuId = 'primary-search-account-menu';
-    const renderMenu = (
+
+	const menuId = 'primary-search-account-menu';
+
+    const ProfileMenu = (
         <Menu
             anchorEl={anchorEl}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -154,116 +192,126 @@ export const SearchAppBar = (props) => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+				<AccountCircle />
+				<Text>Profile</Text>
+				<CoverLink link={`/${localStorage.getItem("USERNAME")}/dashboard`} />
+			</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+				<LogoutIcon stroke={"#181818"} />
+				<LogoutMutation>
+					<Text>Logout</Text>
+				</LogoutMutation>
+			</MenuItem>
         </Menu>
-    );
-  
-    const mobileMenuId = 'primary-search-account-menu-mobile';
+	);
 
-    const renderMobileMenu = (
-      <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        id={mobileMenuId}
-        keepMounted
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMobileMenuOpen}
-        onClose={handleMobileMenuClose}
-      >
-        <MenuItem>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-                </Badge>
-            </IconButton>
-            <p>Messages</p>
-            </MenuItem>
-            <MenuItem>
-            <IconButton aria-label="show 11 new notifications" color="inherit">
-                <Badge badgeContent={11} color="secondary">
-                <NotificationsIcon />
-                </Badge>
-            </IconButton>
-            <p>Notifications</p>
-            </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
-            <IconButton
-                aria-label="account of current user"
-                aria-controls="primary-search-account-menu"
-                aria-haspopup="true"
-                color="inherit"
-            >
-                <AccountCircle />
-            </IconButton>
-            <p>Profile</p>
-        </MenuItem>
-      </Menu>
-    );
+	const AnonymousMenu = (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
+        >
+            <MenuItem onClick={() => (insertLoginForm(), handleMenuClose())}>
+				<LoginIcon  />
+				<Text>Login</Text>
+			</MenuItem>
+            <MenuItem onClick={() => (setJoinModal(true),handleMenuClose())}>
+				<JoinIcon  stroke={"#181818"}/>
+				Join
+			</MenuItem>
+        </Menu>
+	)
+
+	const RıghtMenu = authStatus ? ProfileMenu : AnonymousMenu
   
+
+
+
+	//console.log(screenSize)
     return (
         <FlexBox className={classes.grow}  position="absolute" top={0} left={0} width="100%">
-            <AppBar position="static">
+            <AppBar position="static"  classes={{root:classes.appbar, colorDefault:"#000000"}}>
                 <Toolbar>
-                    <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+					<Box display={["flex", "flex", "flex", 
+						//"none"
+						]}>
+						<IconButton  mr={["8px"]} 
+							edge="start"
+							color="inherit"
+							aria-label="open drawer"
+							onClick={handleDrawerOpen}
+						>
+							<MenuIcon />
+						</IconButton>
+					</Box>
+                   
+				    <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
 
-                    <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
-
-
-                    {/* Search */}
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </div>
-
-
-
-
-
-
-                    
-                    {/* RIGHT PART*/}
-                    <div className={classes.sectionDesktop}>
-                        <div className={classes.sectionLinks}>
+                    <FlexBox display={["none", "none", "none", "flex"]} flexGrow={[0,0,0,1]} justifyContent="center" >
                             <NewLink 
                                 color="#f1f1f1 !important" 
-                                link={"/lists-of-films"} fontSize={["12px", "12px", "12px", "16px"]} 
+                                link={"/lists-of-films"} fontSize={["10px", "10px", "12px", "14px"]} 
                                 px={[1,1,2]} title="All Movie Collections" fontWeight="bold"
-                                >
+                            >
                                 Film Lists
                             </NewLink>
                             <NewLink 
                                 color="#f1f1f1 !important" 
-                                link={"/similar-movie-finder"} fontSize={["12px", "12px", "12px", "16px"]} 
+                                link={"/directors/1"} fontSize={["10px", "10px", "12px", "14px"]} 
+                                px={[1,1,2]} title="All Movie Collections" fontWeight="bold"
+                            >
+                                Directors
+                            </NewLink>
+                            <NewLink 
+                                color="#f1f1f1 !important" 
+                                link={"/similar-movie-finder"} fontSize={["10px", "10px", "12px", "14px"]} 
                                 px={[1,1,2]} title="Find Similar Movies" fontWeight="bold"
-                                >
+                            >
                                 Similars
                             </NewLink>
                             <NewLink 
                                 color="#f1f1f1 !important" 
-                                link={"/advance-search"} fontSize={["12px", "12px", "12px", "16px"]} 
+                                link={"/advance-search"} fontSize={["10px", "10px", "12px", "14px"]} 
                                 px={[1,1,2]} title="Browse movies with advance options" fontWeight="bold"
-                                >
+                            >
                                 Browse
                             </NewLink>
-                        </div>
+							{authStatus && 
+								<NewLink 
+									color="#f1f1f1 !important" fontWeight="bold"
+									link={"/people/1"} fontSize={["10px", "10px", "12px", "14px"]}  
+									title="Discover people"
+									px={[1,1,2]}
+								>
+									People
+								</NewLink>
+								}
+                        </FlexBox>
+
+						{/* Search */}
+						<FlexBox className={classes.search} flexGrow={[1,1,1,0]}>
+							<div className={classes.searchIcon}>
+								<SearchIcon />
+							</div>
+							<InputBase
+								placeholder="Search…"
+								classes={{
+									root: classes.inputRoot,
+									input: classes.inputInput,
+								}}
+								inputProps={{ 'aria-label': 'search' }}
+								onChange={keywordsHandler}
+								value={keywords}
+							/>
+						</FlexBox>			
+
+                    {/* RIGHT PART*/}
+                    <FlexBox>
                         <IconButton
                             edge="end"
                             aria-label="account of current user"
@@ -274,58 +322,208 @@ export const SearchAppBar = (props) => {
                         >
                             <AccountCircle />
                         </IconButton>
-                    </div>
-                    <div className={classes.sectionMobile}>
-                        <IconButton
-                            aria-label="show more"
-                            aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon />
-                        </IconButton>
-                    </div>
+                    </FlexBox>
+
                 </Toolbar>
             </AppBar>
 
             {/* DRAWER */}
-            <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="left"
-                open={open}
-                classes={{paper: classes.drawerPaper}}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleDrawerClose}>
-                        <ChevronLeftIcon />
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                    <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-                </List>
-                <Divider />
-                <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                    <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-                </List>
-            </Drawer>
-        {renderMobileMenu}
-        {renderMenu}
+			<SideBar 
+				isOpen={open} 
+				onClose={handleDrawerClose} 
+				classes={classes} 
+				authStatus={authStatus} 
+				insertJoinForm={insertJoinForm}	
+				insertLoginForm={insertLoginForm}		
+			/>
+        
+		{/* -----------MODALS----------------------------- */}
+		{/* Search Results Modal*/}
+		{debouncedkeywords.length >2 && 
+			<SearchQueryResult 
+				keywords={debouncedkeywords} 
+				cleaner={keywordsCleaner} 
+			/>
+			}
+
+        {RıghtMenu}
+		<SignupFormModal isOpen={isJoinModalOpen} closeModal={closeJoinModal}  />
       </FlexBox>
     );
   }
+
+
+const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJoinForm}) => (
+	<Drawer
+		className={classes.drawer}
+		variant="temporary"
+		anchor="left"
+		open={isOpen}
+		onClose={onClose}
+		classes={{paper: classes.drawerPaper}}
+	>
+		<div className={classes.drawerHeader}>
+			<IconButton onClick={onClose} classes={{root:classes.drawercloseicon}}>
+				<ChevronLeftIcon />
+			</IconButton>
+		</div>
+		<Divider classes={{root:classes.divider}} />
+		<List>
+		{authStatus 
+			?<ListItem classes={{root:classes.listitem}}>
+				<HomeIcon fill={"#f1f1f1"}/>
+				<Text color="light">Dashboard</Text>
+				<CoverLink link={`/${localStorage.getItem("USERNAME")}/dashboard`} />
+			</ListItem>
+
+			:<ListItem classes={{root:classes.listitem}} button onClick={() => (onClose(), insertLoginForm())}>
+				<LoginIcon stroke={"#f1f1f1"} />
+				<Text color="light">Login</Text>
+			</ListItem>
+			}
+
+			<ListItem classes={{root:classes.listitem}} button>
+				<CameraIcon stroke={"#f1f1f1"}/>
+				<Text color="light">Directors</Text>
+				<CoverLink link={"/directors/1"} />
+			</ListItem>
+			<ListItem classes={{root:classes.listitem}} button>
+				<SimilarMovieIcon stroke={"#f1f1f1"} />
+				<Text color="light">Similar Movie Finder</Text>
+				<CoverLink link={"/similar-movie-finder"} />
+			</ListItem>
+			<ListItem classes={{root:classes.listitem}} button>
+				<SearchIconStyled stroke={"#f1f1f1"}/>
+				<Text color="light">Advance Search</Text>
+				<CoverLink link={"/advance-search"} />
+			</ListItem>
+			<ListItem classes={{root:classes.listitem}} button>
+				<UsersIcon stroke={"#f1f1f1"}/>
+				<Text color="light">People</Text>
+				<CoverLink link={"/people/1"} />
+			</ListItem>
+
+			<Divider classes={{root:classes.divider}} />
+			
+			<ListItem classes={{root:classes.listitem}} button>
+				<FourSquareIcon  stroke={"#f1f1f1"}/>
+				<NewLink link={"/lists-of-films"}>
+					<Text color="light">Film Lists</Text>
+				</NewLink>
+			</ListItem>
+
+			{[{text:"Arthouse Movies", link:"/topic/art-house"},
+			{text:"Biography Movies", link:"/topic/historical-figures"},
+			{text:"Controversial Movies", link:"/topic/controversial-films"},
+			{text:"Cyberpunk Movies", link:"/topic/cyberpunk"},
+			{text:"Thought-Provoking", link:"/topic/thought-provoking"},
+			{text:"LGBTQ+ Movies", link:"/topic/lgbtq-plus-films"},
+			{text:"Mystery Movies", link:"/topic/mystery"}].map(liste => (
+				<ListItem classes={{root:classes.listitem}} button key={"- " + liste.text}>
+					<NewLink link={liste.link} title={`${liste.text}`}>
+						<Text 
+							fontSize={["12px", "12px", "12px", "14px"]} 
+							pl={[4]} 
+							color="light"
+						>
+							{liste.text}
+						</Text>
+					</NewLink>
+				</ListItem>
+			))
+			}
+		</List>
+
+		<Divider classes={{root:classes.divider}} />
+		{authStatus &&
+			<ListItem classes={{root:classes.listitem}} button>
+				<LogoutIcon stroke={"#f1f1f1"} />
+				<LogoutMutation>
+					<Text color="light">Logout</Text>
+				</LogoutMutation>
+			</ListItem>}
+
+		{!authStatus && 
+			<>
+			<ListItem classes={{root:classes.listitem}} button onClick={() => (onClose(), insertJoinForm())}>
+				<JoinIcon  stroke={"#f1f1f1"}/>
+				<Text color="light">Join</Text>
+			</ListItem>
+			</>
+		}
+
+		<ListItem classes={{root:classes.listitem}} button>
+			<NewLink link={"/blog"}>
+				<Text color="light" fontWeight="bold">BLOG</Text>
+			</NewLink>
+		</ListItem>
+		<Box minHeight={"40px"} minWidth="100%"></Box>
+		</Drawer>
+)
+
+
+const SearchQueryResult = React.memo(({keywords, cleaner}) => {
+	const values = useValues([4,,4, 6,8,10])
+
+	//Dialog Status
+	const [open, setOpen] = useState(true);
+	
+
+    const { loading, data, error } = useQuery(COMPLEX_SEARCH, {variables:{page:1, keywords, first:(values*2 )- 1} });
+
+    const MoreCard = () => <PlaceHolderCard text="Get More" link={"/advance-search"} state={{keywords}} title="Bring More" />
+		
+	const handleClose = () => (setOpen(false), cleaner());
+
+	const ModalContent = ({ items, onClose, overitems }) => (
+		<Grid 
+			columns={[3,4,5,6,6,6, 8]}  
+			py={"10px"} px="10px" 
+			position="relative" 
+			zIndex={100}
+			width={"100%"}
+			>
+			{items.map( item => (
+				<MoviePosterCard
+					item={item}
+					key={item.slug}
+					ratio={1.6} 
+					width={"100%"}
+					fontSize="xs"
+					onClick={onClose}
+					zIndex={100}
+				/>
+				))}
+			{overitems && <MoreCard />}
+		</Grid>
+	)
+
+	useEffect(() => {
+		if (keywords.length > 2 && open === false){
+			setOpen(true)
+		}
+	},[keywords])
+	if (loading) return <Loading />
+	if (data) {
+		//console.log(data)
+        return (
+            <SimpleDialog 
+				onClose={handleClose} 
+				isOpen={open} 
+				header={`'${keywords}' Search:${data.complexSearch.quantity} ${data.complexSearch.quantity > 1 ? "movies " : "movie"} found`}
+				fullWidth={true}
+				maxWidth={"xl"}
+			>
+				<ModalContent 
+					items={data.complexSearch.result} 
+					overitems={data.complexSearch.quantity >= 18} 
+					onClose={handleClose}
+				/>
+			</SimpleDialog>
+        )}
+    else return <div></div>
+})  
+
 
 
 const Brand = (props) => (

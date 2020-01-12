@@ -18,7 +18,6 @@ export const FacebookIcon = (props) => <Facebook title="See Facebook Page" {...p
 export const TwitterIcon = (props) => <Twitter title="See Twitter Page" {...props} />
 export const InstagramIcon = (props) => <Instagram title="See Instagram Page" {...props} />
 export const ImdbIcon = (props) => <Imdb title="See Internet Movie Database Page" {...props} />
-export const HomeIcon = (props) => <Home title="See Home Page" {...props}/>
 
 export const YoutubeIcon = (props) => <Youtube {...props} />
 
@@ -30,7 +29,6 @@ export const FollowAnimateIcon = (props) => <FollowAnimate {...props} title={!pr
 export const FollowSuccessAnimateIcon = (props) => <FollowSuccessAnimate {...props} title={!props.authStatus && "Follow/Unfollow"} clickable/>
 
 export const UserIcon = (props) => <User {...props} />
-export const UsersIcon = (props) => <Users {...props} />
 export const EyeIcon = (props) => <Eye {...props} />
 
 export const LogoutIcon = (props) => <Logout size={props.size || 24} {...props} />
@@ -39,7 +37,6 @@ export const WatchIcon = (props) => <Watch {...props} />
 export const ClockIcon = (props) => <Clock {...props} />
 
 export const YearIcon = (props) => <ClockYear title="Release Year" {...props} />
-export const ProfileIcon = (props) => <Profile size={props.size || 24} clickable {...props} />
 
 //export const YearIcon = (props) => <WatchYear title="Release Year" {...props} />
 //export const HourGlassIcon = (props) => <HourGlass title="Release Year" {...props} />
@@ -52,6 +49,52 @@ const Path = styled.path`
 	${position};
 	${color};
 `
+export const JoinIcon = (props) => (
+<Svg  viewBox="0 0 24 24" 
+	fill="none" stroke="#000000" 
+	strokeWidth="2" strokeLinecap="round" 
+	strokeLinejoin="round" {...props}
+>
+	<path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle>
+	<line x1="20" y1="8" x2="20" y2="14"></line>
+	<line x1="23" y1="11" x2="17" y2="11"></line>
+</Svg>)
+
+
+export const LoginIcon = (props) => (
+<Svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" 
+	fill="none" stroke="#000000" strokeWidth="2" 
+	strokeLinecap="round" strokeLinejoin="round"
+	{...props}
+>
+	<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/>
+</Svg>
+
+)
+
+export const CameraIcon = (props) => (
+<Svg xmlns="http://www.w3.org/2000/svg" 
+	viewBox="0 0 24 24" 
+	fill="none" stroke="#000000" 
+	strokeWidth="2" strokeLinecap="round" 
+	strokeLinejoin="round" {...props}
+>
+	<path d="M15.6 11.6L22 7v10l-6.4-4.5v-1zM4 5h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7c0-1.1.9-2 2-2z"/>
+</Svg>
+
+)
+
+export const SimilarMovieIcon = (props) => (
+<Svg xmlns="http://www.w3.org/2000/svg"  
+	viewBox="0 0 24 24" 
+	fill="none" stroke="#000000" 
+	strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+	{...props}
+>
+	<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+	<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+</Svg>
+)
 
 export const ImdbColorfulIcon = ({size=40,...props}) => {
 	return (
@@ -317,9 +360,9 @@ export const PinterestIcon = props => (
 )
 
 
-const Profile = (props) =>(
+export const ProfileIcon = (props) =>(
 	<Svg viewBox="0 0 24 24" {...props}>
-		<rect width={props.size} height={props.size} fill="none" rx="0" ry="0"/>
+		<rect width={props.size} height={props.size} fill="none" rx="0" ry="0" />
 		<path fillRule="evenodd" clipRule="evenodd" d="M17 7C17 9.76142 14.7614 12 12 12C9.23858 12 7 9.76142 7 7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7ZM11 13C6.58172 13 3 16.5817 3 21C3 21 6 22 12 22C18 22 21 21 21 21C21 16.5817 17.4183 13 13 13H11Z" fill="#ffffff"/>
 	</Svg>
 )
@@ -441,7 +484,7 @@ const Follow = (props) => (
 		<line x1="8" y1="12" x2="16" y2="12"></line>
 	</Svg>
 )
-const FollowSuccess = (props) => (
+export const FollowSuccess = (props) => (
 	<UnFollowAnimatedSvg xmlns="http://www.w3.org/2000/svg" 
 		viewBox="0 0 24 24" fill="none" 
 		strokeWidth="2" strokeLinecap="round" strokeLinejoin="arcs"
@@ -488,7 +531,7 @@ const Notification = (props) => (
 		<path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path>
 	</Svg>
 )
-const Home = props => (
+export const HomeIcon = props => (
 	<Svg 
 		viewBox="0 0 576 512" fill="#f1f1f1"
 		strokeWidth="2"
@@ -516,7 +559,7 @@ const User = (props) => (
 		<circle cx="12" cy="7" r="4"></circle>
 	</Svg>
 )
-const Users = (props) => (
+export const UsersIcon = (props) => (
 	<Svg xmlns="http://www.w3.org/2000/svg" 
 		viewBox="0 0 24 24" fill="none" 
 		strokeWidth="2" strokeLinecap="round" strokeLinejoin="arcs"

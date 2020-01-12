@@ -23,10 +23,9 @@ import {
     HomeIcon,ListIcon,FilmListMenu,
     LogoutMutation,SearchQueryBox,
     navbarheight
-
 } from "../"
 
-//import { SearchAppBar, SearchAppBar2 } from "../../styled-material"
+import { SearchAppBar } from "../../styled-material"
 
 const NB = props => {
     const { username, history, isAuthenticated, logoutDispatcher } = props;
@@ -160,4 +159,4 @@ const Brand = (props) => (
 )
 
 
-export const NavBar = withRouter(NB)
+export const NavBar = withRouter(SearchAppBar)
