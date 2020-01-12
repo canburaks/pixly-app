@@ -52,7 +52,9 @@ const App = (props) => {
     const isPathIncludes = (pathname) => window.location.pathname.includes(pathname)
 
     const checkFooter = () => {
-        let blacklist = ["lists-of-films", "topic", "list/",  "advance-search", "similar-movie-finder"]
+        let blacklist = ["lists-of-films",
+            "topic", "list/",  "advance-search",
+            "similar-movie-finder", "blog"]
         return !blacklist.some(e => window.location.pathname.includes(e))
         
     }
@@ -61,6 +63,7 @@ const App = (props) => {
     <ThemeProvider theme={themes.default}>
         <div className="App" theme="palette-1"  id="app-container">
             <NavBar />
+            <Clippy />
             <Box minHeight="90vh" height="auto" mt={navbarheight} >
                 <Switch>
                     <Route exact path="/" component={MainPageRedirect} />

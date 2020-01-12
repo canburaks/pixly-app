@@ -89,13 +89,14 @@ export const MessageBox = ({ header,Header,subheader, text, Image, children, ...
 )
 
 export const PostInfoBox = ({ post, follow, children }) => (
-    <FlexBox 
+    <FlexBox position="relative"
         fontFamily="paragraph" overflow="hidden"
         border="1px solid" borderColor="rgba(40,40,40, 0.4)" 
         boxShadow="1px 5px 8px -8px rgba(0,0,0, 0.9)" 
         bg="#e1e1e1"
         p={[2]} mt={[4, 4,5]}
         width={"100%"}
+        minHeight={"300px"}
     >
         <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start" pb={[3]} width={"100%"}>
             <SuperBox 
