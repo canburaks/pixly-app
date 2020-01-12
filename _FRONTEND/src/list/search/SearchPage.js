@@ -98,13 +98,13 @@ const SearchPage = (props) =>{
     return(
         <PageContainer  p={[0]}>
 
-            <FlexBox overflow="hidden" flexDirection="column" position="relative" top={-65}>
+            <FlexBox overflow="hidden" flexDirection="column" position="relative" top={-65} boxShadow="card">
                 <Image src={responsivePosterUrl} position="absolute" 
                     top={-75} left={-10} right={10} blur={8}
                     minWidth={"100%"} 
                     alt={"Pixly AI Movie Recommendation and Movie Rating Website"} zIndex={0}
                 />
-                <Form flexWrap="wrap" onSubmit={submitHandler} py={[5]} maxWidth="100%"  zIndex={1} px={[4]}>
+                <Form flexWrap="wrap" onSubmit={submitHandler} py={[5]} maxWidth="100%" mt={[4]} zIndex={1} px={[4]}>
                     <HeaderText 
                         textAlign="center" color="rgba(255,255,255, 0.9)" 
                         my={[3]} 

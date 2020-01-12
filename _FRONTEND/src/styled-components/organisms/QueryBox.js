@@ -18,7 +18,7 @@ import {
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
     ImdbIcon, WatchIcon, SearchIcon,MoviePosterBox, CloseIcon,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
-    PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox,
+
     RatingSlider, YearSlider,MoviePosterCard, PlaceHolderCard, Label, Modal
 } from "../../styled-components"
 
@@ -84,7 +84,10 @@ export const SearchQueryBox = (props) =>{
                         focusBg="rgba(20,20,20, 0.2)"
 
                         maxWidth={["40vw", "40vw", "30vw", "200px"]}
-                    /><Label position="absolute" color="transparent" height="1px" width="1px" fontSize="1px">Search</Label>
+                    />
+                    <Label position="absolute" color="transparent" height="1px" width="1px" fontSize="1px">
+                        Search
+                    </Label>
                     {debouncedkeywords.length > 2 && 
                     <Button type="submit" 
                         position="absolute" 

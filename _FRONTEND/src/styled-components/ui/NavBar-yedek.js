@@ -23,9 +23,9 @@ import {
     HomeIcon,ListIcon,FilmListMenu,
     LogoutMutation,SearchQueryBox,
     navbarheight
-
 } from "../"
 
+import { SearchAppBar } from "../../styled-material"
 
 const NB = props => {
     const { username, history, isAuthenticated, logoutDispatcher } = props;
@@ -84,7 +84,7 @@ const NB = props => {
 				>
 				<UnderlineEffect >Search</UnderlineEffect>
 			</NewLink>
-			{window.innerWidth > 900 && <SearchQueryBox />}
+			{(window.innerWidth > 900 && !window.location.pathname.includes("search")) && <SearchQueryBox />}
 		</FlexBox>
 	)
 	
@@ -159,4 +159,4 @@ const Brand = (props) => (
 )
 
 
-export const NavBar = withRouter(NB)
+export const NavBar = withRouter(SearchAppBar)

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from "react";
 import { useState, useContext, useMemo, useEffect, useRef } from "react";
-import { withRouter, Link, Redirect } from "react-router-dom";
+import { withRouter, Link, Redirect, useParams } from "react-router-dom";
 import {
 	rgaPageView, Head, MoviePageAd, MidPageAd, 
 	FeedMobileTopicPageAd, HomePageFeedAd 
@@ -301,9 +301,8 @@ const MovieSummaryWithTwitter = ({item}) => {
 )}
 
 const MovieQuery = (props) => {
-	const slug = props.match.params.slug;
-
-	const { loading, error, data, client, refetch } = useQuery(MOVIE, { variables:{slug}, partialRefetch:true})
+	const { slug } = props
+	const { loading, error, data, client, refetch } = useQuery(MOVIE, { variables:{slug:slug}, partialRefetch:true})
 	const movieCacheUpdate = (newData) => {
         const oldData = client.readQuery({ query: MOVIE, variables:{slug:slug} });
         const newMovieData = {...oldData.movie, ...newData}

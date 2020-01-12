@@ -2,7 +2,7 @@
 import React, {  useContext, useMemo  }  from "react";
 
 //import { connect } from "react-redux";
-import { Route, Switch, Redirect, withRouter,StaticRouter } from "react-router-dom"
+import { Route, Switch, Redirect, withRouter,StaticRouter, useParams } from "react-router-dom"
 import { Query } from "react-apollo";
 import { useQuery } from '@apollo/react-hooks';
 
@@ -137,7 +137,7 @@ const HomeQuery = () => {
 };
 
 const MovieQuery = (props) => {
-    const slug = props.match.params.slug;
+    const { slug } = useParams()
 
     function is_numeric(str){
         return /^\d+$/.test(str);
@@ -145,7 +145,7 @@ const MovieQuery = (props) => {
     const notfound = useMemo(() => is_numeric(slug), [slug])
     //console.log(notfound, "notfound")
     if (notfound) return <Redirect to="/404" status={404}/>
-    return <MoviePage {...props} />
+    return <MoviePage {...props} slug={slug} />
 }
 
 

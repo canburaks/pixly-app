@@ -1,20 +1,20 @@
 @import "./styles/reset.css";
-@import "./styles/atoms/cbs-colors.css";
+/*
 @import "./styles/atoms/cbs-layout.css";
+@import "./styles/atoms/cbs-colors.css";
 @import "./styles/atoms/cbs-grid.css";
 @import "./styles/components.css";
 @import "./styles/atoms/cbs-components.css";
-/*
 @import "../node_modules/semantic-ui-css/semantic.css";
 @import "./styles/modules/glide.core.min.css";
 @import "./styles/modules/glide.theme.min.css";
 @import '~semantic-ui-css/semantic.css';
 @import "./styles/atoms/cbs-components.css"; 
+@import "./styles/react-transitions.css";
 */
-
 @import "./styles/forms.css";
 @import "./styles/atoms/cbs-fonts.css";
-@import "./styles/react-transitions.css";
+
 
 /*
 @import "./styles/themes.css";

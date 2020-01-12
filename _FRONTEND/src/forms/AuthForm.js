@@ -14,7 +14,7 @@ import { GlobalContext } from "../";
 import { emailValidator, passwordValidator, usernameValidator } from "../functions/form"
 import { EnvelopeIcon, WarningIcon, InfoIcon, SuccessIcon } from "../assets/f-icons"
 import { facebook } from "../functions"
-
+import { Button } from "../styled-components"
 import "./AuthForms.css"
 
 
@@ -237,12 +237,14 @@ const SignupForm = (props) => {
                 onError={(e) => mutationErrorHandler(e)}
             >
                 {mutation => (
-                    <button
-                        className="btn primary w100 xs"
+                    <Button width={"100%"} bg={"active"} color="white"
+                        hoverBg="#4c4ece"
+
+                        fontWeight="bold"
                         onClick={() => submitHandler(mutation)}
                     >
                         CREATE ACCOUNT
-                    </button>
+                    </Button>
                 )}
             </Mutation>
 
@@ -341,12 +343,14 @@ const LoginForm = (props) => {
                 onError={(error) => mutationErrorHandler(error)}
             >
                 {(mutation) => (
-                    <button
-                        className="btn primary w100 xs"
+                    <Button width={"100%"} bg={"active"} color="white"
+                        hoverBg="#4c4ece" mb={[2]}
+
+                        fontWeight="bold"
                         onClick={() => submitHandler(mutation)}
                     >
                         LOGIN
-            </button>
+                    </Button>
                 )}
             </Mutation>
             <Fb.Auth dispatchLoadedSignal={setFbLoaded}/>

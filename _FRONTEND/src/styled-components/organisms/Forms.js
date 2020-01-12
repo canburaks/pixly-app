@@ -44,7 +44,7 @@ export const SignupForm = (props) => {
     //print("get-set", getValues())
     //          06301987Cbs
     return(
-        <Form onSubmit={handleSubmit(onSubmit)} p={[2]} zIndex={20}>
+        <Form onSubmit={handleSubmit(onSubmit)} p={[2]} zIndex={20} pt={[0]}>
             <FormInput 
                 name={"Name"}
                 defaultValue={props.name || ""}
@@ -129,10 +129,10 @@ export const SignupFormModal = (props) => {
     <SimpleModal 
         isOpen={props.isOpen} closeModal={props.closeModal} 
         width={["90vw","90vw","80vw", "60vw"]} maxWidth={"400px"}
-        bg="light" color="dark" zIndex={100} over
+        bg="light" color="dark" zIndex={100} header="Sign Up"
     >
         <SignupForm {...props} />
-        <Fb.Auth dispatchLoadedSignal={setFbLoaded}/>
+        {props.isOpen && <Fb.Auth dispatchLoadedSignal={setFbLoaded}/>}
 
     </SimpleModal>
 )}
