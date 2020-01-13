@@ -255,7 +255,7 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
         dispatcher(willBeDispatched)
         return (
             <Ul>
-                <Grid columns={networkResponsiveColumn} py={[3]} gridColumnGap={[3,3,3,4]} className="asdasd">
+                <Grid columns={networkResponsiveColumn} py={[1]} gridColumnGap={[3,3,3,4]} className="asdasd">
                     {firstPart.map( item => (
                             <Li key={"rec" + item.id}>
                             <MovieRecommendationCard 
@@ -267,7 +267,7 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
                     ))}
                 </Grid>
                 <HomePageFeedAd/>
-                <Grid columns={networkResponsiveColumn} py={[3]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={networkResponsiveColumn} py={[1]} gridColumnGap={[3,3,3,4]}>
                     {secondPArt.map( item => (
                         <LazyLoadComponent key={"rec" + item.id}>
                             <Li>
@@ -281,7 +281,7 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
                     ))}
                 </Grid>
                 <MoviePageAd />
-                <Grid columns={networkResponsiveColumn} py={[3]} gridColumnGap={[3,3,3,4]}>
+                <Grid columns={networkResponsiveColumn} py={[1]} gridColumnGap={[3,3,3,4]}>
                     {thirdPart.map( item => (
                         <LazyLoadComponent key={"rec" + item.id}>
                             <Li>
