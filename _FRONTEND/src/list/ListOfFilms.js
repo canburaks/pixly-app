@@ -56,7 +56,7 @@ const ListOfFilms = (props) => {
                 }
 
                 canonical={`https://pixly.app/lists-of-films`}
-				image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"}
+				image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/great-film-lists-arrival-small.jpg"}
             />
             <Hero />
             <TopicSection topics={topics} />
