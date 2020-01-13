@@ -133,6 +133,7 @@ class StaticSitemap(Sitemap):
         statics = stat_slug + [
             "/people/1",
             "/rss/great-film-collections",
+            "rss/pixly-technical-tutorial-and-articles",
             "/termsofservice", "/privacy", "", "/"
         ]
         return statics
