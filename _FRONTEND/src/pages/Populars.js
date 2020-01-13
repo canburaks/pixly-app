@@ -72,7 +72,7 @@ const MoviesPage = (props) => {
             if (message && message.length > 0) setMessage("")
         } 
     }
-    //console.log("main", tag, lazyvariables)
+    //console.log("main", props.data.movies)
     const isSmallScreen = useMemo(() => !screenSize.includes("L"), [screenSize])
     const responsivePosterUrl = isSmallScreen 
         ? "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-v.jpg"
@@ -89,6 +89,14 @@ const MoviesPage = (props) => {
     //console.log("props", props)
     return(
         <PageContainer  p={[0]} bg="light">
+            <Head
+                title={"Pixly - Popular and Upcoming Movies and List of Films"}
+                description={"The latest and popular movies, list of films and movie collections that includes the best, " + 
+                        "films of its theme. Search films by IMDb rating, year and genre"}
+                keywords={["Movie Search", "Advance Movie Search", "Search by IMDb Rating", "Movie with Release Year"]}
+                canonical={`https://pixly.app/popular-and-upcoming-movies`}
+            />
+
 
             <FlexBox 
                 overflow="hidden" flexDirection="column" 
@@ -156,7 +164,7 @@ const MoviesPage = (props) => {
             {/* SEARCH SETTING PANEL*/}
             <MessageBox 
                 subheader="Popular and Upcoming Films"
-                text="You can also make advance search with respect to release year, genre or the IMDb rating of movies." 
+                text="You can also search movies with respect to release year, genre or the IMDb rating." 
                 width="100%"
             
             >
@@ -225,7 +233,7 @@ const SearchQueryBox = ({lazyvariables, skip, initialMovies}) => {
     const [page, setPage] = useState(1)
     const skipQuery = (lazyvariables.keywords.length>2 || lazyvariables.tags) ? false : true
     const { loading, data, error } = useQuery(COMPLEX_SEARCH, {variables:{page:page, ...lazyvariables}, skip:skipQuery});
-    console.log("skip",skipQuery)
+    //console.log("skip",skipQuery)
 
     //Network Status
     //const { effectiveConnectionType } = useNetworkStatus();
