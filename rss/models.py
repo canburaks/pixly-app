@@ -1,5 +1,6 @@
 from django.db import models
 from items.models import List, Topic, Movie
+from blog.models import Post
 from persons.profile import Profile
 from django.urls import reverse
 from django_mysql.models import (JSONField, SetTextField, ListTextField, SetCharField)
@@ -11,6 +12,8 @@ from feedgen.feed import FeedGenerator
 
 def horizontal_upload_path(instance, filename):
     return "rss/{0}/cover/{1}".format(instance.slug,filename)
+def python_upload_path(instance, filename):
+    return "rss-python/{0}/cover/{1}".format(instance.slug,filename)
 
 
 FEED_TYPE = (
@@ -102,3 +105,42 @@ class RSSFeed(models.Model):
             status = "created" if created else "updated"
             print(f"RSS Feed {status} from List:{l.slug}")
         print("Done. Don't forget to add cover poster and make the feed items published")
+
+
+class PythonRSSFeed(models.Model):
+    slug = models.SlugField(max_length=100, unique=True,primary_key=True)
+    post = models.OneToOneField(Post, related_name='feed', on_delete=models.CASCADE, null=True, blank=True)
+    
+
+    title = models.CharField(max_length=70, null=True, blank=True)
+    tag = ListTextField(default = list(),base_field=models.CharField(max_length=60), null=True, blank=True)
+
+    pathname = models.CharField(max_length=80, null=True, blank=True,help_text="page url without domain part.")
+    is_published = models.BooleanField(default=False)
+ 
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank = True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank = True)
+
+    def __str__(self):
+        return self.slug
+    
+    @classmethod
+    def generate_id(cls):
+        qs = cls.objects.all().order_by("id")
+        if qs.exists():
+            return qs.last().id + 1
+        return 1
+  
+    @property
+    def tags(self):
+        return self.tags
+
+    @property
+    def description(self):
+        return self.post.summary
+
+    @property
+    def updated_at(self):
+        return self.post.created_at
+
+  

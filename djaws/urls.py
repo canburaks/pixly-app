@@ -53,7 +53,7 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import path, include, re_path
 #from pixly.indexing import deindex_url_patterns
 from pixly.lib import is_ascii, to_english_chars, save_json, get_json
-from .feed import CollectionsFeed
+from .feed import CollectionsFeed, PythonFeed
 def raw_404(request):
   response = HttpResponse("Not Found", status=404)
   response["status"] = 404
@@ -136,6 +136,7 @@ urlpatterns = [
 #print(deindex_url_patterns)
 urlpatterns = urlpatterns + custom_url_pages + deindex_url_patterns + [
     path('rss/great-film-collections', CollectionsFeed()),
+    path("rss/pixly-technical-tutorial-and-articles", PythonFeed()),
     path("/", TemplateView.as_view(template_name="prerendered/index.html")),
     path("", TemplateView.as_view(template_name="prerendered/index.html")),
     #*deindex_url_patterns,
