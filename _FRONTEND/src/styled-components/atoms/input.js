@@ -92,10 +92,11 @@ export const SearchInput = styled("input")`
     :focus {
         color:${props => props.focusColor && props.focusColor};
         background-color:${props => props.focusBg ? props.focusBg : "rgba(255,255,255,0.8)"};
+        caret-color: ${themeGet("colors.active")};
     }
-    :focus  ::placeholder {
-        color: ${themeGet("colors.active")} ;
-        border-color:white;
+    :focus::placeholder {
+        color: transparent ;
+        border-color:rgba(140,140,140,1);
     }
     ::placeholder {
         color: rgba(40,40,40, 0,9);

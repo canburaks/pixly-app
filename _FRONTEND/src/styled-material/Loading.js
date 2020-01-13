@@ -15,3 +15,4 @@ export const Loading = ({ open=true }) => (
         <CircularProgress color="inherit" />
     </Backdrop>
 )
+export const LoadingIcon = CircularProgress

@@ -31,6 +31,7 @@ import TopicPage from "../pages/topic/TopicPage"
 import Blog from "../pages/blog/BlogPage"
 
 import MoviePage from "../pages/movie/MoviePage"
+import Populars from "../pages/Populars"
 import PersonPage from "../pages/person/PersonPage";
 import ProfilePage from "../pages/profil/ProfilePage";
 import DraftPage from "../pages/DraftPage"
@@ -87,6 +88,8 @@ const Middle = (props) => {
             <Route path={`/user/:username/:menu`} component={UserQuery} />
             <Route exact path={`/user/:username`} component={UserQuery} />
 
+
+            <Route exact path="/popular-and-upcoming-movies" component={Populars} />
             <Route exact path="/movie/:slug" component={MovieQuery} />
             {/*
             <Route exact path="/movie/:slug/:text" component={MovieQueryRedirect} />

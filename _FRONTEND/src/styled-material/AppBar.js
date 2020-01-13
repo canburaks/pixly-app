@@ -23,7 +23,7 @@ import {
 	FlexBox, NewLink, Box,LogoutIcon, LogoutMutation, Text,CloseIcon,
 	CoverLink, SignupFormModal,MoviePosterCard, PlaceHolderCard, Grid,  Button,
 	HomeIcon, UsersIcon, SearchIcon as SearchIconStyled, FourSquareIcon,
-	SimilarMovieIcon, CameraIcon, LoginIcon, JoinIcon
+	SimilarMovieIcon, CameraIcon, LoginIcon, JoinIcon, FilmIcon
 } from "../styled-components"
 import { useAuthCheck, useValues, useOnClickOutside, useDebounce, useLocation, useWindowSize } from "../functions/hooks";
 
@@ -132,6 +132,7 @@ const useStyles = makeStyles(theme => ({
 
 
 export const SearchAppBar = (props) => {
+	const location = useLocation()
 	//Globals
 	const classes = useStyles();
 	const state = useContext(GlobalContext)
@@ -230,11 +231,17 @@ export const SearchAppBar = (props) => {
 	const RıghtMenu = authStatus ? ProfileMenu : AnonymousMenu
   
 
+	//console.log("props", props)
+	useEffect(() => {
+		if(open){
+			setOpen(false)
+		}
+	}, [location])
 
 
 	//console.log(screenSize)
     return (
-        <FlexBox className={classes.grow}  position="absolute" top={0} left={0} width="100%">
+        <FlexBox className={classes.grow}  position="absolute" top={0} left={0} width="100%" id="mui-navbar">
             <AppBar position="static"  classes={{root:classes.appbar, colorDefault:"#000000"}}>
                 <Toolbar>
 					<Box display={["flex", "flex", "flex", 
@@ -253,17 +260,24 @@ export const SearchAppBar = (props) => {
 				    <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
 
                     <FlexBox display={["none", "none", "none", "flex"]} flexGrow={[0,0,0,1]} justifyContent="center" >
-                            <NewLink 
+							<NewLink 
+                                color="#f1f1f1 !important" title="Popular and Upcoming Movies"
+                                link={"/popular-and-upcoming-movies"} fontSize={["10px", "10px", "12px", "14px"]} 
+                                px={[1,1,2]} title="All Movie Collections" fontWeight="bold"
+                            >
+                                Movies
+                            </NewLink>
+							<NewLink 
                                 color="#f1f1f1 !important" 
                                 link={"/lists-of-films"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="All Movie Collections" fontWeight="bold"
+                                px={[1,1,2]} title="List of Films Archive" fontWeight="bold"
                             >
                                 Film Lists
                             </NewLink>
                             <NewLink 
                                 color="#f1f1f1 !important" 
                                 link={"/directors/1"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="All Movie Collections" fontWeight="bold"
+                                px={[1,1,2]} title="Famous Directors and Their Favourite Films" fontWeight="bold"
                             >
                                 Directors
                             </NewLink>
@@ -277,20 +291,10 @@ export const SearchAppBar = (props) => {
                             <NewLink 
                                 color="#f1f1f1 !important" 
                                 link={"/advance-search"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="Browse movies with advance options" fontWeight="bold"
+                                px={[1,1,2]} title="Browse Movie with Advance Options" fontWeight="bold"
                             >
                                 Browse
                             </NewLink>
-							{authStatus && 
-								<NewLink 
-									color="#f1f1f1 !important" fontWeight="bold"
-									link={"/people/1"} fontSize={["10px", "10px", "12px", "14px"]}  
-									title="Discover people"
-									px={[1,1,2]}
-								>
-									People
-								</NewLink>
-								}
                         </FlexBox>
 
 						{/* Search */}
@@ -371,34 +375,38 @@ const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJ
 		<List>
 		{authStatus 
 			?<ListItem classes={{root:classes.listitem}}>
-				<HomeIcon fill={"#f1f1f1"}/>
+				<HomeIcon fill={"#f1f1f1"} size={"18px"} />
 				<Text color="light">Dashboard</Text>
 				<CoverLink link={`/${localStorage.getItem("USERNAME")}/dashboard`} />
 			</ListItem>
 
 			:<ListItem classes={{root:classes.listitem}} button onClick={() => (onClose(), insertLoginForm())}>
-				<LoginIcon stroke={"#f1f1f1"} />
+				<LoginIcon stroke={"#f1f1f1"}  size={"18px"} />
 				<Text color="light">Login</Text>
 			</ListItem>
 			}
-
+			<ListItem classes={{root:classes.listitem}} button title="Popular and Upcoming Movies">
+				<FilmIcon stroke={"#f1f1f1"} size={"18px"} />
+				<Text color="light">Movies</Text>
+				<CoverLink link={"/popular-and-upcoming-movies"} />
+			</ListItem>
 			<ListItem classes={{root:classes.listitem}} button>
-				<CameraIcon stroke={"#f1f1f1"}/>
+				<CameraIcon stroke={"#f1f1f1"} size={"18px"} />
 				<Text color="light">Directors</Text>
 				<CoverLink link={"/directors/1"} />
 			</ListItem>
-			<ListItem classes={{root:classes.listitem}} button>
-				<SimilarMovieIcon stroke={"#f1f1f1"} />
+			<ListItem classes={{root:classes.listitem}} button title="Find Similar Movies">
+				<SimilarMovieIcon stroke={"#f1f1f1"}  size={"18px"} />
 				<Text color="light">Similar Movie Finder</Text>
 				<CoverLink link={"/similar-movie-finder"} />
 			</ListItem>
 			<ListItem classes={{root:classes.listitem}} button>
-				<SearchIconStyled stroke={"#f1f1f1"}/>
+				<SearchIconStyled stroke={"#f1f1f1"} size={"18px"} />
 				<Text color="light">Advance Search</Text>
 				<CoverLink link={"/advance-search"} />
 			</ListItem>
 			<ListItem classes={{root:classes.listitem}} button>
-				<UsersIcon stroke={"#f1f1f1"}/>
+				<UsersIcon stroke={"#f1f1f1"} size={"18px"} />
 				<Text color="light">People</Text>
 				<CoverLink link={"/people/1"} />
 			</ListItem>

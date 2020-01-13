@@ -64,17 +64,18 @@ export const HtmlContainer = ({ html, ...props }) => {
     )
 }
 
-export const MessageBox = ({ header,Header,subheader, text, Image, children, ...props}) => (
+export const MessageBox = ({ header,Header,subheader,Subheader, text, Image, children, ...props}) => (
     <FlexBox 
         overflow="hidden"
         border="1px solid" borderColor="rgba(40,40,40, 0.4)" 
         boxShadow="1px 5px 8px -8px rgba(0,0,0, 0.9)" 
-        bg="#e1e1e1"
+        bg="#d1d1d1"
         p={[2]} mt={[4, 4,5]}
         width={"100%"} {...props}
     >
-        <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start">
+        <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start" width={"100%"}>
             {Header && <Header />}
+            {Subheader && <Subheader />}
             {subheader && <SubHeaderText fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold">{subheader}</SubHeaderText>}
             {header && <HeaderMini fontSize={["16px", "16px", "18px", "20px"]}>{header}</HeaderMini>}
             <Text>{text}</Text>
@@ -269,7 +270,7 @@ export const Clippy = styled(Container)`
     top:0;
     left:0;
     width:100vw;
-    height: 80px;
+    height: 65px;
     background: #242830;
     background: linear-gradient(
         180deg,

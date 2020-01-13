@@ -10,7 +10,46 @@ import { Text, Paragraph, HeaderMini,
 } from "../index"
 import { rgba } from "polished";
 import { AbsoluteBox } from "../atoms";
+import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
 
+export const CollectionCard = (props) => (
+    <FlexBox flexDirection="column" mb={[5]} height={"100%"} mt={[2]}>
+        <LazyLoadComponent>
+            <SuperBox 
+                display="flex" flexDirection="column" 
+                src={props.item.coverPoster || props.item.poster} 
+                ratio={props.ratio || 0.5625} borderRadius={"8px"}
+                width={"100%"}
+            >
+                <CoverLink link={props.link} color="transparent">{props.link}</CoverLink>
+            </SuperBox>
+        </LazyLoadComponent>
+            <Dt>
+        <HeaderMini width={"75%"} fontFamily={"playfair"} color="dark" hoverUnderline
+            my={[2,2,3]}
+            >
+            <NewLink link={props.link} follow={props.item.isImportantPage ? true : undefined}>
+                {props.item.name}
+            </NewLink>
+        </HeaderMini>
+            </Dt>
+        <Dd  
+            color="dark"
+            textAlign="justify"
+        >
+            {props.text.slice(0,200)}
+        </Dd>
+        <Box position="absolute" bottom={"20px"} width={"100%"}>
+            <NewLink link={props.link}  
+                fontWeight="bold" color="dark" 
+                hoverUnderline
+            >
+                {props.buttonText || "See more"}
+            </NewLink>
+            <Hr my={"8px"} />
+        </Box>
+    </FlexBox>
+    )
 
 export const NewestCollectionCard = ({link, coverPoster}) => (
     <SuperBox
@@ -161,7 +200,7 @@ export const ActiveDirectorCard = (props) => (
 </FlexListItem>
 ) 
 
-export const CollectionCard = (props) => (
+export const CollectionCard0 = (props) => (
     <FlexListItem flexDirection="column" mb={[5]} height={"100%"} mt={[2]}>
         <SuperBox 
             display="flex" flexDirection="column" 
