@@ -26,7 +26,7 @@ import { AuthForm, ForgetForm } from "./forms/AuthForm"
 import ContactForm from "./forms/ContactForm"
 
 import { client, cache } from "./index"
-import { useWindowSize,  usePageViews, rgaStart, useAuthCheck} from "./functions"
+import { useWindowSize,  usePageViews, rgaStart, useAuthCheck, useClientHeight} from "./functions"
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
@@ -39,8 +39,6 @@ import { GlobalContext } from "./";
 
 const App = (props) => {
     const globalstate = useContext(GlobalContext)
-    //var cookie = document.cookie;
-    //console.log("cookie", cookie)
     const authStatus = useAuthCheck()
     const MainPageRedirect =() => authStatus ? <Redirect to="/lists-of-films" /> : <MainPage2 />
 
@@ -59,6 +57,8 @@ const App = (props) => {
         
     }
     const haveFooter = checkFooter()
+    const offsetfromtop = window.scrollY
+    console.log(offsetfromtop)
     return (
     <ThemeProvider theme={themes.default}>
         <div className="App" theme="palette-1"  id="app-container">

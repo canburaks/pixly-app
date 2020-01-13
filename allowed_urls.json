@@ -6,6 +6,7 @@
         "/explore",
         "/advance-search",
         "/lists-of-films",
+        "/popular-and-upcoming-movies",
         "/directors/1"
     ],
     "topic":[
@@ -395,6 +396,7 @@
         "/",
         "/similar-movie-finder",
         "/lists-of-films",
+        "/popular-and-upcoming-movies",
         "/explore",
         "/advance-search",
         "/topics",

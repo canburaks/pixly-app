@@ -64,7 +64,7 @@ const MainPage = (props) => {
         "of the art of film."
         
     const screenSize = useWindowSize()
-    const isSmallScreen = useMemo(() => !screenSize.includes("XL"), [screenSize])
+    const isSmallScreen = useMemo(() => !screenSize.includes("L"), [screenSize])
     const responsivePosterUrl = isSmallScreen 
         ? "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-v.jpg"
         : "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"
@@ -99,15 +99,13 @@ const MainPage = (props) => {
             <SuperBox display="flex" position="relative"
                 flexDirection="column" justifyContent="flex-end" alignItems="center"
                 top={-75} 
-                width={"100%"} pt={[3,3,5]} pb={[3,3,4]}
+                width={"100%"} pt={[3,3,4,4,5]} pb={[3,3,4]}
                 position="relative"
-                borderBottom="3px solid"
-                borderColor="rgba(40,40,40, 0.7)"
             >
-				<Image src={responsivePosterUrl} position="absolute" top={0} left={0} width={"100%"} alt={"Pixly AI Movie Recommendation and Movie Rating Website"}/>
+				<Image src={responsivePosterUrl} position="absolute" top={0} left={-10} right={-10} blur={4} width={"100%"} alt={"Pixly AI Movie Recommendation and Movie Rating Website"}/>
             	<FlexBox flexDirection="column" zIndex={9}  px={[2,2,3,4]} height={"100%"} alignItems="center" justifyContent="flex-end">
                     <HeaderText 
-                        mt={[6,6,6]} mb={[2]}
+                        mt={[4,4,5]} mb={[2]}
                         fontSize={["24px","24px","40px", "40px", "44px"]} 
                         textAlign="center"
                         uncapitalize 
@@ -184,9 +182,17 @@ const ExploreSection = ({ isSmallScreen }) => (
 	</Text>
 	<FlexBox flexWrap="wrap" width={"100%"} alignItems="center" justifyContent="center" flexDirection={["column", "column","column", "row"]}>
 		<LinkButton px={[3,3,4]} m={[2]}
+			link="/popular-and-upcoming-movies" textAlign="center"
+			color="light" bg="dark" borderRadius="4px" 
+			height={"50px"} width={["40%"]} maxWidth={"400px"} 
+			hoverScale hoverBg="#3633CC" boxShadow="card" fontSize={["14px", "14px", "16px"]}
+		>
+			Popular Movies
+		</LinkButton>
+		<LinkButton px={[3,3,4]} m={[2]}
 			link="/lists-of-films" textAlign="center"
 			color="light" bg="dark" borderRadius="4px" 
-			height={"50px"} width={["60%","60%","60%","28%"]} maxWidth={"400px"} 
+			height={"50px"} width={["40%"]} maxWidth={"400px"} 
 			hoverScale hoverBg="#3633CC" boxShadow="card" fontSize={["14px", "14px", "16px"]}
 		>
 			Lists of Films
@@ -194,7 +200,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 		<LinkButton px={[2,2,4]} m={[2]}
 			link="/similar-movie-finder" textAlign="center"
 			color="light" bg="dark" borderRadius="4px" 
-			height={"50px"} width={["60%","60%","60%","28%"]} maxWidth={"400px"} 
+			height={"50px"} width={["40%"]} maxWidth={"400px"} 
 			hoverScale hoverBg="#3633CC" boxShadow="card" fontSize={["14px", "14px", "16px"]}
 		>
 			Similar Movie Finder
@@ -202,7 +208,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 		<LinkButton px={[3,3,4]} m={[2]}
 			link="/advance-search" textAlign="center"
 			color="light" bg="dark" borderRadius="4px" 
-			height={"50px"} width={["60%","60%","60%","28%"]} maxWidth={"400px"} 
+			height={"50px"} width={["40%"]} maxWidth={"400px"} 
 			hoverScale hoverBg="#3633CC" boxShadow="card" fontSize={["14px", "14px", "16px"]}
 		>
 			Advance Search

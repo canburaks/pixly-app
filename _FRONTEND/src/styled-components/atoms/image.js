@@ -11,10 +11,12 @@ import { NewLink } from './link';
 //import ImgShim from 'react-shimmer'
 
 
-export const CoverImage = ({src, ratio, alt, title, link, follow=undefined, ...props }) => (
+export const CoverImage = ({src, ratio, alt, title, link, follow=undefined,blur=undefined, ...props }) => (
     <Box position="relative" width="100%" pt={`${ratio*100}%`}  {...props} overflow="hidden">
         {link 
-            ? <NewLink link={link} title={title} follow={follow}><AbsoluteImage src={src} alt={alt} title={title} /></NewLink>
+            ? <NewLink link={link} title={title} follow={follow}>
+                <AbsoluteImage src={src} alt={alt} title={title} blur={blur} />
+                </NewLink>
             : <AbsoluteImage src={src} alt={alt} title={title} />
         }
     </Box>
@@ -28,6 +30,7 @@ export const AbsoluteImage = styled("img")`
     bottom:0;
     min-width:100%;
     height:100%;
+    filter:${props => props.blur && `blur(${props.blur}px)`};
     ${color}
     ${space}
     ${shadow}

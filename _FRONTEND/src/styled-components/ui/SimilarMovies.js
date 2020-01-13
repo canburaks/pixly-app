@@ -150,7 +150,7 @@ const RecommendationSection = ({num=19}) => {
     
     // Network sensitive settings
     const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 12 : 6) : 6 // if slow network request less movie
-    const networkSensitiveColumns = speed === "fast" ? [1,1,1,2,2,2,2,3,4] : [2,2,3,3,3,4,6]
+    const networkSensitiveColumns = speed === "fast" ? [1,1,2,2,2,2,3,4] : [2,2,3,3,3,4,6]
 
 	const { loading, error, data } = useQuery(RECOMMENDATION_FINDER, {
             variables:{slug:slug,
@@ -267,7 +267,7 @@ const ContentSimilarMovieCard = ({ item }) => (
 const MovieRecommendationCard = ({ item, speed }) => (
 	<SuperBox borderRadius={"4px"}
 		width="100%"
-        src={speed === "fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.coverPoster} 
+        src={speed === "fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster} 
 		ratio={speed === "slow" ? 1.5 : 0.7}
 		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
         className="recommendation-similar-movie-card"

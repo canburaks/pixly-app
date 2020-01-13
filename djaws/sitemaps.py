@@ -32,7 +32,8 @@ static__slugs = blog__slugs + [
     "advance-search",
     "directors/1",
     "similar-movie-finder",
-    "lists-of-films"
+    "lists-of-films",
+    "popular-and-upcoming-movies"
 ]
 
 

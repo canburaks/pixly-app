@@ -27,13 +27,40 @@ const useStyles = makeStyles(theme => ({
         flexDirection:"row",
         alignItems:"center"
       },
-      slider:{
+      imdbslider:{
           color:"#F3CE13",
           '& .MuiSlider-thumb': {
               background:"black",
               color:"black"
-          }
+          },
+          '& .MuiSlider-rail':{
+            background:"black",
+            height:"2px",
+            opacity:0.9,
+        },
+        '& .MuiSlider-track':{
+            height:"4px"
+        }
       },
+      yearslider:{
+        color:"#3437c7",
+        '& .MuiSlider-root':{
+            background:"black",
+            color:"black"
+        },
+        '& .MuiSlider-thumb': {
+            background:"#3437c7",
+            color:"#3437c7"
+        },
+        '& .MuiSlider-rail':{
+        background:"black",
+            height:"2px",
+            opacity:0.9,
+        },
+        '& .MuiSlider-track':{
+            height:"4px"
+        }
+    },
       formControl: {
         margin: 4,
         minWidth: 180,
@@ -107,7 +134,7 @@ export const YearSlider = ({ min=1920, max=2020, dispatcher,showLabel, ...props 
     return(
         <div className={classes.root}>
             <WatchIcon title="Release Year" stroke={props.iconColor || "#3f51b5"}  size={34}/>
-            <Slider
+            <Slider className={classes.yearslider}
                 min={min}
                 max={max}
                 value={value}
@@ -137,7 +164,7 @@ export const RatingSlider = ({ min=2, max=10, dispatcher,showLabel, ...props }) 
         <div className={classes.root}>
             <ImdbColorfulIcon title="IMDb Rating" />
             <Slider
-                className={classes.slider}
+                className={classes.imdbslider}
                 step={0.1}
                 min={min}
                 max={max}
