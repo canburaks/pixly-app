@@ -56,7 +56,7 @@ class CollectionsFeed(Feed):
 
 
 class PythonFeed(Feed):
-    title = "Pixy - Technical Tutorials and Articles"
+    title = "Pixy - Technical Articles About Python, Django, Javascript and React"
     link = "/rss/pixly-technical-tutorial-and-articles"
     description = "Python Javascript Tutorial and Articles"
     author_name = 'Can Burak S.' # Hard-coded author name.
