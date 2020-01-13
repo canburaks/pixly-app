@@ -134,12 +134,12 @@ const MoviesPage = (props) => {
                     <Text>
                         We are passionately expanding our film collections. We have many great list of films that includes 
                         the best examples of its category like&nbsp;
-                        <NewLink title="See the best arthouse movies" fontWeight="bold" link={"/topic/art-house"}><em title="See the best arthouse movies">Arthouse</em></NewLink>,&nbsp;
-                        <NewLink title="See the best cyberpunk movies" fontWeight="bold" link={"/topic/cyberpunk"}><em title="See the best cyberpunk movies">Cyberpunk</em></NewLink>,&nbsp;
-                        <NewLink title="See the best thought-provoking movies" fontWeight="bold" link={"/topic/thought-provoking"}><em title="See the best thought-provoking movies">Thought-Provoking</em></NewLink> and&nbsp;
-                        <NewLink title="See the best mystery movies" fontWeight="bold" link={"/topic/mystery"}><em title="See the best mystery movies">Mystery</em></NewLink> movies.
+                        <NewLink title="See the best arthouse movies" fontWeight="bold" follow link={"/topic/art-house"}><em title="See the best arthouse movies">Arthouse</em></NewLink>,&nbsp;
+                        <NewLink title="See the best cyberpunk movies" fontWeight="bold" follow link={"/topic/cyberpunk"}><em title="See the best cyberpunk movies">Cyberpunk</em></NewLink>,&nbsp;
+                        <NewLink title="See the best thought-provoking movies" fontWeight="bold" follow link={"/topic/thought-provoking"}><em title="See the best thought-provoking movies">Thought-Provoking</em></NewLink> and&nbsp;
+                        <NewLink title="See the best mystery movies" fontWeight="bold" follow link={"/topic/mystery"}><em title="See the best mystery movies">Mystery</em></NewLink> movies.
                         Some of the popular movie collections are below. For more, visit&nbsp;
-                        <NewLink link={"/lists-of-films"} underline title="Visit All Movie List Collections">
+                        <NewLink link={"/lists-of-films"} underline title="Visit All Movie List Collections" follow>
                             <em title="See List of Film Archive">list of film collections</em>
                         </NewLink>
                         .
@@ -157,9 +157,9 @@ const MoviesPage = (props) => {
                     ))}
                 </Grid>
                 </MessageBox>
-
-
             </FlexBox>
+
+            <HomePageFeedAd />
 
             {/* SEARCH SETTING PANEL*/}
             <MessageBox 
@@ -255,7 +255,6 @@ const SearchQueryBox = ({lazyvariables, skip, initialMovies}) => {
                     <MovieRecommendationCard item={item} speed={speed} key={"rec" + item.id} />
                 ))}
             </Grid>
-            <HomePageFeedAd />
             <Grid columns={networkSensitiveColumns} py={[4]} gridColumnGap={[1]} gridRowGap={[1]}>
                 {secondPArt.map( item => (
                     <LazyLoadComponent key={"rec" + item.id} >
@@ -263,7 +262,6 @@ const SearchQueryBox = ({lazyvariables, skip, initialMovies}) => {
                     </LazyLoadComponent>
                 ))}
             </Grid>
-            <MidPageAd/>
             </>
         )
     }
@@ -280,7 +278,6 @@ const SearchQueryBox = ({lazyvariables, skip, initialMovies}) => {
                     <MovieRecommendationCard item={item} speed={speed} key={"rec" + item.id} />
                 ))}
             </Grid>
-            <HomePageFeedAd />
             <Grid columns={networkSensitiveColumns} py={[4]} gridColumnGap={[1]} gridRowGap={[1]}>
                 {secondPArt.map( item => (
                     <LazyLoadComponent key={"rec" + item.id} >
@@ -288,8 +285,6 @@ const SearchQueryBox = ({lazyvariables, skip, initialMovies}) => {
                     </LazyLoadComponent>
                 ))}
             </Grid>
-            <MidPageAd/>
-
             {data.complexSearch.quantity >= 18 &&
                     <PaginationBox mb={[2]}
                         currentPage={data.complexSearch.quantity!==null && page} 
