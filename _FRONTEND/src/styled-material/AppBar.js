@@ -424,6 +424,7 @@ const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJ
 			{text:"Biography Movies", link:"/topic/historical-figures"},
 			{text:"Controversial Movies", link:"/topic/controversial-films"},
 			{text:"Cyberpunk Movies", link:"/topic/cyberpunk"},
+			{text:"Gangster Movies", link:"/topic/gangster-films"},
 			{text:"Thought-Provoking", link:"/topic/thought-provoking"},
 			{text:"LGBTQ+ Movies", link:"/topic/lgbtq-plus-films"},
 			{text:"Mystery Movies", link:"/topic/mystery"}].map(liste => (
