@@ -22,7 +22,8 @@
         "/topic/controversial-films",
         "/topic/historical-figures",
         "/topic/mystery",
-        "/topic/video-game"
+        "/topic/video-game",
+        "/topic/gangster-films"
     ],
 
 
@@ -415,6 +416,7 @@
         "/topic/historical-figures",
         "/topic/mystery",
         "/topic/video-game",
+        "/topic/gangster-films",
         "/blog/a-brief-introduction-to-collaborative-filtering",
         "/blog/django-graphql-react-integration-tutorial-part-1",
         "/blog/django-graphql-react-integration-tutorial-part-2",
