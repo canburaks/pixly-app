@@ -411,12 +411,13 @@ const Features = ({ setModalOpen }) => {
 						<Text mr={[1,1,2]}  fontSize={["14px", "14px", "14px", "14px"]}>
 							We are also collecting and curating lists of movies that fit your mood or cinema taste such as the favourite list of films of the famous
 							directors, the grand prize winner movies of the prestigious film festivals. Also, there are
-							topic lists that include the best artworks of its category such as
-							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Arthouse Movies"} link="/topic/art-house">arthouse</NewLink>,
-							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Cyberpunk Movies"} link="/topic/cyberpunk">cyberpunk</NewLink>,
-							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Controversial Movies"} link="/topic/controversial">controversial</NewLink>,
-							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Thought-Provoking Movies"} link="/topic/thought-provoking">thought-provoking</NewLink>, 
-							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Mystery Movies"} link="/topic/mystery">mystery</NewLink> movies etc.
+							topic lists that include the best artworks of its category such as&nbsp;
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Arthouse Movies"} link="/topic/art-house">Arthouse</NewLink>,&nbsp;
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Cyberpunk Movies"} link="/topic/cyberpunk">Cyberpunk</NewLink>,&nbsp;
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Controversial Movies"} link="/topic/controversial">Controversial</NewLink>,&nbsp;
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Gangster Movies"} link="/topic/gangster-films">Gangster</NewLink>,&nbsp;
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Mystery Movies"} link="/topic/mystery">Mystery</NewLink> and&nbsp;
+							<NewLink ml={[1]} follow={true} underline fontWeight="bold" title={"Thought-Provoking Movies"} link="/topic/thought-provoking">Thought-Provoking</NewLink> movies etc.
 						</Text>
 					</FlexBox>
 				</FlexBox>

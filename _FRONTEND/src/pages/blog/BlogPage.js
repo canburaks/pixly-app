@@ -93,7 +93,8 @@ const TopicLinkList = (props) => {
         {name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk.jpg"},
         {name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking.jpg"},
         {name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery.jpg"},
-        {name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures.jpg"}
+        //{name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures.jpg"}
+        {name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/gangster.jpg"}
     ]
 
     return (
@@ -114,7 +115,7 @@ const TopicLinkList = (props) => {
                             src={topic.coverPoster}
                             ratio={0.55}
                             link={`/topic/${topic.slug}`} follow
-                            title={`Visit ${topic.name} Movies`}
+                            title={`${topic.name} Movies`}
                             alt={`${topic.name} Film List Image`}
                             key={topic.name} 
                         />

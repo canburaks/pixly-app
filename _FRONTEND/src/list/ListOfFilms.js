@@ -66,7 +66,7 @@ const ListOfFilms = (props) => {
         </PageContainer>
     )
 }
-const TopicSection = ({topics, partitionQuantity=4}) => (
+const TopicSection = ({topics, partitionQuantity=6}) => (
     <FlexBox 
         width="100%" height="auto" 
         flexDirection="column" 

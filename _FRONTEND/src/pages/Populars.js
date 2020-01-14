@@ -83,7 +83,7 @@ const MoviesPage = (props) => {
         "the-irishman-2019", "doctor-sleep-2019"].includes(m.slug)
     ))
     const mainpageTopics = props.data.topics.filter(t => (
-        ["mystery","thought-provoking", "art-house", "cyberpunk"].includes(t.slug)
+        ["mystery","thought-provoking", "gangster-films", "cyberpunk"].includes(t.slug)
     ))
 
     //console.log("props", props)
