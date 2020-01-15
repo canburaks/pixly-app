@@ -220,8 +220,7 @@
     "include": [
       "/",
       "/",
-      "/topic/gangster-films",
-      "/movie/the-gentlemen-2019"
+      "/topic/gangster-films"
     ],
     "publicPath": "/"
   }
