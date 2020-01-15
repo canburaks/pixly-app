@@ -87,6 +87,7 @@ const TopicPage = (props) =>{
     },[page])
     
     const featuremovies = isReady ? queryData.topic.featureMovies : [];
+    queryData && queryData.topic && console.log(queryData.topic)
     return(
         <PageContainer>
             
@@ -211,6 +212,12 @@ const TopicPage = (props) =>{
                         currentPage={page} 
                         totalPage={Math.ceil(queryData.quantity/18)} 
                         nextPage={nextPage} prevPage={prevPage} 
+                    />}
+                {queryData && queryData.topic.references && 
+                    <HtmlContainer 
+                        my={[5]} 
+                        fontSize={["14px","16px", "16px", "18px"]} 
+                        html={queryData.topic.references}     
                     />}
                 </Box>
             </ContentContainer>
