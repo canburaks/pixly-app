@@ -221,13 +221,7 @@
       "/",
       "/",
       "/topic/gangster-films",
-      "/lists-of-films",
-      "/popular-and-upcoming-movies",
-      "/movie/the-irishman-2019",
-      "/blog/a-brief-introduction-to-collaborative-filtering",
-      "/blog/django-graphql-react-integration-tutorial-part-1",
-      "/blog/django-graphql-react-integration-tutorial-part-2",
-      "/blog/django-graphql-react-integration-tutorial-part-3"
+      "/the-gentlemen-2019"
     ],
     "publicPath": "/"
   }
