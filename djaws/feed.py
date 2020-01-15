@@ -56,15 +56,15 @@ class CollectionsFeed(Feed):
 
 
 class PythonFeed(Feed):
-    title = "Pixy - Technical Articles About Python, Django, Javascript and React"
+    title = "Pixy - Technical Articles About Python and Django"
     link = "/rss/pixly-technical-tutorial-and-articles"
-    description = "Python Javascript Tutorial and Articles"
+    description = "Python Django Tutorial and Articles"
     author_name = 'Can Burak S.' # Hard-coded author name.
     author_email = 'canburaks@pixly.app' # Hard-coded author email.
     author_link = 'https://pixly.app/user/canburaks' # Hard-coded author URL.
     item_author_name = 'Can Burak S.' # Hard-coded author name.
     item_author_link = 'https://pixly.app/user/canburaks' # Hard-coded author URL.
-    item_categories = ("python", "react", "django", "django-react", "javascript") # Hard-coded categories.
+    item_categories = ("python",  "django", "django-react") # Hard-coded categories.
 
     def items(self):
         return PythonRSSFeed.objects.filter(is_published=True)
@@ -97,4 +97,4 @@ class PythonFeed(Feed):
     def item_categories(self, item):
         if len(item.tag)>0:
             return item.tag
-        return ("movies", "movie lists", "film collections")
+        return ("django", "python-django", "django-spa")

@@ -149,7 +149,7 @@ export const YearSlider = ({ min=1920, max=2020, dispatcher,showLabel, ...props 
 
 export const RatingSlider = ({ min=2, max=10, dispatcher,showLabel, ...props }) => {
     const classes = useStyles();
-    const [value, setValue] = useState([min + 4, max]);
+    const [value, setValue] = useState([min + 2, max]);
     const ratingvalues = useMemo(() => ({minRating:value[0], maxRating:value[1]}), [value])
 
     //console.log("options",minYearOptions, maxYearOptions)
