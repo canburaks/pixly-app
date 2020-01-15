@@ -848,6 +848,7 @@ class TopicType(DjangoObjectType, SEOType):
     summary = graphene.String()
     content = graphene.String()
     content_html = graphene.String()
+    references = graphene.String()
 
     wiki = graphene.String()
 
@@ -987,6 +988,9 @@ class TopicType(DjangoObjectType, SEOType):
     def resolve_content_html(self, info, *_):
         #print(self.content_html)
         return self.content_html
+    def resolve_references(self, info, *_):
+        #print(self.content_html)
+        return self.references
 
     def resolve_summary(self, info, *_):
         return self.summary
