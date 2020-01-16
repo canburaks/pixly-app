@@ -42,12 +42,12 @@ export const SimilarMovies = (props) => {
             display="flex" flexDirection="column"
             id="similar-movies" pt={50}
         >
+            <RecommendationSection  />
+            
+            <ResponsiveAd3 />
+
             <ContentSimilarSection  />
 
-            <LazyLoadComponent>
-                <RecommendationSection  />
-            </LazyLoadComponent>
-            <ResponsiveAd3 />
         </Section>
     )
 }
