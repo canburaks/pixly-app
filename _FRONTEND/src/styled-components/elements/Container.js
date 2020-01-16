@@ -40,7 +40,7 @@ export const HtmlContainer = ({ html, ...props }) => {
             }
             else if (domNode.attribs && domNode.name === 'p' ) {
                 //console.log(domNode)
-                return <Text textAlign="justify" >{domToReact(domNode.children)}</Text>
+                return <Text >{domToReact(domNode.children)}</Text>
             }
             //else if (domNode.attribs && domNode.name === 'img') {
             //    //console.log(domNode)

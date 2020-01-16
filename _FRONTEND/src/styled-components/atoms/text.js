@@ -190,7 +190,6 @@ export const SubHeaderText = styled("h2")`
 export const HeaderMini = styled(HM)({
     width:"100% ",
     textTransform:"capitalize",
-    fontWeight:"bold",
     color:"dark",
     cursor:props => props.clickable ? "pointer" : "inherit",
     textShadow:props => props.textShadow || themeGet("shadows.lightGray"),

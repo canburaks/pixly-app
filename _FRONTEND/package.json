@@ -220,6 +220,7 @@
     "include": [
       "/",
       "/",
+      "/topic/cyberpunk",
       "/topic/gangster-films"
     ],
     "publicPath": "/"
