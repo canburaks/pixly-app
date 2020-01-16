@@ -66,7 +66,7 @@ const PostPage = (props) =>{
     //    return {__html: props.post.text};
     //  }
     //const InnerHtml = () => <div dangerouslySetInnerHTML={createMarkup()} />;
-    useEffect(() => window.scrollTo({top:0, left:0, behavior:"smooth"}))
+    //useEffect(() => window.scrollTo({top:0, left:0, behavior:"smooth"}))
     return(
         <PageContainer>
             <Head
