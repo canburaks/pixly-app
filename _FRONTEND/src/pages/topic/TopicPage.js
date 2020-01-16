@@ -75,10 +75,10 @@ const TopicPage = (props) =>{
     }
     // Page Scroll
     useEffect(() => {
-        if (page === undefined || parseInt(page)===1){
-            window.scrollTo({left:0, top:0, behavior:"smooth"})
-        }
-        else if (parseInt(page) > 1 && node && node.current){
+        //if (page === undefined || parseInt(page)===1){
+        //    window.scrollTo({left:0, top:0, behavior:"smooth"})
+        //}
+        if (parseInt(page) > 1 && node && node.current){
             window.scrollTo({left:0, top:node.current.offsetTop, behavior:"smooth"})
         }
     },[page])
