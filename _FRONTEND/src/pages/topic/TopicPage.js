@@ -8,9 +8,6 @@ import { isEqualObj, Head, MidPageAd,HomePageFeedAd,MoviePageAd,
     useValues, useWindowSize, FeedMobileTopicPageAd
 } from "../../functions"
 
-import { renderToStaticMarkup, renderToString } from 'react-dom/server';
-import * as SocialButtons from 'react-social-sharing'
-
 
 import { 
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
@@ -87,7 +84,7 @@ const TopicPage = (props) =>{
     },[page])
     
     const featuremovies = isReady ? queryData.topic.featureMovies : [];
-    queryData && queryData.topic && console.log(queryData.topic)
+    //queryData && queryData.topic && console.log(queryData.topic)
     return(
         <PageContainer>
             
@@ -239,7 +236,6 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
     const networkResponsiveRatio = useMemo(() => speed==="fast" ? 0.7 : 1.5)
     const networkResponsiveColumn = useMemo(() => speed==="fast" ? [1,1,1,2,2,2,3] : [1,1,2,2,3,3,4])
 
-    if (loading) return <Loading />
     if (data && data.complexSearch) {
         const willBeDispatched = {topic:data.complexSearch.topic, quantity:data.complexSearch.quantity}
         const pageQuantity = data.complexSearch.topicResult.length 
@@ -305,6 +301,7 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
             </Ul>
 
         )}
+    else return <div></div>
 }, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.page === n.page) )
 
 
