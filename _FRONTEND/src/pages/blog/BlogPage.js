@@ -38,7 +38,7 @@ const BlogQuery = (props) => {
 
 
 const BlogPage = (props) =>{
-    useEffect(() => window.scrollTo({top:0, left:0, behavior:"smooth"}))
+    useEffect(() => window.scrollTo({top:0, left:0, behavior:"smooth"}),[])
     return(
         <PageContainer>
             <Head
