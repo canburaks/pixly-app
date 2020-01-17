@@ -220,6 +220,7 @@
     "include": [
       "/",
       "/",
+      "/movie/the-gentlemen-2019",
       "/movie/easy-money-1983"
     ],
     "publicPath": "/"
