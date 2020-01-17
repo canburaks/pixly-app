@@ -94,6 +94,7 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/easy-money-1983",
         "/movie/the-gentlemen-2019",
         "/movie/extremis-2016",
         "/movie/heartbreaker-2010",
@@ -769,6 +770,8 @@
         "/movie/hereditary-2018",
         "/movie/heartbreaker-2010",
         "/movie/extremis-2016",
-        "/movie/the-gentlemen-2019"
+        "/movie/the-gentlemen-2019",
+        "/movie/easy-money-1983"
+
     ]
 }
