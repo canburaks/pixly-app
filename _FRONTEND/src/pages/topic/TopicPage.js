@@ -24,14 +24,11 @@ import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-componen
 
 import { YearSlider, RatingSlider, TagSelect, SearchInputMaterial } from "../../styled-material"
 
-export const ResponsiveTopicCard = ({ item }) => {
-    const screenSize = useWindowSize()
-    const isLargeScreen = useMemo(() => screenSize.includes("L"), [screenSize])
-    //console.log("isLargeScreen", isLargeScreen)
-    return (
-        <LargeTopicMovieCard item={item} />
-    )
-}
+const HeroCSSBanner = ({header, subheader}) => (
+    <FlexBox width="100%" width={400} bg="#ffcc35" justifyContent="center" alignItems="center">
+
+    </FlexBox>
+) 
 
 const TopicPage = (props) =>{
     let history = useHistory();
@@ -101,7 +98,8 @@ const TopicPage = (props) =>{
             {isReady && queryData.topic.heroPoster && 
                 <Image 
                     src={queryData.topic.heroPoster} 
-                    width="100vw" height="auto" minHeight="100px"
+                    width="100vw" height="auto" minHeight="100px" position="relative"
+                    minHeight={160}
                     alt={queryData.topic.name} 
                     title={queryData.topic.name} 
                 />

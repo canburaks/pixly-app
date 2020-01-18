@@ -260,7 +260,10 @@ const CollectionCard = (props) => (
             </SuperBox>
         </LazyLoadComponent>
             <Dt>
-        <HeaderMini width={"75%"} fontFamily={"playfair"} color="dark" hoverUnderline
+        <HeaderMini width={"75%"} 
+            
+            fontFamily={"playfair"} fontWeight="bold" 
+            color="dark" hoverUnderline
             my={[2,2,3]}
             >
             <NewLink link={props.link} follow={props.item.isImportantPage ? true : undefined}>
