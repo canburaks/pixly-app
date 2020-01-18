@@ -132,7 +132,7 @@ export const TopPanelBackElement = (props) => (
             src={props.src} //will be either coverPoster or poster for blurry background  
             position="absolute"
             width={"110vw"} maxHeight={["110vh", "105vh", "105vh"]}
-            left={"-5vw"} top={"-95px"} bottom={"-10px"} 
+            left={"-5vw"} top={-20} bottom={"-10px"} 
             blur={props.blur || 20}
             zIndex={2}
             />
@@ -172,7 +172,7 @@ export const TopPanelCoverElement = React.memo((props) => (
         </Box>
 
     </SuperBox>
-), (prevProps, nextProps) => (prevProps.isLargeScreen === nextProps.isLargeScreen))
+), (prevProps, nextProps) => (prevProps.isLargeScreen === nextProps.isLargeScreen && prevProps.item.coverPoster === nextProps.item.coverPoster))
 
 
 

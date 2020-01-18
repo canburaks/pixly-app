@@ -241,7 +241,7 @@ export const SearchAppBar = (props) => {
 
 	//console.log(screenSize)
     return (
-        <FlexBox className={classes.grow}  position="absolute" top={0} left={0} width="100%" id="mui-navbar">
+        <FlexBox className={classes.grow}  position="relative" top={0} left={0} width="100%" id="mui-navbar">
             <AppBar position="static"  classes={{root:classes.appbar, colorDefault:"#000000"}}>
                 <Toolbar>
 					<Box display={["flex", "flex", "flex", 
