@@ -174,7 +174,7 @@ export const SearchAppBar = (props) => {
     const handleMobileMenuClose = () => setMobileMoreAnchorEl(null);
     const handleMobileMenuOpen = event => setMobileMoreAnchorEl(event.currentTarget);
   
-    const handleMenuClose = () => (setAnchorEl(null), handleMobileMenuClose())
+    const handleMenuClose = () => (setAnchorEl(null))
 	
     const handleDrawerOpen = () => setOpen(true)
     const handleDrawerClose = () => setOpen(false)

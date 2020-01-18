@@ -220,9 +220,8 @@
     "include": [
       "/",
       "/",
-      "/movie/heartbreaker-2010",
-      "/movie/good-will-hunting-1997"
-
+      "/movie/glass-2019",
+      "/movie/monella-1998"
     ],
     "publicPath": "/"
   }
