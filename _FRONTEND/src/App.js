@@ -75,7 +75,7 @@ const App = (props) => {
                 </Modal>
             </Box>
             {haveFooter && <Footer />}
-            <ScrollTopButton />
+            <ScrollTopButton type="text"/>
         </div>
     </ThemeProvider>
 
