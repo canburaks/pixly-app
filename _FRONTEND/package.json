@@ -220,7 +220,8 @@
     "include": [
       "/",
       "/",
-      "/movie/heartbreaker-2010"
+      "/movie/heartbreaker-2010",
+      "/movie/good-will-hunting-1997"
 
     ],
     "publicPath": "/"
