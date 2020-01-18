@@ -80,13 +80,13 @@ def set_configs(file_name):
     #js file
     elif file_name.endswith("js"):
         props = {'ContentType': 'application/javascript', 'ACL':'public-read'}
-        if "vendor" in file_name:
-            props["CacheControl"] = "max-age=18000"
+        #if "vendor" in file_name:
+        props["CacheControl"] = "max-age=18000"
     #css file
     elif file_name.endswith("css"):
         props = {'ContentType': 'text/css', 'ACL':'public-read'}
-        if "vendor" in file_name:
-            props["CacheControl"] = "max-age=18000"
+        #if "vendor" in file_name:
+        props["CacheControl"] = "max-age=18000"
     else: 
         props = None
     return props
