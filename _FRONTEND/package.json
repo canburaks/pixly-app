@@ -220,22 +220,8 @@
     "include": [
       "/",
       "/",
-      "/movie/glass-2019",
-      "/movie/monella-1998",
-      "/topics",
-      "/topic/art-house",
-      "/topic/based-on-true-story",
-      "/topic/cyberpunk",
-      "/topic/dialogue-focused",
-      "/topic/thought-provoking",
-      "/topic/feel-good-movies",
-      "/topic/bechdel-test",
-      "/topic/lgbtq-plus-films",
-      "/topic/controversial-films",
-      "/topic/historical-figures",
-      "/topic/mystery",
-      "/topic/video-game",
-      "/topic/gangster-films"
+      "/lists-of-films"
+
     ],
     "publicPath": "/"
   }
