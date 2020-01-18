@@ -105,7 +105,7 @@ const MainPage = (props) => {
 				<Image src={responsivePosterUrl} position="absolute" top={0} left={-10} right={-10} blur={4} width={"100%"} alt={"Pixly AI Movie Recommendation and Movie Rating Website"}/>
             	<FlexBox flexDirection="column" zIndex={9}  px={[2,2,3,4]} height={"100%"} alignItems="center" justifyContent="flex-end">
                     <HeaderText 
-                        mt={[4,4,5]} mb={[2]}
+                        mt={80} mb={[2]}
                         fontSize={["24px","24px","40px", "40px", "44px"]} 
                         textAlign="center"
                         uncapitalize 
