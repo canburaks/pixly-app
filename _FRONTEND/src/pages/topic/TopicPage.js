@@ -257,29 +257,25 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
         //console.log("data", data.complexSearch.topicResult)
         dispatcher(willBeDispatched)
         return (
-            <Ul>
+                <>
                 <Grid columns={networkResponsiveColumn} py={[1]} gridColumnGap={[3,3,3,4]} className="asdasd">
                     {firstPart.map( item => (
-                            <Li key={"rec" + item.id}>
                             <MovieRecommendationCard 
-                                item={item}  
+                                item={item}  key={"rec" + item.id}
                                 ratio={networkResponsiveRatio} 
                                 poster={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
                             />
-                            </Li>
                     ))}
                 </Grid>
                 <HomePageFeedAd/>
                 <Grid columns={networkResponsiveColumn} py={[1]} gridColumnGap={[3,3,3,4]}>
                     {secondPArt.map( item => (
                         <LazyLoadComponent key={"rec" + item.id}>
-                            <Li>
                             <MovieRecommendationCard 
                                 item={item}  
                                 ratio={networkResponsiveRatio} 
                                 poster={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
                             />
-                            </Li>
                         </LazyLoadComponent>
                     ))}
                 </Grid>
@@ -287,18 +283,16 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
                 <Grid columns={networkResponsiveColumn} py={[1]} gridColumnGap={[3,3,3,4]}>
                     {thirdPart.map( item => (
                         <LazyLoadComponent key={"rec" + item.id}>
-                            <Li>
                             <MovieRecommendationCard 
                                 item={item}  
                                 ratio={networkResponsiveRatio} 
                                 poster={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
                             />
-                            </Li>
                         </LazyLoadComponent>
                     ))}
                 </Grid>
                 <br/>
-            </Ul>
+            </>
 
         )}
     else return <div></div>
