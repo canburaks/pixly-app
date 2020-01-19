@@ -110,11 +110,11 @@ export function usePageViews() {
             ReactGA.pageview(location.pathname)
 
             // calculate miliseconds between page navigation
-            const passed = Math.round(timeHandler())
+            //const passed = Math.round(timeHandler())
             const navtext = navTextHandler()
             if (navtext) {
-                rgaSetNavTime(passed,navtext)
-                rgaSetEvent("Nav", navtext, passed, passed.toString())
+                rgaSetNavTime(0 ,navtext)
+                //rgaSetEvent("Nav", navtext, passed, passed.toString())
             }
         }
     }, [location]);

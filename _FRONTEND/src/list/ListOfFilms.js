@@ -59,10 +59,11 @@ const ListOfFilms = (props) => {
 				image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/great-film-lists-arrival-small.jpg"}
             />
             <Hero />
-            <TopicSection topics={topics} />
-            <Hr  border="3px solid" bg="dark"/>
-            <ListeSection lists={allLists} />
-
+            <ContentContainer>
+                <TopicSection topics={topics} />
+                <Hr  border="3px solid" bg="dark"/>
+                <ListeSection lists={allLists} />
+            </ContentContainer>
         </PageContainer>
     )
 }

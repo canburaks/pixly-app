@@ -28,7 +28,6 @@ const MovieActions = (props) => (
 )
 
 export const MovieCoverPanel = (props) => (
-    <TopPanelBackElement src={props.item.coverPoster || props.item.poster} blur={props.blur} slug={props.item.slug}>
         <TopPanelCoverElement 
             item={props.item} 
             header={`${props.item.name} - ${props.item.year}`} 
@@ -42,7 +41,6 @@ export const MovieCoverPanel = (props) => (
             <RatingMutation  item={props.item}  />
             */}
         </TopPanelCoverElement>
-    </TopPanelBackElement>
 )
 
 const ListActions = (props) => (
