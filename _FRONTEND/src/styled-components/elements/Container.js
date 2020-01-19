@@ -73,14 +73,19 @@ export const MessageBox = ({ header,Header,subheader,Subheader,miniheader, text,
         p={[2]} mt={[4, 4,5]} px={[3]}
         width={"100%"} {...props}
     >
-        <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start" width={"100%"}>
-            {Header && <Header fontWeight="bold" />}
+        <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start" width={"100%"} textAlign="left">
+            {Header && <Header fontWeight="bold" textAlign="left" />}
             {(header || subheader) && 
-                <SubHeaderText fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.95}>
+                <SubHeaderText fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.95} textAlign="left">
                     {header || subheader}
                 </SubHeaderText>}
-            {Subheader && <Subheader fontWeight="bold" opacity={0.9}/>}
-            {miniheader && <HeaderMini fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.75}>{miniheader}</HeaderMini>}
+            {Subheader && <Subheader fontWeight="bold" opacity={0.9} textAlign="left"/>}
+            {miniheader && 
+                <HeaderMini fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.75}
+                    textAlign="left"
+                >
+                    {miniheader}
+                </HeaderMini>}
 
             <Text opacity={0.8}>{text}</Text>
             <FlexBox width="100%" mt={[3]}>

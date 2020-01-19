@@ -234,10 +234,12 @@ class TmdbMovie(models.Model):
             if poster_url:
                 m.poster.save(*url_image(poster_url, poster_filename))
                 print("poster was saved")
-            large_poster_filename = f"{self.movielens_id}-poster-l.jpg"
-            if large_poster_url:
-                m.large_poster.save(*url_image(large_poster_url, large_poster_filename))
-                print("large poster was saved")   
+            
+            #large_poster_filename = f"{self.movielens_id}-poster-l.jpg"
+            #if large_poster_url:
+            #    m.large_poster.save(*url_image(large_poster_url, large_poster_filename))
+            #    print("large poster was saved")   
+            
             cover_filename = f"{self.movielens_id}-cover.jpg"
             if cover_url:
                 m.cover_poster.save(*url_image(cover_url, cover_filename))
