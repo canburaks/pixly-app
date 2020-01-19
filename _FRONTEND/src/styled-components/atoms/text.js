@@ -75,7 +75,8 @@ export const Text= styled("p")`
     white-space:${props => props.truncate && "nowrap"};
     overflow:${props => props.truncate && "hidden"};
     text-overflow:${props => props.truncate && "ellipsis"};
-    text-decoration:${props => props.underline && "underline"}
+    text-decoration:${props => props.underline && "underline"};
+    vertical-align:middle;
     :hover {
       text-decoration:${props => props.hoverUnderline && "underline"};
     }
@@ -177,6 +178,17 @@ export const SubHeaderText = styled("h2")`
     text-transform:"capitalize";
     font-weight:"bold";
     color:"dark";
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
+`
+export const Em = styled("em")`
     ${color}
     ${space}
     ${shadow}

@@ -457,15 +457,16 @@ export const CrewCard = (props) => (
             title={props.crew.person.name}
         />
         <NewLink link={`/person/${props.crew.person.slug}`} hoverUnderline>
-            <Dt fontSize={["xs", "xs", "s"]} fontWeight="bold">
+            <Text fontSize={["xxs", "xxs","xs", "xs", "s"]} lineHeight={"16px"} fontWeight="bold">
                 {props.crew.person.name}
-            </Dt>
+            </Text>
         </NewLink>
         {props.crew.character && 
-            <Dd fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"}>{props.crew.character.slice(0,20)}</Dd>
+            <Text fontSize={["xxs", "xxs","xs", "xs", "s"]} lineHeight={"16px"} opacity={0.8} mt={"auto"}>{props.crew.character.slice(0,20)}</Text>
             }
     </Card>
 )
+
 
 
 export const ListCard = (props) => (

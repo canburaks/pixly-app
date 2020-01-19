@@ -73,7 +73,7 @@ const MoviePage = props => {
 	const allCrews = [...directorFilter, ...actorFilter];
 
 
-
+	//console.log(directorFilter)
 
 
 	const listsThatInvolveText = useMemo(() => {
@@ -90,17 +90,18 @@ const MoviePage = props => {
 	//console.log(item.seoShortDescription)
     const hasTwitter = useMemo(() => (item.twitter && item.twitter.length > 5) ? true : false,[])
     const SummaryElement = useMemo(() => hasTwitter 
-        ? () => <MovieSummaryWithTwitter item={item}/> 
-        : () =>  <MovieSummary name={item.name} summary={item.summary} />, [hasTwitter])
+        ? () => <MovieSummaryWithTwitter item={item} /> 
+        : () =>  <MovieSummary name={item.name} summary={item.summary}  year={item.year}/>, [hasTwitter])
  
 
 
 	const isMobile = window.innerWidth < 480;
 
 	// TOPIC SECTION TEXTS
+	const topicShortNames = item.topics.map(t => t.shortName)
+	var mappedTopicNames = topicShortNames.length > 2 ? topicShortNames.join(", ") :topicShortNames.join(" and ")
 
-	const mappedTopicNames = item.topics.map(t => t.shortName).join(", ")
-	const messageBoxTopicHeader = `Topic Movie ${item.topics.length > 1 ? "Lists" : "List"}: ${mappedTopicNames}`
+	const messageBoxTopicHeader = `See Other ${mappedTopicNames} Movies`
 	const messageBoxTopicText = `This section shows the topic film collection that includes ${item.name}. ` +
 				`It appears in ${item.topics.length}  topic movie ${item.topics.length > 1 ? "collections" : "collections"}. ` + 
 				`You will find many great artworks of ${mappedTopicNames} films below.`
@@ -158,35 +159,81 @@ const MoviePage = props => {
 
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
-					<>
 					<MessageBox mb={[2]} id="movie-page-header"
-						header={`${item.name} Cast & Crew`}
+						header={`${item.name} (${item.year}) Cast & Crew`}
 						text={item.crew.length > 4 ? `Here the list of director, actors and actresses of ${item.name} (${item.year}) and their character names.` : null}
-					/>
-					<Dl>
-						<Grid columns={[3,4,4,5,5,6,8]} width={"100%"}>
+						border={"0px"}
+						borderRadius={6}
+						boxShadow="card"
+						bg="#f1f1f1"
+					>
+						<Grid columns={[3,3,4,4,5,5,6]} width={"100%"}>
 							{allCrews.map((crew, i) => (
 								<CrewCard crew={crew} key={i + crew.person.name} translateY/>
 									))}
 						</Grid>
-					</Dl>
-					</>
+					</MessageBox>
 				)}
+				
+				{/* VISIT THE DIRECTOR'S OTHER MOVIES */}
+				{(directorFilter.length >0 && directorFilter.length < 3) &&
+					directorFilter.map((d,i) => (
+						<FlexBox key={"director-of-movie" + i} 
+							width={"100%"} height="100px" 
+							alignItems="center" 
+							px={[3]} mt={[4]}
+							className="other-films-of-director"
+							color="light"
+							borderRadius="6px"
+							boxShadow="card"
+						>
+							<CoverLink link={`/person/${d.person.slug}#director-page-filmography`} 
+								zIndex={0} 
+
+							/>
+							<NewLink link={`/person/${d.person.slug}`} zIndex={1}>
+								<Image 
+									src={d.person.poster}  
+									alt={`The poster of the director of ${item.name}: ${d.person.name}`}
+									title={`Visit ${d.person.name} page`}
+									width={"80px"} height={"80px"} borderRadius="100%"
+									boxShadow="card" 
+								/>
+							</NewLink>
+							<NewLink follow zIndex={1}
+								link={`/person/${d.person.slug}#director-page-filmography`} 
+								width="100%"
+								fontWeight="bold" 
+								textAlign="center"
+								fontSize={["20px", "20px", "24px", "28px"]}
+								hoverUnderline
+								color={"#f1f1f1"}
+								title={`See the other films of the director of ${item.name} (${item.year}): ${d.person.name}`}
+							>
+								
+								<em>See {d.person.name}</em>'s Other Films
+							</NewLink>
+						</FlexBox>
+					))
+				
+				}
 
 				{/*<!--TOPICS Section--> */}
 				{item.topics.length > 0 && (
 					<>
 					<MessageBox mb={[2]} id="movie-page-topic-section"
-						header={messageBoxTopicHeader}
+						miniheader={messageBoxTopicHeader}
 						text={messageBoxTopicText}
-					/>
-					<Dl>
+						border={"0px"}
+						borderRadius={6}
+						boxShadow="card"
+						bg="#f1f1f1"
+					>
 						<Grid columns={[1,2,2,3,3,3,4]} width={"100%"}>
 							{item.topics.map((topic, i) => (
 								<CoverImage  
 									borderRadius={"4px"}
-									boxShadow="card"
-									hoverShadow="hover" translateY
+									hoverShadow="hover"
 									src={topic.coverPoster}
 									ratio={0.55}
 									link={`/topic/${topic.slug}`} follow={item.isImportantPage ? true : undefined}
@@ -196,7 +243,8 @@ const MoviePage = props => {
 								/>
 								))}
 						</Grid>
-					</Dl>
+					</MessageBox>
+		
 					</>
 				)}
 
@@ -208,11 +256,14 @@ const MoviePage = props => {
 
 				{/*<!--APPEARS IN  LIST Section--> */}
 				{item.appears.length > 0 && (
-					<>
 					<MessageBox mb={[2]} 
 						header={`Film Lists`}
 						text={listsThatInvolveText}
-					/>
+						border={"0px"}
+						borderRadius={6}
+						boxShadow="card"
+						bg="#f1f1f1"
+					>
 					<Grid columns={[2,3,3,4]}>
 						{item.appears.map((liste, index) => (
 							<Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card"  maxWidth={"200px"} key={liste.slug}>
@@ -230,18 +281,24 @@ const MoviePage = props => {
 								</NewLink>
 							</Card>))}
 					</Grid>
-					</>
+					</MessageBox>
 				)}
 				{/* VIDEO */}
 				{hasVideos && 
 					<>
-						<MessageBox mb={[2]} header={videoText} id="movie-page-video-header"/>
-						<LazyLoadComponent>
-							<YoutubePlayer
-								videos={item.videos}
-								title={item.name + " Videos"}
-							/>
-						</LazyLoadComponent>
+						<MessageBox mb={[2]} header={videoText} id="movie-page-video-header"
+							border={"0px"}
+							borderRadius={6}
+							boxShadow="card"
+							bg="#f1f1f1"
+						>
+							<LazyLoadComponent>
+								<YoutubePlayer
+									videos={item.videos}
+									title={item.name + " Videos"}
+								/>
+							</LazyLoadComponent>
+						</MessageBox>
 					</>
 				}
 			</ContentContainer>
@@ -279,20 +336,20 @@ const TrailerIcon = () => (
 	</HashLink>
 )
 
-const MovieSummary = ({name, summary}) => (
+const MovieSummary = ({name, summary, year}) => (
     <>
-		<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{name}</HeaderText>
+		<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{name} ({year})</HeaderText>
 		<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>{summary}</Text>
     </>
 )
 
 const MovieSummaryWithTwitter = ({item}) => {
-    const Twitter = twitter()
+	const Twitter = twitter()
     return (
         <>
             <Box>
 				<Twitter.Timeline name={item.name} link={item.twitter} mr={[3,3,3,4]} mb={[3,3,3,4]} />
-				<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{item.name}</HeaderText>
+				<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{item.name} ({item.year})</HeaderText>
 				<br/>
 				{item.summary}
             </Box>

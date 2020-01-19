@@ -123,7 +123,10 @@ const HomePage = (props) => {
                 {/* IF THERE ARE LESS THAN 40 POINTS */}
                 {profile.points < 40 &&
                     <>
-                    <MessageBox header={"Low Points"} text={"You can start to give rating by looking the popular film list below"} />
+                    <MessageBox 
+                        header={"Low Points"} 
+                        text={"You can start to give rating by looking the popular film list below"} 
+                    />
                     <Grid columns={[1,1, 2, 2,2,2,3]} py={[4]}>
                         {persona.starterLists.map(list => (
                             <CoverCard follow={true}

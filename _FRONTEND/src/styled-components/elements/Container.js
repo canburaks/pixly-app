@@ -64,22 +64,28 @@ export const HtmlContainer = ({ html, ...props }) => {
     )
 }
 
-export const MessageBox = ({ header,Header,subheader,Subheader, text, Image, children, ...props}) => (
+export const MessageBox = ({ header,Header,subheader,Subheader,miniheader, text, Image, children, ...props}) => (
     <FlexBox 
         overflow="hidden"
         border="1px solid" borderColor="rgba(40,40,40, 0.4)" 
         boxShadow="1px 5px 8px -8px rgba(0,0,0, 0.9)" 
         bg="#d1d1d1"
-        p={[2]} mt={[4, 4,5]}
+        p={[2]} mt={[4, 4,5]} px={[3]}
         width={"100%"} {...props}
     >
         <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start" width={"100%"}>
-            {Header && <Header />}
-            {Subheader && <Subheader />}
-            {subheader && <SubHeaderText fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold">{subheader}</SubHeaderText>}
-            {header && <HeaderMini fontSize={["16px", "16px", "18px", "20px"]}>{header}</HeaderMini>}
-            <Text>{text}</Text>
-            {children}
+            {Header && <Header fontWeight="bold" />}
+            {(header || subheader) && 
+                <SubHeaderText fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.95}>
+                    {header || subheader}
+                </SubHeaderText>}
+            {Subheader && <Subheader fontWeight="bold" opacity={0.9}/>}
+            {miniheader && <HeaderMini fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.75}>{miniheader}</HeaderMini>}
+
+            <Text opacity={0.8}>{text}</Text>
+            <FlexBox width="100%" mt={[3]}>
+                {children}
+            </FlexBox>
         </FlexBox>
         {Image && 
             <FlexBox maxWidth={"30%"}>
@@ -122,58 +128,6 @@ export const PostInfoBox = ({ post, follow, children }) => (
     </FlexBox>
 )
 
-export const TopPanelBackElement = (props) => (
-    <Box display="flex"
-        flexDirection="column"
-        width={"105vw"} maxHeight={"100vh"} position={"relative"} py={[0,0,4]} mb={[3]} zIndex={2}
-        {...props}
-    >
-        <BlurBox 
-            src={props.src} //will be either coverPoster or poster for blurry background  
-            position="absolute"
-            width={"110vw"} maxHeight={["110vh", "105vh", "105vh"]}
-            left={"-5vw"} top={-20} bottom={"-10px"} 
-            blur={props.blur || 20}
-            zIndex={2}
-            />
-        {props.children}
-    </Box>
-)
-
-export const TopPanelCoverElement = React.memo((props) => (
-    <SuperBox src={props.item.largeCoverPoster || props.item.coverPoster || props.item.poster} 
-        position={"relative"} 
-        top={0} left={["0px", "0px", "5vw"]} right={["0px", "0px", "5vw"]} maxWidth={["100vw", "100vw", "88vw"]}
-        height={["60vw","60vw", "45vw"]} maxHeight={"80vh"}
-        boxShadow="card" 
-        zIndex={3}
-        borderRadius={["0px","0px", "8px"]}
-        overflow="hidden"
-    >   
-        <SocialBox size={24} item={props.item} position="absolute" top="20px" right="20px" />
-        {props.Actions && <props.Actions item={props.item} authStatus={props.authStatus} />}
-        {props.Trailer && <props.Trailer />}
-
-        {/*console.log("top panel", props.item.name) */}
-        <Box position={"absolute"} 
-            pl={[2,2,3]} py={[1,1,2]} pt={[1,1,2]} 
-            left={0} bottom={0} 
-            width={"100%"} height={"auto"} maxHeight={"50%"}
-            darken={props.darken}
-            bg={"rgba(0,0,0, 0.5)"}
-        >
-            <HeaderText color="lightDark1" textShadow={"textDark"} fontSize={[16, 16, 20, 24, 28]} fontWeight="bold">{props.header}</HeaderText>
-
-            {props.Header && <props.Header item={props.item} authStatus={props.authStatus} />}
-            {props.subheader && <HeaderText color="lightDark1" textShadow="dark" fontSize={[14, 14, 18, 20, 22]} fontWeight="500">{props.subheader}</HeaderText>}
-            {/*console.log("il", props.isLargeScreen)*/}
-            {(props.text && props.isLargeScreen) && <Paragraph color="lightDark1" textShadow={"textDark"} fontSize={[14, 14, 16, 16,18]}  maxWidth={"95%"}>{props.text}</Paragraph>}
-            {props.children}
-        </Box>
-
-    </SuperBox>
-), (prevProps, nextProps) => (prevProps.isLargeScreen === nextProps.isLargeScreen && prevProps.item.coverPoster === nextProps.item.coverPoster))
-
 
 
 export const PaginationBox = ({currentPage, totalPage, nextPage, prevPage}) => (
@@ -193,48 +147,6 @@ export const PaginationBox = ({currentPage, totalPage, nextPage, prevPage}) => (
 ) 
 
 
-export const Grid = styled(GridBox)`
-    width:100%;
-    position:relative;
-    grid-template-rows: minmax(50px, 400px;);
-
-    @media screen and (min-width: 200px){
-        grid-template-columns: repeat(${props => props.columns[0]}, 1fr) !important;
-    }
-    @media screen and (min-width: ${themeGet("breakpoints.xs")}){
-        grid-template-columns: repeat(${props => props.columns[1]}, 1fr) !important;
-
-    }
-    @media screen and (min-width: ${themeGet("breakpoints.sm")}){
-        grid-template-columns: repeat(${props => props.columns[2]}, 1fr) !important;
-
-    }
-    @media screen and (min-width: ${themeGet("breakpoints.md")}){
-        grid-template-columns: repeat(${props => props.columns[3]}, 1fr) !important;
-
-    }
-    @media screen and (min-width: ${themeGet("breakpoints.lg")}){
-        grid-template-columns: repeat(${props => props.columns[4]}, 1fr) !important;
-
-    }
-    @media screen and (min-width: ${themeGet("breakpoints.xl")}){
-        grid-template-columns: repeat(${props => props.columns[5]}, 1fr) !important;
-
-    }
-    @media screen and (min-width: ${themeGet("breakpoints.xxl")}){
-        grid-template-columns: repeat(${props => props.columns[6]}, 1fr) !important;
-
-    }
-    @media screen and (min-width: ${themeGet("breakpoints.xxxl")}){
-        grid-template-columns: repeat(${props => props.columns[7]}, 1fr) !important;
-
-    }
-    transition: ${themeGet("transitions.medium")};
-`
-Grid.defaultProps = {
-    gridColumnGap: ["8px", "8px", "16px"],
-    gridRowGap: "32px"
-}
 
 export const TagBox = ({tags, num=100, color, ...props}) => (
     <FlexBox flexWrap="wrap" py={[0,0,1]} color={color || "light"} {...props}>
@@ -281,16 +193,17 @@ export const Clippy = styled(Container)`
 `
 
 export const PageContainer = (props) => (
-    <Container  id={"page-container"} 
+    <Container  id={"page-container"} bg="#d1d1d1"
         minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"70vh"} pt={0} 
         {...props}
     />
 )
 
 export const ContentContainer = (props) => (
-    <Container  id="content-container" display="flex"
+    <Container  id="content-container" display="flex" 
+        bg="#d1d1d1"
         width={"100%"} minHeight={"70vh"} pb={[3]}
-        pl={"5vw"} pr={"6vw"}
+        px={["4vw", "4vw", "6vw", "4vw", "80px"]}
         {...props}
     />
 )
@@ -309,6 +222,101 @@ export const BlurryBox = (props) =>(
         {props.children}
     </Box>
 )
+
+
+export const Grid = styled(GridBox)`
+    width:100%;
+    position:relative;
+    grid-template-rows: minmax(50px, 400px;);
+
+    @media screen and (min-width: 200px){
+        grid-template-columns: repeat(${props => props.columns[0]}, 1fr) !important;
+    }
+    @media screen and (min-width: ${themeGet("breakpoints.xs")}){
+        grid-template-columns: repeat(${props => props.columns[1]}, 1fr) !important;
+
+    }
+    @media screen and (min-width: ${themeGet("breakpoints.sm")}){
+        grid-template-columns: repeat(${props => props.columns[2]}, 1fr) !important;
+
+    }
+    @media screen and (min-width: ${themeGet("breakpoints.md")}){
+        grid-template-columns: repeat(${props => props.columns[3]}, 1fr) !important;
+
+    }
+    @media screen and (min-width: ${themeGet("breakpoints.lg")}){
+        grid-template-columns: repeat(${props => props.columns[4]}, 1fr) !important;
+
+    }
+    @media screen and (min-width: ${themeGet("breakpoints.xl")}){
+        grid-template-columns: repeat(${props => props.columns[5]}, 1fr) !important;
+
+    }
+    @media screen and (min-width: ${themeGet("breakpoints.xxl")}){
+        grid-template-columns: repeat(${props => props.columns[6]}, 1fr) !important;
+
+    }
+    @media screen and (min-width: ${themeGet("breakpoints.xxxl")}){
+        grid-template-columns: repeat(${props => props.columns[7]}, 1fr) !important;
+
+    }
+    transition: ${themeGet("transitions.medium")};
+`
+Grid.defaultProps = {
+    gridColumnGap: ["8px", "8px", "16px"],
+    gridRowGap: "32px"
+}
+
+export const TopPanelBackElement = (props) => (
+    <Box display="flex"
+        flexDirection="column"
+        width={"105vw"} maxHeight={"100vh"} position={"relative"} py={[0,0,4]} mb={[3]} zIndex={2}
+        {...props}
+    >
+        <BlurBox 
+            src={props.src} //will be either coverPoster or poster for blurry background  
+            position="absolute"
+            width={"110vw"} maxHeight={["120vh", "120vh", "120vh"]}
+            left={"-5vw"} top={-70} bottom={"-10px"} 
+            blur={props.blur || 20}
+            zIndex={2}
+            />
+        {props.children}
+    </Box>
+)
+
+export const TopPanelCoverElement = React.memo((props) => (
+    <SuperBox src={props.item.largeCoverPoster || props.item.coverPoster || props.item.poster} 
+        position={"relative"} 
+        top={0} left={0} maxWidth={["100%"]}
+        height={["60vw","60vw", "50vw"]} maxHeight={"90vh"}
+        boxShadow="card" 
+        zIndex={3}
+        overflow="hidden"
+    >   
+        <SocialBox size={24} item={props.item} position="absolute" top="20px" right="20px" />
+        {props.Actions && <props.Actions item={props.item} authStatus={props.authStatus} />}
+        {props.Trailer && <props.Trailer />}
+
+        {/*console.log("top panel", props.item.name) */}
+        <Box position={"absolute"} 
+            pl={[2,2,3]} py={[1,1,2]} pt={[1,1,2]} 
+            left={0} bottom={0} 
+            width={"100%"} height={"auto"} maxHeight={"50%"}
+            darken={props.darken}
+            bg={"rgba(0,0,0, 0.5)"}
+        >
+            <HeaderText color="lightDark1" textShadow={"textDark"} fontSize={[16, 16, 20, 24, 28]} fontWeight="bold">{props.header}</HeaderText>
+
+            {props.Header && <props.Header item={props.item} authStatus={props.authStatus} />}
+            {props.subheader && <HeaderText color="lightDark1" textShadow="dark" fontSize={[14, 14, 18, 20, 22]} fontWeight="500">{props.subheader}</HeaderText>}
+            {/*console.log("il", props.isLargeScreen)*/}
+            {(props.text && props.isLargeScreen) && <Paragraph color="lightDark1" textShadow={"textDark"} fontSize={[14, 14, 16, 16,18]}  maxWidth={"95%"}>{props.text}</Paragraph>}
+            {props.children}
+        </Box>
+
+    </SuperBox>
+), (prevProps, nextProps) => (prevProps.isLargeScreen === nextProps.isLargeScreen && prevProps.item.coverPoster === nextProps.item.coverPoster))
 
 
 //-------------------------------------------------------------

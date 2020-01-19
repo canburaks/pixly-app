@@ -1,6 +1,33 @@
 import React from "react";
 import { Text, Paragraph, HeaderMini,HeaderText, NewLink, Box, FlexBox, Blockquote, Cite} from "../atoms"
 
+export const TextSection = (props) =>(
+    <Box display="flex" 
+        flexDirection="column" justifyContent="flex-start" alignItems="flex-start"
+         my={[2]} mt={5}
+        {...props} 
+    >
+        <HeaderMini color={"dark"} textShadow={props.textShadow || "textLight"} fontWeight="bold" fontSize={props.headerSize || ["l", "l", "xl", "xxl"]} 
+            pt={"4px"} 
+        >
+            {props.header}
+        </HeaderMini>
+        {props.text && 
+        <Text color={"dark"} fontWeight={400} fontSize={props.textSize} 
+            minHeight={30}  mt={[1]} maxHeight={200} textHidden={props.textHidden}
+        >
+            {props.text}
+        </Text>}
+        {props.children}
+    </Box>
+)
+
+TextSection.defaultProps = {
+    textSize:"s"
+}
+
+
+
 export const Stats = (props) => (
     <FlexBox flexDirection="column" alignItems="center" {...props}>
         <Text  color={props.color} fontSize={["xxxs", "xxs", "xs", "xs", "s"]}>{props.text}</Text>
@@ -101,30 +128,5 @@ ArticleSection.defaultProps = {
     subheaderSize:"l",
     textSize:"m",
     quoteSize:"l"
-}
-
-export const TextSection = (props) =>(
-    <Box display="flex" 
-        flexDirection="column" justifyContent="flex-start" alignItems="flex-start"
-         my={[2]} mt={5}
-        {...props} 
-    >
-        <HeaderMini color={"dark"} textShadow={props.textShadow || "textLight"} fontWeight="bold" fontSize={props.headerSize || ["l", "l", "xl", "xxl"]} 
-            pt={"4px"} 
-        >
-            {props.header}
-        </HeaderMini>
-        {props.text && 
-        <Text color={"dark"} fontWeight={400} fontSize={props.textSize} 
-            minHeight={30}  mt={[1]} maxHeight={200} textHidden={props.textHidden}
-        >
-            {props.text}
-        </Text>}
-        {props.children}
-    </Box>
-)
-
-TextSection.defaultProps = {
-    textSize:"s"
 }
 

@@ -19,7 +19,7 @@ import JoinBanner from "../../components/JoinBanner.js"
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
     Loading, HeaderText, Text, FlexBox, RegularInput, MovieAutoComplete, SuperBox, CoverLink, TagBox,
     NewLink, Image, SubHeaderText, LinkButton, HeaderMini, Span, Box, Hr, Section,MessageBox,
-    PaginationBox, Dl,Dt,Dd
+    PaginationBox, Dl,Dt,Dd, Em
 } from "../"
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
 import { Plus } from 'css-spinners-react'
@@ -47,7 +47,7 @@ export const SimilarMovies = (props) => {
             <ResponsiveAd3 />
 
             <ContentSimilarSection  />
-
+            
         </Section>
     )
 }
@@ -116,17 +116,22 @@ const ContentSimilarSection = (props) => {
                 <Dl ref={node}>
                     <MessageBox 
                         subheader={`Similar ${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Movies" : "Movies" } like ${data.movie.name.trim()} (${data.movie.year})`}
+                        miniheader="Contentful Similar Films"
                         text={data.movie.contentSimilarsSummary ? data.movie.contentSimilarsSummary :
-                            `These are highly similar movies to ${data.movie.name.trim()} in a manner of only the content elements. ` +
                             `The movies in this part have common topics, tags or sub-genres with ${data.movie.name.trim()} movie. ` +
                             `${commonGenres(data.movie.tagNames, data.listOfContentSimilarMovies)}`
                         }
-                    />
+						border={"0px"}
+						borderRadius={6}
+						boxShadow="card"
+						bg="#f1f1f1"
+                    >
                     <Grid columns={[2,2,3,3,3,4,6]} py={[4]} >
                         {data.listOfContentSimilarMovies.map( item => (
                                 <ContentSimilarMovieCard item={item} key={item.slug + "cs"}/>
                         ))}
                     </Grid>
+                    </MessageBox>
                 </Dl>
                 {haveManyPages(data.listOfContentSimilarMovies.length) && <PaginationBox 
                     currentPage={page} 
@@ -190,9 +195,9 @@ const RecommendationSection = ({num=19}) => {
             {data.listOfSimilarMovies && data.listOfSimilarMovies.length > 0 &&
                 <>
                 <ResponsiveAd2 />
-                <Dl>
                     <MessageBox 
-                        subheader={`Film Recommendations: Movies Similar to ${data.movie.name.trim()}`}
+                        subheader={`Film Recommendations: Movies Similar to ${data.movie.name.trim()} (${data.movie.year})`}
+                        miniheader="People also like"
                         text={
                             `Our AI-assisted algorithm found that those movies are showing high similarity to ${data.movie.name.trim()}. ` +
                             `The movies like ${data.movie.name.trim()} in this section not only consider the common content elements, ` + 
@@ -200,13 +205,17 @@ const RecommendationSection = ({num=19}) => {
                             `People who like ${data.movie.name.trim()} also like and give high ratings below movies. ` + 
                             `The chance of you will like them are highly probable, if you like ${data.movie.name.trim()}.`
                         }
-                    />
+						border={"0px"}
+						borderRadius={6}
+						boxShadow="card"
+						bg="#f1f1f1"
+                    >
                     <Grid columns={networkSensitiveColumns} py={[4]} >
                         {data.listOfSimilarMovies.map( item => (
                             <MovieRecommendationCard item={item} key={item.slug + "rm"} speed={speed}/>
                         ))}
                     </Grid>
-                </Dl>
+                    </MessageBox>
                 {haveManyPages(data.listOfSimilarMovies.length) && <PaginationBox 
                     currentPage={page} 
                     totalPage={data.listOfSimilarMovies.length >= requestQuantity ? page + 1 : page} 
@@ -249,17 +258,15 @@ const ContentSimilarMovieCard = ({ item }) => (
 			bg={"rgba(0,0,0, 0.85)"} minHeight={"100px"}
             className="content-similar-movie-card-info"
 		>
-			<Dt fontSize={["12px", "12px", "14px", "16px"]}
+			<Text fontSize={["12px", "12px", "14px", "16px"]}
                 fontWeight="bold" lineHeight={["16px", "16px", "18px"]}
                 color="light" 
                 zIndex={1} 
                 mb={[2]} 
             >
                     <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
-            </Dt>
-            <Dd>
-			    <TagBox tags={item.tagNames || []} num={4} color={"light"}/>
-            </Dd>
+            </Text>
+			<TagBox tags={item.tagNames || []} num={4} color={"light"}/>
 		</FlexBox>
 	</SuperBox>
 )
@@ -281,12 +288,10 @@ const MovieRecommendationCard = ({ item, speed }) => (
             className="recommendation-similar-movie-card-info"
 			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"} zIndex={1}
 		>
-			<Dt color="light" fontWeight="bold" mb={[2]} lineHeight={["16px", "16px", "18px"]}>
+			<Text color="light" fontWeight="bold" mb={[2]} lineHeight={["16px", "16px", "18px"]}>
                 <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
-            </Dt>
-            <Dd>
+            </Text>
 			    <TagBox tags={item.nongenreTags || []} num={6} color={"light"}/>
-            </Dd>
 		</FlexBox>
 
 	</SuperBox>

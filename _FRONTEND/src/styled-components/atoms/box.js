@@ -10,6 +10,9 @@ import { generateGradient } from "../../functions/"
 const hoverShadow = `:hover { box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')}}`
 
 export const Hr = styled("hr")`
+    width:100%;
+    border-color:transparent;
+    background-color:rgba(0,0,0,0.4);
     ${color}
     ${space}
     ${shadow}
