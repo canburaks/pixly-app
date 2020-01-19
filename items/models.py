@@ -557,9 +557,19 @@ class Movie(SocialMedia, SEO,MainPage):
                 for g in self.data.get("genres"):
                     if g.get("id"):
                         tag_tmdb_ids.append(g.get("id"))
+            #respect tp tmdb_id
             tag_qs = Tag.objects.filter(tmdb_id__in=tag_tmdb_ids)
             if tag_qs.count() > 0:
                 for tag in tag_qs:
+                    tag.related_movies.add(self)
+                    tag.save()
+
+            #respect to slug
+            genres = self.data.get("genres")
+            tag_slugs = [x.get("name").strip().lower().replace(" ", "-") for x in genres]
+            tag_slug_qs = Tag.objects.filter(slug__in=tag_slugs)
+            if tag_slug_qs.count() > 0:
+                for tag in tag_slug_qs:
                     tag.related_movies.add(self)
                     tag.save()
         self.save()
@@ -579,7 +589,7 @@ class Movie(SocialMedia, SEO,MainPage):
 
     def generate_description(self):
         text = ""
-        dn = self.director_names
+        dn = list(self.director_names)
         tag_names = self.tag_names
         genres = self.genre_names
         director_name = ""
@@ -591,21 +601,6 @@ class Movie(SocialMedia, SEO,MainPage):
             elif len(dn) > 2:
                 director_name = "many directors"
         #definition word
-        definition = ""
-        pheno_text = ""
-        if "mindfuck" in tag_names or "thought-provoking" in tag_names:
-            pheno_text = "thought-provoking"
-        elif "feel-good-movie" in tag_names or "feel-good" in tag_names:
-            pheno_text = "feeling good"
-        award_text = ""
-        if  "golden-bear-winner" in tag_names or \
-                "golden-lion-winner" in tag_names or \
-                "palme-dor-winner" in tag_names:
-            if len(pheno_text) > 0:
-                award_text = "awarded"
-        definition = pheno_text
-        if award_text:
-            definition += f" {award_text}"
 
         #------------DOCUMENTARY------------
         if "documentary" in tag_names:
@@ -617,53 +612,51 @@ class Movie(SocialMedia, SEO,MainPage):
             if self.year == 2018 or self.year >= 2019:
                 if self.imdb_rating and self.imdb_rating > 7.5:
                     if self.imdb_rating and self.imdb_rating > 8:
-                        text += f"One of the best {definition} movies of {self.year} directed by {director_name}."
+                        text += f"One of the best movies of {self.year} directed by {director_name}."
                     else:
-                        text += f"One of the good {definition} movies of {self.year} directed by {director_name}."
-            else:
-                if self.imdb_rating and self.imdb_rating > 8.2:
-                    text += f"One of the best {definition} movies directed by {director_name}."
+                        text += f"One of the good movies of {self.year} directed by {director_name}."
                 else:
                     text += f"A {director_name} movie released in {self.year}."
+            else:
+                if self.imdb_rating and self.imdb_rating > 8.2:
+                    text += f"One of the best movies directed by {director_name}."
+                else:
+                    text += f"A {director_name} movie released in {self.year}."
+
             # Similars, Recommendation
-            sim_text = ""
-            if self.have_content_similars:
-                sim_text += f" See similar movies like {self.name} {self.year}, {self.name} cast and the trailer." 
+            sim_text = f" See similar movies like {self.name} ({self.year}), {self.name} cast, plot and the trailer." 
             sim_text_num = len(sim_text)
             current_num = len(text)
-            available_num = 157 - (current_num + sim_text_num)
+            available_num = 150 - (current_num + sim_text_num)
             #text += f" {self.summary[:available_num]}.."
-            text += sim_text
+            text = text + f" {self.summary[:available_num]}..." + sim_text
         print(f"description length: {len(text)}")
         return text
 
     def generate_title(self):
         #start with year, add name at the end
-        year_text = f"({self.year}) - " 
-        text = f"{self.name[:20]} ({self.year}) - "
-
-        # Similars, Recommendation
-        if len(self.name) > 14:
-            text += f"Movies Like {self.name[:15]}, "
-        else:
-            text += f"Movies Like {self.name[:15]}, Similar Films, "
-                    
+        year_text = f" ({self.year}) - " 
 
         # Trailer
         video_tags = set(self.video_tags)
-        if "trailer" in video_tags:
+        video_text = ""
+        if len(video_tags) > 0:
             #check videos other than trailer
             tags_without_trailer = video_tags.difference({"trailer"})  
             if len(tags_without_trailer) > 0:
-                text += "Videos, "
+                video_text += ", Videos"
             else:
-                text += "Trailer, "
+                video_text += ", Trailer"
 
-        # Crew
-        if self.have_crew:
-            text += "Cast"
-        title = text[:70]
-            
+
+        # Similars, Recommendation
+        def_text = f"Similar Movies, Plot, Cast"
+        def_plus_video_text  = def_text + video_text if video_text else def_text
+                    
+
+        non_name_text = year_text + def_plus_video_text
+        remaining_chars = 59 - len(non_name_text)
+        title = f"{self.name.strip()[:remaining_chars]}{non_name_text}"
         print(f"title length: {len(title)}, title: {title}")
         return title
 
@@ -671,33 +664,7 @@ class Movie(SocialMedia, SEO,MainPage):
     #in order to bulk update, does not save
     def set_seo_description_keywords(self, save=True):
         description_text = self.generate_description()
-        keywords = [self.name,f"{self.name} {self.year}", self.slug, "movie rating website", "user ratings"]
-        #KEYWORDS
-        #video part
-        mvqs = self.videos.filter(tags__isnull=False)
-        if mvqs.count() > 0:
-            keywords.append(f"{self.name} Videos")
-            video_tags = Tag.objects.filter(related_videos__in=mvqs).values_list("slug", flat=True)
-            if "trailer" in video_tags:
-                keywords.append(f"{self.name} Trailer")
-
-            if "behind-the-scene" in video_tags:
-                keywords.append(f"{self.name} Behind The Scene")
-
-            if "film-review" in video_tags:
-                keywords.append(f"{self.name} Review")
-
-            if "video-essay" in video_tags:
-                keywords.append(f"{self.name} Video Essays")
-
-            if "video-clip" in video_tags:
-                keywords.append(f"{self.name} Video Clips")
-            if "film-critic" in video_tags:
-                keywords.append(f"{self.name} Film Critic")
-
-
         self.seo_description = description_text
-        self.seo_keywords = ", ".join(keywords)
         #print(self.seo_description)
         #print(self.seo_keywords)
         if save:
