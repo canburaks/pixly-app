@@ -94,6 +94,8 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/gloomy-sunday-1999",
+        "/movie/akira-1988",
         "/movie/somebody-to-love-1994",
         "/movie/monella-1998",
         "/movie/easy-money-1983",
@@ -775,6 +777,8 @@
         "/movie/the-gentlemen-2019",
         "/movie/easy-money-1983",
         "/movie/monella-1998",
-        "/movie/somebody-to-love-1994"
+        "/movie/somebody-to-love-1994",
+        "/movie/akira-1988",
+        "/movie/gloomy-sunday-1999"
     ]
 }
