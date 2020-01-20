@@ -41,10 +41,31 @@ const ListOfFilms = (props) => {
     const allLists = useMemo(() => changeListOrder(props.data.lists), [])
 
     // TOPIC
-    const topics = useMemo(() => props.data.topics.sort((a,b) => b.id - a.id),[])
 
+    const orderTopics = () => {
+        const firstPart = []
+        
+        // order of topics wrt slugs
+        const featureSlugs = [
+            "gangster-films", "mystery","cyberpunk",
+            "historical-figures", "art-house","thought-provoking"
+        ]
+        
+        //create featured topics
+        featureSlugs.forEach(slug => {
+            props.data.topics.forEach(t => {
+                if (t.slug === slug){
+                    firstPart.push(t)
+                }
+            })
+        })
+        //remove featured topics
+        const secondPart = props.data.topics.filter(t => !featureSlugs.includes(t.slug))
+        return [...firstPart, ...secondPart]
+    }
+    const topics = useMemo(() => orderTopics(),[])
     
-    //console.log("data",topics, allLists)
+    console.log("data",topics)
     useEffect(() => window.scrollTo(0,0), [])
     return (
         <PageContainer top={-75}>
@@ -89,20 +110,34 @@ const TopicSection = ({topics, partitionQuantity=6}) => (
             The Categorical List of Masterpiece Films 
         </SubHeaderText>
         <Text mt={[3]} textAlign="justify" color="dark">
-        {`Pixly topics are kind of collections that are more specific than genre based collections. ` + 
-            `Topic movies can focus on some specific issue, or can include the topic as an element of the narrative ` +
-            `such as art house, cyberpunk films or movies that focus on rich dialogues or movies passed the Bechdel test. ` +
-            `We added a filter mechanism to some topics which you can filter the films by IMDb rating or release year. ` + 
-            `By doing this, you can also look for the best movies in a year that you choose.` 
-            }
+            Pixly topics are kind of film collections that can be a genre or 
+            subgenre film list with brief or detailed explanations. The films of these 
+            lists are selected by us. Those include the top and well-known movies of its category.
+            We often expand our collections by either creating a new list of movies or updating the current ones.
+            <br/>
+            <em>For example, in the <strong>Gangster</strong> movies, you will find an analysis of the genre and the very best
+            gangster and mafia movies. 
+            </em>
+            <br/>
+            Maybe you didn't hear the <strong>Cyberpunk</strong> genre. No problem, we also explained it in details and made 
+            the list with the top cyberpunk films.
+            <br/>
+            <em>Discovering a new genre or subgenre always worth a shot.</em>
+            <br/>
+            Moreover, you will find below the best movies of <strong>Arthouse, LGBTQ+, Feel-Good, Dialogue-Focused</strong>, etc..
+            <br/>
+            Enjoy your discover experience.
+
         </Text>
-        <dl>
+        
             <Grid columns={[1,1,2,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {topics.slice(0, partitionQuantity).map( item => (
                     <CollectionCard 
                         item={item} key={"rec" + item.id}  
                         link={`/topic/${item.slug}`} 
-                        text={item.seoShortDescription} />
+                        text={item.seoShortDescription} 
+                        buttonText={`See ${item.shortName} Movies`}
+                    />
                 ))}
             </Grid>
             <HomePageFeedAd />
@@ -113,7 +148,9 @@ const TopicSection = ({topics, partitionQuantity=6}) => (
                     <CollectionCard 
                         item={item} key={"rec" + item.id}  
                         link={`/topic/${item.slug}`} 
-                        text={item.seoShortDescription} />
+                        text={item.seoShortDescription} 
+                        buttonText={`See ${item.shortName} Movies`}
+                    />
                 ))}
             </Grid>
             <MoviePageAd />
@@ -123,11 +160,12 @@ const TopicSection = ({topics, partitionQuantity=6}) => (
                     <CollectionCard 
                         item={item} key={"rec" + item.id}  
                         link={`/topic/${item.slug}`} 
-                        text={item.seoShortDescription} />
+                        text={item.seoShortDescription} 
+                        buttonText={`See ${item.shortName} Movies`}
+                    />
                 ))}
             </Grid>
             <FeedMobileCollectionAd />
-        </dl>
     </FlexBox>
 )
 
@@ -174,7 +212,6 @@ const ListeSection = ({lists, partitionQuantity=6}) => (
             The lists of favourite movies of famous directors can also be a good place for you.
             
         </Text>
-        <dl>
             <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[3,3,3,4]}>
                 {lists.slice(0, partitionQuantity).map( item => (
                     <CollectionCard ratio={0.4}
@@ -204,7 +241,6 @@ const ListeSection = ({lists, partitionQuantity=6}) => (
                         text={item.seoShortDescription} />
                 ))}
             </Grid>
-        </dl>
     </FlexBox>
 )
 
@@ -257,31 +293,30 @@ const CollectionCard = (props) => (
                 ratio={props.ratio || 0.5625} borderRadius={"8px"}
                 width={"100%"}
             >
-                <CoverLink link={props.link} color="transparent">{props.link}</CoverLink>
+                <CoverLink link={props.link} color="transparent" title={props.item.name}>
+                    {props.link}
+                </CoverLink>
             </SuperBox>
         </LazyLoadComponent>
-            <Dt>
         <HeaderMini width={"75%"} 
-            
             fontFamily={"playfair"} fontWeight="bold" 
             color="dark" hoverUnderline
             my={[2,2,3]}
             >
-            <NewLink link={props.link} follow={props.item.isImportantPage ? true : undefined}>
+            <NewLink link={props.link} follow={true} title={"See " + props.item.name}>
                 {props.item.name}
             </NewLink>
         </HeaderMini>
-            </Dt>
-        <Dd  
+        <Text  
             color="dark"
             textAlign="justify"
         >
             {props.text.slice(0,200)}
-        </Dd>
+        </Text>
         <Box position="absolute" bottom={"20px"} width={"100%"}>
             <NewLink link={props.link}  
-                fontWeight="bold" color="dark" 
-                hoverUnderline
+                fontWeight="bold" color="dark" follow={true}
+                hoverUnderline title={props.item.summary || "See " + props.item.name}
             >
                 {props.buttonText || "See more"}
             </NewLink>
@@ -289,6 +324,7 @@ const CollectionCard = (props) => (
         </Box>
     </FlexBox>
     )
+
 const ListOfFilmsQuery = props => {
 	const { loading, error, data } = useQuery(MAIN_PAGE, {
 		partialRefetch: true
