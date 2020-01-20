@@ -42,7 +42,7 @@ const PeoplePage = (props) => {
     return (
         <PageContainer>
             <Head
-                title={"Pixly People"}
+                title={"Pixly - Discover People Who Have Similar Taste"}
                 description={"The People who are the most actives "}
                 canonical={`https://pixly.app/people`}
             />
