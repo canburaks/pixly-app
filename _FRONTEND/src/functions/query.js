@@ -142,7 +142,7 @@ query mainPage{
     movies{id, slug, name, year, poster, coverPoster, imdbRating, tags{slug, name}, summary }
     lists{id, slug, name,  summary, poster, listType,seoShortDescription, coverPoster, largeCoverPoster }
     persons{id, slug, name,  poster, coverPoster },
-    topics{ id, slug, summary,name,seoShortDescription, coverPoster, isImportantPage}
+    topics{ id, slug, summary,name,seoShortDescription, coverPoster, isImportantPage, shortName}
     }
 }
 `
