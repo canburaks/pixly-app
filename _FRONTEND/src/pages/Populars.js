@@ -77,13 +77,15 @@ const MoviesPage = (props) => {
     const responsivePosterUrl = isSmallScreen 
         ? "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-v.jpg"
         : "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"
-    
+
     const mainpageMovies = props.data.movies.filter(m => (
-        ["ford-v-ferrari-2019", "the-lighthouse-2019", "portrait-of-a-lady-on-fire-2019","little-women-2019",
+        ["ford-v-ferrari-2019", "ip-man-4-the-finale-2019", 
+        "portrait-of-a-lady-on-fire-2019","1917-2019",
         "the-irishman-2019", "doctor-sleep-2019"].includes(m.slug)
     ))
     const mainpageTopics = props.data.topics.filter(t => (
-        ["mystery","thought-provoking", "gangster-films", "cyberpunk"].includes(t.slug)
+        ["mystery","thought-provoking", "gangster-films", "cyberpunk",
+        "art-house", "historical-figures" ].includes(t.slug)
     ))
 
     //console.log("props", props)
@@ -116,12 +118,19 @@ const MoviesPage = (props) => {
                                 src={movie.coverPoster}
                                 link={`/movie/${movie.slug}`}
                             />
-                            <Text fontSize={["20px", "24px", "30px", "36px", "42px"]}
-                                width="100%" textAlign="center" 
-                                fontWeight="bold" color="rgba(255,255,255,0.8)" textShadow="textDark"
-                                position="absolute" left={0} bottom={"30px"}
-                                >
-                                {movie.name}</Text>
+                            <FlexBox position="absolute" left={0} bottom={0} zIndex={0} 
+                                width="100%" bg={"rgba(0,0,0,0.4)"} 
+                                height={["50px", "60px", "70px"]}
+                                justifyContent="center" alignItems="center"
+                            >
+                                <Text fontSize={["20px", "24px", "30px", "36px"]}
+                                    width="100%" textAlign="center" 
+                                    fontWeight="bold" color="rgba(255,255,255,0.8)" textShadow="textDark"
+                                    
+                                    >
+                                    {movie.name}
+                                </Text>
+                            </FlexBox>
                         </FlexBox>
                     ))}
                 </Carousel>
@@ -130,12 +139,20 @@ const MoviesPage = (props) => {
             <ContentContainer>
             <HeaderText textAlign="center">Popular & Upcoming Movies and List of Films  </HeaderText>
             <FlexBox width={"100%"} flexDirection="column" px={[2]}>
-                <MessageBox subheader={"Popular Film Collections"}>
+                <MessageBox 
+                    subheader={"Popular Film Collections"}
+                    border={"0px"}
+                    borderRadius={6}
+                    boxShadow="card"
+                    bg="#f1f1f1"
+                >
                     <Text>
                         We are passionately expanding our film collections. We have many great list of films that includes 
                         the best examples of its category like&nbsp;
                         <NewLink title="See the best arthouse movies" fontWeight="bold" follow link={"/topic/art-house"}><em title="See the best arthouse movies">Arthouse</em></NewLink>,&nbsp;
+                        <NewLink title="See the best biographical movies" fontWeight="bold" follow link={"/topic/historical-figures"}><em title="See the best biographical movies">Biography</em></NewLink>,&nbsp;
                         <NewLink title="See the best cyberpunk movies" fontWeight="bold" follow link={"/topic/cyberpunk"}><em title="See the best cyberpunk movies">Cyberpunk</em></NewLink>,&nbsp;
+                        <NewLink title="See the best gangster and mafia movies" fontWeight="bold" follow link={"/topic/gangster-films"}><em title="See the best gangster and mafia  movies">Gangster</em></NewLink>,&nbsp;
                         <NewLink title="See the best thought-provoking movies" fontWeight="bold" follow link={"/topic/thought-provoking"}><em title="See the best thought-provoking movies">Thought-Provoking</em></NewLink> and&nbsp;
                         <NewLink title="See the best mystery movies" fontWeight="bold" follow link={"/topic/mystery"}><em title="See the best mystery movies">Mystery</em></NewLink> movies.
                         Some of the popular movie collections are below. For more, visit&nbsp;
@@ -144,11 +161,11 @@ const MoviesPage = (props) => {
                         </NewLink>
                         .
                     </Text>
-                    <Grid columns={[2,2,2,2,2,4]} py={[2]} gridColumnGap={[2]}>
+                    <Grid columns={[2,2,3,]} py={[2]} gridColumnGap={[2]}>
                     {mainpageTopics.map( item => (
                         <CoverImage 
                             src={item.coverPoster} key={"rec" + item.slug}  
-                            ratio={0.6}
+                            ratio={0.6} hoverShadow="hover"
                             boxShadow="card"
                             link={`/topic/${item.slug}`} 
                             alt={`Popular Topic Film Collection: ${item.name}.`} 
@@ -166,6 +183,10 @@ const MoviesPage = (props) => {
                 subheader="Popular and Upcoming Films"
                 text="You can also search movies with respect to release year, genre or the IMDb rating." 
                 width="100%"
+                border={"0px"}
+                borderRadius={6}
+                boxShadow="card"
+                bg="#f1f1f1"
             
             >
                 <Form flexWrap="wrap" onSubmit={submitHandler} py={[3]} minWidth="100%" mt={[3]} zIndex={1}>
@@ -217,7 +238,7 @@ const MoviesPage = (props) => {
             </MessageBox>
             
             {/* RESULTS*/}
-            <Box id="search-rresult-box"  width="100%"
+            <Box id="search-rresult-box"  width="100%" mt={[3,3,4]}
                 minWidth={["100%"]} minHeight={["20vw"]}
                 top={0} p={[0]}
             >
