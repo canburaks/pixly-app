@@ -220,10 +220,8 @@
     "include": [
       "/",
       "/",
-      "/movie/disturbia-2007",
-      "/movie/mean-girls-2004",
-      "/movie/pulp-fiction-1994",
-      "/topic/mystery"
+      "/popular-and-upcoming-movies"
+
 
   ],
     "publicPath": "/"

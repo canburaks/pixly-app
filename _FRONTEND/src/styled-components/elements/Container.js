@@ -88,7 +88,7 @@ export const MessageBox = ({ header,Header,subheader,Subheader,miniheader, text,
                 </HeaderMini>}
 
             <Text opacity={0.8}>{text}</Text>
-            <FlexBox width="100%" mt={[3]}>
+            <FlexBox width="100%" mt={[3]} flexDirection="column">
                 {children}
             </FlexBox>
         </FlexBox>
