@@ -226,7 +226,26 @@ export const HtmlBox = styled.div`
         border: ${props => props.hoverBorder && '3px solid #3633CC' };
         text-decoration: ${props => props.hoverUnderline && "underline"};
         background:${props => props.hoverLight && setLightness('0.15', `${props.hoverLight}`)};
+        };
+        & p {
+            font-size:14px;
+            line-height: 1.8rem;
+            word-spacing: 4px;
         }
+
+        @media (min-width: 370px) {
+            & p {
+                font-size:16px;
+            }
+        }
+        @media (min-width: 480px) {
+            & p {
+                font-size:18px;
+            }
+        }
+
+
+
     transition: ${themeGet("transitions.fast")};
     border: ${props => props.hoverBorder && "3px solid transparent"};
     cursor: ${props => props.clickable ? "pointer" : "inherit"};

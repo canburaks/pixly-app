@@ -94,6 +94,9 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/disturbia-2007",
+        "/movie/mean-girls-2004",
+
         "/movie/gloomy-sunday-1999",
         "/movie/akira-1988",
         "/movie/somebody-to-love-1994",
@@ -396,7 +399,8 @@
         "/movie/shutter-island-2010",
         "/movie/gone-girl-2014",
         "/movie/after-2019",
-        "/movie/hard-candy-2005"
+        "/movie/hard-candy-2005",
+        "/movie/pulp-fiction-1994"
     ],
     "all":[
         "",
@@ -779,6 +783,9 @@
         "/movie/monella-1998",
         "/movie/somebody-to-love-1994",
         "/movie/akira-1988",
-        "/movie/gloomy-sunday-1999"
+        "/movie/gloomy-sunday-1999",
+        "/movie/disturbia-2007",
+        "/movie/mean-girls-2004",
+        "/movie/pulp-fiction-1994"
     ]
 }
