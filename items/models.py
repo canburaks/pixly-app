@@ -1009,7 +1009,7 @@ class Topic(SEO, MainPage):
     short_name = models.CharField(max_length=50, null=True, blank=True, help_text="This will be used in a situation that requires short name rather than 'The Best ....'")
     summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic. max: 300 characters")
     content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
-    html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
+    html_content = RichTextField(max_length=50000,null=True, blank=True, help_text="Detailed description")
     references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")
 
     wiki = models.URLField(blank=True, null=True)
