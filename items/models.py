@@ -1016,7 +1016,8 @@ class Topic(SEO, MainPage):
     
     movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="topics")
     feature_movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="feature_topics", help_text="For starring movies that will show on top of the page.")
-
+    movie_order = ListTextField(default = list(),base_field=models.CharField(max_length=100),
+        null=True, blank=True, help_text="Ordered movie slugs: the movies and its content will display according to this order.")
     lists = models.ManyToManyField(List,null=True, blank=True, related_name="topics")
     tags = models.ManyToManyField("items.Tag",null=True, blank=True, related_name="topics")
     persons = models.ManyToManyField(Person,null=True, blank=True, related_name="topics")
@@ -1035,6 +1036,7 @@ class Topic(SEO, MainPage):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False, help_text="True for RSS publishing, leave it False if you are unsure")
     is_newest = models.BooleanField(default=False, help_text="True for displaying in the latest section")
+    is_ordered = models.BooleanField(default=False, help_text="True for ordered content display.(default=False)")
 
     def __str__(self):
         return self.name

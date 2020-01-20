@@ -94,9 +94,9 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/crazy-rich-asians-2018",
         "/movie/disturbia-2007",
         "/movie/mean-girls-2004",
-
         "/movie/gloomy-sunday-1999",
         "/movie/akira-1988",
         "/movie/somebody-to-love-1994",
@@ -120,7 +120,6 @@
         "/movie/life-2017",
         "/movie/the-maze-runner-2014",
         "/movie/little-women-2019",
-        "/movie/jumanji-the-next-level-2019",
         "/movie/frozen-ii-2019",
         "/movie/tumbleweeds-1999",
         "/movie/synecdoche-new-york-2008",
@@ -140,8 +139,6 @@
         "/movie/room-in-rome-2010",
         "/movie/two-brothers-2004",
         "/movie/the-faculty-1998",
-        "/movie/chungking-express-1994",
-        "/movie/mirrormask-2005",
         "/movie/london-2005",
         "/movie/scent-of-a-woman-1992",
         "/movie/below-her-mouth-2017",
@@ -241,8 +238,6 @@
         "/movie/kagemusha",
         "/movie/embrace-of-the-serpent",
         "/movie/the-end-of-the-tour",
-        "/movie/a-bittersweet-life",
-        "/movie/jumanji-the-next-level-2019",
         "/movie/a-tale-of-three-sisters-2019",
         "/movie/star-wars-the-rise-of-skywalker-2019",
         "/movie/spies-in-disguise-2019",
@@ -351,7 +346,6 @@
         "/movie/matthias-maxime-2019",
         "/movie/the-death-and-return-of-superman-2019",
         "/movie/knives-out-2019",
-        "/movie/the-rising-hawk-2019",
         "/movie/doctor-sleep-2019",
         "/movie/terminator-dark-fate-2019",
         "/movie/the-true-don-quixote-2019",
@@ -587,7 +581,6 @@
         "/movie/matthias-maxime-2019",
         "/movie/the-death-and-return-of-superman-2019",
         "/movie/knives-out-2019",
-        "/movie/the-rising-hawk-2019",
         "/movie/doctor-sleep-2019",
         "/movie/terminator-dark-fate-2019",
         "/movie/the-true-don-quixote-2019",
@@ -646,7 +639,6 @@
         "/movie/kagemusha",
         "/movie/embrace-of-the-serpent",
         "/movie/the-end-of-the-tour",
-        "/movie/a-bittersweet-life",
         "/movie/gosford-park-2001",
         "/movie/lost-in-translation-2003",
         "/movie/the-pursuit-of-happyness-2006",
@@ -740,8 +732,6 @@
         "/movie/room-in-rome-2010",
         "/movie/two-brothers-2004",
         "/movie/the-faculty-1998",
-        "/movie/chungking-express-1994",
-        "/movie/mirrormask-2005",
         "/movie/london-2005",
         "/movie/scent-of-a-woman-1992",
         "/movie/homegrown-1998",
@@ -786,6 +776,7 @@
         "/movie/gloomy-sunday-1999",
         "/movie/disturbia-2007",
         "/movie/mean-girls-2004",
-        "/movie/pulp-fiction-1994"
+        "/movie/pulp-fiction-1994",
+        "/movie/crazy-rich-asians-2018"
     ]
 }

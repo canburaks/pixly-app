@@ -95,7 +95,7 @@ const SimilarFinder = (props) => {
 
     },[slug])
     const summaryChar = useValues([250, 300,400,500,600,700])
-    const canonical = `https://pixly.app/${props.location.pathname}`
+    const canonical = `https://pixly.app/similar-movie-finder`
     return (
         <PageContainer top={-75} position="relative" >
             <Head
