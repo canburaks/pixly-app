@@ -77,7 +77,7 @@ class TopicSitemap(Sitemap):
 
 class ListSitemap(Sitemap):
     changefreq = "yearly"
-    priority = 0.9
+    priority = 0.1
     def items(self):
         slugs = [x.replace("list/", "").strip().replace("/1", "").strip() for x in liste__slugs]
         lists =  List.objects.filter(slug__in=slugs).only("id", "slug")
@@ -107,7 +107,7 @@ class MovieSitemap(Sitemap):
 
 class DirectorSitemap(Sitemap):
     changefreq = "yearly"
-    priority = 0.6
+    priority = 0.1
     def items(self):
         slugs = [x.split("person/")[1] for x in person__slugs]
         mqs_mini = Person.objects.filter(slug__in=slugs).only("id", "slug", "name")
