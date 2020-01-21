@@ -1015,10 +1015,7 @@ class Topic(SEO, MainPage):
     wiki = models.URLField(blank=True, null=True)
     
     movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="topics")
-    feature_movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="feature_topics", help_text="For starring movies that will show on top of the page.")
-    movie_order = ListTextField(default = list(),base_field=models.CharField(max_length=100),
-        null=True, blank=True, help_text="Ordered movie slugs: the movies and its content will display according to this order.")
-    lists = models.ManyToManyField(List,null=True, blank=True, related_name="topics")
+
     tags = models.ManyToManyField("items.Tag",null=True, blank=True, related_name="topics")
     persons = models.ManyToManyField(Person,null=True, blank=True, related_name="topics")
     quotes = models.ManyToManyField("items.Quote",null=True, blank=True, related_name="topics")
@@ -1082,6 +1079,17 @@ class Topic(SEO, MainPage):
         if not self.slug:
             self.add_slug()
         super().save(*args, **kwargs)  # Call the "real" save() method.
+
+
+class TopicItems(models.Model):
+    movie = models.ForeignKey(Movie, related_name="topic_items", on_delete=models.CASCADE)
+    topic = models.ForeignKey(Topic, related_name="topic_items", on_delete=models.CASCADE)
+    
+    header = models.CharField(max_length=80, null=True, blank=True)
+    summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic. max: 300 characters")
+    html_content = RichTextField(max_length=50000,null=True, blank=True, help_text="Detailed description")
+
+    references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")
 
 
 

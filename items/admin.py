@@ -83,7 +83,7 @@ class TopicAdmin(admin.ModelAdmin):
     list_display = ("id", "main_page" ,"slug",'name', "summary", "content", "searchable","is_newest")
 
     inlines = [TagTopicInline,]
-    raw_id_fields = ['movies',"feature_movies", 'persons', 'lists',"tags", "quotes"]
+    raw_id_fields = ['movies','persons', "tags", "quotes"]
 
 @admin.register(Award)
 class AwardAdmin(admin.ModelAdmin):

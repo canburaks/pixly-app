@@ -873,15 +873,13 @@ class TopicType(DjangoObjectType, SEOType):
     short_name = graphene.String()
     is_important_page = graphene.Boolean()
     is_ordered = graphene.Boolean()
-    movie_order = graphene.List(graphene.String)
 
     class Meta:
         model = Topic
     
-    def resolve_is_important_page(self, info):
-        return self.movie_order
 
-    def resolve_is_important_page(self, info):
+
+    def resolve_is_ordered(self, info):
         return self.is_ordered
 
     def resolve_is_important_page(self, info):
