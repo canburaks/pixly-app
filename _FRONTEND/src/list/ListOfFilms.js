@@ -65,7 +65,7 @@ const ListOfFilms = (props) => {
     }
     const topics = useMemo(() => orderTopics(),[])
     
-    console.log("data",topics)
+    //console.log("data",topics)
     useEffect(() => window.scrollTo(0,0), [])
     return (
         <PageContainer top={-75}>
