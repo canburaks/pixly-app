@@ -67,7 +67,6 @@ const TopicPage = (props) =>{
         const newLazyVars = {...yearData, ...ratingData}
         if (!isEqualObj(lazyvariables, newLazyVars)){
             setLazyVariables(newLazyVars);
-            setPage(1);
         }
     }
     // Page Scroll
@@ -355,44 +354,8 @@ const MovieRecommendationCard = ({ item, poster, ratio, title=null }) => (
 
 	</FlexBox>
 )
-const MovieRecommendationCard2 = ({ item, poster, ratio }) => (
-	<SuperBox
-		width="100%"
-        src={poster}
-        maxWidth={"600px"}
-		ratio={ratio}
-        position="relative"
-		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
-	>	
-        <CoverLink link={`/movie/${item.slug}`} alt={item.name + "poster"} zIndex={0} title={`Visit ${item.name}`}/>
-		<FlexBox 
-			position="absolute" 
-			bottom={0} left={0}
-			width={"100%"} height={"auto"}
-			flexDirection="column" px={[2]} pt={[2]}
-			bg={"rgba(0,0,0, 0.85)"} minHeight={"80px"} zIndex={1}
-		>
-			<Text color="light" fontWeight="bold">
-                <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
-            </Text>
-			<TagBox tags={item.tags || []} num={6} color={"light"}/>
-		</FlexBox>
 
-	</SuperBox>
-)
 
-const FeatureMovie = ({ movie }) => (
-    <FlexBox flexDirection="column" mt={[3,3,4]}>
-        <HeaderMini>{movie.name} ({movie.year})</HeaderMini>
-        <Image 
-            src={movie.widePoster} 
-            alt={"The Best Mystery Movies: " + movie.name} title={"The Best Mystery Movies: " + movie.name} 
-            width={"100%"} height="auto" minHeight="50px" 
-            my={[2]}    
-        />
-        <HtmlContainer my={[3]} html={movie.htmlContent} />
-    </FlexBox>
-)
 
 
 export default withRouter(TopicPage);

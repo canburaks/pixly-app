@@ -704,6 +704,7 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
         id = kwargs.get("id")
         slug = kwargs.get("slug")
         #ip = info.context.META.get('REMOTE_ADDR')
+        print("asd",kwargs)
         if id:
             return Topic.objects.filter(id=id).first()
         elif slug:
@@ -815,9 +816,6 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
             return rates
             #return Rating.objects.get(profile=profile, movie=Movie.objects.get(id=id))
 
-    def resolve_topic(self, info, **kwargs):
-        id = kwargs.get("id")
-        return Topic.objects.get(id=id)
 
     def resolve_prediction(self, info,**kwargs):
         # Change in future, only use "id"
