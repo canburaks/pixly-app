@@ -136,7 +136,7 @@ export const PostInfoBox = ({ post, follow, children }) => (
 
 
 export const PaginationBox = ({currentPage, totalPage, nextPage, prevPage}) => (
-<Box justifyContent="center" alignItems="center" className="fbox-r jcc aic pag">
+<Box display="flex" justifyContent="center" alignItems="center" className="fbox-r jcc aic pag">
     <Box fontWeight="bold" color="dark" textAlign="center" hoverUnderline clickable onClick={prevPage}>
         {currentPage > 1 && "< Previous" }
     </Box>

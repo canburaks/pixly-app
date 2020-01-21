@@ -27,7 +27,9 @@ import PeoplePage from "../list/people/PeoplePage";
 
 import  { useLocation } from "../functions"
 import  { rgaSetUser } from "../functions/analytics"
-import TopicPage from "../pages/topic/TopicPage"
+//import TopicPage from "../pages/topic/TopicPage"
+import TopicPage from "../pages/topic/OrderedTopicPage"
+
 import Blog from "../pages/blog/BlogPage"
 
 import MoviePage from "../pages/movie/MoviePage"
