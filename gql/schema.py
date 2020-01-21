@@ -704,7 +704,7 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
         id = kwargs.get("id")
         slug = kwargs.get("slug")
         #ip = info.context.META.get('REMOTE_ADDR')
-        print("asd",kwargs)
+        #print("asd",kwargs)
         if id:
             return Topic.objects.filter(id=id).first()
         elif slug:
