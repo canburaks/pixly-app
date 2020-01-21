@@ -88,6 +88,7 @@ class TopicItemStackInline(admin.StackedInline):
     def get_person_name(self, obj):
         #print(obj)
         return "retrun"
+        
 class TagTopicInline(admin.StackedInline):
     model = Tag.topics.through
     #raw_id_fields = ("tag",  )

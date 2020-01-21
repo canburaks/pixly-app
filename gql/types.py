@@ -839,6 +839,27 @@ class ListType(DjangoObjectType, SocialMediaType, SEOType):
             return len(profile.ratings.items())
         return 0
 
+class TopicItemType(DjangoObjectType, SEOType):
+    slug = graphene.String()
+    name = graphene.String()
+    summary = graphene.String()
+    content = graphene.String()
+    content_html = graphene.String()
+    references = graphene.String()
+
+    wiki = graphene.String()
+
+    poster = graphene.String()
+    cover_poster = graphene.String()
+    hero_poster = graphene.String()
+
+    topic = graphene.Field("gql.types.TopicType")
+    movies = graphene.List("gql.types.CustomMovieType")
+
+    tags = graphene.List("gql.types.TagType")
+    quotes = graphene.List(QuoteType)
+    class Meta:
+        model = TopicItem
 
 
 class TopicType(DjangoObjectType, SEOType):
@@ -860,6 +881,7 @@ class TopicType(DjangoObjectType, SEOType):
     tag = graphene.Field("gql.types.TagType")
 
     movies = graphene.List("gql.types.CustomMovieType")
+    items = graphene.List(TopicItemType)
 
     tags = graphene.List("gql.types.TagType")
     quotes = graphene.List(QuoteType)
@@ -877,7 +899,8 @@ class TopicType(DjangoObjectType, SEOType):
     class Meta:
         model = Topic
     
-
+    def resolve_items(self, info):
+        return self.items
 
     def resolve_is_ordered(self, info):
         return self.is_ordered
@@ -999,28 +1022,7 @@ class TopicType(DjangoObjectType, SEOType):
 
 
 
-class TopicItemType(DjangoObjectType, SEOType):
-    slug = graphene.String()
-    name = graphene.String()
-    summary = graphene.String()
-    content = graphene.String()
-    content_html = graphene.String()
-    references = graphene.String()
 
-    wiki = graphene.String()
-
-    poster = graphene.String()
-    cover_poster = graphene.String()
-    hero_poster = graphene.String()
-
-    tag = graphene.Field("gql.types.TagType")
-
-    movies = graphene.List("gql.types.CustomMovieType")
-
-    tags = graphene.List("gql.types.TagType")
-    quotes = graphene.List(QuoteType)
-    class Meta:
-        model = TopicItem
 
 class DirectorPersonMixType(DjangoObjectType, SocialMediaType, SEOType, StatisticsType):
     filtered_data = graphene.types.json.JSONString()
