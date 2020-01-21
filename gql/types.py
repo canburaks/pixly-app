@@ -934,8 +934,8 @@ class TopicType(DjangoObjectType, SEOType):
     def resolve_items(self, info):
         if self.is_ordered == False:
             print("Topic is not set for ordered list. Change it")
-        print(self.items.all().select_related("movie"))
-        return self.items.all().select_related("movie")
+        #print(self.items.all().select_related("movie"))
+        return self.items.all().select_related("movie").order_by("rank")
 
     def resolve_is_ordered(self, info):
         return self.is_ordered
