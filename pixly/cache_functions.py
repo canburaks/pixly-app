@@ -44,7 +44,7 @@ class Cache():
         pqs = Person.objects.filter(main_page=True).values_list("slug", flat=True)
         return Person.objects.filter(slug__in=pqs)
 
-    #@lru_cache(maxsize=100)    
+    @lru_cache(maxsize=100)    
     def main_page_topics():
         pqs = Topic.objects.filter(main_page=True).values_list("slug", flat=True)
         return Topic.objects.filter(slug__in=pqs)
