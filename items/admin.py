@@ -83,12 +83,9 @@ class TopicItemStackInline(admin.StackedInline):
     #readonly_fields = ("person__name",)
     raw_id_fields = ("movie",)
     #list_display = ("person__name",)
-    fields = ("header","movie", "rank", "html_content" )
+    fields = ("header","movie", "rank", "html_content", "cover_poster" )
     
-    def get_person_name(self, obj):
-        #print(obj)
-        return "retrun"
-        
+
 class TagTopicInline(admin.StackedInline):
     model = Tag.topics.through
     #raw_id_fields = ("tag",  )

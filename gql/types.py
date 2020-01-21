@@ -841,26 +841,58 @@ class ListType(DjangoObjectType, SocialMediaType, SEOType):
 
 class TopicItemType(DjangoObjectType, SEOType):
     slug = graphene.String()
-    name = graphene.String()
-    summary = graphene.String()
-    content = graphene.String()
-    content_html = graphene.String()
+    header = graphene.String()
+    rank = graphene.Int()
+    
+    html_content = graphene.String()
     references = graphene.String()
 
-    wiki = graphene.String()
-
-    poster = graphene.String()
     cover_poster = graphene.String()
-    hero_poster = graphene.String()
+    
+    movie = graphene.Field(MovieType)
 
-    topic = graphene.Field("gql.types.TopicType")
-    movies = graphene.List("gql.types.CustomMovieType")
+    created_at = graphene.String()
+    updated_at = graphene.String()
 
-    tags = graphene.List("gql.types.TagType")
-    quotes = graphene.List(QuoteType)
     class Meta:
         model = TopicItem
 
+    def resolve_header(self, info):
+        return self.header
+
+    def resolve_html_content(self, info):
+        return self.html_content
+
+    def resolve_rank(self, info):
+        return self.rank
+
+    def resolve_movie(self, info):
+        return self.movie
+
+    def resolve_is_ordered(self, info):
+        return self.is_ordered
+
+
+    def resolve_cover_poster(self, info, *_):
+        if self.cover_poster:
+            return self.cover_poster.url
+        return self.movie.cover_poster.url
+
+
+
+    def resolve_created_at(self, info, *_):
+        str_date = self.created_at.__str__()
+        try:
+            return str_date.split(" ")[0]
+        except:
+            return str_date
+
+    def resolve_updated_at(self, info, *_):
+        str_date = self.updated_at.__str__()
+        try:
+            return str_date.split(" ")[0]
+        except:
+            return str_date
 
 class TopicType(DjangoObjectType, SEOType):
     id = graphene.Int()
@@ -900,7 +932,10 @@ class TopicType(DjangoObjectType, SEOType):
         model = Topic
     
     def resolve_items(self, info):
-        return self.items
+        if self.is_ordered == False:
+            print("Topic is not set for ordered list. Change it")
+        print(self.items.all().select_related("movie"))
+        return self.items.all().select_related("movie")
 
     def resolve_is_ordered(self, info):
         return self.is_ordered
