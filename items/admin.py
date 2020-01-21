@@ -83,7 +83,7 @@ class TopicItemStackInline(admin.StackedInline):
     #readonly_fields = ("person__name",)
     raw_id_fields = ("movie",)
     #list_display = ("person__name",)
-    fields = ("header","movie", "rank", "html_content", "cover_poster" )
+    fields = ("header","movie", "rank", "html_content", "cover_poster", "poster" )
     
 
 class TagTopicInline(admin.StackedInline):
@@ -105,12 +105,12 @@ class TopicAdmin(admin.ModelAdmin):
     )
     inlines = [TopicItemStackInline]
 
-"""
-@admin.register(TopicItems)
+
+@admin.register(TopicItem)
 class TopicItemsAdmin(admin.ModelAdmin):
-    list_display = ("header", "rank", "movie")
+    list_display = ("movie", "rank", "topic")
     raw_id_fields = ['movie',]
-"""
+
 
 ################################################################################
 
