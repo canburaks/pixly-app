@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from .models import Video, VideoList, List, Movie, Topic, Article, Rating, Prediction, Tag, Award, Quote
+from .models import Video, VideoList, List, Movie, Topic, TopicItem, Article, Rating, Prediction, Tag, Award, Quote
 from archive.models import ContentSimilarity
 from persons.models import Crew
 from items.resources import TagResource, VideoResource
@@ -52,7 +52,7 @@ class ContentSimilarInline(admin.TabularInline):
     #exclude = ("data",)
 
 
-class CrewStackInline(admin.StackedInline):
+class CrewStackInline (admin.StackedInline):
     model = Crew
     #readonly_fields = ("person__name",)
     raw_id_fields = ("person",)
@@ -77,13 +77,44 @@ class ArticleMovieInline(admin.TabularInline):
 
 
 
+## TOPICS
+class TopicItemStackInline(admin.StackedInline):
+    model = TopicItem
+    #readonly_fields = ("person__name",)
+    raw_id_fields = ("movie",)
+    #list_display = ("person__name",)
+    fields = ("header","movie", "rank", "html_content" )
+    
+    def get_person_name(self, obj):
+        #print(obj)
+        return "retrun"
+class TagTopicInline(admin.StackedInline):
+    model = Tag.topics.through
+    #raw_id_fields = ("tag",  )
+    #exclude = ("related_movies","related_lists", )
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
     list_display = ("id", "main_page" ,"slug",'name', "summary", "content", "searchable","is_newest")
 
-    inlines = [TagTopicInline,]
     raw_id_fields = ['movies','persons', "tags", "quotes"]
+    fields = (
+        "id", "slug", "name", "short_name", "seo_title", "seo_description",
+        "is_ordered", "main_page", "is_newest", "important_page", "searchable",
+        "is_article","is_published",
+        "summary", "html_content", "movies", "quotes",
+        "poster", "cover_poster", "hero_poster", "references"
+    )
+    inlines = [TopicItemStackInline]
+
+"""
+@admin.register(TopicItems)
+class TopicItemsAdmin(admin.ModelAdmin):
+    list_display = ("header", "rank", "movie")
+    raw_id_fields = ['movie',]
+"""
+
+################################################################################
 
 @admin.register(Award)
 class AwardAdmin(admin.ModelAdmin):

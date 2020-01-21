@@ -1016,7 +1016,7 @@ class Topic(SEO, MainPage):
 
     wiki = models.URLField(blank=True, null=True)
     
-    movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="topics")
+    movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="topics", help_text="Leave blank if is_ordered=True")
 
     tags = models.ManyToManyField("items.Tag",null=True, blank=True, related_name="topics")
     persons = models.ManyToManyField(Person,null=True, blank=True, related_name="topics")
@@ -1082,18 +1082,21 @@ class Topic(SEO, MainPage):
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
 
-class TopicItems(models.Model):
-    movie = models.ForeignKey(Movie, related_name="topic_items", on_delete=models.CASCADE)
-    topic = models.ForeignKey(Topic, related_name="topic_items", on_delete=models.CASCADE)
-    
-    header = models.CharField(max_length=80, null=True, blank=True)
-    summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic. max: 300 characters")
-    html_content = RichTextField(max_length=50000,null=True, blank=True, help_text="Detailed description")
+class TopicItem(models.Model):
+    movie = models.ForeignKey(Movie, related_name="in_topics", on_delete=models.CASCADE)
+    topic = models.ForeignKey(Topic, related_name="items", on_delete=models.CASCADE)
+    rank = models.IntegerField(null=True, blank=True)
+
+    header = models.CharField(max_length=80, null=True, blank=True, help_text="In case of different text, use this as header")
+    html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
 
     references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
 
-
+    def __str__(self):
+        return self.movie.name
 
 TAG_INFO_TYPE = (
     ("award", "Awarded"),

@@ -244,7 +244,7 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
         //const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
         //const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
 
-        console.log("data", data.complexSearch)
+        //console.log("data", data.complexSearch)
         
         dispatcher(willBeDispatched)
         return (
@@ -254,6 +254,7 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
                             <MovieRecommendationCard 
                                 item={item}  key={"rec" + item.id}
                                 ratio={networkResponsiveRatio} 
+                                title={"See the details of the " + data.complexSearch.topic.shortName.toLowerCase() + " movie."}
                                 poster={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
                             />
                     ))}
@@ -265,6 +266,7 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
                             <MovieRecommendationCard 
                                 item={item}  
                                 ratio={networkResponsiveRatio} 
+                                title={"See the details of the " + data.complexSearch.topic.shortName.toLowerCase() + " movie."}
                                 poster={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
                             />
                         </LazyLoadComponent>
@@ -277,6 +279,7 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
                             <MovieRecommendationCard 
                                 item={item}  
                                 ratio={networkResponsiveRatio} 
+                                title={"See the details of the " + data.complexSearch.topic.shortName.toLowerCase() + " movie."}
                                 poster={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
                             />
                         </LazyLoadComponent>
@@ -290,7 +293,7 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
 }, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.page === n.page) )
 
 
-const MovieRecommendationCard = ({ item, poster, ratio }) => (
+const MovieRecommendationCard = ({ item, poster, ratio, title=null }) => (
 	<FlexBox
 		width="100%"
         maxWidth={"600px"}
@@ -325,7 +328,14 @@ const MovieRecommendationCard = ({ item, poster, ratio }) => (
                 color="light"  
                 pb={[1]}
             >
-                <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name.trim()}</NewLink>
+                <NewLink 
+                    link={`/movie/${item.slug}`} 
+                    hoverUnderline 
+                    follow={true}
+                    title={title ? `${item.name} (${item.year}): ${title} ` : `${item.name} (${item.year})`}
+                >
+                    {item.name.trim()}
+                </NewLink>
                 &nbsp;({item.year})
             </HeaderMini>
             <Text fontSize={["12px","12px","14px", "14px"]} 
