@@ -79,9 +79,7 @@ const TopicPage = (props) =>{
             window.scrollTo({left:0, top:node.current.offsetTop, behavior:"smooth"})
         }
     },[page])
-    
-    const featuremovies = isReady ? queryData.topic.featureMovies : [];
-    //queryData && queryData.topic && console.log(queryData.topic)
+
     return(
         <PageContainer>
             
@@ -135,7 +133,6 @@ const TopicPage = (props) =>{
                                 html={queryData.topic.htmlContent}     
                             />
                         </SchemaArticle>
-                        {isReady && featuremovies.map((fm,i )=> <FeatureMovie movie={fm} key={`feature${i}`} /> )}
 
                         {/*<FlexBox my={[4,4,4,5]} width={"100%"} overflow="hidden" flexWrap="wrap" className="social-share-box" flexDirection="row">
                             <SocialButtons.Twitter className="social-share" link={"https://pixly.app/" + window.location.pathname} />
@@ -236,23 +233,18 @@ const SearchQueryBox = React.memo(({ lazyvariables, dispatcher}) =>{
 
     if (data && data.complexSearch) {
         const willBeDispatched = {topic:data.complexSearch.topic, quantity:data.complexSearch.quantity}
-        const pageQuantity = data.complexSearch.topicResult.length 
-        //const firstPart = data.complexSearch.topicResult.slice(0, Math.floor(pageQuantity/ 2) + 1)
-        //const secondPArt = data.complexSearch.topicResult.slice(Math.floor(pageQuantity/ 2) + 1, 30)
+        
+        
 
-        const featuremovieslugs = data.complexSearch.topic.featureMovies.map(fm => fm.slug)
-        const renderMovies = data.complexSearch.topicResult.filter(mv => !featuremovieslugs.includes(mv.slug))
+        const firstPart = data.complexSearch.topicResult.slice(0, 6)
+        const secondPArt = data.complexSearch.topicResult.slice(6, 12)
+        const thirdPart = data.complexSearch.topicResult.slice(12, 24)
 
-        const firstPart = renderMovies.slice(0, 6)
-        const secondPArt = renderMovies.slice(6, 12)
-        const thirdPart = renderMovies.slice(12, 24)
-
-        const isMobile = window.innerWidth < 480;
         //const ResponsiveAd1 = isMobile ? FeedMobileTopicPageAd : HomePageFeedAd
         //const ResponsiveAd2 = isMobile ? FeedMobileTopicPageAd : MidPageAd
         //const ResponsiveAd3 = isMobile ? FeedMobileTopicPageAd : MoviePageAd
 
-        //console.log("data", data.complexSearch.topicResult)
+        console.log("data", data.complexSearch)
         
         dispatcher(willBeDispatched)
         return (
