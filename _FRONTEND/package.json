@@ -220,14 +220,9 @@
     "include": [
       "/",
       "/",
-      "/movie/below-her-mouth-2017",
-      "/movie/crazy-rich-asians-2018",
-      "/topic/cyberpunk",
-      "/topic/gangster-films",
-      "/topic/mystery",
-      "/topic/controversial-films",
-      "/topic/historical-figures",
-      "/lists-of-films"
+      "/movie/american-pie-1999",
+      "/movie/the-raven-2012"
+
   ],
     "publicPath": "/"
   }
