@@ -1002,6 +1002,8 @@ class Prediction(models.Model):
 
 class Topic(SEO, MainPage):
     id = models.IntegerField(primary_key=True)
+    is_ordered = models.BooleanField(default=False, help_text="True for ordered movies and synopsis display.(default=False)")
+
     slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
     tag = models.OneToOneField("items.Tag", null=True, blank=True, on_delete=models.CASCADE)
     
@@ -1033,7 +1035,6 @@ class Topic(SEO, MainPage):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False, help_text="True for RSS publishing, leave it False if you are unsure")
     is_newest = models.BooleanField(default=False, help_text="True for displaying in the latest section")
-    is_ordered = models.BooleanField(default=False, help_text="True for ordered content display.(default=False)")
 
     def __str__(self):
         return self.name
