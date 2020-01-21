@@ -41,7 +41,7 @@ const BlogPage = (props) =>{
     return(
         <PageContainer>
             <Head
-                title={"Pixly Blog - Articles About Cinema, Movie Recommendation, and Technical Stuff."}
+                title={"Pixly Blog - Articles About Movie Recommendation, and Technical Stuff."}
                 description={"Pixly App Official Blog Page. Official articles from Pixly Board that is related with " + 
                     "cinema, movie recommendation, and technical stuff."}
                 canonical={`https://pixly.app/blog`}
