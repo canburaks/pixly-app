@@ -57,6 +57,9 @@ def video_image_upload_path(instance, filename):
 def topic_item_cover_poster_path(instance, filename):
     return "topics/{0}/items/cover/{1}".format(instance.id,filename)
 
+def topic_item_poster_path(instance, filename):
+    return "topics/{0}/items/poster/{1}".format(instance.id,filename)
+    
 LIST_RELATION_TYPE = (
     ('df', "Director's Favourite"),
     ("fw", "Festival Winner Movies"),
@@ -87,13 +90,10 @@ class Movie(SocialMedia, SEO,MainPage):
     poster = models.ImageField(blank=True, upload_to=movie_poster_upload_path)
     large_poster = models.ImageField(blank=True, upload_to=movie_large_poster_upload_path)
     cover_poster = models.ImageField(blank=True, upload_to=movie_cover_poster_upload_path)
+
     #1280x300px
     wide_poster = models.ImageField(blank=True, upload_to=movie_topic_poster_upload_path)
 
-    #cover_mini = ImageSpecField(source='cover_poster',
-    #                                  processors=[ResizeToFill(300, 168.75)],
-    #                                  format='JPEG',
-    #                                  options={'quality': 60})
 
     director = models.ForeignKey(Person, on_delete=models.CASCADE, null=True,blank=True, related_name="movies")
 
@@ -1092,6 +1092,7 @@ class TopicItem(models.Model):
     html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
 
     cover_poster = models.ImageField(blank=True, null=True, upload_to=topic_item_cover_poster_path)
+    poster = models.ImageField(blank=True, null=True, upload_to=topic_item_poster_path)
 
     references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")
 
