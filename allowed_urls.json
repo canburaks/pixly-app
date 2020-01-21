@@ -94,6 +94,7 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/country-1984",
         "/movie/crazy-rich-asians-2018",
         "/movie/disturbia-2007",
         "/movie/mean-girls-2004",
@@ -777,6 +778,8 @@
         "/movie/disturbia-2007",
         "/movie/mean-girls-2004",
         "/movie/pulp-fiction-1994",
-        "/movie/crazy-rich-asians-2018"
+        "/movie/crazy-rich-asians-2018",
+        "/movie/country-1984"
+
     ]
 }
