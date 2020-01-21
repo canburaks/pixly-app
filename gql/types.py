@@ -848,7 +848,8 @@ class TopicItemType(DjangoObjectType, SEOType):
     references = graphene.String()
 
     cover_poster = graphene.String()
-    
+    poster = graphene.String()
+
     movie = graphene.Field(MovieType)
 
     created_at = graphene.String()
@@ -872,13 +873,17 @@ class TopicItemType(DjangoObjectType, SEOType):
     def resolve_is_ordered(self, info):
         return self.is_ordered
 
-
     def resolve_cover_poster(self, info, *_):
         if self.cover_poster:
             return self.cover_poster.url
         return self.movie.cover_poster.url
 
-
+    def resolve_poster(self, info, *_):
+        if self.poster:
+            return self.poster
+        elif self.movie.large_poster:
+            return self.movie.large_poster.url
+        return self.movie.poster.url
 
     def resolve_created_at(self, info, *_):
         str_date = self.created_at.__str__()
