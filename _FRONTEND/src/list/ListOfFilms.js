@@ -316,7 +316,7 @@ const CollectionCard = (props) => (
         <Box position="absolute" bottom={"20px"} width={"100%"}>
             <NewLink link={props.link}  
                 fontWeight="bold" color="dark" follow={true}
-                hoverUnderline title={props.item.summary || "See " + props.item.name}
+                hoverUnderline title={props.item.shortName ? `See great ${props.item.shortName} movies` : "See " + props.item.name}
             >
                 {props.buttonText || "See more"}
             </NewLink>
