@@ -220,8 +220,7 @@
     "include": [
       "/",
       "/",
-      "/movie/american-pie-1999",
-      "/movie/the-raven-2012"
+      "/movie/country-1984"
 
   ],
     "publicPath": "/"
