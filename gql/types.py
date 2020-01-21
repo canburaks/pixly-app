@@ -1,4 +1,4 @@
-from items.models import Rating,Movie, List,  Video, Topic, Prediction, Tag, Quote
+from items.models import Rating,Movie, List,  Video, Topic, TopicItem,Prediction, Tag, Quote
 from persons.models import Person, Director, Crew
 from persons.profile import Profile, Follow, Activity
 from archive.models import MovSim, TmdbMovie, ContentSimilarity
@@ -840,6 +840,7 @@ class ListType(DjangoObjectType, SocialMediaType, SEOType):
         return 0
 
 
+
 class TopicType(DjangoObjectType, SEOType):
     id = graphene.Int()
     netflix_id = graphene.Int()
@@ -859,7 +860,6 @@ class TopicType(DjangoObjectType, SEOType):
     tag = graphene.Field("gql.types.TagType")
 
     movies = graphene.List("gql.types.CustomMovieType")
-    feature_movies = graphene.List(MovieType)
 
     tags = graphene.List("gql.types.TagType")
     quotes = graphene.List(QuoteType)
@@ -964,9 +964,6 @@ class TopicType(DjangoObjectType, SEOType):
     def resolve_movies(self, info, *_):
         mid = self.movies.all().values_list("id", flat=True)
         return [CustomMovieType(id=x) for x in mid ]
-
-    def resolve_feature_movies(self, info, *_):
-        return self.feature_movies.all()
         
 
     def resolve_cover_poster(self, info, *_):
@@ -999,6 +996,31 @@ class TopicType(DjangoObjectType, SEOType):
 
     def resolve_summary(self, info, *_):
         return self.summary
+
+
+
+class TopicItemType(DjangoObjectType, SEOType):
+    slug = graphene.String()
+    name = graphene.String()
+    summary = graphene.String()
+    content = graphene.String()
+    content_html = graphene.String()
+    references = graphene.String()
+
+    wiki = graphene.String()
+
+    poster = graphene.String()
+    cover_poster = graphene.String()
+    hero_poster = graphene.String()
+
+    tag = graphene.Field("gql.types.TagType")
+
+    movies = graphene.List("gql.types.CustomMovieType")
+
+    tags = graphene.List("gql.types.TagType")
+    quotes = graphene.List(QuoteType)
+    class Meta:
+        model = TopicItem
 
 class DirectorPersonMixType(DjangoObjectType, SocialMediaType, SEOType, StatisticsType):
     filtered_data = graphene.types.json.JSONString()
