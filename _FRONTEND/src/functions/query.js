@@ -816,9 +816,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                         poster,coverPoster, 
                         isBookmarked, isFaved,
                         viewerRating,imdbRating
-                        tags{
-                            name, slug, genreTag, subgenreTag
-                    },
+                        tags{name, slug, genreTag, subgenreTag},
                 }
                 topic{
                     name, summary,content, htmlContent, isArticle, slug, poster, heroPoster,
@@ -827,6 +825,21 @@ export const TOPIC_SEARCH_QUERY = gql`
                     searchable,references,isOrdered, shortName
                     quotes{
                         ownerName, text, movie{name, slug}, person{name, slug}, 
+                    }
+                    items{
+                        rank,
+                        header,
+                        htmlContent,
+                        coverPoster, poster,
+                        references,
+                        updatedAt,
+                        movie{
+                            id, name,slug, year, summary,
+                            poster,coverPoster, 
+                            isBookmarked, isFaved,
+                            viewerRating,imdbRating,
+                            tags{name, slug, genreTag, subgenreTag}
+                        }
                     }
                 },
                 quantity

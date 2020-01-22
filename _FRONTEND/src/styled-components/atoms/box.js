@@ -147,7 +147,45 @@ export const ImageBox = ({ratio,src, ...props}) => (
 
         />
     </SuperBox>
-    )
+)
+export const ImageBoxBg = styled.div`
+    box-sizing: border-box !important;
+    display:flex;
+    position:relative;
+    height:auto;
+    padding-bottom:${props => `${props.ratio * 100}%`};
+
+    ${props => props.src && backgroundImages(`url(${props.src})`)};
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+
+
+    border: ${props => props.hoverBorder && "3px solid transparent"};
+    cursor: ${props => props.clickable ? "pointer" : "inherit"};
+    overflow: hidden;
+    z-index:1;
+    transition: ${themeGet("transitions.medium")};
+    transition: background-image 2s ease-in-out !important;
+    :hover { 
+        box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
+        border: ${props => props.hoverBorder && '3px solid #3633CC' };
+        text-decoration: ${props => props.hoverUnderline && "underline"};
+        background:${props => props.hoverLight && setLightness('0.45', 'rgba(204,205,100,0.7)')};
+        transform:${props => props.translateY && `translateY(-4px)`};
+    }
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${grid}
+    ${typography}
+`
 
 export const GridBox = styled(Box)`
     display: grid;
@@ -227,22 +265,7 @@ export const HtmlBox = styled.div`
         text-decoration: ${props => props.hoverUnderline && "underline"};
         background:${props => props.hoverLight && setLightness('0.15', `${props.hoverLight}`)};
         };
-        & p {
-            font-size:14px;
-            line-height: 1.8rem;
-            word-spacing: 4px;
-        }
 
-        @media (min-width: 370px) {
-            & p {
-                font-size:16px;
-            }
-        }
-        @media (min-width: 480px) {
-            & p {
-                font-size:18px;
-            }
-        }
 
 
 

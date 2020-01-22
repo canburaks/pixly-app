@@ -127,43 +127,45 @@ export const LogoutMutation = (props) => {
 
 
 
-export const LikeMutation = (props) => {
-    const [fav, { data }] = useMutation(FAV_MUTATION, {onComplete(data){props.cacheUpdate(data.fav.movie)}});
+export const LikeMutation = ({ id,active, cacheUpdate, ...props }) => {
+    const [fav, { data }] = useMutation(FAV_MUTATION, {onComplete(data){cacheUpdate(data.fav.movie)}});
 	const authStatus = useAuthCheck()
 	//console.log("like mutation data", data)
 
-    const mutation = useCallback(() => fav({ variables:{ id:props.id, type:"movie"}},[props.id]))
+    const mutation = useCallback(() => fav({ variables:{ id:id, type:"movie"}},[id]))
     return (
 		<LikeIcon
 			onClick={authStatus ? mutation : null}
-			active={data ? data.fav.movie.isFaved : props.active}
+			active={data ? data.fav.movie.isFaved : active}
             className={!authStatus && "anonymous"}
             title={!authStatus && "Please Login to Continue"}
+			{...props}
 		/>
 	)
 }
 
 
-export const BookmarkMutation = (props) => {
-    const [bookmark, { data }] = useMutation(BOOKMARK_MUTATION, {onComplete(data){props.cacheUpdate(data.bookmark.movie)}} );
+export const BookmarkMutation = ({ id, size, active, cacheUpdate, ...props }) => {
+    const [bookmark, { data }] = useMutation(BOOKMARK_MUTATION, {onComplete(data){cacheUpdate(data.bookmark.movie)}} );
 	const authStatus = useAuthCheck()
 	//console.log("bookmark mutation data", props)
-    const mutation = useCallback(() => bookmark({ variables:{ id:props.id } }),[props.id])
+    const mutation = useCallback(() => bookmark({ variables:{ id:id } }),[id])
     
     return (
 		<BookmarkIcon   
             onClick={authStatus ? mutation : null}  
-            active={authStatus ? (data ? data.bookmark.movie.isBookmarked : props.active) : false}
+            active={authStatus ? (data ? data.bookmark.movie.isBookmarked : active) : false}
             title={authStatus ? "Add/Remove Watchlist" : "Please Login to Continue"}
-			size={props.size}
+			size={size}
+			{...props}
         />
 	)
 }
 
 
 
-export const RatingMutation = (props) => {
-	const previousRating = props.item.viewerRating
+export const RatingMutation = ({ item, size, viewerRating }) => {
+	const previousRating = item.viewerRating
     const [currentRating, setCurrentRating ] = useState(previousRating)
 	const debouncedRating = useDebounce(currentRating, 1000);
 	const authStatus = useAuthCheck()
@@ -177,10 +179,10 @@ export const RatingMutation = (props) => {
 		//{id: 58559, slug: "the-dark-knight-2008", viewerRating: 4, __typename: "MovieType"}
 		
 		if (window.location.pathname.includes("/movie/")){
-			var oldData = client.readQuery({ query: MOVIE, variables:{slug:props.item.slug} });
+			var oldData = client.readQuery({ query: MOVIE, variables:{slug:item.slug} });
 			const newMovieData = {...oldData.movie, ...newData}
 			oldData.movie = newMovieData;
-			client.writeQuery({ query: MOVIE, variables:{slug:props.item.slug}, data: oldData});
+			client.writeQuery({ query: MOVIE, variables:{slug:item.slug}, data: oldData});
 			return null
 		}
 	}
@@ -194,16 +196,16 @@ export const RatingMutation = (props) => {
     }
 	const ratingSetter = useCallback((value) => setCurrentRating(value), [currentRating] )
 	const ratingSize = useValues([28,32,66,44,46])
-	const starSize = props.size ? props.size : ratingSize
-	const debouncedMutation = () => rating({ variables:{id:props.item.id, rate:debouncedRating}})
+	const starSize = size ? size : ratingSize
+	const debouncedMutation = () => rating({ variables:{id:item.id, rate:debouncedRating}})
 	
 	useEffect(() =>{
 		//console.log("effect response rating:", responseRating)
 		function listener(){
 			//console.log("in listener function => ", currentRating, debouncedRating)
-			if (props.item.viewerRating !== currentRating && currentRating === debouncedRating){
+			if (item.viewerRating !== currentRating && currentRating === debouncedRating){
 				//console.log("changed rating detected. Will mutate")
-				debouncedMutation({ variables:{id:props.item.id, rate:debouncedRating}})
+				debouncedMutation({ variables:{id:item.id, rate:debouncedRating}})
 			}
 		}
 		listener()
@@ -213,7 +215,7 @@ export const RatingMutation = (props) => {
       <ReactStars half 
           edit={authStatus} 
           color2={"#ffd700"} color1="grey" size={starSize} 
-          value={authStatus ? (currentRating || props.viewerRating) : null} 
+          value={authStatus ? (currentRating || viewerRating) : null} 
           onChange={ratingSetter}
       />
     )

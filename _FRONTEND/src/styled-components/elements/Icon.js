@@ -262,14 +262,14 @@ export const ImdbRatingIconLink = (props) => (
 	</OuterLink>
 )
 export const ImdbRatingIcon = (props) => (
-<FlexBox mr={[1]} display="flex" alignItems="flex-end" follow={props.follow}>
-	<ImdbIcon title="See IMDb Page" fill="#f1f1f1" {...props} className="no-click"/>
+<FlexBox mr={[1]} display="flex" alignItems="flex-end">
+	<ImdbIcon title="See IMDb Page" fill="#f1f1f1" {...props} />
 	{props.rating && 
 	<Text 
 		fontWeight="bold"
 		fontSize={["14px"]}
-		color="light"
-		textShadow="-2px 2px 1px rgba(0,0,0, 0.6)"
+		color={props.color || "light"}
+		textShadow={!props.noShadow && "-2px 2px 1px rgba(0,0,0, 0.6)"}
 		position="relative"
 		m={[0]} p={[0]}
 		ml={[1]}
@@ -279,19 +279,19 @@ export const ImdbRatingIcon = (props) => (
 	<HiddenText>IMDb Page</HiddenText>
 </FlexBox>
 )
-export const YearClockIcon = (props) => (
+export const YearClockIcon = ({year, color, noShadow, ...props}) => (
 	<FlexBox  mr={[1]} display="flex" alignItems="center">
 		<ClockIcon title="Release Year"  {...props}/>
-		{props.year && 
+		{year && 
 		<Text 
 			fontWeight="bold"
 			fontSize={["14px"]}
-			color="light"
-			textShadow="textDark"
+			color={color || "light"}
+			textShadow={!noShadow && "textDark"}
 			position="relative"
 			ml={[1]}
 		>
-			{props.year}
+			{year}
 		</Text>}
 	</FlexBox>
 )
@@ -370,7 +370,7 @@ const Heart = (props) => (
 	<MovieSvg xmlns="http://www.w3.org/2000/svg" 
 		viewBox="0 0 24 24"
 		strokeLinecap="square" strokeLinejoin="arcs"
-		strokeWidth="2"
+		strokeWidth={2}
 		{...props}
 	>   
 		{props.title && <title>{props.title}</title>}
@@ -381,6 +381,7 @@ const Bookmark = (props) => (
 	<MovieSvg xmlns="http://www.w3.org/2000/svg" 
 		viewBox="0 0 24 24" 
 		strokeLinecap="square" strokeLinejoin="arcs"
+		strokeWidth={2}
 		{...props}
 	>  
 		{props.title && <title>{props.title}</title>}
@@ -437,6 +438,16 @@ const Imdb2 = props => (
 	</SocialMediaSvg>
 )
 const Imdb = props => (
+    <SocialMediaSvg width={30} height={30} viewBox="0 0 30 30" fill="none" {...props}>
+      <rect width={30} height={30} rx={15} fill="#181818" />
+      <path
+        d="M26.786 0H3.214A3.215 3.215 0 000 3.214v23.572A3.215 3.215 0 003.214 30h23.572A3.215 3.215 0 0030 26.786V3.214A3.215 3.215 0 0026.786 0zM1.426 13.205h-.02c.007-.006.014-.02.02-.026v.026zm5.07 6.067h-2.21v-8.558h2.21v8.558zm7.58 0h-1.922v-5.785l-.777 5.785h-1.38l-.816-5.658v5.658H7.239v-8.558h2.866c.22 1.326.402 2.672.582 4.011l.51-4.01h2.879v8.557zm.763 0v-8.558h1.648c1.178 0 2.993-.107 3.28 1.4.115.509.095 1.091.095 1.634 0 5.926.743 5.531-5.023 5.524zm10.775-1.955c0 1.051-.16 2.07-1.487 2.07-.602 0-1.018-.202-1.4-.657l-.127.542h-1.995v-8.558h2.123v2.793c.401-.436.803-.616 1.4-.616 1.432 0 1.486.857 1.486 2.015v2.411zm-7.869-4.065c0-.65.108-1.071-.69-1.071v5.605c.818.02.69-.583.69-1.232v-3.302zM23.471 15c0-.362.074-.85-.415-.85-.402 0-.328.595-.328.85 0 .04-.074 2.652.073 2.993.054.107.148.161.255.161.522 0 .415-.603.415-.964V15z"
+        fill="#F3CE13"
+      />
+    </SocialMediaSvg>
+)
+
+const Imdb0 = props => (
 	<SocialMediaSvg
 	aria-hidden="true"
 	viewBox="0 0 448 512"

@@ -5,7 +5,7 @@ import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 
 import { isEqualObj, Head, MidPageAd, HomePageFeedAd, MoviePageAd,
-    useValues, useWindowSize, FeedMobileTopicPageAd, useDebounce
+    useValues, useWindowSize, useWindowWidth, FeedMobileTopicPageAd, useDebounce
 } from "../../functions"
 
 
@@ -15,9 +15,10 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
     //YearSlider,RatingSlider,
-    HtmlBox, HtmlContainer, MessageBox, Hr,
+    HtmlBox, HtmlContainer, MessageBox, Hr, HomeIcon,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
-    Ul,Li,ImdbRatingIcon, AbsoluteBox,BookmarkMutation
+    Ul,Li,ImdbRatingIcon, AbsoluteBox,ImageBoxBg,YearClockIcon,
+    BookmarkMutation, RatingMutation, LikeMutation
 } from "../../styled-components"
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
 import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
@@ -117,29 +118,25 @@ const TopicQuery = ({ lazyvariables }) =>{
     //Network
     const { effectiveConnectionType } = useNetworkStatus();
     let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
-    const networkResponsiveRatio = useMemo(() => speed==="fast" ? 0.7 : 1.5, [speed])
-    const networkResponsiveColumn = useMemo(() => speed==="fast" ? [1,1,1,2,2,2,3] : [1,1,2,2,3,3,4], [speed])
 
 
-    //const firstPart = items.slice(0, 6)
-    //const secondPArt = items.slice(6, 12)
-    //const thirdPart = items.slice(12, 24)
-    //console.log(data, loading)
+
     if (error) return <div>{error.message}</div>
     if (!data && loading) return <Loading />
     if (data){
         const topic = data.complexSearch.topic
-        const items = data.complexSearch.topicResult
-        const quantity = data.complexSearch.quantity || 0
         const isOrdered = topic.isOrdered
+        const items = isOrdered ? topic.items : data.complexSearch.topicResult
+        const quantity = data.complexSearch.quantity || 0
 
-        console.log(topic, items, quantity, isOrdered, screenSize)
+        //console.log(topic, items, quantity, isOrdered, screenSize)
+        //console.log(screenSize, screenSize.includes("XL"))
+        //console.log("speed", speed)
+        //console.log("size", screenSize)
 
         // Other variables
-        const title = "See the details of the " + topic.shortName.toLowerCase() + " movie."
-        const columns = isOrdered ? [1] : networkResponsiveColumn
-
-        const MovieCard = (props) => isOrdered ? <OrderedCard {...props} /> : <UnorderedCard {...props} />
+        const title = "See the details of the " + topic.shortName.toLowerCase() + " movie."        
+        const Liste = isOrdered ? OrderedList : UnorderedList
 
         return (
             <PageContainer>
@@ -160,7 +157,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                     />}
                 
                 <ContentContainer minHeight={"150px"} maxWidth={"100%"}
-                    flexDirection="column" pb={[4,4]}
+                    flexDirection="column" pb={[4,4]} alignItems="center"
                 >
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
                     <SchemaArticle 
@@ -189,36 +186,8 @@ const TopicQuery = ({ lazyvariables }) =>{
 
                     <Hr />
                 
-
-
                     {/* CONTENT */}
-                    <Grid columns={columns} py={[1]} gridColumnGap={[3,3,3,4]} width="100%" height="auto" >
-                        {items.slice(0,6).map( item => (
-                                <MovieCard key={"rec" + item.id}
-                                    item={item}  title={title}
-                                    ratio={networkResponsiveRatio} 
-                                    speed={speed}
-                                />
-                        ))}
-                    </Grid>
-                    <Grid columns={columns} py={[1]} gridColumnGap={[3,3,3,4]} width="100%" height="auto" >
-                        {items.slice(6, 12).map( item => (
-                                <MovieCard key={"rec" + item.id}
-                                    item={item}  title={title}
-                                    ratio={networkResponsiveRatio} 
-                                    speed={speed}
-                                />
-                        ))}
-                    </Grid>
-                    <Grid columns={columns} py={[1]} gridColumnGap={[3,3,3,4]} width="100%" height="auto" >
-                        {items.slice(12, 18).map( item => (
-                                <MovieCard key={"rec" + item.id}
-                                    item={item}  title={title}
-                                    ratio={networkResponsiveRatio} 
-                                    speed={speed}
-                                />
-                        ))}
-                    </Grid>
+                    <Liste items={items} title={title} speed={speed} size={screenSize} />
 
                     {/* PAGINATION */}
                     <Box id="search-rresult-box"  ref={node}
@@ -236,7 +205,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                         <HtmlContainer 
                             my={[5]} 
                             fontSize={["14px","16px", "16px", "18px"]} 
-                            html={queryData.topic.references}     
+                            html={topic.references}     
                         />}
                     </Box>
                 </ContentContainer>
@@ -246,14 +215,246 @@ const TopicQuery = ({ lazyvariables }) =>{
     else return <div></div>
 }
 
-const OrderedCard = ({ item, ratio, speed}) => (
-    <FlexBox width="100%" >
-        
+const OrderedCard = ({ item, specs}) => (
+    <FlexBox width="90vw" flexDirection={specs.flexDirection}
+        border={"0px"} borderRadius={6}
+        boxShadow="card" bg="#f1f1f1"
+        my={[3]} overflow="hidden"
+        className="ordered-topic-card"
+        minHeight={specs.isLargeScreen ? specs.rightPosterHeight : "auto"}
+    >
+
+        {/* TOP CONTENT*/}
+        {specs.show==="top" &&
+            <FlexBox width="100%">
+                <CoverImage 
+                    src={specs.typeTop==="cover" ? item.coverPoster : item.poster}
+                    title={"Visit " + item.movie.name}
+                    alt={`${item.movie.name} poster`} 
+                    ratio={specs.ratioTop}  
+                    link={`/movie/${item.movie.slug}`} 
+                />
+                <FlexBox position="absolute" left={"20px"} top={"12px"} flexDirection="column" alignItems="center" width="auto">
+                    <BookmarkMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize + 4} />
+                    <LikeMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize} mt={[2]} />
+                </FlexBox>
+  
+                <FlexBox position="absolute" left={"20px"} bottom={"4px"}>
+                    <RatingMutation item={item.movie} size={36} />
+                </FlexBox>
+            </FlexBox>
+        }
+
+        {/* HTML CONTENT*/}
+        <FlexBox 
+            flexDirection="column" flexGrow={1}  p={[2]} 
+            
+            position="relative"
+            width={specs.htmlContentWidth}
+            height={specs.isLargeScreen ? specs.htmlContentHeight : "auto"}
+            px={specs.isLargeScreen ? [1,1,1,2,3] :[3,3,3,3,3,4]} pt={[3,3,3,2,3]} pb={[1]}
+        >
+            <FlexBox width="100%" position="relative" flexGrow={1} flexDirection="column" overflowY="auto" >
+                <NewLink 
+                    link={`/movie/${item.movie.slug}`} 
+                    title={`See ${item.movie.name} (${item.movie.year}) plot, cast, trailer, similar films and movie recommendations.`}
+                    hoverUnderline follow
+                    pb={[3,3,3,2,2]}
+                    > 
+                    <HeaderMini textAlign="left" fontWeight="bold" height="100%"
+                        fontSize={specs.headerSize}
+                        
+                    >
+                        {item.header} ({item.movie.year})
+                    </HeaderMini>
+                </NewLink>
+                {item.htmlContent 
+                    ? <HtmlContainer 
+                        html={item.htmlContent} 
+                        style={{
+                            p:{fontSize:specs.textSize},
+                        }} 
+                    />
+                    : <Text mt={[2]} fontSize={specs.textSize}>
+                            {item.movie.summary.slice(0,250)}
+                        </Text>
+                }
+            </FlexBox>
+
+            {/* HOME BUTTON*/}
+ 
+            <Box display="flex" position="relative" left={0} bottom={0} height={"32px"} width="100%" mt="4px"
+                justifyContent="space-between" alignItems="center"
+            >
+                <NewLink 
+                    link={`/movie/${item.movie.slug}`} 
+                    hoverUnderline follow
+                    title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
+                >
+                    <HomeIcon size={specs.iconSize -4} 
+                        fill="rgba(0,0,0,0.9)" 
+                        hoverFill="rgba(0,0,0,1)" 
+                        m={["2px"]}
+                    />
+                </NewLink>
+                <Box display="flex" title={`${item.movie.name} released in ${item.movie.year} and have ${item.movie.imdbRating} IMDb rating.`}>
+                    <YearClockIcon year={item.movie.year} color="dark" fill="#181818"  noShadow size={specs.iconSize -4} />
+                    {item.movie.imdbRating && 
+                        <ImdbRatingIcon 
+                            rating={item.movie.imdbRating} color="dark" noShadow 
+                             
+                        />}
+                </Box>
+            </Box>
+        </FlexBox>
+
+        {/* RIGHT SECTION*/}
+        {specs.show==="right" &&
+            <FlexBox  
+                flexDirection="column" alignItems="center" 
+                width={specs.rightPosterWidth}  
+                height={specs.htmlContentHeight}
+                boxShadow="4px 4px 12px 4px rgba(0,0,0,0.4)"
+                >   
+                    <NewLink flexGrow={1}
+                        link={`/movie/${item.movie.slug}`} 
+                        title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
+                        >
+                        <FlexBox 
+                            width={specs.rightPosterWidth}  height={specs.rightPosterHeight} 
+                            position="relative" flexDirection="column"
+                            flexGrow={1}
+                        >
+                            <ImageBoxBg display="flex" flexGrow={1}
+                                width={specs.rightPosterWidth} 
+                                src={specs.typeRight==="cover" ? item.coverPoster : item.poster}
+                                alt={`${item.movie.name} poster`} 
+                                ratio={specs.ratioRight}  zIndex={0}
+                                link={`/movie/${item.movie.slug}`} 
+                            />
+                            {false && item.movie.imdbRating && 
+                                <Box position="absolute" right={[1]} top={[2]} zIndex={1}>
+                                    <ImdbRatingIcon rating={item.movie.imdbRating} />
+                                </Box>
+                            }
+                        </FlexBox>
+                    </NewLink>
+                    {/* MUTATION PANEL */}
+                    <FlexBox width={"100%"} height="100%" position="relaive" bg="dark" alignItems="center">
+                        <BookmarkMutation id={item.movie.isBookmarked} 
+                            active={item.movie.isBookmarked} 
+                            size={specs.iconSize + 4} 
+                        />
+                        <LikeMutation id={item.movie.isBookmarked} 
+                            active={item.movie.isBookmarked} 
+                            size={specs.iconSize} mx={[2]} 
+                        />
+                        <Box display="flex" flexGrow={1}
+                            width="100%" height="100%"
+                            justifyContent="center" alignItems="center"
+                        >
+                            <RatingMutation item={item.movie} size={36} />
+                        </Box>
+                    </FlexBox>
+            </FlexBox>
+            }
     </FlexBox>
 )
 
 
-const UnorderedCard = ({ item, speed, ratio, title=null }) => (
+    
+
+const OrderedList = ({ items, speed, size, title}) => {
+
+
+    // Poster 
+    const specs = {
+        isLargeScreen:size.includes("L"),
+        flexDirection:size.includes("L") ? "row" : "column",
+        show:size.includes("L") ? "right" : "top",
+        iconSize:size.includes("S") ? 26 :32,
+        headerSize:size.includes("S") ? ["18px"] : ["16px","16px","16px","16px","18px", "20px"],
+        textSize:size.includes("S") ? ["14px"]   : ["14px", "14px", "14px", "14px", "16px"],
+        htmlContentWidth:!size.includes("L") 
+                          ? "100%" 
+                          :["50vw","50vw","50vw","50vwvw", "50vw"],
+        
+        rightPosterWidth  :["40vw","40vw","40vw","40vw", "45vw"],
+        rightPosterHeight :["24vw","24vw","24vw","24vw", "28vw"],
+        htmlContentHeight :["30vw","30vw","30vw","29vw","32vw", "30vw"],
+        //---------------TOP-------------------
+        // Screen size is the most determinant
+        // Only use poster in extra-small size and slow internet
+        typeTop: (speed==="slow" && size==="XS") ? "poster": "cover",
+        ratioTop:(speed==="slow" && size==="XS") ? 1.5 : 0.6,
+        //----------------RIGHT-----------------
+        // Only use poster in medium size and slow internet
+        typeRight: (speed==="slow" && size==="M") ? "poster": "cover",
+        ratioRight:(speed==="slow" && size.includes("S")) ? 1.5 : 0.6
+
+        //------------------------------------
+    }
+    console.log("ordered", size)
+    return (
+        <>
+            {items.slice(0,6).map( item => (
+                    <OrderedCard key={"rec" + item.movie.id}
+                        item={item}
+                        specs={specs}
+                    />
+            ))}
+            {items.slice(6, 12).map( item => (
+                    <OrderedCard key={"rec" + item.movie.id}
+                        item={item}
+                        specs={specs}
+                    />
+            ))}
+            {items.slice(12, 18).map( item => (
+                    <OrderedCard key={"rec" + item.id}
+                        item={item}
+                        specs={specs}
+                    />
+            ))}
+        </>
+    )
+}
+
+
+const UnorderedList = ({items, speed, title }) => {
+    const ratio = useMemo(() => speed==="fast" ? 0.7 : 1.5, [speed])
+    const columns = useMemo(() => speed==="fast" ? [1,1,1,2,2,2,3] : [1,1,2,2,3,3,4], [speed])
+    //console.log("unordered", speed)
+    return(
+        <>
+        <Grid columns={columns} py={[1]} gridColumnGap={[3,3,3,4]} width="100%" height="auto" >
+            {items.slice(0,6).map( item => (
+                    <UnorderedCard key={"rec" + item.id}
+                        item={item}  title={title}
+                        ratio={ratio}
+                    />
+            ))}
+        </Grid>
+        <Grid columns={columns} py={[1]} gridColumnGap={[3,3,3,4]} width="100%" height="auto" >
+            {items.slice(6, 12).map( item => (
+                    <UnorderedCard key={"rec" + item.id}
+                        item={item}  title={title}
+                        ratio={ratio}
+                    />
+            ))}
+        </Grid>
+        <Grid columns={columns} py={[1]} gridColumnGap={[3,3,3,4]} width="100%" height="auto" >
+            {items.slice(12, 18).map( item => (
+                    <UnorderedCard key={"rec" + item.id}
+                        item={item}  title={title}
+                        ratio={ratio}
+                    />
+            ))}
+        </Grid>
+    </>
+    )
+}
+
+const UnorderedCard = ({ item, ratio, title=null }) => (
         <FlexBox
             width="100%"
             maxWidth={"600px"}
@@ -263,7 +464,7 @@ const UnorderedCard = ({ item, speed, ratio, title=null }) => (
         >	
         
             <CoverImage 
-                src={speed==="fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
+                src={ratio < 1 ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
                 title={"Visit " + item.name}
                 alt={`${item.name} poster`} 
                 ratio={ratio}  
@@ -317,7 +518,110 @@ const UnorderedCard = ({ item, speed, ratio, title=null }) => (
         </FlexBox>
 )
 
+const OrderedCard_ = ({ item, specs}) => (
+    <FlexBox width="90vw" flexDirection={specs.flexDirection}
+        border={"0px"} borderRadius={6}
+        boxShadow="card" bg="#f1f1f1"
+        my={[3]} overflow="hidden"
+        className="ordered-topic-card"
+        height={specs.isLargeScreen ? specs.rightPosterHeight : "auto"}
+    >
 
+        {/* TOP CONTENT*/}
+        {specs.show==="top" &&
+            <FlexBox width="100%">
+                <CoverImage 
+                    src={specs.typeTop==="cover" ? item.coverPoster : item.poster}
+                    title={"Visit " + item.movie.name}
+                    alt={`${item.movie.name} poster`} 
+                    ratio={specs.ratioTop}  
+                    link={`/movie/${item.movie.slug}`} 
+                />
+                <FlexBox position="absolute" left={"20px"} top={"12px"} flexDirection="column" alignItems="center" width="auto">
+                    <BookmarkMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize + 4} />
+                    <LikeMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize} mt={[2]} />
+                </FlexBox>
+  
+                <FlexBox position="absolute" left={"20px"} bottom={"4px"}>
+                    <RatingMutation item={item.movie} size={36} />
+                </FlexBox>
+            </FlexBox>
+        }
+
+        {/* HTML CONTENT*/}
+        <FlexBox 
+            flexDirection="column" flexGrow={1}  p={[2]} 
+            overflowY="scroll" 
+            position="relative"
+            width={specs.htmlContentWidth}
+            height={specs.isLargeScreen ? specs.rightPosterHeight : "auto"}
+            p={specs.isLargeScreen ? [1,1,1,2,3,4] :[3,3,3,3,3,4]}
+        >
+                <NewLink 
+                    link={`/movie/${item.movie.slug}`} 
+                    title={`See ${item.movie.name} (${item.movie.year}) plot, cast, trailer, similar films and movie recommendations.`}
+                    hoverUnderline follow
+                    > 
+                    <HeaderMini textAlign="left" fontWeight="bold" height="100%"
+                        fontSize={specs.headerSize}
+                        mt={[2]}
+                    >
+                        {item.header} ({item.movie.year})
+                    </HeaderMini>
+                </NewLink>
+                {item.htmlContent 
+                    ? <HtmlContainer 
+                        html={item.htmlContent} 
+                        style={{
+                            p:{fontSize:specs.textSize},
+                        }} 
+                    />
+                    : <Text mt={[2]} fontSize={specs.textSize}>
+                            {item.movie.summary.slice(0,250)}
+                        </Text>
+                }
+                <NewLink selfAlign="right" width="100%"
+                    link={`/movie/${item.movie.slug}`} 
+                    hoverUnderline follow
+                    title={`See ${item.movie.name} (${item.movie.year}) plot, cast, trailer, similar films and movie recommendations.`}
+                >
+                    <Text textAlign="right" width="100%" fontSize="14px" color="active"><strong>Visit <em>{item.movie.name} ({item.movie.year})</em></strong></Text>
+                </NewLink>
+        </FlexBox>
+
+        {/* RIGHT SECTION*/}
+        {specs.show==="right" &&
+            <FlexBox  
+                flexDirection="column" alignItems="center" 
+                width={specs.rightPosterWidth}  
+                height={specs.rightPosterHeight}
+                >
+                
+                    <ImageBoxBg height="180px" 
+                        width={specs.rightPosterWidth} 
+                        src={specs.typeRight==="cover" ? item.coverPoster : item.poster}
+                        title={"Visit " + item.movie.name}
+                        alt={`${item.movie.name} poster`} 
+                        ratio={specs.ratioRight}  zIndex={0}
+                        link={`/movie/${item.movie.slug}`} 
+                    />
+                    <FlexBox position="absolute" left={"20px"} top={"12px"} flexDirection="column" alignItems="center" width="auto" zIndex={1}>
+                        <BookmarkMutation id={item.movie.isBookmarked} 
+                            active={item.movie.isBookmarked} 
+                            size={specs.iconSize + 4} 
+                        />
+                        <LikeMutation id={item.movie.isBookmarked} 
+                            active={item.movie.isBookmarked} 
+                            size={specs.iconSize} mt={[2]} 
+                        />
+                    </FlexBox>
+                    <FlexBox position="absolute" left={"20px"} bottom={"4px"} zIndex={1}>
+                        <RatingMutation item={item.movie} size={36} />
+                    </FlexBox>
+            </FlexBox>
+            }
+    </FlexBox>
+)
 
 
 export default withRouter(TopicQuery);

@@ -105,7 +105,7 @@ const MoviePage = props => {
 	const messageBoxTopicText = `This section shows the topic film collection that includes ${item.name}. ` +
 				`It appears in ${item.topics.length}  topic movie ${item.topics.length > 1 ? "collections" : "collections"}. ` + 
 				`You will find many great artworks of ${mappedTopicNames} films below.`
-
+	const textSize = ["14px", "16px", "18px"]
 
     useEffect(()=>{
         if (props.location.hash){
@@ -155,7 +155,7 @@ const MoviePage = props => {
 				<SummaryElement />
 
 				{/* OPTIONAL HTML CONTENT*/}
-				{item.htmlContent && <HtmlContent movie={item} />}
+				{item.htmlContent && <HtmlContent movie={item} style={{p:{fontSize:textSize}}} />}
 
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && (
@@ -308,7 +308,7 @@ const MoviePage = props => {
 
 
 
-const HtmlContent = ({ movie }) => (
+const HtmlContent = ({ movie, ...props }) => (
     <FlexBox flexDirection="column" mt={[3,3,4]}>
         {movie.widePoster && 
 			<Image 
@@ -317,7 +317,7 @@ const HtmlContent = ({ movie }) => (
 				width={"100%"} height="auto" minHeight="50px" maxHeight="450px"
 				my={[3]}    
 			/>}
-        <HtmlContainer my={[3]} html={movie.htmlContent} />
+        <HtmlContainer my={[3]} html={movie.htmlContent} {...props}/>
     </FlexBox>
 )
 

@@ -219,7 +219,6 @@
     },
     "include": [
       "/",
-      "/topics",
       "/topic/art-house",
       "/topic/based-on-true-story",
       "/topic/cyberpunk",
