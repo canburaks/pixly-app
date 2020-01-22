@@ -33,8 +33,15 @@ export const Svg = styled("svg")`
 
     }
     title:${props => props.title && props.title}
-	${layout};
-	${position};
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
 
 `
 
