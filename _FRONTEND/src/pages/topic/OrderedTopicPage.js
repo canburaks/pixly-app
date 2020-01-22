@@ -283,18 +283,20 @@ const OrderedCard = ({ item, specs}) => (
 
             {/* HOME BUTTON*/}
  
-            <Box display="flex" position="relative" left={0} bottom={0} height={"32px"} width="100%" mt="4px"
-                justifyContent="space-between" alignItems="center"
+            <Box display="flex" position="relative" 
+                left={0} bottom={0} 
+                height={"34px"} width="100%"
+                mt="4px" pb={"2px"} pt="4px" borderTop="1px solid" borderColor="rgba(0,0,0,0.15)"
+                justifyContent="space-between" alignItems="flex-end"
             >
                 <NewLink 
                     link={`/movie/${item.movie.slug}`} 
-                    hoverUnderline follow
+                    hoverUnderline follow display="flex" alignItems="flex-end"
                     title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
                 >
                     <HomeIcon size={specs.iconSize -4} 
                         fill="rgba(0,0,0,0.9)" 
                         hoverFill="rgba(0,0,0,1)" 
-                        m={["2px"]}
                     />
                 </NewLink>
                 <Box display="flex" title={`${item.movie.name} released in ${item.movie.year} and have ${item.movie.imdbRating} IMDb rating.`}>
@@ -343,11 +345,11 @@ const OrderedCard = ({ item, specs}) => (
                     <FlexBox width={"100%"} height="100%" position="relaive" bg="dark" alignItems="center">
                         <BookmarkMutation id={item.movie.isBookmarked} 
                             active={item.movie.isBookmarked} 
-                            size={specs.iconSize + 4} 
+                            size={specs.iconSize } mx={[2]} 
                         />
                         <LikeMutation id={item.movie.isBookmarked} 
                             active={item.movie.isBookmarked} 
-                            size={specs.iconSize} mx={[2]} 
+                            size={specs.iconSize - 2} 
                         />
                         <Box display="flex" flexGrow={1}
                             width="100%" height="100%"
@@ -394,7 +396,7 @@ const OrderedList = ({ items, speed, size, title}) => {
 
         //------------------------------------
     }
-    console.log("ordered", size)
+    //console.log("ordered", size)
     return (
         <>
             {items.slice(0,6).map( item => (
