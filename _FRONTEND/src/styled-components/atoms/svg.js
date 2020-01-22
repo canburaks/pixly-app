@@ -24,11 +24,13 @@ export const Svg = styled("svg")`
     width:  ${props => props.size || "24px"};
     height: ${props => props.size || "24px"};
     cursor: ${props => props.clickable && "pointer"};
-    margin:4px;
+    margin:0px;
     transition: all 0.2s cubic-bezier(.51,.17,.46,.88);
     transform-origin: center;
     :hover {
         transform:${props => props.hoverScale && "scale(1.1, 1.1)"};
+        fill: ${props => props.hoverFill && props.hoverFill};
+
     }
     title:${props => props.title && props.title}
 	${layout};
@@ -41,7 +43,9 @@ export const Svg = styled("svg")`
 export const MovieSvg = styled(Svg)`
     stroke:${props => props.active ? "white" : "white"};
     stroke-width:${props => props.active ? 0.5 : 2};
-    fill:${props => props.active ? "red" : "none"};
+    fill:${props => props.active ? "red" : props.activeColor ? props.activeColor : "none"};
+    width:  ${props => props.size || "24px"};
+    height: ${props => props.size || "24px"};
     cursor:pointer;
     :hover {
         transform: scale(1.1, 1.1);
@@ -54,7 +58,7 @@ export const SocialMediaSvg = styled(Svg)`
     fill: light;
     width:  ${props => props.size || ["20px", "26px", "32px", "36px"]} !important;
     height: ${props => props.size || ["20px", "26px", "32px", "36px"]} !important;
-    cursor: pointer;
+    cursor: ${props => props.clickable && "pointer"};
     :hover {
         transform: ${ props => props.hoverScale ? scale(1.1, 1.1) : null};
         fill:${props => 

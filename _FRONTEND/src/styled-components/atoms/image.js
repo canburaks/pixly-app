@@ -12,7 +12,7 @@ import { NewLink } from './link';
 
 
 export const CoverImage = ({src, ratio, alt, title, link, follow=undefined,blur=undefined, ...props }) => (
-    <Box position="relative" width="100%" pt={`${ratio*100}%`}  {...props} overflow="hidden">
+    <Box position="relative" width="100%" pt={`${ratio*100}%`}  {...props} overflow="hidden" className="absolute-cover-image">
         {link 
             ? <NewLink link={link} title={title} follow={follow}>
                 <AbsoluteImage src={src} alt={alt} title={title} blur={blur} />
@@ -40,6 +40,7 @@ export const AbsoluteImage = styled("img")`
     ${flexbox}
     ${position}
 `
+
 
 export const Image = styled('img').attrs(
     (props) =>( props.info 

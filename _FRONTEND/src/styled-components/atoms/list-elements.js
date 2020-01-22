@@ -10,7 +10,7 @@ import { generateGradient } from "../../functions/"
 
 
 export const Ul = styled("ul")`
-    padding:0;
+    list-style-type: disc;
     ${color}
     ${space}
     ${shadow}
