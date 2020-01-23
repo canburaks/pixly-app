@@ -18,7 +18,7 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
     //YearSlider,RatingSlider,
-    HtmlBox, HtmlContainer, MessageBox, Hr, HomeIcon,
+    HtmlBox, HtmlContainer, MessageBox, Hr, HomeIcon,FilmIcon,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
     Ul,Li,ImdbRatingIcon, AbsoluteBox,ImageBoxBg,YearClockIcon,
     BookmarkMutation, RatingMutation, LikeMutation
@@ -161,7 +161,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                     flexDirection="column" pb={[4,4]} alignItems="center"
                 >
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
-                    <SchemaArticle 
+                    {false && <SchemaArticle 
                         headerSize={["24px", "26px", "28px", "32px"]}
                         textSize={["14px","16px", "16px", "18px"]}
                         mt={[3]} mb={[0]} py={[0]}
@@ -186,7 +186,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                                 fontSize={["14px","16px", "16px", "18px"]} 
                                 html={topic.htmlContent2}     
                             />
-                    </SchemaArticle>
+                    </SchemaArticle>}
                     {/* FILTER WITH YEAR AND RATING */}
                     {topic.searchable && <FilterPanel dispatcher={filterDispatcher} states={filterVariables} />}
 
@@ -282,13 +282,12 @@ const OrderedCard = ({ item, specs}) => (
                         }} 
                     />
                     : <Text mt={[2]} fontSize={specs.textSize}>
-                            {item.movie.summary.slice(0,250)}
+                            {item.movie.summary.length>300 ? item.movie.summary.slice(0,300) + "..." : item.movie.summary.slice(0,300)}
                         </Text>
                 }
             </FlexBox>
 
             {/* HOME BUTTON*/}
- 
             <Box display="flex" position="relative" 
                 left={0} bottom={0} 
                 height={"34px"} width="100%"
@@ -300,7 +299,7 @@ const OrderedCard = ({ item, specs}) => (
                     hoverUnderline follow display="flex" alignItems="flex-end"
                     title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
                 >
-                    <HomeIcon size={specs.iconSize -4} 
+                    <FilmIcon size={specs.iconSize -4} 
                         fill="rgba(0,0,0,0.9)" 
                         hoverFill="rgba(0,0,0,1)" 
                     />
@@ -329,7 +328,7 @@ const OrderedCard = ({ item, specs}) => (
                         title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
                         >
                         <FlexBox 
-                            width={specs.rightPosterWidth}  height={specs.rightPosterHeight} 
+                            width={specs.rightPosterWidth}  height={specs.rightPosterHeight} minHeight={specs.rightPosterHeight}
                             position="relative" flexDirection="column"
                             flexGrow={1}
                         >
@@ -340,15 +339,22 @@ const OrderedCard = ({ item, specs}) => (
                                 ratio={specs.ratioRight}  zIndex={0}
                                 link={`/movie/${item.movie.slug}`} 
                             />
-                            {false && item.movie.imdbRating && 
-                                <Box position="absolute" right={[1]} top={[2]} zIndex={1}>
-                                    <ImdbRatingIcon rating={item.movie.imdbRating} />
-                                </Box>
-                            }
                         </FlexBox>
                     </NewLink>
+                    {/* NAME PANEL*/}
+                    <FlexBox width={"100%"} height={specs.rightTextPanelHeight}
+                        position="relaive"  bg="dark" 
+                        alignItems="center" pl={"8px"}
+                        borderBottom="1px solid" borderColor="rgba(255,255,255,0.3)"
+                    >   
+                        <NewLink link={`/movie/${item.movie.slug}`} 
+                            title={`See the details of ${item.movie.name} (${item.movie.year}).`}                        
+                        >
+                            <Text color="light" hoverUnderline fontWeight="bold" fontSize="13px">{item.movie.name} ({item.movie.year})</Text>
+                        </NewLink>
+                    </FlexBox>
                     {/* MUTATION PANEL */}
-                    <FlexBox width={"100%"} height="100%" position="relaive" bg="dark" alignItems="center">
+                    <FlexBox width={"100%"} height={specs.rightMutatinPanelHeight} position="relaive" bg="dark" alignItems="center">
                         <BookmarkMutation id={item.movie.isBookmarked} 
                             active={item.movie.isBookmarked} 
                             size={specs.iconSize } mx={[2]} 
@@ -375,20 +381,29 @@ const OrderedCard = ({ item, specs}) => (
 const OrderedList = ({ items, speed, size}) => {
     const ordereditems = items.sort((a,b) => (a.rank || a.movie.year) - (b.rank || b.movie.year))
 
-    const specs = {
+    //Responsive Height
+    const rightTextPanelHeight = 30
+    const rightMutatinPanelHeight = 50
+    const rightBottomPanelHeight = rightMutatinPanelHeight + rightTextPanelHeight // mutation + name
+    const onewidth = useMemo(() => window.innerWidth / 100, [size])
+    const setTotalHeight = useCallback((imagevw) => imagevw + (rightBottomPanelHeight / onewidth),[size])
+
+    console.log("screen",onewidth)
+
+    const specs = useMemo(() => ({
         isLargeScreen:size.includes("L"),
         flexDirection:size.includes("L") ? "row" : "column",
         show:size.includes("L") ? "right" : "top",
         iconSize:size.includes("S") ? 26 :32,
         headerSize:size.includes("S") ? ["18px"] : ["16px","16px","16px","16px","18px", "20px"],
-        textSize:size.includes("S") ? ["14px"]   : ["14px", "14px", "14px", "14px", "16px"],
+        textSize:size.includes("S") ? ["14px"]   : ["14px", "14px", "14px", "13px", "16px"],
         htmlContentWidth:!size.includes("L") 
                           ? "100%" 
-                          :["50vw","50vw","50vw","50vwvw", "50vw"],
+                          :["50vw","50vw","50vw",           "40vwvw",                   "50vw"],
         
-        rightPosterWidth  :["40vw","40vw","40vw","40vw", "45vw"],
-        rightPosterHeight :["24vw","24vw","24vw","24vw", "28vw"],
-        htmlContentHeight :["30vw","30vw","30vw","29vw","32vw", "30vw"],
+        rightPosterWidth  :["40vw","40vw","40vw",           "40vw",                     "45vw"],
+        rightPosterHeight :["24vw","24vw","24vw",           "30vw",                     "28vw"],
+        htmlContentHeight :["30vw","30vw","30vw",`${setTotalHeight(30)}vw`, `${setTotalHeight(28)}vw`],
         //---------------TOP-------------------
         // Screen size is the most determinant
         // Only use poster in extra-small size and slow internet
@@ -397,11 +412,12 @@ const OrderedList = ({ items, speed, size}) => {
         //----------------RIGHT-----------------
         // Only use poster in medium size and slow internet
         typeRight: (speed==="slow" && size==="M") ? "poster": "cover",
-        ratioRight:(speed==="slow" && size.includes("S")) ? 1.5 : 0.6
-
+        ratioRight:(speed==="slow" && size.includes("S")) ? 1.5 : 0.6,
+        rightTextPanelHeight,
+        rightMutatinPanelHeight
         //------------------------------------
-    }
-    console.log("ordered", items)
+    }),[size])
+    //console.log("ordered", items)
     return (
         <>
             {ordereditems.slice(0,4).map( item => (
