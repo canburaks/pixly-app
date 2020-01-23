@@ -907,6 +907,7 @@ class TopicType(DjangoObjectType, SEOType):
     summary = graphene.String()
     html_content = graphene.String()
     html_content2 = graphene.String()
+    show_html_content2 = graphene.Boolean()
     content_html = graphene.String()
     references = graphene.String()
 
@@ -952,6 +953,8 @@ class TopicType(DjangoObjectType, SEOType):
             return self.html_content2
         return ""
 
+    def resolve_show_html_content2(self, info):
+        return self.show_html_content2
 
     def resolve_is_ordered(self, info):
         return self.is_ordered
