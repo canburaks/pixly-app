@@ -1013,6 +1013,8 @@ class Topic(SEO, MainPage):
     summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic. max: 300 characters")
     content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
     html_content = RichTextField(max_length=50000,null=True, blank=True, help_text="Detailed description")
+    html_content2 = RichTextField(max_length=10000,null=True, blank=True, help_text="Second part of detailed description")
+
     references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")
 
     wiki = models.URLField(blank=True, null=True)

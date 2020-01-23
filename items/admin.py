@@ -100,7 +100,7 @@ class TopicAdmin(admin.ModelAdmin):
         "id", "slug", "name", "short_name", "seo_title", "seo_description",
         "is_ordered", "main_page", "is_newest", "important_page", "searchable",
         "is_article","is_published",
-        "summary", "html_content", "movies", "quotes",
+        "summary", "html_content","html_content2", "movies", "quotes",
         "poster", "cover_poster", "hero_poster", "references"
     )
     inlines = [TopicItemStackInline]

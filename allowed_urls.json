@@ -95,6 +95,7 @@
     ],
     "movie":[
         "/movie/tootsie-1982",
+        "/movie/it-happened-one-night-1934",
         "/movie/country-1984",
         "/movie/crazy-rich-asians-2018",
         "/movie/disturbia-2007",
@@ -781,7 +782,8 @@
         "/movie/pulp-fiction-1994",
         "/movie/crazy-rich-asians-2018",
         "/movie/country-1984",
-        "/movie/tootsie-1982"
+        "/movie/tootsie-1982",
+        "/movie/it-happened-one-night-1934"
 
     ]
 }

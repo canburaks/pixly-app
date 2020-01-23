@@ -393,7 +393,7 @@ const OrderedList = ({ items, speed, size}) => {
 
         //------------------------------------
     }
-    //console.log("ordered", size)
+    console.log("ordered", items)
     return (
         <>
             <HomePageFeedAd />
