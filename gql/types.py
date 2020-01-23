@@ -905,7 +905,8 @@ class TopicType(DjangoObjectType, SEOType):
     slug = graphene.String()
     name = graphene.String()
     summary = graphene.String()
-    content = graphene.String()
+    html_content = graphene.String()
+    html_content2 = graphene.String()
     content_html = graphene.String()
     references = graphene.String()
 
@@ -941,6 +942,16 @@ class TopicType(DjangoObjectType, SEOType):
             print("Topic is not set for ordered list. Change it")
         #print(self.items.all().select_related("movie"))
         return self.items.all().select_related("movie").order_by("rank")
+
+
+    def resolve_html_content(self, info):
+        return self.html_content
+
+    def resolve_html_content2(self, info):
+        if self.html_content2:
+            return self.html_content2
+        return ""
+
 
     def resolve_is_ordered(self, info):
         return self.is_ordered
