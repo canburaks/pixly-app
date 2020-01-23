@@ -178,7 +178,11 @@ const TopicQuery = ({ lazyvariables }) =>{
                             html={topic.htmlContent}     
                         />
                     </SchemaArticle>
-                    
+                        <HtmlContainer 
+                                my={[3]} 
+                                fontSize={["14px","16px", "16px", "18px"]} 
+                                html={topic.htmlContent}     
+                            />
                     {/* FILTER WITH YEAR AND RATING */}
                     {topic.searchable && <FilterPanel dispatcher={filterDispatcher} states={filterVariables} />}
 
@@ -429,6 +433,12 @@ const OrderedList = ({ items, speed, size}) => {
             ))}
 
             <FeedMobileCollectionAd />
+            {ordereditems.slice(16, 20).map( item => (
+                    <OrderedCard key={"rec" + item.movie.id}
+                        item={item}
+                        specs={specs}
+                    />
+            ))}
             {ordereditems.slice(16, 20).map( item => (
                     <OrderedCard key={"rec" + item.movie.id}
                         item={item}
