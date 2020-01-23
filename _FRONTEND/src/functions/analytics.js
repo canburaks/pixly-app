@@ -212,8 +212,49 @@ ReactGA.timing({
 
 //--------------ADS------------------------------
 
-
-
+// arranged for topic page movies
+export const TopicArticleAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
+    useEffect(() => {
+        if (isProduction && window) {
+            //console.log("if true");
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }, [isProduction])
+    //if (!production) return <div className="hidden"></div>
+    return (
+        <ins className="adsbygoogle"
+            style={{ display: "block",textAlign:"center", width: "100%", minHeight: 90 }}
+            data-ad-client="ca-pub-9259748524746137"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-slot="3037090019"
+            >
+        </ins>
+    )
+}
+// arranged for topic page movies
+export const TopicOrderedListAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
+    useEffect(() => {
+        if (isProduction && window) {
+            //console.log("if true");
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }, [isProduction])
+    //if (!production) return <div className="hidden"></div>
+    return (
+        <ins className="adsbygoogle"
+            style={{ display: "block", width: "100%", minHeight: 90 }}
+            data-ad-client="ca-pub-9259748524746137"
+            data-ad-format="fluid"
+            data-ad-layout-key="-fg+51+93-c1-8l"
+            data-ad-client="ca-pub-9259748524746137"
+            data-ad-slot="1368785127"
+            >
+        </ins>
+    )
+}
 // arranged for topic page movies
 export const FeedGridItemAd = () => {
     const isProduction = window.location.href.includes("pixly.app")
