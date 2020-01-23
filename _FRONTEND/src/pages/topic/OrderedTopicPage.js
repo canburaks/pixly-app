@@ -388,7 +388,7 @@ const OrderedList = ({ items, speed, size}) => {
     const onewidth = useMemo(() => window.innerWidth / 100, [size])
     const setTotalHeight = useCallback((imagevw) => imagevw + (rightBottomPanelHeight / onewidth),[size])
 
-    console.log("screen",onewidth)
+    //console.log("screen",onewidth)
 
     const specs = useMemo(() => ({
         isLargeScreen:size.includes("L"),
