@@ -249,8 +249,28 @@ export const TopicOrderedListAd = () => {
             data-ad-client="ca-pub-9259748524746137"
             data-ad-format="fluid"
             data-ad-layout-key="-fg+51+93-c1-8l"
-            data-ad-client="ca-pub-9259748524746137"
             data-ad-slot="1368785127"
+            >
+        </ins>
+    )
+}
+// arranged for topic page movies
+export const TopicOrderedListAd2 = () => {
+    const isProduction = window.location.href.includes("pixly.app")
+    useEffect(() => {
+        if (isProduction && window) {
+            //console.log("if true");
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    }, [isProduction])
+    //if (!production) return <div className="hidden"></div>
+    return (
+        <ins className="adsbygoogle"
+            style={{ display: "block", width: "100%", minHeight: 90 }}
+            data-ad-client="ca-pub-9259748524746137"
+            data-ad-format="fluid"
+            data-ad-layout-key="-fg+51+93-c1-8l"
+            data-ad-slot="7853182867"
             >
         </ins>
     )

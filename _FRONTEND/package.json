@@ -220,7 +220,20 @@
     "include": [
       "/",
       "/movie/tootsie-1982",
-      "/movie/it-happened-one-night-1934"
+      "/movie/it-happened-one-night-1934",
+      "/topic/art-house",
+      "/topic/based-on-true-story",
+      "/topic/cyberpunk",
+      "/topic/dialogue-focused",
+      "/topic/thought-provoking",
+      "/topic/feel-good-movies",
+      "/topic/bechdel-test",
+      "/topic/lgbtq-plus-films",
+      "/topic/controversial-films",
+      "/topic/historical-figures",
+      "/topic/mystery",
+      "/topic/video-game",
+      "/topic/gangster-films"
   ],
     "publicPath": "/"
   }

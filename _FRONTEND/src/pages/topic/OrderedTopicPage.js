@@ -4,7 +4,10 @@ import { useQuery } from '@apollo/react-hooks';
 import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 
 
-import { isEqualObj, Head, MidPageAd, HomePageFeedAd, MoviePageAd, FeedMobileCollectionAd,
+import { isEqualObj, Head, MidPageAd, HomePageFeedAd, 
+    MoviePageAd, FeedMobileCollectionAd,
+    TopicArticleAd, TopicOrderedListAd,
+    TopicOrderedListAd2,
     useValues, useWindowSize, useWindowWidth, FeedMobileTopicPageAd, useDebounce
 } from "../../functions"
 
@@ -177,12 +180,13 @@ const TopicQuery = ({ lazyvariables }) =>{
                             fontSize={["14px","16px", "16px", "18px"]} 
                             html={topic.htmlContent}     
                         />
-                    </SchemaArticle>
+                        <TopicArticleAd />
                         <HtmlContainer 
                                 my={[3]} 
                                 fontSize={["14px","16px", "16px", "18px"]} 
-                                html={topic.htmlContent}     
+                                html={topic.htmlContent2}     
                             />
+                    </SchemaArticle>
                     {/* FILTER WITH YEAR AND RATING */}
                     {topic.searchable && <FilterPanel dispatcher={filterDispatcher} states={filterVariables} />}
 
@@ -400,15 +404,13 @@ const OrderedList = ({ items, speed, size}) => {
     console.log("ordered", items)
     return (
         <>
-            <HomePageFeedAd />
             {ordereditems.slice(0,4).map( item => (
                     <OrderedCard key={"rec" + item.movie.id}
                         item={item}
                         specs={specs}
                     />
             ))}
-
-            <MoviePageAd />
+            <TopicOrderedListAd />
             {ordereditems.slice(4, 8).map( item => (
                     <OrderedCard key={"rec" + item.movie.id}
                         item={item}
@@ -424,7 +426,7 @@ const OrderedList = ({ items, speed, size}) => {
                     />
             ))}
 
-            <FeedMobileTopicPageAd />
+            <HomePageFeedAd />
             {ordereditems.slice(12, 16).map( item => (
                     <OrderedCard key={"rec" + item.movie.id}
                         item={item}
@@ -432,19 +434,26 @@ const OrderedList = ({ items, speed, size}) => {
                     />
             ))}
 
-            <FeedMobileCollectionAd />
-            {ordereditems.slice(16, 20).map( item => (
-                    <OrderedCard key={"rec" + item.movie.id}
-                        item={item}
-                        specs={specs}
-                    />
-            ))}
-            {ordereditems.slice(16, 20).map( item => (
-                    <OrderedCard key={"rec" + item.movie.id}
-                        item={item}
-                        specs={specs}
-                    />
-            ))}
+            <TopicOrderedListAd2 />
+            <LazyLoadComponent>
+                {ordereditems.slice(16, 20).map( item => (
+                        <OrderedCard key={"rec" + item.movie.id}
+                            item={item}
+                            specs={specs}
+                        />
+                ))}
+            </LazyLoadComponent>
+
+            <FeedMobileTopicPageAd />
+
+            <LazyLoadComponent>
+                {ordereditems.slice(20).map( item => (
+                        <OrderedCard key={"rec" + item.movie.id}
+                            item={item}
+                            specs={specs}
+                        />
+                ))}
+            </LazyLoadComponent>
         </>
     )
 }
@@ -477,6 +486,7 @@ const UnorderedList = ({items, speed, title }) => {
         </Grid>
 
         <MidPageAd />
+        <LazyLoadComponent>
         <Grid columns={columns} py={[1]} gridColumnGap={[2,2,2,3]} width="100%" height="auto" >
             {items.slice(12, 18).map( item => (
                     <UnorderedCard key={"rec" + item.id}
@@ -485,6 +495,7 @@ const UnorderedList = ({items, speed, title }) => {
                     />
             ))}
         </Grid>
+        </LazyLoadComponent>
     </>
     )
 }
