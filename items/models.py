@@ -1014,6 +1014,7 @@ class Topic(SEO, MainPage):
     content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
     html_content = RichTextField(max_length=50000,null=True, blank=True, help_text="Detailed description")
     html_content2 = RichTextField(max_length=10000,null=True, blank=True, help_text="Second part of detailed description")
+    show_html_content2 = models.BooleanField(default=True,help_text="For mobile hiding of the text.")
 
     references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")
 
