@@ -1,4 +1,4 @@
-from items.models import Rating,Movie, List,  Video, Topic, TopicItem,Prediction, Tag, Quote
+from items.models import Rating,Movie, List,  Video, Topic, TopicItem,Prediction, Tag, Quote, MovieGroup
 from persons.models import Person, Director, Crew
 from persons.profile import Profile, Follow, Activity
 from archive.models import MovSim, TmdbMovie, ContentSimilarity
@@ -499,6 +499,69 @@ class MovieType(DjangoObjectType):
                 return True
         return False
 
+
+class MovieGroupType(DjangoObjectType, SEOType):
+    slug = graphene.String()
+    name = graphene.String()
+    
+    html_content = graphene.String()
+
+    cover_poster = graphene.String()
+    poster = graphene.String()
+
+    movies = graphene.Field(MovieType)
+    topics = graphene.List("gql.types.TopicType")
+
+    created_at = graphene.String()
+    updated_at = graphene.String()
+
+    class Meta:
+        model = MovieGroup
+
+
+
+    def resolve_name(self, info):
+        return self.name
+
+    def resolve_html_content(self, info):
+        return self.html_content
+
+
+    def resolve_movies(self, info):
+        return self.movies.all()
+
+    def resolve_topics(self, info):
+        return self.topics.all()
+        
+    def resolve_slug(self, info):
+        return self.slug
+
+    def resolve_cover_poster(self, info, *_):
+        if self.cover_poster:
+            return self.cover_poster.url
+        return self.movie.cover_poster.url
+
+    def resolve_poster(self, info, *_):
+        if self.poster:
+            return self.poster
+        elif self.movie.large_poster:
+            return self.movie.large_poster.url
+        return self.movie.poster.url
+
+    def resolve_created_at(self, info, *_):
+        str_date = self.created_at.__str__()
+        try:
+            return str_date.split(" ")[0]
+        except:
+            return str_date
+
+    def resolve_updated_at(self, info, *_):
+        str_date = self.updated_at.__str__()
+        try:
+            return str_date.split(" ")[0]
+        except:
+            return str_date
+
 class RecommendationType(DjangoObjectType):
     profile = graphene.Field("gql.types.ProfileType")
     movie = graphene.Field("gql.types.CustomMovieType")
@@ -968,7 +1031,7 @@ class TopicType(DjangoObjectType, SEOType):
         if self.html_content3:
             return self.html_content3
         return ""
-        
+
     def resolve_show_html_content2(self, info):
         return self.show_html_content2
 
