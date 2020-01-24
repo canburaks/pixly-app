@@ -357,10 +357,16 @@ class MovieType(DjangoObjectType):
     content_similars_summary = graphene.String()
     topics = graphene.List("gql.types.TopicType")
     is_important_page = graphene.Boolean()
+    groups = graphene.List("gql.types.MovieGroupType")
 
 
     class Meta:
         model = Movie
+
+    def resolve_groups(self, info):
+        if self.groups.exists()
+            return self.groups.all()
+        return None
 
     def resolve_is_important_page(self, info):
         return self.important_page
@@ -532,7 +538,7 @@ class MovieGroupType(DjangoObjectType, SEOType):
 
     def resolve_topics(self, info):
         return self.topics.all()
-        
+
     def resolve_slug(self, info):
         return self.slug
 
@@ -2012,6 +2018,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     tag_names = graphene.List(graphene.String)
     topics = graphene.List(TopicType)
     is_important_page = graphene.Boolean()
+    groups = graphene.List(MovieGroupType)
 
 
     def __init__(self, id=None, slug=None, viewer=None):
@@ -2033,6 +2040,11 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_groups(self, info):
+        if self.movie.groups.exists()
+            return self.movie.groups.all()
+        return None
 
     def resolve_is_important_page(self, info):
         return self.movie.important_page
