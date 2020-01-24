@@ -863,7 +863,9 @@ class TopicItemType(DjangoObjectType, SEOType):
         pqs = self.persons.all().only("id", "slug", "name")
         if pqs:
             return pqs
-        return self.movie.crews.only("id", "slug", "name").filter(job="a")[:2]
+        crews =  self.movie.crews.select_related("person").only("person").filter(job="a")[:2]
+        person_list = [x.person for x in crews]
+        return person_list
 
     def resolve_header(self, info):
         return self.header
