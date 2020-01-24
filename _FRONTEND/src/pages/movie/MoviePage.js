@@ -25,7 +25,7 @@ import { CrewCard, MovieSimilarBox, PageContainer, ContentContainer, MovieCoverB
 	HiddenHeader,HeaderMini,Grid,Card,Image,ImageCard,HiddenSpan,RatingMutation,HeaderText,Text,Span,NewLink,TextSection,
 	MovieRichCardBox, MovieRichCard, FlexBox, Box, HashLink, YoutubeIcon,
 	HtmlContainer, SuperBox, TagBox, AbsoluteBox, CoverLink,CardContainer,HtmlParagraph,
-	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText,CoverCard
+	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText,
 } from "../../styled-components";
 
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
@@ -315,9 +315,16 @@ const MovieGroup = ({groupItem}) => (
 	<CardContainer>
 		<SubHeaderText opacity={0.95} fontWeight="bold">{groupItem.group.header}</SubHeaderText>
 		<HtmlParagraph html={groupItem.htmlContent} opacity={0.95}/>
-		<Grid columns={[3,3,3,4,4,4,5]} width={"100%"} mt={[2]}>
-			{groupItem.siblingMovies.map(movie => (
-				<CoverCard item={movie} link={`/movie/${movie.slug}`} />
+		<Grid columns={groupItem.group.posterType==="poster" ?[3,3,3,4,4,4,5] : [1,2,3,3,4]} width={"100%"} mt={[2]}>
+			{groupItem.group.items.map(item => (
+				<FlexBox position="relative" width="100%" key={item.movie.id}>
+					<CoverImage 
+						src={item.poster} 
+						link={`/item./${item.movie.slug}`} 
+						ratio={groupItem.group.posterType==="poster" ? 1.5 : 0.6} 
+
+					/>
+				</FlexBox>
 			))}
 		</Grid>
 	</CardContainer>

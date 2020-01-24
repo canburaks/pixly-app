@@ -694,8 +694,8 @@ class Movie(SocialMedia, SEO,MainPage):
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
 POSTER_TYPE = (
-    ("cover", "Cover (Horizontal) Image"),
-    ('poster', "Vertical Poster"),
+    ("c", "Cover (Horizontal) Image"),
+    ('p', "Vertical Poster"),
 )
 class MovieGroup(models.Model):
     slug = models.SlugField(db_index=True, max_length=50 )
@@ -704,7 +704,7 @@ class MovieGroup(models.Model):
 
     cover_poster = models.ImageField(blank=True, null=True, upload_to=movie_group_cover_path)
     poster = models.ImageField(blank=True, null=True, upload_to=movie_group_poster_path)
-    poster_type = models.CharField(default="cover", max_length=6, choices=POSTER_TYPE)
+    poster_type = models.CharField(default="cover", max_length=2, choices=POSTER_TYPE)
     topics = models.ManyToManyField("items.Topic", related_name="groups",null=True, blank=True )
 
     html_content = RichTextField(max_length=10000,null=True, blank=True,
