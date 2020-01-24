@@ -695,8 +695,8 @@ class Movie(SocialMedia, SEO,MainPage):
 
 class MovieGroup(models.Model):
     slug = models.SlugField(db_index=True, max_length=50 )
-    topic = models.ManyToManyField("items.Topic", related_name="groups")
-    movies = models.ManyToManyField(Person,null=True, blank=True, related_name="groups")
+    topics = models.ManyToManyField("items.Topic", related_name="groups")
+    movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="groups")
 
     name = models.CharField(max_length=80, null=True, blank=True, help_text="In case of different text, use this as header")
 
