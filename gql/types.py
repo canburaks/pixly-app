@@ -515,7 +515,7 @@ class MovieGroupType(DjangoObjectType, SEOType):
     cover_poster = graphene.String()
     poster = graphene.String()
 
-    movies = graphene.Field(MovieType)
+    movies = graphene.List(MovieType)
     topics = graphene.List("gql.types.TopicType")
 
     created_at = graphene.String()
