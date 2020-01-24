@@ -851,7 +851,7 @@ class TopicItemType(DjangoObjectType, SEOType):
     poster = graphene.String()
 
     movie = graphene.Field(MovieType)
-    persons = graphene.List("gql.types.DirectorPersonMix")
+    persons = graphene.List("gql.types.DirectorPersonMixType")
 
     created_at = graphene.String()
     updated_at = graphene.String()
