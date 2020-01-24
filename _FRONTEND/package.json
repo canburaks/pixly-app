@@ -218,10 +218,10 @@
       "width": 730
     },
     "include": [
-      "/",
-      "/movie/silver-linings-playbook-2012",
-      "/movie/crazy-rich-asians-2018",
-      "/movie/heartbreaker-2010"
+      "",
+      "/"
+   
+
   ],
     "publicPath": "/"
   }

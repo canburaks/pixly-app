@@ -20,7 +20,7 @@ import {
     //YearSlider,RatingSlider,
     HtmlBox, HtmlContainer, MessageBox, Hr, HomeIcon,FilmIcon,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
-    Ul,Li,ImdbRatingIcon, AbsoluteBox,ImageBoxBg,YearClockIcon,
+    Ul,Li,ImdbRatingIcon, AbsoluteBox,ImageBoxBg,YearClockIcon,RightIcon,
     BookmarkMutation, RatingMutation, LikeMutation, StarIcon
 } from "../../styled-components"
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
@@ -28,7 +28,7 @@ import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-componen
 
 import { YearSlider, RatingSlider, TagSelect, SearchInputMaterial } from "../../styled-material"
 
-
+import "./OrderedList.css"
 
 const FilterPanel = ({ dispatcher, states }) => {
     const [yearData, setYearData ] = useState({minYear:1950, maxYear:2019})
@@ -183,13 +183,14 @@ const TopicQuery = ({ lazyvariables }) =>{
                         {topic.showHtmlContent2 && (topic.htmlContent2 && topic.htmlContent2.length > 1) 
                             && <TopicArticleAd />
                             }
-                        {!(!topic.showHtmlContent2 && window.innerWidth < 500) && 
-                            <HtmlContainer 
+                        {!(!topic.showHtmlContent2 && window.innerWidth < 500) 
+                            ? <HtmlContainer 
                                 mt={[5]}  mb={[3]}
-                                fontSize={["14px","16px", "16px", "18px"]} 
                                 html={topic.htmlContent2}     
-                            />}
+                            />
+                            : <Text fontSize={["14px","14px", "16px"]} >{topic.summary}</Text>}
                     </SchemaArticle>
+                    
                     {/* FILTER WITH YEAR AND RATING */}
                     {topic.searchable && <FilterPanel dispatcher={filterDispatcher} states={filterVariables} />}
 
@@ -230,7 +231,8 @@ const OrderedCard = ({ item, specs}) => (
         boxShadow="card" bg="#f1f1f1"
         my={[3]} overflow="hidden"
         className="ordered-topic-card"
-        minHeight={specs.isLargeScreen ? specs.rightPosterHeight : "auto"}
+        alignItems="stretch"
+        minHeight={specs.isLargeScreen ? specs.htmlContentHeight : "auto"}
     >
 
         {/* TOP CONTENT*/}
@@ -261,9 +263,9 @@ const OrderedCard = ({ item, specs}) => (
             position="relative"
             width={specs.htmlContentWidth}
             height={specs.isLargeScreen ? specs.htmlContentHeight : "auto"}
-            px={specs.isLargeScreen ? [1,1,1,2,3] :[3,3,3,3,3,4]} pt={[3,3,3,2,3]} pb={[1]}
+            px={specs.isLargeScreen ? [1,1,1,2,3] :[3,3,3,3,3,4]} pt={[3,3,3,3,3]} pb={[1]}
         >
-            <FlexBox width="100%" position="relative" flexGrow={1} flexDirection="column" overflowY="auto" >
+            <FlexBox width="100%" position="relative" flexGrow={1} flexDirection="column"  >
                 <NewLink 
                     link={`/movie/${item.movie.slug}`} 
                     title={`See ${item.movie.name} (${item.movie.year}) plot, cast, trailer, similar films and movie recommendations.`}
@@ -297,22 +299,24 @@ const OrderedCard = ({ item, specs}) => (
             {/* HOME BUTTON*/}
             <Box display="flex" position="relative" 
                 left={0} bottom={0} 
-                height={"34px"} width="100%"
+                height={"auto"} width="100%"
                 mt="4px" pb={"2px"} pt="4px" borderTop="1px solid" borderColor="rgba(0,0,0,0.25)"
                 justifyContent="space-between" alignItems="flex-end"
             >
-                <NewLink 
-                    link={`/movie/${item.movie.slug}`} 
-                    hoverUnderline follow display="flex" alignItems="flex-end"
-                    title={`Visit ${item.movie.name} (${item.movie.year})'`}
+                <NewLink link={`/movie/${item.movie.slug}`} 
+                    follow title={`Visit ${item.movie.name} (${item.movie.year})'`} 
                 >
-                    <FilmIcon size={specs.iconSize -4} 
-                        fill="rgba(0,0,0,0.9)" 
-                        hoverFill="rgba(0,0,0,1)" 
-                    />
+                    <Box display="flex" 
+                        alignItems="center" hoverColor="#3437c7" 
+                        justifyContent="center" fontWeight="bold" 
+                        opacity={0.8}
+                    >
+                        More <RightIcon size={"20px"} />
+                    </Box>
                 </NewLink>
+
                 <Box display="flex" title={`${item.movie.name} released in ${item.movie.year} and have ${item.movie.imdbRating} IMDb rating.`}>
-                    <YearClockIcon year={item.movie.year} color="dark" fill="#181818"  noShadow size={specs.iconSize -4} />
+                    <YearClockIcon year={item.movie.year} color="dark" fill="#181818" opacity={0.8}  noShadow size={specs.iconSize -4} />
                     {item.movie.imdbRating && 
                         <ImdbRatingIcon 
                             rating={item.movie.imdbRating} color="dark" noShadow 
@@ -330,24 +334,17 @@ const OrderedCard = ({ item, specs}) => (
                 height={specs.htmlContentHeight}
                 boxShadow="4px 4px 12px 4px rgba(0,0,0,0.4)"
                 >   
-                    <NewLink flexGrow={1} follow height={specs.rightPosterHeight}
+
+                    <SuperBox flexGrow={1} height="auto" minWidth="100%"
+                        
+                        src={specs.typeRight==="cover" ? item.coverPoster : item.poster}
+                        alt={`${item.movie.name} poster`} 
+                        ratio={specs.ratioRight}  zIndex={0}
                         link={`/movie/${item.movie.slug}`} 
-                        title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
-                        >
-                        <FlexBox 
-                            width={specs.rightPosterWidth}  height={"100%"} minHeight={specs.rightPosterHeight}
-                            position="relative" flexDirection="column"
-                            flexGrow={1}
-                        >
-                            <ImageBoxBg display="flex" flexGrow={1} minHeight="100%"
-                                width={specs.rightPosterWidth} 
-                                src={specs.typeRight==="cover" ? item.coverPoster : item.poster}
-                                alt={`${item.movie.name} poster`} 
-                                ratio={specs.ratioRight}  zIndex={0}
-                                link={`/movie/${item.movie.slug}`} 
-                            />
-                        </FlexBox>
-                    </NewLink>
+                    >
+                        <CoverLink link={`/movie/${item.movie.slug}`}  title={""} />
+                    </SuperBox>
+
                     {/* NAME PANEL*/}
                     <FlexBox width={"100%"} height={specs.rightTextPanelHeight}
                         position="relaive"  bg="dark" flexDirection="column" 
@@ -360,11 +357,11 @@ const OrderedCard = ({ item, specs}) => (
                             <Text color="light" hoverUnderline fontWeight="bold" fontSize="13px">{item.movie.name} ({item.movie.year})</Text>
                         </NewLink>
 
+                    {/* ACTOR PANEL*/}
                         <FlexBox alignItems="center">
-                            <StarIcon size={14} stroke="yellow" />
                             {item.persons.map(star => (
                                 <NewLink link={`/person/${star.slug}`} key={star.id}>
-                                    <Text color="#f1f1f1" fontSize="12px" mx={"8px"} hoverUnderline>{star.name}</Text>
+                                    <Text color="#f1f1f1" fontSize="12px" mx={"8px"} opacity={0.8} hoverUnderline>{star.name}</Text>
                                 </NewLink>
                             ))}
                         </FlexBox>
@@ -401,9 +398,9 @@ const OrderedList = ({ items, speed, size}) => {
     //Responsive Height
     const rightTextPanelHeight = 60
     const rightMutatinPanelHeight = 50
-    const rightBottomPanelHeight = rightMutatinPanelHeight + rightTextPanelHeight // mutation + name
-    const onewidth = useMemo(() => window.innerWidth / 100, [size])
-    const setTotalHeight = useCallback((imagevw) => imagevw + (rightBottomPanelHeight / onewidth),[size])
+    //const rightBottomPanelHeight = rightMutatinPanelHeight + rightTextPanelHeight // mutation + name
+    //const onewidth = useMemo(() => window.innerWidth / 100, [size])
+    //const setTotalHeight = useCallback((imagevw) => imagevw + (rightBottomPanelHeight / onewidth),[size])
 
     //console.log("screen",onewidth)
 
@@ -412,15 +409,17 @@ const OrderedList = ({ items, speed, size}) => {
         flexDirection:size.includes("L") ? "row" : "column",
         show:size.includes("L") ? "right" : "top",
         iconSize:size.includes("S") ? 26 :32,
-        headerSize:size.includes("S") ? ["18px"] : ["16px","16px","16px","16px","18px", "20px"],
-        textSize:size.includes("S") ? ["14px"]   : ["14px", "14px", "14px", "13px", "16px"],
+        headerSize:size.includes("S") ? ["18px"] : ["16px","16px","16px","16px","20px", "20px"],
+        textSize:size.includes("S") ? ["14px"]   : ["14px"],
         htmlContentWidth:!size.includes("L") 
                           ? "100%" 
                           :["50vw","50vw","50vw",           "40vwvw",                   "50vw"],
         
         rightPosterWidth  :["40vw","40vw","40vw",           "40vw",                     "45vw"],
-        rightPosterHeight :["24vw","24vw","24vw",           "28vw",                     "28vw"],
-        htmlContentHeight :["30vw","30vw","30vw",`${setTotalHeight(34)}vw`, `${setTotalHeight(28)}vw`],
+        rightPosterHeight :["24vw","24vw","24vw",           "24vw",                     "28vw"],
+        //htmlContentHeight :["30vw","30vw","30vw",`${setTotalHeight(24)}vw`, `${setTotalHeight(28)}vw`],
+        htmlContentHeight :["30vw","30vw","30vw",`auto`, `auto`],
+
         //---------------TOP-------------------
         // Screen size is the most determinant
         // Only use poster in extra-small size and slow internet
@@ -595,6 +594,174 @@ const UnorderedCard = ({ item, ratio, title=null }) => (
         </FlexBox>
 )
 
+
+const OrderedCard0 = ({ item, specs}) => (
+    <FlexBox width="90vw" flexDirection={specs.flexDirection}
+        border={"0px"} borderRadius={6}
+        boxShadow="card" bg="#f1f1f1"
+        my={[3]} overflow="hidden"
+        className="ordered-topic-card"
+        minHeight={specs.isLargeScreen ? specs.rightPosterHeight : "auto"}
+    >
+
+        {/* TOP CONTENT*/}
+        {specs.show==="top" &&
+            <FlexBox width="100%">
+                <CoverImage 
+                    src={specs.typeTop==="cover" ? item.coverPoster : item.poster}
+                    title={"Visit " + item.movie.name}
+                    alt={`${item.movie.name} poster`} 
+                    ratio={specs.ratioTop}  
+                    link={`/movie/${item.movie.slug}`} 
+                />
+                <FlexBox position="absolute" left={"20px"} top={"12px"} flexDirection="column" alignItems="center" width="auto">
+                    <BookmarkMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize + 4} />
+                    <LikeMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize} mt={[2]} />
+                </FlexBox>
+  
+                <FlexBox position="absolute" left={"20px"} bottom={"4px"}>
+                    <RatingMutation item={item.movie} size={36} />
+                </FlexBox>
+            </FlexBox>
+        }
+
+        {/* HTML CONTENT*/}
+        <FlexBox 
+            flexDirection="column" flexGrow={1}  p={[2]} 
+            
+            position="relative"
+            width={specs.htmlContentWidth}
+            height={specs.isLargeScreen ? specs.htmlContentHeight : "auto"}
+            px={specs.isLargeScreen ? [1,1,1,2,3] :[3,3,3,3,3,4]} pt={[3,3,3,2,3]} pb={[1]}
+        >
+            <FlexBox width="100%" position="relative" flexGrow={1} flexDirection="column" overflowY="auto" >
+                <NewLink 
+                    link={`/movie/${item.movie.slug}`} 
+                    title={`See ${item.movie.name} (${item.movie.year}) plot, cast, trailer, similar films and movie recommendations.`}
+                    hoverUnderline follow
+                    pb={[3,3,3,2,2]}
+                    > 
+                    <HeaderMini textAlign="left" fontWeight="bold" height="100%"
+                        fontSize={specs.headerSize}
+                        
+                    >
+                        {item.header} ({item.movie.year})
+                    </HeaderMini>
+                </NewLink>
+                {item.htmlContent 
+                    ? <HtmlContainer 
+                        html={item.htmlContent} 
+                        style={{
+                            p:{fontSize:specs.textSize},
+                        }} 
+                    />
+                    : <Text mt={[2]} fontSize={specs.textSize}>
+                            {item.movie.htmlContent 
+                                ? item.movie.summary.length > 500 
+                                    ? item.movie.summary.slice(0,500) + "..." 
+                                    : item.movie.summary
+                                : item.movie.summary.slice(0,500)}
+                        </Text>
+                }
+            </FlexBox>
+
+            {/* HOME BUTTON*/}
+            <Box display="flex" position="relative" 
+                left={0} bottom={0} 
+                height={"34px"} width="100%"
+                mt="4px" pb={"2px"} pt="4px" borderTop="1px solid" borderColor="rgba(0,0,0,0.25)"
+                justifyContent="space-between" alignItems="flex-end"
+            >
+                <NewLink 
+                    link={`/movie/${item.movie.slug}`} 
+                    hoverUnderline follow display="flex" alignItems="flex-end"
+                    title={`Visit ${item.movie.name} (${item.movie.year})'`}
+                >
+                    <FilmIcon size={specs.iconSize -4} 
+                        fill="rgba(0,0,0,0.9)" 
+                        hoverFill="rgba(0,0,0,1)" 
+                    />
+                </NewLink>
+                <Box display="flex" title={`${item.movie.name} released in ${item.movie.year} and have ${item.movie.imdbRating} IMDb rating.`}>
+                    <YearClockIcon year={item.movie.year} color="dark" fill="#181818"  noShadow size={specs.iconSize -4} />
+                    {item.movie.imdbRating && 
+                        <ImdbRatingIcon 
+                            rating={item.movie.imdbRating} color="dark" noShadow 
+                             
+                        />}
+                </Box>
+            </Box>
+        </FlexBox>
+
+        {/* RIGHT SECTION*/}
+        {specs.show==="right" &&
+            <FlexBox  
+                flexDirection="column" alignItems="center" 
+                width={specs.rightPosterWidth}  
+                height={specs.htmlContentHeight}
+                boxShadow="4px 4px 12px 4px rgba(0,0,0,0.4)"
+                >   
+                    <NewLink flexGrow={1} follow height={specs.rightPosterHeight}
+                        link={`/movie/${item.movie.slug}`} 
+                        title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
+                        >
+                        <FlexBox 
+                            width={specs.rightPosterWidth}  height={"100%"} minHeight={specs.rightPosterHeight}
+                            position="relative" flexDirection="column"
+                            flexGrow={1}
+                        >
+                            <ImageBoxBg display="flex" flexGrow={1} minHeight="100%"
+                                width={specs.rightPosterWidth} 
+                                src={specs.typeRight==="cover" ? item.coverPoster : item.poster}
+                                alt={`${item.movie.name} poster`} 
+                                ratio={specs.ratioRight}  zIndex={0}
+                                link={`/movie/${item.movie.slug}`} 
+                            />
+                        </FlexBox>
+                    </NewLink>
+                    {/* NAME PANEL*/}
+                    <FlexBox width={"100%"} height={specs.rightTextPanelHeight}
+                        position="relaive"  bg="dark" flexDirection="column" 
+                        pl={"8px"}
+                        borderBottom="1px solid" borderColor="rgba(255,255,255,0.3)"
+                    >   
+                        <NewLink link={`/movie/${item.movie.slug}`} 
+                            title={`See the details of ${item.movie.name} (${item.movie.year}).`}                        
+                        >
+                            <Text color="light" hoverUnderline fontWeight="bold" fontSize="13px">{item.movie.name} ({item.movie.year})</Text>
+                        </NewLink>
+
+                        <FlexBox alignItems="center">
+                            <StarIcon size={14} stroke="yellow" />
+                            {item.persons.map(star => (
+                                <NewLink link={`/person/${star.slug}`} key={star.id}>
+                                    <Text color="#f1f1f1" fontSize="12px" mx={"8px"} hoverUnderline>{star.name}</Text>
+                                </NewLink>
+                            ))}
+                        </FlexBox>
+
+                    </FlexBox>
+                    {/* MUTATION PANEL */}
+                    <FlexBox width={"100%"} height={specs.rightMutatinPanelHeight} position="relaive" bg="dark" alignItems="center">
+                        <BookmarkMutation id={item.movie.id} 
+                            active={item.movie.isBookmarked} 
+                            size={specs.iconSize } mx={[2]} 
+                        />
+                        <LikeMutation id={item.movie.id} 
+                            active={item.movie.isBookmarked} 
+                            size={specs.iconSize - 2} 
+                        />
+                        <Box display="flex" flexGrow={1}
+                            width="100%" height="100%"
+                            justifyContent="center" alignItems="center"
+                        >
+                            <RatingMutation item={item.movie} size={36} />
+                        </Box>
+                    </FlexBox>
+            </FlexBox>
+            }
+    </FlexBox>
+)
 
 
 export default withRouter(TopicQuery);

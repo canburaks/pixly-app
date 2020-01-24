@@ -1011,9 +1011,11 @@ class Topic(SEO, MainPage):
     name = models.CharField(max_length=400)
     short_name = models.CharField(max_length=50, null=True, blank=True, help_text="This will be used in a situation that requires short name rather than 'The Best ....'")
     summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic. max: 300 characters")
+
     content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
     html_content = RichTextField(max_length=50000,null=True, blank=True, help_text="Detailed description")
     html_content2 = RichTextField(max_length=10000,null=True, blank=True, help_text="Second part of detailed description")
+    html_content3 = RichTextField(max_length=1000,null=True, blank=True, help_text="Final part of detailed description, use for last senteces, or if html_content2 is not visible.")
     show_html_content2 = models.BooleanField(default=True,help_text="For mobile hiding of the text.")
 
     references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")

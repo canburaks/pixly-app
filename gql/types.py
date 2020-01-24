@@ -916,6 +916,8 @@ class TopicType(DjangoObjectType, SEOType):
     summary = graphene.String()
     html_content = graphene.String()
     html_content2 = graphene.String()
+    html_content3 = graphene.String()
+
     show_html_content2 = graphene.Boolean()
     content_html = graphene.String()
     references = graphene.String()
@@ -962,7 +964,11 @@ class TopicType(DjangoObjectType, SEOType):
         if self.html_content2:
             return self.html_content2
         return ""
-
+    def resolve_html_content3(self, info):
+        if self.html_content3:
+            return self.html_content3
+        return ""
+        
     def resolve_show_html_content2(self, info):
         return self.show_html_content2
 
