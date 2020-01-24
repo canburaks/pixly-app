@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from .models import Video, VideoList, List, Movie, Topic, TopicItem, Article, Rating, Prediction, Tag, Award, Quote,MovieGroup
+from .models import Video, VideoList, List, Movie, Topic, TopicItem, Article, Rating, Prediction, Tag, Award, Quote,MovieGroup, MovieGroupItem
 from archive.models import ContentSimilarity
 from persons.models import Crew
 from items.resources import TagResource, VideoResource
@@ -115,20 +115,23 @@ class TopicItemsAdmin(admin.ModelAdmin):
 
 
 ################################################################################
+
+class MovieGroupItemStackInline(admin.StackedInline):
+    model = MovieGroupItem
+    #readonly_fields = ("person__name",)
+    raw_id_fields = ("movie",)
+    #list_display = ("person__name",)
+    fields = ( "header", "movie","group", "html_content",  )
+    ordering = ("movie__year",)
+
 @admin.register(MovieGroup)
 class MovieGroupAdmin(admin.ModelAdmin):
-    list_display = ("slug", "name")
-    raw_id_fields = ['movies', "topics",]
-
-class MovieGroupStackInline(admin.StackedInline):
-    model = MovieGroup
-    #readonly_fields = ("person__name",)
-    raw_id_fields = ("movies","topics")
-    #list_display = ("person__name",)
-    fields = ("slug", "name", "html_content",  "movies", "topics", "cover_poster", "poster", )
-    ordering = ("slug",)
+    list_display = ("slug", "header",)
+    #raw_id_fields = ['movies', "topics",]
+    inlines = [MovieGroupItemStackInline]
 
 
+######################################################################
 
 
 

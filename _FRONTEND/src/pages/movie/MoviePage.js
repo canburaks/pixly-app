@@ -107,6 +107,8 @@ const MoviePage = props => {
 				`You will find many great artworks of ${mappedTopicNames} films below.`
 	const textSize = ["14px", "16px", "18px"]
 
+	//const group
+
     useEffect(()=>{
         if (props.location.hash){
 			var hashId = props.location.hash.slice(1) 
