@@ -232,7 +232,7 @@ const OrderedCard = ({ item, specs}) => (
         my={[3]} overflow="hidden"
         className="ordered-topic-card"
         alignItems="stretch"
-        minHeight={["30vw","30vw","30vw",`auto`]}
+        minHeight={"auto"}
     >
 
         {/* TOP CONTENT*/}
@@ -257,14 +257,15 @@ const OrderedCard = ({ item, specs}) => (
 
         {/* HTML CONTENT*/}
         <FlexBox 
-            flexDirection="column"  p={[2]} 
+            flexDirection="column"
             
             position="relative"
-            width={["100%","100%","100%","40vwvw","50vw"]}
-            height={["30vw","30vw","30vw",`auto`]}
-            px={[3,3,3,2,3,4]} pt={[3,3,3,3,3]} pb={[1]}
+            width={["100%","100%","100%","40vwv","45vw"]}
+            height="auto"
+            minHeight={["30vw"]}
+            px={[3,3,3,2,3,4]} pt={[3,3,3,3,3]} pb={[2]}
         >
-        <FlexBox width="100%" position="relative" flexGrow={1} flexDirection="column"  >
+        <FlexBox width="100%" position="relative" flexGrow={1} flexDirection="column"  pb={[3]}>
             <NewLink 
                 link={`/movie/${item.movie.slug}`} 
                 title={`See ${item.movie.name} (${item.movie.year}) plot, cast, trailer, similar films and movie recommendations.`}
@@ -286,11 +287,10 @@ const OrderedCard = ({ item, specs}) => (
                     }} 
                 />
                 : <Text mt={[2]} fontSize={specs.textSize}>
-                        {item.movie.htmlContent 
-                            ? item.movie.summary.length > 500 
+                        {item.movie.summary.length > 500 
                                 ? item.movie.summary.slice(0,500) + "..." 
                                 : item.movie.summary
-                            : item.movie.summary.slice(0,500)}
+                            }
                     </Text>
             }
             </FlexBox>
@@ -329,7 +329,7 @@ const OrderedCard = ({ item, specs}) => (
     
         <FlexBox  display={["none", "none", "none", "flex"]}
             flexDirection="column" alignItems="center" 
-            width={["40vw","40vw","40vw","50vw","40vw"]}  
+            width={["40vw","40vw","40vw","50vw","45vw"]}  
             height={["30vw","30vw","30vw",`auto`]}
             boxShadow="4px 4px 12px 4px rgba(0,0,0,0.4)"
             >   
@@ -359,7 +359,7 @@ const OrderedCard = ({ item, specs}) => (
                 <FlexBox alignItems="center">
                     {item.persons.map(star => (
                         <NewLink link={`/person/${star.slug}`} key={star.id}>
-                            <Text color="#f1f1f1" fontSize="12px" mx={"8px"} opacity={0.8} hoverUnderline>{star.name}</Text>
+                            <Text color="#f1f1f1" fontSize="12px" mr={"16px"} opacity={0.8} hoverUnderline>{star.name}</Text>
                         </NewLink>
                     ))}
                 </FlexBox>
