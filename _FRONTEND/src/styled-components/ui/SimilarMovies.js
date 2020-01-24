@@ -60,7 +60,7 @@ const ContentSimilarSection = (props) => {
     let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
 
     const [ page, setPage ] = useState(1)
-    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 12 : 6) : 6 // if slow network request less movie
+    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 12 : 8) : 8 // if slow network request less movie
 
 
 	const { loading, error, data } = useQuery(CONTENT_SIMILAR_FINDER, {variables:{
@@ -154,7 +154,7 @@ const RecommendationSection = ({num=19}) => {
     
     
     // Network sensitive settings
-    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 12 : 6) : 6 // if slow network request less movie
+    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 12 : 8) : 8 // if slow network request less movie
     const networkSensitiveColumns = speed === "fast" ? [1,1,2,2,2,2,3,4] : [2,2,3,3,3,4,6]
 
 	const { loading, error, data } = useQuery(RECOMMENDATION_FINDER, {
@@ -232,7 +232,7 @@ const ContentSimilarMovieCard = ({ item }) => (
 	<SuperBox borderRadius={"4px"}
 		width="100%"
 		ratio={1.5}
-		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
+		boxShadow="card"
         className="content-similar-movie-card"
         title={"Visit " + item.name + ` - ${item.year} Page`} 
 	>	
@@ -276,7 +276,7 @@ const MovieRecommendationCard = ({ item, speed }) => (
 		width="100%"
         src={speed === "fast" ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster} 
 		ratio={speed === "slow" ? 1.5 : 0.7}
-		boxShadow="0 6px 8px 4px rgba(0,0,0, 0.4)"
+		boxShadow="card"
         className="recommendation-similar-movie-card"
 	>	
         <CoverLink link={`/movie/${item.slug}`} title={item.name} zIndex={0} title={`Visit ${item.name}`}/>
