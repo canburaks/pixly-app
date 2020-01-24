@@ -43,7 +43,7 @@ movie_defer = ("imdb_id","tmdb_id","data",
         "director","summary","tags", "tags")
 
 movie_group_item_siblings_only = (
-    "movie__id", "movie__slug", "movie__name", "movie__poster", "movie__cover_poster"
+    "movie__id", "movie__slug", "movie__name", "movie__poster", "movie__cover_poster", "movie__year"
 )
 
 
@@ -570,6 +570,7 @@ class MovieGroupItemType(DjangoObjectType):
     header = graphene.String()
     
     html_content = graphene.String()
+    poster = graphene.String() #poster or cover was set in admin panel
 
     movie = graphene.Field(MovieType)
     group = graphene.Field(MovieGroupType)
@@ -584,6 +585,11 @@ class MovieGroupItemType(DjangoObjectType):
             movie=self.movie).only(*movie_group_item_siblings_only)
         sibling_movies = [x.movie for x in siblings]
         return sibling_movies
+
+    def resolve_poster(self, info):
+        if self.group.poster_type=="poster":
+            return self.movie.poster.url
+        return self.movie.cover_poster.url
 
     def resolve_html_content(self, info):
         return self.html_content

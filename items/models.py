@@ -693,18 +693,23 @@ class Movie(SocialMedia, SEO,MainPage):
             self.add_slug()
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
-
+POSTER_TYPE = (
+    ("cover", "Cover (Horizontal) Image"),
+    ('poster', "Vertical Poster"),
+)
 class MovieGroup(models.Model):
     slug = models.SlugField(db_index=True, max_length=50 )
     header = models.CharField(max_length=80, null=True, blank=True, help_text="Name")
-    html_content = RichTextField(max_length=10000,null=True, blank=True,
-                help_text = "Description for all the movies and topic. In movie page, " +
-                            "movie group item's description will be used not this.")
+
 
     cover_poster = models.ImageField(blank=True, null=True, upload_to=movie_group_cover_path)
     poster = models.ImageField(blank=True, null=True, upload_to=movie_group_poster_path)
-
+    poster_type = models.CharField(default="cover", max_length=6, choices=POSTER_TYPE)
     topics = models.ManyToManyField("items.Topic", related_name="groups",null=True, blank=True )
+
+    html_content = RichTextField(max_length=10000,null=True, blank=True,
+                help_text = "Description for all the movies and topic. In movie page, " +
+                            "movie group item's description will be used not this.")
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)

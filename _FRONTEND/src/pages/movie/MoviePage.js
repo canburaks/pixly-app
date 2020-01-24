@@ -24,8 +24,8 @@ import { twitter } from "../../functions/third-party/twitter/twitter"
 import { CrewCard, MovieSimilarBox, PageContainer, ContentContainer, MovieCoverBox, MovieCoverPanel,
 	HiddenHeader,HeaderMini,Grid,Card,Image,ImageCard,HiddenSpan,RatingMutation,HeaderText,Text,Span,NewLink,TextSection,
 	MovieRichCardBox, MovieRichCard, FlexBox, Box, HashLink, YoutubeIcon,
-	HtmlContainer, SuperBox, TagBox, AbsoluteBox, CoverLink,
-	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading
+	HtmlContainer, SuperBox, TagBox, AbsoluteBox, CoverLink,CardContainer,HtmlParagraph,
+	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText,CoverCard
 } from "../../styled-components";
 
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
@@ -218,8 +218,10 @@ const MoviePage = props => {
 							</NewLink>
 						</FlexBox>
 					))
-				
 				}
+
+				{/* FILM GROUPS */}
+				{item.groupItems.map(gi => <MovieGroup groupItem={gi} /> )}
 
 				{/*<!--TOPICS Section--> */}
 				{item.topics.length > 0 && (
@@ -309,7 +311,17 @@ const MoviePage = props => {
 	);
 }
 
-
+const MovieGroup = ({groupItem}) => (
+	<CardContainer>
+		<SubHeaderText opacity={0.95} fontWeight="bold">{groupItem.group.header}</SubHeaderText>
+		<HtmlParagraph html={groupItem.htmlContent} opacity={0.95}/>
+		<Grid columns={[3,3,3,4,4,4,5]} width={"100%"} mt={[2]}>
+			{groupItem.siblingMovies.map(movie => (
+				<CoverCard item={movie} link={`/movie/${movie.slug}`} />
+			))}
+		</Grid>
+	</CardContainer>
+)
 
 const HtmlContent = ({ movie, ...props }) => (
     <FlexBox flexDirection="column" mt={[3,3,4]}>
