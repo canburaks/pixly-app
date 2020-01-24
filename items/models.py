@@ -1090,7 +1090,7 @@ class TopicItem(models.Model):
     movie = models.ForeignKey(Movie, related_name="in_topics", on_delete=models.CASCADE)
     topic = models.ForeignKey(Topic, related_name="items", on_delete=models.CASCADE)
     persons = models.ManyToManyField(Person,null=True, blank=True, related_name="topic_items")
-    rank = models.IntegerField(null=True, blank=True)
+    rank = models.IntegerField(default=100, null=True, blank=True)
 
     header = models.CharField(max_length=80, null=True, blank=True, help_text="In case of different text, use this as header")
     html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
