@@ -219,7 +219,6 @@
     },
     "include": [
       "/",
-      "/topic/romantic-comedy-movies",
       "/movie/silver-linings-playbook-2012",
       "/movie/crazy-rich-asians-2018",
       "/movie/heartbreaker-2010"
