@@ -46,6 +46,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                 return <SubHeaderText 
                             fontSize={["22px", "22px", "26px"]}  
                             mt={"32px !important"}
+                            opacity={0.95}
                             {...style.h2}
                         >
                         {domToReact(domNode.children)}
@@ -55,7 +56,8 @@ export const HtmlContainer = ({ html, ...props }) => {
             else if (domNode.attribs && (domNode.name === 'h3' || domNode.name === 'h4')) {
                 return <HeaderMini   
                             fontSize={["20px", "20px", "22px"]}
-                            mt={"8px !important"} 
+                            mt={"8px !important"} width="100%"
+                            opacity={0.95}
                             {...style.h3}
                             {...style.h4}
                         >
