@@ -269,10 +269,6 @@ export const HtmlBox = styled.div`
         text-decoration: ${props => props.hoverUnderline && "underline"};
         background:${props => props.hoverLight && setLightness('0.15', `${props.hoverLight}`)};
         };
-
-
-
-
     transition: ${themeGet("transitions.fast")};
     border: ${props => props.hoverBorder && "3px solid transparent"};
     cursor: ${props => props.clickable ? "pointer" : "inherit"};

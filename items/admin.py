@@ -126,7 +126,7 @@ class MovieGroupItemStackInline(admin.StackedInline):
 
 @admin.register(MovieGroup)
 class MovieGroupAdmin(admin.ModelAdmin):
-    list_display = ("slug", "header",)
+    list_display = ("slug", "header", )
     #raw_id_fields = ['movies', "topics",]
     inlines = [MovieGroupItemStackInline]
 

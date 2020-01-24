@@ -17,100 +17,21 @@ import "../../../node_modules/highlight.js/styles/rainbow.css"
 
 
 
-export const HtmlContainer = ({ html, ...props }) => {
-    const style = props.style || {
-        p:{},
-        h1:{},
-        h2:{},
-        h3:{},
-        h4:{},
-        ul:{},
-        li:{}
 
-    }
-    //console.log(props)
-    const options = {
-        replace: domNode => {
-            //console.log(domNode)
-            if (domNode.attribs && domNode.name ==="h1"){
-                return (
-                    <HeaderText  
-                        mt={"32px !important"}
-                        fontSize={["24px", "24px", "28px", "32px", "36px"]}
-                        {...style.h1}
-                    >
-                        {domToReact(domNode.children)}
-                    </HeaderText>)
-            }
-            else if (domNode.attribs && domNode.name ==="h2"){
-                return <SubHeaderText 
-                            fontSize={["22px", "22px", "26px"]}  
-                            mt={"32px !important"}
-                            opacity={0.95}
-                            {...style.h2}
-                        >
-                        {domToReact(domNode.children)}
-                        </SubHeaderText>
-            }
 
-            else if (domNode.attribs && (domNode.name === 'h3' || domNode.name === 'h4')) {
-                return <HeaderMini   
-                            fontSize={["20px", "20px", "22px"]}
-                            mt={"8px !important"} width="100%"
-                            opacity={0.95}
-                            {...style.h3}
-                            {...style.h4}
-                        >
-                            {domToReact(domNode.children)}
-                        </HeaderMini>
-            }
-            else if (domNode.attribs && domNode.name === 'p' ) {
-                return <Text width={"100%"}
-                            fontSize={["14px","14px", "16px"]} 
-                            {...style.p}
-                        >
-                            {domToReact(domNode.children)}
-                        </Text>
-            }
-            else if (domNode.attribs && domNode.name === 'ul' ) {
-                return <Ul width={"100%"}
-                            fontSize={["14px","14px", "16px"]} 
-                            {...style.p}
-                            {...style.ul}
-                        >
-                            {domToReact(domNode.children)}
-                        </Ul>
-            }
-            else if (domNode.attribs && domNode.name === 'li' ) {
-                return <Li width={"100%"}
-                            fontSize={["14px","14px", "16px"]} 
-                            {...style.p}
-                            {...style.li}
-                        >
-                            {domToReact(domNode.children)}
-                        </Li>
-            }
-            else if (domNode.attribs && domNode.name ==="code"){
-                return <Highlight>{domToReact(domNode.children)}</Highlight>
-            }
-          }
-    }
+export const CardContainer = (props) => (
+    <FlexBox 
+        flexDirection="column"
+        p={[3]} mt={[4, 4,5]} px={[3]}
+        width={"100%"} height="auto"
+        border={"0px"}
+        borderRadius={6}
+        boxShadow="card"
+        bg="#f1f1f1"
+        {...props}
+    />
 
-    function parseTest(){
-        if(html){
-            //console.log("parser" , html)
-            //console.log("topic: ", parseResult)
-            return parse(html, options)
-        }
-    }
-    parseTest()
-    return (
-        <HtmlBox maxWidth={"100%"} width={"100%"}  overflowX="hidden" {...props} className="html-box">
-            {parseTest()}
-        </HtmlBox>
-    )
-}
-
+)
 export const MessageBox = ({ header,Header,subheader,Subheader,miniheader, text, Image, children, ...props}) => (
     <FlexBox 
         overflow="hidden"
