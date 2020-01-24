@@ -15,7 +15,7 @@ export const CoverImage = ({src, ratio, alt, title, link, follow=undefined,blur=
     <Box position="relative" width="100%" pt={`${ratio*100}%`}  {...props} overflow="hidden" className="absolute-cover-image">
         {link 
             ? <NewLink link={link} title={title} follow={follow}>
-                <AbsoluteImage src={src} alt={alt} title={title} blur={blur} />
+                    <AbsoluteImage src={src} alt={alt} title={title} blur={blur} />
                 </NewLink>
             : <AbsoluteImage src={src} alt={alt} title={title} />
         }

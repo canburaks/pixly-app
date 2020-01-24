@@ -35,9 +35,11 @@ export const MOVIE = gql`
             tags{name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag},
             videos{id,title,summary,link,duration,tags,isFaved,ytId,thumb},
             groupItems{htmlContent, , 
-                group{slug, header}
-                siblingMovies{
-                    id, slug, name, year, poster, coverPoster
+                group{slug, header,posterType,
+                    items{
+                        htmlContent,poster
+                        movie{id,slug,year}
+                    }
                 }
             }
             isBookmarked,
