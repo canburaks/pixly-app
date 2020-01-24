@@ -693,16 +693,18 @@ class Movie(SocialMedia, SEO,MainPage):
             self.add_slug()
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
+
 class MovieGroup(models.Model):
     slug = models.SlugField(db_index=True, max_length=50 )
-    topics = models.ManyToManyField("items.Topic", related_name="groups",null=True, blank=True )
-    movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="groups")
-
-    name = models.CharField(max_length=80, null=True, blank=True, help_text="Name")
-    html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
+    header = models.CharField(max_length=80, null=True, blank=True, help_text="Name")
+    html_content = RichTextField(max_length=10000,null=True, blank=True,
+                help_text = "Description for all the movies and topic. In movie page, " +
+                            "movie group item's description will be used not this.")
 
     cover_poster = models.ImageField(blank=True, null=True, upload_to=movie_group_cover_path)
     poster = models.ImageField(blank=True, null=True, upload_to=movie_group_poster_path)
+
+    topics = models.ManyToManyField("items.Topic", related_name="groups",null=True, blank=True )
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
@@ -712,6 +714,19 @@ class MovieGroup(models.Model):
         return self.slug
 
 
+class MovieGroupItem(models.Model):
+    movie = models.ForeignKey(Movie, related_name="group_items", on_delete=models.CASCADE)
+    group = models.ForeignKey(MovieGroup, related_name="items", on_delete=models.CASCADE)
+
+    header = models.CharField(max_length=80, null=True, blank=True, help_text="Unque name, in case of attractive header")
+    html_content = RichTextField(max_length=10000,null=True, blank=True, 
+                help_text = "Detailed description of the item. Use similar bu unique " + 
+                            "description for each item in the group")
+
+
+
+    def __str__(self):
+        return self.movie.name
 
 
 class List(SEO,MainPage):

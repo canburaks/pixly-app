@@ -1,4 +1,4 @@
-from items.models import Rating,Movie, List,  Video, Topic, TopicItem,Prediction, Tag, Quote, MovieGroup
+from items.models import Rating,Movie, List,  Video, Topic, TopicItem,Prediction, Tag, Quote, MovieGroup,MovieGroupItem
 from persons.models import Person, Director, Crew
 from persons.profile import Profile, Follow, Activity
 from archive.models import MovSim, TmdbMovie, ContentSimilarity
@@ -41,6 +41,10 @@ def is_owner(self, info):
 
 movie_defer = ("imdb_id","tmdb_id","data",
         "director","summary","tags", "tags")
+
+movie_group_item_siblings_only = (
+    "movie__id", "movie__slug", "movie__name", "movie__poster", "movie__cover_poster"
+)
 
 
 #-------ABSTRACT TYPES-----------#
@@ -357,14 +361,14 @@ class MovieType(DjangoObjectType):
     content_similars_summary = graphene.String()
     topics = graphene.List("gql.types.TopicType")
     is_important_page = graphene.Boolean()
-    groups = graphene.List("gql.types.MovieGroupType")
+    group_items = graphene.List("gql.types.MovieGroupItemType")
 
 
     class Meta:
         model = Movie
 
     def resolve_groups(self, info):
-        return self.groups.all()
+        return self.group_items.all()
 
     def resolve_is_important_page(self, info):
         return self.important_page
@@ -504,17 +508,15 @@ class MovieType(DjangoObjectType):
         return False
 
 
-class MovieGroupType(DjangoObjectType, SEOType):
+class MovieGroupType(DjangoObjectType):
     slug = graphene.String()
-    name = graphene.String()
+    header = graphene.String()
     
-    html_content = graphene.String()
-
     cover_poster = graphene.String()
     poster = graphene.String()
 
-    movies = graphene.List(MovieType)
-    topics = graphene.List("gql.types.TopicType")
+    topic = graphene.List("gql.types.TopicType")
+    items = graphene.List("gql.types.MovieGroupItemType")
 
     created_at = graphene.String()
     updated_at = graphene.String()
@@ -522,23 +524,21 @@ class MovieGroupType(DjangoObjectType, SEOType):
     class Meta:
         model = MovieGroup
 
-
-
-    def resolve_name(self, info):
-        return self.name
-
-    def resolve_html_content(self, info):
-        return self.html_content
-
-
-    def resolve_movies(self, info):
-        return self.movies.all()
+    def resolve_items(self, info):
+        return self.items.all()
 
     def resolve_topics(self, info):
         return self.topics.all()
 
     def resolve_slug(self, info):
         return self.slug
+
+    def resolve_header(self, info):
+        return self.header
+
+    def resolve_html_content(self, info):
+        return self.html_content
+
 
     def resolve_cover_poster(self, info, *_):
         if self.cover_poster:
@@ -565,6 +565,39 @@ class MovieGroupType(DjangoObjectType, SEOType):
             return str_date.split(" ")[0]
         except:
             return str_date
+
+class MovieGroupItemType(DjangoObjectType):
+    header = graphene.String()
+    
+    html_content = graphene.String()
+
+    movie = graphene.Field(MovieType)
+    group = graphene.Field(MovieGroupType)
+    sibling_movies = graphene.List(MovieType)
+
+
+    class Meta:
+        model = MovieGroupItem
+
+    def resolve_sibling_movies(self, info):
+        siblings = self.group.items.select_related("movie").exclude(
+            movie=self.movie).only(*movie_group_item_siblings_only)
+        sibling_movies = [x.movie for x in siblings]
+        return sibling_movies
+
+    def resolve_html_content(self, info):
+        return self.html_content
+
+    def resolve_header(self, info):
+        return self.header
+
+    def resolve_movie(self, info):
+        return self.movie
+
+    def resolve_group(self, info):
+        return self.group
+
+
 
 class RecommendationType(DjangoObjectType):
     profile = graphene.Field("gql.types.ProfileType")
@@ -2016,7 +2049,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     tag_names = graphene.List(graphene.String)
     topics = graphene.List(TopicType)
     is_important_page = graphene.Boolean()
-    groups = graphene.List(MovieGroupType)
+    group_items = graphene.List("gql.types.MovieGroupItemType")
 
 
     def __init__(self, id=None, slug=None, viewer=None):
@@ -2039,8 +2072,8 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
             
         self.viewer = viewer #Profile
 
-    def resolve_groups(self, info):
-        return self.movie.groups.all()
+    def resolve_group_items(self, info):
+        return self.movie.group_items.all()
 
     def resolve_is_important_page(self, info):
         return self.movie.important_page
