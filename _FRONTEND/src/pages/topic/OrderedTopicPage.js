@@ -226,13 +226,13 @@ const TopicQuery = ({ lazyvariables }) =>{
 }
 
 const OrderedCard = ({ item, specs}) => (
-    <FlexBox width="90vw" flexDirection={specs.flexDirection}
+    <FlexBox width="90vw" flexDirection={["column", "column","column", "row"]}
         border={"0px"} borderRadius={6}
         boxShadow="card" bg="#f1f1f1"
         my={[3]} overflow="hidden"
         className="ordered-topic-card"
         alignItems="stretch"
-        minHeight={specs.isLargeScreen ? specs.htmlContentHeight : "auto"}
+        minHeight={["30vw","30vw","30vw",`auto`]}
     >
 
         {/* TOP CONTENT*/}
@@ -261,9 +261,9 @@ const OrderedCard = ({ item, specs}) => (
             flexDirection="column" flexGrow={1}  p={[2]} 
             
             position="relative"
-            width={specs.htmlContentWidth}
-            height={specs.isLargeScreen ? specs.htmlContentHeight : "auto"}
-            px={specs.isLargeScreen ? [1,1,1,2,3] :[3,3,3,3,3,4]} pt={[3,3,3,3,3]} pb={[1]}
+            width={["100%","100%","100%","40vwvw","50vw"]}
+            height={["30vw","30vw","30vw",`auto`]}
+            px={[3,3,3,2,3,4]} pt={[3,3,3,3,3]} pb={[1]}
         >
             <FlexBox width="100%" position="relative" flexGrow={1} flexDirection="column"  >
                 <NewLink 
@@ -330,12 +330,12 @@ const OrderedCard = ({ item, specs}) => (
         {specs.show==="right" &&
             <FlexBox  
                 flexDirection="column" alignItems="center" 
-                width={specs.rightPosterWidth}  
-                height={specs.htmlContentHeight}
+                width={["40vw","40vw","40vw","40vw","45vw"]}  
+                height={["30vw","30vw","30vw",`auto`]}
                 boxShadow="4px 4px 12px 4px rgba(0,0,0,0.4)"
                 >   
 
-                    <SuperBox flexGrow={1} height="auto" minWidth="100%"
+                    <SuperBox flexGrow={1} height="auto" minWidth="100%" className="img-supbox"
                         
                         src={specs.typeRight==="cover" ? item.coverPoster : item.poster}
                         alt={`${item.movie.name} poster`} 
@@ -346,7 +346,7 @@ const OrderedCard = ({ item, specs}) => (
                     </SuperBox>
 
                     {/* NAME PANEL*/}
-                    <FlexBox width={"100%"} height={specs.rightTextPanelHeight}
+                    <FlexBox width={"100%"} height={"60px"}
                         position="relaive"  bg="dark" flexDirection="column" 
                         pl={"8px"}
                         borderBottom="1px solid" borderColor="rgba(255,255,255,0.3)"
@@ -368,7 +368,7 @@ const OrderedCard = ({ item, specs}) => (
 
                     </FlexBox>
                     {/* MUTATION PANEL */}
-                    <FlexBox width={"100%"} height={specs.rightMutatinPanelHeight} position="relaive" bg="dark" alignItems="center">
+                    <FlexBox width={"100%"} height={"50px"} position="relaive" bg="dark" alignItems="center">
                         <BookmarkMutation id={item.movie.id} 
                             active={item.movie.isBookmarked} 
                             size={specs.iconSize } mx={[2]} 
@@ -404,21 +404,19 @@ const OrderedList = ({ items, speed, size}) => {
 
     //console.log("screen",onewidth)
 
-    const specs = useMemo(() => ({
+    const specs = {
         isLargeScreen:size.includes("L"),
         flexDirection:size.includes("L") ? "row" : "column",
         show:size.includes("L") ? "right" : "top",
         iconSize:size.includes("S") ? 26 :32,
         headerSize:size.includes("S") ? ["18px"] : ["16px","16px","16px","16px","20px", "20px"],
         textSize:size.includes("S") ? ["14px"]   : ["14px"],
-        htmlContentWidth:!size.includes("L") 
-                          ? "100%" 
-                          :["50vw","50vw","50vw",           "40vwvw",                   "50vw"],
+        htmlContentWidth: ["100%","100%","100%","40vwvw","50vw"],
         
-        rightPosterWidth  :["40vw","40vw","40vw",           "40vw",                     "45vw"],
-        rightPosterHeight :["24vw","24vw","24vw",           "24vw",                     "28vw"],
+        rightPosterWidth  :["40vw","40vw","40vw","40vw","45vw"],
+        rightPosterHeight :["24vw","24vw","24vw","24vw","28vw"],
         //htmlContentHeight :["30vw","30vw","30vw",`${setTotalHeight(24)}vw`, `${setTotalHeight(28)}vw`],
-        htmlContentHeight :["30vw","30vw","30vw",`auto`, `auto`],
+        htmlContentHeight :["30vw","30vw","30vw",`auto`],
 
         //---------------TOP-------------------
         // Screen size is the most determinant
@@ -432,7 +430,7 @@ const OrderedList = ({ items, speed, size}) => {
         rightTextPanelHeight,
         rightMutatinPanelHeight
         //------------------------------------
-    }),[size])
+    }
     //console.log("ordered", items)
     return (
         <>

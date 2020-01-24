@@ -60,6 +60,11 @@ def topic_item_cover_poster_path(instance, filename):
 def topic_item_poster_path(instance, filename):
     return "topics/{0}/items/poster/{1}".format(instance.id,filename)
     
+def movie_group_poster_path(instance, filename):
+    return "movie-group/{0}/items/poster/{1}".format(instance.slug,filename)
+def movie_group_cover_path(instance, filename):
+    return "movie-group/{0}/items/cover/{1}".format(instance.slug,filename)
+
 LIST_RELATION_TYPE = (
     ('df', "Director's Favourite"),
     ("fw", "Festival Winner Movies"),
@@ -687,6 +692,28 @@ class Movie(SocialMedia, SEO,MainPage):
         if not self.slug:
             self.add_slug()
         super().save(*args, **kwargs)  # Call the "real" save() method.
+
+class MovieGroup(models.Model):
+    slug = models.SlugField(db_index=True, max_length=50 )
+    topic = models.ManyToManyField("items.models.Topic", related_name="groups", on_delete=models.CASCADE)
+    movies = models.ManyToManyField(Person,null=True, blank=True, related_name="groups")
+
+    name = models.CharField(max_length=80, null=True, blank=True, help_text="In case of different text, use this as header")
+
+    html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
+
+    cover_poster = models.ImageField(blank=True, null=True, upload_to=movie_group_cover_path)
+    poster = models.ImageField(blank=True, null=True, upload_to=movie_group_poster_path)
+
+    references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")
+
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+
+
+    def __str__(self):
+        return self.movie.name
+
 
 
 
