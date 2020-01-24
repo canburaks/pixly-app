@@ -21,7 +21,7 @@ import {
     HtmlBox, HtmlContainer, MessageBox, Hr, HomeIcon,FilmIcon,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
     Ul,Li,ImdbRatingIcon, AbsoluteBox,ImageBoxBg,YearClockIcon,
-    BookmarkMutation, RatingMutation, LikeMutation
+    BookmarkMutation, RatingMutation, LikeMutation, StarIcon
 } from "../../styled-components"
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
 import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
@@ -297,7 +297,7 @@ const OrderedCard = ({ item, specs}) => (
                 <NewLink 
                     link={`/movie/${item.movie.slug}`} 
                     hoverUnderline follow display="flex" alignItems="flex-end"
-                    title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
+                    title={`Visit ${item.movie.name} (${item.movie.year})'`}
                 >
                     <FilmIcon size={specs.iconSize -4} 
                         fill="rgba(0,0,0,0.9)" 
@@ -323,7 +323,7 @@ const OrderedCard = ({ item, specs}) => (
                 height={specs.htmlContentHeight}
                 boxShadow="4px 4px 12px 4px rgba(0,0,0,0.4)"
                 >   
-                    <NewLink flexGrow={1}
+                    <NewLink flexGrow={1} follow
                         link={`/movie/${item.movie.slug}`} 
                         title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
                         >
@@ -343,8 +343,8 @@ const OrderedCard = ({ item, specs}) => (
                     </NewLink>
                     {/* NAME PANEL*/}
                     <FlexBox width={"100%"} height={specs.rightTextPanelHeight}
-                        position="relaive"  bg="dark" 
-                        alignItems="center" pl={"8px"}
+                        position="relaive"  bg="dark" flexDirection="column" 
+                        pl={"8px"}
                         borderBottom="1px solid" borderColor="rgba(255,255,255,0.3)"
                     >   
                         <NewLink link={`/movie/${item.movie.slug}`} 
@@ -352,6 +352,16 @@ const OrderedCard = ({ item, specs}) => (
                         >
                             <Text color="light" hoverUnderline fontWeight="bold" fontSize="13px">{item.movie.name} ({item.movie.year})</Text>
                         </NewLink>
+
+                        <FlexBox alignItems="center">
+                            <StarIcon size={14} stroke="yellow" />
+                            {item.persons.map(star => (
+                                <NewLink link={`/person/${star.slug}`} width={"100%"}>
+                                    <Text color="#f1f1f1" fontSize="12px" ml={1}>{star.name}</Text>
+                                </NewLink>
+                            ))}
+                        </FlexBox>
+
                     </FlexBox>
                     {/* MUTATION PANEL */}
                     <FlexBox width={"100%"} height={specs.rightMutatinPanelHeight} position="relaive" bg="dark" alignItems="center">
@@ -382,7 +392,7 @@ const OrderedList = ({ items, speed, size}) => {
     const ordereditems = items.sort((a,b) => (a.rank || a.movie.year) - (b.rank || b.movie.year))
 
     //Responsive Height
-    const rightTextPanelHeight = 30
+    const rightTextPanelHeight = 60
     const rightMutatinPanelHeight = 50
     const rightBottomPanelHeight = rightMutatinPanelHeight + rightTextPanelHeight // mutation + name
     const onewidth = useMemo(() => window.innerWidth / 100, [size])
