@@ -111,7 +111,6 @@ const ContentSimilarSection = (props) => {
         <Section display="flex" flexDirection="column" px={[2]} width="100%" id="cso-section" className="content-similar-movies-section">
             {data.listOfContentSimilarMovies && data.listOfContentSimilarMovies.length > 0 &&
                 <>
-                <ResponsiveAd1 />
                 <Dl ref={node}>
                     <MessageBox 
                         subheader={`Similar ${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Movies" : "Movies" } like ${data.movie.name.trim()} (${data.movie.year})`}
@@ -193,7 +192,6 @@ const RecommendationSection = ({num=19}) => {
         >
             {data.listOfSimilarMovies && data.listOfSimilarMovies.length > 0 &&
                 <>
-                <ResponsiveAd2 />
                     <MessageBox 
                         subheader={`Film Recommendations: Movies Similar to ${data.movie.name.trim()} (${data.movie.year})`}
                         miniheader="People also like"

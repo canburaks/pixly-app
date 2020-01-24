@@ -38,7 +38,7 @@ export const MOVIE = gql`
                 group{slug, header,posterType,
                     items{
                         htmlContent,poster
-                        movie{id,slug,year}
+                        movie{id, name, slug,year}
                     }
                 }
             }
