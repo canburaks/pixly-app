@@ -819,7 +819,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                         tags{name, slug, genreTag, subgenreTag},
                 }
                 topic{
-                    name, summary,content, htmlContent, htmlContent2,isArticle, slug, poster, heroPoster,
+                    name, summary,content, htmlContent, htmlContent2,htmlContent3,isArticle, slug, poster, heroPoster,
                     seoTitle, seoShortDescription, seoKeywords,seoDescription,
                     coverPoster, createdAt, updatedAt, wiki, richdata,
                     searchable,references,isOrdered, shortName,

@@ -130,8 +130,9 @@ const TopicQuery = ({ lazyvariables }) =>{
         const isOrdered = topic.isOrdered
         const items = isOrdered ? topic.items : data.complexSearch.topicResult
         const quantity = isOrdered ? topic.items.length : data.complexSearch.quantity 
+        const hideContent2 = (topic.htmlContent2 && topic.htmlContent2.length > 1) && window.innerWidth < 500 && !topic.showHtmlContent2
 
-        //console.log(topic, items, quantity, isOrdered, screenSize)
+        console.log(topic, items, quantity, isOrdered, screenSize)
         //console.log(screenSize, screenSize.includes("XL"))
         //console.log("speed", speed)
         //console.log("size", screenSize)
@@ -177,18 +178,17 @@ const TopicQuery = ({ lazyvariables }) =>{
                     >   
                         <HtmlContainer 
                             my={[3]} 
-                            fontSize={["14px","16px", "16px", "18px"]} 
                             html={topic.htmlContent}     
                         />
                         {topic.showHtmlContent2 && (topic.htmlContent2 && topic.htmlContent2.length > 1) 
                             && <TopicArticleAd />
                             }
-                        {!(!topic.showHtmlContent2 && window.innerWidth < 500) 
+                        {!hideContent2 
                             ? <HtmlContainer 
                                 mt={[5]}  mb={[3]}
                                 html={topic.htmlContent2}     
                             />
-                            : <Text fontSize={["14px","14px", "16px"]} >{topic.summary}</Text>}
+                            : <HtmlContainer my={[3]} html={topic.htmlContent3} />}
                     </SchemaArticle>
                     
                     {/* FILTER WITH YEAR AND RATING */}
