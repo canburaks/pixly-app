@@ -49,6 +49,17 @@ const Path = styled.path`
 	${position};
 	${color};
 `
+export const RightIcon = (props) => (
+<Svg 
+	viewBox="0 0 24 24" fill="none" 
+	stroke="#000000" strokeWidth="2" 
+	strokeLinecap="round" strokeLinejoin="round"
+	{...props}
+>
+	<path d="M9 18l6-6-6-6"/>
+</Svg>
+
+)
 
 export const StarIcon = (props) => (
 <Svg viewBox="0 0 24 24" 

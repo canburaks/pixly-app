@@ -427,6 +427,7 @@ const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJ
 			{text:"Gangster Movies", link:"/topic/gangster-films"},
 			{text:"Thought-Provoking", link:"/topic/thought-provoking"},
 			{text:"LGBTQ+ Movies", link:"/topic/lgbtq-plus-films"},
+			{text:"Rom-Coms", link:"/topic/romantic-comedy-movies"},
 			{text:"Mystery Movies", link:"/topic/mystery"}].map(liste => (
 				<ListItem classes={{root:classes.listitem}} button key={"- " + liste.text}>
 					<NewLink link={liste.link} title={`${liste.text}`}>

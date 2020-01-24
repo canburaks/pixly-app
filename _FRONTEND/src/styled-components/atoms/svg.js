@@ -30,6 +30,7 @@ export const Svg = styled("svg")`
     :hover {
         transform:${props => props.hoverScale && "scale(1.1, 1.1)"};
         fill: ${props => props.hoverFill && props.hoverFill};
+        stroke: ${props => props.hoverStroke && props.hoverStroke};
 
     }
     title:${props => props.title && props.title}

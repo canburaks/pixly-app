@@ -45,10 +45,14 @@ export const Box = styled.div`
     float:${props => props.float && props.float};
     :hover { 
         box-shadow: ${props => props.hoverShadow && themeGet('shadows.hover')};
+        color: ${props => props.hoverColor && props.hoverColor };
         border: ${props => props.hoverBorder && '3px solid #3633CC' };
         text-decoration: ${props => props.hoverUnderline && "underline"};
         background:${props => props.hoverLight && setLightness('0.05', `${props.hoverLight}`)};
         transform:${props => props.translateY && `translateY(-4px)`};
+        svg {
+            stroke: ${props => props.hoverColor && props.hoverColor };
+        }
         }
     transition: ${themeGet("transitions.fast")};
     border: ${props => props.hoverBorder && "3px solid transparent"};
