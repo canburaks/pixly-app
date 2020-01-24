@@ -34,6 +34,11 @@ export const MOVIE = gql`
             crew{job, character, person{id,name, poster, slug}},
             tags{name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag},
             videos{id,title,summary,link,duration,tags,isFaved,ytId,thumb},
+            groups{slug, name, htmlContent, 
+                movies{
+                    id, slug, name, poster, coverPoster
+                }
+            }
             isBookmarked,
             isFaved,
             viewerRating,
