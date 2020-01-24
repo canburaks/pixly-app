@@ -595,7 +595,9 @@ class MovieGroupItemType(DjangoObjectType):
         return self.movie.cover_poster.url
 
     def resolve_html_content(self, info):
-        return self.html_content
+        if self.html_content:
+            return self.html_content
+        return self.group.html_content
 
     def resolve_header(self, info):
         return self.header
