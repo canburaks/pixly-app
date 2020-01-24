@@ -6,7 +6,7 @@ import { themeGet } from '@styled-system/theme-get'
 
 import { 
     Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, HeaderMini, NewLink, Paragraph,
-    TagText,HtmlBox,SubHeaderText, Image,CoverLink
+    TagText,HtmlBox,SubHeaderText, Image,CoverLink, Ul, Li
 } from "../index"
 import { SocialBox } from "../others"
 import parse, { domToReact } from 'html-react-parser';

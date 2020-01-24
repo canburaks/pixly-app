@@ -47,8 +47,9 @@ const ListOfFilms = (props) => {
         
         // order of topics wrt slugs
         const featureSlugs = [
-            "gangster-films", "mystery","cyberpunk",
-            "historical-figures", "art-house","thought-provoking"
+            "romantic-comedy-movies",
+            "gangster-films", "cyberpunk",
+            "historical-figures", "art-house","mystery"
         ]
         
         //create featured topics
@@ -290,7 +291,7 @@ const CollectionCard = (props) => (
             <SuperBox 
                 display="flex" flexDirection="column" 
                 src={props.item.coverPoster || props.item.poster} 
-                ratio={props.ratio || 0.5625} borderRadius={"8px"}
+                ratio={props.ratio || 0.5625} borderRadius={"6px"}
                 width={"100%"}
             >
                 <CoverLink link={props.link} color="transparent" title={props.item.name}>

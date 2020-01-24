@@ -122,7 +122,6 @@ const MoviePage = props => {
 		}
 		else (window.scrollTo({left:0, top:0, behavior:"smooth"}))
 	},[])
-	console.log("movie", item)
 	return (
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
 			<Head
@@ -234,17 +233,16 @@ const MoviePage = props => {
 						boxShadow="card"
 						bg="#f1f1f1"
 					>
-						<Grid columns={[1,2,2,3,3,3,4]} width={"100%"}>
+						<Grid columns={[1,2,2,2,2,3,4]} width={"100%"} py={[3]} mt={2}>
 							{item.topics.map((topic, i) => (
-								<CoverImage  
-									borderRadius={"4px"}
-									hoverShadow="hover"
-									src={topic.coverPoster}
+								<CoverImage
+									boxShadow="card" hoverShadow translateY
+									src={topic.coverPoster} borderRadius={6}
 									ratio={0.55}
 									link={`/topic/${topic.slug}`} follow={item.isImportantPage ? true : undefined}
 									title={`${topic.shortName} Movies`}
 									alt={`${topic.shortName} Movies: ${item.name}`}
-									key={topic.name} 
+									key={topic.name + i} 
 								/>
 								))}
 						</Grid>
@@ -315,16 +313,16 @@ const MovieGroup = ({groupItem}) => (
 	<CardContainer>
 		<SubHeaderText opacity={0.95} fontWeight="bold">{groupItem.group.header}</SubHeaderText>
 		<HtmlParagraph html={groupItem.htmlContent} opacity={0.95}/>
-		<Grid columns={groupItem.group.posterType==="p" ?[3,3,3,4,4,4,5] : [1,2,3,3,4]} width={"100%"} mt={[2]}>
+		<Grid columns={groupItem.group.posterType==="p" ?[3,3,3,4,4,4,5] : [1,2,2,2,2,2,3,4]} width={"100%"} py={[3]} mt={2}>
 			{groupItem.group.items.map(item => (
-				<FlexBox position="relative" width="100%" key={item.movie.id}>
-					<CoverImage 
-						src={item.poster} 
-						link={`/item./${item.movie.slug}`} 
+					<CoverImage key={`${item.movie.slug} + "group-i"`} 
+						title={groupItem.group.header + `: ${item.movie.name} (${item.movie.year})`}
+						src={item.poster} borderRadius="6px"
+						boxShadow="card" hoverShadow translateY
+						link={`/movie/${item.movie.slug}`} 
 						ratio={groupItem.group.posterType==="p" ? 1.5 : 0.6} 
 
 					/>
-				</FlexBox>
 			))}
 		</Grid>
 	</CardContainer>

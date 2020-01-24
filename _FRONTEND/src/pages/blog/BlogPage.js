@@ -90,10 +90,13 @@ const PostPage = (props) =>{
 const TopicLinkList = (props) => {
     const topics = [
         {name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk.jpg"},
-        {name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking.jpg"},
+        {name:"Rom-Com", slug:"romantic-comedy-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/24/cover/romantic-comedy-movies.jpg"},
         {name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery.jpg"},
-        //{name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures.jpg"}
-        {name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/gangster.jpg"}
+        {name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures.jpg"},
+        {name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking.jpg"},
+        {name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/gangster.jpg"},
+
+        
     ]
 
     return (
@@ -106,7 +109,7 @@ const TopicLinkList = (props) => {
                     If you are interested, you can check our <NewLink link={"/lists-of-films"} follow underline title="Film List Collections">movie list collections</NewLink>.
                 </Text>
             </MessageBox>
-                <Grid columns={[2,2,2,2,2,4]} width={"100%"} mt={[3]}>
+                <Grid columns={[2,2,3]} width={"100%"} mt={[3]}>
                     {topics.map((topic, i) => (
                         <CoverImage  
                             borderRadius={"4px"}

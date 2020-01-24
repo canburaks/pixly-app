@@ -71,6 +71,7 @@ export const Text= styled("p")`
     font-weight:400;
     margin:0;
     white-space: "pre-line";
+    font-family: ${props => props.fontFamily ? props.fontFamily : themeGet("fonts.paragraph")};
     cursor:${props => props.clickable ? "pointer" : "inherit"};
     white-space:${props => props.truncate && "nowrap"};
     overflow:${props => props.truncate && "hidden"};
