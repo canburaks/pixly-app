@@ -183,7 +183,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                         {topic.showHtmlContent2 && (topic.htmlContent2 && topic.htmlContent2.length > 1) 
                             && <TopicArticleAd />
                             }
-                        {topic.showHtmlContent2 && 
+                        {!(!topic.showHtmlContent2 && window.innerWidth < 500) && 
                             <HtmlContainer 
                                 my={[3]} 
                                 fontSize={["14px","16px", "16px", "18px"]} 
@@ -468,17 +468,15 @@ const OrderedList = ({ items, speed, size}) => {
             ))}
 
             <TopicOrderedListAd2 />
-            <LazyLoadComponent>
                 {ordereditems.slice(16, 20).map( item => (
                         <OrderedCard key={"rec" + item.movie.id}
                             item={item}
                             specs={specs}
                         />
                 ))}
-            </LazyLoadComponent>
+
 
             <FeedMobileTopicPageAd />
-
             <LazyLoadComponent>
                 {ordereditems.slice(20).map( item => (
                         <OrderedCard key={"rec" + item.movie.id}
