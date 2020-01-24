@@ -220,8 +220,6 @@
     "include": [
       "",
       "/",
-      "/movie/it-happened-one-night-1934",
-      "/movie/the-silence-of-the-lambs-1991",
       "/movie/as-good-as-it-gets-1997"
   ],
     "publicPath": "/"
