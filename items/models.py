@@ -704,7 +704,7 @@ class MovieGroup(models.Model):
 
     cover_poster = models.ImageField(blank=True, null=True, upload_to=movie_group_cover_path)
     poster = models.ImageField(blank=True, null=True, upload_to=movie_group_poster_path)
-    poster_type = models.CharField(default="cover", max_length=2, choices=POSTER_TYPE)
+    poster_type = models.CharField(default="cover", max_length=1, choices=POSTER_TYPE)
     topics = models.ManyToManyField("items.Topic", related_name="groups",null=True, blank=True )
 
     html_content = RichTextField(max_length=10000,null=True, blank=True,

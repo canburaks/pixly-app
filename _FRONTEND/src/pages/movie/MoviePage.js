@@ -221,7 +221,7 @@ const MoviePage = props => {
 				}
 
 				{/* FILM GROUPS */}
-				{item.groupItems.map(gi => <MovieGroup groupItem={gi} /> )}
+				{item.groupItems.map((gi, i) => <MovieGroup groupItem={gi} key={item.slug + "group-items" + i} /> )}
 
 				{/*<!--TOPICS Section--> */}
 				{item.topics.length > 0 && (
@@ -315,13 +315,13 @@ const MovieGroup = ({groupItem}) => (
 	<CardContainer>
 		<SubHeaderText opacity={0.95} fontWeight="bold">{groupItem.group.header}</SubHeaderText>
 		<HtmlParagraph html={groupItem.htmlContent} opacity={0.95}/>
-		<Grid columns={groupItem.group.posterType==="poster" ?[3,3,3,4,4,4,5] : [1,2,3,3,4]} width={"100%"} mt={[2]}>
+		<Grid columns={groupItem.group.posterType==="p" ?[3,3,3,4,4,4,5] : [1,2,3,3,4]} width={"100%"} mt={[2]}>
 			{groupItem.group.items.map(item => (
 				<FlexBox position="relative" width="100%" key={item.movie.id}>
 					<CoverImage 
 						src={item.poster} 
 						link={`/item./${item.movie.slug}`} 
-						ratio={groupItem.group.posterType==="poster" ? 1.5 : 0.6} 
+						ratio={groupItem.group.posterType==="c" ? 1.5 : 0.6} 
 
 					/>
 				</FlexBox>
