@@ -364,9 +364,7 @@ class MovieType(DjangoObjectType):
         model = Movie
 
     def resolve_groups(self, info):
-        if self.groups.exists():
-            return self.groups.all()
-        return None
+        return self.groups.all()
 
     def resolve_is_important_page(self, info):
         return self.important_page
@@ -2042,9 +2040,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         self.viewer = viewer #Profile
 
     def resolve_groups(self, info):
-        if self.movie.groups.exists():
-            return self.movie.groups.all()
-        return None
+        return self.movie.groups.all()
 
     def resolve_is_important_page(self, info):
         return self.movie.important_page
