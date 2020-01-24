@@ -218,7 +218,8 @@
       "width": 730
     },
     "include": [
-      "/"
+      "/",
+      "/topic/romantic-comedy-movies"
   ],
     "publicPath": "/"
   }
