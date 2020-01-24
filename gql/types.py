@@ -860,7 +860,10 @@ class TopicItemType(DjangoObjectType, SEOType):
         model = TopicItem
 
     def resolve_persons(self, info):
-        return self.persons.all().only("id", "slug", "name")
+        pqs = self.persons.all().only("id", "slug", "name")
+        if pqs:
+            return pqs
+        return self.movie.crews.only("id", "slug", "name").filter(job="a")[:2]
 
     def resolve_header(self, info):
         return self.header

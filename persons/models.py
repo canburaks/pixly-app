@@ -323,7 +323,7 @@ class Person(SocialMedia, SEO, MainPage):
             self.save()
 
 class Crew(models.Model):
-    movie = models.ForeignKey("items.Movie", on_delete=models.CASCADE)
+    movie = models.ForeignKey("items.Movie", related_name="crews", on_delete=models.CASCADE)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     job = models.CharField(max_length=len(JOB), choices=JOB, null=True, blank=True)
     data = JSONField(blank=True,null=True)#

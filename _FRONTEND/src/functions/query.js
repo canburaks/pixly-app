@@ -833,6 +833,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                         coverPoster, poster,
                         references,
                         updatedAt,
+                        persons{id,slug,name}
                         movie{
                             id, name,slug, year, summary,
                             poster,coverPoster, 
