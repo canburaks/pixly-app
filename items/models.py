@@ -698,21 +698,18 @@ class MovieGroup(models.Model):
     topics = models.ManyToManyField("items.Topic", related_name="groups")
     movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="groups")
 
-    name = models.CharField(max_length=80, null=True, blank=True, help_text="In case of different text, use this as header")
-
+    name = models.CharField(max_length=80, null=True, blank=True, help_text="Name")
     html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
 
     cover_poster = models.ImageField(blank=True, null=True, upload_to=movie_group_cover_path)
     poster = models.ImageField(blank=True, null=True, upload_to=movie_group_poster_path)
-
-    references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
 
     def __str__(self):
-        return self.movie.name
+        return self.slug
 
 
 
