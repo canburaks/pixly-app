@@ -109,14 +109,14 @@ const MoviePage = props => {
 
 	//const group
 	const showDirectorBanner = (directorFilter.length >0 && directorFilter.length < 3)
-	const showMovieGroup = item.groupItems.length > 0
-	const showTopics = item.topics.length > 0
+	const showMovieGroup = item.groupItems && item.groupItems.length > 0
+	const showTopics = item.topics && item.topics.length > 0
 	const showAd1 = [showDirectorBanner, showMovieGroup, showTopics].filter(c => c ===true ).length >1
 	
-	const showVideos = item.videos.length > 0
-	const showDirectorFavourite = item.appears.length > 0
-	const showHtmlContent = item.htmlContent.length >10
-	console.log(item,showAd1)
+	const showVideos = item.videos && item.videos.length > 0
+	const showDirectorFavourite = item.appears && item.appears.length > 0
+	const showHtmlContent = item.htmlContent && item.htmlContent.length >10
+	//console.log(item,showAd1)
 
     useEffect(()=>{
         if (props.location.hash){
