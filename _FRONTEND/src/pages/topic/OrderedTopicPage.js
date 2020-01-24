@@ -161,7 +161,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                     flexDirection="column" pb={[4,4]} alignItems="center"
                 >
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
-                    {false && <SchemaArticle 
+                    <SchemaArticle 
                         headerSize={["24px", "26px", "28px", "32px"]}
                         textSize={["14px","16px", "16px", "18px"]}
                         mt={[3]} mb={[0]} py={[0]}
@@ -180,13 +180,16 @@ const TopicQuery = ({ lazyvariables }) =>{
                             fontSize={["14px","16px", "16px", "18px"]} 
                             html={topic.htmlContent}     
                         />
-                        <TopicArticleAd />
-                        <HtmlContainer 
+                        {topic.showHtmlContent2 && (topic.htmlContent2 && topic.htmlContent2.length > 1) 
+                            && <TopicArticleAd />
+                            }
+                        {topic.showHtmlContent2 && 
+                            <HtmlContainer 
                                 my={[3]} 
                                 fontSize={["14px","16px", "16px", "18px"]} 
                                 html={topic.htmlContent2}     
-                            />
-                    </SchemaArticle>}
+                            />}
+                    </SchemaArticle>
                     {/* FILTER WITH YEAR AND RATING */}
                     {topic.searchable && <FilterPanel dispatcher={filterDispatcher} states={filterVariables} />}
 
@@ -282,7 +285,11 @@ const OrderedCard = ({ item, specs}) => (
                         }} 
                     />
                     : <Text mt={[2]} fontSize={specs.textSize}>
-                            {item.movie.summary.length>300 ? item.movie.summary.slice(0,300) + "..." : item.movie.summary.slice(0,300)}
+                            {item.movie.htmlContent 
+                                ? item.movie.summary.length > 500 
+                                    ? item.movie.summary.slice(0,500) + "..." 
+                                    : item.movie.summary
+                                : item.movie.summary.slice(0,500)}
                         </Text>
                 }
             </FlexBox>
@@ -323,16 +330,16 @@ const OrderedCard = ({ item, specs}) => (
                 height={specs.htmlContentHeight}
                 boxShadow="4px 4px 12px 4px rgba(0,0,0,0.4)"
                 >   
-                    <NewLink flexGrow={1} follow
+                    <NewLink flexGrow={1} follow height={specs.rightPosterHeight}
                         link={`/movie/${item.movie.slug}`} 
                         title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
                         >
                         <FlexBox 
-                            width={specs.rightPosterWidth}  height={specs.rightPosterHeight} minHeight={specs.rightPosterHeight}
+                            width={specs.rightPosterWidth}  height={"100%"} minHeight={specs.rightPosterHeight}
                             position="relative" flexDirection="column"
                             flexGrow={1}
                         >
-                            <ImageBoxBg display="flex" flexGrow={1}
+                            <ImageBoxBg display="flex" flexGrow={1} minHeight="100%"
                                 width={specs.rightPosterWidth} 
                                 src={specs.typeRight==="cover" ? item.coverPoster : item.poster}
                                 alt={`${item.movie.name} poster`} 
@@ -356,8 +363,8 @@ const OrderedCard = ({ item, specs}) => (
                         <FlexBox alignItems="center">
                             <StarIcon size={14} stroke="yellow" />
                             {item.persons.map(star => (
-                                <NewLink link={`/person/${star.slug}`} width={"100%"}>
-                                    <Text color="#f1f1f1" fontSize="12px" ml={1}>{star.name}</Text>
+                                <NewLink link={`/person/${star.slug}`} key={star.id}>
+                                    <Text color="#f1f1f1" fontSize="12px" mx={"8px"} hoverUnderline>{star.name}</Text>
                                 </NewLink>
                             ))}
                         </FlexBox>
@@ -365,11 +372,11 @@ const OrderedCard = ({ item, specs}) => (
                     </FlexBox>
                     {/* MUTATION PANEL */}
                     <FlexBox width={"100%"} height={specs.rightMutatinPanelHeight} position="relaive" bg="dark" alignItems="center">
-                        <BookmarkMutation id={item.movie.isBookmarked} 
+                        <BookmarkMutation id={item.movie.id} 
                             active={item.movie.isBookmarked} 
                             size={specs.iconSize } mx={[2]} 
                         />
-                        <LikeMutation id={item.movie.isBookmarked} 
+                        <LikeMutation id={item.movie.id} 
                             active={item.movie.isBookmarked} 
                             size={specs.iconSize - 2} 
                         />
@@ -412,8 +419,8 @@ const OrderedList = ({ items, speed, size}) => {
                           :["50vw","50vw","50vw",           "40vwvw",                   "50vw"],
         
         rightPosterWidth  :["40vw","40vw","40vw",           "40vw",                     "45vw"],
-        rightPosterHeight :["24vw","24vw","24vw",           "30vw",                     "28vw"],
-        htmlContentHeight :["30vw","30vw","30vw",`${setTotalHeight(30)}vw`, `${setTotalHeight(28)}vw`],
+        rightPosterHeight :["24vw","24vw","24vw",           "28vw",                     "28vw"],
+        htmlContentHeight :["30vw","30vw","30vw",`${setTotalHeight(34)}vw`, `${setTotalHeight(28)}vw`],
         //---------------TOP-------------------
         // Screen size is the most determinant
         // Only use poster in extra-small size and slow internet

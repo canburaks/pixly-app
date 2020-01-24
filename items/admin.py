@@ -84,6 +84,7 @@ class TopicItemStackInline(admin.StackedInline):
     raw_id_fields = ("movie","persons")
     #list_display = ("person__name",)
     fields = ("header","movie", "rank", "html_content", "cover_poster", "poster", "persons" )
+    ordering = ("rank",)
     
 
 class TagTopicInline(admin.StackedInline):
