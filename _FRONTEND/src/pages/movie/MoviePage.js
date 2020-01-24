@@ -321,7 +321,7 @@ const MovieGroup = ({groupItem}) => (
 					<CoverImage 
 						src={item.poster} 
 						link={`/item./${item.movie.slug}`} 
-						ratio={groupItem.group.posterType==="c" ? 1.5 : 0.6} 
+						ratio={groupItem.group.posterType==="p" ? 1.5 : 0.6} 
 
 					/>
 				</FlexBox>

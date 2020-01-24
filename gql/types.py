@@ -590,7 +590,7 @@ class MovieGroupItemType(DjangoObjectType):
         return sibling_movies
 
     def resolve_poster(self, info):
-        if self.group.poster_type=="poster":
+        if self.group.poster_type=="p":
             return self.movie.poster.url
         return self.movie.cover_poster.url
 
