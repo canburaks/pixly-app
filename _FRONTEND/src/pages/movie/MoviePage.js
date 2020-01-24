@@ -108,6 +108,15 @@ const MoviePage = props => {
 	const textSize = ["14px", "16px", "18px"]
 
 	//const group
+	const showDirectorBanner = (directorFilter.length >0 && directorFilter.length < 3)
+	const showMovieGroup = item.groupItems.length > 0
+	const showTopics = item.topics.length > 0
+	const showAd1 = [showDirectorBanner, showMovieGroup, showTopics].filter(c => c ===true ).length >1
+	
+	const showVideos = item.videos.length > 0
+	const showDirectorFavourite = item.appears.length > 0
+	const showHtmlContent = item.htmlContent.length >10
+	console.log(item,showAd1)
 
     useEffect(()=>{
         if (props.location.hash){
@@ -176,9 +185,10 @@ const MoviePage = props => {
 						</Grid>
 					</MessageBox>
 				)}
-				
+				<MoviePageAd />
+
 				{/* VISIT THE DIRECTOR'S OTHER MOVIES */}
-				{(directorFilter.length >0 && directorFilter.length < 3) &&
+				{showDirectorBanner &&
 					directorFilter.map((d,i) => (
 						<FlexBox key={"director-of-movie" + i} 
 							width={"100%"} height="100px" 
@@ -250,13 +260,14 @@ const MoviePage = props => {
 		
 					</>
 				)}
+				{showAd1 && <HomePageFeedAd/> }
 
 				{/*<!--SIMILAR Section--> */}
 				<Box width="100%" ref={nodeSimilarMovies}>
 					<SimilarMovies movie={item} />
 
 				</Box>
-
+				<MidPageAd />
 				{/*<!--APPEARS IN  LIST Section--> */}
 				{item.appears.length > 0 && (
 					<MessageBox mb={[2]} 

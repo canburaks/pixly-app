@@ -44,7 +44,6 @@ export const SimilarMovies = (props) => {
         >
             <RecommendationSection  />
             
-            <ResponsiveAd3 />
 
             <ContentSimilarSection  />
             

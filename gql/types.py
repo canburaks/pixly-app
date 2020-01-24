@@ -374,7 +374,9 @@ class MovieType(DjangoObjectType):
         return self.important_page
 
     def resolve_topics(self, info):
-        return self.topics.all().exclude(cover_poster="")
+        un_topics =  list(self.topics.all().exclude(cover_poster=""))
+        or_topics =  list(map(lambda x: x.topic, self.in_topics.all())) 
+        return un_topics + or_topics
 
     def resolve_content_similars_summary(self, info):
         return self.content_similars_summary
@@ -2090,7 +2092,9 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         return self.movie.important_page
 
     def resolve_topics(self, info):
-        return self.movie.topics.all().exclude(cover_poster="")
+        un_topics =  list(self.movie.topics.all().exclude(cover_poster=""))
+        or_topics =  list(map(lambda x: x.topic, self.movie.in_topics.all())) 
+        return un_topics + or_topics
 
     def resolve_content_similars_summary(self, info):
         return self.movie.content_similars_summary
