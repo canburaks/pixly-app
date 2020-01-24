@@ -236,64 +236,63 @@ const OrderedCard = ({ item, specs}) => (
     >
 
         {/* TOP CONTENT*/}
-        {specs.show==="top" &&
-            <FlexBox width="100%">
-                <CoverImage 
-                    src={specs.typeTop==="cover" ? item.coverPoster : item.poster}
-                    title={"Visit " + item.movie.name}
-                    alt={`${item.movie.name} poster`} 
-                    ratio={specs.ratioTop}  
-                    link={`/movie/${item.movie.slug}`} 
-                />
-                <FlexBox position="absolute" left={"20px"} top={"12px"} flexDirection="column" alignItems="center" width="auto">
-                    <BookmarkMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize + 4} />
-                    <LikeMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize} mt={[2]} />
-                </FlexBox>
-  
-                <FlexBox position="absolute" left={"20px"} bottom={"4px"}>
-                    <RatingMutation item={item.movie} size={36} />
-                </FlexBox>
+        <FlexBox width="100%" display={["flex", "flex", "flex", "none"]}>
+            <CoverImage 
+                src={item.coverPoster}
+                title={"Visit " + item.movie.name}
+                alt={`${item.movie.name} poster`} 
+                ratio={specs.ratioTop}  
+                link={`/movie/${item.movie.slug}`} 
+            />
+            <FlexBox position="absolute" left={"20px"} top={"12px"} flexDirection="column" alignItems="center" width="auto">
+                <BookmarkMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize + 4} />
+                <LikeMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize} mt={[2]} />
             </FlexBox>
-        }
+
+            <FlexBox position="absolute" left={"20px"} bottom={"4px"}>
+                <RatingMutation item={item.movie} size={36} />
+            </FlexBox>
+        </FlexBox>
+        
 
         {/* HTML CONTENT*/}
         <FlexBox 
-            flexDirection="column" flexGrow={1}  p={[2]} 
+            flexDirection="column"  p={[2]} 
             
             position="relative"
             width={["100%","100%","100%","40vwvw","50vw"]}
             height={["30vw","30vw","30vw",`auto`]}
             px={[3,3,3,2,3,4]} pt={[3,3,3,3,3]} pb={[1]}
         >
-            <FlexBox width="100%" position="relative" flexGrow={1} flexDirection="column"  >
-                <NewLink 
-                    link={`/movie/${item.movie.slug}`} 
-                    title={`See ${item.movie.name} (${item.movie.year}) plot, cast, trailer, similar films and movie recommendations.`}
-                    hoverUnderline follow
-                    pb={[3,3,3,2,2]}
-                    > 
-                    <HeaderMini textAlign="left" fontWeight="bold" height="100%"
-                        fontSize={specs.headerSize}
-                        
-                    >
-                        {item.header} ({item.movie.year})
-                    </HeaderMini>
-                </NewLink>
-                {item.htmlContent 
-                    ? <HtmlContainer 
-                        html={item.htmlContent} 
-                        style={{
-                            p:{fontSize:specs.textSize},
-                        }} 
-                    />
-                    : <Text mt={[2]} fontSize={specs.textSize}>
-                            {item.movie.htmlContent 
-                                ? item.movie.summary.length > 500 
-                                    ? item.movie.summary.slice(0,500) + "..." 
-                                    : item.movie.summary
-                                : item.movie.summary.slice(0,500)}
-                        </Text>
-                }
+        <FlexBox width="100%" position="relative" flexGrow={1} flexDirection="column"  >
+            <NewLink 
+                link={`/movie/${item.movie.slug}`} 
+                title={`See ${item.movie.name} (${item.movie.year}) plot, cast, trailer, similar films and movie recommendations.`}
+                hoverUnderline follow
+                pb={[3,3,3,2,2]}
+                > 
+                <HeaderMini textAlign="left" fontWeight="bold" height="100%"
+                    fontSize={specs.headerSize}
+                    
+                >
+                    {item.header} ({item.movie.year})
+                </HeaderMini>
+            </NewLink>
+            {item.htmlContent 
+                ? <HtmlContainer 
+                    html={item.htmlContent} 
+                    style={{
+                        p:{fontSize:specs.textSize},
+                    }} 
+                />
+                : <Text mt={[2]} fontSize={specs.textSize}>
+                        {item.movie.htmlContent 
+                            ? item.movie.summary.length > 500 
+                                ? item.movie.summary.slice(0,500) + "..." 
+                                : item.movie.summary
+                            : item.movie.summary.slice(0,500)}
+                    </Text>
+            }
             </FlexBox>
 
             {/* HOME BUTTON*/}
@@ -327,65 +326,64 @@ const OrderedCard = ({ item, specs}) => (
         </FlexBox>
 
         {/* RIGHT SECTION*/}
-        {specs.show==="right" &&
-            <FlexBox  
-                flexDirection="column" alignItems="center" 
-                width={["40vw","40vw","40vw","40vw","45vw"]}  
-                height={["30vw","30vw","30vw",`auto`]}
-                boxShadow="4px 4px 12px 4px rgba(0,0,0,0.4)"
-                >   
+    
+        <FlexBox  display={["none", "none", "none", "flex"]}
+            flexDirection="column" alignItems="center" 
+            width={["40vw","40vw","40vw","50vw","40vw"]}  
+            height={["30vw","30vw","30vw",`auto`]}
+            boxShadow="4px 4px 12px 4px rgba(0,0,0,0.4)"
+            >   
 
-                    <SuperBox flexGrow={1} height="auto" minWidth="100%" className="img-supbox"
-                        
-                        src={specs.typeRight==="cover" ? item.coverPoster : item.poster}
-                        alt={`${item.movie.name} poster`} 
-                        ratio={specs.ratioRight}  zIndex={0}
-                        link={`/movie/${item.movie.slug}`} 
-                    >
-                        <CoverLink link={`/movie/${item.movie.slug}`}  title={""} />
-                    </SuperBox>
+            <SuperBox flexGrow={1} height="auto" minWidth="100%" className="img-supbox"
+                src={item.coverPoster}
+                alt={`${item.movie.name} poster`} 
+                ratio={0.6}  zIndex={0}
+                link={`/movie/${item.movie.slug}`} 
+            >
+                <CoverLink link={`/movie/${item.movie.slug}`}  title={""} />
+            </SuperBox>
 
-                    {/* NAME PANEL*/}
-                    <FlexBox width={"100%"} height={"60px"}
-                        position="relaive"  bg="dark" flexDirection="column" 
-                        pl={"8px"}
-                        borderBottom="1px solid" borderColor="rgba(255,255,255,0.3)"
-                    >   
-                        <NewLink link={`/movie/${item.movie.slug}`} 
-                            title={`See the details of ${item.movie.name} (${item.movie.year}).`}                        
-                        >
-                            <Text color="light" hoverUnderline fontWeight="bold" fontSize="13px">{item.movie.name} ({item.movie.year})</Text>
+            {/* NAME PANEL*/}
+            <FlexBox width={"100%"} height={"60px"}
+                position="relaive"  bg="dark" flexDirection="column" 
+                pl={"8px"}
+                borderBottom="1px solid" borderColor="rgba(255,255,255,0.3)"
+            >   
+                <NewLink link={`/movie/${item.movie.slug}`} 
+                    title={`See the details of ${item.movie.name} (${item.movie.year}).`}                        
+                >
+                    <Text color="light" hoverUnderline fontWeight="bold" fontSize="13px">{item.movie.name} ({item.movie.year})</Text>
+                </NewLink>
+
+            {/* ACTOR PANEL*/}
+                <FlexBox alignItems="center">
+                    {item.persons.map(star => (
+                        <NewLink link={`/person/${star.slug}`} key={star.id}>
+                            <Text color="#f1f1f1" fontSize="12px" mx={"8px"} opacity={0.8} hoverUnderline>{star.name}</Text>
                         </NewLink>
+                    ))}
+                </FlexBox>
 
-                    {/* ACTOR PANEL*/}
-                        <FlexBox alignItems="center">
-                            {item.persons.map(star => (
-                                <NewLink link={`/person/${star.slug}`} key={star.id}>
-                                    <Text color="#f1f1f1" fontSize="12px" mx={"8px"} opacity={0.8} hoverUnderline>{star.name}</Text>
-                                </NewLink>
-                            ))}
-                        </FlexBox>
-
-                    </FlexBox>
-                    {/* MUTATION PANEL */}
-                    <FlexBox width={"100%"} height={"50px"} position="relaive" bg="dark" alignItems="center">
-                        <BookmarkMutation id={item.movie.id} 
-                            active={item.movie.isBookmarked} 
-                            size={specs.iconSize } mx={[2]} 
-                        />
-                        <LikeMutation id={item.movie.id} 
-                            active={item.movie.isBookmarked} 
-                            size={specs.iconSize - 2} 
-                        />
-                        <Box display="flex" flexGrow={1}
-                            width="100%" height="100%"
-                            justifyContent="center" alignItems="center"
-                        >
-                            <RatingMutation item={item.movie} size={36} />
-                        </Box>
-                    </FlexBox>
             </FlexBox>
-            }
+            {/* MUTATION PANEL */}
+            <FlexBox width={"100%"} height={"50px"} position="relaive" bg="dark" alignItems="center">
+                    <BookmarkMutation id={item.movie.id} 
+                        active={item.movie.isBookmarked} 
+                        size={specs.iconSize } mx={[2]} 
+                    />
+                    <LikeMutation id={item.movie.id} 
+                        active={item.movie.isBookmarked} 
+                        size={specs.iconSize - 2} 
+                    />
+                    <Box display="flex" flexGrow={1}
+                        width="100%" height="100%"
+                        justifyContent="center" alignItems="center"
+                    >
+                        <RatingMutation item={item.movie} size={36} />
+                    </Box>
+                </FlexBox>
+        </FlexBox>
+
     </FlexBox>
 )
 

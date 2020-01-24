@@ -1,6 +1,6 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from .models import Video, VideoList, List, Movie, Topic, TopicItem, Article, Rating, Prediction, Tag, Award, Quote
+from .models import Video, VideoList, List, Movie, Topic, TopicItem, Article, Rating, Prediction, Tag, Award, Quote,MovieGroup
 from archive.models import ContentSimilarity
 from persons.models import Crew
 from items.resources import TagResource, VideoResource
@@ -76,8 +76,9 @@ class ArticleMovieInline(admin.TabularInline):
     model = Article.related_movies.through
 
 
-
+#####################################################################
 ## TOPICS
+
 class TopicItemStackInline(admin.StackedInline):
     model = TopicItem
     #readonly_fields = ("person__name",)
@@ -114,12 +115,22 @@ class TopicItemsAdmin(admin.ModelAdmin):
 
 
 ################################################################################
+@admin.register(MovieGroup)
+class MovieGroupAdmin(admin.ModelAdmin):
+    list_display = ("slug", "name")
+    raw_id_fields = ['movies', "topics",]
 
-@admin.register(Award)
-class AwardAdmin(admin.ModelAdmin):
-    list_display = ("year", "award" ,"movie","person")
+class MovieGroupStackInline(admin.StackedInline):
+    model = MovieGroup
+    #readonly_fields = ("person__name",)
+    raw_id_fields = ("movies","topics")
+    #list_display = ("person__name",)
+    fields = ("slug", "name", "html_content",  "movies", "topics", "cover_poster", "poster", )
+    ordering = ("slug",)
 
-    raw_id_fields = ["movie",'movies', "person", 'persons',]
+
+
+
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
@@ -131,12 +142,14 @@ class MovieAdmin(admin.ModelAdmin):
     inlines = [TagInline,CrewStackInline,ContentSimilarInline]
     search_fields = ('name', "tmdb_id", 'id', )
 
-    #def get_data_director(self, obj):
-    #    if obj.data:q  
-    #        return obj.data.get("Director")
-    #    else:
-    #        return ""
 
+
+#####################################################################
+@admin.register(Award)
+class AwardAdmin(admin.ModelAdmin):
+    list_display = ("year", "award" ,"movie","person")
+
+    raw_id_fields = ["movie",'movies', "person", 'persons',]
 # Register your models here.
 @admin.register(List)
 class ListAdmin(admin.ModelAdmin):
