@@ -514,6 +514,7 @@ class MovieGroupType(DjangoObjectType):
     
     cover_poster = graphene.String()
     poster = graphene.String()
+    poster_type = graphene.String() #poster or cover was set in admin panel
 
     topic = graphene.List("gql.types.TopicType")
     items = graphene.List("gql.types.MovieGroupItemType")
@@ -539,6 +540,8 @@ class MovieGroupType(DjangoObjectType):
     def resolve_html_content(self, info):
         return self.html_content
 
+    def resolve_poster_type(self, info):
+        return self.poster_type.lower()
 
     def resolve_cover_poster(self, info, *_):
         if self.cover_poster:
