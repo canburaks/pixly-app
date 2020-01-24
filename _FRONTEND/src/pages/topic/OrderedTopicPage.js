@@ -185,7 +185,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                             }
                         {!(!topic.showHtmlContent2 && window.innerWidth < 500) && 
                             <HtmlContainer 
-                                my={[3]} 
+                                mt={[5]}  mb={[3]}
                                 fontSize={["14px","16px", "16px", "18px"]} 
                                 html={topic.htmlContent2}     
                             />}
