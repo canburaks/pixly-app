@@ -94,6 +94,7 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/as-good-as-it-gets-1997",
         "/movie/tootsie-1982",
         "/movie/it-happened-one-night-1934",
         "/movie/country-1984",
@@ -725,7 +726,8 @@
         "/movie/crazy-rich-asians-2018",
         "/movie/country-1984",
         "/movie/tootsie-1982",
-        "/movie/it-happened-one-night-1934"
+        "/movie/it-happened-one-night-1934",
+        "/movie/as-good-as-it-gets-1997"
 
     ]
 }
