@@ -851,12 +851,16 @@ class TopicItemType(DjangoObjectType, SEOType):
     poster = graphene.String()
 
     movie = graphene.Field(MovieType)
+    persons = graphene.List("gql.types.DirectorPersonMix")
 
     created_at = graphene.String()
     updated_at = graphene.String()
 
     class Meta:
         model = TopicItem
+
+    def resolve_persons(self, info):
+        return self.persons.all().only("id", "slug", "name")
 
     def resolve_header(self, info):
         return self.header
@@ -943,6 +947,7 @@ class TopicType(DjangoObjectType, SEOType):
             print("Topic is not set for ordered list. Change it")
         #print(self.items.all().select_related("movie"))
         return self.items.all().select_related("movie").order_by("rank")
+
 
 
     def resolve_html_content(self, info):

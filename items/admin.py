@@ -81,9 +81,9 @@ class ArticleMovieInline(admin.TabularInline):
 class TopicItemStackInline(admin.StackedInline):
     model = TopicItem
     #readonly_fields = ("person__name",)
-    raw_id_fields = ("movie",)
+    raw_id_fields = ("movie","persons")
     #list_display = ("person__name",)
-    fields = ("header","movie", "rank", "html_content", "cover_poster", "poster" )
+    fields = ("header","movie", "rank", "html_content", "cover_poster", "poster", "persons" )
     
 
 class TagTopicInline(admin.StackedInline):
