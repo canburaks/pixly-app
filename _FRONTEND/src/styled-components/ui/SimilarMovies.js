@@ -198,7 +198,7 @@ const RecommendationSection = ({num=19}) => {
                         text={
                             `Our AI-assisted algorithm found that those movies are showing high similarity to ${data.movie.name.trim()}. ` +
                             `The movies like ${data.movie.name.trim()} in this section not only consider the common content elements, ` + 
-                            `but also the personality of people who watch them. ` +
+                            `but also the personal interest of people who watch them. ` +
                             `People who like ${data.movie.name.trim()} also like and give high ratings below movies. ` + 
                             `The chance of you will like them are highly probable, if you like ${data.movie.name.trim()}.`
                         }
