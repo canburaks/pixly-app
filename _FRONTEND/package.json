@@ -220,7 +220,11 @@
     "include": [
       "",
       "/",
-      "/movie/as-good-as-it-gets-1997"
+      "/movie/as-good-as-it-gets-1997",
+      "/movie/forrest-gump-1994",
+      "/movie/silver-linings-playbook-2012",
+      "/movie/american-hustle-2013"
+
   ],
     "publicPath": "/"
   }
