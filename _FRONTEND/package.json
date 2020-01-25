@@ -220,9 +220,8 @@
     "include": [
       "",
       "/",
-      "/topic/romantic-comedy-movies",
-      "/topic/cyberpunk",
-      "/topic/gangster-films"
+      "/topic/mystery"
+
 
   ],
     "publicPath": "/"
