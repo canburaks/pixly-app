@@ -168,8 +168,25 @@ const MoviePage = props => {
 				{/* OPTIONAL HTML CONTENT*/}
 				{item.htmlContent && <HtmlContent movie={item} style={{p:{fontSize:textSize}}} />}
 
-
-
+				{/*<!--CAST Section--> */}
+				{item.crew.length > 0 && (
+					<MessageBox mb={[2]} id="movie-page-header"
+						header={`${item.name} (${item.year}) Cast & Crew`}
+						text={item.crew.length > 4 ? `Here the list of director, actors and actresses of ${item.name} (${item.year}) and their character names.` : null}
+						border={"0px"}
+						borderRadius={6}
+						boxShadow="card"
+						bg="#f1f1f1"
+					>
+						<Grid columns={[3,3,4,4,5,5,6]} width={"100%"}>
+							{allCrews.map((crew, i) => (
+								<CrewCard crew={crew} key={i + crew.person.name} translateY/>
+									))}
+						</Grid>
+					</MessageBox>
+				)}
+				<MoviePageAd />
+				
 				{/* VISIT THE DIRECTOR'S OTHER MOVIES */}
 				{showDirectorBanner &&
 					directorFilter.map((d,i) => (
@@ -211,7 +228,7 @@ const MoviePage = props => {
 						</FlexBox>
 					))
 				}
-				<MoviePageAd />
+				
 				{/* FILM GROUPS */}
 				{item.groupItems.map((gi, i) => <MovieGroup groupItem={gi} key={item.slug + "group-items" + i} /> )}
 
@@ -249,7 +266,6 @@ const MoviePage = props => {
 				<Box width="100%" ref={nodeSimilarMovies}>
 					<SimilarMovies movie={item} />
 				</Box>
-				<MidPageAd />
 
 				{/*<!--APPEARS IN  LIST Section--> */}
 				{item.appears.length > 0 && (
@@ -281,23 +297,8 @@ const MoviePage = props => {
 					</MessageBox>
 				)}
 
-				{/*<!--CAST Section--> */}
-				{item.crew.length > 0 && (
-					<MessageBox mb={[2]} id="movie-page-header"
-						header={`${item.name} (${item.year}) Cast & Crew`}
-						text={item.crew.length > 4 ? `Here the list of director, actors and actresses of ${item.name} (${item.year}) and their character names.` : null}
-						border={"0px"}
-						borderRadius={6}
-						boxShadow="card"
-						bg="#f1f1f1"
-					>
-						<Grid columns={[3,3,4,4,5,5,6]} width={"100%"}>
-							{allCrews.map((crew, i) => (
-								<CrewCard crew={crew} key={i + crew.person.name} translateY/>
-									))}
-						</Grid>
-					</MessageBox>
-				)}
+				<MidPageAd />
+
 				{/* VIDEO */}
 				{hasVideos && 
 					<>
