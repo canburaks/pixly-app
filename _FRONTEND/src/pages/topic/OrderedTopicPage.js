@@ -139,7 +139,7 @@ const TopicQuery = ({ lazyvariables }) =>{
         //console.log("size", screenSize)
         // Other variables
         const title = "See the details of the " + topic.shortName.toLowerCase() + " movie."        
-        const Liste = isOrdered ? OrderedList : UnorderedList
+        const Liste = haveOrderedItems ? OrderedList : UnorderedList
 
         return (
             <PageContainer>
