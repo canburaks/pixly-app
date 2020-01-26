@@ -260,7 +260,7 @@ const MoviePage = props => {
 		
 					</>
 				)}
-				{showAd1 && <HomePageFeedAd/> }
+				{false && showAd1 && <HomePageFeedAd/> }
 
 				{/*<!--SIMILAR Section--> */}
 				<Box width="100%" ref={nodeSimilarMovies}>

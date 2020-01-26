@@ -218,7 +218,11 @@ export const TopicArticleAd = () => {
     useEffect(() => {
         if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
     }, [isProduction])
     //if (!production) return <div className="hidden"></div>
@@ -239,7 +243,12 @@ export const TopicOrderedListAd = () => {
     useEffect(() => {
         if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
     }, [isProduction])
     //if (!production) return <div className="hidden"></div>
@@ -260,7 +269,12 @@ export const TopicOrderedListAd2 = () => {
     useEffect(() => {
         if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
     }, [isProduction])
     //if (!production) return <div className="hidden"></div>
@@ -281,7 +295,12 @@ export const FeedGridItemAd = () => {
     useEffect(() => {
         if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
     }, [isProduction])
     //if (!production) return <div className="hidden"></div>
@@ -303,7 +322,12 @@ export const FeedMobileTopicPageAd = () => {
     useEffect(() => {
         if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
     }, [isProduction])
     //if (!production) return <div className="hidden"></div>
@@ -324,7 +348,12 @@ export const FeedMobileCollectionAd = () => {
     useEffect(() => {
         if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
     }, [isProduction])
     //if (!production) return <div className="hidden"></div>
@@ -340,13 +369,18 @@ export const FeedMobileCollectionAd = () => {
     )
 }
 export const BlogPostAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
     useEffect(() => {
-        if (production && window) {
+        if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
-    }, [window])
-    
+    }, [isProduction])
     return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", textAlign:"center" , minHeight: 90 }}
@@ -360,14 +394,18 @@ export const BlogPostAd = () => {
 
 
 export const DirectorPageAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
     useEffect(() => {
-        if (production && window) {
+        if (isProduction && window) {
             //console.log("if true");
-            //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-        }
-    }, [window])
+            try{
 
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
+        }
+    }, [isProduction])
     return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", minHeight: 90 }}
@@ -380,12 +418,18 @@ export const DirectorPageAd = () => {
 }
 
 export const ListBoardAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
     useEffect(() => {
-        if (production && window) {
+        if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
-    }, [window])
+    }, [isProduction])
     return (
         <ins className="adsbygoogle"
             style={{display:"block", width:"100%", minHeight:90}}
@@ -399,12 +443,18 @@ export const ListBoardAd = () => {
 }
 
 export const ListBoardAd2 = () => {
+    const isProduction = window.location.href.includes("pixly.app")
     useEffect(() => {
-        if (production && window) {
+        if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
-    }, [window])
+    }, [isProduction])
     return (
         <ins className="adsbygoogle"
             style={{display:"block", width:"100%", minHeight:90}}
@@ -418,12 +468,18 @@ export const ListBoardAd2 = () => {
 }
 
 export const MoviePageAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
     useEffect(() => {
-        if (production && window) {
+        if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
-    }, [window])
+    }, [isProduction])
     return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", minHeight: 90 }}
@@ -435,12 +491,18 @@ export const MoviePageAd = () => {
     )
 }
 export const MidPageAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
     useEffect(() => {
-        if (production && window) {
+        if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
-    }, [window])
+    }, [isProduction])
     return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", minHeight: 90 }}
@@ -456,7 +518,12 @@ export const HomePageFeedAd = () => {
     useEffect(() => {
         if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
     }, [isProduction])
     //if (!production) return <div className="hidden"></div>
@@ -471,12 +538,18 @@ export const HomePageFeedAd = () => {
     )
 }
 export const HomePageArchiveAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
     useEffect(() => {
-        if (production && window) {
+        if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
-    }, [window])
+    }, [isProduction])
     return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", minHeight: 90 }}
@@ -488,13 +561,18 @@ export const HomePageArchiveAd = () => {
     )
 }
 export const ProfilePageAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
     useEffect(() => {
-        if (production && window) {
+        if (isProduction && window) {
             //console.log("if true");
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            try{
+
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",error)
+            }
         }
-    }, [window])
-    if (!production) return <div className="hidden"></div>
+    }, [isProduction])
     return (
         <ins className="adsbygoogle"
             style={{ display: "block", width: "100%", minHeight: 90 }}
