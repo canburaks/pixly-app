@@ -124,7 +124,7 @@ const ContentSimilarSection = (props) => {
 						boxShadow="card"
 						bg="#f1f1f1"
                     >
-                    <Grid columns={[2,2,3,3,3,4,6]} py={[4]} >
+                    <Grid columns={[2,2,3,3,3,4,4,4,6]} py={[4]} >
                         {data.listOfContentSimilarMovies.map( item => (
                                 <ContentSimilarMovieCard item={item} key={item.slug + "cs"}/>
                         ))}
