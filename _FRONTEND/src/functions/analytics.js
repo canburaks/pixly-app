@@ -221,7 +221,7 @@ export const TopicArticleAd = () => {
             try{
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -247,7 +247,7 @@ export const TopicOrderedListAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -273,7 +273,7 @@ export const TopicOrderedListAd2 = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -299,7 +299,7 @@ export const FeedGridItemAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -326,7 +326,7 @@ export const FeedMobileTopicPageAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -352,7 +352,7 @@ export const FeedMobileCollectionAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -377,7 +377,7 @@ export const BlogPostAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -402,7 +402,7 @@ export const DirectorPageAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -426,7 +426,7 @@ export const ListBoardAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -451,7 +451,7 @@ export const ListBoardAd2 = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -476,7 +476,7 @@ export const MoviePageAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -499,7 +499,7 @@ export const MidPageAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -522,7 +522,7 @@ export const HomePageFeedAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -546,7 +546,7 @@ export const HomePageArchiveAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
@@ -569,7 +569,7 @@ export const ProfilePageAd = () => {
 
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
             } catch(e) {
-                console.log("ad error",error)
+                console.log("ad error",e)
             }
         }
     }, [isProduction])
