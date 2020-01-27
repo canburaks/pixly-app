@@ -126,7 +126,7 @@ const TopicQuery = ({ lazyvariables }) =>{
     if (error) return <div>{error.message}</div>
     if (!data && loading) return <Loading />
     if (data){
-        console.log(data.complexSearch)
+        //console.log(data.complexSearch)
         const topic = data.complexSearch.topic
         const isOrdered = topic.isOrdered
         const haveOrderedItems = data.complexSearch.topicItems && data.complexSearch.topicItems.length > 0
