@@ -47,7 +47,7 @@ const ListOfFilms = (props) => {
         
         // order of topics wrt slugs
         const featureSlugs = [
-            "romantic-comedy-movies","gangster-films","mystery",
+            "romantic-comedy","gangster-films","mystery",
             "cyberpunk","historical-figures", "art-house",
         ]
         

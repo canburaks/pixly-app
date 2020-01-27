@@ -103,7 +103,8 @@ const TopicQuery = ({ lazyvariables }) =>{
 
 
     const { loading, data, error } = useQuery(TOPIC_SEARCH_QUERY,{variables:{
-        topicSlug:slug, page,
+        topicSlug:(slug==="romantic-comedy-movies" ? "romantic-comedy" : slug),
+        page,
         minRating:filterVariables.minRating, maxRating:filterVariables.maxRating,
         minYear:filterVariables.minYear, maxYear:filterVariables.maxYear
     },partialRefetch:true})
