@@ -24,7 +24,7 @@
         "/topic/mystery",
         "/topic/video-game",
         "/topic/gangster-films",
-        "/topic/romantic-comedy-movies"
+        "/topic/romantic-comedy"
     ],
 
 
@@ -372,7 +372,7 @@
         "/topic/mystery",
         "/topic/video-game",
         "/topic/gangster-films",
-        "/topic/romantic-comedy-movies",
+        "/topic/romantic-comedy",
         "/blog/a-brief-introduction-to-collaborative-filtering",
         "/blog/django-graphql-react-integration-tutorial-part-1",
         "/blog/django-graphql-react-integration-tutorial-part-2",
