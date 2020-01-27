@@ -13,7 +13,7 @@ import { GlobalContext } from "../../";
 import JoinBanner from "../../components/JoinBanner.js"
 
 import {  PageContainer, ContentContainer, Grid, ListCoverBox, HiddenHeader, ImageCard,CollectionCard,
-    Loading, HeaderText, Text,ActivePeopleCard, FlexBox,PaginationBox
+    Loading, HeaderText, Text,ActivePeopleCard, FlexBox,PaginationBox, MessageBox,CardContainer
 } from "../../styled-components"
 
 
@@ -56,22 +56,25 @@ const PeoplePage = (props) => {
                 </Text>    
                 <hr/>
                 <FlexBox flexDirection="column">
-                    {firstPart.map(profile => (
-                        <ActivePeopleCard key={profile.username}
-                            profile={profile} 
+                    <CardContainer
 
-                        />
-                    ))}
+                    >
+                        {firstPart.map(profile => (
+                            <ActivePeopleCard key={profile.username}
+                                profile={profile} 
 
-                    <ResponsiveAd1 />
+                            />
+                        ))}
 
-                    {secondPart.map(profile => (
-                        <ActivePeopleCard key={profile.username}
-                            profile={profile} 
+                        <ResponsiveAd1 />
 
-                        />
-                    ))}
+                        {secondPart.map(profile => (
+                            <ActivePeopleCard key={profile.username}
+                                profile={profile} 
 
+                            />
+                        ))}
+                    </CardContainer>
                     <ResponsiveAd2 />
                 </FlexBox>
 

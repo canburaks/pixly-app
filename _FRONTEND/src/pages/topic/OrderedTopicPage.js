@@ -129,8 +129,11 @@ const TopicQuery = ({ lazyvariables }) =>{
         //console.log(data.complexSearch)
         const topic = data.complexSearch.topic
         const isOrdered = topic.isOrdered
+
         const haveOrderedItems = data.complexSearch.topicItems && data.complexSearch.topicItems.length > 0
-        const items = isOrdered ? data.complexSearch.topicItems : data.complexSearch.topicResult
+        const selector = haveOrderedItems // or other
+
+        const items = selector ? data.complexSearch.topicItems : data.complexSearch.topicResult
         //const quantity = haveOrderedItems ? data.complexSearch.topicItems.length : data.complexSearch.quantity 
         const quantity = data.complexSearch.quantity 
 
@@ -142,7 +145,7 @@ const TopicQuery = ({ lazyvariables }) =>{
         //console.log("size", screenSize)
         // Other variables
         const title = "See the details of the " + topic.shortName.toLowerCase() + " movie."        
-        const Liste = isOrdered ? OrderedList : UnorderedList
+        const Liste = selector ? OrderedList : UnorderedList
 
         return (
             <PageContainer>
@@ -166,7 +169,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                     flexDirection="column" pb={[4,4]} alignItems="center"
                 >
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
-                    {true && <SchemaArticle 
+                    {false && <SchemaArticle 
                         headerSize={["24px", "26px", "28px", "32px"]}
                         textSize={["14px","16px", "16px", "18px"]}
                         mt={[3]} mb={[0]} py={[0]}
@@ -280,7 +283,7 @@ const OrderedCard = ({ item, specs}) => (
                     fontSize={specs.headerSize}
                     
                 >
-                    {item.header} ({item.movie.year})
+                    {item.header || item.movie.name} ({item.movie.year})
                 </HeaderMini>
             </NewLink>
             {item.htmlContent 
@@ -404,7 +407,7 @@ const OrderedList = ({ items, speed, size}) => {
     //const onewidth = useMemo(() => window.innerWidth / 100, [size])
     //const setTotalHeight = useCallback((imagevw) => imagevw + (rightBottomPanelHeight / onewidth),[size])
 
-    //console.log("screen",onewidth)
+    console.log("screen",items)
 
     const specs = {
         isLargeScreen:size.includes("L"),
