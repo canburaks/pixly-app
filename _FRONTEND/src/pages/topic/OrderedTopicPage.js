@@ -130,7 +130,7 @@ const TopicQuery = ({ lazyvariables }) =>{
         const topic = data.complexSearch.topic
         const isOrdered = topic.isOrdered
         const haveOrderedItems = data.complexSearch.topicItems && data.complexSearch.topicItems.length > 0
-        const items = haveOrderedItems ? data.complexSearch.topicItems : data.complexSearch.topicResult
+        const items = isOrdered ? data.complexSearch.topicItems : data.complexSearch.topicResult
         //const quantity = haveOrderedItems ? data.complexSearch.topicItems.length : data.complexSearch.quantity 
         const quantity = data.complexSearch.quantity 
 
@@ -142,7 +142,7 @@ const TopicQuery = ({ lazyvariables }) =>{
         //console.log("size", screenSize)
         // Other variables
         const title = "See the details of the " + topic.shortName.toLowerCase() + " movie."        
-        const Liste = haveOrderedItems ? OrderedList : UnorderedList
+        const Liste = isOrdered ? OrderedList : UnorderedList
 
         return (
             <PageContainer>
@@ -166,7 +166,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                     flexDirection="column" pb={[4,4]} alignItems="center"
                 >
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
-                    {false && <SchemaArticle 
+                    {true && <SchemaArticle 
                         headerSize={["24px", "26px", "28px", "32px"]}
                         textSize={["14px","16px", "16px", "18px"]}
                         mt={[3]} mb={[0]} py={[0]}
