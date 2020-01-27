@@ -106,6 +106,8 @@ urlpatterns = [
     path("movie/242", handler404),
     path(f'termsofservice', TemplateView.as_view(template_name=f"others/terms_of_service.html")),
     path(f'privacy', TemplateView.as_view(template_name=f"others/privacy.html")),
+    path(f'rss/specificfeeds-verification-code.html', TemplateView.as_view(template_name=f"others/specificfeeds-verification-code.html")),
+
     #facebook bussiness
     path(f'qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html', TemplateView.as_view(template_name=f"others/qxlz5o8q9j8y9kqeehnnz9kfx2mce5.html")),
 
