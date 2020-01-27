@@ -131,7 +131,9 @@ const TopicQuery = ({ lazyvariables }) =>{
         const isOrdered = topic.isOrdered
         const haveOrderedItems = data.complexSearch.topicItems && data.complexSearch.topicItems.length > 0
         const items = haveOrderedItems ? data.complexSearch.topicItems : data.complexSearch.topicResult
+        //const quantity = haveOrderedItems ? data.complexSearch.topicItems.length : data.complexSearch.quantity 
         const quantity = data.complexSearch.quantity 
+
         const hideContent2 = (topic.htmlContent2 && topic.htmlContent2.length > 1) && window.innerWidth < 500 && !topic.showHtmlContent2
 
         //console.log(topic, items, quantity, isOrdered, screenSize)

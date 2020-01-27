@@ -64,7 +64,6 @@ class ComplexSearchQuery(object):
 
     def resolve_tag_search_quantity(self, info, **kwargs):
         tags = kwargs.get("tags")
-        print("self",self)
         tag_qs = Tag.objects.filter(slug__in=tags).only("related_movies__id", "slug").prefetch_related("related_movies")
         movie_list = set()
         for t in tag_qs:
@@ -340,7 +339,6 @@ class ComplexSearchType(graphene.ObjectType):
 
     def resolve_topic(self, info, **kwargs):
         qs = Topic.objects.filter(slug=self.topic_slug)
-        asd = "asd"
         if qs.exists():
             #print(qs.first().html_content)
             return qs.first()
@@ -349,7 +347,7 @@ class ComplexSearchType(graphene.ObjectType):
     def resolve_topic_items(self, info, **kwargs):
         #print(self.first, self.skip)
         qs = Topic.objects.filter(slug=self.topic_slug)
-        if qs.exists():
+        if qs.exists() and qs.first().items.count() > 0:
             topic = qs.first()
             #print(topic, topic.items.count())
             items =  topic.items.select_related("movie").order_by("rank")[self.skip : self.skip + self.first]
