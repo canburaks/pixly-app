@@ -992,13 +992,12 @@ class TopicItemType(DjangoObjectType, SEOType):
     def resolve_movie(self, info):
         return self.movie
 
-    def resolve_is_ordered(self, info):
-        return self.is_ordered
-
     def resolve_cover_poster(self, info, *_):
         if self.cover_poster:
             return self.cover_poster.url
-        return self.movie.cover_poster.url
+        elif self.movie.cover_poster:
+            return self.movie.cover_poster.url
+        return self.movie.poster.url
 
     def resolve_poster(self, info, *_):
         if self.poster:
@@ -1062,11 +1061,14 @@ class TopicType(DjangoObjectType, SEOType):
     class Meta:
         model = Topic
     
-    def resolve_items(self, info):
+    def resolve_items(self, info, **kwargs):
         if self.is_ordered == False:
             print("Topic is not set for ordered list. Change it")
         #print(self.items.all().select_related("movie"))
-        return self.items.all().select_related("movie").order_by("rank")
+        print(info.context)
+        print(info(), kwargs)
+
+        return self.items.all().select_related("movie").order_by("rank")[:5]
 
 
 

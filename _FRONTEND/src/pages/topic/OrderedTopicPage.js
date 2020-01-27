@@ -126,11 +126,12 @@ const TopicQuery = ({ lazyvariables }) =>{
     if (error) return <div>{error.message}</div>
     if (!data && loading) return <Loading />
     if (data){
+        console.log(data.complexSearch)
         const topic = data.complexSearch.topic
         const isOrdered = topic.isOrdered
-        const haveOrderedItems = topic.items && topic.items.length > 0
-        const items = isOrdered ? topic.items : data.complexSearch.topicResult
-        const quantity = isOrdered ? topic.items.length : data.complexSearch.quantity 
+        const haveOrderedItems = data.complexSearch.topicItems && data.complexSearch.topicItems.length > 0
+        const items = haveOrderedItems ? data.complexSearch.topicItems : data.complexSearch.topicResult
+        const quantity = data.complexSearch.quantity 
         const hideContent2 = (topic.htmlContent2 && topic.htmlContent2.length > 1) && window.innerWidth < 500 && !topic.showHtmlContent2
 
         //console.log(topic, items, quantity, isOrdered, screenSize)
@@ -163,7 +164,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                     flexDirection="column" pb={[4,4]} alignItems="center"
                 >
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
-                    <SchemaArticle 
+                    {false && <SchemaArticle 
                         headerSize={["24px", "26px", "28px", "32px"]}
                         textSize={["14px","16px", "16px", "18px"]}
                         mt={[3]} mb={[0]} py={[0]}
@@ -190,7 +191,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                                 html={topic.htmlContent2}     
                             />
                             : <HtmlContainer my={[3]} html={topic.htmlContent3} />}
-                    </SchemaArticle>
+                    </SchemaArticle>}
                     
                     {/* FILTER WITH YEAR AND RATING */}
                     {topic.searchable && <FilterPanel dispatcher={filterDispatcher} states={filterVariables} />}

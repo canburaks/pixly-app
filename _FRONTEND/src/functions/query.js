@@ -835,21 +835,21 @@ export const TOPIC_SEARCH_QUERY = gql`
                     quotes{
                         ownerName, text, movie{name, slug}, person{name, slug}, 
                     }
-                    items{
-                        rank,
-                        header,
-                        htmlContent,
-                        coverPoster, poster,
-                        references,
-                        updatedAt,
-                        persons{id,slug,name}
-                        movie{
-                            id, name,slug, year, summary,
-                            poster,coverPoster, 
-                            isBookmarked, isFaved,
-                            viewerRating,imdbRating,
-                            tags{name, slug, genreTag, subgenreTag}
-                        }
+                },
+                topicItems{
+                    rank,
+                    header,
+                    htmlContent,
+                    coverPoster, poster,
+                    references,
+                    updatedAt,
+                    persons{id,slug,name}
+                    movie{
+                        id, name,slug, year, summary,
+                        poster,coverPoster, 
+                        isBookmarked, isFaved,
+                        viewerRating,imdbRating,
+                        tags{name, slug, genreTag, subgenreTag}
                     }
                 },
                 quantity
