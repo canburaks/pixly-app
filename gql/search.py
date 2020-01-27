@@ -11,7 +11,7 @@ import django_filters
 from django.conf import settings
 from pixly.cache_functions import Cache
 from .types import (VideoType, MovieType, MovieListType, RatingType, ProfileType, PersonType,
-        CustomListType, CustomMovieType, DirectorPersonMixType, TagType,
+        CustomListType, CustomMovieType, DirectorPersonMixType, TagType, TopicItemType,
         DirectorType, TopicType, ListType, UserType, CrewType, movie_defer)
 
 def multi_word_search(text):
@@ -86,6 +86,7 @@ class ComplexSearchType(graphene.ObjectType):
     keyword_result = graphene.List(MovieType)
 
     topic = graphene.Field(TopicType)
+    topic_items = graphene.List(TopicItemType)
     topic_result = graphene.List(MovieType)
 
     def __init__(self,kwargs):
@@ -266,6 +267,12 @@ class ComplexSearchType(graphene.ObjectType):
     def resolve_quantity(self, info):
         if self.quantity:
             return self.quantity
+        tqs = Topic.objects.filter(slug=self.topic_slug)
+        if tqs.exists():
+            if tqs.first().is_ordered and tqs.first().items.count() > 3:
+                return tqs.first().items.count()
+            else:
+                return tqs.first().movies.count()
         return 0
     
     #This is for only quantity requests
@@ -331,11 +338,23 @@ class ComplexSearchType(graphene.ObjectType):
 
 
 
-    def resolve_topic(self, info):
+    def resolve_topic(self, info, **kwargs):
         qs = Topic.objects.filter(slug=self.topic_slug)
+        asd = "asd"
         if qs.exists():
             #print(qs.first().html_content)
             return qs.first()
+        return None
+
+    def resolve_topic_items(self, info, **kwargs):
+        #print(self.first, self.skip)
+        qs = Topic.objects.filter(slug=self.topic_slug)
+        if qs.exists():
+            topic = qs.first()
+            #print(topic, topic.items.count())
+            items =  topic.items.select_related("movie").order_by("rank")[self.skip : self.skip + self.first]
+            #print(items.count())
+            return items
         return None
 
     def resolve_topic_result(self, info):

@@ -80,6 +80,8 @@ class Cache():
         qs = Topic.objects.filter(slug=topic_slug)
         if not qs.exists():
             return []
+        if qs.first().is_ordered:
+            return Topic.objects.none()
         topic = qs.first()
         topic.html_content
         qs = topic.movies.all().only(
