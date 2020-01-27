@@ -108,10 +108,9 @@ const ContentSimilarSection = (props) => {
     if (error) return (<div></div>)
     if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"><Plus id="plus-loader-container" /></FlexBox>
     if (data) return (
-        <Section display="flex" flexDirection="column" px={[2]} width="100%" id="cso-section" className="content-similar-movies-section">
+        <Section display="flex" flexDirection="column" px={[2]} width="100%" id="cso-section" className="content-similar-movies-section" ref={node}>
             {data.listOfContentSimilarMovies && data.listOfContentSimilarMovies.length > 0 &&
                 <>
-                <Dl ref={node}>
                     <MessageBox 
                         subheader={`Similar ${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Movies" : "Movies" } like ${data.movie.name.trim()} (${data.movie.year})`}
                         miniheader="Contentful Similar Films"
@@ -130,12 +129,12 @@ const ContentSimilarSection = (props) => {
                         ))}
                     </Grid>
                     </MessageBox>
-                </Dl>
-                {haveManyPages(data.listOfContentSimilarMovies.length) && <PaginationBox 
-                    currentPage={page} 
-                    totalPage={data.listOfContentSimilarMovies.length >= requestQuantity ? page + 1 : page} 
-                    nextPage={nextPage} prevPage={prevPage} 
-                />}
+                {haveManyPages(data.listOfContentSimilarMovies.length) && 
+                    <PaginationBox 
+                        currentPage={page} 
+                        totalPage={data.listOfContentSimilarMovies.length >= requestQuantity ? page + 1 : page} 
+                        nextPage={nextPage} prevPage={prevPage} 
+                    />}
                 </>
             }
         </Section>

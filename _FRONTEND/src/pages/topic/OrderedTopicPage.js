@@ -131,7 +131,7 @@ const TopicQuery = ({ lazyvariables }) =>{
         const isOrdered = topic.isOrdered
 
         const haveOrderedItems = data.complexSearch.topicItems && data.complexSearch.topicItems.length > 0
-        const selector = haveOrderedItems // or other
+        const selector = isOrdered // haveOrderedItems // or other
 
         const items = selector ? data.complexSearch.topicItems : data.complexSearch.topicResult
         //const quantity = haveOrderedItems ? data.complexSearch.topicItems.length : data.complexSearch.quantity 
@@ -169,7 +169,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                     flexDirection="column" pb={[4,4]} alignItems="center"
                 >
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
-                    {false && <SchemaArticle 
+                    {true && <SchemaArticle 
                         headerSize={["24px", "26px", "28px", "32px"]}
                         textSize={["14px","16px", "16px", "18px"]}
                         mt={[3]} mb={[0]} py={[0]}
@@ -294,8 +294,8 @@ const OrderedCard = ({ item, specs}) => (
                     }} 
                 />
                 : <Text mt={[2]} fontSize={specs.textSize}>
-                        {item.movie.summary.length > 500 
-                                ? item.movie.summary.slice(0,500) + "..." 
+                        {item.movie.summary.length > 300 
+                                ? item.movie.summary.slice(0,300) + "..." 
                                 : item.movie.summary
                             }
                     </Text>
@@ -407,7 +407,7 @@ const OrderedList = ({ items, speed, size}) => {
     //const onewidth = useMemo(() => window.innerWidth / 100, [size])
     //const setTotalHeight = useCallback((imagevw) => imagevw + (rightBottomPanelHeight / onewidth),[size])
 
-    console.log("screen",items)
+    //console.log("screen",items)
 
     const specs = {
         isLargeScreen:size.includes("L"),
