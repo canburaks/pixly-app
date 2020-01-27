@@ -43,7 +43,7 @@ export const FollowUserMutation = (props) => {
 	const Identifier = (props) =>(
 		<FlexBox 
 			clickable
-			border="1px solid" 
+			border="2px solid" 
 			borderRadius="6px"
 			borderColor={active ? "rgba(0,255,0, 0.7)" :"rgba(0,0,0, 0.7)" }
 			color={active ? "rgba(0,255,0, 0.7)" :"rgba(0,0,0, 0.7)" }

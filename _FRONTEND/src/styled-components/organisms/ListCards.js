@@ -69,12 +69,12 @@ export const ActivePeopleCard = ({ profile, ...props }) => (
         alignItems="center"
         p={[2]} 
         width={"100%"} 
-        border="1px solid" 
+        borderBottom="1px solid" 
         borderColor="rgba(0,0,0, 0.2)" 
         flexWrap="wrap"
     
     >
-        <FlexBox alignItems="center"  my={[3, 3, 2]}>
+        <FlexBox alignItems="center"  mt={[3, 3, 2]}>
             <NewLink to={`/user/${profile.username}`}>
                 <Image 
                     src={profile.avatar} alt={profile.username + "avatart"}
@@ -86,7 +86,8 @@ export const ActivePeopleCard = ({ profile, ...props }) => (
                 <Text fontWeight="bold" >{profile.username}</Text>
             </NewLink>
         </FlexBox>
-        <FlexBox alignItems="center" justifyContent="space-between" width={["100%", "100%", "40%"]}>
+
+        <FlexBox alignItems="center" justifyContent="space-between" width={["100%", "100%", "100%", "40%"]}>
             <UserStatsIcon 
                 points={profile.points} 
                 lenBookmarks={profile.lenBookmarks} 
@@ -209,7 +210,7 @@ export const CollectionCard0 = (props) => (
             width={"100%"}
         ><CoverLink link={props.link} color="transparent">{props.link}</CoverLink>
         </SuperBox>
-        <HeaderMini width={"75%"} fontFamily={"playfair"} color="dark" hoverUnderline
+        <HeaderMini width={"75%"}  color="dark" hoverUnderline
             my={[2,2,3]}
             >
             <NewLink link={props.link}>
@@ -218,12 +219,13 @@ export const CollectionCard0 = (props) => (
             </dt>
             </NewLink>
         </HeaderMini>
-        <DD  
+        <Text  
             color="dark"
             textAlign="justify"
+            fontSize={["14px", "14px", "14px", "16px"]}
         >
-            {props.text.slice(0,200)}
-        </DD>
+            {props.text.slice(0,120)}
+        </Text>
         <Box position="absolute" bottom={"20px"} width={"100%"}>
             <NewLink link={props.link}  
                 fontWeight="bold" color="dark" 

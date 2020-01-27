@@ -79,7 +79,7 @@ const MoviesPage = (props) => {
         : "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"
 
     const mainpageMovies = props.data.movies.filter(m => (
-        ["ford-v-ferrari-2019", "ip-man-4-the-finale-2019", 
+        ["ford-v-ferrari-2019",
         "portrait-of-a-lady-on-fire-2019","1917-2019",
         "the-irishman-2019", "doctor-sleep-2019"].includes(m.slug)
     ))
@@ -100,7 +100,7 @@ const MoviesPage = (props) => {
             />
 
 
-            <FlexBox 
+            {false && <FlexBox 
                 overflow="hidden" flexDirection="column" 
                 position="relative"  
                 width={"100%"} 
@@ -108,7 +108,7 @@ const MoviesPage = (props) => {
                 borderColor="rgba(40,40,40, 1)"
                 zIndex={1}
             >
-                <Carousel autoplay autoplayReverse speed={500} autoplayInterval={3000} swiping>
+                <Carousel autoplay  speed={500} autoplayInterval={3000} swiping>
                     {mainpageMovies.map(movie => (
                         <FlexBox position="relative" width={"100%"} key={movie.slug} >
                             <CoverImage 
@@ -123,8 +123,8 @@ const MoviesPage = (props) => {
                                 height={["50px", "60px", "70px"]}
                                 justifyContent="center" alignItems="center"
                             >
-                                <Text fontSize={["20px", "24px", "30px", "36px"]}
-                                    width="100%" textAlign="center" 
+                                <Text fontSize={["16px","16px","16px", "18px"]}
+                                    width="100%" textAlign="left" px="16px"
                                     fontWeight="bold" color="rgba(255,255,255,0.8)" textShadow="textDark"
                                     
                                     >
@@ -134,10 +134,10 @@ const MoviesPage = (props) => {
                         </FlexBox>
                     ))}
                 </Carousel>
-            </FlexBox>
+            </FlexBox>}
 
             <ContentContainer>
-            <HeaderText textAlign="center">Popular & Upcoming Movies and List of Films  </HeaderText>
+            <HeaderText textAlign="left">Popular & Upcoming Films  </HeaderText>
             <FlexBox width={"100%"} flexDirection="column" px={[2]}>
                 <MessageBox 
                     subheader={"Popular Film Collections"}
@@ -235,6 +235,7 @@ const MoviesPage = (props) => {
                     </FlexBox>
                     <Text fontSize={[14,14,16]} fontWeight={"bold"} textAlign="center" color="red">{message}</Text>
                 </Form>
+                <SearchQueryBox lazyvariables={lazyvariables} skip={skip} initialMovies={props.data.movies} />
             </MessageBox>
             
             {/* RESULTS*/}
@@ -243,7 +244,7 @@ const MoviesPage = (props) => {
                 top={0} p={[0]}
             >
                 
-                <SearchQueryBox lazyvariables={lazyvariables} skip={skip} initialMovies={props.data.movies} />
+                
             </Box>
             </ContentContainer>
         </PageContainer>

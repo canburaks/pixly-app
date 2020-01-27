@@ -119,7 +119,7 @@ class Cache():
     # ------ Movies  ---------gql.types 
     @lru_cache(maxsize=100)
     def recent_movies(quantity=20):
-        mqs = Movie.objects.filter(year=2019, imdb_rating__gte=6.5).defer("director", "data").order_by("-updated_at")[:quantity]
+        mqs = Movie.objects.filter(year__in=[2019,2020], imdb_rating__gte=7).defer("director", "data").order_by("-updated_at")[:quantity]
         return mqs
 
     @lru_cache(maxsize=42)
