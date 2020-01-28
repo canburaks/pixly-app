@@ -2442,7 +2442,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         return 0
     
     def resolve_appears(self, info):
-        qs = self.movie.lists.filter(list_type="df").defer("movies")
+        qs = self.movie.lists.all().only("id", "slug", "name", "cover_poster").exclude(cover_poster="")
         return qs
 
 

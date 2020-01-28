@@ -28,6 +28,8 @@ import { CrewCard, MovieSimilarBox, PageContainer, ContentContainer, MovieCoverB
 	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText,
 } from "../../styled-components";
 
+import { ExpansionBox } from "../../styled-material"
+
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
 import "../pages.css";
@@ -154,37 +156,31 @@ const MoviePage = props => {
 				darken
 			/>
 
-			<FlexBox flexDirection="column" justifyContent="center" alignItems="center" mt={["30px", "30px", "18px"]}>
+			<CardContainer flexDirection="column" justifyContent="center" alignItems="center" mt={["30px", "30px", "18px"]}>
 				<Text fontWeight="bold" fontSize={["16px", "16px", "18px"]}>How much did you like the movie?</Text>
 				<RatingMutation item={item} size={50}/>
-			</FlexBox>
+			</CardContainer>
 			{/*<!-- Page Container --> */}
 
 			{/* SUMMARY */}
 			<ContentContainer zIndex={1} mt={[4]}>
-				
 				<SummaryElement />
-
 				{/* OPTIONAL HTML CONTENT*/}
 				{item.htmlContent && <HtmlContent movie={item} style={{p:{fontSize:textSize}}} />}
 
 				{/*<!--CAST Section--> */}
-				{item.crew.length > 0 && (
-					<MessageBox mb={[2]} id="movie-page-header"
-						header={`${item.name} (${item.year}) Cast & Crew`}
-						text={item.crew.length > 4 ? `Here the list of director, actors and actresses of ${item.name} (${item.year}) and their character names.` : null}
-						border={"0px"}
-						borderRadius={6}
-						boxShadow="card"
-						bg="#f1f1f1"
-					>
-						<Grid columns={[3,3,4,4,5,5,6]} width={"100%"}>
-							{allCrews.map((crew, i) => (
-								<CrewCard crew={crew} key={i + crew.person.name} translateY/>
-									))}
-						</Grid>
-					</MessageBox>
-				)}
+				{item.crew.length > 0 && 
+				<ExpansionBox
+					header={`${item.name} (${item.year}) Cast & Crew`}
+					text={item.crew.length > 4 ? `Director, Actors and Actresses of ${item.name} (${item.year})` : null}
+				>
+					<Grid columns={[3,3,4,4,5,5,6]} width={"100%"}>
+						{allCrews.map((crew, i) => (
+							<CrewCard crew={crew} key={i + crew.person.name} translateY/>
+								))}
+					</Grid>
+				</ExpansionBox>}
+
 				<MoviePageAd />
 				
 				{/* VISIT THE DIRECTOR'S OTHER MOVIES */}
@@ -301,21 +297,15 @@ const MoviePage = props => {
 
 				{/* VIDEO */}
 				{hasVideos && 
-					<>
-						<MessageBox mb={[2]} header={videoText} id="movie-page-video-header"
-							border={"0px"}
-							borderRadius={6}
-							boxShadow="card"
-							bg="#f1f1f1"
-						>
+					<ExpansionBox header={videoText}>
+
 							<LazyLoadComponent>
 								<YoutubePlayer
 									videos={item.videos}
 									title={item.name + " Videos"}
 								/>
 							</LazyLoadComponent>
-						</MessageBox>
-					</>
+					</ExpansionBox>
 				}
 			</ContentContainer>
 		</PageContainer>
@@ -349,6 +339,7 @@ const MovieGroup = ({groupItem}) => (
 
 const HtmlContent = ({ movie, ...props }) => (
     <FlexBox flexDirection="column" mt={[3,3,4]}>
+		<CardContainer>
         {movie.widePoster && 
 			<Image 
 				src={movie.widePoster} 
@@ -357,6 +348,7 @@ const HtmlContent = ({ movie, ...props }) => (
 				my={[3]}    
 			/>}
         <HtmlContainer my={[3]} html={movie.htmlContent} {...props}/>
+		</CardContainer>
     </FlexBox>
 )
 
@@ -376,10 +368,10 @@ const TrailerIcon = () => (
 )
 
 const MovieSummary = ({name, summary, year}) => (
-    <>
+    <CardContainer>
 		<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{name} ({year})</HeaderText>
 		<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>{summary}</Text>
-    </>
+    </CardContainer>
 )
 
 const MovieSummaryWithTwitter = ({item}) => {

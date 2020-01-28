@@ -20,6 +20,7 @@ import {
     TagSlider,CollectionCard, CoverLink,
     HeaderText,
     SubHeaderText,
+    CardContainer,
 } from "../styled-components"
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
@@ -137,115 +138,103 @@ const MoviesPage = (props) => {
             </FlexBox>}
 
             <ContentContainer>
-            <HeaderText textAlign="left">Popular & Upcoming Films  </HeaderText>
-            <FlexBox width={"100%"} flexDirection="column" px={[2]}>
-                <MessageBox 
-                    subheader={"Popular Film Collections"}
-                    border={"0px"}
-                    borderRadius={6}
-                    boxShadow="card"
-                    bg="#f1f1f1"
-                >
-                    <Text>
-                        We are passionately expanding our film collections. We have many great list of films that includes 
-                        the best examples of its category like&nbsp;
-                        <NewLink title="See the best arthouse movies" fontWeight="bold" follow link={"/topic/art-house"}><em title="See the best arthouse movies">Arthouse</em></NewLink>,&nbsp;
-                        <NewLink title="See the best biographical movies" fontWeight="bold" follow link={"/topic/historical-figures"}><em title="See the best biographical movies">Biography</em></NewLink>,&nbsp;
-                        <NewLink title="See the best cyberpunk movies" fontWeight="bold" follow link={"/topic/cyberpunk"}><em title="See the best cyberpunk movies">Cyberpunk</em></NewLink>,&nbsp;
-                        <NewLink title="See the best gangster and mafia movies" fontWeight="bold" follow link={"/topic/gangster-films"}><em title="See the best gangster and mafia  movies">Gangster</em></NewLink>,&nbsp;
-                        <NewLink title="See the best thought-provoking movies" fontWeight="bold" follow link={"/topic/thought-provoking"}><em title="See the best thought-provoking movies">Thought-Provoking</em></NewLink> and&nbsp;
-                        <NewLink title="See the best mystery movies" fontWeight="bold" follow link={"/topic/mystery"}><em title="See the best mystery movies">Mystery</em></NewLink> movies.
-                        Some of the popular movie collections are below. For more, visit&nbsp;
-                        <NewLink link={"/lists-of-films"} underline title="Visit All Movie List Collections" follow>
-                            <em title="See List of Film Archive">list of film collections</em>
-                        </NewLink>
-                        .
-                    </Text>
-                    <Grid columns={[2,2,3,]} py={[2]} gridColumnGap={[2]}>
-                    {mainpageTopics.map( item => (
-                        <CoverImage 
-                            src={item.coverPoster} key={"rec" + item.slug}  
-                            ratio={0.6} hoverShadow="hover"
-                            boxShadow="card"
-                            link={`/topic/${item.slug}`} 
-                            alt={`Popular Topic Film Collection: ${item.name}.`} 
-                            title={`Popular Topic Film Collection: ${item.name}.`} 
-                        />
-                    ))}
-                </Grid>
-                </MessageBox>
-            </FlexBox>
-
-            <HomePageFeedAd />
-
-            {/* SEARCH SETTING PANEL*/}
-            <MessageBox 
-                subheader="Popular and Upcoming Films"
-                text="You can also search movies with respect to release year, genre or the IMDb rating." 
-                width="100%"
-                border={"0px"}
-                borderRadius={6}
-                boxShadow="card"
-                bg="#f1f1f1"
-            
-            >
-                <Form flexWrap="wrap" onSubmit={submitHandler} py={[3]} minWidth="100%" mt={[3]} zIndex={1}>
-                    <FlexBox flexDirection={["column", "column", "row"]} width={"100%"}>
-                        <YearSlider dispatcher={yearDispatcher} showLabel/>
-                        <RatingSlider dispatcher={ratingDispatcher} showLabel/>
-                    </FlexBox>
-                    <FlexBox flexDirection={["column","column","column","row"]} alignItems="center">
-                        <TagSlider 
-                            dispatcher={tagDispatcher}  
-                            height={["30px","30px","30px","50px"]} 
-                            width={["100%","100%","100%","20%"]}
-                            minWidth="100px"
-                            px={[0,0,0,2]}     mb={[2,2,2,0]}                       
-                        />
-                        <FlexBox justifyContent="center" id="s-text-input" 
-                            minWidth={["100%","100%","100%","80%"]} alignItems="center" position="relative" 
-                            >
-                            <SearchInput type="text"   
-                                px={[2,3,4,4,4]}
-                                placeholder="Search.."
-                                autoFocus={false}
-                                value={keywords} 
-                                onChange={keywordsHandler} 
-                                minHeight="50px"
-                                width={"100%"}
-                                border="1px solid"
-                                borderColor="rgba(0,0,0, 0.15)"
-                                color="#181818"
-                                bg="rgba(180,180,180,0.45)"
-                            />
-                            <Button type="submit" 
-                                onClick={submitHandler} 
-                                position="absolute" 
-                                display="flex" justifyContent="center" alignItems="center"
-                                right={["4vw", "4vw", "2vw", "2vw"]} top={"2px"} p={0} 
-                                width={40} height={40} 
-                                hoverBg={"rgba(40,40,40,0.4)"}
-                                borderRadius="50%" 
-                                title="Click for Search"
-                                bg="dark"
-                            >
-                                <SearchIcon  stroke="white" strokeWidth="3" size={24} />
-                            </Button>
+                {/* SEARCH SETTING PANEL*/}
+                <CardContainer>
+                    <HeaderText textAlign="left">Popular & Upcoming Films  </HeaderText>
+                    <Text opacity={0.85}>You can also search movies with respect to release year, genre or the IMDb rating.</Text>
+                    <Form flexWrap="wrap" onSubmit={submitHandler} py={[3]} minWidth="100%" mt={[3]} zIndex={1}>
+                        <FlexBox flexDirection={["column", "column", "row"]} width={"100%"}>
+                            <YearSlider dispatcher={yearDispatcher} showLabel/>
+                            <RatingSlider dispatcher={ratingDispatcher} showLabel/>
                         </FlexBox>
-                    </FlexBox>
-                    <Text fontSize={[14,14,16]} fontWeight={"bold"} textAlign="center" color="red">{message}</Text>
-                </Form>
-                <SearchQueryBox lazyvariables={lazyvariables} skip={skip} initialMovies={props.data.movies} />
-            </MessageBox>
-            
-            {/* RESULTS*/}
-            <Box id="search-rresult-box"  width="100%" mt={[3,3,4]}
-                minWidth={["100%"]} minHeight={["20vw"]}
-                top={0} p={[0]}
-            >
+                        <FlexBox flexDirection={["column","column","column","row"]} alignItems="center">
+                            <TagSlider 
+                                dispatcher={tagDispatcher}  
+                                height={["30px","30px","30px","50px"]} 
+                                width={["100%","100%","100%","20%"]}
+                                minWidth="100px"
+                                px={[0,0,0,2]}     mb={[2,2,2,0]}                       
+                            />
+                            <FlexBox justifyContent="center" id="s-text-input" 
+                                minWidth={["100%","100%","100%","80%"]} alignItems="center" position="relative" 
+                                >
+                                <SearchInput type="text"   
+                                    px={[2,3,4,4,4]}
+                                    placeholder="Search.."
+                                    autoFocus={false}
+                                    value={keywords} 
+                                    onChange={keywordsHandler} 
+                                    minHeight="50px"
+                                    width={"100%"}
+                                    border="1px solid"
+                                    borderColor="rgba(0,0,0, 0.15)"
+                                    color="#181818"
+                                    bg="rgba(180,180,180,0.45)"
+                                />
+                                <Button type="submit" 
+                                    onClick={submitHandler} 
+                                    position="absolute" 
+                                    display="flex" justifyContent="center" alignItems="center"
+                                    right={["4vw", "4vw", "2vw", "2vw"]} top={"2px"} p={0} 
+                                    width={40} height={40} 
+                                    hoverBg={"rgba(40,40,40,0.4)"}
+                                    borderRadius="50%" 
+                                    title="Click for Search"
+                                    bg="dark"
+                                >
+                                    <SearchIcon  stroke="white" strokeWidth="3" size={24} />
+                                </Button>
+                            </FlexBox>
+                        </FlexBox>
+                        <Text fontSize={[14,14,16]} fontWeight={"bold"} textAlign="center" color="red">{message}</Text>
+                    </Form>
+                    <SearchQueryBox lazyvariables={lazyvariables} skip={skip} initialMovies={props.data.movies} />
                 
+                </CardContainer>
+                {/* RESULTS*/}
                 
-            </Box>
+                <HomePageFeedAd />
+
+                {/* COLLECTIONS */}
+                <FlexBox width={"100%"} flexDirection="column" px={[2]}>
+                    <MessageBox 
+                        subheader={"Popular Film Collections"}
+                        border={"0px"}
+                        borderRadius={6}
+                        boxShadow="card"
+                        bg="#f1f1f1"
+                    >
+                        <Text>
+                            We are passionately expanding our film collections. We have many great list of films that includes 
+                            the best examples of its category like&nbsp;
+                            <NewLink title="See the best arthouse movies" fontWeight="bold" follow link={"/topic/art-house"}><em title="See the best arthouse movies">Arthouse</em></NewLink>,&nbsp;
+                            <NewLink title="See the best biographical movies" fontWeight="bold" follow link={"/topic/historical-figures"}><em title="See the best biographical movies">Biography</em></NewLink>,&nbsp;
+                            <NewLink title="See the best cyberpunk movies" fontWeight="bold" follow link={"/topic/cyberpunk"}><em title="See the best cyberpunk movies">Cyberpunk</em></NewLink>,&nbsp;
+                            <NewLink title="See the best gangster and mafia movies" fontWeight="bold" follow link={"/topic/gangster-films"}><em title="See the best gangster and mafia  movies">Gangster</em></NewLink>,&nbsp;
+                            <NewLink title="See the best thought-provoking movies" fontWeight="bold" follow link={"/topic/thought-provoking"}><em title="See the best thought-provoking movies">Thought-Provoking</em></NewLink> and&nbsp;
+                            <NewLink title="See the best mystery movies" fontWeight="bold" follow link={"/topic/mystery"}><em title="See the best mystery movies">Mystery</em></NewLink> movies.
+                            Some of the popular movie collections are below. For more, visit&nbsp;
+                            <NewLink link={"/lists-of-films"} underline title="Visit All Movie List Collections" follow>
+                                <em title="See List of Film Archive">list of film collections</em>
+                            </NewLink>
+                            .
+                        </Text>
+                        <Grid columns={[2,2,3,]} py={[2]} gridColumnGap={[2]}>
+                        {mainpageTopics.map( item => (
+                            <CoverImage 
+                                src={item.coverPoster} key={"rec" + item.slug}  
+                                ratio={0.6} hoverShadow="hover"
+                                boxShadow="card"
+                                link={`/topic/${item.slug}`} 
+                                alt={`Popular Topic Film Collection: ${item.name}.`} 
+                                title={`Popular Topic Film Collection: ${item.name}.`} 
+                            />
+                        ))}
+                    </Grid>
+                    </MessageBox>
+                </FlexBox>
+
+                <MidPageAd />
             </ContentContainer>
         </PageContainer>
     );
