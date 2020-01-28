@@ -2103,7 +2103,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     def resolve_topics(self, info):
         un_topics =  list(self.movie.topics.all().exclude(cover_poster=""))
         or_topics =  list(map(lambda x: x.topic, self.movie.in_topics.all())) 
-        return un_topics + or_topics
+        return list(set(un_topics + or_topics))
 
     def resolve_content_similars_summary(self, info):
         return self.movie.content_similars_summary
