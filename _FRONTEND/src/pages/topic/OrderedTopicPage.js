@@ -132,7 +132,7 @@ const TopicQuery = ({ lazyvariables }) =>{
         const isOrdered = topic.isOrdered
 
         const haveOrderedItems = data.complexSearch.topicItems && data.complexSearch.topicItems.length > 0
-        const selector = isOrdered // haveOrderedItems // or other
+        const selector =  isOrdered //haveOrderedItems   // or other
 
         const items = selector ? data.complexSearch.topicItems : data.complexSearch.topicResult
         //const quantity = haveOrderedItems ? data.complexSearch.topicItems.length : data.complexSearch.quantity 
@@ -284,7 +284,7 @@ const OrderedCard = ({ item, specs}) => (
                     fontSize={specs.headerSize}
                     
                 >
-                    {item.header || item.movie.name} ({item.movie.year})
+                    {item.header || `${item.movie.name} (${item.movie.year})`}
                 </HeaderMini>
             </NewLink>
             {item.htmlContent 
@@ -399,7 +399,10 @@ const OrderedCard = ({ item, specs}) => (
     
 
 const OrderedList = ({ items, speed, size}) => {
-    const ordereditems = items.sort((a,b) => (a.rank || a.movie.year) - (b.rank || b.movie.year))
+    //const ordereditems = items.sort((a,b) => (a.rank || a.movie.year) - (b.rank || b.movie.year))
+    const movies = items.filter(i => i.rank !== 100).sort((a,b) => (a.rank - b.rank))
+    const nonranked = items.filter(i => i.rank === 100).sort((a,b) => (b.movie.imdbRating -a.movie.imdbRating))
+    const ordereditems = [...movies, ...nonranked]
 
     //Responsive Height
     const rightTextPanelHeight = 60
