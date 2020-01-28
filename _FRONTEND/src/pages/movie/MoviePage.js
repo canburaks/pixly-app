@@ -118,7 +118,7 @@ const MoviePage = props => {
 	const showVideos = item.videos && item.videos.length > 0
 	const showDirectorFavourite = item.appears && item.appears.length > 0
 	const showHtmlContent = item.htmlContent && item.htmlContent.length >10
-	//console.log(item,showAd1)
+	console.log(item)
 
     useEffect(()=>{
         if (props.location.hash){
@@ -259,21 +259,15 @@ const MoviePage = props => {
 
 				{/*<!--LIST Section--> */}
 				{item.appears.length > 0 && (
-					<>
-					<MessageBox mb={[2]} id="movie-page-topic-section"
-						miniheader={messageBoxTopicHeader}
-						text={messageBoxTopicText}
-						border={"0px"}
-						borderRadius={6}
-						boxShadow="card"
-						bg="#f1f1f1"
-					>
+					<CardContainer>
+						<SubHeaderText fontWeight="bold">Film {item.appears.length >1 ? "Lists" : "List"}</SubHeaderText>
+						<Text opacity={0.85}><em>The Film {item.appears.length >1 ? "lists" : "list"}  that includes {item.name}</em></Text>
 						<Grid columns={[1,2,2,2,2,3,4]} width={"100%"} py={[3]} mt={2}>
 							{item.appears.map((list, i) => (
 								<CoverImage
 									boxShadow="card" hoverShadow translateY
 									src={list.coverPoster} borderRadius={6}
-									ratio={0.55}
+									ratio={0.40}
 									link={`/list/${list.slug}/1`} follow={item.isImportantPage ? true : undefined}
 									title={`${list.name}`}
 									alt={`${list.name}`}
@@ -281,9 +275,7 @@ const MoviePage = props => {
 								/>
 								))}
 						</Grid>
-					</MessageBox>
-		
-					</>
+					</CardContainer>
 				)}
 
 				{false && showAd1 && <HomePageFeedAd/> }
