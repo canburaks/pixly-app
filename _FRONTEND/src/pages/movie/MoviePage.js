@@ -78,16 +78,16 @@ const MoviePage = props => {
 	//console.log(directorFilter)
 
 
-	const listsThatInvolveText = useMemo(() => {
-		if(item.appears.length > 0){
-			const directornames = item.appears.map(list => list.relatedPersons[0].name).join(", ")
-			const text = `${item.name} is the favorite movie of ${directornames}. You can check these great film lists that includes ${item.name}`
-			return text
-		}
-		return null
-	},[item.slug] )
+	//const listsThatInvolveText = useMemo(() => {
+	//	if(item.appears.length > 0){
+	//		const directornames = item.appears.map(list => list.relatedPersons[0].name).join(", ")
+	//		const text = `${item.name} is the favorite movie of ${directornames}. You can check these great film lists that includes ${item.name}`
+	//		return text
+	//	}
+	//	return null
+	//},[item.slug] )
 
-	//console.log(item.appears, isFavOfDirectors)
+	console.log(item.appears)
 	//console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
 	//console.log(item.seoShortDescription)
     const hasTwitter = useMemo(() => (item.twitter && item.twitter.length > 5) ? true : false,[])
@@ -256,6 +256,36 @@ const MoviePage = props => {
 		
 					</>
 				)}
+
+				{/*<!--LIST Section--> */}
+				{item.appears.length > 0 && (
+					<>
+					<MessageBox mb={[2]} id="movie-page-topic-section"
+						miniheader={messageBoxTopicHeader}
+						text={messageBoxTopicText}
+						border={"0px"}
+						borderRadius={6}
+						boxShadow="card"
+						bg="#f1f1f1"
+					>
+						<Grid columns={[1,2,2,2,2,3,4]} width={"100%"} py={[3]} mt={2}>
+							{item.appears.map((list, i) => (
+								<CoverImage
+									boxShadow="card" hoverShadow translateY
+									src={list.coverPoster} borderRadius={6}
+									ratio={0.55}
+									link={`/list/${list.slug}/1`} follow={item.isImportantPage ? true : undefined}
+									title={`${list.name}`}
+									alt={`${list.name}`}
+									key={list.name + i} 
+								/>
+								))}
+						</Grid>
+					</MessageBox>
+		
+					</>
+				)}
+
 				{false && showAd1 && <HomePageFeedAd/> }
 
 				{/*<!--SIMILAR Section--> */}
@@ -263,35 +293,7 @@ const MoviePage = props => {
 					<SimilarMovies movie={item} />
 				</Box>
 
-				{/*<!--APPEARS IN  LIST Section--> */}
-				{item.appears.length > 0 && (
-					<MessageBox mb={[2]} 
-						header={`Film Lists`}
-						text={listsThatInvolveText}
-						border={"0px"}
-						borderRadius={6}
-						boxShadow="card"
-						bg="#f1f1f1"
-					>
-					<Grid columns={[2,3,3,4]}>
-						{item.appears.map((liste, index) => (
-							<Card width={"100%"} p={[1]}  height={"100%"} boxShadow="card"  maxWidth={"200px"} key={liste.slug}>
-								<Image
-									src={liste.relatedPersons[0].poster} 
-									borderRadius={"8px"}
-									alt={liste.name + " image"}
-									title={liste.name}
-								/>
-								<NewLink to={`/list/${liste.slug}/1`} hoverUnderline>
-									<Text fontSize={["xs", "xs", "s"]} fontWeight="bold" >{liste.name}</Text>
-								</NewLink>
-								<NewLink to={`/person/${liste.relatedPersons[0].slug}`} hoverUnderline>
-									<Text fontSize={["xs", "xs", "s"]} opacity={0.8} mt={"auto"} >{liste.relatedPersons[0].name}</Text>
-								</NewLink>
-							</Card>))}
-					</Grid>
-					</MessageBox>
-				)}
+
 
 				<MidPageAd />
 

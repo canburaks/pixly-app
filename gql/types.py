@@ -882,6 +882,8 @@ class ListType(DjangoObjectType, SocialMediaType, SEOType):
     followers = graphene.List("gql.types.ProfileType")
     num_movies = graphene.Int()
     poster = graphene.String()
+    cover_poster = graphene.String()
+
     list_type = graphene.String()
     slug = graphene.String()
 
@@ -925,8 +927,13 @@ class ListType(DjangoObjectType, SocialMediaType, SEOType):
         return self.movies.count()
     
     def resolve_poster(self,info):
-        if self.liste.poster!="" and self.liste.poster!=None:
-            return self.liste.poster.url
+        if self.poster!="" and self.poster!=None:
+            return self.poster.url
+        return None
+
+    def resolve_cover_poster(self,info):
+        if self.cover_poster!="" and self.cover_poster!=None:
+            return self.cover_poster.url
         return None
 
     def resolve_followers(self,info, *_):
@@ -2442,7 +2449,8 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         return 0
     
     def resolve_appears(self, info):
-        qs = self.movie.lists.all().only("id", "slug", "name", "cover_poster").exclude(cover_poster="")
+        QS = Q(cover_poster=None) | Q(cover_poster="")
+        qs = self.movie.lists.all().only("id", "slug", "name", "cover_poster").exclude(QS)
         return qs
 
 
