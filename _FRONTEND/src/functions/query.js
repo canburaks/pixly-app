@@ -47,10 +47,7 @@ export const MOVIE = gql`
             viewerRating,
             viewerPoints,
             appears{
-                id, name,slug, owner{id, username},
-                relatedPersons{
-                    id, name, poster, coverPoster, hasCover, slug
-                }
+                id, name,slug,coverPoster
             }
             },
             viewer{id,username,points, lists{id,name, numMovies}}

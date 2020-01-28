@@ -192,14 +192,13 @@ const RecommendationSection = ({num=19}) => {
             {data.listOfSimilarMovies && data.listOfSimilarMovies.length > 0 &&
                 <>
                     <MessageBox 
-                        subheader={`Film Recommendations: Movies Similar to ${data.movie.name.trim()} (${data.movie.year})`}
-                        miniheader="People also like"
+                        subheader={`Algorithmic Film Recommendations`}
+                        miniheader="You may also like"
                         text={
                             `Our AI-assisted algorithm found that those movies are showing high similarity to ${data.movie.name.trim()}. ` +
                             `The movies like ${data.movie.name.trim()} in this section not only consider the common content elements, ` + 
                             `but also the personal interest of people who watch them. ` +
-                            `People who like ${data.movie.name.trim()} also like and give high ratings below movies. ` + 
-                            `The chance of you will like them are highly probable, if you like ${data.movie.name.trim()}.`
+                            `People who like ${data.movie.name.trim()} also like and give high ratings below movies.` 
                         }
 						border={"0px"}
 						borderRadius={6}
@@ -262,7 +261,7 @@ const ContentSimilarMovieCard = ({ item }) => (
             >
                     <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
             </Text>
-			<TagBox tags={item.tagNames || []} num={4} color={"light"}/>
+			<TagBox tags={item.tagNames || []} num={2} color={"light"}/>
 		</FlexBox>
 	</SuperBox>
 )
@@ -287,7 +286,7 @@ const MovieRecommendationCard = ({ item, speed }) => (
 			<Text color="light" fontWeight="bold" mb={[2]} lineHeight={["16px", "16px", "18px"]}>
                 <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
             </Text>
-			    <TagBox tags={item.nongenreTags || []} num={6} color={"light"}/>
+			    <TagBox tags={item.nongenreTags || []} num={4} color={"light"}/>
 		</FlexBox>
 
 	</SuperBox>
