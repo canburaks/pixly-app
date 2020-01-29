@@ -295,8 +295,8 @@ const OrderedCard = ({ item, specs}) => (
                     }} 
                 />
                 : <Text mt={[2]} fontSize={specs.textSize}>
-                        {item.movie.summary.length > 300 
-                                ? item.movie.summary.slice(0,300) + "..." 
+                        {item.movie.summary.length > 450 
+                                ? item.movie.summary.slice(0,450) + "..." 
                                 : item.movie.summary
                             }
                     </Text>
