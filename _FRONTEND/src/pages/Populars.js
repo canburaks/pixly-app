@@ -278,13 +278,8 @@ const SearchQueryBox = ({lazyvariables, skip, initialMovies}) => {
         return (
             <>
             <Grid columns={networkSensitiveColumns} pb={[4]} gridColumnGap={[1]} gridRowGap={[1]}>
-                {firstPart.map( item => (
+                {data.complexSearch.result.map( item => (
                     <MovieRecommendationCard item={item} speed={speed} key={"rec" + item.id} />
-                ))}
-            </Grid>
-            <Grid columns={networkSensitiveColumns} py={[4]} gridColumnGap={[1]} gridRowGap={[1]}>
-                {secondPArt.map( item => (                    
-                        <MovieRecommendationCard item={item} speed={speed} />
                 ))}
             </Grid>
             {data.complexSearch.quantity >= 18 &&
