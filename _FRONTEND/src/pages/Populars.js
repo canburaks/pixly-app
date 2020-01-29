@@ -262,15 +262,8 @@ const SearchQueryBox = ({lazyvariables, skip, initialMovies}) => {
         return (
             <FlexBox flexDirection="column" width="100%">
                 <Grid columns={networkSensitiveColumns} pb={[4]} gridColumnGap={[1]} gridRowGap={[1]} width="100%">
-                    {firstPart.map( item => (
+                    {initialMovies.map( item => (
                         <MovieRecommendationCard item={item} speed={speed} key={"rec" + item.id} />
-                    ))}
-                </Grid>
-                <Grid columns={networkSensitiveColumns} py={[4]} gridColumnGap={[1]} gridRowGap={[1]} width="100%">
-                    {secondPArt.map( item => (
-                        <LazyLoadComponent key={"rec" + item.id} >
-                            <MovieRecommendationCard item={item} speed={speed} />
-                        </LazyLoadComponent>
                     ))}
                 </Grid>
             </FlexBox>
@@ -290,10 +283,8 @@ const SearchQueryBox = ({lazyvariables, skip, initialMovies}) => {
                 ))}
             </Grid>
             <Grid columns={networkSensitiveColumns} py={[4]} gridColumnGap={[1]} gridRowGap={[1]}>
-                {secondPArt.map( item => (
-                    <LazyLoadComponent key={"rec" + item.id} >
+                {secondPArt.map( item => (                    
                         <MovieRecommendationCard item={item} speed={speed} />
-                    </LazyLoadComponent>
                 ))}
             </Grid>
             {data.complexSearch.quantity >= 18 &&

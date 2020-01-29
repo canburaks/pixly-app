@@ -228,7 +228,7 @@ export const TopicArticleAd = () => {
     //if (!production) return <div className="hidden"></div>
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block",textAlign:"center", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block",textAlign:"center", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-client="ca-pub-9259748524746137"
             data-ad-layout="in-article"
             data-ad-format="fluid"
@@ -254,7 +254,7 @@ export const TopicOrderedListAd = () => {
     //if (!production) return <div className="hidden"></div>
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-client="ca-pub-9259748524746137"
             data-ad-format="fluid"
             data-ad-layout-key="-fg+51+93-c1-8l"
@@ -280,7 +280,7 @@ export const TopicOrderedListAd2 = () => {
     //if (!production) return <div className="hidden"></div>
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-client="ca-pub-9259748524746137"
             data-ad-format="fluid"
             data-ad-layout-key="-fg+51+93-c1-8l"
@@ -306,7 +306,7 @@ export const FeedGridItemAd = () => {
     //if (!production) return <div className="hidden"></div>
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-client="ca-pub-9259748524746137"
             data-ad-slot="3012994157"
             data-ad-format="auto"
@@ -333,7 +333,7 @@ export const FeedMobileTopicPageAd = () => {
     //if (!production) return <div className="hidden"></div>
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-format="fluid"
             data-ad-layout-key="-6f+bs+35+1z+37"
             data-ad-client="ca-pub-9259748524746137"
@@ -359,7 +359,7 @@ export const FeedMobileCollectionAd = () => {
     //if (!production) return <div className="hidden"></div>
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-format="fluid"
             data-ad-layout-key="-6f+bs+35+1z+37"
             data-ad-client="ca-pub-9259748524746137"
@@ -383,7 +383,7 @@ export const BlogPostAd = () => {
     }, [isProduction])
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", textAlign:"center" , minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", textAlign:"center" , minHeight: 50, height:"auto" }}
             data-ad-layout="in-article"
             data-ad-format="fluid"
             data-ad-client="ca-pub-9259748524746137"
@@ -408,7 +408,7 @@ export const DirectorPageAd = () => {
     }, [isProduction])
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-format="fluid"
             data-ad-layout-key="-f9+5v+4m-d8+7b"
             data-ad-client="ca-pub-9259748524746137"
@@ -482,7 +482,7 @@ export const MoviePageAd = () => {
     }, [isProduction])
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-client="ca-pub-9259748524746137"
             data-ad-slot="9217070427"
             data-ad-format="auto"
@@ -505,7 +505,7 @@ export const MidPageAd = () => {
     }, [isProduction])
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-format="fluid"
             data-ad-layout-key="-f7+5u+4t-da+6l"
             data-ad-client="ca-pub-9259748524746137"
@@ -529,7 +529,7 @@ export const HomePageFeedAd = () => {
     //if (!production) return <div className="hidden"></div>
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-client="ca-pub-9259748524746137"
             data-ad-slot="5598417282"
             data-ad-format="auto"
@@ -552,7 +552,7 @@ export const HomePageArchiveAd = () => {
     }, [isProduction])
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-client="ca-pub-9259748524746137"
             data-ad-slot="3842482482"
             data-ad-format="auto"
@@ -575,7 +575,7 @@ export const ProfilePageAd = () => {
     }, [isProduction])
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 30, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto" }}
             data-ad-client="ca-pub-9259748524746137"
             data-ad-slot="2914320299"
             data-ad-format="auto"
