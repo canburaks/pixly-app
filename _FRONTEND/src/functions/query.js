@@ -1,5 +1,20 @@
 import gql from "graphql-tag";
 
+
+export const MOVIE_GROUP = gql`
+    query movieGroup($slug:String){
+        slug, header, htmlContent, poster, coverPoster, posterType
+        seoTitle,seoDescription, havePage,
+        movie{
+            id,
+            slug,
+            name,
+            year,
+            poster,
+            coverPoster
+    }
+`
+
 export const MOVIE = gql`
     query getMovie($id:Int, $slug:String){
         movie(id:$id, slug:$slug){

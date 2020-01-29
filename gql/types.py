@@ -561,14 +561,11 @@ class MovieGroupType(DjangoObjectType, SEOType):
     def resolve_cover_poster(self, info, *_):
         if self.cover_poster:
             return self.cover_poster.url
-        return self.movie.cover_poster.url
 
     def resolve_poster(self, info, *_):
         if self.poster:
-            return self.poster
-        elif self.movie.large_poster:
-            return self.movie.large_poster.url
-        return self.movie.poster.url
+            return self.poster.url
+
 
     def resolve_created_at(self, info, *_):
         str_date = self.created_at.__str__()
