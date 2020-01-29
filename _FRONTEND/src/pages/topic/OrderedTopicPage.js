@@ -171,19 +171,19 @@ const TopicQuery = ({ lazyvariables }) =>{
                 >
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
                     {true && <SchemaArticle 
-                        headerSize={["24px", "26px", "28px", "32px"]}
-                        textSize={["14px","16px", "16px", "18px"]}
-                        mt={[3]} mb={[0]} py={[0]}
-                        header={topic.name}
-                        quote={topic.quotes.length > 0 && topic.quotes[0]}
-                        description={topic.seoShortDescription}
-                        summary={topic.summary}
-                        content={topic.content}
-                        image={topic.coverPoster}
-                        createdAt={topic.createdAt}
-                        updatedAt={topic.updatedAt}
-                        wiki={topic.wiki}
-                    >   
+                            headerSize={["24px", "26px", "28px", "32px"]}
+                            textSize={["14px","16px", "16px", "18px"]}
+                            mt={[3]} mb={[0]} py={[0]}
+                            header={topic.name}
+                            quote={topic.quotes.length > 0 && topic.quotes[0]}
+                            description={topic.seoShortDescription}
+                            summary={topic.summary}
+                            content={topic.content}
+                            image={topic.coverPoster}
+                            createdAt={topic.createdAt}
+                            updatedAt={topic.updatedAt}
+                            wiki={topic.wiki}
+                        >   
                         <HtmlContainer 
                             my={[3]} 
                             html={topic.htmlContent}     
