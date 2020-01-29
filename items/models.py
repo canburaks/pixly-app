@@ -65,6 +65,12 @@ def movie_group_poster_path(instance, filename):
 def movie_group_cover_path(instance, filename):
     return "movie-group/{0}/items/cover/{1}".format(instance.slug,filename)
 
+
+def tag_group_poster_path(instance, filename):
+    return "tag-group/{0}/items/poster/{1}".format(instance.slug,filename)
+def tag_group_cover_path(instance, filename):
+    return "tag-group/{0}/items/cover/{1}".format(instance.slug,filename)
+
 LIST_RELATION_TYPE = (
     ('df', "Director's Favourite"),
     ("fw", "Festival Winner Movies"),
@@ -697,12 +703,13 @@ POSTER_TYPE = (
     ("c", "Cover (Horizontal) Image"),
     ('p', "Vertical Poster"),
 )
-class MovieGroup(models.Model):
+class MovieGroup(SEO, MainPage):
     slug = models.SlugField(db_index=True, max_length=50 )
     header = models.CharField(max_length=80, null=True, blank=True, help_text="Name")
+    have_page = models.BooleanField(default=False, help_text="if yes, group treated like list or topic and have unique url")
 
 
-    cover_poster = models.ImageField(blank=True, null=True, upload_to=movie_group_cover_path)
+    cover_poster = models.ImageField(blank=True, null=True, upload_to=movie_group_cover_path, help_text="600x338px")
     poster = models.ImageField(blank=True, null=True, upload_to=movie_group_poster_path)
     poster_type = models.CharField(default="cover", max_length=1, choices=POSTER_TYPE)
     topics = models.ManyToManyField("items.Topic", related_name="groups",null=True, blank=True )
@@ -728,10 +735,10 @@ class MovieGroupItem(models.Model):
                 help_text = "Detailed description of the item. Use similar bu unique " + 
                             "description for each item in the group")
 
-
-
     def __str__(self):
         return self.movie.name
+
+
 
 
 class List(SEO,MainPage):
@@ -742,6 +749,8 @@ class List(SEO,MainPage):
         help_text="Minimumun 250 character, otherwise will not be shown.")
     movies = models.ManyToManyField(Movie, related_name="lists")
     content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
+    html_content = RichTextField(max_length=10000,null=True, blank=True,
+                help_text = "Description for all the movies and topic. In mov")
 
     slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
 
