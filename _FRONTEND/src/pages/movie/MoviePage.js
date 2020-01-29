@@ -87,7 +87,7 @@ const MoviePage = props => {
 	//	return null
 	//},[item.slug] )
 
-	console.log(item.appears)
+	//console.log(item.appears)
 	//console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
 	//console.log(item.seoShortDescription)
     const hasTwitter = useMemo(() => (item.twitter && item.twitter.length > 5) ? true : false,[])
@@ -118,7 +118,7 @@ const MoviePage = props => {
 	const showVideos = item.videos && item.videos.length > 0
 	const showDirectorFavourite = item.appears && item.appears.length > 0
 	const showHtmlContent = item.htmlContent && item.htmlContent.length >10
-	console.log(item)
+	//console.log(item)
 
     useEffect(()=>{
         if (props.location.hash){
@@ -156,7 +156,7 @@ const MoviePage = props => {
 				darken
 			/>
 
-			<CardContainer flexDirection="column" justifyContent="center" alignItems="center" mt={["30px", "30px", "18px"]}>
+			<CardContainer flexDirection="column" justifyContent="center" alignItems="center" mt={[0]}>
 				<Text fontWeight="bold" fontSize={["16px", "16px", "18px"]}>How much did you like the movie?</Text>
 				<RatingMutation item={item} size={50}/>
 			</CardContainer>
@@ -364,7 +364,7 @@ const TrailerIcon = () => (
 const MovieSummary = ({name, summary, year}) => (
     <CardContainer>
 		<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{name} ({year})</HeaderText>
-		<Text mt={[2]} fontSize={["14px", "16px", "18px"]}>{summary}</Text>
+		<Text mt={[2]} fontSize={["14px", "16px", "18px"]} opacity={0.85}>{summary}</Text>
     </CardContainer>
 )
 

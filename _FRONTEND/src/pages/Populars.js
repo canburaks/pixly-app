@@ -260,20 +260,20 @@ const SearchQueryBox = ({lazyvariables, skip, initialMovies}) => {
         const firstPart = initialMovies.slice(0, 12)
         const secondPArt = initialMovies.slice(12)
         return (
-            <>
-            <Grid columns={networkSensitiveColumns} pb={[4]} gridColumnGap={[1]} gridRowGap={[1]}>
-                {firstPart.map( item => (
-                    <MovieRecommendationCard item={item} speed={speed} key={"rec" + item.id} />
-                ))}
-            </Grid>
-            <Grid columns={networkSensitiveColumns} py={[4]} gridColumnGap={[1]} gridRowGap={[1]}>
-                {secondPArt.map( item => (
-                    <LazyLoadComponent key={"rec" + item.id} >
-                        <MovieRecommendationCard item={item} speed={speed} />
-                    </LazyLoadComponent>
-                ))}
-            </Grid>
-            </>
+            <FlexBox flexDirection="column" width="100%">
+                <Grid columns={networkSensitiveColumns} pb={[4]} gridColumnGap={[1]} gridRowGap={[1]} width="100%">
+                    {firstPart.map( item => (
+                        <MovieRecommendationCard item={item} speed={speed} key={"rec" + item.id} />
+                    ))}
+                </Grid>
+                <Grid columns={networkSensitiveColumns} py={[4]} gridColumnGap={[1]} gridRowGap={[1]} width="100%">
+                    {secondPArt.map( item => (
+                        <LazyLoadComponent key={"rec" + item.id} >
+                            <MovieRecommendationCard item={item} speed={speed} />
+                        </LazyLoadComponent>
+                    ))}
+                </Grid>
+            </FlexBox>
         )
     }
     if (loading && data===undefined) return <FlexBox width="100%" justifyContent="center" alignItems="center" position="relative" minHeight="250px"><LoadingIcon text="Searching"/></FlexBox>
