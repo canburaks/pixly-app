@@ -510,10 +510,11 @@ class MovieType(DjangoObjectType):
         return False
 
 
-class MovieGroupType(DjangoObjectType):
+class MovieGroupType(DjangoObjectType, SEOType):
     slug = graphene.String()
     header = graphene.String()
-    
+    have_page = graphene.Boolean()
+
     cover_poster = graphene.String()
     poster = graphene.String()
     poster_type = graphene.String() #poster or cover was set in admin panel
@@ -541,6 +542,18 @@ class MovieGroupType(DjangoObjectType):
 
     def resolve_html_content(self, info):
         return self.html_content
+
+    def resolve_seo_title(self, info, *_):
+        return self.seo_title
+
+    def resolve_seo_description(self, info, *_):
+        return self.seo_description
+
+    def resolve_main_page(self, info, *_):
+        return self.main_page
+
+    def resolve_have_page(self, info, *_):
+        return self.have_page
 
     def resolve_poster_type(self, info):
         return self.poster_type.lower()

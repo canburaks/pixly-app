@@ -127,6 +127,9 @@ class MovieGroupItemStackInline(admin.StackedInline):
 @admin.register(MovieGroup)
 class MovieGroupAdmin(admin.ModelAdmin):
     list_display = ("slug", "header", )
+    search_fields = ('have_page', "header", 'slug', )
+    list_filter = ("have_page", )
+
     #raw_id_fields = ['movies', "topics",]
     inlines = [MovieGroupItemStackInline]
 
@@ -160,6 +163,8 @@ class ListAdmin(admin.ModelAdmin):
     raw_id_fields = ['movies', "owner", "related_persons"]
     list_select_related = ('owner',)
     list_filter = ('list_type', "is_newest")
+    search_fields = ('name', "tmdb_id", 'id', )
+
     #exclude = ('related_persons',)
     autocomplete_lookup_fields = {
         'm2m': ['movies', ],

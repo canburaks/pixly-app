@@ -4,7 +4,7 @@ from django.contrib.auth import logout, get_user_model
 from django.contrib.auth.models import User 
 from django.core.cache import cache
 from django_mysql.models import JSONField
-from items.models import Movie,Rating, List,  Video, Topic, Tag
+from items.models import Movie,Rating, List,  Video, Topic, Tag,MovieGroup
 from persons.models import Person,  Director, Crew
 from persons.profile import Profile, Follow
 from persona.models import Recommendation, Persona
@@ -22,7 +22,7 @@ import django_filters
 from .types import (VideoType, MovieType, MovieListType, RatingType, ProfileType, PersonType,TagType,
         CustomListType, CustomMovieType, DirectorPersonMixType,CountryType, PersonaType,
         DirectorType, TopicType, ListType, UserType, CrewType, movie_defer,
-        CustomSearchType, AdvanceSearchType, PostType, MainPageType)
+        CustomSearchType, AdvanceSearchType, PostType, MainPageType, MovieGroupType)
 from .search import ComplexSearchType, ComplexSearchQuery
 from .persona_query import CustomPersonaType
 from functools import lru_cache
@@ -682,6 +682,18 @@ class Query(ListQuery, SearchQuery,ComplexSearchQuery, graphene.ObjectType):
                 slug=graphene.String(default_value = None))
 
     tag_movies = graphene.List(CustomMovieType,slug=graphene.String(default_value = None))
+
+    movie_group = graphene.Field(MovieGroupType,slug=graphene.String(default_value = None))
+
+
+    def resolve_movie_group(self, info, **kwargs):
+        slug = kwargs.get("slug")
+        #ip = info.context.META.get('REMOTE_ADDR')
+        if slug:
+            mqs = MovieGroup.objects.filter(slug=slug)
+            if  mqs.exists():
+                return mqs.first()
+        return None
 
     def resolve_film(self, info, **kwargs):
         slug = kwargs.get("slug")
