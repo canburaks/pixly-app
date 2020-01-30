@@ -2084,6 +2084,9 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     in_page_groups = graphene.List("gql.types.MovieGroupItemType")
     groups = graphene.List("gql.types.MovieGroupType")
 
+    # asap remove
+    group_items = graphene.List("gql.types.MovieGroupItemType")
+
 
     def __init__(self, id=None, slug=None, viewer=None):
         #print(self,  id, slug)
