@@ -118,7 +118,7 @@ const MoviePage = props => {
 	const showVideos = item.videos && item.videos.length > 0
 	const showDirectorFavourite = item.appears && item.appears.length > 0
 	const showHtmlContent = item.htmlContent && item.htmlContent.length >10
-	console.log(item)
+	//console.log(item)
 
     useEffect(()=>{
         if (props.location.hash){
@@ -225,7 +225,7 @@ const MoviePage = props => {
 					))
 				}
 				
-				{/* FILM GROUPS */}
+				{/* FILM IN-PAGE GROUPS */}
 				{item.inPageGroups.map((gi, i) => <MovieGroup groupItem={gi} key={item.slug + "group-items" + i} /> )}
 
 				{/*<!--TOPICS Section--> */}
@@ -253,10 +253,29 @@ const MoviePage = props => {
 								))}
 						</Grid>
 					</MessageBox>
-		
 					</>
 				)}
 
+				{/*<!--GROUPS  Section--> */}
+				{item.groups.length > 0 && (
+					<CardContainer>
+						<HeaderMini>The Other Film Groups</HeaderMini>
+						<Text opacity={0.85}>{item.name} ({item.year}) is also in below film {item.groups.length>1 ? "groups" : "group"}. Maybe you would like to check it out?</Text>
+						<Grid columns={[1,2,2,2,2,3,4]} width={"100%"} py={[3]} mt={2}>
+							{item.groups.map((group, i) => (
+								<CoverImage
+									boxShadow="card" hoverShadow translateY
+									src={group.coverPoster} borderRadius={6}
+									ratio={0.55}
+									link={`/tag/${group.slug}`} follow={true}
+									title={group.header}
+									alt={group.header}
+									key={group.slug} 
+								/>
+								))}
+						</Grid>
+					</CardContainer>
+				)}
 				{/*<!--LIST Section--> */}
 				{item.appears.length > 0 && (
 					<CardContainer>

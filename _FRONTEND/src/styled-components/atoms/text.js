@@ -159,7 +159,7 @@ export const SubHeaderText0 = styled('h2')({
 )
 
 
-export const HM = styled("h4")`
+export const HM = styled("h3")`
     :hover {
       text-decoration:${props => props.hoverUnderline && "underline"};
     };
@@ -215,7 +215,10 @@ export const HeaderMini = styled(HM)({
 )
 
 HeaderMini.defaultProps = {
-  fontSize: ["18px", "18px", "20px", "22px", "24px", "26px"]
+  fontSize: ["20px", "20px", "24px", "28px"],
+  fontWeight:"bold",
+  opacity:0.75,
+  marginTop: "16px"
 }
 SubHeaderText.defaultProps = {
   fontSize: ["20px", "20px", "22px", "26px", "28px", "30px"]
