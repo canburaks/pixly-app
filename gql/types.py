@@ -2114,7 +2114,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         return [x.group for x in gitems]
 
     def resolve_in_page_groups(self, info):
-        return self.movie.group_items.all().exclude(group__have_page=False)
+        return self.movie.group_items.all().exclude(group__have_page=True)
 
     # asap remove it
     def resolve_group_items(self, info):
