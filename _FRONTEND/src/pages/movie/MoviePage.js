@@ -226,7 +226,7 @@ const MoviePage = props => {
 				}
 				
 				{/* FILM GROUPS */}
-				{item.groupItems.map((gi, i) => <MovieGroup groupItem={gi} key={item.slug + "group-items" + i} /> )}
+				{item.inPageGroups.map((gi, i) => <MovieGroup groupItem={gi} key={item.slug + "group-items" + i} /> )}
 
 				{/*<!--TOPICS Section--> */}
 				{item.topics.length > 0 && (
