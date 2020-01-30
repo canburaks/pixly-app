@@ -219,21 +219,10 @@
     },
     "include": [
       "",
+      "/",
       "/lists-of-films",
-      "/topic/art-house",
-      "/topic/based-on-true-story",
-      "/topic/cyberpunk",
-      "/topic/dialogue-focused",
-      "/topic/thought-provoking",
-      "/topic/feel-good-movies",
-      "/topic/bechdel-test",
-      "/topic/lgbtq-plus-films",
-      "/topic/controversial-films",
-      "/topic/historical-figures",
-      "/topic/mystery",
-      "/topic/video-game",
-      "/topic/gangster-films",
-      "/topic/romantic-comedy"
+      "/popular-and-upcoming-movies"
+
   ],
     "publicPath": "/"
   }

@@ -36,7 +36,7 @@ import { rgba } from "polished";
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
 	  appbar:{
-		background:"rgba(80,80,80, 0.7)"
+		background:"rgba(20,20,20, 0.7)",
 		
 	  },
 	  listitem:{

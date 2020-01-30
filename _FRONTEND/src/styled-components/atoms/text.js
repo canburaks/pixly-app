@@ -122,6 +122,7 @@ export const HeaderText = styled('h1')({
   marginTop:"8px",
   cursor:props => props.clickable ? "pointer" : "inherit",
   textShadow:props => props.textShadow || themeGet("shadows.lightGray"),
+  fontFamily:props => props.textShadow || themeGet("fonts.header"),
   wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
 
 },
@@ -142,7 +143,8 @@ export const SubHeaderText0 = styled('h2')({
   color:"dark",
   cursor:props => props.clickable ? "pointer" : "inherit",
   textShadow:props => props.textShadow || themeGet("shadows.lightGray"),
-  wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal"
+  wordSpacing: props => props.wordSpacing ? props.wordSpacing : "normal",
+  fontFamily:props => props.textShadow || themeGet("fonts.header"),
 
 },
   compose(
@@ -179,6 +181,7 @@ export const SubHeaderText = styled("h2")`
     text-transform:"capitalize";
     font-weight:"bold";
     color:"dark";
+    vertical-align:middle;
     ${color}
     ${space}
     ${shadow}

@@ -204,7 +204,7 @@ const MoviesPage = (props) => {
                         boxShadow="card"
                         bg="#f1f1f1"
                     >
-                        <Text>
+                        <Text maxWidth="100%" overflow="hidden">
                             We are passionately expanding our film collections. We have many great list of films that includes 
                             the best examples of its category like&nbsp;
                             <NewLink title="See the best arthouse movies" fontWeight="bold" follow link={"/topic/art-house"}><em title="See the best arthouse movies">Arthouse</em></NewLink>,&nbsp;

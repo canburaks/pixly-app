@@ -17,7 +17,7 @@ import { NavBar } from "./styled-components"
 
 import Middle from "./containers/Middle"
 import LandingPage from "./auth/LandingPage"
-import MainPage from "./main-page/MainPage";
+//import MainPage from "./main-page/MainPage";
 import MainPage2 from "./main-page/MainPage2";
 
 import ExploreQuery from "./list/Explore";
@@ -66,7 +66,7 @@ const App = (props) => {
             <Clippy />
             <Box minHeight="90vh" height="auto" >
                 <Switch>
-                    <Route exact path="/" component={MainPageRedirect} />
+                    <Route exact path="/" component={MainPage2} />
                     <Route path="/" component={Middle} />
                 </Switch>
                 
