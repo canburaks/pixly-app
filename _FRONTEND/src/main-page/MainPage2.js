@@ -101,23 +101,23 @@ const MainPage = (props) => {
         <PageContainer >
 			
 			{/* HERO*/}
-			<FlexBox borderBottom="6px solid" borderColor="rgba(0,0,0,0.7)"
-				flexDirection="column" 
-				alignItems="center" justifyContent="flex-end" 
+			<FlexBox borderBottom="6px solid" borderTop="6px solid"  borderColor="rgba(0,0,0,0.7)"
+				flexDirection="column" minHeight={[ "400px", "400px", "500px"]}
+				alignItems="center" justifyContent="center" boxSizing="border-box"
 				zIndex={9}  
 				px={[2,2,3,4]} pb={[3]}
 				height={"100%"} overflow="hidden"
 				position="relative"
 			>
 				<CoverImage ratio={300/250} src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"} 
-					position="absolute" filter="blur(8px)" className="hero-image"
-					top={0} left={"-2vw"} right={"-2vw"} 
-					blur={8} width={"104vw"} zIndex={0}
+					position="absolute" filter="blur(4px)" className="hero-image"
+					top={0} left={["-5vw", "-5vw" , "-2vw"]} right={["-5vw", "-5vw" , "-2vw"]} 
+					blur={8} width={["110vw", "110vw", "104vw"]} zIndex={0}
 					alt={"Pixly AI Movie Recommendation and Movie Rating Website"} minHeight="400px"
 				/>	
 
 				<HeaderText 
-					mt={80} mb={[2]}
+					mt={["80px", "80px", 4,5]} mb={[2]}
 					fontSize={["24px","24px","28px", "40px", "44px"]} 
 					textAlign="center"
 					uncapitalize 
@@ -207,50 +207,52 @@ const ExploreSection = ({ isSmallScreen }) => (
 	
 	width={"100%"}
 >
-	<Text fontWeight="bold" 
-		color="dark" 
-		my={[3]}
-		textAlign="center" 
-		color={"light" }
-		fontSize={["22px","22px","28px", "30px"]} 
-		>
-		Let Me Discover First
-	</Text>
-	<Grid columns={[2]} py={[1]} gridColumnGap={[2,2,2,3]} width="100%" height="auto" px={[2,2,4,5,6]} >
-		<LinkButton px={[3,3,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
-			link="/popular-and-upcoming-movies" textAlign="center"
-			color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
-			height={"50px"} width={["90%"]} maxWidth={"300px"} 
-			hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
-		>
-			Popular Movies
-		</LinkButton>
-		<LinkButton px={[3,3,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
-			link="/lists-of-films" textAlign="center"
-			color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
-			height={"50px"} width={["90%"]} maxWidth={"300px"} 
-			hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
-		>
-			Lists of Films
-		</LinkButton>
-		<LinkButton px={[2,2,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
-			link="/similar-movie-finder" textAlign="center"
-			color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
-			height={"50px"} width={["90%"]} maxWidth={"300px"} 
-			hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
-		>
-			Similar Movie Finder
-		</LinkButton>
-		<LinkButton px={[3,3,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
-			link="/advance-search" textAlign="center"
-			color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
-			height={"50px"} width={["90%"]} maxWidth={"300px"} 
-			hoverScale boxShadow="card" fontSize={["12px", "12px", "14px"]}
-		>
-			Advance Search
-		</LinkButton>
+		<Text fontWeight="bold" 
+			color="dark" 
+			my={[3]}
+			textAlign="center" 
+			color={"light" }
+			fontSize={["22px","22px","28px", "30px"]} 
+			>
+			Let Me Discover First
+		</Text>
+	<FlexBox justifyContent="center" alignItems="center" >
+		<Grid columns={[2]} py={[1]} gridColumnGap={[2,2,2,3]} width="100%" height="auto" px={[2,2,4,5,6]} >
+			<LinkButton px={[3,3,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
+				link="/popular-and-upcoming-movies" textAlign="center"
+				color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
+				height={"50px"} width={["90%"]} maxWidth={"300px"} 
+				hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
+			>
+				Popular Movies
+			</LinkButton>
+			<LinkButton px={[3,3,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
+				link="/lists-of-films" textAlign="center"
+				color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
+				height={"50px"} width={["90%"]} maxWidth={"300px"} 
+				hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
+			>
+				Lists of Films
+			</LinkButton>
+			<LinkButton px={[2,2,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
+				link="/similar-movie-finder" textAlign="center"
+				color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
+				height={"50px"} width={["90%"]} maxWidth={"300px"} 
+				hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
+			>
+				Similar Movie Finder
+			</LinkButton>
+			<LinkButton px={[3,3,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
+				link="/advance-search" textAlign="center"
+				color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
+				height={"50px"} width={["90%"]} maxWidth={"300px"} 
+				hoverScale boxShadow="card" fontSize={["12px", "12px", "14px"]}
+			>
+				Advance Search
+			</LinkButton>
 
-	</Grid>
+		</Grid>
+	</FlexBox>
 </Section>
 )
 
