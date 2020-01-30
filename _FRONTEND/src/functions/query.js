@@ -57,7 +57,14 @@ export const MOVIE = gql`
             crew{job, character, person{id,name, poster, slug}},
             tags{name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag},
             videos{id,title,summary,link,duration,tags,isFaved,ytId,thumb},
-            groupItems{htmlContent, , 
+            groups{
+                slug,
+                header,
+                havePage,
+                coverPoster
+            }
+
+            inPageGroups{htmlContent , 
                 group{slug, header,posterType,
                     items{
                         htmlContent,poster

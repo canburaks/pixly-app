@@ -2081,7 +2081,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     tag_names = graphene.List(graphene.String)
     topics = graphene.List(TopicType)
     is_important_page = graphene.Boolean()
-    group_items = graphene.List("gql.types.MovieGroupItemType")
+    in_page_groups = graphene.List("gql.types.MovieGroupItemType")
     groups = graphene.List("gql.types.MovieGroupType")
 
 
@@ -2105,12 +2105,18 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
             
         self.viewer = viewer #Profile
 
+    # this is groups that have self page, and cover-link element will be rendered
     def resolve_groups(self, info):
-        gitems =  self.movie.group_items.all()
+        gitems =  self.movie.group_items.all().exclude(group__have_page=False)
         return [x.group for x in gitems]
 
+    def resolve_in_page_groups(self, info):
+        return self.movie.group_items.all().exclude(group__have_page=False)
+
+    # asap remove it
     def resolve_group_items(self, info):
         return self.movie.group_items.all()
+
 
     def resolve_is_important_page(self, info):
         return self.movie.important_page
