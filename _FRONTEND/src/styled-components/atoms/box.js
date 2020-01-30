@@ -48,7 +48,7 @@ export const Box = styled.div`
         color: ${props => props.hoverColor && props.hoverColor };
         border: ${props => props.hoverBorder && '3px solid #3633CC' };
         text-decoration: ${props => props.hoverUnderline && "underline"};
-        background:${props => props.hoverLight && setLightness('0.05', `${props.hoverLight}`)};
+        background:${props => props.hoverBg ? props.hoverBg : props.hoverLight && setLightness('0.05', `${props.hoverLight}`)};
         transform:${props => props.translateY && `translateY(-4px)`};
         svg {
             stroke: ${props => props.hoverColor && props.hoverColor };

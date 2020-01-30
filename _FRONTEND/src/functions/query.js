@@ -3,16 +3,24 @@ import gql from "graphql-tag";
 
 export const MOVIE_GROUP = gql`
     query movieGroup($slug:String){
+        movieGroup(slug:$slug){
         slug, header, htmlContent, poster, coverPoster, posterType
         seoTitle,seoDescription, havePage,
-        movie{
-            id,
-            slug,
-            name,
-            year,
-            poster,
-            coverPoster
+        items{
+            header,
+            htmlContent,
+            poster
+            movie{
+                id,
+                slug,
+                name,
+                year,
+                poster,
+                coverPoster
+            }
+        }
     }
+}
 `
 
 export const MOVIE = gql`

@@ -31,6 +31,7 @@ export const AbsoluteImage = styled("img")`
     bottom:0;
     min-width:100%;
     height:100%;
+    filter:${props => props.filter};
     /*
     */
     ${color}

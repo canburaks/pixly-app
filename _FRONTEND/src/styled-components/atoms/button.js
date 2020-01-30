@@ -19,7 +19,8 @@ export const Button = styled.button`
         color:${props => props.hoverColor && props.hoverColor};
         box-shadow:${props => props.hoverShadow && props.hoverShadow};
         border-color:${props => props.hoverBorderColor && props.hoverBorderColor};
-        transform:${props => props.hoverScale && "scale(1.1)"};
+        transform:${props => props.translateY ? `translateY(-4px)` : props.hoverScale && "scale(1.1)"};
+
     }
     ${props => props.gradient && themeGet(`gradients.${props.gradient}.colors`)(props) 
         && linearGradient({

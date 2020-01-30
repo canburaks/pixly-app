@@ -24,7 +24,8 @@ themes.default.fonts = {
 	playfair: "'Playfair Display', serif",
 	fira: 	"'Fira Sans', sans-serif",
 	marker: "'Permanent Marker', cursive",
-	lobster:"'Lobster Two', cursive"
+	lobster:"'Lobster Two', cursive",
+	textme:"'Text Me One', sans-serif"
 }
 
 themes.default.fontSizes = {
