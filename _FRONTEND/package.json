@@ -219,9 +219,7 @@
     },
     "include": [
       "",
-      "/",
-      "/lists-of-films",
-      "/popular-and-upcoming-movies"
+      "/"
 
   ],
     "publicPath": "/"

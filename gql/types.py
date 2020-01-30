@@ -2082,6 +2082,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     topics = graphene.List(TopicType)
     is_important_page = graphene.Boolean()
     group_items = graphene.List("gql.types.MovieGroupItemType")
+    groups = graphene.List("gql.types.MovieGroupType")
 
 
     def __init__(self, id=None, slug=None, viewer=None):
@@ -2103,6 +2104,10 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_groups(self, info):
+        gitems =  self.movie.group_items.all()
+        return [x.group for x in gitems]
 
     def resolve_group_items(self, info):
         return self.movie.group_items.all()
