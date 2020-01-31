@@ -101,19 +101,19 @@ const MainPage = (props) => {
         <PageContainer >
 			
 			{/* HERO*/}
-			<FlexBox borderBottom="6px solid" borderTop="6px solid"  borderColor="rgba(0,0,0,0.7)"
+			<FlexBox borderBottom="6px solid"   borderColor="rgba(0,0,0,0.7)"
 				flexDirection="column" minHeight={[ "400px", "400px", "500px"]}
 				alignItems="center" justifyContent="center" boxSizing="border-box"
-				zIndex={9}  
-				px={[2,2,3,4]} pb={[3]}
+				zIndex={9}  boxSizing="border-box"
+				px={[2,2,3,4]} 
 				height={"100%"} overflow="hidden"
 				position="relative"
 			>
-				<CoverImage ratio={300/250} src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"} 
-					position="absolute" filter="blur(4px)" className="hero-image"
-					top={0} left={["-5vw", "-5vw" , "-2vw"]} right={["-5vw", "-5vw" , "-2vw"]} 
-					blur={8} width={["110vw", "110vw", "104vw"]} zIndex={0}
-					alt={"Pixly AI Movie Recommendation and Movie Rating Website"} minHeight="400px"
+				<CoverImage ratio={0.56} src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"} 
+					position="absolute"  className="hero-image"
+					top={0} left={0} right={0} 
+					width={["100vw"]} zIndex={0}
+					alt={"Pixly AI Movie Recommendation and Movie Rating Website"} minHeight={[ "410px", "410px", "500px"]}
 				/>	
 
 				<HeaderText 
@@ -157,7 +157,7 @@ const MainPage = (props) => {
 			<FlexBox 
 				flexDirection="column" justifyContent="center" 
 				borderBottom="6px solid" borderColor="rgba(0,0,0,1)"
-				position="relative" 
+				position="relative" boxSizing="border-box"
 				overflow="hidden" 
 				minHeight="400px" 
 				zIndex={6} top={-5}
@@ -174,7 +174,7 @@ const MainPage = (props) => {
 			{false && !isSmallScreen && <ExploreSection isSmallScreen={isSmallScreen} />}
 
 			{/* FEATURES */}
-			<ContentContainer>
+			<ContentContainer boxSizing="border-box">
 				<Grid columns={[1,1,1,2,2,3]} px={[2]} py={[4]}>
 					<RecommendationFeature onClick={insertJoinForm} authStatus={authStatus} />
 					<SimilarMoviesFeature  authStatus={authStatus} />
@@ -258,7 +258,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 
 const FeatureCard = ({ color, ...props}) => (
 	<FlexBox width="100%" maxWidth="100%" height="auto" minHeight="350px" flexDirection="column" alignItems="center" 
-		px={[3]} overflow="hidden" pt={[4]} boxShadow="card" borderRadius="6px"
+		px={[3]} overflow="hidden" pt={[3]} boxShadow="card" borderRadius="6px"
 	>
 		<AbsoluteImage ratio={350/250}
 			src={`https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-cards/${color}.jpg`} 
@@ -267,7 +267,7 @@ const FeatureCard = ({ color, ...props}) => (
 		/>
 		<FlexBox 
 			flexDirection="column"  
-			position="relative" top={0} bottom={0} left={0} right={0} minHeight={"300px"}
+			position="relative" top={0} bottom={0} left={0} right={0} minHeight={"360px"}
 			maxWidth="100%" zIndex={5} 
 			justifyContent="flex-start" alignItems="center" 
 			overflow="hidden"
@@ -315,7 +315,7 @@ const RecommendationFeature = ({authStatus, onClick, color="aqua",}) => (
 )
 const SimilarMoviesFeature = ({color="yesil",}) => (
 	<FeatureCard color={color} header="Find Similar Movies" >
-		<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]} color="light">
+		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} color="light">
 			Let search your movies you like and discover movies that have similar genre, tag, or theme with our 
 			<em> similar movie finder</em>.
 			Besides, You may also find film recommendations like your favourite film which are suggested by our AI-assisted recommendation engine. 
@@ -332,9 +332,9 @@ const SimilarMoviesFeature = ({color="yesil",}) => (
 	</FeatureCard>
 )
 const CollectionsFeature = ({color="mor",}) => (
-	<FeatureCard color={color} header="List Of Films Collections " 
+	<FeatureCard color={color} header="List Of Films" 
 		text={
-			"We are also collecting and curating lists of movies that fit your mood or taste such as the favourite films of the " +
+			"We are also collecting and curating lists of movies that fit your mood such as the favourite films of the " +
 			"directors, the grand prize winner films from festivals, and " +
 			"topic lists that include the best artworks of its category like "
 		}
@@ -354,7 +354,7 @@ const CollectionsFeature = ({color="mor",}) => (
 
 const SocialFeature = ({setModalOpen, color="mor-pembe",}) => (
 	<FeatureCard color={color} header="Discover People and Share Movie" >
-		<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]} color="light">
+		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} color="light">
 			Keep and track your personal cinema history by adding movies to watchlist, or liking them. Then You can share movies from there.
 		</Text>
 	</FeatureCard>
@@ -362,7 +362,7 @@ const SocialFeature = ({setModalOpen, color="mor-pembe",}) => (
 
 const AdvanceSearchFeature = ({color="kırmızı",}) => (
 	<FeatureCard color={color} header="Advance Film Search" >
-		<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]} color="light">
+		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} color="light">
 			You can search movies within your favourite genre or subgenre and filter them with IMDb rating or release year.
 		</Text>
 			<LinkButton px={[3,3,4]} mt={[4]} translateY hoverBg="rgba(0,0,0,0.4)"
@@ -380,7 +380,7 @@ const AdvanceSearchFeature = ({color="kırmızı",}) => (
 
 const ActionFeatures = ({setModalOpen, color="sarı"}) => (
 	<FeatureCard color={color} header="Watch List, Likes and Movie Rating" >
-		<Text mr={[1,1,2]} textAlign="justify" fontSize={["14px", "14px", "14px", "14px"]} color="light">
+		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} color="light">
 			You can save your favourite films. Add films to your watch list that is not watched yet, so you don't have to remember them.
 			Rate films, then your friends will see your public opinion. Also, get very personalized film recommendations based on your ratings.   
 		</Text>
