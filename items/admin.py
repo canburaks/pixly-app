@@ -126,7 +126,7 @@ class MovieGroupItemStackInline(admin.StackedInline):
 
 @admin.register(MovieGroup)
 class MovieGroupAdmin(admin.ModelAdmin):
-    list_display = ("slug", "header", )
+    list_display = ("have_page","slug", "header", )
     search_fields = ('have_page', "header", 'slug', )
     list_filter = ("have_page", )
 
