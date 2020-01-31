@@ -134,6 +134,16 @@ const useStyles = makeStyles(theme => ({
 
 export const SearchAppBar = (props) => {
 	const location = useLocation()
+	const isFollowLink = [
+		"/topic/cyberpunk","/topic/thought-provoking","/topic/mystery","/topic/gangster-films","/topic/romantic-comedy",
+		"/topic/art-house","/topic/historical-figures","/topic/",
+		"/similar-movie-finder", "/", "/lists-of-films", "/popular-and-upcoming-movies", "advance-search",
+		"/blog", "/blog/django-graphql-react-integration-tutorial-part-1"
+	].includes(location)
+	//const isFollowLink = location.includes("/topic/") || location.includes("/similar-movie-finder")
+	//console.log(location, isFollowLink)
+
+    
 	//Globals
 	const classes = useStyles();
 	const state = useContext(GlobalContext)
@@ -258,25 +268,25 @@ export const SearchAppBar = (props) => {
 						</IconButton>
 					</Box>
                    
-				    <NewLink to="/" rel="nofollow" ><Brand /></NewLink>
+				    <NewLink to="/" follow={isFollowLink} ><Brand /></NewLink>
 
                     <FlexBox display={["none", "none", "none", "flex"]} flexGrow={[0,0,0,1]} justifyContent="center" >
 							<NewLink 
                                 color="#f1f1f1 !important" title="Popular and Upcoming Movies"
                                 link={"/popular-and-upcoming-movies"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="All Movie Collections" fontWeight="bold"
+                                px={[1,1,2]} title="All Movie Collections" fontWeight="bold" follow={isFollowLink}
                             >
                                 Movies
                             </NewLink>
 							<NewLink 
                                 color="#f1f1f1 !important" 
                                 link={"/lists-of-films"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="List of Films Archive" fontWeight="bold"
+                                px={[1,1,2]} title="List of Films Archive" fontWeight="bold" follow={isFollowLink}
                             >
                                 Film Lists
                             </NewLink>
                             <NewLink 
-                                color="#f1f1f1 !important" 
+                                color="#f1f1f1 !important" follow={isFollowLink}
                                 link={"/directors/1"} fontSize={["10px", "10px", "12px", "14px"]} 
                                 px={[1,1,2]} title="Famous Directors and Their Favourite Films" fontWeight="bold"
                             >
@@ -285,7 +295,7 @@ export const SearchAppBar = (props) => {
                             <NewLink 
                                 color="#f1f1f1 !important" 
                                 link={"/similar-movie-finder"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="Find Similar Movies" fontWeight="bold"
+                                px={[1,1,2]} title="Find Similar Movies" fontWeight="bold" follow={isFollowLink}
                             >
                                 Similars
                             </NewLink>
@@ -334,6 +344,7 @@ export const SearchAppBar = (props) => {
 
             {/* DRAWER */}
 			<SideBar 
+				isFollowLink={isFollowLink}
 				isOpen={open} 
 				onClose={handleDrawerClose} 
 				classes={classes} 
@@ -358,7 +369,7 @@ export const SearchAppBar = (props) => {
   }
 
 
-const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJoinForm}) => (
+const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJoinForm, isFollowLink}) => (
 	<Drawer
 		className={classes.drawer}
 		variant="temporary"
@@ -378,7 +389,7 @@ const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJ
 			?<ListItem classes={{root:classes.listitem}}>
 				<HomeIcon fill={"#f1f1f1"} size={"18px"} />
 				<Text color="light">Dashboard</Text>
-				<CoverLink link={`/${localStorage.getItem("USERNAME")}/dashboard`} />
+				<CoverLink link={`/${localStorage.getItem("USERNAME")}/dashboard`} follow={isFollowLink} />
 			</ListItem>
 
 			:<ListItem classes={{root:classes.listitem}} button onClick={() => (onClose(), insertLoginForm())}>
@@ -389,7 +400,7 @@ const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJ
 			<ListItem classes={{root:classes.listitem}} button title="Popular and Upcoming Movies">
 				<FilmIcon stroke={"#f1f1f1"} size={"18px"} />
 				<Text color="light">Movies</Text>
-				<CoverLink link={"/popular-and-upcoming-movies"} />
+				<CoverLink link={"/popular-and-upcoming-movies"} follow={isFollowLink} />
 			</ListItem>
 			<ListItem classes={{root:classes.listitem}} button>
 				<CameraIcon stroke={"#f1f1f1"} size={"18px"} />
@@ -397,17 +408,17 @@ const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJ
 				<CoverLink link={"/directors/1"} />
 			</ListItem>
 			<ListItem classes={{root:classes.listitem}} button title="Find Similar Movies">
-				<SimilarMovieIcon stroke={"#f1f1f1"}  size={"18px"} />
+				<SimilarMovieIcon stroke={"#f1f1f1"}  size={"18px"} follow={isFollowLink} />
 				<Text color="light">Similar Movie Finder</Text>
 				<CoverLink link={"/similar-movie-finder"} />
 			</ListItem>
 			<ListItem classes={{root:classes.listitem}} button>
-				<SearchIconStyled stroke={"#f1f1f1"} size={"18px"} />
+				<SearchIconStyled stroke={"#f1f1f1"} size={"18px"} follow={isFollowLink} />
 				<Text color="light">Advance Search</Text>
 				<CoverLink link={"/advance-search"} />
 			</ListItem>
 			<ListItem classes={{root:classes.listitem}} button>
-				<UsersIcon stroke={"#f1f1f1"} size={"18px"} />
+				<UsersIcon stroke={"#f1f1f1"} size={"18px"} follow={isFollowLink} />
 				<Text color="light">People</Text>
 				<CoverLink link={"/people/1"} />
 			</ListItem>
@@ -432,7 +443,7 @@ const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJ
 			{text:"Rom-Coms", link:"/topic/romantic-comedy"}
 			].map(liste => (
 				<ListItem classes={{root:classes.listitem}} button key={"- " + liste.text}>
-					<NewLink link={liste.link} title={`${liste.text}`}>
+					<NewLink link={liste.link} title={`${liste.text}`} follow={isFollowLink}>
 						<Text 
 							fontSize={["12px", "12px", "12px", "14px"]} 
 							pl={[4]} 
