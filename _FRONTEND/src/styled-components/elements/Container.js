@@ -22,7 +22,7 @@ import "../../../node_modules/highlight.js/styles/rainbow.css"
 export const CardContainer = (props) => (
     <FlexBox 
         flexDirection="column"
-        p={[3]} mt={[4, 4,5]} px={[3]}
+        p={[3]} mt={[3]} px={[3]}
         width={"100%"} height="auto"
         border={"0px"}
         borderRadius={6}
@@ -42,14 +42,14 @@ export const MessageBox = ({ header,Header,subheader,Subheader,miniheader, text,
         width={"100%"} {...props}
     >
         <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start" width={"100%"} textAlign="left">
-            {Header && <Header fontWeight="bold" textAlign="left" />}
+            {Header && <Header fontWeight="bold" textAlign="left" opacity={0.95}/>}
             {(header || subheader) && 
                 <SubHeaderText fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.95} textAlign="left">
                     {header || subheader}
                 </SubHeaderText>}
-            {Subheader && <Subheader fontWeight="bold" opacity={0.9} textAlign="left"/>}
+            {Subheader && <Subheader fontWeight="bold" opacity={0.95} textAlign="left"/>}
             {miniheader && 
-                <HeaderMini fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.75}
+                <HeaderMini fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.85}
                     textAlign="left"
                 >
                     {miniheader}
