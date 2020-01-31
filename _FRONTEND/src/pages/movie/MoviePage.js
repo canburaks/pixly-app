@@ -382,7 +382,7 @@ const TrailerIcon = () => (
 
 const MovieSummary = ({name, summary, year}) => (
     <CardContainer>
-		<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{name} ({year})</HeaderText>
+		<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]} opacity={0.85}>{name} ({year})</HeaderText>
 		<Text mt={[2]} fontSize={["14px", "16px", "18px"]} opacity={0.85}>{summary}</Text>
     </CardContainer>
 )
@@ -393,7 +393,7 @@ const MovieSummaryWithTwitter = ({item}) => {
         <>
             <Box boxShadow="card" bg="#f1f1f1" p={[3]} mt={[3]} px={[3]} borderRadius={6}>
 				<Twitter.Timeline name={item.name} link={item.twitter} mr={[3,3,3,4]} mb={[3,3,3,4]} />
-				<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{item.name} ({item.year})</HeaderText>
+				<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]} opacity={0.9}>{item.name} ({item.year})</HeaderText>
 				<br/>
 				{item.summary}
             </Box>

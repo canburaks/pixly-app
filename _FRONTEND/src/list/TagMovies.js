@@ -25,7 +25,7 @@ const TagMovies = (props) => {
     const isAuth = useAuthCheck()
     console.log(props)
     const { loading, data, } = useQuery(TAG_MOVIES_QUERY, {variables:{slug:props.match.params.slug}, skip:!isAuth})
-    console.log(data)
+    console.log(loading,data)
     return(
         <PageContainer>
             <ContentContainer>
