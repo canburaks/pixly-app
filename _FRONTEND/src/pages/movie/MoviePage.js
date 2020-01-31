@@ -353,8 +353,7 @@ const MovieGroup = ({groupItem}) => (
 )
 
 const HtmlContent = ({ movie, ...props }) => (
-    <FlexBox flexDirection="column" mt={[3,3,4]}>
-		<CardContainer>
+	<CardContainer>
         {movie.widePoster && 
 			<Image 
 				src={movie.widePoster} 
@@ -363,8 +362,7 @@ const HtmlContent = ({ movie, ...props }) => (
 				my={[3]}    
 			/>}
         <HtmlContainer my={[3]} html={movie.htmlContent} {...props}/>
-		</CardContainer>
-    </FlexBox>
+	</CardContainer>
 )
 
 const TrailerIcon = () => (
@@ -393,7 +391,7 @@ const MovieSummaryWithTwitter = ({item}) => {
 	const Twitter = twitter()
     return (
         <>
-            <Box>
+            <Box boxShadow="card" bg="#f1f1f1" p={[3]} mt={[3]} px={[3]} borderRadius={6}>
 				<Twitter.Timeline name={item.name} link={item.twitter} mr={[3,3,3,4]} mb={[3,3,3,4]} />
 				<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]}>{item.name} ({item.year})</HeaderText>
 				<br/>

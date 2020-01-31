@@ -483,14 +483,12 @@ const OrderedList = ({ items, speed, size}) => {
 
 
             <FeedMobileTopicPageAd />
-            <LazyLoadComponent>
                 {ordereditems.slice(20).map( item => (
                         <OrderedCard key={"rec" + item.movie.id}
                             item={item}
                             specs={specs}
                         />
                 ))}
-            </LazyLoadComponent>
         </>
     )
 }
@@ -526,6 +524,16 @@ const UnorderedList = ({items, speed, title }) => {
         <LazyLoadComponent>
         <Grid columns={columns} py={[1]} gridColumnGap={[2,2,2,3]} width="100%" height="auto" >
             {items.slice(12, 18).map( item => (
+                    <UnorderedCard key={"rec" + item.id}
+                        item={item}  title={title}
+                        ratio={ratio}
+                    />
+            ))}
+        </Grid>
+        </LazyLoadComponent>
+        <LazyLoadComponent>
+        <Grid columns={columns} py={[1]} gridColumnGap={[2,2,2,3]} width="100%" height="auto" >
+            {items.slice(18).map( item => (
                     <UnorderedCard key={"rec" + item.id}
                         item={item}  title={title}
                         ratio={ratio}

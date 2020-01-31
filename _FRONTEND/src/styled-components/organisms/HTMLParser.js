@@ -21,7 +21,7 @@ export const HtmlParagraph = ({ html, ...props }) => {
     const options = {replace: domNode => {
         //console.log(domNode)
         if (domNode.attribs && domNode.name ==="p"){
-            return <Text width={"100%"} maxWidth={"100%"} opacity={0.95}
+            return <Text width={"100%"} maxWidth={"100%"} opacity={0.8}
                         fontSize={["14px","14px", "16px"]} 
                         {...props}
                     >
@@ -62,7 +62,7 @@ export const HtmlContainer = ({ html, ...props }) => {
             //console.log(domNode)
             if (domNode.attribs && domNode.name ==="h1"){
                 return (
-                    <HeaderText  
+                    <HeaderText  opacity={0.95}
                         mt={"32px !important"}
                         fontSize={["24px", "24px", "28px", "32px", "36px"]}
                         {...style.h1}
@@ -71,7 +71,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                     </HeaderText>)
             }
             else if (domNode.attribs && domNode.name ==="h2"){
-                return <SubHeaderText 
+                return <SubHeaderText opacity={0.9}
                             fontSize={["22px", "22px", "26px"]}  
                             mt={"32px !important"}
                             opacity={0.95}
@@ -82,7 +82,7 @@ export const HtmlContainer = ({ html, ...props }) => {
             }
 
             else if (domNode.attribs && (domNode.name === 'h3' || domNode.name === 'h4')) {
-                return <HeaderMini   
+                return <HeaderMini   opacity={0.85}
                             fontSize={["20px", "20px", "22px"]}
                             mt={"8px !important"} width="100%"
                             opacity={0.95}
@@ -93,7 +93,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                         </HeaderMini>
             }
             else if (domNode.attribs && domNode.name === 'p' ) {
-                return <Text width={"100%"} opacity={0.95}
+                return <Text width={"100%"} opacity={0.8}
                             fontSize={["14px","14px", "16px"]} 
                             {...style.p}
                         >
@@ -101,7 +101,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                         </Text>
             }
             else if (domNode.attribs && domNode.name === 'ul' ) {
-                return <Ul width={"100%"} opacity={0.95}
+                return <Ul width={"100%"} opacity={0.8}
                             fontSize={["14px","14px", "16px"]} 
                             {...style.p}
                             {...style.ul}
@@ -110,7 +110,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                         </Ul>
             }
             else if (domNode.attribs && domNode.name === 'li' ) {
-                return <Li width={"100%"} opacity={0.95}
+                return <Li width={"100%"} opacity={0.8}
                             fontSize={["14px","14px", "16px"]} 
                             {...style.p}
                             {...style.li}
