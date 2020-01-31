@@ -584,7 +584,7 @@ class MovieGroupType(DjangoObjectType, SEOType):
 class MovieGroupItemType(DjangoObjectType):
     header = graphene.String()
     
-    html_content = graphene.String()
+    html_content = graphene.String() 
     poster = graphene.String() #poster or cover was set in admin panel
 
     movie = graphene.Field(MovieType)
@@ -604,7 +604,11 @@ class MovieGroupItemType(DjangoObjectType):
     def resolve_poster(self, info):
         if self.group.poster_type=="p":
             return self.movie.poster.url
-        return self.movie.cover_poster.url
+        else:
+            if self.movie.cover_poster:
+                return self.movie.cover_poster.url
+            return self.movie.poster.url
+
 
     def resolve_html_content(self, info):
         if self.html_content:
