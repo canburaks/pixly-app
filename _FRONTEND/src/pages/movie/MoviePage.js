@@ -168,6 +168,19 @@ const MoviePage = props => {
 				{/* OPTIONAL HTML CONTENT*/}
 				{item.htmlContent && <HtmlContent movie={item} style={{p:{fontSize:textSize}}} />}
 
+				{/* VIDEO */}
+				{hasVideos && 
+					<ExpansionBox header={videoText}>
+
+							<LazyLoadComponent>
+								<YoutubePlayer
+									videos={item.videos}
+									title={item.name + " Videos"}
+								/>
+							</LazyLoadComponent>
+					</ExpansionBox>
+				}
+
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && 
 				<ExpansionBox
@@ -255,6 +268,7 @@ const MoviePage = props => {
 					</MessageBox>
 					</>
 				)}
+				<MidPageAd />
 
 				{/*<!--GROUPS  Section--> */}
 				{item.groups.length > 0 && (
@@ -297,7 +311,7 @@ const MoviePage = props => {
 					</CardContainer>
 				)}
 
-				{false && showAd1 && <HomePageFeedAd/> }
+				{true && showAd1 && <HomePageFeedAd/> }
 
 				{/*<!--SIMILAR Section--> */}
 				<Box width="100%" ref={nodeSimilarMovies}>
@@ -306,20 +320,8 @@ const MoviePage = props => {
 
 
 
-				<MidPageAd />
 
-				{/* VIDEO */}
-				{hasVideos && 
-					<ExpansionBox header={videoText}>
 
-							<LazyLoadComponent>
-								<YoutubePlayer
-									videos={item.videos}
-									title={item.name + " Videos"}
-								/>
-							</LazyLoadComponent>
-					</ExpansionBox>
-				}
 			</ContentContainer>
 		</PageContainer>
 	);

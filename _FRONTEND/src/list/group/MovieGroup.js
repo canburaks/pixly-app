@@ -43,12 +43,12 @@ const MovieGroupPage = ({ group, ...props }) => {
             <ContentContainer>
                 <CardContainer mt={[3]}>
                     <HeaderText mt={0} mb={[2]}>{group.header}</HeaderText>
-                    <HtmlParagraph html={group.htmlContent} />
+                    <HtmlContainer html={group.htmlContent} />
                     <Grid columns={group.posterType==="p" ?[2,2,3,4,4,4,5,6] : [1,2,2,3,3,4]} width={"100%"} py={[3]} mt={4}>
                     {group.items.map(item => (
                             <FlexBox width={"100%"} height="auto" 
                                 key={item.movie.slug} 
-                                overflow="hidden" 
+                                overflow="hidden"
                                 title={`${item.movie.name} (${item.movie.year})`}
                                 translateY boxShadow="card" hoverShadow 
                             >
@@ -56,12 +56,12 @@ const MovieGroupPage = ({ group, ...props }) => {
                                     title={`${item.movie.name} (${item.movie.year})`}
                                     src={item.poster} borderRadius="6px"
                                     link={`/movie/${item.movie.slug}`} 
-                                    ratio={group.posterType==="p" ? 1.5 : 0.56} 
+                                    ratio={group.posterType==="p" ? 1.5 : 0.6} 
                                 />
                                 <Text width="100%" bg="rgba(0,0,0,0.6)"
-                                    position="absolute" left={0} bottom={0} pl={[2]}
+                                    position="absolute" left={0} bottom={-2} pl={[2]}
                                     color="light" fontSize="10px" fontWeight="bold"
-                                >{item.movie.name} ({item.movie.year})
+                                ><NewLink link={`/movie/${item.movie.slug}`} >{item.movie.name} ({item.movie.year})</NewLink>
                                 </Text>
                             </FlexBox>
                     ))}
