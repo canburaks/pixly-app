@@ -46,13 +46,17 @@ const MovieGroupPage = ({ group, ...props }) => {
                     <HtmlParagraph html={group.htmlContent} />
                     <Grid columns={group.posterType==="p" ?[2,2,3,4,4,4,5,6] : [1,2,2,3,3,4]} width={"100%"} py={[3]} mt={4}>
                     {group.items.map(item => (
-                            <FlexBox width={"100%"} height="auto" key={item.movie.slug} overflow="hidden" title={`${item.movie.name} (${item.movie.year})`}>
+                            <FlexBox width={"100%"} height="auto" 
+                                key={item.movie.slug} 
+                                overflow="hidden" 
+                                title={`${item.movie.name} (${item.movie.year})`}
+                                translateY boxShadow="card" hoverShadow 
+                            >
                                 <CoverImage key={`${item.movie.slug} + "group-i"`} 
                                     title={`${item.movie.name} (${item.movie.year})`}
                                     src={item.poster} borderRadius="6px"
-                                    boxShadow="card" hoverShadow translateY
                                     link={`/movie/${item.movie.slug}`} 
-                                    ratio={group.posterType==="p" ? 1.5 : 0.6} 
+                                    ratio={group.posterType==="p" ? 1.5 : 0.56} 
                                 />
                                 <Text width="100%" bg="rgba(0,0,0,0.6)"
                                     position="absolute" left={0} bottom={0} pl={[2]}
