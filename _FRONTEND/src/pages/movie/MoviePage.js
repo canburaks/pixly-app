@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from "react";
+import React, { useCallback } from "react";
 import { useState, useContext, useMemo, useEffect, useRef } from "react";
 import { withRouter, Link, Redirect, useParams } from "react-router-dom";
 import {
@@ -41,14 +41,18 @@ const MoviePage = props => {
 	const { cacheUpdate } = props;
     const nodeSimilarMovies = useRef(null)
     const nodeVideoSection = useRef(null)
-
+	
 	//up()
-
+	
 	const authStatus = useAuthCheck();
 	const state = useContext(GlobalContext);
 	const screenSize = state.screenSize;
 	const isLargeScreen = screenSize.includes("L");
 
+	//check any collection, if not open crew panel
+	const haveAnyCollection = (item.groups.length > 0 || item.topics.length > 0)
+	//const [isCrewPanelOpen, setCrewPanel] = useState(!haveAnyCollection);
+	//const crewPanelHandler = useCallback(() => setCrewPanel(!isCrewPanelOpen),[isCrewPanelOpen])
 	//const [ pageBookmark, setPageBookmark ] = useState(item.isBookmarked)
 	//const [ pageFav, setPageFav ] = useState(item.isFaved)
 	//const [ pageRating, setPageRating ] = useState(item.viewerRating)
@@ -184,6 +188,7 @@ const MoviePage = props => {
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && 
 				<ExpansionBox
+					isOpen={!haveAnyCollection}
 					header={`${item.name} (${item.year}) Cast & Crew`}
 					text={item.crew.length > 4 ? `Director, Actors and Actresses of ${item.name} (${item.year})` : null}
 				>
@@ -254,7 +259,7 @@ const MoviePage = props => {
 					>
 						<Grid columns={[1,2,2,2,2,3,4]} width={"100%"} py={[3]} mt={2}>
 							{item.topics.map((topic, i) => (
-								<CoverImage
+								<CoverImage follow={true}
 									boxShadow="card" hoverShadow translateY
 									src={topic.coverPoster} borderRadius={6}
 									ratio={0.55}
@@ -277,7 +282,7 @@ const MoviePage = props => {
 						<Text opacity={0.85}>{item.name} ({item.year}) is also in below film {item.groups.length>1 ? "groups" : "group"}. Maybe you would like to check it out?</Text>
 						<Grid columns={[1,2,2,2,2,3,4]} width={"100%"} py={[3]} mt={2}>
 							{item.groups.map((group, i) => (
-								<CoverImage
+								<CoverImage follow={true}
 									boxShadow="card" hoverShadow translateY
 									src={group.coverPoster} borderRadius={6}
 									ratio={0.55}
@@ -334,7 +339,8 @@ const MovieGroup = ({groupItem}) => (
 		<Grid columns={groupItem.group.posterType==="p" ?[2,3,4,4,5,6] : [1,2,2,3,3,4]} width={"100%"} py={[3]} mt={2}>
 			{groupItem.group.items.map(item => (
 					<FlexBox width={"100%"} height="auto" key={item.movie.slug}>
-						<CoverImage key={`${item.movie.slug} + "group-i"`} 
+						<CoverImage follow={true}
+							key={`${item.movie.slug} + "group-i"`} 
 							title={`${item.movie.name} (${item.movie.year})`}
 							src={item.poster} borderRadius="6px"
 							boxShadow="card" hoverShadow translateY
