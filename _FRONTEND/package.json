@@ -220,24 +220,8 @@
     "include": [
       "",
       "/",
-      "/movie/midway-2019",
-      "/movie/last-christmas-2019",
-      "/movie/i-tonya-2017",
-      "/movie/good-will-hunting-1997",
-      "/movie/blade-runner-2049-2017",
-      "/movie/blade-runner-1982",
-      "/movie/the-broken-2008",
-      "/movie/ghost-in-the-shell-1995",
-      "/movie/ford-v-ferrari-2019",
-      "/movie/sorry-we-missed-you-2019",
-      "/movie/the-predator-2018",
-      "/movie/proof-1991",
-      "/movie/the-silence-of-the-lambs-1991",
-      "/movie/shutter-island-2010",
-      "/movie/gone-girl-2014",
-      "/movie/after-2019",
-      "/movie/hard-candy-2005",
-      "/movie/pulp-fiction-1994"
+      "/movie/nymphomaniac-volume-ii-2013"
+
   ],
     "publicPath": "/"
   }
