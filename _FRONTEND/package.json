@@ -220,7 +220,8 @@
     "include": [
       "",
       "/",
-      "/topic/cyberpunk"
+      "/topic/cyberpunk",
+      "/lists-of-films"
   ],
     "publicPath": "/"
   }
