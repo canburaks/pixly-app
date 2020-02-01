@@ -221,7 +221,9 @@
       "",
       "/",
       "/topic/cyberpunk",
-      "/lists-of-films"
+      "/lists-of-films",
+      "/topic/post-apocalyptic",
+      "/topic/bdsm-movies"
   ],
     "publicPath": "/"
   }
