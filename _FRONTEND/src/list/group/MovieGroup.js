@@ -53,6 +53,7 @@ const MovieGroupPage = ({ group, ...props }) => {
                                 translateY boxShadow="card" hoverShadow 
                             >
                                 <CoverImage key={`${item.movie.slug} + "group-i"`} 
+                                    follow={true}
                                     title={`${item.movie.name} (${item.movie.year})`}
                                     src={item.poster} borderRadius="6px"
                                     link={`/movie/${item.movie.slug}`} 
@@ -61,7 +62,7 @@ const MovieGroupPage = ({ group, ...props }) => {
                                 <Text width="100%" bg="rgba(0,0,0,0.6)"
                                     position="absolute" left={0} bottom={-2} pl={[2]}
                                     color="light" fontSize="10px" fontWeight="bold"
-                                ><NewLink link={`/movie/${item.movie.slug}`} >{item.movie.name} ({item.movie.year})</NewLink>
+                                ><NewLink link={`/movie/${item.movie.slug}`} follow={true}>{item.movie.name} ({item.movie.year})</NewLink>
                                 </Text>
                             </FlexBox>
                     ))}

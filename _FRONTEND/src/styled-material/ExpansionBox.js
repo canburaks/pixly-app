@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useCallback } from "react"
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -28,12 +29,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const ExpansionBox = (props) => {
+export const ExpansionBox = React.memo(({isOpen=false, ...props}) => {
   const classes = useStyles();
+  const [expanded,setExpanded] = useState(isOpen)
+  const panelHandler = useCallback(() => setExpanded(!expanded),[expanded])
 
   return (
     <Box width="100%" my={[3]}>
-      <ExpansionPanel classes={{root:classes.panel}}>
+      <ExpansionPanel
+        classes={{root:classes.panel}} 
+        expanded={expanded} 
+        onChange={panelHandler}
+        >
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -50,4 +57,4 @@ export const ExpansionBox = (props) => {
       </ExpansionPanel>
     </Box>
   );
-}
+},(p,n) => (p.expanded === n.expanded && p.header === n.header))

@@ -24,7 +24,8 @@
         "/topic/mystery",
         "/topic/video-game",
         "/topic/gangster-films",
-        "/topic/romantic-comedy"
+        "/topic/romantic-comedy",
+        "/topic/post-apocalyptic"
     ],
 
 
@@ -345,6 +346,7 @@
         "/topic/video-game",
         "/topic/gangster-films",
         "/topic/romantic-comedy",
+        "/topic/post-apocalyptic",
         "/blog/a-brief-introduction-to-collaborative-filtering",
         "/blog/django-graphql-react-integration-tutorial-part-1",
         "/blog/django-graphql-react-integration-tutorial-part-2",
