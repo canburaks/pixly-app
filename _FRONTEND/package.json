@@ -220,8 +220,7 @@
     "include": [
       "",
       "/",
-      "/movie/nymphomaniac-volume-ii-2013"
-
+      "/topic/cyberpunk"
   ],
     "publicPath": "/"
   }
