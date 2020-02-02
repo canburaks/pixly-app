@@ -16,17 +16,20 @@ import {
     Box, FlexBox, Text,Input,SearchInput, Form,Loading, Button,
     ImdbIcon, WatchIcon, SearchIcon,SubHeaderText,Image,CoverImage,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
-    TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,
+    TextSection,SchemaArticle,MovieRichCardBox,MovieRichCard, Grid,VideoPlayer,
     //YearSlider,RatingSlider,
     HtmlBox, HtmlContainer, MessageBox, Hr, HomeIcon,FilmIcon,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
     Ul,Li,ImdbRatingIcon, AbsoluteBox,ImageBoxBg,YearClockIcon,RightIcon,
-    BookmarkMutation, RatingMutation, LikeMutation, StarIcon
+    BookmarkMutation, RatingMutation, LikeMutation, StarIcon,YoutubeIcon
 } from "../../styled-components"
+
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
 import { LazyLoadImage, LazyLoadComponent } from 'react-lazy-load-image-component';
 
-import { YearSlider, RatingSlider, TagSelect, SearchInputMaterial } from "../../styled-material"
+import { YearSlider, RatingSlider, TagSelect, SearchInputMaterial, SimpleDialog } from "../../styled-material"
+import ModalVideo from 'react-modal-video'
+import { YoutubePlayer } from "cbs-react-components";
 
 import "./OrderedList.css"
 
@@ -233,7 +236,7 @@ const TopicQuery = ({ lazyvariables }) =>{
     else return <div></div>
 }
 
-const OrderedCard = ({ item, specs}) => (
+const OrderedCard = ({ item, specs, play}) => (
     <FlexBox width="90vw" flexDirection={["column", "column","column", "row"]}
         border={"0px"} borderRadius={6}
         boxShadow="card" bg="#f1f1f1"
@@ -257,8 +260,18 @@ const OrderedCard = ({ item, specs}) => (
                 <LikeMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize} mt={[2]} />
             </FlexBox>
 
-            <FlexBox position="absolute" left={"20px"} bottom={"4px"}>
+            <FlexBox position="absolute" left={"20px"} bottom={"4px"} justifyContent="space-between" alignItems="center">
                 <RatingMutation item={item.movie} size={36} />
+                {item.movie.videos.length > 0 &&
+                    <TrailerIcon 
+                        onClick={() => play(item.movie.videos)} 
+                        right={"-12px"} bottom={0}
+                        width={"40px"} height="40px"
+                        zIndex={12} 
+                        position="relative"
+                        
+                    />
+                }
             </FlexBox>
         </FlexBox>
         
@@ -334,7 +347,6 @@ const OrderedCard = ({ item, specs}) => (
         </FlexBox>
 
         {/* RIGHT SECTION*/}
-    
         <FlexBox  display={["none", "none", "none", "flex"]}
             flexDirection="column" alignItems="center" 
             width={["40vw","40vw","40vw","50vw","45vw"]}  
@@ -348,7 +360,18 @@ const OrderedCard = ({ item, specs}) => (
                 ratio={0.6}  zIndex={0}
                 link={`/movie/${item.movie.slug}`} 
             >
-                <CoverLink link={`/movie/${item.movie.slug}`}  title={""} />
+                {item.movie.videos.length > 0 &&
+                    <TrailerIcon 
+                        onClick={() => play(item.movie.videos)} 
+                        zIndex={12} 
+                        position="relative"
+                        left={0} top={0}
+                        width={"60px"} height="50px" overflow="hidden"
+                        mr={[2,2,3]}
+
+                    />
+                }
+                <CoverLink link={`/movie/${item.movie.slug}`}  title={""}  zIndex={2}/>
             </SuperBox>
 
             {/* NAME PANEL*/}
@@ -400,6 +423,13 @@ const OrderedCard = ({ item, specs}) => (
 
 const OrderedList = ({ items, speed, size}) => {
     //const ordereditems = items.sort((a,b) => (a.rank || a.movie.year) - (b.rank || b.movie.year))
+    
+    //Trailer
+    const [isOpen, setOpen] = useState(false)
+    const [videos, setVideos] = useState(null)
+    const closeHandler = () => setOpen(false)
+    const playHandler = (videos) => (setVideos(videos), setOpen(true))
+
     const movies = items.filter(i => i.rank !== 100).sort((a,b) => (a.rank - b.rank))
     const nonranked = items.filter(i => i.rank === 100).sort((a,b) => (b.movie.imdbRating -a.movie.imdbRating))
     const ordereditems = [...movies, ...nonranked]
@@ -440,13 +470,14 @@ const OrderedList = ({ items, speed, size}) => {
         rightMutatinPanelHeight
         //------------------------------------
     }
-    //console.log("ordered", items)
+    console.log("ordered", items)
     return (
         <>
             {ordereditems.slice(0,4).map( item => (
                     <OrderedCard key={"rec" + item.movie.id}
                         item={item}
                         specs={specs}
+                        play={playHandler}
                     />
             ))}
             <TopicOrderedListAd />
@@ -454,6 +485,7 @@ const OrderedList = ({ items, speed, size}) => {
                     <OrderedCard key={"rec" + item.movie.id}
                         item={item}
                         specs={specs}
+                        play={playHandler}
                     />
             ))}
 
@@ -462,6 +494,7 @@ const OrderedList = ({ items, speed, size}) => {
                     <OrderedCard key={"rec" + item.movie.id}
                         item={item}
                         specs={specs}
+                        play={playHandler}
                     />
             ))}
 
@@ -470,6 +503,7 @@ const OrderedList = ({ items, speed, size}) => {
                     <OrderedCard key={"rec" + item.movie.id}
                         item={item}
                         specs={specs}
+                        play={playHandler}
                     />
             ))}
 
@@ -478,6 +512,7 @@ const OrderedList = ({ items, speed, size}) => {
                         <OrderedCard key={"rec" + item.movie.id}
                             item={item}
                             specs={specs}
+                            play={playHandler}
                         />
                 ))}
 
@@ -487,8 +522,20 @@ const OrderedList = ({ items, speed, size}) => {
                         <OrderedCard key={"rec" + item.movie.id}
                             item={item}
                             specs={specs}
+                            play={playHandler}
                         />
                 ))}
+
+            <SimpleDialog
+                onClose={closeHandler}
+                isOpen={isOpen}
+            >
+                <FlexBox minWidth="90vw" minHeight={["auto", "auto", "70vh"]} maxWidth="100%" overflowX="hidden">
+                    <YoutubePlayer
+                        videos={videos}
+                    />
+                </FlexBox>
+            </SimpleDialog>
         </>
     )
 }
@@ -610,173 +657,23 @@ const UnorderedCard = ({ item, ratio, title=null }) => (
 )
 
 
-const OrderedCard0 = ({ item, specs}) => (
-    <FlexBox width="90vw" flexDirection={specs.flexDirection}
-        border={"0px"} borderRadius={6}
-        boxShadow="card" bg="#f1f1f1"
-        my={[3]} overflow="hidden"
-        className="ordered-topic-card"
-        minHeight={specs.isLargeScreen ? specs.rightPosterHeight : "auto"}
-    >
 
-        {/* TOP CONTENT*/}
-        {specs.show==="top" &&
-            <FlexBox width="100%">
-                <CoverImage 
-                    src={specs.typeTop==="cover" ? item.coverPoster : item.poster}
-                    title={"Visit " + item.movie.name}
-                    alt={`${item.movie.name} poster`} 
-                    ratio={specs.ratioTop}  
-                    link={`/movie/${item.movie.slug}`} 
-                />
-                <FlexBox position="absolute" left={"20px"} top={"12px"} flexDirection="column" alignItems="center" width="auto">
-                    <BookmarkMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize + 4} />
-                    <LikeMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize} mt={[2]} />
-                </FlexBox>
-  
-                <FlexBox position="absolute" left={"20px"} bottom={"4px"}>
-                    <RatingMutation item={item.movie} size={36} />
-                </FlexBox>
-            </FlexBox>
-        }
-
-        {/* HTML CONTENT*/}
-        <FlexBox 
-            flexDirection="column" flexGrow={1}  p={[2]} 
-            
-            position="relative"
-            width={specs.htmlContentWidth}
-            height={specs.isLargeScreen ? specs.htmlContentHeight : "auto"}
-            px={specs.isLargeScreen ? [1,1,1,2,3] :[3,3,3,3,3,4]} pt={[3,3,3,2,3]} pb={[1]}
-        >
-            <FlexBox width="100%" position="relative" flexGrow={1} flexDirection="column" overflowY="auto" >
-                <NewLink 
-                    link={`/movie/${item.movie.slug}`} 
-                    title={`See ${item.movie.name} (${item.movie.year}) plot, cast, trailer, similar films and movie recommendations.`}
-                    hoverUnderline follow
-                    pb={[3,3,3,2,2]}
-                    > 
-                    <HeaderMini textAlign="left" fontWeight="bold" height="100%"
-                        fontSize={specs.headerSize}
-                        
-                    >
-                        {item.header} ({item.movie.year})
-                    </HeaderMini>
-                </NewLink>
-                {item.htmlContent 
-                    ? <HtmlContainer 
-                        html={item.htmlContent} 
-                        style={{
-                            p:{fontSize:specs.textSize},
-                        }} 
-                    />
-                    : <Text mt={[2]} fontSize={specs.textSize}>
-                            {item.movie.htmlContent 
-                                ? item.movie.summary.length > 500 
-                                    ? item.movie.summary.slice(0,500) + "..." 
-                                    : item.movie.summary
-                                : item.movie.summary.slice(0,500)}
-                        </Text>
-                }
-            </FlexBox>
-
-            {/* HOME BUTTON*/}
-            <Box display="flex" position="relative" 
-                left={0} bottom={0} 
-                height={"34px"} width="100%"
-                mt="4px" pb={"2px"} pt="4px" borderTop="1px solid" borderColor="rgba(0,0,0,0.25)"
-                justifyContent="space-between" alignItems="flex-end"
-            >
-                <NewLink 
-                    link={`/movie/${item.movie.slug}`} 
-                    hoverUnderline follow display="flex" alignItems="flex-end"
-                    title={`Visit ${item.movie.name} (${item.movie.year})'`}
-                >
-                    <FilmIcon size={specs.iconSize -4} 
-                        fill="rgba(0,0,0,0.9)" 
-                        hoverFill="rgba(0,0,0,1)" 
-                    />
-                </NewLink>
-                <Box display="flex" title={`${item.movie.name} released in ${item.movie.year} and have ${item.movie.imdbRating} IMDb rating.`}>
-                    <YearClockIcon year={item.movie.year} color="dark" fill="#181818"  noShadow size={specs.iconSize -4} />
-                    {item.movie.imdbRating && 
-                        <ImdbRatingIcon 
-                            rating={item.movie.imdbRating} color="dark" noShadow 
-                             
-                        />}
-                </Box>
-            </Box>
-        </FlexBox>
-
-        {/* RIGHT SECTION*/}
-        {specs.show==="right" &&
-            <FlexBox  
-                flexDirection="column" alignItems="center" 
-                width={specs.rightPosterWidth}  
-                height={specs.htmlContentHeight}
-                boxShadow="4px 4px 12px 4px rgba(0,0,0,0.4)"
-                >   
-                    <NewLink flexGrow={1} follow height={specs.rightPosterHeight}
-                        link={`/movie/${item.movie.slug}`} 
-                        title={`See ${item.movie.name} (${item.movie.year}): Plot, Cast, Trailer and Similar Movies.`}
-                        >
-                        <FlexBox 
-                            width={specs.rightPosterWidth}  height={"100%"} minHeight={specs.rightPosterHeight}
-                            position="relative" flexDirection="column"
-                            flexGrow={1}
-                        >
-                            <ImageBoxBg display="flex" flexGrow={1} minHeight="100%"
-                                width={specs.rightPosterWidth} 
-                                src={specs.typeRight==="cover" ? item.coverPoster : item.poster}
-                                alt={`${item.movie.name} poster`} 
-                                ratio={specs.ratioRight}  zIndex={0}
-                                link={`/movie/${item.movie.slug}`} 
-                            />
-                        </FlexBox>
-                    </NewLink>
-                    {/* NAME PANEL*/}
-                    <FlexBox width={"100%"} height={specs.rightTextPanelHeight}
-                        position="relaive"  bg="dark" flexDirection="column" 
-                        pl={"8px"}
-                        borderBottom="1px solid" borderColor="rgba(255,255,255,0.3)"
-                    >   
-                        <NewLink link={`/movie/${item.movie.slug}`} 
-                            title={`See the details of ${item.movie.name} (${item.movie.year}).`}                        
-                        >
-                            <Text color="light" hoverUnderline fontWeight="bold" fontSize="13px">{item.movie.name} ({item.movie.year})</Text>
-                        </NewLink>
-
-                        <FlexBox alignItems="center">
-                            <StarIcon size={14} stroke="yellow" />
-                            {item.persons.map(star => (
-                                <NewLink link={`/person/${star.slug}`} key={star.id}>
-                                    <Text color="#f1f1f1" fontSize="12px" mx={"8px"} hoverUnderline>{star.name}</Text>
-                                </NewLink>
-                            ))}
-                        </FlexBox>
-
-                    </FlexBox>
-                    {/* MUTATION PANEL */}
-                    <FlexBox width={"100%"} height={specs.rightMutatinPanelHeight} position="relaive" bg="dark" alignItems="center">
-                        <BookmarkMutation id={item.movie.id} 
-                            active={item.movie.isBookmarked} 
-                            size={specs.iconSize } mx={[2]} 
-                        />
-                        <LikeMutation id={item.movie.id} 
-                            active={item.movie.isBookmarked} 
-                            size={specs.iconSize - 2} 
-                        />
-                        <Box display="flex" flexGrow={1}
-                            width="100%" height="100%"
-                            justifyContent="center" alignItems="center"
-                        >
-                            <RatingMutation item={item.movie} size={36} />
-                        </Box>
-                    </FlexBox>
-            </FlexBox>
-            }
-    </FlexBox>
+const TrailerIcon = ({onClick, ...props}) => (
+	<FlexBox 
+		display="flex"
+		to={`#movie-page-video-header`}
+		title={"See Video Section"}
+		position="absolute"
+        alignItems="center"
+        justifyContent="center"
+		left={"45%"}
+		width={"10%"}
+		top={"45%"}
+		height={"45%"}
+        onClick={onClick}
+        {...props}
+	>
+		<YoutubeIcon size={[50,50,50, 35]} hoverScale boxShadow={"0 1px 1px 1px rgba(0,0,0, 0.95)"}/>
+	</FlexBox>
 )
-
-
 export default withRouter(TopicQuery);

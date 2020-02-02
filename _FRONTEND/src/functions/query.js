@@ -877,6 +877,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                         isBookmarked, isFaved,
                         viewerRating,imdbRating,
                         tags{name, slug, genreTag, subgenreTag}
+                        videos{id,title,summary,link,duration,tags,isFaved,ytId,thumb},
                     }
                 },
                 quantity

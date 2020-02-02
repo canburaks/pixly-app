@@ -26,7 +26,8 @@
         "/topic/gangster-films",
         "/topic/romantic-comedy",
         "/topic/post-apocalyptic",
-        "/topic/bdsm-movies"
+        "/topic/bdsm-movies",
+        "/topic/cinematic-documentary"
 
     ],
 
@@ -350,6 +351,7 @@
         "/topic/romantic-comedy",
         "/topic/post-apocalyptic",
         "/topic/bdsm-movies",
+        "/topic/cinematic-documentary",
         "/blog/a-brief-introduction-to-collaborative-filtering",
         "/blog/django-graphql-react-integration-tutorial-part-1",
         "/blog/django-graphql-react-integration-tutorial-part-2",

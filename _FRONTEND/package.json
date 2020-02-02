@@ -141,6 +141,7 @@
     "react-hot-loader": "^4.12.15",
     "react-input-range": "^1.3.0",
     "react-lazy-load-image-component": "^1.4.0",
+    "react-modal-video": "^1.2.3",
     "react-router-dom": "^5.1.0",
     "react-router-hash-link": "^1.2.2",
     "react-scripts": "^3.0.1",
@@ -148,6 +149,7 @@
     "react-snap": "^1.22.1",
     "react-social-sharing": "^3.0.1",
     "react-stars": "^2.2.5",
+    "react-styled-carousel": "^0.5.1",
     "react-twitter-widgets": "^1.7.1",
     "reactackle-menu": "^1.1.1",
     "remove": "^0.1.5",
@@ -220,11 +222,25 @@
     "include": [
       "",
       "/",
-      "/topic/cyberpunk",
       "/lists-of-films",
+      "/topic/art-house",
+      "/topic/based-on-true-story",
+      "/topic/cyberpunk",
+      "/topic/dialogue-focused",
+      "/topic/thought-provoking",
+      "/topic/feel-good-movies",
+      "/topic/bechdel-test",
+      "/topic/lgbtq-plus-films",
+      "/topic/controversial-films",
+      "/topic/historical-figures",
+      "/topic/mystery",
+      "/topic/video-game",
+      "/topic/gangster-films",
+      "/topic/romantic-comedy",
       "/topic/post-apocalyptic",
-      "/topic/bdsm-movies"
-  ],
+      "/topic/bdsm-movies",
+      "/topic/cinematic-documentary"
+    ],
     "publicPath": "/"
   }
 }

@@ -71,7 +71,16 @@ export const styledPicture = styled.picture`
     ${border}
     ${position}
 `
-
+export const Iframe = styled("iframe")`
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+`
 /*
 export const Picture = (props) => (
     <styledPicture {...props}>
