@@ -24,7 +24,9 @@ const useStyles = makeStyles({
 	paper: {
 		backgroundColor: "#181818",
 		color: "#f1f1f1",
-		padding:"4px 8px"
+		padding:"4px 8px",
+		margin:0,
+		maxWidth: "1000px"
 	},
 
 });
@@ -35,7 +37,7 @@ export const SimpleDialog = ({header, onClose, isOpen, ...props}) => {
 	const classes = useStyles();
 
 	const handleClose = (value) => onClose(value);
-
+	console.log(header, onClose, isOpen)
 
 	return (
 		<Dialog 
@@ -48,7 +50,7 @@ export const SimpleDialog = ({header, onClose, isOpen, ...props}) => {
 			onClose={handleClose} 
 			{...props}
 		>
-			<DialogTitle id="simple-dialog-title">{header}</DialogTitle>
+			{header && <DialogTitle id="simple-dialog-title">{header}</DialogTitle>}
 			{props.children}
 		</Dialog>
 	);
