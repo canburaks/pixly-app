@@ -36,7 +36,7 @@ import { rgba } from "polished";
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
 	  appbar:{
-		background:"rgba(20,20,20, 0.7)",
+		background:"rgba(0,0,0, 0.9)",
 		
 	  },
 	  listitem:{
@@ -300,7 +300,7 @@ export const SearchAppBar = (props) => {
                                 Similars
                             </NewLink>
                             <NewLink 
-                                color="#f1f1f1 !important" 
+                                color="#f1f1f1 !important" follow={isFollowLink}
                                 link={"/advance-search"} fontSize={["10px", "10px", "12px", "14px"]} 
                                 px={[1,1,2]} title="Browse Movie with Advance Options" fontWeight="bold"
                             >
@@ -440,10 +440,10 @@ const SideBar = ({classes, isOpen, onClose, authStatus, insertLoginForm, insertJ
 			{text:"Thought-Provoking", link:"/topic/thought-provoking"},
 			{text:"LGBTQ+ Movies", link:"/topic/lgbtq-plus-films"},
 			{text:"Mystery Movies", link:"/topic/mystery"},
-			{text:"Rom-Coms", link:"/topic/romantic-comedy"}
+			{text:"Romantic-Comedy", link:"/topic/romantic-comedy"}
 			].map(liste => (
 				<ListItem classes={{root:classes.listitem}} button key={"- " + liste.text}>
-					<NewLink link={liste.link} title={`${liste.text}`} follow={isFollowLink}>
+					<NewLink link={liste.link} title={`${liste.text}`} follow={true}>
 						<Text 
 							fontSize={["12px", "12px", "12px", "14px"]} 
 							pl={[4]} 

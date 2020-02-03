@@ -212,12 +212,20 @@ export const RatingMutation = ({ item, size, viewerRating }) => {
 	}, [debouncedRating])
 
     return (
-      <ReactStars half 
-          edit={authStatus} 
-          color2={"#ffd700"} color1="grey" size={starSize} 
-          value={authStatus ? (currentRating || viewerRating) : null} 
-          onChange={ratingSetter}
-      />
+		<FlexBox 
+			width="100%" 
+			justifyContent="center" 
+			alignItems="center" 
+			title={!authStatus ? "You must be logged in to rate movie" : "How much did you like the movie?"}
+		>
+			<ReactStars half 
+				edit={authStatus} 
+				color2={"#ffd700"} color1="grey" size={starSize} 
+				value={authStatus ? (currentRating || viewerRating) : null} 
+				onChange={ratingSetter}
+				title={"asdasd"}
+			/>
+		</FlexBox>
     )
 }
 
