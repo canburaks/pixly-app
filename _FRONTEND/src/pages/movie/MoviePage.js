@@ -177,8 +177,8 @@ const MoviePage = props => {
 			/>
 
 			<FlexBox flexDirection="column" justifyContent="center" alignItems="center" mt={[0]} bg="rgba(0,0,0,0.95)">
-				<HeaderOneText color="light"/>
-				{false && <Text fontWeight="bold" fontSize={["16px", "16px", "18px"]} opacity={0.75} mt={[4]}>How much did you like the movie?</Text>}
+				<HeaderOneText color="light" my={[3]} />
+				{true && <Text fontWeight="bold" fontSize={["14px", "14px", "18px"]} opacity={0.75} mt={[4]} color="light">How much did you like the movie?</Text>}
 				<RatingMutation item={item} size={50}/>
 			</FlexBox>
 			{/*<!-- Page Container --> */}
