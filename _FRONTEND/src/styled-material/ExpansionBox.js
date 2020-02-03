@@ -33,7 +33,7 @@ export const ExpansionBox = React.memo(({isOpen=false, ...props}) => {
   const classes = useStyles();
   const [expanded,setExpanded] = useState(isOpen)
   const panelHandler = useCallback(() => setExpanded(!expanded),[expanded])
-
+  console.log(isOpen)
   return (
     <Box width="100%" my={[3]}>
       <ExpansionPanel
@@ -57,4 +57,4 @@ export const ExpansionBox = React.memo(({isOpen=false, ...props}) => {
       </ExpansionPanel>
     </Box>
   );
-},(p,n) => (p.expanded === n.expanded && p.header === n.header))
+},(p,n) => (p.expanded === n.expanded && p.header === n.header && p.isOpen === n.isOpen))

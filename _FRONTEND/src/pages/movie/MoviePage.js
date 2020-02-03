@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useCallback } from "react";
 import { useState, useContext, useMemo, useEffect, useRef } from "react";
-import { withRouter, Link, Redirect, useParams } from "react-router-dom";
+import { withRouter, Link, Redirect, useParams, useLocation } from "react-router-dom";
 import {
 	rgaPageView, Head, MoviePageAd, MidPageAd, 
 	FeedMobileTopicPageAd, HomePageFeedAd 
@@ -28,7 +28,7 @@ import { CrewCard, MovieSimilarBox, PageContainer, ContentContainer, MovieCoverB
 	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText,
 } from "../../styled-components";
 
-import { ExpansionBox } from "../../styled-material"
+import { ExpansionBox, SimpleDialog } from "../../styled-material"
 
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
@@ -39,6 +39,11 @@ const MoviePage = props => {
 	//console.log("props", props)
 	const { movie: item, viewer } = props.item;
 	const { cacheUpdate } = props;
+	const { hash } = useLocation()
+	const [openVideoSection, setVideoSection] = useState(hash.includes("movie-page-video-header"))
+	const openVideoHandler = () => setVideoSection(true)
+	const closeHandler = () => setVideoSection(false)
+
     const nodeSimilarMovies = useRef(null)
     const nodeVideoSection = useRef(null)
 	
@@ -94,10 +99,20 @@ const MoviePage = props => {
 	//console.log(item.appears)
 	//console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
 	//console.log(item.seoShortDescription)
+	const headerOneText = ((item.inPageGroups && item.inPageGroups.length > 0) || (item.topics && item.topics.length > 0))
+		? `${item.name} (${item.year}) and Similar Movies`
+		: `${item.name} (${item.year})`
+	const HeaderOneText = (props) => ((item.inPageGroups && item.inPageGroups.length > 0) || (item.topics && item.topics.length > 0))
+		?<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]} opacity={0.85} textAlign="center" uncapitalize {...props}>
+			Similar Movies like {item.name} ({item.year})
+		</HeaderText>
+		:<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]} opacity={0.85} textAlign="center" {...props}>
+			{item.name} ({item.year})
+		</HeaderText>
     const hasTwitter = useMemo(() => (item.twitter && item.twitter.length > 5) ? true : false,[])
     const SummaryElement = useMemo(() => hasTwitter 
-        ? () => <MovieSummaryWithTwitter item={item} /> 
-        : () =>  <MovieSummary name={item.name} summary={item.summary}  year={item.year}/>, [hasTwitter])
+        ? () => <MovieSummaryWithTwitter item={item} header={headerOneText}/> 
+        : () =>  <MovieSummary name={item.name} summary={item.summary}  year={item.year} header={headerOneText}/>, [hasTwitter])
  
 
 
@@ -122,10 +137,11 @@ const MoviePage = props => {
 	const showVideos = item.videos && item.videos.length > 0
 	const showDirectorFavourite = item.appears && item.appears.length > 0
 	const showHtmlContent = item.htmlContent && item.htmlContent.length >10
-	//console.log(item)
+
+
 
     useEffect(()=>{
-        if (props.location.hash){
+        if (hash){
 			var hashId = props.location.hash.slice(1) 
 			if (hashId === "similar-movies" && nodeSimilarMovies.current){
 				nodeSimilarMovies.current.scrollIntoView({behavior: "smooth"})
@@ -156,14 +172,15 @@ const MoviePage = props => {
 				cacheUpdate={cacheUpdate}
 				authStatus={authStatus}
 				isLargeScreen={isLargeScreen}
-				Trailer={hasVideos && TrailerIcon}
+				Trailer={hasVideos ? () => <TrailerIcon onClick={openVideoHandler} /> : null}
 				darken
 			/>
 
-			<CardContainer flexDirection="column" justifyContent="center" alignItems="center" mt={[0]}>
-				<Text fontWeight="bold" fontSize={["16px", "16px", "18px"]}>How much did you like the movie?</Text>
+			<FlexBox flexDirection="column" justifyContent="center" alignItems="center" mt={[0]} bg="rgba(0,0,0,0.95)">
+				<HeaderOneText color="light"/>
+				{false && <Text fontWeight="bold" fontSize={["16px", "16px", "18px"]} opacity={0.75} mt={[4]}>How much did you like the movie?</Text>}
 				<RatingMutation item={item} size={50}/>
-			</CardContainer>
+			</FlexBox>
 			{/*<!-- Page Container --> */}
 
 			{/* SUMMARY */}
@@ -174,20 +191,21 @@ const MoviePage = props => {
 
 				{/* VIDEO */}
 				{hasVideos && 
-					<ExpansionBox header={videoText}>
-
-							<LazyLoadComponent>
-								<YoutubePlayer
-									videos={item.videos}
-									title={item.name + " Videos"}
-								/>
-							</LazyLoadComponent>
-					</ExpansionBox>
+					<Box ref={nodeVideoSection}  >
+						<ExpansionBox header={videoText}>
+								<LazyLoadComponent>
+									<YoutubePlayer
+										videos={item.videos}
+										title={item.name + " Videos"}
+									/>
+								</LazyLoadComponent>
+						</ExpansionBox>
+					</Box>
 				}
 
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && 
-				<ExpansionBox
+				<ExpansionBox id=""
 					isOpen={!haveAnyCollection}
 					header={`${item.name} (${item.year}) Cast & Crew`}
 					text={item.crew.length > 4 ? `Director, Actors and Actresses of ${item.name} (${item.year})` : null}
@@ -325,6 +343,18 @@ const MoviePage = props => {
 
 
 
+				{hasVideos && 
+					<SimpleDialog
+						onClose={closeHandler}
+						isOpen={openVideoSection}
+					>
+                <FlexBox minWidth="90vw" minHeight={["auto", "auto", "70vh"]} maxWidth="100%" overflowX="hidden">
+					<YoutubePlayer
+						videos={item.videos}
+						title={item.name + " Videos"}
+					/>
+                </FlexBox>
+            </SimpleDialog>}
 
 
 			</ContentContainer>
@@ -371,39 +401,25 @@ const HtmlContent = ({ movie, ...props }) => (
 	</CardContainer>
 )
 
-const TrailerIcon = () => (
-	<HashLink 
-		display="flex"
-		to={`#movie-page-video-header`}
-		title={"See Video Section"}
-		position="absolute"
-		left={"45%"}
-		width={"10%"}
-		top={"45%"}
-		height={"45%"}
-	>
-		<YoutubeIcon size={[40,40,50,60]} hoverScale boxShadow={"0 1px 1px 1px rgba(0,0,0, 0.35)"}/>
-	</HashLink>
-)
 
-const MovieSummary = ({name, summary, year}) => (
+
+const MovieSummary = ({name, header, summary, year}) => (
     <CardContainer>
-		<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]} opacity={0.85}>{name} ({year})</HeaderText>
+		<SubHeaderText opacity={0.8} fontWeight="bold">Synopsis</SubHeaderText>
 		<Text mt={[2]} fontSize={["14px", "16px", "18px"]} opacity={0.85}>{summary}</Text>
     </CardContainer>
 )
 
-const MovieSummaryWithTwitter = ({item}) => {
+const MovieSummaryWithTwitter = ({item, header}) => {
 	const Twitter = twitter()
     return (
         <>
             <Box boxShadow="card" bg="#f1f1f1" p={[3]} mt={[3]} px={[3]} borderRadius={6}>
 				<Twitter.Timeline name={item.name} link={item.twitter} mr={[3,3,3,4]} mb={[3,3,3,4]} />
-				<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]} opacity={0.9}>{item.name} ({item.year})</HeaderText>
+				<SubHeaderText opacity={0.8} fontWeight="bold">Synopsis</SubHeaderText>
 				<br/>
 				{item.summary}
             </Box>
-
         </>
 
 )}
@@ -426,9 +442,41 @@ const MovieQuery = (props) => {
     }
 }
 
+const TrailerIcon = ({onClick}) => (
+	<Box 
+		display="flex"
+		title={"See Trailer"}
+		position="absolute"
+		left={"45%"}
+		width={"10%"}
+		top={"45%"}
+		height={"45%"}
+		onClick={onClick}
+	>
+		<YoutubeIcon size={[40,40,50,60]} hoverScale boxShadow={"0 1px 1px 1px rgba(0,0,0, 0.35)"}/>
+	</Box>
+)
+
 export default withRouter(MovieQuery);
 
+
 /*
+
+const TrailerIcon0 = () => (
+	<HashLink 
+		display="flex"
+		to={`#movie-page-video-header`}
+		title={"See Video Section"}
+		position="absolute"
+		left={"45%"}
+		width={"10%"}
+		top={"45%"}
+		height={"45%"}
+	>
+		<YoutubeIcon size={[40,40,50,60]} hoverScale boxShadow={"0 1px 1px 1px rgba(0,0,0, 0.35)"}/>
+	</HashLink>
+)
+
 const TopPanel = React.memo(({ item, authStatus, screenSize }) =>
 	item.hasCover ? (
 		<CoverPanel

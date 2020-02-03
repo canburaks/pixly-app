@@ -44,12 +44,12 @@ export const MessageBox = ({ header,Header,subheader,Subheader,miniheader, text,
         <FlexBox flexDirection="column" justifyContent="flex-start" alignItems="flex-start" width={"100%"} textAlign="left">
             {Header && <Header fontWeight="bold" textAlign="left" opacity={0.95}/>}
             {(header || subheader) && 
-                <SubHeaderText fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.95} textAlign="left">
+                <SubHeaderText fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.85} textAlign="left">
                     {header || subheader}
                 </SubHeaderText>}
-            {Subheader && <Subheader fontWeight="bold" opacity={0.95} textAlign="left"/>}
+            {Subheader && <Subheader fontWeight="bold" opacity={0.85} textAlign="left"/>}
             {miniheader && 
-                <HeaderMini fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.85}
+                <HeaderMini fontSize={["20px", "20px", "24px", "28px"]} fontWeight="bold" opacity={0.8}
                     textAlign="left"
                 >
                     {miniheader}

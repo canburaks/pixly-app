@@ -22,8 +22,8 @@ const ListName = ({ item }) => <HeaderMini color="lightDark1" textShadow="dark" 
 
 const MovieActions = (props) => (
 <FlexBox position="absolute" top="20px" left={[1,1,2,2]} height="auto" minWidth="28px" flexDirection="column">
-    <LikeMutation id={props.item.id} active={props.item.isFaved}/>
-    <BookmarkMutation id={props.item.id} active={props.item.isBookmarked}/>
+    <LikeMutation id={props.item.id} active={props.item.isFaved} mb={[2]}/>
+    <BookmarkMutation id={props.item.id} active={props.item.isBookmarked} mb={[2]}/>
 </FlexBox>
 )
 

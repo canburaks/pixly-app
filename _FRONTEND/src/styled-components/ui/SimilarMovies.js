@@ -112,8 +112,7 @@ const ContentSimilarSection = (props) => {
             {data.listOfContentSimilarMovies && data.listOfContentSimilarMovies.length > 0 &&
                 <>
                     <MessageBox 
-                        subheader={`Similar ${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Movies" : "Movies" } like ${data.movie.name.trim()} (${data.movie.year})`}
-                        miniheader="Contentful Similar Films"
+                        subheader={`Contentful Similar ${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Films" : "Films" } like ${data.movie.name.trim()} (${data.movie.year})`}
                         text={data.movie.contentSimilarsSummary ? data.movie.contentSimilarsSummary :
                             `The movies in this part have common topics, tags or sub-genres with ${data.movie.name.trim()} movie. ` +
                             `${commonGenres(data.movie.tagNames, data.listOfContentSimilarMovies)}`
@@ -181,7 +180,16 @@ const RecommendationSection = ({num=19}) => {
         <div></div>
     )
     if (loading) return <FlexBox minHeight={"200px"} justifyContent="center"  width="100%"><Plus id="plus-loader-container" /></FlexBox>
-    if (data) return (
+    if (data){
+        const RecommendationHeader = () => (
+            <SubHeaderText 
+                fontSize={["20px", "20px", "24px", "28px"]} 
+                fontWeight="bold" opacity={0.85}
+            >
+                Algorithmic Film Recommendations <br/>Based on {data.movie.name.trim()} {data.movie.year}
+            </SubHeaderText>
+        )
+        return (
         <Section 
             display="flex" flexDirection="column" 
             px={[2]} 
@@ -192,8 +200,7 @@ const RecommendationSection = ({num=19}) => {
             {data.listOfSimilarMovies && data.listOfSimilarMovies.length > 0 &&
                 <>
                     <MessageBox 
-                        subheader={`Algorithmic Film Recommendations`}
-                        miniheader="You may also like"
+                        Subheader={RecommendationHeader}
                         text={
                             `Our AI-assisted algorithm found that those movies are showing high similarity to ${data.movie.name.trim()}. ` +
                             `The movies like ${data.movie.name.trim()} in this section not only consider the common content elements, ` + 
@@ -219,7 +226,7 @@ const RecommendationSection = ({num=19}) => {
                 </>
             }
         </Section>
-    )
+    )}
 }
 
 

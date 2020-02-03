@@ -298,7 +298,6 @@ const devSettings = {
 		rules: [
 			{
 				test: /\.m?js$/,
-				exclude: /(node_modules|bower_components)/,
 				include: path.resolve(__dirname, 'src'),
 				use: {
 					loader: "babel-loader",

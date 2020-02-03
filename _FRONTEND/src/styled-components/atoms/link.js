@@ -45,10 +45,12 @@ export const DirectorLink = ({director, ...props}) => (
 	<NewLink 
 		to={`/person/${director.slug}`}  
 		textShadow={"textDark"} 
-		{...props}
+    px={0}
 		mr={[0]} 
+    hoverUnderline
+		{...props}
 	>
-		<UnderlineEffect>{director.name}</UnderlineEffect>
+		{director.name}
 		{props.extra}
     </NewLink>)
 

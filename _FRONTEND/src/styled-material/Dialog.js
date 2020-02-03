@@ -37,7 +37,7 @@ export const SimpleDialog = ({header, onClose, isOpen, ...props}) => {
 	const classes = useStyles();
 
 	const handleClose = (value) => onClose(value);
-	console.log(header, onClose, isOpen)
+	//console.log(header, onClose, isOpen)
 
 	return (
 		<Dialog 
