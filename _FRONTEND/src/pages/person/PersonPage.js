@@ -164,7 +164,7 @@ const PersonPage = (props) => {
                 <DirectorPageAd />
 
                 <SubHeaderText id="director-page-filmography">{item.name + " Movies (Filmography)"}</SubHeaderText>
-                <MovieCoverBox items={sortedMovies} />
+                <MovieCoverBox items={sortedMovies} follow={true} />
 
                 
 
