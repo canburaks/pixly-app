@@ -222,7 +222,8 @@
     "include": [
       "",
       "/",
-      "/movie/high-noon-2009"
+      "/movie/high-noon-2009",
+      "/movie/the-blind-side-2009"
 
     ],
     "publicPath": "/"
