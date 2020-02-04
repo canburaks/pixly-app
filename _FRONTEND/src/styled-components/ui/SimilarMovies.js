@@ -245,8 +245,10 @@ const ContentSimilarMovieCard = ({ item }) => (
         >
             <Image 
                 src={item.poster} 
+                info={`${item.name} (${item.year}) Poster`}
                 alt={`${item.name} (${item.year}) Poster`}
                 title={"Visit " + item.name + ` - ${item.year} Page`} 
+
                 position="absolute" top={0} left={0} right={0} bottom={0}
                 minWidth="100%" 
             />
