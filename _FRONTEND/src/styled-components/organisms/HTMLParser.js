@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useContext, useMemo, useEffect, useRef } from "react";
+import { renderToStaticMarkup } from 'react-dom/server';
 
 import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
@@ -26,7 +27,7 @@ export const HtmlParagraph = ({ html, ...props }) => {
                         fontSize={["14px","14px", "16px"]} 
                         {...props}
                     >
-                        {domToReact(domNode.children)}
+                        {domToReact(domNode.children, options)}
                     </Text>}
         }}
 
@@ -45,39 +46,51 @@ export const HtmlParagraph = ({ html, ...props }) => {
 }
 
 
-
-
 export const HtmlContainer = ({ html, ...props }) => {
     const style = props.style || {
-        p:{},
-        h1:{},
-        h2:{},
-        h3:{},
-        h4:{},
-        ul:{},
-        li:{}
+        a:{opacity:0.95, follow:true},
+        p:{opacity:0.8},
+        h1:{opacity:0.95},
+        h2:{opacity:0.90},
+        h3:{opacity:0.85},
+        h4:{opacity:0.85},
+        ul:{opacity:0.9},
+        li:{opacity:0.9}
     }
     //console.log(props)
     const options = {
         replace: domNode => {
+            if (domNode.name ==="a"){
+                //const anchor = domNode
+                //console.log("a",anchor)
+                return (
+                    <NewLink  className="newlink"
+                        fontSize={["14px","14px", "16px"]}
+                        link={domNode.attribs.href}
+                        textUnderline
+                        {...style.a}
+                    >
+                        {domToReact(domNode.children, options)}
+                    </NewLink>)
+            }
             if (domNode.attribs && domNode.name ==="h1"){
                 return (
-                    <HeaderText  opacity={0.95}
+                    <HeaderText 
                         mt={"32px !important"}
                         fontSize={["24px", "24px", "28px", "32px", "36px"]}
                         {...style.h1}
                     >
-                        {domToReact(domNode.children)}
+                        {domToReact(domNode.children, options)}
                     </HeaderText>)
             }
             else if (domNode.attribs && domNode.name ==="h2"){
-                return <SubHeaderText opacity={0.9}
+                return <SubHeaderText
                             fontSize={["22px", "22px", "26px"]}  
                             mt={"32px !important"}
-                            opacity={0.95}
+                        
                             {...style.h2}
                         >
-                        {domToReact(domNode.children)}
+                        {domToReact(domNode.children, options)}
                         </SubHeaderText>
             }
 
@@ -85,41 +98,39 @@ export const HtmlContainer = ({ html, ...props }) => {
                 return <HeaderMini   opacity={0.85}
                             fontSize={["20px", "20px", "22px"]}
                             mt={"8px !important"} width="100%"
-                            opacity={0.95}
+                        
                             {...style.h3}
                             {...style.h4}
                         >
-                            {domToReact(domNode.children)}
+                            {domToReact(domNode.children, options)}
                         </HeaderMini>
             }
             else if (domNode.attribs && domNode.name === 'p' ) {
-                //const anchorchildren = domNode.children.filter(c => c.name==="a")
-                //for (let i=0; i<domNode.children.length)
 
                 //console.log("aaaa",anchorchildren)
-                return <Text width={"100%"} opacity={0.8}
+                return <Text width={"100%"} 
                             fontSize={["14px","14px", "16px"]} 
                             {...style.p}
                         >
-                            {domToReact(domNode.children)}
+                            {domToReact(domNode.children, options)}
                         </Text>
             }
             else if (domNode.attribs && domNode.name === 'ul' ) {
-                return <Ul width={"100%"} opacity={0.8}
+                return <Ul width={"100%"} 
                             fontSize={["14px","14px", "16px"]} 
                             {...style.p}
                             {...style.ul}
                         >
-                            {domToReact(domNode.children)}
+                            {domToReact(domNode.children, options)}
                         </Ul>
             }
             else if (domNode.attribs && domNode.name === 'li' ) {
-                return <Li width={"100%"} opacity={0.8}
+                return <Li width={"100%"} 
                             fontSize={["14px","14px", "16px"]} 
                             {...style.p}
                             {...style.li}
                         >
-                            {domToReact(domNode.children)}
+                            {domToReact(domNode.children, options)}
                         </Li>
             }
             else if (domNode.attribs && domNode.name ==="code"){
@@ -146,17 +157,6 @@ export const HtmlContainer = ({ html, ...props }) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 const logger = (html) => {
         //console.log("html nodes", html.childNodes)
         var box = document.createElement('div');
@@ -175,14 +175,14 @@ const parser = (el) => {
     const children = el.childNodes
     const len = children.length
     const tag = children.nodeName
-    console.log("opening - child nodes: ", children,len)
+    //console.log("opening - child nodes: ", children,len)
     //children.forEach(c => console.log("foreach",c, c.length, c.nodeName))
     //console.log(len, "len")
     for(let i=0; i<len; i++){
         const child = children[i]
-        console.log("for child: ", child, child.nodeName, child.childElementCount)
+        //console.log("for child: ", child, child.nodeName, child.childElementCount)
         if (child.nodeName==="P"){
-            console.log("p found:", parser(child))
+            //console.log("p found:", parser(child))
         }
         //console.log("loop ", children[i].childNodes)
         //console.log("i", children[i])
@@ -209,3 +209,17 @@ const parseFromString = (html) => {
     el.innerHTML = html
     return el
 }
+
+
+/*
+const anchorHook = (children, follow=false) =>{
+    const result = []
+    children.map(child => {
+        if (child.name === "a"){
+            child = NewLink
+        }
+    })
+
+}
+*/
+

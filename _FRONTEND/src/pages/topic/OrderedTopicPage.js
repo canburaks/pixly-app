@@ -254,6 +254,7 @@ const OrderedCard = ({ item, specs, play}) => (
                 alt={`${item.movie.name} poster`} 
                 ratio={specs.ratioTop}  
                 link={`/movie/${item.movie.slug}`} 
+                follow={true}
             />
             <FlexBox position="absolute" left={"20px"} top={"12px"} flexDirection="column" alignItems="center" width="auto">
                 <BookmarkMutation id={item.movie.isBookmarked} active={item.movie.isBookmarked} size={specs.iconSize + 4} />
@@ -371,7 +372,7 @@ const OrderedCard = ({ item, specs, play}) => (
 
                     />
                 }
-                <CoverLink link={`/movie/${item.movie.slug}`}  title={""}  zIndex={2}/>
+                <CoverLink link={`/movie/${item.movie.slug}`}  title={""}  zIndex={2} follow={true}/>
             </SuperBox>
 
             {/* NAME PANEL*/}
@@ -380,7 +381,7 @@ const OrderedCard = ({ item, specs, play}) => (
                 pl={"8px"}
                 borderBottom="1px solid" borderColor="rgba(255,255,255,0.3)"
             >   
-                <NewLink link={`/movie/${item.movie.slug}`} 
+                <NewLink link={`/movie/${item.movie.slug}`} follow={true}
                     title={`See the details of ${item.movie.name} (${item.movie.year}).`}                        
                 >
                     <Text color="light" hoverUnderline fontWeight="bold" fontSize="13px">{item.movie.name} ({item.movie.year})</Text>
@@ -389,7 +390,7 @@ const OrderedCard = ({ item, specs, play}) => (
             {/* ACTOR PANEL*/}
                 <FlexBox alignItems="center">
                     {item.persons.map(star => (
-                        <NewLink link={`/person/${star.slug}`} key={star.id}>
+                        <NewLink link={`/person/${star.slug}`} key={star.id} follow={true}>
                             <Text color="#f1f1f1" fontSize="12px" mr={"16px"} opacity={0.8} hoverUnderline>{star.name}</Text>
                         </NewLink>
                     ))}
@@ -605,7 +606,7 @@ const UnorderedCard = ({ item, ratio, title=null }) => (
                 src={ratio < 1 ? (item.coverPoster ? item.coverPoster : item.poster) : item.poster}
                 title={"Visit " + item.name}
                 alt={`${item.name} poster`} 
-                ratio={ratio}  
+                ratio={ratio}   follow={true}
                 link={`/movie/${item.slug}`} 
             />
             <AbsoluteBox top={"20px"} right={"20px"}>
