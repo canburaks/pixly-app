@@ -18,8 +18,9 @@ import Highlight from 'react-highlight'
 
 export const HtmlParagraph = ({ html, ...props }) => {
     //console.log(props)
-    const options = {replace: domNode => {
-        //console.log(domNode)
+    const options = {
+        replace: domNode => {
+        console.log(domNode)
         if (domNode.attribs && domNode.name ==="p"){
             return <Text width={"100%"} maxWidth={"100%"} opacity={0.8}
                         fontSize={["14px","14px", "16px"]} 
@@ -59,7 +60,6 @@ export const HtmlContainer = ({ html, ...props }) => {
     //console.log(props)
     const options = {
         replace: domNode => {
-            //console.log(domNode)
             if (domNode.attribs && domNode.name ==="h1"){
                 return (
                     <HeaderText  opacity={0.95}
@@ -93,6 +93,10 @@ export const HtmlContainer = ({ html, ...props }) => {
                         </HeaderMini>
             }
             else if (domNode.attribs && domNode.name === 'p' ) {
+                //const anchorchildren = domNode.children.filter(c => c.name==="a")
+                //for (let i=0; i<domNode.children.length)
+
+                //console.log("aaaa",anchorchildren)
                 return <Text width={"100%"} opacity={0.8}
                             fontSize={["14px","14px", "16px"]} 
                             {...style.p}

@@ -470,7 +470,7 @@ const OrderedList = ({ items, speed, size}) => {
         rightMutatinPanelHeight
         //------------------------------------
     }
-    console.log("ordered", items)
+    //console.log("ordered", items)
     return (
         <>
             {ordereditems.slice(0,4).map( item => (
