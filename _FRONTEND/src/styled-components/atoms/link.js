@@ -98,7 +98,7 @@ export const NewLink = styled(LinkNoFollow)`
 
   };
   vertical-align:middle;
-  text-decoration:${props => props.underline ? "underline" : "initial"};
+  text-decoration:${props => (props.underline || props.textUnderline) ? "underline" : "initial"};
   transition: ${themeGet("transitions.fast")};
   ${props => props.hidden && hideText()}
   ${flexbox}

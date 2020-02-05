@@ -33,7 +33,6 @@ export const Svg = styled("svg")`
         stroke: ${props => props.hoverStroke && props.hoverStroke};
 
     }
-    title:${props => props.title && props.title}
     ${color}
     ${space}
     ${shadow}

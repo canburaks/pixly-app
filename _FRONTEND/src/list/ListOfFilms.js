@@ -71,7 +71,7 @@ const ListOfFilms = (props) => {
         { breakPoint: 1280, cardsToShow: 4 }, // this will be applied if screen size is greater than 1280px. cardsToShow will become 4.
         { breakPoint: 760, cardsToShow: 2 },
       ];
-    console.log("data",topics)
+    //console.log("data",topics)
     useEffect(() => window.scrollTo(0,0), [])
     const isSmallScreen = window.innerWidth < 500
     return (
