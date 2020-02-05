@@ -16,9 +16,29 @@ for ti in tqdm(topics):
     ti.save()
 
 
+for ti in tqdm(topics):
+    if ti.html_content:
+        new_html = ti.html_content.replace( 'rel="nofollow"', '')
+        ti.html_content =  new_html
+    if ti.html_content2:
+        new_html = ti.html_content2.replace( 'rel="nofollow"', '')
+        ti.html_content2 =  new_html
+    if ti.html_content3:
+        new_html = ti.html_content3.replace( 'rel="nofollow"', '')
+        ti.html_content3 =  new_html
+    ti.save()
+
 
 for ti in tqdm(tis):
     if ti.html_content:
         new_html = ti.html_content.replace("http://localhost:8080", "https://pixly.app")
+        ti.html_content =  new_html
+        ti.save()
+
+
+for ti in tqdm(tis):
+    if ti.html_content:
+        #new_html = ti.html_content.replace( "https://pixly.app", "")
+        new_html = ti.html_content.replace( 'rel="nofollow"', '')
         ti.html_content =  new_html
         ti.save()

@@ -20,7 +20,7 @@ export const HtmlParagraph = ({ html, ...props }) => {
     //console.log(props)
     const options = {
         replace: domNode => {
-        console.log(domNode)
+        //console.log(domNode)
         if (domNode.attribs && domNode.name ==="p"){
             return <Text width={"100%"} maxWidth={"100%"} opacity={0.8}
                         fontSize={["14px","14px", "16px"]} 
