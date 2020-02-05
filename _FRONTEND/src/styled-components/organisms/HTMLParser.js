@@ -50,19 +50,17 @@ export const HtmlContainer = ({ html, ...props }) => {
     const style = props.style || {
         a:{opacity:0.95, follow:true},
         p:{opacity:0.8},
-        h1:{opacity:0.95},
-        h2:{opacity:0.90},
-        h3:{opacity:0.85},
-        h4:{opacity:0.85},
-        ul:{opacity:0.9},
-        li:{opacity:0.9}
+        h1:{opacity:1.0},
+        h2:{opacity:0.85},
+        h3:{opacity:0.80},
+        h4:{opacity:0.80},
+        ul:{opacity:0.8},
+        li:{opacity:0.8}
     }
     //console.log(props)
     const options = {
         replace: domNode => {
             if (domNode.name ==="a"){
-                //const anchor = domNode
-                //console.log("a",anchor)
                 return (
                     <NewLink  className="newlink"
                         fontSize={["14px","14px", "16px"]}
