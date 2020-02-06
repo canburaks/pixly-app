@@ -131,7 +131,6 @@ const NB = props => {
 
 const Brand = (props) => (
     <svg width={44} height={44} fill="none" {...props}>
-    <title>Home Page</title>
     <circle cx={22} cy={22} r={22} fill="url(#prefix__paint0_angular)" />
     <circle cx={22} cy={22} r={20} fill="#000" />
     <path

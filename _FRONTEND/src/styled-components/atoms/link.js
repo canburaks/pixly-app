@@ -32,7 +32,7 @@ export const HashLink = styled(HLink).attrs(props => props.rel ? {rel:props.rel}
 const LinkNoFollow = ({ to,link, className, children, follow,target, title, ...props }) => (
 	<Link 
     target={target}
-		rel={!follow ? "nofollow" : ""}  
+		rel={follow ? follow : true}  
 		className={className} 
 		to={link || to} 
     title={title}
