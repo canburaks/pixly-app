@@ -113,7 +113,7 @@ const MainPage = (props) => {
 					position="absolute"  className="hero-image"
 					top={0} left={0} right={0} 
 					width={["100vw"]} zIndex={0}
-					alt={"Pixly AI Movie Recommendation and Movie Rating Website"} minHeight={[ "410px", "410px", "500px"]}
+					alt={"Pixly AI Movie Recommendation"} minHeight={[ "410px", "410px", "500px"]}
 				/>	
 
 				<HeaderText 
@@ -166,7 +166,7 @@ const MainPage = (props) => {
 					position="absolute" filter="blur(8px)"
 					top={0} left={"-2vw"} right={"-2vw"} 
 					blur={8} width={"104vw"} zIndex={0}
-					alt={"Pixly AI Movie Recommendation and Movie Rating Website"} minHeight="400px"
+					alt={"Pixly Features"} minHeight="400px"
 				/>
 				<ExploreSection isSmallScreen={isSmallScreen} />
 			</FlexBox>
@@ -263,7 +263,7 @@ const FeatureCard = ({ color, ...props}) => (
 		<AbsoluteImage ratio={350/250}
 			src={`https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-cards/${color}.jpg`} 
 			zIndex={0}
-			alt={"Pixly AI Movie Recommendation and Movie Rating Website"} 
+			alt={"Pixly Features "} 
 		/>
 		<FlexBox 
 			flexDirection="column"  
