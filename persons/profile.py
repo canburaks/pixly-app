@@ -210,6 +210,7 @@ class Profile(SocialMedia, SEO):
             return Persona.objects.filter(user=self.user, id=self.user.id).defer("similars_dummy").first()
 
     def promote(self):
+        return False
         if self.points>=40:
             self.set_seo_description_keywords()
             MyQueue.put(self.sync_movie_archives)
@@ -256,7 +257,7 @@ class Profile(SocialMedia, SEO):
 
             print("<--------PROMOTING---------------->")
             self.promote()
-            self.sync_active_status()
+            #self.sync_active_status() --> uncomment in low energy mode, otherwise uncomment
             print("<----------------------------------->")
         #<--------------------------------------------------------------->
 
@@ -273,25 +274,25 @@ class Profile(SocialMedia, SEO):
             ma.save()
 
             #UPDATE IF PREVIOUS RECOMMENDATION IS EXISTS
-            if self.persona:
-                self.persona.update_recommendation(target, rate)
+            #if self.persona:
+            #    self.persona.update_recommendation(target, rate)
 
             #SCAN MOVIES IF RATING IS HIGHER THAN MEAN
-            if rate >= 4:
-                MyQueue.put(self.scan_movies_by_id, movie_id)
+            #if rate >= 4:
+            #    MyQueue.put(self.scan_movies_by_id, movie_id)
 
-            # Persona objects
-            if self.points>40 and self.points//10==0:
-                #only scan real users 
-                self.print_info("points has increased by 10. Real users will be scanned.")
-                MyQueue.put(self.sync_persona, full=False, create=True)
-            elif self.points>40 and self.points//20==0:
-                #scan both dummy and real users
-                self.print_info("points has increased by 20. New full scan will start.")
-                MyQueue.put(self.sync_persona, full=True, create=True)
-                MyQueue.put(self.scan_movies_by_rating, 5)
-                MyQueue.put(self.scan_movies_by_rating, 4.5)
-                MyQueue.put(self.scan_movies_by_rating, 4)
+            ## Persona objects
+            #if self.points>40 and self.points//10==0:
+            #    #only scan real users 
+            #    self.print_info("points has increased by 10. Real users will be scanned.")
+            #    MyQueue.put(self.sync_persona, full=False, create=True)
+            #elif self.points>40 and self.points//20==0:
+            #    #scan both dummy and real users
+            #    self.print_info("points has increased by 20. New full scan will start.")
+            #    MyQueue.put(self.sync_persona, full=True, create=True)
+            #    MyQueue.put(self.scan_movies_by_rating, 5)
+            #    MyQueue.put(self.scan_movies_by_rating, 4.5)
+            #    MyQueue.put(self.scan_movies_by_rating, 4)
 
             print("<------------------------------------------------>")
         #<--------------------------------------------------------------->
