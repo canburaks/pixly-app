@@ -61,12 +61,15 @@ export const HtmlContainer = ({ html, ...props }) => {
     const options = {
         replace: domNode => {
             if (domNode.name ==="a"){
+                //console.log(domNode)
+                const newlink = domNode.attribs.href.includes("https://pixly.app") ? domNode.attribs.href.split("https://pixly.app")[1] : domNode.attribs.href
+                //console.log(newlink)
                 return (
                     <NewLink  className="newlink"
                         fontSize={["14px","14px", "16px"]}
-                        link={domNode.attribs.href}
+                        link={newlink}
                         textUnderline
-                        {...style.a}
+                        { ...style.a}
                     >
                         {domToReact(domNode.children, options)}
                     </NewLink>)
