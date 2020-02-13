@@ -306,6 +306,7 @@ const OrderedCard = ({ item, specs, play}) => (
                     html={item.htmlContent} 
                     style={{
                         p:{fontSize:specs.textSize},
+                        a:{fontSize:specs.textSize},
                     }} 
                 />
                 : <Text mt={[2]} fontSize={specs.textSize}>

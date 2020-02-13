@@ -222,12 +222,6 @@
     "include": [
       "",
       "/",
-      "/similar-movie-finder",
-      "/lists-of-films",
-      "/popular-and-upcoming-movies",
-      "/advance-search",
-      "/blog",
-      "/directors/1",
       "/topic/art-house",
       "/topic/cyberpunk",
       "/topic/based-on-true-story",
