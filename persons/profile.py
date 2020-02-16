@@ -221,6 +221,8 @@ class Profile(SocialMedia, SEO):
             MyQueue.put(self.scan_movies_by_rating, 4.5)
             print("*")
             MyQueue.put(self.scan_movies_by_rating, 4)
+            MyQueue.put(self.scan_movies_by_rating, 3)
+
             self.sync_active_status()
             return True
 
