@@ -872,15 +872,3 @@ for f in qs:
     fbulk.append(Activity(profile= f.profile, action="fu", target_profile_username=f.target_profile.username))
 Activity.objects.bulk_create(fbulk)
 """
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
