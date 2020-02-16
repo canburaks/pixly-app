@@ -1,31 +1,3 @@
-Skip to content
- 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@canburaks 
-canburaks
-/
-pixly-app
-Private
-1
-0 0
- Code  Issues 0  Pull requests 0  Actions  Projects 0  Wiki  Security  Insights  Settings
-pixly-app/persons/profile.py
-@canburaks canburaks ...
-3a539f8 on Dec 16, 2019
-879 lines (715 sloc)  33.6 KB
-  
-Code navigation is available!
-Navigate your code with ease. Click on function and method calls to jump to their definitions or references in the same repository. Learn more
-
- Code navigation is available for this repository but data for this commit does not exist.
-
-Learn more or give us feedback
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
