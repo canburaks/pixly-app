@@ -257,8 +257,8 @@ class Profile(SocialMedia, SEO):
             #MyQueue.put(self.promote)
 
             print("<--------PROMOTING---------------->")
-            self.promote()
-            self.sync_active_status()
+            #-----#self.promote()
+            #-----#self.sync_active_status()
             print("<----------------------------------->")
         #<--------------------------------------------------------------->
 
@@ -279,6 +279,7 @@ class Profile(SocialMedia, SEO):
                 self.persona.update_recommendation(target, rate)
 
             #SCAN MOVIES IF RATING IS HIGHER THAN MEAN
+            """
             if rate >= 4:
                 MyQueue.put(self.scan_movies_by_id, movie_id)
 
@@ -294,7 +295,7 @@ class Profile(SocialMedia, SEO):
                 MyQueue.put(self.scan_movies_by_rating, 5)
                 MyQueue.put(self.scan_movies_by_rating, 4.5)
                 MyQueue.put(self.scan_movies_by_rating, 4)
-
+            """
             print("<------------------------------------------------>")
         #<--------------------------------------------------------------->
 
