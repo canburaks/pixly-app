@@ -1,3 +1,31 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@canburaks 
+canburaks
+/
+pixly-app
+Private
+1
+0 0
+ Code  Issues 0  Pull requests 0  Actions  Projects 0  Wiki  Security  Insights  Settings
+pixly-app/persons/profile.py
+@canburaks canburaks ...
+3a539f8 on Dec 16, 2019
+879 lines (715 sloc)  33.6 KB
+  
+Code navigation is available!
+Navigate your code with ease. Click on function and method calls to jump to their definitions or references in the same repository. Learn more
+
+ Code navigation is available for this repository but data for this commit does not exist.
+
+Learn more or give us feedback
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -210,7 +238,6 @@ class Profile(SocialMedia, SEO):
             return Persona.objects.filter(user=self.user, id=self.user.id).defer("similars_dummy").first()
 
     def promote(self):
-        return False
         if self.points>=40:
             self.set_seo_description_keywords()
             MyQueue.put(self.sync_movie_archives)
@@ -257,7 +284,7 @@ class Profile(SocialMedia, SEO):
 
             print("<--------PROMOTING---------------->")
             self.promote()
-            #self.sync_active_status() --> uncomment in low energy mode, otherwise uncomment
+            self.sync_active_status()
             print("<----------------------------------->")
         #<--------------------------------------------------------------->
 
@@ -274,25 +301,25 @@ class Profile(SocialMedia, SEO):
             ma.save()
 
             #UPDATE IF PREVIOUS RECOMMENDATION IS EXISTS
-            #if self.persona:
-            #    self.persona.update_recommendation(target, rate)
+            if self.persona:
+                self.persona.update_recommendation(target, rate)
 
             #SCAN MOVIES IF RATING IS HIGHER THAN MEAN
-            #if rate >= 4:
-            #    MyQueue.put(self.scan_movies_by_id, movie_id)
+            if rate >= 4:
+                MyQueue.put(self.scan_movies_by_id, movie_id)
 
-            ## Persona objects
-            #if self.points>40 and self.points//10==0:
-            #    #only scan real users 
-            #    self.print_info("points has increased by 10. Real users will be scanned.")
-            #    MyQueue.put(self.sync_persona, full=False, create=True)
-            #elif self.points>40 and self.points//20==0:
-            #    #scan both dummy and real users
-            #    self.print_info("points has increased by 20. New full scan will start.")
-            #    MyQueue.put(self.sync_persona, full=True, create=True)
-            #    MyQueue.put(self.scan_movies_by_rating, 5)
-            #    MyQueue.put(self.scan_movies_by_rating, 4.5)
-            #    MyQueue.put(self.scan_movies_by_rating, 4)
+            # Persona objects
+            if self.points>40 and self.points//10==0:
+                #only scan real users 
+                self.print_info("points has increased by 10. Real users will be scanned.")
+                MyQueue.put(self.sync_persona, full=False, create=True)
+            elif self.points>40 and self.points//20==0:
+                #scan both dummy and real users
+                self.print_info("points has increased by 20. New full scan will start.")
+                MyQueue.put(self.sync_persona, full=True, create=True)
+                MyQueue.put(self.scan_movies_by_rating, 5)
+                MyQueue.put(self.scan_movies_by_rating, 4.5)
+                MyQueue.put(self.scan_movies_by_rating, 4)
 
             print("<------------------------------------------------>")
         #<--------------------------------------------------------------->
@@ -859,22 +886,29 @@ post_save.connect(post_save_user_model_receiver, sender=settings.AUTH_USER_MODEL
 
 """
 Activity.objects.all().count()
-
 bulk = []
 qs = Rating.objects.select_related("movie", "profile").all()
 for r in qs:
     bulk.append(Activity(profile=r.profile, action="rm", movie_id=r.movie.id, created_at=r.created_at, rating=r.rating))
-
-
 fbulk = []
 qs = Follow.objects.select_related("profile", "target_profile").filter(typeof="u")
 for f in qs:
     fbulk.append(Activity(profile= f.profile, action="fu", target_profile_username=f.target_profile.username))
-
 fbulk = []
 qs = Follow.objects.select_related("profile", "target_profile").filter(typeof="u")
 for f in qs:
     fbulk.append(Activity(profile= f.profile, action="fu", target_profile_username=f.target_profile.username))
-
 Activity.objects.bulk_create(fbulk)
 """
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
