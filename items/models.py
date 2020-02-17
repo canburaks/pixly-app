@@ -1387,7 +1387,7 @@ class Review(models.Model):
     reference_link = models.URLField(null=True, blank=True, help_text="Reference of relation with person. Enter link of url")
 
     def __str__(self):
-        return self.text[:50]
+        return f"{self.person.name} {self.movie.name}"
 
 #######################################################################################
 

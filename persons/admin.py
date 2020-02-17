@@ -30,10 +30,10 @@ class ProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ("id",'name', "born", "died",)
+    list_display = ('name',"slug", "id", "born")
     list_filter = ('active',)
     list_display_links = ("name",)
-    search_fields = ('name', 'id', )
+    search_fields = ('name', 'id', "slug", "tmdb_id" )
     inlines = [VideoPersonInline,]
     raw_id_fields = ["videos", ]
     readony_fields = ("homepage", "twitter","facebook", "instagram", "imdb",)
