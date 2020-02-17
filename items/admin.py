@@ -1,10 +1,24 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-from .models import Video, VideoList, List, Movie, Topic, TopicItem, Article, Rating, Prediction, Tag, Award, Quote,MovieGroup, MovieGroupItem
+from .models import (
+    Video, VideoList, List, Movie, Topic, TopicItem,
+    Article, Rating, Prediction, Tag, Award, Quote,
+    MovieGroup, MovieGroupItem, Review
+)
 from archive.models import ContentSimilarity
 from persons.models import Crew
 from items.resources import TagResource, VideoResource
 from django import forms
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ("critic","movie", "person", )
+
+
+    search_fields = ('movie', "person" )
+    raw_id_fields = ['movie',"person",]
+    #resource_class = TagResource
+
 
 class VideoMovieInline(admin.TabularInline):
     model = Video.related_movies.through
@@ -136,7 +150,11 @@ class MovieGroupAdmin(admin.ModelAdmin):
 
 ######################################################################
 
-
+class ReviewStackInline(admin.StackedInline):
+    model = Review
+    raw_id_fields = ("movie","persons")
+    fields = ("critic", "person", "html_content", "reference_link" )
+    raw_id_fields = ["person", ]
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
@@ -145,7 +163,7 @@ class MovieAdmin(admin.ModelAdmin):
     readony_fields = ("homepage", "twitter","facebook", "instagram", "imdb",)
     exclude = ('data', "director")
     list_filter = ("main_page", "important_page")
-    inlines = [TagInline,CrewStackInline,ContentSimilarInline]
+    inlines = [TagInline,CrewStackInline,ContentSimilarInline, ReviewStackInline]
     search_fields = ('name', "tmdb_id", 'id', )
 
 
@@ -249,4 +267,6 @@ class QuoteAdmin(admin.ModelAdmin):
     search_fields = ('text','movie',"owner_name", "person" )
     raw_id_fields = ['movie',"person", "topics"]
     #resource_class = TagResource
+    
+
     

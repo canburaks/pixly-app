@@ -1372,6 +1372,23 @@ class Quote(models.Model):
     def __str__(self):
         return self.text[:50]
 
+class Review(models.Model):
+    html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Both Blocquote and the owner of critic and else.")
+
+    critic = models.CharField(max_length=100, null=True, blank=True, help_text="for database query and other differentiations. Write everything including critic to html_content." )
+
+    #person who said that
+    person = models.ForeignKey(Person, null=True, blank=True, related_name="reviews", on_delete=models.CASCADE)
+    
+    #movie that includes the quote
+    movie = models.ForeignKey(Movie, related_name="reviews", on_delete=models.CASCADE)
+
+    reference_notes = models.CharField(max_length=400, null=True, blank=True, help_text="Notes about reference.")
+    reference_link = models.URLField(null=True, blank=True, help_text="Reference of relation with person. Enter link of url")
+
+    def __str__(self):
+        return self.text[:50]
+
 #######################################################################################
 
 def post_save_rating_signal(sender, instance, created, *args, **kwargs):
