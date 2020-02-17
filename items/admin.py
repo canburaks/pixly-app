@@ -13,8 +13,6 @@ from django import forms
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ("critic","movie", "person", )
-
-
     search_fields = ('movie', "person" )
     raw_id_fields = ['movie',"person",]
     #resource_class = TagResource
@@ -152,9 +150,8 @@ class MovieGroupAdmin(admin.ModelAdmin):
 
 class ReviewStackInline(admin.StackedInline):
     model = Review
-    raw_id_fields = ("movie","persons")
+    raw_id_fields = ("movie","person")
     fields = ("critic", "person", "html_content", "reference_link" )
-    raw_id_fields = ["person", ]
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
@@ -163,7 +160,7 @@ class MovieAdmin(admin.ModelAdmin):
     readony_fields = ("homepage", "twitter","facebook", "instagram", "imdb",)
     exclude = ('data', "director")
     list_filter = ("main_page", "important_page")
-    inlines = [TagInline,CrewStackInline,ContentSimilarInline, ReviewStackInline]
+    inlines = [TagInline,CrewStackInline, ReviewStackInline, ContentSimilarInline]
     search_fields = ('name', "tmdb_id", 'id', )
 
 

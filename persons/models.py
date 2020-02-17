@@ -78,7 +78,7 @@ class Person(SocialMedia, SEO, MainPage):
     work_quantity = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.name}-{self.id}"
+        return self.slug
 
     def add_slug(self):
         from django.utils.text import slugify
