@@ -10,6 +10,7 @@ import { HashLink as HLink } from 'react-router-hash-link';
 export const HashLink = styled(HLink).attrs(props => props.rel ? {rel:props.rel} : {rel:"nofollow"} )`
   color: unset !important;
   color:${props => props.color ? props.color : themeGet("colors.light")};
+  font-family: ${props => props.fontFamily ? props.fontFamily : themeGet("fonts.paragraph")};
   :hover {
       background-color:${props => props.hoverBg && props.hoverBg};
       color:${props => props.hoverColor && props.hoverColor};
@@ -90,6 +91,7 @@ export const CoverLink = (props) => (
 export const NewLink = styled(LinkNoFollow)`
   color: unset !important;
   color:${props => props.color ? props.color : themeGet("colors.light")};
+  font-family: ${props => props.fontFamily ? props.fontFamily : themeGet("fonts.paragraph")};
   :hover {
       background-color:${props => props.hoverBg && props.hoverBg};
       color:${props => props.hoverColor && props.hoverColor};
