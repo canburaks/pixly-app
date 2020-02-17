@@ -96,7 +96,7 @@ export const HtmlContainer = ({ html, ...props }) => {
             }
 
             else if (domNode.attribs && (domNode.name === 'h3' || domNode.name === 'h4')) {
-                return <HeaderMini   opacity={0.85}
+                return <HeaderMini 
                             fontSize={["20px", "20px", "22px"]}
                             mt={"8px !important"} width="100%"
                         
