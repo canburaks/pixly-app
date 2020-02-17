@@ -99,6 +99,9 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/hairspray-1988",
+        "/movie/two-brothers-2004",
+        "/movie/layer-cake-2004",
         "/movie/american-hustle-2013",
         "/movie/as-good-as-it-gets-1997",
         "/movie/tootsie-1982",
@@ -631,6 +634,9 @@
         "/movie/tootsie-1982",
         "/movie/it-happened-one-night-1934",
         "/movie/as-good-as-it-gets-1997",
-        "/movie/american-hustle-2013"
+        "/movie/american-hustle-2013",
+        "/movie/layer-cake-2004",
+        "/movie/hairspray-1988",
+        "/movie/two-brothers-2004"
     ]
 }

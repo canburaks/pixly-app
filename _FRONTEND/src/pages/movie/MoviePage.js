@@ -102,7 +102,7 @@ const MoviePage = props => {
 	const headerOneText = ((item.inPageGroups && item.inPageGroups.length > 0) || (item.topics && item.topics.length > 0))
 		? `${item.name} (${item.year}) and Similar Movies`
 		: `${item.name} (${item.year})`
-	const HeaderOneText = (props) => ((item.inPageGroups && item.inPageGroups.length > 0) || (item.topics && item.topics.length > 0))
+	const HeaderOneText = (props) => (true || (item.inPageGroups && item.inPageGroups.length > 0) || (item.topics && item.topics.length > 0))
 		?<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]} opacity={0.85} textAlign="center" uncapitalize {...props}>
 			Similar Movies like {item.name} ({item.year})
 		</HeaderText>
@@ -178,7 +178,7 @@ const MoviePage = props => {
 
 			<FlexBox flexDirection="column" justifyContent="center" alignItems="center" mt={[0]} bg="rgba(0,0,0,0.95)">
 				<HeaderOneText color="light" my={[3]} />
-				{true && <Text fontWeight="bold" fontSize={["14px", "14px", "18px"]} opacity={0.75} mt={[4]} color="light">How much did you like the movie?</Text>}
+				{true && <Text fontWeight="bold" fontSize={["14px", "14px", "16px"]} opacity={0.75} mt={[3]} color="light">How much did you like the movie?</Text>}
 				<RatingMutation item={item} size={50}/>
 			</FlexBox>
 			{/*<!-- Page Container --> */}
@@ -453,7 +453,7 @@ const TrailerIcon = ({onClick}) => (
 		height={"45%"}
 		onClick={onClick}
 	>
-		<YoutubeIcon size={[40,40,50,60]} hoverScale boxShadow={"0 1px 1px 1px rgba(0,0,0, 0.35)"}/>
+		<YoutubeIcon size={[40,40,50,60]} hoverScale />
 	</Box>
 )
 
