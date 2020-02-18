@@ -23,7 +23,7 @@ import PosterPanel from "../elements/PosterPanel";
 import { twitter } from "../../functions/third-party/twitter/twitter"
 import { CrewCard, MovieSimilarBox, PageContainer, ContentContainer, MovieCoverBox, MovieCoverPanel,
 	HiddenHeader,HeaderMini,Grid,Card,Image,ImageCard,HiddenSpan,RatingMutation,HeaderText,Text,Span,NewLink,TextSection,
-	MovieRichCardBox, MovieRichCard, FlexBox, Box, HashLink, YoutubeIcon,
+	MovieRichCardBox, MovieRichCard, FlexBox, Box, HashLink, YoutubeIcon,InfoIcon,
 	HtmlContainer, SuperBox, TagBox, AbsoluteBox, CoverLink,CardContainer,HtmlParagraph,
 	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText,
 } from "../../styled-components";
@@ -178,7 +178,7 @@ const MoviePage = props => {
 
 			<FlexBox flexDirection="column" justifyContent="center" alignItems="center" mt={[0]} bg="rgba(0,0,0,0.95)">
 				<HeaderOneText color="light" my={[3]} />
-				{true && <Text fontWeight="bold" fontSize={["14px", "14px", "16px"]} opacity={0.75} mt={[3]} color="light">How much did you like the movie?</Text>}
+				{true && <Text fontWeight="bold" fontSize={["14px", "14px", "16px"]} opacity={0.75} mt={[2]} color="light">How much did you like the movie?</Text>}
 				<RatingMutation item={item} size={50}/>
 			</FlexBox>
 			{/*<!-- Page Container --> */}
@@ -397,6 +397,17 @@ const HtmlContent = ({ movie, ...props }) => (
 				width={"100%"} height="auto" minHeight="50px" maxHeight="450px"
 				my={[3]}    
 			/>}
+		<FlexBox alignItems="center">
+			<InfoIcon opacity={0.85} mt={"8px"} />
+			<HeaderMini 
+				opacity={0.8} 
+				fontWeight="bold" 
+				pt={0} 
+				ml={[2]}
+			>
+				{movie.name.trim()} Wiki
+			</HeaderMini>
+		</FlexBox>
         <HtmlContainer my={[3]} html={movie.htmlContent} {...props}/>
 	</CardContainer>
 )

@@ -1,13 +1,14 @@
 import React from "react";
 import { useState, useContext, useMemo, useEffect, useRef } from "react";
 import { renderToStaticMarkup } from 'react-dom/server';
+import { useLocation } from "react-router-dom";
 
 import {  styled } from "../"
 import { themeGet } from '@styled-system/theme-get'
 
 import { 
-    Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, HeaderMini, NewLink, Paragraph,
-    TagText,HtmlBox,SubHeaderText, Image,CoverLink, Ul, Li
+    Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, HeaderMini, NewLink,OuterLink,
+    Paragraph, TagText,HtmlBox,SubHeaderText, Image,CoverLink, Ul, Li
 } from "../index"
 import { SocialBox } from "../others"
 import parse, { domToReact } from 'html-react-parser';
@@ -47,9 +48,10 @@ export const HtmlParagraph = ({ html, ...props }) => {
 
 
 export const HtmlContainer = ({ html, ...props }) => {
+    const location = useLocation()
     const style = props.style || {
-        a:{opacity:0.95, follow:true},
-        p:{opacity:0.8},
+        a:{opacity:0.95,lineHeight:"1.9em", follow:true},
+        p:{opacity:0.8},lineHeight:"1.9em",
         h1:{opacity:1.0},
         h2:{opacity:0.85},
         h3:{opacity:0.80},
@@ -57,22 +59,42 @@ export const HtmlContainer = ({ html, ...props }) => {
         ul:{opacity:0.8},
         li:{opacity:0.8}
     }
-    //console.log(props)
+    console.log(location)
     const options = {
         replace: domNode => {
             if (domNode.name ==="a"){
                 //console.log(domNode)
-                const newlink = domNode.attribs.href.includes("https://pixly.app") ? domNode.attribs.href.split("https://pixly.app")[1] : domNode.attribs.href
-                //console.log(newlink)
+                const isInnerLink = (
+                    domNode.attribs.href.includes("https://pixly.app") 
+                    || domNode.attribs.href.includes("http://pixly.app")
+                    || (!domNode.attribs.href.includes("http://") && !domNode.attribs.href.includes("https://")))
+
+                const haveProtocol = domNode.attribs.href.includes("http://") || domNode.attribs.href.includes("https://")
+
+                const newlink =  haveProtocol ? domNode.attribs.href.split("://pixly.app")[1]  : domNode.attribs.href
+                if (!isInnerLink) {
+                    console.log(domNode.attribs.href)
+                    return (
+                        <OuterLink
+                            fontSize={style.p.fontSize || ["14px", "14px", "16px"]}
+                            href={domNode.attribs.href}
+                            textUnderline
+                            { ...style.a}
+                        >
+                            {domToReact(domNode.children, options)}
+                        </OuterLink>
+                )}
                 return (
                     <NewLink  className="newlink"
-                        fontSize={["14px","14px", "16px"]}
+                        fontSize={style.p.fontSize || ["14px", "14px", "16px"]}
                         link={newlink}
                         textUnderline
                         { ...style.a}
                     >
                         {domToReact(domNode.children, options)}
-                    </NewLink>)
+                    </NewLink>
+                    )
+                
             }
             if (domNode.attribs && domNode.name ==="h1"){
                 return (

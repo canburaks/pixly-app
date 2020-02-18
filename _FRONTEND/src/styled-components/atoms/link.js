@@ -33,10 +33,11 @@ export const HashLink = styled(HLink).attrs(props => props.rel ? {rel:props.rel}
 const LinkNoFollow = ({ to,link, className, children, follow,target, title, ...props }) => (
 	<Link 
     target={target}
-		rel={follow ? follow : true}  
+		rel={(follow===false) ? "nofollow" : null}  
 		className={className} 
 		to={link || to} 
     title={title}
+
   >
 		{children}
 	</Link>)
@@ -44,15 +45,15 @@ const LinkNoFollow = ({ to,link, className, children, follow,target, title, ...p
 
 export const DirectorLink = ({director, ...props}) => (
 	<NewLink 
-		to={`/person/${director.slug}`}  
-		textShadow={"textDark"} 
-    px={0}
-		mr={[0]} 
-    hoverUnderline
-		{...props}
-	>
-		{director.name}
-		{props.extra}
+      to={`/person/${director.slug}`}  
+      textShadow={"textDark"} 
+      px={0}
+      mr={[0]} 
+      hoverUnderline
+      {...props}
+    >
+      {director.name}
+      {props.extra}
     </NewLink>)
 
 const StateLink = (props) => <Link  {...props} to={{pathname:props.link, state:{...props.state}}}  rel="nofollow"/>
@@ -97,7 +98,7 @@ export const NewLink = styled(LinkNoFollow)`
       color:${props => props.hoverColor && props.hoverColor};
       box-shadow:${props => props.hoverShadow && props.hoverShadow};
       text-decoration:${props => props.hoverUnderline && "underline"};
-
+      opacity:1;
   };
   vertical-align:middle;
   text-decoration:${props => (props.underline || props.textUnderline) ? "underline" : "initial"};
@@ -114,17 +115,22 @@ export const NewLink = styled(LinkNoFollow)`
 `
 export const CoverLink2 = () => <NewLink position="absolute" left={0} top={0}  right={0} bottom={0} {...props} />
 
-export const OuterLink = styled.a.attrs((props) => (
-  props.follow ? {rel:"noopener", target:"_blank"}: {rel:"nofollow noopener", target:"_blank"}))`
-  :hover { 
-    text-decoration: ${props => props.hoverUnderline && "underline"}
+export const OuterLink = styled.a.attrs(({follow=true, ...props}) => (
+  props.follow ? {rel:"noopener", target:"_blank"} : {rel:"nofollow noopener", target:"_blank"}))`
+  color: unset !important;
+  color:${props => props.color ? props.color : themeGet("colors.light")};
+  font-family: ${props => props.fontFamily ? props.fontFamily : themeGet("fonts.paragraph")};
+  :hover {
+      background-color:${props => props.hoverBg && props.hoverBg};
+      color:${props => props.hoverColor && props.hoverColor};
+      box-shadow:${props => props.hoverShadow && props.hoverShadow};
+      text-decoration:${props => props.hoverUnderline && "underline"};
+      opacity:1;
   };
-  text-decoration:initial;
-  text-align:center;
-  display:flex;
-  flex-direction:row;
-  align-items:center;
-  transition: ${themeGet("transitions.medium")};
+  vertical-align:middle;
+  text-decoration:${props => (props.underline || props.textUnderline) ? "underline" : "initial"};
+  transition: ${themeGet("transitions.fast")};
+
   ${color}
   ${space}
   ${shadow}

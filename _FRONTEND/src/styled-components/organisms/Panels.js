@@ -30,7 +30,7 @@ const MovieActions = (props) => (
 export const MovieCoverPanel = (props) => (
         <TopPanelCoverElement 
             item={props.item} 
-            header={`${props.item.name} - ${props.item.year}`} 
+            header={`${props.item.name.trim()} (${props.item.year})`} 
             Actions={MovieActions}
             darken={true}
             {...props}
