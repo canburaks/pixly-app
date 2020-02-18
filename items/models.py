@@ -1390,7 +1390,7 @@ class Review(models.Model):
     primary = models.BooleanField(default=False, help_text="Use this for featured review")
 
     def __str__(self):
-        return f"{self.person.name} {self.movie.name}"
+        return f"{self.critic} {self.movie.name}"
 
 #######################################################################################
 
