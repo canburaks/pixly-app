@@ -154,6 +154,10 @@ export const HtmlContainer = ({ html, ...props }) => {
                             {domToReact(domNode.children, options)}
                         </Li>
             }
+            else if (domNode.name === 'pwa' ) {
+                console.log(domNode)
+                return ""
+            }
             else if (domNode.attribs && domNode.name ==="code"){
                 return <Highlight>{domToReact(domNode.children)}</Highlight>
             }

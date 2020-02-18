@@ -25,7 +25,7 @@ import { CrewCard, MovieSimilarBox, PageContainer, ContentContainer, MovieCoverB
 	HiddenHeader,HeaderMini,Grid,Card,Image,ImageCard,HiddenSpan,RatingMutation,HeaderText,Text,Span,NewLink,TextSection,
 	MovieRichCardBox, MovieRichCard, FlexBox, Box, HashLink, YoutubeIcon,InfoIcon,
 	HtmlContainer, SuperBox, TagBox, AbsoluteBox, CoverLink,CardContainer,HtmlParagraph,
-	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText,
+	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText, Blockquote,
 } from "../../styled-components";
 
 import { ExpansionBox, SimpleDialog } from "../../styled-material"
@@ -185,6 +185,15 @@ const MoviePage = props => {
 
 			{/* SUMMARY */}
 			<ContentContainer zIndex={1} mt={[4]}>
+				{item.reviews.filter(r => r.primary === true).map(r => (
+					<CardContainer>
+					<Blockquote cite={r.referenceLink}>
+						<Text fontSize={["18px","20px", "22px"]} fontWeight="bold" opacity={0.8} >{r.text}</Text>
+						<HtmlContainer html={r.htmlContent} />
+					</Blockquote>
+					</CardContainer>
+				))}
+
 				<SummaryElement />
 				
 				{/* OPTIONAL HTML CONTENT*/}

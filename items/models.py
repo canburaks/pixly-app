@@ -1373,7 +1373,7 @@ class Quote(models.Model):
         return self.text[:50]
 
 class Review(models.Model):
-    text = models.TextField(max_length=2000, help_text="Quote with quotation mark.")
+    text = models.TextField(max_length=2000, help_text="Quote without quotation mark.")
 
     html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="The owner of review and related info.")
     critic = models.CharField(max_length=100, null=True, blank=True, help_text="for database query and other differentiations. Write everything including critic to html_content." )
