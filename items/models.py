@@ -88,6 +88,8 @@ class Movie(SocialMedia, SEO,MainPage):
     active = models.BooleanField(default=False)
 
     name = models.CharField(max_length=100)
+    header = models.CharField(max_length=150, null=True, blank=True)
+
     year = models.IntegerField(null=True)
     release = models.DateField(null=True, blank=True)
     summary = models.TextField(max_length=3000,null=True)

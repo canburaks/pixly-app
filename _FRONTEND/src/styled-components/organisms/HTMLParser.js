@@ -150,6 +150,7 @@ export const HtmlContainer = ({ html, ...props }) => {
             else if (domNode.attribs && domNode.name === 'li' ) {
                 return <Li width={"100%"} 
                             fontSize={["14px","14px", "16px"]} 
+                            pt={[2]}
                             {...style.p}
                             {...style.li}
                         >
