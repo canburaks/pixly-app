@@ -371,6 +371,8 @@ class VideoType(DjangoObjectType):
 
 class MovieType(DjangoObjectType):
     name = graphene.String()
+    header = graphene.String()
+
     poster = graphene.String()
 
     isBookmarked = graphene.Boolean()
@@ -405,6 +407,9 @@ class MovieType(DjangoObjectType):
 
     class Meta:
         model = Movie
+
+    def resolve_header(self, info):
+        return self.header
 
     def resolve_reviews(self, info):
         return self.reviews.all()
@@ -2082,6 +2087,7 @@ class CustomListType(graphene.ObjectType, SocialMediaType, SEOType,StatisticsTyp
 class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     id = graphene.Int()
     name = graphene.String()
+    header = graphene.String()
     summary = graphene.String()
     year = graphene.Int()
 
@@ -2155,6 +2161,9 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_header(self, info):
+        return self.movie.header
 
     def resolve_reviews(self, info):
         return self.movie.reviews.all()

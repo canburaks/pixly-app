@@ -22,8 +22,7 @@ export const Ul = styled("ul")`
     ${grid}
     ${typography}
 `
-export const Li = styled("ul")`
-    padding:0;
+export const Li = styled("li")`
     ${color}
     ${space}
     ${shadow}
