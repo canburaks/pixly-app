@@ -56,6 +56,7 @@ export const MOVIE = gql`
             topics{id,name,slug,coverPoster, summary, shortName},
             crew{job, character, person{id,name, poster, slug}},
             tags{name, slug, tagType, genreTag, subgenreTag, phenomenalTag, themeTag, formTag},
+            reviews{primary, text, htmlContent, referenceLink},
             videos{id,title,summary,link,duration,tags,isFaved,ytId,thumb},
             groups{
                 slug,

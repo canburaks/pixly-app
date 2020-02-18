@@ -283,9 +283,6 @@ export const Blockquote = styled('blockquote')`
     :after {
       display: inline;
     }
-    p {
-      font-size:20px;
-    }
     ${color}
     ${space}
     ${shadow}
