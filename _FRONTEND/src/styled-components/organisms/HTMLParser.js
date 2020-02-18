@@ -8,7 +8,7 @@ import { themeGet } from '@styled-system/theme-get'
 
 import { 
     Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, HeaderMini, NewLink,OuterLink,
-    Paragraph, TagText,HtmlBox,SubHeaderText, Image,CoverLink, Ul, Li
+    Paragraph, TagText,HtmlBox,SubHeaderText, Image,CoverLink, Ul, Li, Blockquote
 } from "../index"
 import { SocialBox } from "../others"
 import parse, { domToReact } from 'html-react-parser';
@@ -48,7 +48,6 @@ export const HtmlParagraph = ({ html, ...props }) => {
 
 
 export const HtmlContainer = ({ html, ...props }) => {
-    const location = useLocation()
     const style = props.style || {
         a:{opacity:0.95,lineHeight:"1.9em", follow:true},
         p:{opacity:0.8},lineHeight:"1.9em",
@@ -57,9 +56,8 @@ export const HtmlContainer = ({ html, ...props }) => {
         h3:{opacity:0.80},
         h4:{opacity:0.80},
         ul:{opacity:0.8},
-        li:{opacity:0.8}
+        li:{opacity:0.8},
     }
-    console.log(location)
     const options = {
         replace: domNode => {
             if (domNode.name ==="a"){
@@ -71,9 +69,8 @@ export const HtmlContainer = ({ html, ...props }) => {
 
                 const haveProtocol = domNode.attribs.href.includes("http://") || domNode.attribs.href.includes("https://")
 
-                const newlink =  haveProtocol ? domNode.attribs.href.split("://pixly.app")[1]  : domNode.attribs.href
                 if (!isInnerLink) {
-                    console.log(domNode.attribs.href)
+                    //console.log(domNode.attribs.href)
                     return (
                         <OuterLink
                             fontSize={style.p.fontSize || ["14px", "14px", "16px"]}
@@ -84,6 +81,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                             {domToReact(domNode.children, options)}
                         </OuterLink>
                 )}
+                const newlink =  haveProtocol ? domNode.attribs.href.split("://pixly.app")[1]  : domNode.attribs.href
                 return (
                     <NewLink  className="newlink"
                         fontSize={style.p.fontSize || ["14px", "14px", "16px"]}

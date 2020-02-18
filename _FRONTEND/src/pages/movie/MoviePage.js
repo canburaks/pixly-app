@@ -186,6 +186,7 @@ const MoviePage = props => {
 			{/* SUMMARY */}
 			<ContentContainer zIndex={1} mt={[4]}>
 				<SummaryElement />
+				
 				{/* OPTIONAL HTML CONTENT*/}
 				{item.htmlContent && <HtmlContent movie={item} style={{p:{fontSize:textSize}}} />}
 
