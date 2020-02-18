@@ -157,7 +157,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                         </Li>
             }
             else if (domNode.name === 'pwa' ) {
-                console.log(domNode)
+                //console.log(domNode)
                 return ""
             }
             else if (domNode.attribs && domNode.name ==="code"){
