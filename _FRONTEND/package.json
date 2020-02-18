@@ -222,8 +222,10 @@
     "include": [
       "",
       "/",
-      "/topic/dialogue-focused",
-      "/topic/mystery"
+      "/movie/blue-is-the-warmest-color-2013",
+      "/movie/fame-1980",
+      "/movie/over-the-hedge-2006"
+
 
     ],
     "publicPath": "/"

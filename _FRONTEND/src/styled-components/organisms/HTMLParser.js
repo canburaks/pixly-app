@@ -76,7 +76,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                             fontSize={style.p.fontSize || ["14px", "14px", "16px"]}
                             href={domNode.attribs.href}
                             title={domNode.attribs.title}
-                            textUnderline
+                            textUnderline hoverColor="#000000"
                             { ...style.a}
                         >
                             {domToReact(domNode.children, options)}
@@ -89,6 +89,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                         link={newlink}
                         title={domNode.attribs.title}
                         textUnderline
+                        hoverColor="#000000"
                         { ...style.a}
                     >
                         {domToReact(domNode.children, options)}
@@ -133,6 +134,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                 //console.log("aaaa",anchorchildren)
                 return <Text width={"100%"} 
                             fontSize={["14px","14px", "16px"]} 
+                            opacity={0.8}
                             {...style.p}
                         >
                             {domToReact(domNode.children, options)}
@@ -151,15 +153,12 @@ export const HtmlContainer = ({ html, ...props }) => {
                 return <Li width={"100%"} 
                             fontSize={["14px","14px", "16px"]} 
                             pt={[2]}
+                            opacity={0.85}
                             {...style.p}
                             {...style.li}
                         >
                             {domToReact(domNode.children, options)}
                         </Li>
-            }
-            else if (domNode.name === 'pwa' ) {
-                //console.log(domNode)
-                return ""
             }
             else if (domNode.attribs && domNode.name ==="code"){
                 return <Highlight>{domToReact(domNode.children)}</Highlight>

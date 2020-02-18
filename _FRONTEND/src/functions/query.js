@@ -28,6 +28,7 @@ export const MOVIE = gql`
         movie(id:$id, slug:$slug){
             id,
             name,
+            header,
             year, slug,
             poster,
             hasCover,
