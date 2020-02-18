@@ -222,10 +222,32 @@
     "include": [
       "",
       "/",
-      "/person/roger-ebert",
+      "/movie/kopps-2003",
+      "/movie/burlesque-2010",
+      "/movie/booksmart-2019",
+      "/movie/national-treasure-2004",
+      "/movie/hereditary-2018",
+      "/movie/heartbreaker-2010",
+      "/movie/extremis-2016",
+      "/movie/the-gentlemen-2019",
+      "/movie/easy-money-1983",
+      "/movie/monella-1998",
+      "/movie/somebody-to-love-1994",
+      "/movie/akira-1988",
+      "/movie/gloomy-sunday-1999",
+      "/movie/disturbia-2007",
+      "/movie/mean-girls-2004",
+      "/movie/pulp-fiction-1994",
+      "/movie/crazy-rich-asians-2018",
+      "/movie/country-1984",
+      "/movie/tootsie-1982",
+      "/movie/it-happened-one-night-1934",
+      "/movie/as-good-as-it-gets-1997",
+      "/movie/american-hustle-2013",
+      "/movie/layer-cake-2004",
+      "/movie/hairspray-1988",
+      "/movie/two-brothers-2004",
       "/movie/secretariat-2010"
-
-
     ],
     "publicPath": "/"
   }
