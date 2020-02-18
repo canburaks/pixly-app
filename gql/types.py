@@ -362,10 +362,14 @@ class MovieType(DjangoObjectType):
     topics = graphene.List("gql.types.TopicType")
     is_important_page = graphene.Boolean()
     group_items = graphene.List("gql.types.MovieGroupItemType")
+    reviews = graphene.List(graphene.String)
 
 
     class Meta:
         model = Movie
+
+    def resolve_reviews(self, info):
+        return list(map(lambda x: x.html_content, self.reviews.all()))
 
     def resolve_groups(self, info):
         return self.group_items.all()
@@ -2091,6 +2095,8 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     # asap remove
     group_items = graphene.List("gql.types.MovieGroupItemType")
 
+    reviews = graphene.List(graphene.String)
+
 
     def __init__(self, id=None, slug=None, viewer=None):
         #print(self,  id, slug)
@@ -2111,6 +2117,9 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_reviews(self, info):
+        return list(map(lambda x: x.html_content, self.movie.reviews.all()))
 
     # this is groups that have self page, and cover-link element will be rendered
     def resolve_groups(self, info):

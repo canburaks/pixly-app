@@ -77,7 +77,8 @@ export const Text= styled("p")`
     overflow:${props => props.truncate && "hidden"};
     text-overflow:${props => props.truncate && "ellipsis"};
     text-decoration:${props => props.underline && "underline"};
-    vertical-align:middle;
+    text-align:justify;
+    lineHeight:1.9rem;
     :hover {
       text-decoration:${props => props.hoverUnderline && "underline"};
     }

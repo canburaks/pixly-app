@@ -279,7 +279,13 @@ export const TopPanelCoverElement = React.memo((props) => (
             darken={props.darken}
             bg={"rgba(0,0,0, 0.5)"}
         >
-            <SubHeaderText color="lightDark1" textShadow={"textDark"} fontSize={[16, 16, 20, 24, 28]} fontWeight="bold">{props.header}</SubHeaderText>
+            <SubHeaderText 
+                color="lightDark1" textShadow={"textDark"} 
+                fontSize={["20px", "20px", "24px", "30px","34px"]} 
+                fontWeight="bold"
+            >
+                {props.header}
+            </SubHeaderText>
 
             {props.Header && <props.Header item={props.item} authStatus={props.authStatus} />}
             {props.subheader && <SubHeaderText color="lightDark1" textShadow="dark" fontSize={[14, 14, 18, 20, 22]} fontWeight="500">{props.subheader}</SubHeaderText>}
