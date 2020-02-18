@@ -58,6 +58,7 @@
         "/list/horror-movies-2019/1"
     ],
     "person":[
+        "/person/roger-ebert",
         "/person/charlie-hunnam-56365",
         "/person/david-fincher-7467",
         "/person/ingmar-bergman-6648",
@@ -99,6 +100,7 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/secretariat-2010",
         "/movie/hairspray-1988",
         "/movie/two-brothers-2004",
         "/movie/layer-cake-2004",
@@ -374,6 +376,7 @@
         "/list/mike-leighs-favourite-films/1",
         "/list/david-lynchs-favorite-films/1",
         "/list/horror-movies-2019/1",
+        "/person/roger-ebert",
         "/person/charlie-hunnam-56365",
         "/person/joaquin-phoenix-73421",
         "/person/ingmar-bergman-6648",
@@ -637,6 +640,7 @@
         "/movie/american-hustle-2013",
         "/movie/layer-cake-2004",
         "/movie/hairspray-1988",
-        "/movie/two-brothers-2004"
+        "/movie/two-brothers-2004",
+        "/movie/secretariat-2010"
     ]
 }
