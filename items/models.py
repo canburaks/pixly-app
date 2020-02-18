@@ -1373,8 +1373,9 @@ class Quote(models.Model):
         return self.text[:50]
 
 class Review(models.Model):
-    html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Both Blocquote and the owner of critic and else.")
+    text = models.TextField(max_length=2000, help_text="Quote with quotation mark.")
 
+    html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="The owner of review and related info.")
     critic = models.CharField(max_length=100, null=True, blank=True, help_text="for database query and other differentiations. Write everything including critic to html_content." )
 
     #person who said that
@@ -1385,6 +1386,8 @@ class Review(models.Model):
 
     reference_notes = models.CharField(max_length=400, null=True, blank=True, help_text="Notes about reference.")
     reference_link = models.URLField(null=True, blank=True, help_text="Reference of relation with person. Enter link of url")
+
+    primary = models.BooleanField(default=False, help_text="Use this for featured review")
 
     def __str__(self):
         return f"{self.person.name} {self.movie.name}"

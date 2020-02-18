@@ -13,7 +13,7 @@ from django import forms
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ("critic","movie", "person", )
-    search_fields = ('movie', "person" )
+    search_fields = ('movie', "person", "critic" )
     raw_id_fields = ['movie',"person",]
     #resource_class = TagResource
 
@@ -151,7 +151,7 @@ class MovieGroupAdmin(admin.ModelAdmin):
 class ReviewStackInline(admin.StackedInline):
     model = Review
     raw_id_fields = ("movie","person")
-    fields = ("critic", "person", "html_content", "reference_link" )
+    fields = ("primary", "critic", "person", "text", "html_content", "reference_link" )
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):

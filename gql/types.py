@@ -1,4 +1,4 @@
-from items.models import Rating,Movie, List,  Video, Topic, TopicItem,Prediction, Tag, Quote, MovieGroup,MovieGroupItem
+from items.models import Rating,Movie, List,  Video, Topic, TopicItem,Prediction, Tag, Quote, MovieGroup,MovieGroupItem, Review
 from persons.models import Person, Director, Crew
 from persons.profile import Profile, Follow, Activity
 from archive.models import MovSim, TmdbMovie, ContentSimilarity
@@ -121,6 +121,44 @@ class QuoteType(DjangoObjectType):
 
     def resolve_reference_link(self,info, *_):
         return self.reference_link
+
+class ReviewType(DjangoObjectType):
+    text = graphene.String()
+    html_content = graphene.String()
+    person = graphene.Field("gql.types.DirectorPersonMixType")
+    movie = graphene.Field("gql.types.MovieType")
+
+    reference_notes = graphene.String()
+    reference_link = graphene.String()
+    primary = graphene.Boolean()
+
+    class Meta:
+        model = Review
+    
+    def resolve_primary(self,info, *_):
+        return self.primary
+
+    def resolve_text(self,info, *_):
+        return self.text
+
+    def resolve_owner_name(self,info, *_):
+        if self.owner_name:
+            return self.owner_name
+        elif self.person and not self.owner_name:
+            return self.person.name
+
+    def resolve_movie(self,info, *_):
+        return self.movie
+
+    def resolve_owner(self,info, *_):
+        return self.person
+
+    def resolve_reference_notes(self,info, *_):
+        return self.reference_notes
+
+    def resolve_reference_link(self,info, *_):
+        return self.reference_link
+
 
 
 class TagType(DjangoObjectType, StatisticsType):
@@ -362,14 +400,14 @@ class MovieType(DjangoObjectType):
     topics = graphene.List("gql.types.TopicType")
     is_important_page = graphene.Boolean()
     group_items = graphene.List("gql.types.MovieGroupItemType")
-    reviews = graphene.List(graphene.String)
+    reviews = graphene.List(ReviewType)
 
 
     class Meta:
         model = Movie
 
     def resolve_reviews(self, info):
-        return list(map(lambda x: x.html_content, self.reviews.all()))
+        return self.reviews.all()
 
     def resolve_groups(self, info):
         return self.group_items.all()
@@ -2095,7 +2133,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     # asap remove
     group_items = graphene.List("gql.types.MovieGroupItemType")
 
-    reviews = graphene.List(graphene.String)
+    reviews = graphene.List(ReviewType)
 
 
     def __init__(self, id=None, slug=None, viewer=None):
@@ -2119,7 +2157,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         self.viewer = viewer #Profile
 
     def resolve_reviews(self, info):
-        return list(map(lambda x: x.html_content, self.movie.reviews.all()))
+        return self.movie.reviews.all()
 
     # this is groups that have self page, and cover-link element will be rendered
     def resolve_groups(self, info):
