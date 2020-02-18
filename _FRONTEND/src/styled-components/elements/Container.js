@@ -22,7 +22,7 @@ import "../../../node_modules/highlight.js/styles/rainbow.css"
 export const CardContainer = (props) => (
     <FlexBox 
         flexDirection="column"
-        p={[3]} mt={[3]} px={[3]}
+        p={[3]} mt={[3]} px={[3,3,4]}
         width={"100%"} height="auto"
         border={"0px"}
         borderRadius={6}

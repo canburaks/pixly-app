@@ -91,7 +91,7 @@ export const CoverLink = (props) => (
 
 export const NewLink = styled(LinkNoFollow)`
   color: unset !important;
-  color:${props => props.color ? props.color : themeGet("colors.light")};
+  color:${props => props.color ? props.color : themeGet("light")} !important;
   font-family: ${props => props.fontFamily ? props.fontFamily : themeGet("fonts.paragraph")};
   :hover {
       background-color:${props => props.hoverBg && props.hoverBg};

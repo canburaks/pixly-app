@@ -99,22 +99,24 @@ const MoviePage = props => {
 	//console.log(item.appears)
 	//console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
 	//console.log(item.seoShortDescription)
-	const headerOneText = ((item.inPageGroups && item.inPageGroups.length > 0) || (item.topics && item.topics.length > 0))
-		? `${item.name} (${item.year}) and Similar Movies`
-		: `${item.name} (${item.year})`
-	const HeaderOneText = (props) => (true || (item.inPageGroups && item.inPageGroups.length > 0) || (item.topics && item.topics.length > 0))
-		?<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]} opacity={0.85} textAlign="center" uncapitalize {...props}>
-			Similar Movies like {item.name} ({item.year})
-		</HeaderText>
-		:<HeaderText fontSize={["22px", "22px", "26px", "32px","36px"]} mt={[3]} opacity={0.85} textAlign="center" {...props}>
-			{item.name} ({item.year})
-		</HeaderText>
+	const headerOneText = useMemo(() => item.header 
+		? item.header
+		: ((item.inPageGroups && item.inPageGroups.length > 0) || (item.topics && item.topics.length > 0))
+			? `Similar Movies like ${item.name} (${item.year})`
+			: `${item.name} (${item.year})`
+	)
+
+		
     const hasTwitter = useMemo(() => (item.twitter && item.twitter.length > 5) ? true : false,[])
     const SummaryElement = useMemo(() => hasTwitter 
-        ? () => <MovieSummaryWithTwitter item={item} header={headerOneText}/> 
-        : () =>  <MovieSummary name={item.name} summary={item.summary}  year={item.year} header={headerOneText}/>, [hasTwitter])
+        ? () => <MovieSummaryWithTwitter item={item} /> 
+        : () =>  <MovieSummary name={item.name} summary={item.summary}  year={item.year} />, [hasTwitter])
  
-
+	const HeaderOneText = (props) => (
+		<HeaderText fontSize={["22px", "22px", "26px", "28px","30px"]} mt={[3]} px={[2,2,3,]} opacity={0.85} textAlign="center" uncapitalize {...props}>
+			{headerOneText}
+		</HeaderText>
+	)
 
 	const isMobile = window.innerWidth < 480;
 
@@ -153,6 +155,7 @@ const MoviePage = props => {
 		}
 		else (window.scrollTo({left:0, top:0, behavior:"smooth"}))
 	},[])
+	//console.log(item.htmlContent, item.header)
 	return (
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
 			<Head
@@ -188,16 +191,19 @@ const MoviePage = props => {
 				{/* Quotation  */}
 				{item.reviews.filter(r => r.primary === true).map(r => (
 					<Blockquote key={r.text.slice(0,8)} cite={r.referenceLink} 
-						opacity={0.9} m={0} px={[3,3,4,4,5]} pt={[2]} className="blockquote-wrapper"
+						opacity={0.9} 
+						m={0} mb={[4,4,5]} mx={[4,4,5]}
+						px={[2]} py={[2]} 
+						
 						borderLeft="8px solid"
-						borderColor="rgba(20,20,255,0.5)"
+						borderColor="rgba(0,0,0,0.3)"
 						display="flex" flexDirection="column"
-						boxShadow="card" borderRadius={6}
+						
 					>
-						<QuotationLeftIcon size="34px" opacity={0.8}/>
+						<QuotationLeftIcon size="34px" opacity={0.4}/>
 						<Text 
 							ml={[2,2,3,4,5]} textAlign="center"
-							fontSize={["18px","18pxpx", "22px", "24px"]} 
+							fontSize={["18px"]} 
 							fontWeight="bold" 
 							opacity={0.9}
 						>
@@ -208,8 +214,7 @@ const MoviePage = props => {
 								html={r.htmlContent}  
 								mt={[3]} 
 								style={{p:{fontSize:["12px", "14px"], textAlign:"right", padding:"auto"}}} 
-								borderTop="2px solid" 
-								borderColor="rgba(20,20,20,0.4)"
+
 								width="auto"	
 								selfAlign="flex-end"
 							/>
@@ -241,7 +246,7 @@ const MoviePage = props => {
 				{/*<!--CAST Section--> */}
 				{item.crew.length > 0 && 
 				<ExpansionBox id=""
-					isOpen={!haveAnyCollection}
+					isOpen={true}
 					header={`${item.name} (${item.year}) Cast & Crew`}
 					text={item.crew.length > 4 ? `Director, Actors and Actresses of ${item.name} (${item.year})` : null}
 				>
