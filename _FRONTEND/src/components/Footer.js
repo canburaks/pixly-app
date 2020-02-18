@@ -25,9 +25,7 @@ const Footer = (props) =>{
 
 const PixlyTwitterIcon = () => {
     const state = useContext(GlobalContext)
-    const anchorRelationship = (window.location.pathname === "" || window.location.pathname === "/") 
-        ?  "" 
-        : "noopener nofollow noreferrer"
+    const anchorRelationship = "noopener nofollow noreferrer"
     return(
     <div className="footer-twitter " >
         {/*<a 
