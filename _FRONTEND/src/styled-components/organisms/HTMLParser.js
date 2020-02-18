@@ -75,6 +75,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                         <OuterLink
                             fontSize={style.p.fontSize || ["14px", "14px", "16px"]}
                             href={domNode.attribs.href}
+                            title={domNode.attribs.title}
                             textUnderline
                             { ...style.a}
                         >
@@ -86,6 +87,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                     <NewLink  className="newlink"
                         fontSize={style.p.fontSize || ["14px", "14px", "16px"]}
                         link={newlink}
+                        title={domNode.attribs.title}
                         textUnderline
                         { ...style.a}
                     >

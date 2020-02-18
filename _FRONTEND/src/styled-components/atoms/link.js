@@ -100,9 +100,9 @@ export const NewLink = styled(LinkNoFollow)`
       text-decoration:${props => props.hoverUnderline && "underline"};
       opacity:1;
   };
-  vertical-align:middle;
   text-decoration:${props => (props.underline || props.textUnderline) ? "underline" : "initial"};
   transition: ${themeGet("transitions.fast")};
+  lineHeight:inherit;
   ${props => props.hidden && hideText()}
   ${flexbox}
   ${color}
@@ -116,7 +116,7 @@ export const NewLink = styled(LinkNoFollow)`
 export const CoverLink2 = () => <NewLink position="absolute" left={0} top={0}  right={0} bottom={0} {...props} />
 
 export const OuterLink = styled.a.attrs(({follow=true, ...props}) => (
-  props.follow ? {rel:"noopener", target:"_blank"} : {rel:"nofollow noopener", target:"_blank"}))`
+  follow ? {rel:"noopener", target:"_blank"} : {rel:"nofollow noopener", target:"_blank"}))`
   color: unset !important;
   color:${props => props.color ? props.color : themeGet("colors.light")};
   font-family: ${props => props.fontFamily ? props.fontFamily : themeGet("fonts.paragraph")};
@@ -127,7 +127,6 @@ export const OuterLink = styled.a.attrs(({follow=true, ...props}) => (
       text-decoration:${props => props.hoverUnderline && "underline"};
       opacity:1;
   };
-  vertical-align:middle;
   text-decoration:${props => (props.underline || props.textUnderline) ? "underline" : "initial"};
   transition: ${themeGet("transitions.fast")};
 

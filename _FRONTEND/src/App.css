@@ -154,6 +154,15 @@ h3 {
 .social-share-box > a {
     max-width: 30%;
 }
+
+
+
+
+
+
+
+
+
 @media all and (max-width: 480px) { 
     .social-share-box span {
         font-size:12px;
@@ -236,3 +245,7 @@ h3 {
 }
 */
 
+/* BLOCKQUOTE */
+.blockquote-wrapper {
+    background-image: linear-gradient(to right top, #ffffff, #eeeeee, #dedede, #cecece, #bebebe);
+}

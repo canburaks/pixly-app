@@ -23,7 +23,7 @@ import PosterPanel from "../elements/PosterPanel";
 import { twitter } from "../../functions/third-party/twitter/twitter"
 import { CrewCard, MovieSimilarBox, PageContainer, ContentContainer, MovieCoverBox, MovieCoverPanel,
 	HiddenHeader,HeaderMini,Grid,Card,Image,ImageCard,HiddenSpan,RatingMutation,HeaderText,Text,Span,NewLink,TextSection,
-	MovieRichCardBox, MovieRichCard, FlexBox, Box, HashLink, YoutubeIcon,InfoIcon,
+	MovieRichCardBox, MovieRichCard, FlexBox, Box, HashLink, YoutubeIcon,InfoIcon,QuotationLeftIcon,
 	HtmlContainer, SuperBox, TagBox, AbsoluteBox, CoverLink,CardContainer,HtmlParagraph,
 	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText, Blockquote,
 } from "../../styled-components";
@@ -183,17 +183,42 @@ const MoviePage = props => {
 			</FlexBox>
 			{/*<!-- Page Container --> */}
 
-			{/* SUMMARY */}
 			<ContentContainer zIndex={1} mt={[4]}>
+
+				{/* Quotation  */}
 				{item.reviews.filter(r => r.primary === true).map(r => (
-					<CardContainer>
-					<Blockquote cite={r.referenceLink}>
-						<Text fontSize={["18px","20px", "22px"]} fontWeight="bold" opacity={0.8} >{r.text}</Text>
-						<HtmlContainer html={r.htmlContent} />
+					<Blockquote key={r.text.slice(0,8)} cite={r.referenceLink} 
+						opacity={0.9} m={0} px={[3,3,4,4,5]} pt={[2]} className="blockquote-wrapper"
+						borderLeft="8px solid"
+						borderColor="rgba(20,20,255,0.5)"
+						display="flex" flexDirection="column"
+						boxShadow="card" borderRadius={6}
+					>
+						<QuotationLeftIcon size="34px" opacity={0.8}/>
+						<Text 
+							ml={[2,2,3,4,5]} textAlign="center"
+							fontSize={["18px","18pxpx", "22px", "24px"]} 
+							fontWeight="bold" 
+							opacity={0.9}
+						>
+							{r.text}
+						</Text>
+							<HtmlContainer 
+								ml={[2,2,3,4,5]} 
+								html={r.htmlContent}  
+								mt={[3]} 
+								style={{p:{fontSize:["12px", "14px"], textAlign:"right", padding:"auto"}}} 
+								borderTop="2px solid" 
+								borderColor="rgba(20,20,20,0.4)"
+								width="auto"	
+								selfAlign="flex-end"
+							/>
+						<FlexBox justifyContent="flex-end" width="100%" px={[3,4,4,5]}>
+						</FlexBox>
 					</Blockquote>
-					</CardContainer>
 				))}
 
+				{/* SUMMARY */}
 				<SummaryElement />
 				
 				{/* OPTIONAL HTML CONTENT*/}
