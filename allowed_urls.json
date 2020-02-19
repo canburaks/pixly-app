@@ -100,6 +100,20 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/annie-hall-1977",
+        "/movie/amelie-2001",
+        "/movie/my-sassy-girl-2001",
+        "/movie/500-days-of-summer-2009",
+        "/movie/love-simon-2018",
+        "/movie/pretty-woman-1990",
+        "/movie/la-la-land-2016",
+        "/movie/breakfast-at-tiffanys-1961",
+        "/movie/the-big-sick-2017",
+        "/movie/juno-2007",
+        "/movie/notting-hill-1999",
+        "/movie/when-harry-met-sally-1989",
+
+
         "/movie/over-the-hedge-2006",
         "/movie/secretariat-2010",
         "/movie/hairspray-1988",
@@ -643,6 +657,19 @@
         "/movie/hairspray-1988",
         "/movie/two-brothers-2004",
         "/movie/secretariat-2010",
-        "/movie/over-the-hedge-2006"
+        "/movie/over-the-hedge-2006",
+        "/movie/annie-hall-1977",
+        "/movie/amelie-2001",
+        "/movie/my-sassy-girl-2001",
+        "/movie/500-days-of-summer-2009",
+        "/movie/love-simon-2018",
+        "/movie/pretty-woman-1990",
+        "/movie/la-la-land-2016",
+        "/movie/breakfast-at-tiffanys-1961",
+        "/movie/the-big-sick-2017",
+        "/movie/juno-2007",
+        "/movie/notting-hill-1999",
+        "/movie/when-harry-met-sally-1989"
+
     ]
 }
