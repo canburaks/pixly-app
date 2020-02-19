@@ -25,7 +25,7 @@ const Footer = (props) =>{
 
 const PixlyTwitterIcon = () => {
     const state = useContext(GlobalContext)
-    const anchorRelationship = "noopener nofollow noreferrer"
+    const anchorRelationship = "noopener nofollow"
     return(
     <div className="footer-twitter " >
         {/*<a 
@@ -90,7 +90,7 @@ const PixlyTwitterIcon = () => {
             <HiddenText>Pixly Tumblr</HiddenText>
         </a>
 
-        <a target="_blank" rel={anchorRelationship} href="https://www.pinterest.com/pixlymovie/" className="footer-link fbox-r jcfs aic">
+        <a target="_blank" rel={anchorRelationship} href="https://www.pinterest.com/pixlymovie/" className="footer-link">
         <svg
             aria-hidden="true"
             data-prefix="fab"
@@ -106,7 +106,7 @@ const PixlyTwitterIcon = () => {
         </a>
 
 
-        <div className="footer-link fbox-r jcfs aic">
+        <div className="footer-link">
             <a href="mailto:pixly@pixly.app">
                 <svg 
                     aria-hidden="true" focusable="false"
@@ -117,6 +117,10 @@ const PixlyTwitterIcon = () => {
             </a>
         </div>
 
+
+        <a href="https://refind.com/pixly?follow=true" rel={anchorRelationship} target="_blank">
+            <img src="https://refind.com/img/logo-gray.svg" className="footer-refinder footer-link" />
+        </a>
         {/*<div className="footer-link fbox-r jcfs aic">
             <svg 
                 aria-hidden="true" focusable="false" onClick={() => state.methods.insertContactForm()}

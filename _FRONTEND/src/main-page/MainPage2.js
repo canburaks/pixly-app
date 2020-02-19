@@ -185,13 +185,12 @@ const MainPage = (props) => {
 				</Grid>
 			</ContentContainer>
 
-			{false && <SuperBox  
-				display="flex" flexDirection="column" 
+			{true && <SuperBox  
+				display="flex" flexDirection="column" alignItems="center"
 				width={"100%"} mx={"0px"} py={[5]} px={["5vw", "5vw", "5vw", "8vw"]} 
 				gradient="blueish" 
 			>
-				<HeaderMini color={"light"} my={[3]} fontSize={["22px", "22px", "26px", "30px", "32px"]} textAlign="center">We have just started</HeaderMini>
-				<Message />
+				<MessageFromPixly />
 			</SuperBox>}
 			<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />
         </PageContainer>
@@ -349,6 +348,14 @@ const CollectionsFeature = ({color="mor",}) => (
 			<NewLink ml={"2px"} follow={true} underline fontWeight="bold" title={"Mystery Movies"} link="/topic/romantic-comedy">Romantic Comedy</NewLink>,&nbsp;
 			<NewLink ml={"2px"} mr="4px" follow={true} underline fontWeight="bold" title={"Thought-Provoking Movies"} link="/topic/thought-provoking">Thought-Provoking</NewLink> movies etc.
 		</Box>
+		<LinkButton px={[3,3,4]} mt={[4]} translateY hoverBg="rgba(0,0,0,0.4)"
+				textAlign="center" link="/lists-of-films" position="absolute" bottom={0}
+				color="light" bg="rgba(0,0,0,0.1)" 
+				height={"40px"} width={["90%"]} maxWidth={"300px"} 
+				hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
+			>
+				See List of Films
+			</LinkButton>
 	</FeatureCard>
 )
 
@@ -386,8 +393,6 @@ const ActionFeatures = ({setModalOpen, color="sarı"}) => (
 		</Text>
 	</FeatureCard>
 )
-
-
 
 const FeatureText = (props) => (
 	<FlexBox flexDirection="column" px={[1,1,2,3]} maxWidth={600}>
@@ -481,6 +486,27 @@ const Message = () =>(
 	always welcome. Please send us any questions and suggestions in the message box at the bottom of the page or email us at <em>pixly@pixly.app</em>
 	</Text>
 ) 
+
+const MessageFromPixly = () => (
+	<FlexBox flexDirection="column" px={["5vw", "5vw", "8vw", "10vw"]} alignItems="center">
+		<SubHeaderText 
+			fontSize={["24px", "28px"]} 
+			fontWeight="bold" 
+			opacity={0.85} color={"light"}
+			textAlign="center" my={[3]}
+		>
+			Pixly, Movie Recommendations, and List of Films 
+		</SubHeaderText>
+		<Text fontSize={["14px", "14px", "16px", "18px"]} color={"light"} mt={[3]}>
+			When making movie suggestions, it is essential to consider the art of cinema, the cinema industry and the complex human nature of the audience. Since we consider these, we want to offer you multiple services reasonably. 
+		</Text>
+		<Text fontSize={["14px", "14px", "16px", "18px"]} color={"light"} mt={[3]}>Our AI-assisted algorithmic movie recommendation engine is currently in a beta phase. Besides, content-like movie recommendation services show contentful similars to movies that you choose.  </Text>
+		<Text fontSize={["14px", "14px", "16px", "18px"]} color={"light"} mt={[3]}>We are curating movie lists including the best examples of various genres and categories like Mystery, Gangster, Romantic Comedy, Cyberpunk etc...</Text>
+		<Text fontSize={["14px", "14px", "16px", "18px"]} color={"light"} mt={[3]}>We are also collecting popular film lists around the world, such as the grand prize winner movies of film festivals, director’s favourite movies and other popular list of films.</Text>
+		<Text fontSize={["14px", "14px", "16px", "18px"]} color={"light"} mt={[3]}>We constantly try to keep our content up to date. Your intellectual support and suggestions are always welcome. Please send us questions and suggestions via pixly[et]pixly.app</Text>
+
+	</FlexBox>
+)
 
 export default MainPage;
 

@@ -168,7 +168,6 @@ const TopicSection = ({topics, partitionQuantity=6}) => (
             We often expand our collections by either creating a new list of movies or updating the current ones.
 
         </Text>
-        
             <Grid columns={[1,1,2,2,2,3]} py={[2,2,3]} gridColumnGap={[2,2,3]}>
                 {topics.slice(0, partitionQuantity).map( item => (
                     <CollectionCard 
