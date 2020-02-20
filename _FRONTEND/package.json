@@ -222,18 +222,14 @@
     "include": [
       "",
       "/",
-      "/movie/brazil-1985",
-      "/movie/the-terminator-1984",
-      "/movie/children-of-men-2006",
-      "/movie/the-animatrix-2003",
-      "/movie/twelve-monkeys-1995",
-      "/movie/total-recall-1990",
-      "/movie/videodrome-1983",
-      "/movie/strange-days-1995",
-      "/movie/the-city-of-lost-children-1995",
-      "/movie/looper-2012",
-      "/movie/dredd-2012",
-      "/movie/gattaca-1997"
+      "/movie/upgrade-2018",
+      "/movie/dirty-computer-2018",
+      "/movie/starship-troopers-1997",
+      "/movie/scanner-darkly-a-2006",
+      "/movie/i-robot-2004",
+      "/movie/snowpiercer-2013",
+      "/movie/2036-nexus-dawn-2017",
+      "/movie/logans-run-1976"
     ],
     "publicPath": "/"
   }
