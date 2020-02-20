@@ -222,18 +222,18 @@
     "include": [
       "",
       "/",
-      "/movie/annie-hall-1977",
-      "/movie/amelie-2001",
-      "/movie/my-sassy-girl-2001",
-      "/movie/500-days-of-summer-2009",
-      "/movie/love-simon-2018",
-      "/movie/pretty-woman-1990",
-      "/movie/la-la-land-2016",
-      "/movie/breakfast-at-tiffanys-1961",
-      "/movie/the-big-sick-2017",
-      "/movie/juno-2007",
-      "/movie/notting-hill-1999",
-      "/movie/when-harry-met-sally-1989"
+      "/movie/brazil-1985",
+      "/movie/the-terminator-1984",
+      "/movie/children-of-men-2006",
+      "/movie/the-animatrix-2003",
+      "/movie/twelve-monkeys-1995",
+      "/movie/total-recall-1990",
+      "/movie/videodrome-1983",
+      "/movie/strange-days-1995",
+      "/movie/the-city-of-lost-children-1995",
+      "/movie/looper-2012",
+      "/movie/dredd-2012",
+      "/movie/gattaca-1997"
     ],
     "publicPath": "/"
   }
