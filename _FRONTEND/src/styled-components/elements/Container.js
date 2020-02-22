@@ -165,6 +165,12 @@ export const Clippy = styled(Container)`
     );
 `
 
+//Landing Page
+export const Clipp2 = styled("div")`
+    clip-path: polygon(0 82%, 0% 100%, 100% 100%);
+`
+
+
 export const PageContainer = (props) => (
     <Container  id={"page-container"} bg="#d1d1d1"
         minWidth={"100vw"} maxWidth={"100vw"}  minHeight={"70vh"} pt={0} 

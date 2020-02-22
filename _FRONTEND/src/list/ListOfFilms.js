@@ -76,10 +76,10 @@ const ListOfFilms = (props) => {
     const isSmallScreen = window.innerWidth < 500
     return (
         <PageContainer>
-            <Head title={"Great Lists of Films - Discover Collections of Best and Great Movies"}
+            <Head 
+                title={"Lists of Films - Art Films, Biographies, Cyberpunk, Mystery ..."}
                 description={
-                        `Right place for people asking What movie should I watch?` + 
-                        `Check the great lists of films that includes the masterpieces of cinema that will fit your cinema taste or mood.`
+                        `Great lists of movies that includes the masterpieces of cinema that will fit your cinema taste and mood.`
                 }
 
                 canonical={`https://pixly.app/lists-of-films`}
@@ -101,7 +101,7 @@ const ListOfFilms = (props) => {
                     fontFamily={"playfair"}
                 >
 
-                    List Of Movie Collections
+                    Lists of Films
                 </HeaderText>   
                 <Carousel className={"list-carousel"}
                     autoplay 
@@ -159,7 +159,7 @@ const TopicSection = ({topics, partitionQuantity=6}) => (
         >
             Topic Collections
         </Span><hr/>
-            The Categorical List of Films 
+            Categorical Film Lists 
         </SubHeaderText>
         <Text mt={[3]} textAlign="justify" color="dark" fontSize={["12px", "12px", "14px"]}>
             Pixly topics are kind of film collections that can be a genre or 

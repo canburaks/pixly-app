@@ -70,10 +70,10 @@ const ListOfFilms = (props) => {
     return (
         <PageContainer top={-130}>
             <Head
-                title={"Great Lists of Films - Discover Collections of Best and Great Movies"}
+                title={"Lists of Films - Art Films, Biographies, Cyberpunk, Mystery ..."}
                 description={
-                        `Right place for people asking What movie should I watch?` + 
-                        `Check the great lists of films that includes the masterpieces of cinema that will fit your cinema taste or mood.`
+                        `Discover great lists of movies that includes the masterpieces ` +
+                        `of various topics, festivals and directors.`
                 }
 
                 canonical={`https://pixly.app/lists-of-films`}
@@ -220,17 +220,16 @@ const Hero = () => (
         
         >
 
-            Curated and Collected
-            Movie Lists
+            Lists of Films
         </HeaderText>  
-        <SubHeaderText zIndex={1}
+        <Text zIndex={1}
             fontFamily={"playfair"} minWidth={"100%"}
             fontSize={["16px", "16px", "18px", "20px", "22px", "24px", "26px"]}
             color="white"  fontWeight={400} mt={[4,4,5]}
             textAlign="center" opacity={1}
         >
             "Right Place for people asking <strong><em>What Movie Should I Watch?</em></strong>"
-        </SubHeaderText>
+        </Text>
 </CardContainer>
 )
 

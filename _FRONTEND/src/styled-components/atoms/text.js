@@ -204,7 +204,7 @@ export const Em = styled("em")`
     ${position}
     ${typography}
 `
-export const HeaderMini = styled(HM)({
+export const __HeaderMini = styled(HM)({
     width:"100% ",
     textTransform:"capitalize",
     color:"dark",
@@ -214,6 +214,25 @@ export const HeaderMini = styled(HM)({
 
     }
 )
+export const HeaderMini = styled("h3")`
+    width:"100%";
+    text-transform:capitalize;
+    color: #181818;
+	cursor:${props => props.clickable ? "pointer" : "inherit"};
+	text-shadow: ${props => props.textShadow || themeGet("shadows.lightGray")};
+	cursor:${props => props.wordSpacing ? props.wordSpacing : "normal"}
+
+    ${color}
+    ${space}
+    ${shadow}
+    ${layout}
+    ${background}
+    ${border}
+    ${flexbox}
+    ${position}
+    ${typography}
+`
+
 
 HeaderMini.defaultProps = {
   fontSize: ["20px", "20px", "24px", "28px"],
