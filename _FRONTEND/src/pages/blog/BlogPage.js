@@ -15,7 +15,7 @@ import {
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox, 
     TextSection,SchemaPost,MovieRichCardBox,MovieRichCard, Grid,
     YearSlider,RatingSlider,HtmlBox, HtmlContainer, MessageBox, HeaderMini, NewLink,
-    PostInfoBox,  Dl, Dt, CoverImage, Hr
+    PostInfoBox,  Dl, Dt, CoverImage, Hr, HeaderText
 } from "../../styled-components"
 
 
@@ -46,6 +46,7 @@ const BlogPage = (props) =>{
                     "cinema, movie recommendation, and technical stuff."}
                 canonical={`https://pixly.app/blog`}
             />
+            <HeaderText px={[2,2,3]}>Pixly Blog - Articles About Movie Recommendation, and Technical Stuff</HeaderText>
             <ContentContainer pb={"80px"}>
                 {props.posts.map(post => <PostInfoBox post={post} key={post.slug} follow/>)}
             </ContentContainer>

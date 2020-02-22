@@ -49,6 +49,18 @@ https://seositecheckup.com/seo-audit/pixly.app/topic/dialogue-focused
 https://seositecheckup.com/seo-audit/pixly.app/topic/bdsm-movies  
 
 
+
+urlscan.io
+https://urlscan.io/result/8bd776c6-c35a-4d7e-93f9-dc6d3e7fa7cc
+https://urlscan.io/result/bf63b4e9-5048-4413-bca6-6f868a19b1be
+https://urlscan.io/result/30d11cba-18e9-4c16-b2b7-e09fbb09b86b
+https://urlscan.io/result/eedd1b96-a4e4-44b8-a491-a8ecb385c692
+https://urlscan.io/result/49f63266-6c8e-47ff-8ec9-56b950bee334
+https://urlscan.io/result/ef1d5e96-d5a9-4186-ba39-bf6274dc0540
+https://urlscan.io/result/1d186fc8-c863-4b79-8c62-f22bc4260dd9
+
+
+
 Silktide
 https://bdc.silktide.com/en/reports/pixlymovies.tumblr.com
 https://bdc2.silktide.com/en/reports/pixly.app
@@ -96,8 +108,7 @@ https://alternativeto.net/software/pixly-movie/reviews/
 https://alternativeto.net/software/pixly-movie/
 
 
-BestAppsFinder
-https://bestappsfinder.com/site-apps/pixly.app
+
 
 
 Directory.EntireWeb
@@ -112,7 +123,7 @@ https://allstartups.info/Startups/Show/pixly.app
 
 Sitepromotiondirectory
 https://www.sitepromotiondirectory.com/detail/pixly-app-ai-based-movie-recommendations-app-similar-movies-film-website-2373117.htm
-
+https://www.sitepromotiondirectory.com/latest-links.html
 
 SpecificFeeds
 https://www.specificfeeds.com/pixly
@@ -129,6 +140,9 @@ https://social.msdn.microsoft.com/Profile/canburaks
 Cssfox
 https://cssfox.co/pixly 
 
+
+listchallenges.com
+https://www.listchallenges.com/romantic-comedy-films
 
 List.ly
 https://list.ly/list/3geN-categorical-lists-of-movies-that-fit-your-mood 
@@ -172,3 +186,7 @@ https://www.saashub.com/pixly-movie-alternatives
 
 Launched.io
 https://launched.io/startup/3288-pixly 
+
+
+Webhint.io
+https://webhint.io/scanner/daef0f02-3725-49e3-b751-b1330f65cde2

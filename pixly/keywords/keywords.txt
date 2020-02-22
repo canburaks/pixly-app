@@ -112,7 +112,11 @@ nuri bilge ceylan's favourite films
 --General--
 similar movie finder
 find similar movies
+movie recommendations
 movie recommendation website
 ai movie recommendation app
 movie rating website
+list of films
+list of movies
+
 
