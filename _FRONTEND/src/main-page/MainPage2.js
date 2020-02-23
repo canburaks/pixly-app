@@ -29,7 +29,7 @@ import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,G
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text, SubHeaderText, NewLink,
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
 	GradientAnimationBox,SignupForm, SignupFormModal, production, PulseButton,
-	ScaleButton, Hr, Popup,KeyIcon,LinkIcon, CoverImage, AbsoluteImage
+	ScaleButton, Hr, Popup,KeyIcon,LinkIcon, CoverImage, AbsoluteImage, CardContainer
 	
 } from "../styled-components";
 import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon, RateIcon, SimilarFinderIcon} from "./icons"
@@ -153,36 +153,72 @@ const MainPage = (props) => {
 			</FlexBox>
 			
 
-			{/* EXPLORE*/}
-			<FlexBox 
-				flexDirection="column" justifyContent="center" 
-				borderBottom="6px solid" borderColor="rgba(0,0,0,1)"
-				position="relative" boxSizing="border-box"
-				overflow="hidden" 
-				minHeight="400px" 
-				zIndex={6} top={-5}
-			>
-				<CoverImage src={lovesimonposter} 
-					position="absolute" filter="blur(8px)"
-					top={0} left={"-2vw"} right={"-2vw"} 
-					blur={8} width={"104vw"} zIndex={0}
-					alt={"Pixly Features"} minHeight="400px"
-				/>
-				<ExploreSection isSmallScreen={isSmallScreen} />
-			</FlexBox>
-
-			{false && !isSmallScreen && <ExploreSection isSmallScreen={isSmallScreen} />}
-
 			{/* FEATURES */}
-			<ContentContainer boxSizing="border-box">
-				<Grid columns={[1,1,1,2,2,3]} px={[2]} py={[4]}>
-					<RecommendationFeature onClick={insertJoinForm} authStatus={authStatus} />
-					<SimilarMoviesFeature  authStatus={authStatus} />
-					<CollectionsFeature  />
-					<SocialFeature setModalOpen={setModalOpen} authStatus={authStatus} />
-					<AdvanceSearchFeature  />
-					<ActionFeatures onClick={insertJoinForm} authStatus={authStatus} />
+			<ContentContainer boxSizing="border-box" bg="#F0F0F0">
+				<Grid columns={[1,1,1,2,2,2,4]} px={[2]} py={[4]}>
+					<CardContainer p={[4]} alignItems="center" bg="#ffffff">
+						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]} fontWeight="bold" alignItems="center" pb={[2]} textAlign="center">Movie Recommendations</SubHeaderText>
+						<Text fontSize={["14px", "14px","14px", "16px"]}>
+							After you rate 40 movies, give us some time to analyze. 
+							Then, Our AI-assisted algorithms will find and make <strong><em>very personal movie recommendations</em></strong>.
+						</Text>
+					</CardContainer>
+
+					<CardContainer p={[4]} alignItems="center" bg="#ffffff">
+						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]} fontWeight="bold" alignItems="center" pb={[2]} textAlign="center">Find Similar Movies</SubHeaderText>
+						<Text fontSize={["14px", "14px","14px", "16px"]}>
+						Discover movies that are similar to your favorite movies, both algorithmically and contextually.
+						</Text>
+					</CardContainer>
+
+					<CardContainer p={[4]} alignItems="center" bg="#ffffff">
+						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]} fontWeight="bold" alignItems="center" pb={[2]} textAlign="center">Advance Film Search</SubHeaderText>
+						<Text fontSize={["14px", "14px","14px", "16px"]}>
+						You can search movies within your favourite genre or subgenre and filter them with IMDb rating or release year.
+						</Text>
+					</CardContainer>
+					<CardContainer  p={[4]} alignItems="center" bg="#ffffff">
+						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]} fontWeight="bold" alignItems="center" pb={[2]} textAlign="center">Ratings, Favorites, Watchlis</SubHeaderText>
+						<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px","14px", "16px"]}>
+							Besides recommendations, Pixly is a movie rating website. Keep your favorite films and watch list in one platform.
+						</Text>
+					</CardContainer>
 				</Grid>
+
+			
+                    <CardContainer bg="#ffffff" width={"100%"} mb={[5]}>
+						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]}
+							fontWeight="bold" alignItems="center" 
+							pb={[2]} mt={[3]} 
+							textAlign="center" width="100%"
+						>
+							Lists of Films
+						</SubHeaderText>
+                        <Text maxWidth="100%"  textAlign="center" mb={[3]} fontSize={["14px", "14px","14px", "16px"]}>
+                            We are passionately expanding our movie lists. Besides categorical film lists, 
+							we have many collected popular collections. <NewLink underline to="/lists-of-films">See other movie lists</NewLink>
+						</Text>
+
+                        <Grid columns={[2,2,3,]} py={[2]} gridColumnGap={[2]} mt={[3]}>
+							{[{name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk.jpg"},
+								{name:"Rom-Com", slug:"romantic-comedy", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/24/cover/romantic-comedy-movies.jpg"},
+								{name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery.jpg"},
+								{name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures.jpg"},
+								{name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking.jpg"},
+								{name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/gangster.jpg"},
+							].map( item => (
+								<CoverImage 
+									src={item.coverPoster} key={"rec" + item.slug}  
+									ratio={0.6} hoverShadow="hover" borderRadius="8px"
+									boxShadow="card"
+									link={`/topic/${item.slug}`} 
+									alt={`Popular Topic Film Collection: ${item.name}.`} 
+									title={`Popular Topic Film Collection: ${item.name}.`} 
+								/>
+							))}
+						</Grid>
+					</CardContainer>
+
 			</ContentContainer>
 
 			{true && <SuperBox  
@@ -210,7 +246,6 @@ const ExploreSection = ({ isSmallScreen }) => (
 			color="dark" 
 			my={[3]}
 			textAlign="center" 
-			color={"light" }
 			fontSize={["22px","22px","28px", "30px"]} 
 			>
 			Let Me Discover First
@@ -219,7 +254,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 		<Grid columns={[2]} py={[1]} gridColumnGap={[2,2,2,3]} width="100%" height="auto" px={[2,2,4,5,6]} >
 			<LinkButton px={[3,3,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
 				link="/popular-and-upcoming-movies" textAlign="center"
-				color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
+				bg="rgba(0,0,0,0.1)" borderRadius="4px" 
 				height={"50px"} width={["90%"]} maxWidth={"300px"} 
 				hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
 			>
@@ -227,7 +262,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 			</LinkButton>
 			<LinkButton px={[3,3,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
 				link="/lists-of-films" textAlign="center"
-				color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
+				bg="rgba(0,0,0,0.1)" borderRadius="4px" 
 				height={"50px"} width={["90%"]} maxWidth={"300px"} 
 				hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
 			>
@@ -235,7 +270,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 			</LinkButton>
 			<LinkButton px={[2,2,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
 				link="/similar-movie-finder" textAlign="center"
-				color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
+				bg="rgba(0,0,0,0.1)" borderRadius="4px" 
 				height={"50px"} width={["90%"]} maxWidth={"300px"} 
 				hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
 			>
@@ -243,7 +278,7 @@ const ExploreSection = ({ isSmallScreen }) => (
 			</LinkButton>
 			<LinkButton px={[3,3,4]} m={[2]} translateY hoverBg="rgba(0,0,0,0.4)"
 				link="/advance-search" textAlign="center"
-				color="light" bg="rgba(0,0,0,0.1)" borderRadius="4px" 
+				bg="rgba(0,0,0,0.1)" borderRadius="4px" 
 				height={"50px"} width={["90%"]} maxWidth={"300px"} 
 				hoverScale boxShadow="card" fontSize={["12px", "12px", "14px"]}
 			>
@@ -256,6 +291,31 @@ const ExploreSection = ({ isSmallScreen }) => (
 )
 
 const FeatureCard = ({ color, ...props}) => (
+	<CardContainer width="100%" maxWidth="100%" height="auto" minHeight="250px" flexDirection="column" alignItems="center" 
+		px={[3,3,3,4]} overflow="hidden" pt={[3]} boxShadow="card" borderRadius="6px"
+	>
+		<FlexBox 
+			flexDirection="column"  
+			position="relative" top={0} bottom={0} left={0} right={0} minHeight={"360px"}
+			maxWidth="100%" zIndex={5} 
+			justifyContent="flex-start" alignItems="center" 
+			overflow="hidden"
+		>
+			<SubHeaderText my={[2,2,3]}
+				fontSize={["18px", "18px", "20px", "22px"]}
+				width={"auto"} textAlign="center"
+				fontWeight="bold"
+			>
+				{props.header}
+			</SubHeaderText>
+			{props.text && <Text textAlign="justify" fontSize={["14px"]} textAlign="center">
+				{props.text}
+			</Text>}
+			{props.children}
+		</FlexBox>
+	</CardContainer>
+)
+const FeatureCard0 = ({ color, ...props}) => (
 	<FlexBox width="100%" maxWidth="100%" height="auto" minHeight="350px" flexDirection="column" alignItems="center" 
 		px={[3]} overflow="hidden" pt={[3]} boxShadow="card" borderRadius="6px"
 	>
@@ -287,25 +347,21 @@ const FeatureCard = ({ color, ...props}) => (
 )
 
 
-
 const RecommendationFeature = ({authStatus, onClick, color="aqua",}) => (
 	<FeatureCard color={color}
 		header="Personal Movie Recommendations"
-		text={"We will analyze " + 
-				"your cinema taste with our AI-Based film recommendation engine after you rated 40 movies. " +
-				"After then, we will make very personalized movie " +
-				"recommendations based on movies you like."}
+		text={"After you rate 40 movies, give us some time to analyze. Then, Our AI-assisted algorithms will find and recommend good movies weekly."}
 	>
 		{!authStatus && 
-			<Button px={[3,3,4]} mt={[4]} 
-				hoverBg="rgba(0,0,0,0.4)" translateY 
-				textAlign="center"  position="absolute" bottom={0}
-				color="light" bg="rgba(0,0,0,0.1)" 
-				height={"40px"} width={["90%"]} maxWidth={"300px"} 
-				boxShadow="card"
-				fontSize={["12px", "14px", "14px"]}
-				border={"1px solid"} borderColor="light" 
-				borderRadius={"4px"}
+			<Button px={[2]} mx={[4]} my={[2]}
+				onClick={onClick} 
+				width={"200px"} height={"40px"}
+				color="light"  zIndex={8} 
+				
+				gradient="pinkish"
+				boxShadow={"card"} 
+				fontWeight="bold"
+				hoverScale={1.1}
 			>
 				Join Us
 			</Button>
@@ -313,18 +369,15 @@ const RecommendationFeature = ({authStatus, onClick, color="aqua",}) => (
 	</FeatureCard>
 )
 const SimilarMoviesFeature = ({color="yesil",}) => (
-	<FeatureCard color={color} header="Find Similar Movies" >
-		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} color="light">
-			Let search your movies you like and discover movies that have similar genre, tag, or theme with our 
-			<em> similar movie finder</em>.
-			Besides, You may also find film recommendations like your favourite film which are suggested by our AI-assisted recommendation engine. 
-		</Text>
+	<FeatureCard color={color} header="Find Similar Movies" 
+		text="Discover movies that are similar to your favorite movies, both algorithmically and contextually."
+	>
 
-		<LinkButton px={[3,3,4]} mt={[4]} translateY hoverBg="rgba(0,0,0,0.4)"
-			link="/similar-movie-finder" textAlign="center" position="absolute" bottom={0}
-			color="light" bg="rgba(0,0,0,0.1)" 
-			height={"40px"} width={["90%"]} maxWidth={"300px"} 
-			hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
+		<LinkButton px={[3,3,4]} translateY
+			link="/similar-movie-finder" textAlign="center" 
+			bg="rgba(0,0,0,0.7)" color="#ffffff"
+			height={"40px"} width={["90%"]} maxWidth={"300px"}
+			hoverScale boxShadow="0 4px 12px 1px rgba(0,0,0, 0.15)" fontSize={["12px", "14px", "14px"]}
 		>
 			Find Similar Movies
 		</LinkButton>
@@ -338,7 +391,7 @@ const CollectionsFeature = ({color="mor",}) => (
 			"topic lists that include the best artworks of its category like "
 		}
 	>
-		<Box fontSize={["12px", "12px", "14px", "14px"]}  opacity={0.9} color="light" maxWidth="100%" overflow="hidden"  display="flex" flexWrap="wrap">
+		<Box fontSize={["12px", "12px", "14px", "14px"]}  opacity={0.9}  maxWidth="100%" overflow="hidden"  display="flex" flexWrap="wrap">
 
 			<NewLink ml={"2px"} follow={true} underline fontWeight="bold" title={"Arthouse Movies"} link="/topic/art-house">ArtHouse</NewLink>,&nbsp;
 			<NewLink ml={"2px"} follow={true} underline fontWeight="bold" title={"Cyberpunk Movies"} link="/topic/cyberpunk">Cyberpunk</NewLink>,&nbsp;
@@ -348,11 +401,11 @@ const CollectionsFeature = ({color="mor",}) => (
 			<NewLink ml={"2px"} follow={true} underline fontWeight="bold" title={"Mystery Movies"} link="/topic/romantic-comedy">Romantic Comedy</NewLink>,&nbsp;
 			<NewLink ml={"2px"} mr="4px" follow={true} underline fontWeight="bold" title={"Thought-Provoking Movies"} link="/topic/thought-provoking">Thought-Provoking</NewLink> movies etc.
 		</Box>
-		<LinkButton px={[3,3,4]} mt={[4]} translateY hoverBg="rgba(0,0,0,0.4)"
-				textAlign="center" link="/lists-of-films" position="absolute" bottom={0}
-				color="light" bg="rgba(0,0,0,0.1)" 
+		<LinkButton px={[3,3,4]} translateY
+				textAlign="center" link="/lists-of-films" 
+				bg="rgba(0,0,0,0.7)" borderColor="#ffffff"
 				height={"40px"} width={["90%"]} maxWidth={"300px"} 
-				hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
+				hoverScale boxShadow="0 4px 12px 1px rgba(0,0,0, 0.15)" fontSize={["12px", "14px", "14px"]}
 			>
 				See List of Films
 			</LinkButton>
@@ -361,7 +414,7 @@ const CollectionsFeature = ({color="mor",}) => (
 
 const SocialFeature = ({setModalOpen, color="mor-pembe",}) => (
 	<FeatureCard color={color} header="Discover People and Share Movie" >
-		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} color="light">
+		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} >
 			Keep and track your personal cinema history by adding movies to watchlist, or liking them. Then You can share movies from there.
 		</Text>
 	</FeatureCard>
@@ -369,14 +422,14 @@ const SocialFeature = ({setModalOpen, color="mor-pembe",}) => (
 
 const AdvanceSearchFeature = ({color="kırmızı",}) => (
 	<FeatureCard color={color} header="Advance Film Search" >
-		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} color="light">
+		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} >
 			You can search movies within your favourite genre or subgenre and filter them with IMDb rating or release year.
 		</Text>
-			<LinkButton px={[3,3,4]} mt={[4]} translateY hoverBg="rgba(0,0,0,0.4)"
-				textAlign="center" link="/advance-search" position="absolute" bottom={0}
-				color="light" bg="rgba(0,0,0,0.1)" 
+			<LinkButton px={[3,3,4]} translateY
+				textAlign="center" link="/advance-search" 
+				bg="rgba(0,0,0,0.7)" color="#ffffff"
 				height={"40px"} width={["90%"]} maxWidth={"300px"} 
-				hoverScale boxShadow="card" fontSize={["12px", "14px", "14px"]}
+				hoverScale boxShadow="0 4px 12px 1px rgba(0,0,0, 0.15)" fontSize={["12px", "14px", "14px"]}
 			>
 				Browse Movies
 			</LinkButton>
@@ -386,12 +439,12 @@ const AdvanceSearchFeature = ({color="kırmızı",}) => (
 
 
 const ActionFeatures = ({setModalOpen, color="sarı"}) => (
-	<FeatureCard color={color} header="Watch List, Likes and Movie Rating" >
-		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} color="light">
-			You can save your favourite films. Add films to your watch list that is not watched yet, so you don't have to remember them.
-			Rate films, then your friends will see your public opinion. Also, get very personalized film recommendations based on your ratings.   
+	<CardContainer >
+		<SubHeaderText>Ratings, Favorites, Watchlis</SubHeaderText>
+		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px", "14px", "14px"]} >
+			Besides recommendations, Pixly is a movie rating website. Keep your favorite films and watch list in one platform.
 		</Text>
-	</FeatureCard>
+	</CardContainer>
 )
 
 const FeatureText = (props) => (

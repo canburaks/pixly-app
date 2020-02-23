@@ -222,10 +222,23 @@
     "include": [
       "",
       "/",
+      "/topic/art-house",
+      "/topic/based-on-true-story",
+      "/topic/cyberpunk",
+      "/topic/dialogue-focused",
+      "/topic/thought-provoking",
+      "/topic/feel-good-movies",
+      "/topic/bechdel-test",
+      "/topic/lgbtq-plus-films",
+      "/topic/controversial-films",
       "/topic/historical-figures",
-      "/lists-of-films",
-      "/topic/historical-figures",
-      "/blog"
+      "/topic/mystery",
+      "/topic/video-game",
+      "/topic/gangster-films",
+      "/topic/romantic-comedy",
+      "/topic/post-apocalyptic",
+      "/topic/bdsm-movies",
+      "/topic/cinematic-documentary"
 
     ],
     "publicPath": "/"

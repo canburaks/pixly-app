@@ -107,7 +107,7 @@ const SimilarFinder = (props) => {
                 canonical={canonical}
             />
                 {/* HERO */}
-                <SuperBox className="similar-finder-hero unmatched-red"
+                <SuperBox className="similar-finder-hero"
                     position="relative"
                     width="100%" height={"auto"}
                     display="flex" flexDirection="column" alignItems="center"
@@ -136,7 +136,7 @@ const SimilarFinder = (props) => {
                         Discover <em>Movies Like</em> Your Favourites.
                     </SubHeaderText>  
                     {showInfoText && 
-                        <Text color="white" position="relative" my={[3,3,4]} px={[3,3,4,4,5]}>
+                        <Text color="white" position="relative" my={[3,3,4]} px={[3,3,4,4,5]} textAlign="center">
                             Discover <em>movies like</em> your favourites.
                             Are you looking good movies to watch and can't decide? Let search your favourite film 
                             and discover similar movies like it. Besides, "People also like" section may provide good movie recommendations. 
