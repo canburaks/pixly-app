@@ -139,6 +139,7 @@ themes.default.shadows = {
 
 	hover: "0 12px 16px -4px rgba(0,0,0, 0.7)",
 	crewHover: "0 12px 16px -6px rgba(0,0,0, 0.15)",
+	soft:"0px 20px 40px rgba(0, 0, 0, 0.15)",
 
 	minicard:"0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
 	//hover:  "0 1px 1px   rgba(0, 0, 0,   0.22), " +

@@ -854,19 +854,32 @@ export const _TriangeClip = (props) => {
 	)
   }
   
-export const TriangeClip = styled("div")`
-	position: absolute;
-	left:0;
-	bottom:0;
-    width: 0;
-    height: 0;
-	border-right: ${props => `${window.innerWidth}px solid ${props.color || "transparent"}`};
-    border-bottom: ${props => `${window.innerWidth * 0.1}px solid ${props.color || "#FAFCFF"}`};
-    /* 
-	border-bottom: 200px solid #FAFCFF;
-	border-right: 1440px solid transparent;
-	*/
-`
+export  function SinusWave(props) {
+	return (
+	  <Svg width={1505} height={81} viewBox="0 0 1505 81" fill="none" {...props}>
+		<path
+		  d="M2.47 40.517c62.5-50 62.5-50 125.001 0 62.5 50 62.5 50 125 0s62.5-50 125 0 62.5 50 125 0 62.5-50 125 0 62.5 50 125 0 62.5-50 125 0 62.5 50 124.999 0c62.5-50 62.5-50 125 0s62.5 50 125 0 62.5-50 125 0 62.5 50 125 0"
+		  stroke="url(#prefix__paint0_linear)"
+		  strokeWidth={5}
+		/>
+		<defs>
+		  <linearGradient
+			id="prefix__paint0_linear"
+			x1={1610.63}
+			y1={-34}
+			x2={-16.766}
+			y2={200.214}
+			gradientUnits="userSpaceOnUse"
+		  >
+			<stop stopColor="#4C75F2" />
+			<stop offset={1} stopColor="#FF416C" />
+		  </linearGradient>
+		</defs>
+	  </Svg>
+	)
+  }
+  
+
 
 /*
 
