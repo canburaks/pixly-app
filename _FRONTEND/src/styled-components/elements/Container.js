@@ -166,7 +166,7 @@ export const Clippy = styled(Container)`
 `
 
 //Landing Page
-export const Clipp2 = styled("div")`
+export const Clippy2 = styled("div")`
     clip-path: polygon(0 82%, 0% 100%, 100% 100%);
 `
 

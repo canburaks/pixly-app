@@ -49,6 +49,9 @@ const Path = styled.path`
 	${position};
 	${color};
 `
+
+
+  
 export const QuotationLeftIcon = (props) => (
 	  <Svg
 		aria-hidden="true"
@@ -833,7 +836,37 @@ export const HeroPatternTop = props => (
 	</svg>
 )
 
-
+export const _TriangeClip = (props) => {
+	const height = window.innerWidth > 200 ? 200 : window.innerWidth
+	return (
+	  <Svg
+		width={"100%"}
+		height={height}
+		viewBox="0 0 1441 201"
+		fill="none" zIndex={10}
+		position="absolute"
+		bottom={0} left={0}
+		minWidth="100%"
+		{...props}
+	  >
+		<path d="M.26.5l1440 200H.26V.5z" fill={props.color || "#FAFCFF"} />
+	  </Svg>
+	)
+  }
+  
+export const TriangeClip = styled("div")`
+	position: absolute;
+	left:0;
+	bottom:0;
+    width: 0;
+    height: 0;
+	border-right: ${props => `${window.innerWidth}px solid ${props.color || "transparent"}`};
+    border-bottom: ${props => `${window.innerWidth * 0.1}px solid ${props.color || "#FAFCFF"}`};
+    /* 
+	border-bottom: 200px solid #FAFCFF;
+	border-right: 1440px solid transparent;
+	*/
+`
 
 /*
 

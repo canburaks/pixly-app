@@ -234,7 +234,9 @@ h3 {
     width:20vw;
     height:20vw;
 }
-
+.similar-finder-hero {
+    background: linear-gradient(63.63deg, #596B8D -1.99%, #433FEE 156.21%);
+}
 
 .other-films-of-director{
     background-color: #ff9d00;
