@@ -304,6 +304,20 @@ export const TopPanelCoverElement = React.memo((props) => (
 ), (prevProps, nextProps) => (prevProps.isLargeScreen === nextProps.isLargeScreen && prevProps.item.coverPoster === nextProps.item.coverPoster))
 
 
+export const TriangeClip = styled("div")`
+	position: absolute;
+	left:0;
+	bottom:0;
+    width: 0;
+    height: 0;
+	border-right: ${props => `${window.innerWidth}px solid transparent}`};
+    border-bottom: ${props => `${window.innerWidth * 0.1}px solid ${props.color || "#FAFCFF"}`};
+    /* 
+	border-bottom: 200px solid #FAFCFF;
+	border-right: 1440px solid transparent;
+	*/
+`
+
 //-------------------------------------------------------------
 /*
 export const ColorBox = (props) => {

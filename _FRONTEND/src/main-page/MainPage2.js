@@ -29,7 +29,8 @@ import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,G
 	SuperBox,HiddenText,HiddenHeader,HiddenSubHeader,HeaderText,HeaderMini,Text, SubHeaderText, NewLink,
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
 	GradientAnimationBox,SignupForm, SignupFormModal, production, PulseButton,
-	ScaleButton, Hr, Popup,KeyIcon,LinkIcon, CoverImage, AbsoluteImage, CardContainer
+	ScaleButton, Hr, Popup,KeyIcon,LinkIcon, CoverImage, AbsoluteImage, CardContainer,
+	TriangeClip, SinusWave
 	
 } from "../styled-components";
 import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon, RateIcon, SimilarFinderIcon} from "./icons"
@@ -98,10 +99,10 @@ const MainPage = (props) => {
             />
         </Head>
 
-        <PageContainer >
+        <PageContainer bg="#E5E5E5">
 			
 			{/* HERO*/}
-			<FlexBox borderBottom="6px solid"   borderColor="rgba(0,0,0,0.7)"
+			<FlexBox
 				flexDirection="column" minHeight={[ "400px", "400px", "500px"]}
 				alignItems="center" justifyContent="center" boxSizing="border-box"
 				zIndex={9}  boxSizing="border-box"
@@ -150,12 +151,37 @@ const MainPage = (props) => {
 						>
 						Join
 					</Button>}
+					<TriangeClip color="#E5E5E5" />
 			</FlexBox>
 			
 
+				{/* PERSONAL RECOMMENDATIONS */}
+				<FlexBox px={"5vw"} flexDirection="column" width="100%" justifyContent="center" alignItems="center">
+					<SubHeaderText fontSize={["22px", "22px", "28px"]} 
+						fontWeight="bold" alignItems="center" 
+						textAlign="center" width="100%"
+						my={4}
+					>
+						Personal Movie Recommendations
+					</SubHeaderText>
+
+					<Text fontSize={["14px"]} fontSize="bold" opacity={0.8} pb={[5]} textAlign="center" >
+						We will recommend you good movies considering your taste. 
+						In order to get personal movie recommendations, 
+						join us by creating an account. 
+						After you rate 40 movies, give us some time to analyze. 
+						Then, Our AI-assisted algorithms will find and recommend good movies weekly.
+					</Text>
+					<PersonalRecommendations screenSize={screenSize} />
+				</FlexBox>
+
+				<SinusWave my={4} />
+
+
 			{/* FEATURES */}
-			<ContentContainer boxSizing="border-box" bg="#F0F0F0">
-				<Grid columns={[1,1,1,2,2,2,4]} px={[2]} py={[4]}>
+			<ContentContainer boxSizing="border-box" bg="#E5E5E5">
+			
+				<Grid columns={[1,1,1,2,2,2,4]} px={[2]} py={[4]} mt={4}>
 					<CardContainer p={[4]} alignItems="center" bg="#ffffff">
 						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]} fontWeight="bold" alignItems="center" pb={[2]} textAlign="center">Movie Recommendations</SubHeaderText>
 						<Text fontSize={["14px", "14px","14px", "16px"]}>
@@ -233,6 +259,26 @@ const MainPage = (props) => {
     </>
     );
 }
+
+const PersonalRecommendations = ({ screenSize }) => {
+	const isSmallScreen = screenSize.includes("S")
+	const poster = isSmallScreen
+			? "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/personal-rec-steps-vertical.png"
+			: "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/personal-rec-steps.png"
+
+	return (
+	<FlexBox justifyContent="center" alignItems="center">
+		<Image 
+			src={poster}
+			alt="Join us and get personalized movie recommendations"
+			title="Join us and get personalized movie recommendations"
+			width="100%" maxWidth={"900px"}
+			height="auto"
+		/>
+	</FlexBox>
+)}
+
+
 
 const ExploreSection = ({ isSmallScreen }) => (
 <Section 
