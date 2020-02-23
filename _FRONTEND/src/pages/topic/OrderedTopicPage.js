@@ -675,7 +675,7 @@ const TrailerIcon = ({onClick, ...props}) => (
         onClick={onClick}
         {...props}
 	>
-		<YoutubeIcon size={[50,50,50, 35]} hoverScale boxShadow={"0 1px 1px 1px rgba(0,0,0, 0.95)"}/>
+		<YoutubeIcon size={[50,50,50, 35]} hoverScale />
 	</FlexBox>
 )
 export default withRouter(TopicQuery);
