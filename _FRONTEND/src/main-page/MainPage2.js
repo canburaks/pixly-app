@@ -15,7 +15,8 @@ import {
 	useClientWidth,
 	useClientHeight,
 	rgaSetCloseTime,
-	useValues
+	useWindowWidth,
+	useValues, useHover
 } from "../functions";
 import { GlobalContext } from "../";
 
@@ -44,6 +45,7 @@ const MainPage = (props) => {
 	//rgaPageView()
 	//console.log("main-page props: ",props)
 	const authStatus = useAuthCheck();
+	const windowWidth = useWindowWidth()
 
     const state = useContext(GlobalContext)
 	const insertLoginForm = useCallback(() => state.methods.insertAuthForm("login"),[])
@@ -59,7 +61,7 @@ const MainPage = (props) => {
 	
 	//const [isFbLoaded, setFbLoaded] = useState(false)
 	//const Fb = facebook()
-	//console.log("main", isModalOpen)
+	console.log("main",windowWidth)
 	//const listAndTopics = [...topics, ...lists]
 	const heroMainText = "Discover Best Movies That Fit Your Cinema Taste"
 	const heroHeaderText = "Improve your experience in discovering movies"
@@ -142,7 +144,7 @@ const MainPage = (props) => {
 					<Button px={[2]} mx={[4]} my={[3]}
 						onClick={setModalOpen} 
 						width={"200px"} height={"40px"}
-						color="light"  zIndex={8} 
+						color="light"  zIndex={18} borderRadius={"6px"}
 						
 						gradient="pinkish"
 						boxShadow={"card"} 
@@ -151,7 +153,7 @@ const MainPage = (props) => {
 						>
 						Join
 					</Button>}
-					<TriangeClip color="#E5E5E5" />
+					<TriangeClip color="#E5E5E5" width={windowWidth} />
 			</FlexBox>
 			
 
@@ -175,36 +177,56 @@ const MainPage = (props) => {
 					<PersonalRecommendations screenSize={screenSize} />
 				</FlexBox>
 
-				<SinusWave my={4} />
 
 
+	
 			{/* FEATURES */}
 			<ContentContainer boxSizing="border-box" bg="#E5E5E5">
-			
 				<Grid columns={[1,1,1,2,2,2,4]} px={[2]} py={[4]} mt={4}>
-					<CardContainer p={[4]} alignItems="center" bg="#ffffff">
-						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]} fontWeight="bold" alignItems="center" pb={[2]} textAlign="center">Movie Recommendations</SubHeaderText>
+					<CardContainer p={[4]} alignItems="center" bg="#ffffff" zIndex={1}>
+						<SubHeaderText 
+							fontSize={["16px", "16px", "16px", "18px"]} 
+							fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
+						>
+							Movie Recommendations
+						</SubHeaderText>
 						<Text fontSize={["14px", "14px","14px", "16px"]}>
 							After you rate 40 movies, give us some time to analyze. 
 							Then, Our AI-assisted algorithms will find and make <strong><em>very personal movie recommendations</em></strong>.
 						</Text>
 					</CardContainer>
 
-					<CardContainer p={[4]} alignItems="center" bg="#ffffff">
-						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]} fontWeight="bold" alignItems="center" pb={[2]} textAlign="center">Find Similar Movies</SubHeaderText>
+					<CardContainer p={[4]} alignItems="center" bg="#ffffff" zIndex={1}>
+						<SubHeaderText 
+							fontSize={["16px", "16px", "16px", "18px"]} 
+							fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
+						>
+							Find Similar Movies
+						</SubHeaderText>
 						<Text fontSize={["14px", "14px","14px", "16px"]}>
 						Discover movies that are similar to your favorite movies, both algorithmically and contextually.
 						</Text>
+						<CoverLink to="/similar-movie-finder" />
 					</CardContainer>
 
-					<CardContainer p={[4]} alignItems="center" bg="#ffffff">
-						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]} fontWeight="bold" alignItems="center" pb={[2]} textAlign="center">Advance Film Search</SubHeaderText>
+					<CardContainer p={[4]} alignItems="center" bg="#ffffff" zIndex={1}>
+						<SubHeaderText 
+							fontSize={["16px", "16px", "16px", "18px"]} 
+							fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
+						>
+							Advance Film Search
+						</SubHeaderText>
 						<Text fontSize={["14px", "14px","14px", "16px"]}>
 						You can search movies within your favourite genre or subgenre and filter them with IMDb rating or release year.
 						</Text>
 					</CardContainer>
-					<CardContainer  p={[4]} alignItems="center" bg="#ffffff">
-						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]} fontWeight="bold" alignItems="center" pb={[2]} textAlign="center">Ratings, Favorites, Watchlis</SubHeaderText>
+					<CardContainer  p={[4]} alignItems="center" bg="#ffffff" zIndex={1}>
+						<SubHeaderText 
+							fontSize={["16px", "16px", "16px", "18px"]} 
+							fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
+						>
+							Ratings, Favorites, Watchlist
+						</SubHeaderText>
 						<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px","14px", "16px"]}>
 							Besides recommendations, Pixly is a movie rating website. Keep your favorite films and watch list in one platform.
 						</Text>
@@ -212,39 +234,38 @@ const MainPage = (props) => {
 				</Grid>
 
 			
-                    <CardContainer bg="#ffffff" width={"100%"} mb={[5]}>
-						<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]}
-							fontWeight="bold" alignItems="center" 
-							pb={[2]} mt={[3]} 
-							textAlign="center" width="100%"
-						>
-							Lists of Films
-						</SubHeaderText>
-                        <Text maxWidth="100%"  textAlign="center" mb={[3]} fontSize={["14px", "14px","14px", "16px"]}>
-                            We are passionately expanding our movie lists. Besides categorical film lists, 
-							we have many collected popular collections. <NewLink underline to="/lists-of-films">See other movie lists</NewLink>
-						</Text>
+				<CardContainer bg="#ffffff" width={"100%"} mb={[5]}>
+					<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]}
+						fontWeight="bold" alignItems="center" 
+						pb={[2]} mt={[3]} 
+						textAlign="center" width="100%"
+					>
+						Lists of Films
+					</SubHeaderText>
+					<Text maxWidth="100%"  textAlign="center" mb={[3]} fontSize={["14px", "14px","14px", "16px"]}>
+						We are passionately expanding our movie lists. Besides categorical film lists, 
+						we have many collected popular collections. <NewLink underline to="/lists-of-films">See other movie lists</NewLink>
+					</Text>
 
-                        <Grid columns={[2,2,3,]} py={[2]} gridColumnGap={[2]} mt={[3]}>
-							{[{name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk.jpg"},
-								{name:"Rom-Com", slug:"romantic-comedy", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/24/cover/romantic-comedy-movies.jpg"},
-								{name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery.jpg"},
-								{name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures.jpg"},
-								{name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking.jpg"},
-								{name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/gangster.jpg"},
-							].map( item => (
-								<CoverImage 
-									src={item.coverPoster} key={"rec" + item.slug}  
-									ratio={0.6} hoverShadow="hover" borderRadius="8px"
-									boxShadow="card"
-									link={`/topic/${item.slug}`} 
-									alt={`Popular Topic Film Collection: ${item.name}.`} 
-									title={`Popular Topic Film Collection: ${item.name}.`} 
-								/>
-							))}
-						</Grid>
-					</CardContainer>
-
+					<Grid columns={[2,2,3,]} py={[2]} gridColumnGap={[2]} mt={[3]}>
+						{[{name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk-2.jpg"},
+							{name:"Rom-Com", slug:"romantic-comedy", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/24/cover/romantic-comedy-movies.jpg"},
+							{name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery-3.jpg"},
+							{name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures-2.jpg"},
+							{name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking-3.jpg"},
+							{name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/gangster.jpg"},
+						].map( item => (
+							<CoverImage 
+								src={item.coverPoster} key={"rec" + item.slug}  
+								ratio={0.6} hoverShadow="hover" borderRadius="8px"
+								boxShadow="card"
+								link={`/topic/${item.slug}`} 
+								alt={`Popular Topic Film Collection: ${item.name}.`} 
+								title={`Popular Topic Film Collection: ${item.name}.`} 
+							/>
+						))}
+					</Grid>
+				</CardContainer>
 			</ContentContainer>
 
 			{true && <SuperBox  
@@ -278,6 +299,24 @@ const PersonalRecommendations = ({ screenSize }) => {
 	</FlexBox>
 )}
 
+const FeatureContainer = ({header, text, gradientClass}) => {
+const [hoverRef, isHovered] = useHover();
+return (
+	<CardContainer p={[4]} alignItems="center" bg={!isHovered && "#ffffff"} zIndex={1}>
+		<SubHeaderText 
+			fontSize={["16px", "16px", "16px", "18px"]} 
+			fontWeight="bold" alignItems="center" pb={[2]} 
+			textAlign="center"
+		>
+			{header}
+		</SubHeaderText>
+		<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px","14px", "16px"]}>
+			{text}
+		</Text>
+	</CardContainer>
+
+	)
+}
 
 
 const ExploreSection = ({ isSmallScreen }) => (

@@ -216,6 +216,14 @@ h3 {
 
 
 /* CBS Custom Css*/
+.rotate-90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
 .movie-search-card:hover {
     background-color: rgba(180,180,180, 0.9);
 }
