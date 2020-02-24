@@ -221,9 +221,7 @@
     },
     "include": [
       "",
-      "/",
-      "/movie/instant-family-2018"
-
+      "/"
 
     ],
     "publicPath": "/"

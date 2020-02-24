@@ -261,7 +261,7 @@ function ResponsiveSize(width,xs=370, s=480, m=736, l=980, xl=1280 ){
 }
 
 export function useWindowWidth() {
-  const [screenSize, setScreenSize] = useState(ResponsiveSize(window.innerWidth))//      S | M | L
+  const [screenSize, setScreenSize] = useState(window.innerWidth)//      S | M | L
   
   const screenListener = () => {
       const currentSize = window.innerWidth;

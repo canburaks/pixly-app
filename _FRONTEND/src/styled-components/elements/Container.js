@@ -310,8 +310,8 @@ export const TriangeClip = styled("div")`
 	bottom:0;
     width: 0;
     height: 0;
-	border-right: ${props => `${window.innerWidth}px solid transparent}`};
-    border-bottom: ${props => `${window.innerWidth * 0.1}px solid ${props.color || "#FAFCFF"}`};
+	border-right: ${props => `${props.width || window.innerWidth}px solid transparent}`};
+    border-bottom: ${props => `${props.width*0.1 || window.innerWidth * 0.08}px solid ${props.color || "#FAFCFF"}`};
     /* 
 	border-bottom: 200px solid #FAFCFF;
 	border-right: 1440px solid transparent;
