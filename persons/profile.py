@@ -221,8 +221,6 @@ class Profile(SocialMedia, SEO):
             MyQueue.put(self.scan_movies_by_rating, 4.5)
             print("*")
             MyQueue.put(self.scan_movies_by_rating, 4)
-            MyQueue.put(self.scan_movies_by_rating, 3)
-
             self.sync_active_status()
             return True
 
@@ -257,8 +255,8 @@ class Profile(SocialMedia, SEO):
             #MyQueue.put(self.promote)
 
             print("<--------PROMOTING---------------->")
-            #-----#self.promote()
-            #-----#self.sync_active_status()
+            self.promote()
+            self.sync_active_status()
             print("<----------------------------------->")
         #<--------------------------------------------------------------->
 
@@ -279,7 +277,6 @@ class Profile(SocialMedia, SEO):
                 self.persona.update_recommendation(target, rate)
 
             #SCAN MOVIES IF RATING IS HIGHER THAN MEAN
-            """
             if rate >= 4:
                 MyQueue.put(self.scan_movies_by_id, movie_id)
 
@@ -295,7 +292,8 @@ class Profile(SocialMedia, SEO):
                 MyQueue.put(self.scan_movies_by_rating, 5)
                 MyQueue.put(self.scan_movies_by_rating, 4.5)
                 MyQueue.put(self.scan_movies_by_rating, 4)
-            """
+                MyQueue.put(self.scan_movies_by_rating, 3.5)
+
             print("<------------------------------------------------>")
         #<--------------------------------------------------------------->
 
@@ -861,17 +859,22 @@ post_save.connect(post_save_user_model_receiver, sender=settings.AUTH_USER_MODEL
 
 """
 Activity.objects.all().count()
+
 bulk = []
 qs = Rating.objects.select_related("movie", "profile").all()
 for r in qs:
     bulk.append(Activity(profile=r.profile, action="rm", movie_id=r.movie.id, created_at=r.created_at, rating=r.rating))
+
+
 fbulk = []
 qs = Follow.objects.select_related("profile", "target_profile").filter(typeof="u")
 for f in qs:
     fbulk.append(Activity(profile= f.profile, action="fu", target_profile_username=f.target_profile.username))
+
 fbulk = []
 qs = Follow.objects.select_related("profile", "target_profile").filter(typeof="u")
 for f in qs:
     fbulk.append(Activity(profile= f.profile, action="fu", target_profile_username=f.target_profile.username))
+
 Activity.objects.bulk_create(fbulk)
 """
