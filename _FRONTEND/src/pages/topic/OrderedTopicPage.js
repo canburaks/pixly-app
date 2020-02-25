@@ -325,7 +325,7 @@ const OrderedCard = ({ item, specs, play}) => (
                 mt="4px" pb={"2px"} pt="4px" borderTop="1px solid" borderColor="rgba(0,0,0,0.25)"
                 justifyContent="space-between" alignItems="flex-end"
             >
-                <NewLink link={`/movie/${item.movie.slug}`} 
+                {false && <NewLink link={`/movie/${item.movie.slug}`} 
                     follow title={`Visit ${item.movie.name} (${item.movie.year})'`} 
                 >
                     <Box display="flex" 
@@ -335,7 +335,7 @@ const OrderedCard = ({ item, specs, play}) => (
                     >
                         More <RightIcon size={"20px"} />
                     </Box>
-                </NewLink>
+                </NewLink>}
 
                 <Box display="flex" title={`${item.movie.name} released in ${item.movie.year} and have ${item.movie.imdbRating} IMDb rating.`}>
                     <YearClockIcon year={item.movie.year} color="dark" fill="#181818" opacity={0.8}  noShadow size={specs.iconSize -4} />
@@ -373,7 +373,7 @@ const OrderedCard = ({ item, specs, play}) => (
 
                     />
                 }
-                <CoverLink link={`/movie/${item.movie.slug}`}  title={""}  zIndex={2} follow={true}/>
+                <CoverLink link={`/movie/${item.movie.slug}`}  title={item.movie.name}  zIndex={2} follow={true}/>
             </SuperBox>
 
             {/* NAME PANEL*/}
@@ -389,13 +389,13 @@ const OrderedCard = ({ item, specs, play}) => (
                 </NewLink>
 
             {/* ACTOR PANEL*/}
-                <FlexBox alignItems="center">
+                {<FlexBox alignItems="center">
                     {item.persons.map(star => (
                         <NewLink link={`/person/${star.slug}`} key={star.id} follow={true}>
                             <Text color="#f1f1f1" fontSize="12px" mr={"16px"} opacity={0.8} hoverUnderline>{star.name}</Text>
                         </NewLink>
                     ))}
-                </FlexBox>
+                </FlexBox>}
 
             </FlexBox>
             {/* MUTATION PANEL */}

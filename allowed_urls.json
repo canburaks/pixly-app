@@ -100,6 +100,8 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/i-am-curious-1967",
+        "/movie/white-fang-1991",
         "/movie/brazil-1985",
         "/movie/the-terminator-1984",
         "/movie/children-of-men-2006",
@@ -713,6 +715,8 @@
         "/movie/i-robot-2004",
         "/movie/snowpiercer-2013",
         "/movie/2036-nexus-dawn-2017",
-        "/movie/logans-run-1976"
+        "/movie/logans-run-1976",
+        "/movie/i-am-curious-1967",
+        "/movie/white-fang-1991"
     ]
 }
