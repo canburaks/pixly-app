@@ -210,7 +210,7 @@ class Profile(SocialMedia, SEO):
             return Persona.objects.filter(user=self.user, id=self.user.id).defer("similars_dummy").first()
 
     def promote(self):
-        scan_recommendations = True
+        scan_recommendations = False
 
         if self.points>=40 and scan_recommendations:
             self.set_seo_description_keywords()
@@ -247,7 +247,7 @@ class Profile(SocialMedia, SEO):
         r.save()
         print("created?",created)
         #<--------------------------------------------------------------->
-        scan_recommendations = True
+        scan_recommendations = False
 
         #<---------------PROMOTING------------------------------------->
         # WHEN PROFILE REACHED 40 RATING PROMOTE IT
@@ -265,7 +265,7 @@ class Profile(SocialMedia, SEO):
 
         #<---------------ACTIVE RATING------------------------------------->
         #IF PROFILE HAVE MORE THAN 40 RATINGS
-        if len(self.ratings.keys())>=40 and scan_recommendations:
+        if len(self.ratings.keys())>40 and scan_recommendations:
             print("<----------ACTIVE RATING--------------------->")
             #threaded(self.active_rate, movie_id=movie_id, rating=rate )            
             
