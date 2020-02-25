@@ -210,7 +210,9 @@ class Profile(SocialMedia, SEO):
             return Persona.objects.filter(user=self.user, id=self.user.id).defer("similars_dummy").first()
 
     def promote(self):
-        if self.points>=40:
+        scan_recommendations = True
+
+        if self.points>=40 and scan_recommendations:
             self.set_seo_description_keywords()
             MyQueue.put(self.sync_movie_archives)
             print("*")
@@ -245,11 +247,11 @@ class Profile(SocialMedia, SEO):
         r.save()
         print("created?",created)
         #<--------------------------------------------------------------->
-
+        scan_recommendations = True
 
         #<---------------PROMOTING------------------------------------->
         # WHEN PROFILE REACHED 40 RATING PROMOTE IT
-        if len(self.ratings.keys())==40:
+        if len(self.ratings.keys())==40 and scan_recommendations:
             self.print_info("has reached exactly 40 points. NOW PROMOTING!!!")
             #threaded(self.promote)
             #MyQueue.put(self.promote)
@@ -263,7 +265,7 @@ class Profile(SocialMedia, SEO):
 
         #<---------------ACTIVE RATING------------------------------------->
         #IF PROFILE HAVE MORE THAN 40 RATINGS
-        if len(self.ratings.keys())>40:
+        if len(self.ratings.keys())>=40 and scan_recommendations:
             print("<----------ACTIVE RATING--------------------->")
             #threaded(self.active_rate, movie_id=movie_id, rating=rate )            
             
@@ -281,11 +283,11 @@ class Profile(SocialMedia, SEO):
                 MyQueue.put(self.scan_movies_by_id, movie_id)
 
             # Persona objects
-            if self.points>40 and self.points//10==0:
+            if self.points>=40 and self.points//10==0:
                 #only scan real users 
                 self.print_info("points has increased by 10. Real users will be scanned.")
                 MyQueue.put(self.sync_persona, full=False, create=True)
-            elif self.points>40 and self.points//20==0:
+            elif self.points>=40 and self.points//20==0:
                 #scan both dummy and real users
                 self.print_info("points has increased by 20. New full scan will start.")
                 MyQueue.put(self.sync_persona, full=True, create=True)

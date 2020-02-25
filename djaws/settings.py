@@ -57,7 +57,9 @@ X_FRAME_OPTIONS                 = 'DENY'
 #SITE_ID=2
 ALLOWED_HOSTS = ["*",
     'http://127.0.0.1:8000',
-    'http://127.0.0.1:8000',
+    'https://127.0.0.1:8000',
+    'http://127.0.0.1:8080',
+    'https://127.0.0.1:8080',
     "https://pixly.app/*",
     "http://pixly.app/*",
     "http://www.pixly.app/*",
@@ -66,7 +68,7 @@ ALLOWED_HOSTS = ["*",
     "https://playthough.com/graphql",
     "http://playthough.com",
     'http://localhost:3000',
-    'http://127.0.0.1:3000',
+    'https://127.0.0.1:3000',
     ]
 
 #INTERNAL_IPS = ('127.0.0.1')
