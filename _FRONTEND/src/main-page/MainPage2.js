@@ -61,7 +61,7 @@ const MainPage = (props) => {
 	
 	//const [isFbLoaded, setFbLoaded] = useState(false)
 	//const Fb = facebook()
-	console.log("main",windowWidth)
+	//console.log("main",windowWidth)
 	//const listAndTopics = [...topics, ...lists]
 	const heroMainText = "Discover Best Movies That Fit Your Cinema Taste"
 	const heroHeaderText = "Improve your experience in discovering movies"
