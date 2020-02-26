@@ -222,29 +222,11 @@
     "include": [
       "",
       "/",
-      "/movie/cheeky-2000",
-      "/movie/all-ladies-do-it-1992",
-      "/movie/the-key-1983",
-      "/movie/monella-1998",
-      "/movie/i-am-curious-1967",
-      "/movie/white-fang-1991",
-      "/topic/art-house",
-      "/topic/based-on-true-story",
-      "/topic/cyberpunk",
-      "/topic/dialogue-focused",
-      "/topic/thought-provoking",
-      "/topic/feel-good-movies",
-      "/topic/bechdel-test",
-      "/topic/lgbtq-plus-films",
-      "/topic/controversial-films",
-      "/topic/historical-figures",
-      "/topic/mystery",
-      "/topic/video-game",
-      "/topic/gangster-films",
-      "/topic/romantic-comedy",
-      "/topic/post-apocalyptic",
-      "/topic/bdsm-movies",
-      "/topic/cinematic-documentary"
+      "/movie/rubber-2010",
+      "/movie/premonition-2007",
+      "/movie/hairspray-1988",
+      "/movie/little-nicky-2000"
+
 
     ],
     "publicPath": "/"
