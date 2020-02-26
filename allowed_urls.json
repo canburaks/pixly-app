@@ -100,6 +100,9 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/little-nicky-2000",
+        "/movie/premonition-2007",
+        "/movie/rubber-2010",
         "/movie/i-am-curious-1967",
         "/movie/white-fang-1991",
         "/movie/brazil-1985",
@@ -122,10 +125,6 @@
         "/movie/snowpiercer-2013",
         "/movie/2036-nexus-dawn-2017",
         "/movie/logans-run-1976",
-
-
-
-
         "/movie/annie-hall-1977",
         "/movie/amelie-2001",
         "/movie/my-sassy-girl-2001",
@@ -138,8 +137,6 @@
         "/movie/juno-2007",
         "/movie/notting-hill-1999",
         "/movie/when-harry-met-sally-1989",
-
-
         "/movie/over-the-hedge-2006",
         "/movie/secretariat-2010",
         "/movie/hairspray-1988",
@@ -717,6 +714,9 @@
         "/movie/2036-nexus-dawn-2017",
         "/movie/logans-run-1976",
         "/movie/i-am-curious-1967",
-        "/movie/white-fang-1991"
+        "/movie/white-fang-1991",
+        "/movie/rubber-2010",
+        "/movie/premonition-2007",
+        "/movie/little-nicky-2000"
     ]
 }
