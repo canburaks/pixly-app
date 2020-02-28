@@ -100,9 +100,22 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/12-angry-men-1957",
+        "/movie/fight-club-1999",
+        "/movie/american-history-x-1998",
+        "/movie/the-man-from-earth-2007",
+        "/movie/eternal-sunshine-of-the-spotless-mind-2004",
+        "/movie/the-experiment-2001",
+        "/movie/donnie-darko-2001",
+        "/movie/clockwork-orange-a-1971",
+        "/movie/the-truman-show-1998",
+        "/movie/mulholland-drive-2001",
+        "/movie/being-john-malkovich-1999",
+        "/movie/the-sunset-limited-2011",
+        "/movie/the-tree-of-life-2011",
+
         "/movie/forgetting-sarah-marshall-2008",
         "/movie/crazy-stupid-love-2011",
-
         "/movie/killshot-2008",
         "/movie/mindhunters-2004",
         "/movie/little-nicky-2000",
@@ -726,6 +739,19 @@
         "/movie/killshot-2008",
         "/movie/mindhunters-2004",
         "/movie/forgetting-sarah-marshall-2008",
-        "/movie/crazy-stupid-love-2011"
+        "/movie/crazy-stupid-love-2011",
+        "/movie/12-angry-men-1957",
+        "/movie/fight-club-1999",
+        "/movie/american-history-x-1998",
+        "/movie/the-man-from-earth-2007",
+        "/movie/eternal-sunshine-of-the-spotless-mind-2004",
+        "/movie/the-experiment-2001",
+        "/movie/donnie-darko-2001",
+        "/movie/clockwork-orange-a-1971",
+        "/movie/the-truman-show-1998",
+        "/movie/mulholland-drive-2001",
+        "/movie/being-john-malkovich-1999",
+        "/movie/the-sunset-limited-2011",
+        "/movie/the-tree-of-life-2011"
     ]
 }
