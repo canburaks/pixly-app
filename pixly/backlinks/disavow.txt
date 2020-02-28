@@ -1,9 +1,7 @@
-﻿# All of the following links were marked as low quality or spam.
-# This list was generated with monitorbacklinks.com on Jan 13, 2020.
-# For more info check: https://support.google.com/webmasters/answer/2648487?hl=en
+﻿# For more info check: https://support.google.com/webmasters/answer/2648487?hl=en
 
 
-## 2020-01-13
+## 2020-02-27
 domain:pathimba.com
 domain:suzi.zzone.today
 domain:zzone.today
@@ -52,7 +50,6 @@ domain:positivelybarack.com
 domain:kyouryuclub.info
 domain:revistaemprender.info
 domain:loveyichangcity.xyz
-domain:t.me
 domain:espyawards2016live.xyz
 domain:prestigeofmontenegro.info
 domain:navit.pw
@@ -80,10 +77,18 @@ domain:dormoshe.io
 domain:reflect.freerollpw.info
 domain:freerollpw.info
 domain:157.230.205.23
+domain:marathi.pw
+domain:www.anibookmark.com
+domain:trackslc.brucelead.com
+domain:brucelead.com
+domain:intelseek.com
+domain:practicaldev-herokuapp-com.freetls.fastly.net
+domain:freetls.fastly.net
+domain:tejal.pw
+domain:whenregistered.com
+domain:alternativesz.com
 
 
-
-
-
-
-
+#Tried contacting webmaster, no response after 10 days
+http://107.182.233.166/canburaks/
+107.182.233.166/canburaks/

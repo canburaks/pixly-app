@@ -222,12 +222,11 @@
     "include": [
       "",
       "/",
-      "/movie/rubber-2010",
-      "/movie/premonition-2007",
-      "/movie/hairspray-1988",
-      "/movie/little-nicky-2000"
-
-
+      "/movie/killshot-2008",
+      "/movie/mindhunters-2004",
+      "/movie/easy-money-1983",
+      "/movie/forgetting-sarah-marshall-2008",
+      "/movie/crazy-stupid-love-2011"
     ],
     "publicPath": "/"
   }
