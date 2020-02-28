@@ -100,6 +100,11 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/forgetting-sarah-marshall-2008",
+        "/movie/crazy-stupid-love-2011",
+
+        "/movie/killshot-2008",
+        "/movie/mindhunters-2004",
         "/movie/little-nicky-2000",
         "/movie/premonition-2007",
         "/movie/rubber-2010",
@@ -717,6 +722,10 @@
         "/movie/white-fang-1991",
         "/movie/rubber-2010",
         "/movie/premonition-2007",
-        "/movie/little-nicky-2000"
+        "/movie/little-nicky-2000",
+        "/movie/killshot-2008",
+        "/movie/mindhunters-2004",
+        "/movie/forgetting-sarah-marshall-2008",
+        "/movie/crazy-stupid-love-2011"
     ]
 }
