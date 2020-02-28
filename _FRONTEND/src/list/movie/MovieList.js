@@ -112,7 +112,7 @@ const MovieList = (props) => {
                 
 
                 {/* FOLLOWERS PANEL*/}
-                {liste.followers.length > 0 &&
+                {false && liste.followers.length > 0 &&
                     <div className="fbox-c jcfs pad-lr-5x w100">
                         <h6>Followers</h6>
                         <hr />
@@ -129,7 +129,7 @@ const MovieList = (props) => {
                     <p className="t-italic t-xs op80 mar-t-x w100 mar-t-4x">
                         source:
                         <a className="hover-bor-b t-color-dark op80" 
-                            target="_blank" rel="noopener"  href={liste.referenceLink}>{liste.referenceLink}</a>
+                            target="_blank" rel="noopener nofollow"  href={liste.referenceLink}>{liste.referenceLink}</a>
                     </p>}
             </ContentContainer>
 
