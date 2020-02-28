@@ -115,7 +115,7 @@ export const NewLink = styled(LinkNoFollow)`
 `
 export const CoverLink2 = () => <NewLink position="absolute" left={0} top={0}  right={0} bottom={0} {...props} />
 
-export const OuterLink = styled.a.attrs(({follow=true, ...props}) => (
+export const OuterLink = styled.a.attrs(({follow=false, ...props}) => (
   follow ? {rel:"noopener", target:"_blank"} : {rel:"nofollow noopener", target:"_blank"}))`
   color: unset !important;
   color:${props => props.color ? props.color : themeGet("colors.light")};

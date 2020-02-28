@@ -360,7 +360,6 @@ const OrderedCard = ({ item, specs, play}) => (
                 src={item.coverPoster}
                 alt={`${item.movie.name} poster`} 
                 ratio={0.6}  zIndex={0}
-                link={`/movie/${item.movie.slug}`} 
             >
                 {item.movie.videos.length > 0 &&
                     <TrailerIcon 
@@ -377,7 +376,7 @@ const OrderedCard = ({ item, specs, play}) => (
             </SuperBox>
 
             {/* NAME PANEL*/}
-            <FlexBox width={"100%"} height={"60px"}
+            {false && <FlexBox width={"100%"} height={"60px"}
                 position="relaive"  bg="dark" flexDirection="column" 
                 pl={"8px"}
                 borderBottom="1px solid" borderColor="rgba(255,255,255,0.3)"
@@ -389,7 +388,7 @@ const OrderedCard = ({ item, specs, play}) => (
                 </NewLink>
 
             {/* ACTOR PANEL*/}
-                {<FlexBox alignItems="center">
+                {false && <FlexBox alignItems="center">
                     {item.persons.map(star => (
                         <NewLink link={`/person/${star.slug}`} key={star.id} follow={true}>
                             <Text color="#f1f1f1" fontSize="12px" mr={"16px"} opacity={0.8} hoverUnderline>{star.name}</Text>
@@ -397,7 +396,7 @@ const OrderedCard = ({ item, specs, play}) => (
                     ))}
                 </FlexBox>}
 
-            </FlexBox>
+            </FlexBox>}
             {/* MUTATION PANEL */}
             <FlexBox width={"100%"} height={"50px"} position="relaive" bg="dark" alignItems="center">
                     <BookmarkMutation id={item.movie.id} 
