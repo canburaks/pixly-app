@@ -78,8 +78,11 @@ class Person(SocialMedia, SEO, MainPage):
     work_quantity = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.slug
+        if self.slug:
+            return f"{self.name} {self.slug}"
+        return self.name
 
+        
     def add_slug(self):
         from django.utils.text import slugify
         try:
@@ -330,14 +333,17 @@ class Crew(models.Model):
     character = models.TextField(max_length=100, null=True, blank=True)
 
     def __str__(self):
-        return self.person.name
+        return str(self.person.name)
+
     class Meta:
         unique_together = ("person","movie", "job")
 
     @property
     def person_name(self):
-        return self.person.name
-
+        try:
+            return self.person.name
+        except:
+            return ""
 JOB = (
     ('d', 'Director'),
     ('a', 'Actor/Actress'),

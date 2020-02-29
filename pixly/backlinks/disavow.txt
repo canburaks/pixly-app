@@ -87,6 +87,11 @@ domain:freetls.fastly.net
 domain:tejal.pw
 domain:whenregistered.com
 domain:alternativesz.com
+domain:topfind123.com
+domain:cauley.co
+domain:double.pw
+domain:devsday.ru
+domain:35.176.151.168
 
 
 #Tried contacting webmaster, no response after 10 days

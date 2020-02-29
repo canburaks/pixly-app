@@ -73,7 +73,7 @@ class CrewStackInline (admin.StackedInline):
     exclude = ("data",)
     def get_person_name(self, obj):
         #print(obj)
-        return "retrun"
+        return obj.person_name
 
 class ListMovieInline(admin.TabularInline):
     model = List.movies.through
