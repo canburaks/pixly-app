@@ -111,7 +111,7 @@ class TopicAdmin(admin.ModelAdmin):
 
     raw_id_fields = ['movies','persons', "tags", "quotes"]
     fields = (
-        "id", "slug", "name", "short_name", "seo_title", "seo_description",
+        "id", "slug", "name", "short_name", "seo_title", "seo_description","spotify_playlist",
         "is_ordered", "main_page", "is_newest", "important_page", "searchable",
         "is_article","is_published","show_html_content2",
         "summary", "html_content","html_content2","html_content3", "movies", "quotes",

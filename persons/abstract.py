@@ -5,6 +5,13 @@ from django_mysql.models import JSONField
 #from django_bulk_update.helper import bulk_update
 from django.db.models import Q
 
+class RichMedia(models.Model):
+    spotify_playlist = models.URLField(blank=True, null=True)
+    
+    class Meta:
+        abstract = True
+
+
 class SocialMedia(models.Model):
     homepage = models.URLField(blank=True, null=True)
     wiki = models.URLField(blank=True, null=True)
