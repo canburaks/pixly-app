@@ -222,15 +222,7 @@
     "include": [
       "",
       "/",
-      "/topic/outbreak-movies",
-      "/movie/vampire-academy-2014",
-      "/movie/crazy-stupid-love-2011",
-      "/movie/the-conjuring-2013",
-      "/movie/the-rhythm-section-2020",
-      "/movie/someone-great-2019",
-      "/movie/outbreak-1995",
-      "/movie/contagion-2011",
-      "/lists-of-films"
+      "/topic/outbreak-movies"
 
     ],
     "publicPath": "/"
