@@ -106,6 +106,7 @@
     ],
     "movie":[
         "/movie/braven-2018",
+        "/movie/heavyweights-1995",
 
         "/movie/i-am-legend-2007",
         "/movie/28-days-later-2002",
@@ -797,6 +798,7 @@
         "/movie/flu-2013",
         "/movie/doomsday-2008",
         "/movie/world-war-z-2013",
-        "/movie/braven-2018"
+        "/movie/braven-2018",
+        "/movie/heavyweights-1995"
     ]
 }

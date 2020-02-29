@@ -859,7 +859,7 @@ export const TOPIC_SEARCH_QUERY = gql`
                     name, summary,content, htmlContent, htmlContent2,htmlContent3,isArticle, slug, poster, heroPoster,
                     seoTitle, seoShortDescription, seoKeywords,seoDescription,
                     coverPoster, createdAt, updatedAt, wiki, richdata,
-                    searchable,references,isOrdered, shortName,
+                    searchable,references,isOrdered, shortName,spotifyPlaylist,
                     showHtmlContent2,
                     quotes{
                         ownerName, text, movie{name, slug}, person{name, slug}, 
