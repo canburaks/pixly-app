@@ -172,6 +172,14 @@ const TopicQuery = ({ lazyvariables }) =>{
                 <ContentContainer minHeight={"150px"} maxWidth={"100%"}
                     flexDirection="column" pb={[4,4]} alignItems="center"
                 >
+                <iframe src="https://open.spotify.com/embed/playlist/50hTY7XxtNFZz8ksZ5CrTG" 
+                width="300" height="380" 
+                frameborder="0" 
+                allowtransparency="true" allow="encrypted-media"
+                >
+
+                </iframe>
+
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
                     {true && <SchemaArticle 
                             headerSize={["24px", "26px", "28px", "32px"]}

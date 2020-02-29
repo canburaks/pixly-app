@@ -1125,10 +1125,15 @@ class TopicType(DjangoObjectType, SEOType):
     short_name = graphene.String()
     is_important_page = graphene.Boolean()
     is_ordered = graphene.Boolean()
+    spotify_playlist = graphene.String()
 
     class Meta:
         model = Topic
     
+
+    def resolve_spotify_playlist(self, info):
+        return self.spotify_playlist
+
     def resolve_items(self, info, **kwargs):
         if self.is_ordered == False:
             print("Topic is not set for ordered list. Change it")

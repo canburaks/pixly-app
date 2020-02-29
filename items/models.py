@@ -1,5 +1,5 @@
 from django.db import models
-from persons.abstract import SocialMedia, SEO, DateRecords, MainPage
+from persons.abstract import SocialMedia, SEO, DateRecords, MainPage, RichMedia
 from persons.models import Person, Crew
 from persons.profile import Profile
 from django.urls import reverse
@@ -81,7 +81,7 @@ LIST_RELATION_TYPE = (
 )
 
 
-class Movie(SocialMedia, SEO,MainPage):
+class Movie(SocialMedia, SEO, RichMedia, MainPage):
     id = models.IntegerField(primary_key=True)
     imdb_id = models.CharField(max_length=9, null=True)
     tmdb_id = models.IntegerField(null=True)
@@ -1056,7 +1056,7 @@ class Prediction(models.Model):
 
 
 
-class Topic(SEO, MainPage):
+class Topic(SEO,RichMedia, MainPage):
     id = models.IntegerField(primary_key=True)
     is_ordered = models.BooleanField(default=False, help_text="True for ordered movies and synopsis display.(default=False)")
 
