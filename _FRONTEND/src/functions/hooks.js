@@ -357,11 +357,11 @@ export function useWindowLocation(){
     return location
 }
 
-export function useClientWidth(clsname){
+export function useClientWidth(nodeId){
     const [ width, setWidth] = useState(null)//      
     
     const widthListener = () =>{
-        const currentWidth = document.getElementsByClassName(clsname)[0].clientWidth
+        const currentWidth = document.getElementById(nodeId)[0].clientWidth
         if(width!=currentWidth){
             setWidth(currentWidth)
         }

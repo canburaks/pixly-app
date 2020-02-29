@@ -7,7 +7,7 @@ import { TOPIC_SEARCH_QUERY } from "../../functions/query"
 import { isEqualObj, Head, MidPageAd, HomePageFeedAd, 
     MoviePageAd, FeedMobileCollectionAd,
     TopicArticleAd, TopicOrderedListAd,
-    TopicOrderedListAd2,
+    TopicOrderedListAd2,useClientWidth,
     useValues, useWindowSize, useWindowWidth, FeedMobileTopicPageAd, useDebounce
 } from "../../functions"
 
@@ -21,7 +21,7 @@ import {
     HtmlBox, HtmlContainer, MessageBox, Hr, HomeIcon,FilmIcon,
     LargeTopicMovieCard, WhiteMovieCard, HeaderMini, TagBox, SuperBox, CoverLink, NewLink,
     Ul,Li,ImdbRatingIcon, AbsoluteBox,ImageBoxBg,YearClockIcon,RightIcon,
-    BookmarkMutation, RatingMutation, LikeMutation, StarIcon,YoutubeIcon
+    BookmarkMutation, RatingMutation, LikeMutation, StarIcon,YoutubeIcon, Iframe
 } from "../../styled-components"
 
 import { useNetworkStatus } from 'react-adaptive-hooks/network';
@@ -120,7 +120,13 @@ const TopicQuery = ({ lazyvariables }) =>{
     const dynamicSuffix = useMemo(() => parseInt(page)===2 ? "" : `/${parseInt(page) - 1}`,[page])
     const prevPage = () => history.push(`/topic/${slug}${dynamicSuffix}`)
 
-
+    var contentContainerWidth;
+    useEffect(()=>{
+        console.log("ue")
+        if (node){
+            console.log("node",node.current)
+        }
+    },[node])
 
     //Network
     const { effectiveConnectionType } = useNetworkStatus();
@@ -146,10 +152,21 @@ const TopicQuery = ({ lazyvariables }) =>{
         //console.log(topic, items, quantity, isOrdered, screenSize)
         //console.log(screenSize, screenSize.includes("XL"))
         //console.log("speed", speed)
-        //console.log("size", screenSize)
         // Other variables
         const title = "See the details of the " + topic.shortName.toLowerCase() + " movie."        
         const Liste = selector ? OrderedList : UnorderedList
+
+        const spotifylistwidth = screenSize.includes("L") ? 300 : (contentContainerWidth ? contentContainerWidth : window.innerWidth * 0.8)
+        console.log("size", screenSize)
+
+        const SpotifyPlaylist = ({ src }) => (
+            <Iframe src={src}
+                width={800} height={300}
+                frameborder="0"
+                allowtransparency="true" allow="encrypted-media"
+                ml={[3]}
+            />
+        )
 
         return (
             <PageContainer>
@@ -169,17 +186,9 @@ const TopicQuery = ({ lazyvariables }) =>{
                         title={topic.name} 
                     />}
                 
-                <ContentContainer minHeight={"150px"} maxWidth={"100%"}
+                <ContentContainer minHeight={"150px"} maxWidth={"100%"} ref={node}
                     flexDirection="column" pb={[4,4]} alignItems="center"
                 >
-                <iframe src="https://open.spotify.com/embed/playlist/50hTY7XxtNFZz8ksZ5CrTG" 
-                width="300" height="380" 
-                frameborder="0" 
-                allowtransparency="true" allow="encrypted-media"
-                >
-
-                </iframe>
-
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
                     {true && <SchemaArticle 
                             headerSize={["24px", "26px", "28px", "32px"]}
@@ -202,12 +211,15 @@ const TopicQuery = ({ lazyvariables }) =>{
                         {topic.showHtmlContent2 && (topic.htmlContent2 && topic.htmlContent2.length > 1) 
                             && <TopicArticleAd />
                             }
-                        {!hideContent2 
-                            ? <HtmlContainer 
-                                mt={[5]}  mb={[3]}
-                                html={topic.htmlContent2}     
-                            />
-                            : <HtmlContainer my={[3]} html={topic.htmlContent3} />}
+                        <FlexBox justifyContent={["flex-start", "flex-start"]} mt={[5]} flexWrap={["wrap", "wrap", "wrap", "nowrap"]}>
+                            {!hideContent2 
+                                ?   <HtmlContainer 
+                                        mb={[3]} 
+                                        html={topic.htmlContent2}     
+                                    />
+                                : <HtmlContainer my={[3]} html={topic.htmlContent3} />}
+                            {topic.spotifyPlaylist && <SpotifyPlaylist src={topic.spotifyPlaylist} />}
+                        </FlexBox>
                     </SchemaArticle>}
                     
                     {/* FILTER WITH YEAR AND RATING */}
