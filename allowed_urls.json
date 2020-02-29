@@ -27,7 +27,8 @@
         "/topic/romantic-comedy",
         "/topic/post-apocalyptic",
         "/topic/bdsm-movies",
-        "/topic/cinematic-documentary"
+        "/topic/cinematic-documentary",
+        "/topic/outbreak-movies",
 
     ],
 
@@ -105,6 +106,14 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/vampire-academy-2014",
+        "/movie/crazy-stupid-love-2011",
+        "/movie/the-conjuring-2013",
+        "/movie/the-rhythm-section-2020",
+        "/movie/someone-great-2019",
+        "/movie/outbreak-1995",
+        "/movie/contagion-2011",
+
         "/movie/12-angry-men-1957",
         "/movie/fight-club-1999",
         "/movie/american-history-x-1998",
@@ -761,6 +770,14 @@
         "/movie/mulholland-drive-2001",
         "/movie/being-john-malkovich-1999",
         "/movie/the-sunset-limited-2011",
-        "/movie/the-tree-of-life-2011"
+        "/movie/the-tree-of-life-2011",
+
+        "/movie/vampire-academy-2014",
+        "/movie/crazy-stupid-love-2011",
+        "/movie/the-conjuring-2013",
+        "/movie/the-rhythm-section-2020",
+        "/movie/someone-great-2019",
+        "/movie/outbreak-1995",
+        "/movie/contagion-2011"
     ]
 }
