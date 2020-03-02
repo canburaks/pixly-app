@@ -49,7 +49,7 @@ export const HtmlParagraph = ({ html, ...props }) => {
 
 export const HtmlContainer = ({ html, ...props }) => {
     const style = props.style || {
-        a:{opacity:0.95,lineHeight:"1.9em", follow:true},
+        a:{opacity:0.95,lineHeight:"1.9em"},
         p:{opacity:0.8},lineHeight:"1.9em",
         h1:{opacity:1.0},
         h2:{opacity:0.85},
@@ -84,9 +84,11 @@ export const HtmlContainer = ({ html, ...props }) => {
                         </OuterLink>
                 )}
                 const newlink =  haveProtocol ? domNode.attribs.href.split("://pixly.app")[1]  : domNode.attribs.href
+                console.log(domNode.attribs)
                 return (
                     <NewLink  className="newlink"
                         fontSize={style.p.fontSize || ["14px", "14px", "16px"]}
+                        follow={domNode.attribs.rel === "nofollow" && false}
                         link={newlink}
                         title={domNode.attribs.title}
                         textUnderline
