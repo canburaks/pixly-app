@@ -249,18 +249,22 @@ const MainPage = (props) => {
 
 					<Grid columns={[2,2,3,]} py={[2]} gridColumnGap={[2]} mt={[3]}>
 						{[{name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk-2.jpg"},
-							{name:"Rom-Com", slug:"romantic-comedy", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/24/cover/romantic-comedy-movies.jpg"},
+							{name:"Outbreak", slug:"outbreak-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/30/cover/virus.jpg"},
 							{name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery-3.jpg"},
+							{name:"Rom-Com", slug:"romantic-comedy", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/24/cover/romantic-comedy-movies.jpg"},
 							{name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures-2.jpg"},
 							{name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking-3.jpg"},
+							{name:"Anorexia and Bulimia", slug:"eating-disorder-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/31/cover/card.jpg"},
 							{name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/gangster.jpg"},
+							{name:"BDSM", slug:"bdsm-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/27/cover/bdsm.jpg"},
+
 						].map( item => (
 							<CoverImage 
 								src={item.coverPoster} key={"rec" + item.slug}  
 								ratio={0.6} hoverShadow="hover" borderRadius="8px"
 								boxShadow="card"
 								link={`/topic/${item.slug}`} 
-								alt={`Popular Topic Film Collection: ${item.name}.`} 
+								alt={`${item.name} Movies.`} 
 								title={`Popular Topic Film Collection: ${item.name}.`} 
 							/>
 						))}

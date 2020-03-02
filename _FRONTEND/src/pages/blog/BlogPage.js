@@ -90,12 +90,13 @@ const PostPage = (props) =>{
 
 const TopicLinkList = (props) => {
     const topics = [
-        {name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk.jpg"},
+        {name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk-2.jpg"},
         {name:"Rom-Com", slug:"romantic-comedy", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/24/cover/romantic-comedy-movies.jpg"},
-        {name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery.jpg"},
-        {name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures.jpg"},
-        {name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking.jpg"},
-        {name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/gangster.jpg"},
+        {name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery-3.jpg"},
+        {name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures-2.jpg"},
+        {name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking-3.jpg"},
+        //{name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/gangster.jpg"},
+        {name:"Outbreak", slug:"outbreak-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/30/cover/virus.jpg"},
 
         
     ]
@@ -116,6 +117,7 @@ const TopicLinkList = (props) => {
                             borderRadius={"4px"}
                             boxShadow="card"
                             src={topic.coverPoster}
+                            borderRadius={"6px"}
                             ratio={0.55}
                             link={`/topic/${topic.slug}`} follow
                             title={`${topic.name} Movies`}
