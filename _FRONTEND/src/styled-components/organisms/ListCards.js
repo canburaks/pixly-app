@@ -457,8 +457,9 @@ export const CrewCard = (props) => (
             ratio={1.5}
             borderRadius={"8px"}
             title={props.crew.person.name}
+            follow={false}
         />
-        <NewLink link={`/person/${props.crew.person.slug}`} hoverUnderline>
+        <NewLink link={`/person/${props.crew.person.slug}`} hoverUnderline follow={false}>
             <Text fontSize={["xxs", "xxs","xs", "xs", "s"]} lineHeight={"16px"} fontWeight="bold">
                 {props.crew.person.name}
             </Text>
