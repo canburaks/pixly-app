@@ -84,7 +84,6 @@ export const HtmlContainer = ({ html, ...props }) => {
                         </OuterLink>
                 )}
                 const newlink =  haveProtocol ? domNode.attribs.href.split("://pixly.app")[1]  : domNode.attribs.href
-                console.log(domNode.attribs)
                 return (
                     <NewLink  className="newlink"
                         fontSize={style.p.fontSize || ["14px", "14px", "16px"]}
