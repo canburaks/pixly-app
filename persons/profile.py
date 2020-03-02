@@ -26,7 +26,7 @@ FOLLOW_TYPE = (
 def avatar_upload_path(instance, filename):
     return "avatars/{0}/{1}".format(instance.id,filename)
 
-
+scan_recommendations = True
 
 class Profile(SocialMedia, SEO):
 
@@ -210,8 +210,6 @@ class Profile(SocialMedia, SEO):
             return Persona.objects.filter(user=self.user, id=self.user.id).defer("similars_dummy").first()
 
     def promote(self):
-        scan_recommendations = False
-
         if self.points>=40 and scan_recommendations:
             self.set_seo_description_keywords()
             MyQueue.put(self.sync_movie_archives)
@@ -247,7 +245,6 @@ class Profile(SocialMedia, SEO):
         r.save()
         print("created?",created)
         #<--------------------------------------------------------------->
-        scan_recommendations = False
 
         #<---------------PROMOTING------------------------------------->
         # WHEN PROFILE REACHED 40 RATING PROMOTE IT
