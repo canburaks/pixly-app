@@ -48,7 +48,7 @@ const ListOfFilms = (props) => {
         
         // order of topics wrt slugs
         const featureSlugs = [
-            "cinematic-documentary", "post-apocalyptic", "bdsm-movies",
+            "eating-disorder-movies","outbreak-movies", "post-apocalyptic", "bdsm-movies",
             "romantic-comedy","gangster-films","mystery",
             "cyberpunk","historical-figures", "art-house",
             "based-on-true-story"

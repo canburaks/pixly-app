@@ -224,7 +224,13 @@
       "/",
       "/lists-of-films",
       "/topic/eating-disorder-movies",
-      "/topic/outbreak-movies"
+      "/topic/outbreak-movies",
+      "/blog/a-brief-introduction-to-collaborative-filtering",
+      "/blog/django-graphql-react-integration-tutorial-part-1",
+      "/blog/django-graphql-react-integration-tutorial-part-2",
+      "/blog/django-graphql-react-integration-tutorial-part-3",
+      "/popular-and-upcoming-movies"
+
     ],
     "publicPath": "/"
   }
