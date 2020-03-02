@@ -222,7 +222,7 @@
     "include": [
       "",
       "/",
-      "/movie/sex-and-lucia-2001"
+      "/topic/mystery"
     ],
     "publicPath": "/"
   }
