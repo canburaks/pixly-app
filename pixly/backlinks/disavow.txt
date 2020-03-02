@@ -92,6 +92,11 @@ domain:cauley.co
 domain:double.pw
 domain:devsday.ru
 domain:35.176.151.168
+domain:befound.icu
+domain:url.science
+domain:whenregistered.com
+domain:wehelp.icu
+domain:websitecrawl.com
 
 
 #Tried contacting webmaster, no response after 10 days
