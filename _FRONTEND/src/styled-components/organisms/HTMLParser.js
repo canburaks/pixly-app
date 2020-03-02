@@ -78,6 +78,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                             title={domNode.attribs.title}
                             textUnderline hoverColor="#000000"
                             { ...style.a}
+                            follow={false}
                         >
                             {domToReact(domNode.children, options)}
                         </OuterLink>
