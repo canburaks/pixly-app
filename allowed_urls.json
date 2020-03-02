@@ -106,6 +106,7 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/sex-and-lucia-2001",
         "/movie/braven-2018",
         "/movie/heavyweights-1995",
 
@@ -801,6 +802,7 @@
         "/movie/doomsday-2008",
         "/movie/world-war-z-2013",
         "/movie/braven-2018",
-        "/movie/heavyweights-1995"
+        "/movie/heavyweights-1995",
+        "/movie/sex-and-lucia-2001"
     ]
 }
