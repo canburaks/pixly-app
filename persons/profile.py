@@ -26,7 +26,7 @@ FOLLOW_TYPE = (
 def avatar_upload_path(instance, filename):
     return "avatars/{0}/{1}".format(instance.id,filename)
 
-scan_recommendations = False
+scan_recommendations = True
 
 class Profile(SocialMedia, SEO):
 
