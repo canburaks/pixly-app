@@ -255,7 +255,7 @@ const MainPage = (props) => {
 							{name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures-2.jpg"},
 							{name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking-3.jpg"},
 							{name:"Anorexia and Bulimia", slug:"eating-disorder-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/31/cover/card.jpg"},
-							{name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/gangster.jpg"},
+							{name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/best-gangster-movies.jpg"},
 							{name:"BDSM", slug:"bdsm-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/27/cover/bdsm.jpg"},
 
 						].map( item => (
