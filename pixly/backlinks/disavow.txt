@@ -97,6 +97,7 @@ domain:url.science
 domain:whenregistered.com
 domain:wehelp.icu
 domain:websitecrawl.com
+domain:refresh.pw
 
 
 #Tried contacting webmaster, no response after 10 days
