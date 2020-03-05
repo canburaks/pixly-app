@@ -27,7 +27,26 @@ https://dev.to/canburaks/django-graphql-react-integration-tutorial-part-3-12oc
 
 Pinterest
 https://www.pinterest.com/pixlymovie/
-https://www.pinterest.com/pixlymovie/film-lists/
+https://www.pinterest.com/pixlymovie/favorite-films-of-directors/
+https://www.pinterest.com/pin/781022760366759680/
+https://www.pinterest.com/pin/781022760366759673/
+https://www.pinterest.com/pin/781022760366759666/
+https://www.pinterest.com/pin/781022760366759657/
+https://www.pinterest.com/pin/781022760366759644/
+https://www.pinterest.com/pixlymovie/20-great-romantic-comedy-movies/
+https://www.pinterest.com/pixlymovie/great-movie-lists/
+https://www.pinterest.com/pin/781022760366749382/
+https://www.pinterest.com/pin/781022760366759605/
+https://www.pinterest.com/pin/781022760366749288/
+https://www.pinterest.com/pin/781022760366779909/
+https://www.pinterest.com/pin/781022760366757988/
+https://www.pinterest.com/pin/781022760366757936/
+https://www.pinterest.com/pin/781022760366749406/
+https://www.pinterest.com/pin/781022760366749149/
+https://www.pinterest.com/pin/781022760366749226/
+https://www.pinterest.com/pin/781022760366749338/
+
+
 
 
 Sideprojects
@@ -54,20 +73,27 @@ https://seositecheckup.com/seo-audit/pixly.app/lists-of-films
 https://seositecheckup.com/seo-audit/pixly.app/topic/thought-provoking
 https://seositecheckup.com/seo-audit/pixly.app/topic/cyberpunk
 https://seositecheckup.com/seo-audit/pixly.app/topic/gangster-films 
-https://seositecheckup.com/seo-audit/pixly.app/topic/romantic-comedy 
-https://seositecheckup.com/seo-audit/pixly.app/topic/gangster-films 
 https://seositecheckup.com/seo-audit/pixly.app/topic/dialogue-focused
-https://seositecheckup.com/seo-audit/pixly.app/topic/bdsm-movies  
+https://seositecheckup.com/seo-audit/pixly.app/topic/romantic-comedy 
+https://seositecheckup.com/seo-audit/pixly.app/list/all-palme-dor-winners-cannes-film-festival/1
+https://seositecheckup.com/seo-audit/pixly.app/topic/bdsm-movies
+https://seositecheckup.com/seo-audit/pixly.app/similar-movie-finder
+https://seositecheckup.com/seo-audit/pixly.app/movie/her-2013
+https://seositecheckup.com/seo-audit/pixly.app/topic/eating-disorder-movies
+https://seositecheckup.com/seo-audit/pixly.app/topic/outbreak-movies
+
 
 
 
 urlscan.io
-https://urlscan.io/result/8bd776c6-c35a-4d7e-93f9-dc6d3e7fa7cc
 https://urlscan.io/result/bf63b4e9-5048-4413-bca6-6f868a19b1be
-https://urlscan.io/result/30d11cba-18e9-4c16-b2b7-e09fbb09b86b
+https://urlscan.io/domain/pixly.app
+https://urlscan.io/result/8bd776c6-c35a-4d7e-93f9-dc6d3e7fa7cc
 https://urlscan.io/result/eedd1b96-a4e4-44b8-a491-a8ecb385c692
-https://urlscan.io/result/49f63266-6c8e-47ff-8ec9-56b950bee334
+https://urlscan.io/result/30d11cba-18e9-4c16-b2b7-e09fbb09b86b
 https://urlscan.io/result/ef1d5e96-d5a9-4186-ba39-bf6274dc0540
+https://urlscan.io/result/49f63266-6c8e-47ff-8ec9-56b950bee334
+https://urlscan.io/result/b5bbfd6e-ede9-4baa-bc3a-9e4e4d1c23a1
 https://urlscan.io/result/1d186fc8-c863-4b79-8c62-f22bc4260dd9
 
 
@@ -104,9 +130,6 @@ https://webwide.io/threads/ai-assisted-movie-recomendation-and-movie-discovery-w
 
 
 WeHeartIt
-https://weheartit.com/entry/339227596
-https://weheartit.com/pixlymovies/collections/169186956-great-lists-of-movies 
-https://weheartit.com/entry/339227596?context_set=169186956-great-lists-of-movies&context_type=collection 
 
 
 GrowthHackers
@@ -158,6 +181,10 @@ https://viesearch.com/1fpqc/pixly-app-ai-based-movie-recommendations-app-similar
 
 pearltrees
 https://www.pearltrees.com/canburaks
+https://www.pearltrees.com/canburaks#item288693978
+https://www.pearltrees.com/canburaks#item288693971
+https://www.pearltrees.com/canburaks#item288693956
+
 
 
 

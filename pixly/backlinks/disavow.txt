@@ -98,8 +98,14 @@ domain:whenregistered.com
 domain:wehelp.icu
 domain:websitecrawl.com
 domain:refresh.pw
+domain:radio.revistaemprender.info
+domain:revistaemprender.info
+domain:clickblatt.info
+domain:canariasdeportiva.com
+
 
 
 #Tried contacting webmaster, no response after 10 days
 http://107.182.233.166/canburaks/
 107.182.233.166/canburaks/
+https://hacklines.com/en/editions/153123/click
