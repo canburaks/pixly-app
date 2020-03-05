@@ -79,15 +79,12 @@ const MainPage = (props) => {
     <>
         <Head
             description={
-                "We provide personalized AI-assisted movie recommendations, " + 
-                "great lists of films, similar movie finder, advance film search, and great film recommendations."
-
+                "Discover movies with pixly. Get movie recommendations based on you like. " + 
+                "Genre, festival and director's list of movies. " + 
+				"Simiar movies finder. Filter movies."
             }
             title={
                 "Pixly - Movie Recommendations & Find Similar Movies & Lists of Films"
-            }
-            keywords={
-                "pixly.app ,discover movie, pixly movies, pixly home page, pixly cinema, pixly recommendation, movietowatch, movie suggestions, similar movies, similar movie, ai recommendation, movies like, must seen movies, best movies, awarded movies"
             }
             image={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/main-page-collage.jpg"}
             canonical={`https://pixly.app`}
