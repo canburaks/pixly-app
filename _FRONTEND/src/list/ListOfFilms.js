@@ -48,10 +48,11 @@ const ListOfFilms = (props) => {
         
         // order of topics wrt slugs
         const featureSlugs = [
-            "eating-disorder-movies","outbreak-movies", "post-apocalyptic", "bdsm-movies",
-            "romantic-comedy","gangster-films","mystery",
+            "mystery","witch-movies",
+            "post-apocalyptic",
+            "bdsm-movies",
+            "romantic-comedy","gangster-films",
             "cyberpunk","historical-figures", "art-house",
-            "based-on-true-story"
         ]
         
         //create featured topics
@@ -195,6 +196,17 @@ const TopicSection = ({topics, partitionQuantity=6}) => (
 
             <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
                 {topics.slice(partitionQuantity*2, partitionQuantity*3).map( item => (
+                    <CollectionCard 
+                        item={item} key={"rec" + item.id}  
+                        link={`/topic/${item.slug}`} 
+                        text={item.seoShortDescription} 
+                        buttonText={`See ${item.shortName} Movies`}
+                    />
+                ))}
+            </Grid>
+
+            <Grid columns={[1,1,2,2,2,3]} py={[4]} gridColumnGap={[2,2,3]}>
+                {topics.slice(partitionQuantity*3, partitionQuantity*4).map( item => (
                     <CollectionCard 
                         item={item} key={"rec" + item.id}  
                         link={`/topic/${item.slug}`} 
