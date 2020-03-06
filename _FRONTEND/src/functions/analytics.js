@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState, useMemo, useRef } from "react"
 import ReactGA from 'react-ga';
 import AdSense from 'react-adsense';
 import { Helmet } from "react-helmet";
@@ -211,6 +211,25 @@ ReactGA.timing({
 
 
 //--------------ADS------------------------------
+
+// arranged for topic page movies
+export const MediaNetAd = () => {
+    const node = useRef(null)
+    useEffect(() => {
+        try {
+            window._mNHandle.queue.push(function (){
+                window._mNDetails.loadTag("322681828", "728x90", "322681828");
+            });
+        }
+        catch (error) {}
+    },[node])
+
+    return (
+        <div id="322681828" ref={node}>
+
+        </div>
+    )
+}
 
 // arranged for topic page movies
 export const TopicArticleAd = () => {

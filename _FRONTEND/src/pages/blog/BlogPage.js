@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { BLOG_QUERY } from "../../functions/query"
 
 
-import { isEqualObj, Head, MidPageAd,MoviePageAd, print, useAuthCheck} from "../../functions"
+import { isEqualObj, Head, MidPageAd,MoviePageAd, print, useAuthCheck, MediaNetAd} from "../../functions"
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import * as SocialButtons from 'react-social-sharing'
 
@@ -46,6 +46,7 @@ const BlogPage = (props) =>{
                     "cinema, movie recommendation, and technical stuff."}
                 canonical={`https://pixly.app/blog`}
             />
+            <MediaNetAd />
             <HeaderText px={[2,2,3]}>Pixly Blog - Articles About Movie Recommendation, and Technical Stuff</HeaderText>
             <ContentContainer pb={"80px"}>
                 {props.posts.map(post => <PostInfoBox post={post} key={post.slug} follow/>)}
@@ -76,6 +77,7 @@ const PostPage = (props) =>{
                 canonical={`https://pixly.app/blog/${post.slug}`}
             />
             <ContentContainer  pb={40} px={["5vw", "5vw", "8vw", "10vw", "15vw"]} maxWidth={"100%"}  overFlowX={"hidden"}>
+                <MediaNetAd />
                 <NewLink link={"/blog"} position="absolute" top={"10px"} left={"16px"} underline>&lt; Back to Blog Page</NewLink>
                 <SchemaPost post={post}/>
 
