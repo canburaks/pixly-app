@@ -8,7 +8,8 @@ import { isEqualObj, Head, MidPageAd, HomePageFeedAd,
     MoviePageAd, FeedMobileCollectionAd,
     TopicArticleAd, TopicOrderedListAd,
     TopicOrderedListAd2,useClientWidth,
-    useValues, useWindowSize, useWindowWidth, FeedMobileTopicPageAd, useDebounce
+    useValues, useWindowSize, useWindowWidth, FeedMobileTopicPageAd, useDebounce,
+    MediaNetAd,
 } from "../../functions"
 
 
@@ -185,7 +186,7 @@ const TopicQuery = ({ lazyvariables }) =>{
                         alt={topic.name} 
                         title={topic.name} 
                     />}
-                
+                <MediaNetAd />
                 <ContentContainer minHeight={"150px"} maxWidth={"100%"} ref={node}
                     flexDirection="column" pb={[4,4]} alignItems="center"
                 >
