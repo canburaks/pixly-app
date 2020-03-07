@@ -164,7 +164,6 @@ class MovieAdmin(admin.ModelAdmin):
     search_fields = ('name', "tmdb_id", 'id', )
 
 
-
 #####################################################################
 @admin.register(Award)
 class AwardAdmin(admin.ModelAdmin):

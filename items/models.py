@@ -115,6 +115,8 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank = True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank = True)
 
+    cast_summary = RichTextField(max_length=20000,null=True, blank=True, help_text="Cast summary")
+
     class Meta:
         ordering = ["-year"]
 

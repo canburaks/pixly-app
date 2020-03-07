@@ -2108,6 +2108,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     videos = graphene.List(VideoType)
     director = graphene.List(PersonType)
     crew = graphene.List(CrewType)
+    cast_summary = graphene.String()
 
     isBookmarked = graphene.Boolean()
     isFaved = graphene.Boolean()
@@ -2166,6 +2167,9 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_cast_summary(self, info):
+        return self.movie.cast_summary
 
     def resolve_header(self, info):
         return self.movie.header
