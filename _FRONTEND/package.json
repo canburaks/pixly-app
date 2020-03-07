@@ -222,7 +222,9 @@
     },
     "include": [
       "",
-      "/"
+      "/",
+      "/movie/the-in-laws-1979",
+      "/movie/the-ice-harvest-2005"
 
     ],
     "publicPath": "/"

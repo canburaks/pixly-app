@@ -108,6 +108,8 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/the-ice-harvest-2005",
+        "/movie/the-in-laws-1979",
         "/movie/sex-and-lucia-2001",
         "/movie/braven-2018",
         "/movie/heavyweights-1995",
@@ -802,6 +804,8 @@
         "/movie/world-war-z-2013",
         "/movie/braven-2018",
         "/movie/heavyweights-1995",
-        "/movie/sex-and-lucia-2001"
+        "/movie/sex-and-lucia-2001",
+        "/movie/the-in-laws-1979",
+        "/movie/the-ice-harvest-2005"
     ]
 }
