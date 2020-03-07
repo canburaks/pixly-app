@@ -15,11 +15,12 @@ from persons.profile import Profile
 class Contact(models.Model):
     ip = models.CharField(max_length=60, null=True, blank=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=60)
-    email = models.EmailField(max_length=50)
-    message = models.CharField(default="...", max_length=5000, editable=False)
+    name = models.CharField(max_length=60, null=True, blank=True)
+    email = models.EmailField(max_length=70)
+    _message = models.CharField(default="...", max_length=5000, editable=False)
+    message = models.CharField(default="...", max_length=5000)
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.email

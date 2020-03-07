@@ -5,5 +5,6 @@ export * from "./AutoComplete"
 export * from "./SimilarMovies"
 export * from "./DoubleRangeSlider"
 export * from "./VideoPlayer"
+export * from "./Bot"
 
 //export * from "./Popup"

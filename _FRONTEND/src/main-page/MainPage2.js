@@ -266,6 +266,7 @@ const MainPage = (props) => {
 							/>
 						))}
 					</Grid>
+
 				</CardContainer>
 			</ContentContainer>
 

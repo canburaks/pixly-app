@@ -118,9 +118,6 @@ const PixlyTwitterIcon = () => {
         </div>
 
 
-        <a href="https://refind.com/pixly?follow=true" rel={anchorRelationship} target="_blank">
-            <img src="https://refind.com/img/logo-gray.svg" className="footer-refinder footer-link" />
-        </a>
         {/*<div className="footer-link fbox-r jcfs aic">
             <svg 
                 aria-hidden="true" focusable="false" onClick={() => state.methods.insertContactForm()}
