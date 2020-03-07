@@ -30,11 +30,10 @@ import { useWindowSize,  usePageViews, rgaStart, useAuthCheck, useClientHeight} 
 //import { ThemeProvider } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
-import { Box, ScrollTopButton, navbarheight, PageContainer, Image, SignupFormModal } from "./styled-components"
+import { Box, ScrollTopButton, navbarheight, PageContainer, Image, SignupFormModal, Bot } from "./styled-components"
 import themes from './styled-components/theme'
 import { Clippy } from './styled-components'
 import { GlobalContext } from "./";
-
 
 
 const App = (props) => {
@@ -76,6 +75,7 @@ const App = (props) => {
             </Box>
             {haveFooter && <Footer />}
             <ScrollTopButton type="text"/>
+            <Bot />
         </div>
     </ThemeProvider>
 

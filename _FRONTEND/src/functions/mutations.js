@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
 import { request, GraphQLClient } from 'graphql-request'
 
+
 export const BLOG_POST_MUTATION = gql`
   mutation blogPostMutation($slug: String, $text:String) {
     blogPostMutation(slug:$slug, text:$text) {

@@ -68,15 +68,15 @@ export const SearchButton = ({onClick, borderRadius="6px", ...props}) => (
 
 export const ScrollButton = ({onClick, borderRadius="50%", ...props}) => (
     <Box 
-        position="fixed" right={["30px", "40px", "50px"]} bottom="20px" 
-        width={[50,50,60,70]}
-        height={[50,50,60,70]}
+        position="fixed" left={["32px"]} bottom="32px" 
+        width={[56]}
+        height={[56]}
         onClick={onClick}
         borderRadius={borderRadius}
         zIndex={2}
         {...props}
     >
-        <BubbleButton borderRadius={borderRadius}>{props.children}</BubbleButton>
+        <BubbleButton borderRadius={borderRadius} bg="#f1f1f1" p={[1]}>{props.children}</BubbleButton>
     </Box>
 )
 
@@ -86,5 +86,17 @@ export const ScrollTopButton = React.memo(() => {
     const handleScroll = useCallback(() => window.scrollTo({top:0, left:0, behavior:"smooth"}, []))
     const visibility = {visibility: show ? "visible" : "hidden"}
     
-    return <ScrollButton onClick={handleScroll} style={visibility}>Top</ScrollButton>
+    return <ScrollButton onClick={handleScroll} style={visibility}><ChevronsUp /></ScrollButton>
 })
+
+
+const ChevronsUp = ({size=40, color="#000000"}) => (
+<svg xmlns="http://www.w3.org/2000/svg" 
+    width={size} height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+>
+    <path d="M17 11l-5-5-5 5M17 18l-5-5-5 5"/>
+</svg>
+)

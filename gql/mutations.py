@@ -53,37 +53,28 @@ class ContactMutation(graphene.Mutation):
     message = graphene.String()
     class Arguments:
         #will cache.set("dummy{dummy_id}", value[dummy_id], timeout=None)
-        name = graphene.String()
         email = graphene.String()
         message = graphene.String()
 
 
-    def mutate(self, info, name, email, message):
+    def mutate(self, info, email, message):
         ip = info.context.META.get('REMOTE_ADDR')
-        if len(name) > 60 or len(name) == 0:
-            return ContactMutation(message="Name can not be empty or more than 60 characters.", status=False)
-        if len(message)>5000 or len(message) == 0:
-            return ContactMutation(message="Message can not be empty or more than 5000 characters.", status=False)
-        if len(email)>50 or len(email) == 0:
-            return ContactMutation(message="Please enter valid email.", status=False)
-
+        print("contact mutation", email, message)
         now = datetime.now(timezone.utc)
-    
-        email_qs = Contact.objects.filter(email = email).order_by("created_at").last()
-        #print(email_qs.created_at.seconds)
-        #print("time",(now.date() - email_qs.created_at).seconds)
-        #if email_qs and (now.date() - email_qs.created_at.date()).seconds <300:
-        #    return ContactMutation(message="You already wrote a message. Please try again later.", status=False)
+        try:
+            new_contact_message = Contact( email=email, 
+                message=message, _message=message,
+                ip=ip, created_at=now
+            )
+            profile_qs = Profile.objects.filter(email=email)
+            if profile_qs.exists():
+                new_contact_message.profile = profile_qs.first()
+            #print(email, message)
 
-        last_qs = Contact.objects.order_by("created_at").last()
-        #if last_qs and (now.date() - last_qs.created_at).seconds < 30:
-        #    return ContactMutation(message="We are currently can not process your requests Please try again 1 minute later.", status=False)
-
-        new_contact_message = Contact(name=name, email=email, ip=ip, created_at=now)
-        if info.context.user.is_authenticated:
-            new_contact_message.profile = info.context.user.profile
-        new_contact_message.save()
-        return ContactMutation(message="Succesfully sent", status=True)
+            new_contact_message.save()
+            return ContactMutation(message="Succesfully sent", status=True)
+        except:
+            return ContactMutation(message="Contact Mutation exception", status=False)
 
 
 

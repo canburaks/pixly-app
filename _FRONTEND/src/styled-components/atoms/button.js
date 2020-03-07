@@ -82,12 +82,14 @@ export const BubbleButton = styled.button`
     overflow: hidden;
     transition: all 0.45s ease-in-out;
     box-shadow:${themeGet("shadows.xs")};
+    /*
     ${props => props.gradient && themeGet(`gradients.${props.gradient}.colors`)(props) 
         && linearGradient({
         colorStops: themeGet(`gradients.${props.gradient}.colors`)(props),
         toDirection: themeGet(`gradients.${props.gradient}.direction`)(props),
         fallback: themeGet(`gradients.${props.gradient}.fallback`)(props),
     })}
+    */
     ::before {
         content: '';
         z-index: -1;
@@ -97,7 +99,9 @@ export const BubbleButton = styled.button`
         width: 100%;
         height: 100%;
         border-radius: 50%;
+        /* 
         background-color: ${themeGet("colors.accent1")};
+        */
         transform-origin: center;
         transform: translate3d(50%, 50%, 0) scale3d(0, 0, 0);
         transition: all 0.45s ease-in-out;
