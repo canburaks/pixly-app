@@ -81,7 +81,6 @@ domain:marathi.pw
 domain:www.anibookmark.com
 domain:trackslc.brucelead.com
 domain:brucelead.com
-domain:intelseek.com
 domain:practicaldev-herokuapp-com.freetls.fastly.net
 domain:freetls.fastly.net
 domain:tejal.pw

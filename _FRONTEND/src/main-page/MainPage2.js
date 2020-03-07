@@ -79,9 +79,9 @@ const MainPage = (props) => {
     <>
         <Head
             description={
-                "Discover movies with pixly. Get movie recommendations based on you like. " + 
-                "Genre, festival and director's list of movies. " + 
-				"Simiar movies finder. Filter movies."
+                "Discover good movies and lists of films. Get movie recommendations based on you like. " + 
+                "See directors' list, movie's cast, simiar movie finder. " + 
+				"Cyberpunk, gangster, biography... movies"
             }
             title={
                 "Pixly - Movie Recommendations & Find Similar Movies & Lists of Films"
