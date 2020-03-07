@@ -16,17 +16,17 @@ const theme = {
 	botBubbleColor: "#3437c7",
 	botFontColor: "#fff",
 	userBubbleColor: "#fff",
-	userFontColor: "#4a4a4a"
+	userFontColor: "#4a4a4a",
 };
 
 export const Bot = () => {
     const [success, setSuccess] = useState(null)
     const handleSuccess = useCallback(() => setSuccess(true),[])
-    
     // Mutation
-
+	
     //console.log("bot state: ",success, message, email)
-
+	
+    const floatingStyle = {left:32, border:"1px solid rgba(0,0,0,0.4)", boxShadow:"0 4px 8px rgba(0,0,0,0.35)"}
 	const steps = useMemo(() => [
 		{
 			id: "1",
@@ -80,7 +80,7 @@ export const Bot = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<ChatBot steps={steps} floating />
+			<ChatBot steps={steps} floating floatingStyle={floatingStyle} />
 		</ThemeProvider>
 	);
 };
