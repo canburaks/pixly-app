@@ -256,9 +256,6 @@ const MoviePage = props => {
 								))}
 					</Grid>
 				</ExpansionBox>}
-
-				<MoviePageAd />
-				
 				{/* VISIT THE DIRECTOR'S OTHER MOVIES */}
 				{showDirectorBanner &&
 					directorFilter.map((d,i) => (
@@ -301,6 +298,8 @@ const MoviePage = props => {
 					))
 				}
 				
+				<MoviePageAd />
+
 				{/* FILM IN-PAGE GROUPS */}
 				{item.inPageGroups.map((gi, i) => <MovieGroup groupItem={gi} key={item.slug + "group-items" + i} /> )}
 
