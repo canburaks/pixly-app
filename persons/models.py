@@ -331,6 +331,7 @@ class Crew(models.Model):
     job = models.CharField(max_length=len(JOB), choices=JOB, null=True, blank=True)
     data = JSONField(blank=True,null=True)#
     character = models.TextField(max_length=100, null=True, blank=True)
+    info = models.TextField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return str(self.person.name)
