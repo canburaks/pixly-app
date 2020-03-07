@@ -68,7 +68,7 @@ export const SearchButton = ({onClick, borderRadius="6px", ...props}) => (
 
 export const ScrollButton = ({onClick, borderRadius="50%", ...props}) => (
     <Box 
-        position="fixed" left={["32px"]} bottom="32px" 
+        position="fixed" right={["32px"]} bottom="30px" 
         width={[56]}
         height={[56]}
         onClick={onClick}
