@@ -9,7 +9,7 @@ import {
 	FlexBox, NewLink, Box,LogoutIcon, LogoutMutation, Text,CloseIcon,
 	CoverLink, SignupFormModal,MoviePosterCard, PlaceHolderCard, Grid,  Button,
 	HomeIcon, UsersIcon, SearchIcon as SearchIconStyled, FourSquareIcon,
-	SimilarMovieIcon, CameraIcon, LoginIcon, JoinIcon, FilmIcon,SubHeaderText
+	SimilarMovieIcon, CameraIcon, LoginIcon, JoinIcon, FilmIcon,SubHeaderText, Section
 } from "../styled-components"
 
 const useStyles = makeStyles(theme => ({
@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
   panel:{
       background:"#f1f1f1",
+      margin:"12px 0",
       boxShadow:"0 1px 1px rgba(0,0,0,0.08), " +
                 "0 2px 2px rgba(0,0,0,0.12), " +
                 "0 4px 4px rgba(0,0,0,0.16), " +
@@ -29,13 +30,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 export const ExpansionBox = React.memo(({isOpen=false, ...props}) => {
   const classes = useStyles();
   const [expanded,setExpanded] = useState(isOpen)
   const panelHandler = useCallback(() => setExpanded(!expanded),[expanded])
   console.log(isOpen)
   return (
-    <Box width="100%" my={[3]}>
+    <Section width="100%" my={[3]}>
       <ExpansionPanel
         classes={{root:classes.panel}} 
         expanded={expanded} 
@@ -48,13 +50,15 @@ export const ExpansionBox = React.memo(({isOpen=false, ...props}) => {
         >
             <Box display="flex" flexDirection="column">
                 <SubHeaderText fontWeight="bold">{props.header}</SubHeaderText>
-                <Text>{props.text}</Text>
+                {props.text && <Text>{props.text}</Text>}
             </Box>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          {props.children}
+          <FlexBox flexDirection="column" width="100%">
+            {props.children}
+          </FlexBox>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-    </Box>
+    </Section>
   );
 },(p,n) => (p.expanded === n.expanded && p.header === n.header && p.isOpen === n.isOpen))

@@ -26,6 +26,10 @@ export const Hr = styled("hr")`
 `
 
 export const Section = styled.section`
+    box-sizing: border-box;
+    position: relative;
+    transition: ${themeGet("transitions.fast")};
+    cursor: ${props => props.clickable ? "pointer" : "inherit"};
     ${color}
     ${space}
     ${shadow}
