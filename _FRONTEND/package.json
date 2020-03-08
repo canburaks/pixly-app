@@ -223,9 +223,9 @@
     "include": [
       "",
       "/",
-      "/movie/faster-2010",
-      "/movie/instant-family-2018",
-      "/movie/the-blind-side-2009"
+      "/topic/bdsm-movies",
+      "/topic/controversial-movies-about-bdsm",
+      "/topic/mystery"
 
     ],
     "publicPath": "/"

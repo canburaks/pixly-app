@@ -105,9 +105,15 @@ const TopicQuery = ({ lazyvariables }) =>{
 
     const [ filterVariables, setFilterVariables ] = useState({minYear:1950, maxYear:2019, minRating:5.0, maxRating:9.9})
 
+    const multiSlugCapture = (slug) =>{
+        if (slug === "romantic-comedy-movies") return "romantic-comedy"
+        else if (slug === "controversial-movies-about-bdsm") return "bdsm-movies"
+        else return slug
+    }
+    
 
     const { loading, data, error } = useQuery(TOPIC_SEARCH_QUERY,{variables:{
-        topicSlug:(slug==="romantic-comedy-movies" ? "romantic-comedy" : slug),
+        topicSlug:(multiSlugCapture(slug)),
         page,
         minRating:filterVariables.minRating, maxRating:filterVariables.maxRating,
         minYear:filterVariables.minYear, maxYear:filterVariables.maxYear
