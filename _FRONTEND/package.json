@@ -223,6 +223,8 @@
     "include": [
       "",
       "/",
+      "/movie/faster-2010",
+      "/movie/instant-family-2018",
       "/movie/the-blind-side-2009"
 
     ],
