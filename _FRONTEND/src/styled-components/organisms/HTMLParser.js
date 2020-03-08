@@ -50,7 +50,7 @@ export const HtmlParagraph = ({ html, ...props }) => {
 export const HtmlContainer = ({ html, ...props }) => {
     const style = props.style || {
         a:{opacity:0.95,lineHeight:"1.9em"},
-        p:{opacity:0.8},lineHeight:"1.9em",
+        p:{opacity:0.95},lineHeight:"1.9em",
         h1:{opacity:1.0},
         h2:{opacity:0.85},
         h3:{opacity:0.80},

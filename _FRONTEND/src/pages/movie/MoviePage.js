@@ -243,19 +243,6 @@ const MoviePage = props => {
 					</Box>
 				}
 
-				{/*<!--CAST Section--> */}
-				{item.crew.length > 0 && 
-				<ExpansionBox id=""
-					isOpen={true}
-					header={`${item.name} (${item.year}) Cast & Crew`}
-					text={item.crew.length > 4 ? `Director, Actors and Actresses of ${item.name} (${item.year})` : null}
-				>
-					<Grid columns={[3,3,4,4,5,5,6]} width={"100%"}>
-						{allCrews.map((crew, i) => (
-							<CrewCard crew={crew} key={i + crew.person.name} translateY/>
-								))}
-					</Grid>
-				</ExpansionBox>}
 				{/* VISIT THE DIRECTOR'S OTHER MOVIES */}
 				{showDirectorBanner &&
 					directorFilter.map((d,i) => (
@@ -297,6 +284,26 @@ const MoviePage = props => {
 						</FlexBox>
 					))
 				}
+
+				{/*<!--CAST Section--> */}
+				{item.crew.length > 0 && 
+				<ExpansionBox id=""
+					isOpen={true}
+					header={`${item.name} (${item.year}) Cast & Crew`}
+					text={!item.castSummary && (item.crew.length > 4 
+						? `Director, Actors and Actresses of ${item.name} (${item.year})` 
+						: null)
+						}
+				>
+					<HtmlContainer html={item.castSummary} width="100%" />
+					<br/>
+					<Grid columns={[3,3,4,4,5,5,6]} width={"100%"}>
+						{allCrews.map((crew, i) => (
+							<CrewCard crew={crew} key={i + crew.person.name} translateY/>
+								))}
+					</Grid>
+				</ExpansionBox>}
+
 				
 				<MoviePageAd />
 
@@ -400,6 +407,7 @@ const MoviePage = props => {
 		</PageContainer>
 	);
 }
+
 
 const MovieGroup = ({groupItem}) => (
 	<CardContainer>
