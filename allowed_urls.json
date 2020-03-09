@@ -109,6 +109,7 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/a-quiet-place-2018",
         "/movie/the-ice-harvest-2005",
         "/movie/the-in-laws-1979",
         "/movie/sex-and-lucia-2001",
@@ -808,6 +809,7 @@
         "/movie/heavyweights-1995",
         "/movie/sex-and-lucia-2001",
         "/movie/the-in-laws-1979",
-        "/movie/the-ice-harvest-2005"
+        "/movie/the-ice-harvest-2005",
+        "/movie/a-quiet-place-2018"
     ]
 }
