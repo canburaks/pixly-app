@@ -46,7 +46,6 @@ const BlogPage = (props) =>{
                     "cinema, movie recommendation, and technical stuff."}
                 canonical={`https://pixly.app/blog`}
             />
-            <MediaNetAd />
             <HeaderText px={[2,2,3]}>Pixly Blog - Articles About Movie Recommendation, and Technical Stuff</HeaderText>
             <ContentContainer pb={"80px"}>
                 {props.posts.map(post => <PostInfoBox post={post} key={post.slug} follow/>)}
