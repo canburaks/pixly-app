@@ -12,7 +12,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 import { useAuthCheck } from "../../functions/hooks";
 import { Col } from "react-flexbox-grid";
-import { ScrollInto, MediaNetAd } from "../../functions";
+import { ScrollInto } from "../../functions";
 
 import { YoutubePlayer } from "cbs-react-components";
 import { GlobalContext } from "../../";
@@ -187,7 +187,6 @@ const MoviePage = props => {
 			{/*<!-- Page Container --> */}
 
 			<ContentContainer zIndex={1} mt={[4]}>
-	            <MediaNetAd />
 				{/* Quotation  */}
 				{item.reviews.filter(r => r.primary === true).map(r => (
 					<Blockquote key={r.text.slice(0,8)} cite={r.referenceLink} 

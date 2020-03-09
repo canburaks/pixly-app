@@ -213,7 +213,7 @@ ReactGA.timing({
 //--------------ADS------------------------------
 
 // arranged for topic page movies
-export const MediaNetAd = () => {
+export const __ = () => {
     const node = useRef(null)
     useEffect(() => {
         try {
