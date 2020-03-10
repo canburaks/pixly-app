@@ -128,7 +128,7 @@ const MoviePage = props => {
 	const messageBoxTopicText2 = `This section shows the topic film collection that includes ${item.name}. ` +
 				`It appears in ${item.topics.length}  topic movie ${item.topics.length > 1 ? "collections" : "collections"}. ` + 
 				`Discover ${mappedTopicNames} movies like ${item.name}.`
-	const messageBoxTopicText = `Discover ${mappedTopicNames} movies like ${item.name}.`
+	const messageBoxTopicText = `"${item.name}" is also appear in below movie lists. See ${mappedTopicNames} lists of films.`
 	const textSize = ["14px", "16px", "18px"]
 
 	//const group
@@ -187,7 +187,7 @@ const MoviePage = props => {
 			</FlexBox>
 			{/*<!-- Page Container --> */}
 
-			<ContentContainer zIndex={1} mt={[4]}>
+			<ContentContainer zIndex={1} pt={[4]}>
 				{/* Quotation  */}
 				{item.reviews.filter(r => r.primary === true).map(r => (
 					<Blockquote key={r.text.slice(0,8)} cite={r.referenceLink} 
@@ -195,8 +195,10 @@ const MoviePage = props => {
 						m={0} mb={[4,4,5]} mx={[4,4,5]}
 						px={[2]} py={[2]} 
 						
-						borderLeft="8px solid"
-						borderColor="rgba(0,0,0,0.3)"
+						border="8px solid" borderRadius="12px"
+						boxShadow="0 8px 32px rgba(0,0,0,0.4)"
+						bg={"rgba(255,255,255,0.9)"}
+						borderColor="rgba(0,0,255,0.6)"
 						display="flex" flexDirection="column"
 						
 					>

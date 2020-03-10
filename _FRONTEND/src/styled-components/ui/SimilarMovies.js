@@ -59,7 +59,7 @@ const ContentSimilarSection = (props) => {
     let speed = effectiveConnectionType ? effectiveConnectionType === "4g" ? "fast" : "slow" : "slow"
 
     const [ page, setPage ] = useState(1)
-    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 12 : 8) : 8 // if slow network request less movie
+    const requestQuantity = speed === "fast" ? (window.innerWidth > 600 ? 18 : 12) : 12 // if slow network request less movie
 
 
 	const { loading, error, data } = useQuery(CONTENT_SIMILAR_FINDER, {variables:{
@@ -244,8 +244,8 @@ const ContentSimilarMovieCard = ({ item }) => (
         >
             <Image 
                 src={item.poster} 
-                info={`${item.name} (${item.year}) Poster`}
-                alt={`${item.name} (${item.year}) Poster`}
+                info={`${item.name} (${item.year}): ${item.summary.slice(0,120)}...`}
+                alt={`${item.name} (${item.year}): ${item.summary.slice(0,120)}...`}
                 title={"Visit " + item.name + ` - ${item.year} Page`} 
 
                 position="absolute" top={0} left={0} right={0} bottom={0}
@@ -303,7 +303,7 @@ const MovieRecommendationCard = ({ item, speed }) => (
 const CONTENT_SIMILAR_FINDER = gql`
 query similars($slug:String!, $page:Int!, $num:Int){
     listOfContentSimilarMovies(slug:$slug, page:$page, num:$num){
-        slug, name, year, poster, coverPoster, nongenreTags, tagNames,
+        slug, name, year,summary, poster, coverPoster, nongenreTags, tagNames,
     },
     movie(slug:$slug){id, slug, name, year, nongenreTags, tagNames, contentSimilarsSummary}
 }

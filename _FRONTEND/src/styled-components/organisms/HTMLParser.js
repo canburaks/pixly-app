@@ -136,7 +136,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                 //console.log("aaaa",anchorchildren)
                 return <Text width={"100%"} 
                             fontSize={["14px","14px", "16px"]} 
-                            opacity={0.8}
+                            opacity={0.9}
                             {...style.p}
                         >
                             {domToReact(domNode.children, options)}

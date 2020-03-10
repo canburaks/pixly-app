@@ -6,7 +6,7 @@ import { themeGet } from '@styled-system/theme-get'
 
 import { 
     Box,SuperBox, GridBox, FlexBox, BlurBox, Text, HeaderText, HeaderMini, NewLink, Paragraph,
-    TagText,HtmlBox,SubHeaderText, Image,CoverLink, Ul, Li
+    TagText,HtmlBox,SubHeaderText, Image,CoverLink, Ul, Li, Span
 } from "../index"
 import { SocialBox } from "../others"
 import parse, { domToReact } from 'html-react-parser';
@@ -285,13 +285,13 @@ export const TopPanelCoverElement = React.memo((props) => (
             darken={props.darken}
             bg={"rgba(0,0,0, 0.5)"}
         >
-            <SubHeaderText 
+            <Span 
                 color="lightDark1" textShadow={"textDark"} 
                 fontSize={["20px", "20px", "24px", "30px","34px"]} 
                 fontWeight="bold"
             >
                 {props.header}
-            </SubHeaderText>
+            </Span>
 
             {props.Header && <props.Header item={props.item} authStatus={props.authStatus} />}
             {props.subheader && <SubHeaderText color="lightDark1" textShadow="dark" fontSize={[14, 14, 18, 20, 22]} fontWeight="500">{props.subheader}</SubHeaderText>}
