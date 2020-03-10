@@ -112,9 +112,9 @@ const ContentSimilarSection = (props) => {
             {data.listOfContentSimilarMovies && data.listOfContentSimilarMovies.length > 0 &&
                 <>
                     <MessageBox 
-                        subheader={`Contentful Similar ${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Films" : "Films" } like ${data.movie.name.trim()} (${data.movie.year})`}
+                        subheader={`${isDocumentary(data.movie.nongenreTags) ? "Documentaries and Films" : "Movies" } like ${data.movie.name.trim()} (${data.movie.year})`}
                         text={data.movie.contentSimilarsSummary ? data.movie.contentSimilarsSummary :
-                            `The movies in this part have common topics, tags or sub-genres with ${data.movie.name.trim()} movie. ` +
+                            `The movies that show resemblance to ${data.movie.name.trim()} movie in a way of content: common topics/tags/sub-genres with ` +
                             `${commonGenres(data.movie.tagNames, data.listOfContentSimilarMovies)}`
                         }
 						border={"0px"}
@@ -122,7 +122,7 @@ const ContentSimilarSection = (props) => {
 						boxShadow="card"
 						bg="#f1f1f1"
                     >
-                    <Grid columns={[2,2,3,3,3,4,4,4,6]} py={[4]} >
+                    <Grid columns={[2,2,3,3,3,3,3,4,6]} py={[4]} >
                         {data.listOfContentSimilarMovies.map( item => (
                                 <ContentSimilarMovieCard item={item} key={item.slug + "cs"}/>
                         ))}
@@ -203,9 +203,8 @@ const RecommendationSection = ({num=19}) => {
                         Subheader={RecommendationHeader}
                         text={
                             `Our AI-assisted algorithm found that those movies are showing high similarity to ${data.movie.name.trim()}. ` +
-                            `The movies like ${data.movie.name.trim()} in this section not only consider the common content elements, ` + 
-                            `but also the personal interest of people who watch them. ` +
-                            `People who like ${data.movie.name.trim()} also like and give high ratings below movies.` 
+                            `The films in this section not only consider the common content elements, ` + 
+                            `but also the personal interest of people who watch them. `
                         }
 						border={"0px"}
 						borderRadius={6}
@@ -270,7 +269,7 @@ const ContentSimilarMovieCard = ({ item }) => (
             >
                     <NewLink link={`/movie/${item.slug}`} hoverUnderline>{item.name} ({item.year})</NewLink>
             </Text>
-			<TagBox tags={item.tagNames || []} num={2} color={"light"}/>
+			<TagBox tags={item.tagNames || []} num={4} color={"light"}/>
 		</FlexBox>
 	</SuperBox>
 )
