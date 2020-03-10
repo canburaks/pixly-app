@@ -262,7 +262,7 @@ const MainPage = (props) => {
 								boxShadow="card"
 								link={`/topic/${item.slug}`} 
 								alt={`${item.name} Movies.`} 
-								title={`Popular Topic Film Collection: ${item.name}.`} 
+								title={`Popular Topic Film Collection: ${item.name} Movies.`} 
 							/>
 						))}
 					</Grid>
