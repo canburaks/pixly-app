@@ -124,10 +124,11 @@ const MoviePage = props => {
 	const topicShortNames = item.topics.map(t => t.shortName)
 	var mappedTopicNames = topicShortNames.length > 2 ? topicShortNames.join(", ") :topicShortNames.join(" and ")
 
-	const messageBoxTopicHeader = `See Other ${mappedTopicNames} Movies`
-	const messageBoxTopicText = `This section shows the topic film collection that includes ${item.name}. ` +
+	const messageBoxTopicHeader = `See ${mappedTopicNames} Movies`
+	const messageBoxTopicText2 = `This section shows the topic film collection that includes ${item.name}. ` +
 				`It appears in ${item.topics.length}  topic movie ${item.topics.length > 1 ? "collections" : "collections"}. ` + 
-				`You will find many great artworks of ${mappedTopicNames} films below.`
+				`Discover ${mappedTopicNames} movies like ${item.name}.`
+	const messageBoxTopicText = `Discover ${mappedTopicNames} movies like ${item.name}.`
 	const textSize = ["14px", "16px", "18px"]
 
 	//const group
@@ -320,7 +321,7 @@ const MoviePage = props => {
 						boxShadow="card"
 						bg="#f1f1f1"
 					>
-						<Grid columns={[1,2,2,2,2,3,4]} width={"100%"} py={[3]} mt={2}>
+						<Grid columns={[1,2,2,2,2,3,3,3,4]} width={"100%"} py={[3]} mt={2}>
 							{item.topics.map((topic, i) => (
 								<CoverImage follow={true}
 									boxShadow="card" hoverShadow translateY

@@ -49,7 +49,7 @@ export const Image = styled('img').attrs(
     (props) =>( props.info 
         ? {
             alt:props.info ,
-            title:props.info + " image",
+            title:props.info,
             loading:"auto"
         } 
         : {loading:"auto"}
