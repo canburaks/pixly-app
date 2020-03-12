@@ -223,9 +223,7 @@
     "include": [
       "",
         "/",
-        "/similar-movie-finder",
-        "/lists-of-films",
-        "/topic/mystery"
+        "/topic/gangster-films"
    
 
     ],
