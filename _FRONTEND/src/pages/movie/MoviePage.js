@@ -4,7 +4,7 @@ import { useState, useContext, useMemo, useEffect, useRef } from "react";
 import { withRouter, Link, Redirect, useParams, useLocation } from "react-router-dom";
 import {
 	rgaPageView, Head, MoviePageAd, MidPageAd, 
-	FeedMobileTopicPageAd, HomePageFeedAd 
+	FeedMobileTopicPageAd, HomePageFeedAd, BannerAd 
 } from "../../functions/analytics";
 import { MOVIE } from "../../functions/query";
 import { useQuery } from '@apollo/react-hooks';
@@ -185,6 +185,7 @@ const MoviePage = props => {
 				{true && <Text fontWeight="bold" fontSize={["14px", "14px", "16px"]} opacity={0.75} mt={[2]} color="light">How much did you like the movie?</Text>}
 				<RatingMutation item={item} size={50}/>
 			</FlexBox>
+			<BannerAd />
 			{/*<!-- Page Container --> */}
 
 			<ContentContainer zIndex={1} pt={[4]}>
@@ -307,7 +308,6 @@ const MoviePage = props => {
 				</ExpansionBox>}
 
 				
-				<MoviePageAd />
 
 				{/* FILM IN-PAGE GROUPS */}
 				{item.inPageGroups.map((gi, i) => <MovieGroup groupItem={gi} key={item.slug + "group-items" + i} /> )}
@@ -339,7 +339,6 @@ const MoviePage = props => {
 					</MessageBox>
 					</>
 				)}
-				<MidPageAd />
 
 				{/*<!--GROUPS  Section--> */}
 				{item.groups.length > 0 && (
@@ -382,7 +381,7 @@ const MoviePage = props => {
 					</CardContainer>
 				)}
 
-				{true && showAd1 && <HomePageFeedAd/> }
+				<MoviePageAd />
 
 				{/*<!--SIMILAR Section--> */}
 				<Box width="100%" ref={nodeSimilarMovies}>

@@ -153,7 +153,7 @@ export const SearchAppBar = (props) => {
 	const [ keywords, setKeywords ] = useState("")
 	const ref = useRef()
 	useOnClickOutside(ref, () => setKeywords(""));
-	const debouncedkeywords = useDebounce(keywords, 500);
+	const debouncedkeywords = useDebounce(keywords, 1500);
 
 
 	const keywordsHandler = useCallback((e) => setKeywords(e.target.value), [keywords])
@@ -271,59 +271,59 @@ export const SearchAppBar = (props) => {
 				    <NewLink to="/" follow={isFollowLink} ><Brand /></NewLink>
 
                     <FlexBox display={["none", "none", "none", "flex"]} flexGrow={[0,0,0,1]} justifyContent="center" >
-							<NewLink 
-                                color="#f1f1f1 !important" title="Popular and Upcoming Movies"
-                                link={"/popular-and-upcoming-movies"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="All Movie Collections" fontWeight="bold" follow={isFollowLink}
-                            >
-                                Movies
-                            </NewLink>
-							<NewLink 
-                                color="#f1f1f1 !important" 
-                                link={"/lists-of-films"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="List of Films Archive" fontWeight="bold" follow={isFollowLink}
-                            >
-                                Film Lists
-                            </NewLink>
-                            <NewLink 
-                                color="#f1f1f1 !important" follow={isFollowLink}
-                                link={"/directors/1"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="Famous Directors and Their Favourite Films" fontWeight="bold"
-                            >
-                                Directors
-                            </NewLink>
-                            <NewLink 
-                                color="#f1f1f1 !important" 
-                                link={"/similar-movie-finder"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="Find Similar Movies" fontWeight="bold" follow={isFollowLink}
-                            >
-                                Similars
-                            </NewLink>
-                            <NewLink 
-                                color="#f1f1f1 !important" follow={isFollowLink}
-                                link={"/advance-search"} fontSize={["10px", "10px", "12px", "14px"]} 
-                                px={[1,1,2]} title="Browse Movie with Advance Options" fontWeight="bold"
-                            >
-                                Browse
-                            </NewLink>
-                        </FlexBox>
+						<NewLink 
+							color="#f1f1f1 !important" title="Popular and Upcoming Movies"
+							link={"/popular-and-upcoming-movies"} fontSize={["10px", "10px", "12px", "14px"]} 
+							px={[1,1,2]} title="All Movie Collections" fontWeight="bold" follow={isFollowLink}
+						>
+							Movies
+						</NewLink>
+						<NewLink 
+							color="#f1f1f1 !important" 
+							link={"/lists-of-films"} fontSize={["10px", "10px", "12px", "14px"]} 
+							px={[1,1,2]} title="List of Films Archive" fontWeight="bold" follow={isFollowLink}
+						>
+							Film Lists
+						</NewLink>
+						<NewLink 
+							color="#f1f1f1 !important" follow={isFollowLink}
+							link={"/directors/1"} fontSize={["10px", "10px", "12px", "14px"]} 
+							px={[1,1,2]} title="Famous Directors and Their Favourite Films" fontWeight="bold"
+						>
+							Directors
+						</NewLink>
+						<NewLink 
+							color="#f1f1f1 !important" 
+							link={"/similar-movie-finder"} fontSize={["10px", "10px", "12px", "14px"]} 
+							px={[1,1,2]} title="Find Similar Movies" fontWeight="bold" follow={isFollowLink}
+						>
+							Similars
+						</NewLink>
+						<NewLink 
+							color="#f1f1f1 !important" follow={isFollowLink}
+							link={"/advance-search"} fontSize={["10px", "10px", "12px", "14px"]} 
+							px={[1,1,2]} title="Browse Movie with Advance Options" fontWeight="bold"
+						>
+							Browse
+						</NewLink>
+                    </FlexBox>
 
-						{/* Search */}
-						<FlexBox className={classes.search} flexGrow={[1,1,1,0]}>
-							<div className={classes.searchIcon}>
-								<SearchIcon />
-							</div>
-							<InputBase
-								placeholder="Search…"
-								classes={{
-									root: classes.inputRoot,
-									input: classes.inputInput,
-								}}
-								inputProps={{ 'aria-label': 'search' }}
-								onChange={keywordsHandler}
-								value={keywords}
-							/>
-						</FlexBox>			
+					{/* Search */}
+					<FlexBox className={classes.search} flexGrow={[1,1,1,0]}>
+						<div className={classes.searchIcon}>
+							<SearchIcon />
+						</div>
+						<InputBase
+							placeholder="Search…"
+							classes={{
+								root: classes.inputRoot,
+								input: classes.inputInput,
+							}}
+							inputProps={{ 'aria-label': 'search' }}
+							onChange={keywordsHandler}
+							value={keywords}
+						/>
+					</FlexBox>			
 
                     {/* RIGHT PART*/}
                     <FlexBox>
@@ -530,7 +530,7 @@ const SearchQueryResult = React.memo(({keywords, cleaner}) => {
 	if (data) {
 		//console.log(data)
         return (
-            <SimpleDialog 
+            <SimpleDialog className="bar-search search-modal"
 				onClose={handleClose} 
 				isOpen={open} 
 				header={`'${keywords}' Search:${data.complexSearch.quantity} ${data.complexSearch.quantity > 1 ? "movies " : "movie"} found`}
