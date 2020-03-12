@@ -223,9 +223,27 @@
     "include": [
       "",
       "/",
+      "/topic/art-house",
+      "/topic/based-on-true-story",
+      "/topic/cyberpunk",
+      "/topic/dialogue-focused",
+      "/topic/thought-provoking",
+      "/topic/feel-good-movies",
+      "/topic/bechdel-test",
+      "/topic/lgbtq-plus-films",
+      "/topic/controversial-films",
+      "/topic/historical-figures",
+      "/topic/mystery",
+      "/topic/video-game",
+      "/topic/gangster-films",
+      "/topic/romantic-comedy",
       "/topic/post-apocalyptic",
-      "/movie/burlesque-2010",
-      "/movie/divergent-2014"
+      "/topic/bdsm-movies",
+      "/topic/controversial-movies-about-bdsm",
+      "/topic/cinematic-documentary",
+      "/topic/outbreak-movies",
+      "/topic/eating-disorder-movies",
+      "/topic/witch-movies"
 
     ],
     "publicPath": "/"

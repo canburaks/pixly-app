@@ -232,6 +232,32 @@ export const __ = () => {
 }
 
 // arranged for topic page movies
+
+export const BannerAd = () => {
+    const isProduction = window.location.href.includes("pixly.app")
+    useEffect(() => {
+        if (isProduction && window) {
+            //console.log("if true");
+            try{
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch(e) {
+                console.log("ad error",e)
+            }
+        }
+    }, [isProduction])
+    //if (!production) return <div className="hidden"></div>
+    return (
+        <ins className="adsbygoogle"
+            style={{ display: "block", width: "100%", minHeight: 90, height:"auto" }}
+            data-ad-client="ca-pub-9259748524746137"
+            data-ad-slot="6024408481"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+            >
+        </ins>
+    )
+}
+
 export const TopicArticleAd = () => {
     const isProduction = window.location.href.includes("pixly.app")
     useEffect(() => {

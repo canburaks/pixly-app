@@ -9,6 +9,7 @@ import { isEqualObj, Head, MidPageAd, HomePageFeedAd,
     TopicArticleAd, TopicOrderedListAd,
     TopicOrderedListAd2,useClientWidth,
     useValues, useWindowSize, useWindowWidth, FeedMobileTopicPageAd, useDebounce,
+    BannerAd,
 } from "../../functions"
 
 
@@ -95,6 +96,14 @@ const FilterPanel = ({ dispatcher, states }) => {
     )
 }
 
+const SpotifyPlaylist = React.memo(({ src }) => (
+    <Iframe src={src}
+        width={800} height={300}
+        frameborder="0"
+        allowtransparency="true" allow="encrypted-media"
+        ml={[3]}
+    />
+),() => true)
 
 const TopicQuery = ({ lazyvariables }) =>{
     const { slug, page=1 } = useParams();
@@ -163,16 +172,9 @@ const TopicQuery = ({ lazyvariables }) =>{
         const Liste = selector ? OrderedList : UnorderedList
 
         const spotifylistwidth = screenSize.includes("L") ? 300 : (contentContainerWidth ? contentContainerWidth : window.innerWidth * 0.8)
-        console.log("size", screenSize)
+        //console.log("size", screenSize)
 
-        const SpotifyPlaylist = ({ src }) => (
-            <Iframe src={src}
-                width={800} height={300}
-                frameborder="0"
-                allowtransparency="true" allow="encrypted-media"
-                ml={[3]}
-            />
-        )
+
 
         return (
             <PageContainer>
@@ -191,8 +193,9 @@ const TopicQuery = ({ lazyvariables }) =>{
                         alt={topic.name} 
                         title={topic.name} 
                     />}
+                <BannerAd />
                 <ContentContainer minHeight={"150px"} maxWidth={"100%"} ref={node}
-                    flexDirection="column" pb={[4,4]} alignItems="center"
+                    flexDirection="column" pb={[4,4]} alignItems="center" bg="transparent"
                 >
                     {/* TOPIC MAIN TEXT & STRUCTURED ARTICLE DATA*/}
                     {true && <SchemaArticle 
