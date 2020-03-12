@@ -69,7 +69,7 @@ class CrewStackInline (admin.StackedInline):
     #readonly_fields = ("person__name",)
     raw_id_fields = ("person",)
     #list_display = ("person__name",)
-    fields = ("job","person", "character", "info" )
+    fields = ("job","person", "character", "info")
     exclude = ("data",)
     def get_person_name(self, obj):
         #print(obj)

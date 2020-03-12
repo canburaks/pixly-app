@@ -57,10 +57,13 @@ export const Image = styled('img').attrs(
     )`
     transition: all ${themeGet("transitions.medium")};
     filter:${props => props.blur && `blur(${props.blur}px)`};
+    ${color}
     ${space}
     ${shadow}
     ${layout}
+    ${background}
     ${border}
+    ${flexbox}
     ${position}
 `
 

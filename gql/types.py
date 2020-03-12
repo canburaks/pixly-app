@@ -1674,7 +1674,7 @@ class ProfileType(DjangoObjectType, SocialMediaType, SEOType):
         return False
 
     def resolve_bookmarks(self, info, *_):
-        return self.bookmarks.all().defer(*movie_defer)
+        return self.bookmarks.all().defer(*movie_defer).order_by()
 
     def resolve_ratings(self, info, *_):
         return self.rates.select_related("movie").order_by("-created_at").all()

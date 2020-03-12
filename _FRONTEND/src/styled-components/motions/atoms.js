@@ -5,20 +5,21 @@ import { themeGet } from '@styled-system/theme-get'
 
 //import { motion } from "framer-motion"
 import { linearGradient, backgrounds, backgroundImages, setLightness } from 'polished'
+import { Box } from "../"
 //import { motion, AnimatePresence } from "framer-motion"
 
-export const ModalMotionBox = (props) => (
-    <div>
+export const ModalMotionBox = ({isOpen, ...props}) => (
+    <Box {...props}>
     {props.isOpen && (
       <ModalMotion
         exit={{ opacity: 0 }}
         width={"100%"}
         height="auto"
         overflowY="scroll"
-        {...props}
+        
       />
     )}
-  </div>
+  </Box>
 )
 
 export const ModalMotion = styled("div")`

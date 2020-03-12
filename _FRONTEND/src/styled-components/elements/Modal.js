@@ -89,16 +89,16 @@ export const SimpleModal2 = (props) => {
 }
 
 //When Modal is open, body scroll will be locked
-export const Modal = (props) => {
+export const Modal = ({ isOpen, header, closeModal, children, ...props }) => {
 	const innerModalRef = useRef()
 	useOnClickOutside(innerModalRef, () => props.closeModal())
 
 
 	return(	
-		<ModalMotionBox isOpen={props.isOpen} top={"120px"} >
+		<ModalMotionBox isOpen={isOpen} top={"120px"} {...props}>
 			<Box ref={innerModalRef} 
 				display="flex" position="absolute"
-				top={"10vh"} 
+				top={"150px"} 
 				left={["2vw","2vw", "5vw"]} right={["2vw","2vw", "5vw"]}
 				flexDirection="column" 
 				width={["96vw", "96vw", "90vw"]} 
@@ -116,10 +116,10 @@ export const Modal = (props) => {
 					width={"100%"} 
 					px={[2]} mb={[2]} pb={[1]}
 				>
-					<HeaderMini maxWidth={"75%"} color="light">{props.header}</HeaderMini>
-					<CloseButton  zIndex={20} onClick={props.closeModal} />
+					<HeaderMini maxWidth={"75%"} color="light">{header}</HeaderMini>
+					<CloseButton  zIndex={20} onClick={closeModal} />
 				</FlexBox>
-				{props.children}
+				{children}
 			</Box>
 		</ModalMotionBox>
 	)

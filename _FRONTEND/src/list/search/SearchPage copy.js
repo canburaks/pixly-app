@@ -6,18 +6,25 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { COMPLEX_SEARCH,TAG_LIST } from "../../functions/query"
 
 import { Head, MidPageAd, HomePageFeedAd, rgaSetEvent } from "../../functions/analytics"
-import TagSelectStatic from "./TagSelectStatic"
-import {  isEqualObj} from "../../functions"
+//import TagSelectStatic from "./TagSelectStatic"
+import {  isEqualObj, useWindowSize } from "../../functions"
 
 //import "react-input-range/lib/css/index.css"
 
 import { 
     Box, FlexBox,SuperBox, Text,Input,SearchInput, Form,Loading, Button,
-    ImdbIcon, WatchIcon, SearchIcon,
+    ImdbIcon, WatchIcon, SearchIcon,Image,
     MovieCoverBox, DirectorCard, MovieCoverCard, ImageCard, Grid,
     PageContainer, ContentContainer, InputRange, SearchButton, PaginationBox,
-    RatingSlider, YearSlider, HeaderText,
+    //RatingSlider, 
+    //YearSlider,
+    TagSlider,
+    HeaderText,
 } from "../../styled-components"
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
+
+import { YearSlider, RatingSlider, TagSelect, SearchInputMaterial } from "../../styled-material"
+
 import "./Search.css"
 
 
@@ -40,11 +47,12 @@ const SearchPage = (props) =>{
     //Variables
     const [ keywords, setKeywords ] = useState(initialKeywords)
     const [ skip, setSkip ] = useState(initialSkip)
-    const [ tags, setTags ] = useState([])
+    const [ tag, setTag ] = useState("")
     const [yearData, setYearData ] = useState({minYear:1950, maxYear:2020})
     const [ratingData, setRatingData ] = useState({minRating:5.0, maxRating:9.9})
     const [lazyvariables, setLazyVariables ] = useState({keywords})
     const [ message, setMessage ] = useState(null)
+    const screenSize = useWindowSize()
 
 
 
@@ -59,15 +67,18 @@ const SearchPage = (props) =>{
     //handlers
     const keywordsHandler = useCallback((e) => setKeywords(e.target.value), [keywords])
     const yearDispatcher = useCallback((data) => setYearData(data), [yearData])
+    const tagDispatcher = useCallback((t) => setTag(t), [tag])
     const ratingDispatcher = useCallback((data) => setRatingData(data), [ratingData])
-
 
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if (keywords.length < 3 && tags.length === 0) setMessage("Your should provide search keywords or choose a genre please")
+        if (keywords.length < 3 && (tag===null || tag.length === 0)) setMessage("Your should provide search keywords or choose a genre please")
         else {
-            const vars = {tags:tags.map(tag=>tag.value), keywords, ...yearData, ...ratingData}
+            const vars = {keywords, ...yearData, ...ratingData}
+            if (tag && tag.length > 0){
+                vars.tags = [tag]
+            }
             if (skip === true ) setSkip(false)
             setLazyVariables(vars)
 
@@ -78,73 +89,87 @@ const SearchPage = (props) =>{
             if (message && message.length > 0) setMessage("")
         } 
     }
-
-    //console.log("qv",variables)
+    //console.log("main", tag, lazyvariables)
+    const isSmallScreen = useMemo(() => !screenSize.includes("L"), [screenSize])
+    const responsivePosterUrl = isSmallScreen 
+        ? "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-v.jpg"
+        : "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"
+    
     return(
         <PageContainer  p={[0]}>
-            <Header />
 
-            <Form flexWrap="wrap" onSubmit={submitHandler} className="unmatched-purple" py={[4]} width="100vw">
-                <HeaderText 
-                    textAlign="center" color="rgba(255,255,255, 0.9)" my={[5]} 
-                    fontSize={["30px", "30px", "36px", "42px", "48px", "54px"]}
-                >
-                    Search Movies by Genre, Rating and Year
-                </HeaderText>
-                <Text textAlign="center" color="rgba(255,255,255, 0.9)" my={[3]}>See Similar Movies, Recommendations Based On People Who Like The Movie, Watch Trailer and See the Cast</Text>
-                <FlexBox justifyContent="center" id="s-text-input" minWidth="100%"  position="relative">
-                    <SearchInput type="text"   
-                        px={[2,3,4,4,4]}
-                        placeholder="Search.."
-                        autoFocus={false}
-                        value={keywords} 
-                        onChange={keywordsHandler} 
-                        minHeight="70px"
-                        width={"100%"}
-                    />
-                    <Button type="submit" 
-                        position="absolute" 
-                        display="flex" justifyContent="center" alignItems="center"
-                        right={40} top={12} p={0} 
-                        width={50} height={50} 
-                        hoverBg={"blue"}
-                        borderRadius="50%" 
-                        bg="dark"
+            <FlexBox overflow="hidden" flexDirection="column" position="relative" top={-65} boxShadow="card">
+                <Image src={responsivePosterUrl} position="absolute" 
+                    top={-75} left={-10} right={10} blur={8}
+                    minWidth={"100%"} 
+                    alt={"Pixly AI Movie Recommendation and Movie Rating Website"} zIndex={0}
+                />
+                <Form flexWrap="wrap" onSubmit={submitHandler} py={[5]} maxWidth="100%" mt={[4]} zIndex={1} px={[4]}>
+                    <HeaderText 
+                        textAlign="center" color="rgba(255,255,255, 0.9)" 
+                        my={[3]} 
+                        fontSize={["30px", "30px", "36px", "42px", "48px", "54px"]}
                     >
-                        <SearchIcon  stroke="white" strokeWidth="3" size={30} />
-                    </Button>
-                </FlexBox>
+                        Search Movies by Genre, Rating and Yearasd
+                    </HeaderText>
 
-
-                <FlexBox id="search-settings-box" 
-                    flexDirection={["row", "row"]} 
-                    width={["100%", "100%", "100%"]}  
-                    minHeight={["80px", "80px", "80px", "100%"]}
-                    justifyContent="space-around"
-                    flexWrap="wrap"
-                    px={[3]} mt={[3,3,3]}
-                >
-                    <FlexBox 
-                        flexDirection={["row"]} 
-                        alignItems={"flex-start"} 
-                        my={[3]} px={[3,3,3, 3]} 
-                        width={"100%"}
-                        flexGrow={1,1,1, 0}
-                    >
-                        <TagSelectStatic tags={tags} tagSetter={setTags} />
+                    
+                    <FlexBox flexDirection={["column", "column", "row"]} width={"100%"}>
+                        <YearSlider dispatcher={yearDispatcher} />
+                        <RatingSlider dispatcher={ratingDispatcher} />
                     </FlexBox>
-                    <YearSlider dispatcher={yearDispatcher} classname="cbssss" />
-                    <RatingSlider dispatcher={ratingDispatcher} />
-                </FlexBox>
-                <Text fontSize={[14,14,16]} fontWeight={"bold"}>{message}</Text>
-            </Form>
 
+                    <FlexBox flexDirection={["column","column","column","row"]} alignItems="center">
+
+                        <TagSlider 
+                            dispatcher={tagDispatcher}  
+                            height={["30px","30px","30px","50px"]} 
+                            width={["100%","100%","100%","20%"]}
+                            minWidth="100px"
+                            px={[0,0,0,2]}     mb={[2,2,2,0]}                       
+                        />
+                        <FlexBox justifyContent="center" id="s-text-input" 
+                            minWidth={["100%","100%","100%","80%"]} alignItems="center" position="relative" 
+                            >
+                            <SearchInput type="text"   
+                                px={[2,3,4,4,4]}
+                                placeholder="Search.."
+                                autoFocus={false}
+                                value={keywords} 
+                                onChange={keywordsHandler} 
+                                minHeight="50px"
+                                width={"100%"}
+                                border="1px solid"
+                                borderColor="rgba(0,0,0, 0.15)"
+                                color="#181818"
+                                bg="rgba(255,255,255,0.45)"
+                            />
+                            <Button type="submit" 
+                                onClick={submitHandler} 
+                                position="absolute" 
+                                display="flex" justifyContent="center" alignItems="center"
+                                right={["4vw", "4vw", "2vw", "2vw"]} top={"2px"} p={0} 
+                                width={40} height={40} 
+                                hoverBg={"rgba(40,40,40,0.4)"}
+                                borderRadius="50%" 
+                                title="Click for Search"
+                                bg="dark"
+                            >
+                                <SearchIcon  stroke="white" strokeWidth="3" size={24} />
+                            </Button>
+                        </FlexBox>
+                    </FlexBox>
+
+                    <Text fontSize={[14,14,16]} fontWeight={"bold"} textAlign="center" color="red">{message}</Text>
+
+                </Form>
+            </FlexBox>
             <Box id="search-rresult-box"  
                 borderLeft="2px solid" 
                 borderColor="rgba(40,40,40, 0.3)"
                 width="101vw"
                 minWidth={["100%"]} minHeight={["60vw"]}
-                left={"-1vw"}
+                left={"-1vw"} top={-75}
                 p={[0]}
             >
                 
@@ -157,7 +182,7 @@ const SearchPage = (props) =>{
 const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
     const [page, setPage] = useState(1)
     const { loading, data, error } = useQuery(COMPLEX_SEARCH, {variables:{page:page, ...lazyvariables}, skip:skip});
-
+    //console.log(lazyvariables)
     const prevPage = useCallback(() => setPage(page - 1), [page])
     const nextPage = useCallback(() => setPage(page + 1), [page])
     //console.log(loading, error, data)
@@ -170,13 +195,17 @@ const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
             <>
             <Grid columns={[1,2,2,3,3,3]} pb={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
                 {firstPart.map( item => (
-                    <MovieCoverCard item={item} key={"rec" + item.id} borderRadius={[0]}/>
+                    <LazyLoadComponent key={"rec" + item.id} >
+                        <MovieCoverCard item={item} borderRadius={[0]}/>
+                    </LazyLoadComponent>
                 ))}
             </Grid>
             <HomePageFeedAd />
             <Grid columns={[1,2,2,3,3,3]} py={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
                 {secondPArt.map( item => (
-                    <MovieCoverCard item={item} key={"rec" + item.id} borderRadius={[0]}/>
+                    <LazyLoadComponent key={"rec" + item.id} >
+                        <MovieCoverCard item={item} borderRadius={[0]}/>
+                    </LazyLoadComponent>
                 ))}
             </Grid>
             <MidPageAd/>

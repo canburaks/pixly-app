@@ -7,7 +7,7 @@ import { COMPLEX_SEARCH,TAG_LIST } from "../../functions/query"
 
 import { Head, MidPageAd, HomePageFeedAd, rgaSetEvent } from "../../functions/analytics"
 //import TagSelectStatic from "./TagSelectStatic"
-import {  isEqualObj, useWindowSize } from "../../functions"
+import {  isEqualObj, useWindowSize, BannerAd } from "../../functions"
 
 //import "react-input-range/lib/css/index.css"
 
@@ -20,6 +20,7 @@ import {
     //YearSlider,
     TagSlider,
     HeaderText,
+    NewLink,
 } from "../../styled-components"
 import { LazyLoadComponent } from 'react-lazy-load-image-component';
 
@@ -98,9 +99,9 @@ const SearchPage = (props) =>{
     return(
         <PageContainer  p={[0]}>
 
-            <FlexBox overflow="hidden" flexDirection="column" position="relative" top={-65} boxShadow="card">
+            <FlexBox overflow="hidden" flexDirection="column" position="relative" top={0} boxShadow="card">
                 <Image src={responsivePosterUrl} position="absolute" 
-                    top={-75} left={-10} right={10} blur={8}
+                    top={-20} left={-10} right={10} blur={8}
                     minWidth={"100%"} 
                     alt={"Pixly AI Movie Recommendation and Movie Rating Website"} zIndex={0}
                 />
@@ -115,8 +116,8 @@ const SearchPage = (props) =>{
 
                     
                     <FlexBox flexDirection={["column", "column", "row"]} width={"100%"}>
-                        <YearSlider dispatcher={yearDispatcher} />
-                        <RatingSlider dispatcher={ratingDispatcher} />
+                        <YearSlider dispatcher={yearDispatcher}     showLabel />
+                        <RatingSlider dispatcher={ratingDispatcher} showLabel />
                     </FlexBox>
 
                     <FlexBox flexDirection={["column","column","column","row"]} alignItems="center">
@@ -164,13 +165,14 @@ const SearchPage = (props) =>{
 
                 </Form>
             </FlexBox>
+            <BannerAd />
             <Box id="search-rresult-box"  
                 borderLeft="2px solid" 
                 borderColor="rgba(40,40,40, 0.3)"
                 width="101vw"
                 minWidth={["100%"]} minHeight={["60vw"]}
-                left={"-1vw"} top={-75}
-                p={[0]}
+                left={"-1vw"} top={0}
+                p={[2]}
             >
                 
                 <SearchQueryBox lazyvariables={lazyvariables} skip={skip} />
@@ -185,26 +187,26 @@ const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
     //console.log(lazyvariables)
     const prevPage = useCallback(() => setPage(page - 1), [page])
     const nextPage = useCallback(() => setPage(page + 1), [page])
-    //console.log(loading, error, data)
+    console.log(loading, error, data)
     if (loading) return <Loading text="Searching"/>
     if (data) {
         const pageQuantity = data.complexSearch.result.length
-        const firstPart = data.complexSearch.result.slice(0, 6)
-        const secondPArt = data.complexSearch.result.slice(6)
+        const firstPart = data.complexSearch.result.slice(0, 12)
+        const secondPArt = data.complexSearch.result.slice(12)
         return (
             <>
-            <Grid columns={[1,2,2,3,3,3]} pb={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
+            <Grid columns={[2,2,3,3,4,6]} pb={[4]} gridColumnGap={[2]} gridRowGap={[2]} px={[2]}>
                 {firstPart.map( item => (
                     <LazyLoadComponent key={"rec" + item.id} >
-                        <MovieCoverCard item={item} borderRadius={[0]}/>
+                        <MovieCard item={item} borderRadius={[0]}/>
                     </LazyLoadComponent>
                 ))}
             </Grid>
             <HomePageFeedAd />
-            <Grid columns={[1,2,2,3,3,3]} py={[4]} gridColumnGap={[0]} gridRowGap={[0]}>
+            <Grid columns={[2,2,3,3,4,6]} py={[4]} gridColumnGap={[2]} gridRowGap={[2]} px={[2]}>
                 {secondPArt.map( item => (
                     <LazyLoadComponent key={"rec" + item.id} >
-                        <MovieCoverCard item={item} borderRadius={[0]}/>
+                        <MovieCard item={item} borderRadius={[0]}/>
                     </LazyLoadComponent>
                 ))}
             </Grid>
@@ -221,6 +223,34 @@ const SearchQueryBox = React.memo(({lazyvariables, skip}) => {
     else return <div></div>
 }, (p,n) => (isEqualObj(p.lazyvariables,n.lazyvariables) && p.skip === n.skip))  
 
+
+const MovieCard = ({ item }) => (
+    <FlexBox width="100%" flexDirection="column" minHeight={300} overflow="hidden">
+        <NewLink link={`/movie/${item.slug}`} title={`${item.name} (${item.year})`}>
+            <Image 
+            src={item.poster} 
+            title={`${item.name} (${item.year})`} 
+            alt={`${item.name} (${item.year})`} 
+            position="absolute" 
+            top={0} left={0} right={0} minWidth="100%"
+            height="auto"
+            />
+        </NewLink>
+        <NewLink link={`/movie/${item.slug}`} title={`${item.name} (${item.year})`}>
+            <Text 
+                color="light" zIndex={2}
+                position="absolute" 
+                bottom={"0px"} left={"4px"} 
+                fontWeight="bold"
+                fontSize={["12px","12px","12px","14px"]}
+                width="100%"
+                bg={"#1e1e1e"} hoverUnderline
+            >
+                {`${item.name} (${item.year})`}
+            </Text>
+        </NewLink>
+    </FlexBox>
+)
 
 export default withRouter(SearchPage);
 
