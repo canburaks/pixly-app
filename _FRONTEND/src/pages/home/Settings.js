@@ -21,68 +21,63 @@ import { RecommendationsInfo } from "./messages/RecommendationsInfo"
 import "../pages.css"
 
 import { 
-    ListCard, DirectorCard, CoverCard , HeaderMini, FlexBox, MovieCoverCard, Stats,
+    ListCard, DirectorCard, CoverCard , HeaderMini, FlexBox, Box, MovieCoverCard, Stats,
     ImageCard, Grid, ElementListContainer, MovieCoverBox,
     Menu, MenuItem, PageContainer, ContentContainer, Image, Loading, Error,
     ProfileCoverPanel,PlaceIcon, MessageBox,NewestCollectionCard,
-    Input, Form
+    Input, Form,ActionButton, CloseIcon
 } from "../../styled-components"
 
 
-
-const ProfileInfoForm = props => {
-	const state = useContext(GlobalContext);
-
-	return (
-		<Mutation
-			mutation={PROFILE_MUTATION}
-			onCompleted={data => (
-				console.log("completed"), state.methods.toggleModal()
-			)}
-		>
-			{mutation => (
-				<ProfileForm
-					{...props}
-					onSubmit={qv => mutation({ variables: { ...qv } })}
-				/>
-			)}
-		</Mutation>
-	);
-};
-
 const SettingsPage = props => {
-
-    const Fb = facebook()
-	const state = useContext(GlobalContext);
-    const { register, handleSubmit, errors } = useForm();
-    const [updateProfile, { data }] = useMutation(PROFILE_MUTATION, {onCompleted(data){ completedCallback(data)}});
-
-
     const profile = props.data.persona.profile
     const refetch = props.refetch
+    const Fb = facebook()
+    const state = useContext(GlobalContext);
+    
+    const [updateProfile, { data, loading }] = useMutation(PROFILE_MUTATION, {onCompleted(data){ completedCallback(data)}});
+    const { register, handleSubmit, errors } = useForm({
+        defaultValues:{
+            "Full Name":profile.name,
+            "Bio": profile.bio,
+            "mail_status": profile.mailSubsStatus
+
+        }
+    });
+
+
+
 
     const mutate = (qv) => updateProfile({ variables: { ...qv } })
 
 	const completedCallback = (data) => {
-		console.log("profile updated", data)
+		console.log("profile updated")
 	}
 
 	const onSubmit = data => {
+        //console.log("qv",data)
 		const qv = {};
 		qv.name = data["Full Name"];
 		qv.bio = data["Bio"];
 		qv.country = data["Country"];
-		qv.username = profile.username;
+        qv.username = profile.username;
+        qv.mailStatus = data["mail_status"]
 		//console.log("profile info mutation qv: ", qv)
 		mutate(qv);
 	};
-
+    //console.log("settings page:",props, profile.mailSubsStatus)
 	return (
         <PageContainer alignItems="center">
+
             <Form
                 onSubmit={handleSubmit(onSubmit)}
+                boxShadow="card"
+                mt={[4]}
                 className="frm-form profile-info-form"
+                position="relative"
             >
+                <CloseIcon clickable  onClick={()=> props.history.goBack()} />
+
                 <div className="fbox-r jcc aic t-bold t-center bor-b-color-dark bor-b-w2">
                     Update Profile
                 </div>
@@ -98,7 +93,6 @@ const SettingsPage = props => {
                     <label className="frm-label">Name</label>
                     <Input
                         className="frm-item"
-                        defaultValue={profile.name}
                         type="text"
                         placeholder="Full Name"
                         name="Full Name"
@@ -113,7 +107,6 @@ const SettingsPage = props => {
                         name="Bio"
                         type="text"
                         ref={register({ maxLength: 140 })}
-                        defaultValue={profile.bio}
                     />
                 </div>
 
@@ -134,7 +127,20 @@ const SettingsPage = props => {
                         ))}
                     </select>
                 </div>
-                <Input className="frm-item info-submit" type="submit" />
+                <FlexBox width="100%" justifyContent="flex-start">
+                    <Input 
+                        type="checkbox" 
+                        name="mail_status" 
+                        placeholder="mail_status" 
+                        className="frm-item"
+                        maxWidth={"40px"} 
+                        ref={register} />
+                    Receive notification mails
+                </FlexBox>
+
+                <ActionButton className="frm-item info-submit" mt={[4]} type="submit" isLoading={loading}>
+                    Submit
+                </ActionButton>
 
                 <FlexBox justifyContent="center" alignItems="center" className="fb-cont-box">
                     <Fb.Connect />
@@ -218,12 +224,12 @@ const UploadAvatar = ({refetch}) =>{
 
 
 
-export const SettingsPageQuery = () => {
+export const SettingsPageQuery = (props) => {
     const { loading, error, data, refetch } = useQuery(PERSONA_MINI, { variables:{username:localStorage.getItem("USERNAME")}})
     console.log("query", data)
     if (loading) return <Loading />
     if (error) return <Error />
-    if (data) return <SettingsPage data={data} refetch={refetch}/>
+    if (data) return <SettingsPage data={data} refetch={refetch} {...props} />
 };
 
 const PERSONA_MINI = gql`

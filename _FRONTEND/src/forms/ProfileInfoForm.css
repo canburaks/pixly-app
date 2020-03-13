@@ -4,15 +4,15 @@ select.frm-item{
 input[type="submit"].frm-item.info-submit {
     cursor: pointer;
     position: relative;
-    background-color: white;
+    background-color: #2e2e2e;
     left:10%;
     width:80%;
     box-shadow: 0 6px 10px -4px rgba(75, 85, 225, 0.7);
     font-weight: bold;
 	margin-top: 32px;
     border: 2px solid var(--active-color);
-    color:var(--active-color);
-    border-radius: 8px !important;
+    color:#f1f1f1;
+    border-radius: 8px;
     transition: 0.2s ease-in-out;
 }
 input[type="submit"].frm-item.info-submit:hover {
