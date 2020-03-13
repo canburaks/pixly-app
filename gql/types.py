@@ -1592,7 +1592,7 @@ class ProfileType(DjangoObjectType, SocialMediaType, SEOType):
 
     cognito_status = graphene.Boolean()
     is_verified =  graphene.Boolean()
-    subscribe_mail = graphene.Boolean()
+    mail_subs_status = graphene.Boolean()
     len_bookmarks = graphene.Int()
     len_likes = graphene.Int()
 

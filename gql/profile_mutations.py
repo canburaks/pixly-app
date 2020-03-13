@@ -76,9 +76,10 @@ class ProfileInfo(graphene.Mutation):
         name = graphene.String(required=False)
         bio = graphene.String(required=False)
         country = graphene.String(required=False)
+        mail_status = graphene.Boolean(required=False)
 
     @csrf_exempt
-    def mutate(self,info,username, name, bio, country):
+    def mutate(self,info,username, name, bio, country, mail_status):
         if info.context.user.is_authenticated:
             user = info.context.user
             if user.profile.username==username:
@@ -97,6 +98,8 @@ class ProfileInfo(graphene.Mutation):
                         print("entry", entry)
                         if len(entry)==2:
                             profile.country = entry.upper()
+                if mail_status != None:
+                    profile.subscribe_mail = mail_status
                 profile.save()
                 return ProfileInfo(profile=profile)
             else:
