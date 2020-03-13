@@ -12,14 +12,33 @@ import { useScrollPosition } from "../../functions/hooks"
 import { CoverLink } from "../atoms";
 
 
+export { AwesomeButton, AwesomeButtonProgress, AwesomeButtonSocial  } from 'react-awesome-button';
 
+import "react-awesome-button/dist/styles.css";
 
-export const ActionButton = ({onClick,isLoading, borderRadius="6px", ...props}) => (
+export const CloseButton = (props) => (
+    <Button  
+        position="absolute" 
+        top={"20px"} right="20px" 
+        fontWeight="bold" 
+        color="black"
+        fontSize="16px"
+        border="2px solid"
+        borderColor="black"
+        borderRadius="100%"
+        hoverBg="rgba(0,0,0,0.3)"
+        {...props}
+    >
+        X
+    </Button>
+)
+
+export const ActionButton = ({onClick,isLoading, borderRadius="6px",children, ...props}) => (
     <Button 
         borderRadius={borderRadius}
         minWidth={"120px"}
         maxwidth={"160px"}
-        height={["50px"]}
+        height={["40px"]}
         fontSize={[12,14,14,16]}
         bg="shark"
         color="light"
@@ -28,8 +47,7 @@ export const ActionButton = ({onClick,isLoading, borderRadius="6px", ...props}) 
         alignItems="center"
         {...props}
     >
-        {console.log("action button isLoading", isLoading)}
-        {isLoading ? <Spinner /> : props.children}
+        {isLoading ? <Spinner /> : children}
     </Button>
 )
 

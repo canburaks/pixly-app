@@ -127,14 +127,15 @@ export const CHECK_VERIFICATION = gql`
 
 
 export const PROFILE_MUTATION = gql`
-  mutation ProfileMutation($username: String!, $name: String, $bio: String, $country: String) {
-    profileInfoMutation(username: $username, name:$name, bio:$bio, country:$country) {
+  mutation ProfileMutation($username: String!, $name: String, $bio: String, $country: String, $mailStatus:Boolean) {
+    profileInfoMutation(username: $username, name:$name, bio:$bio, country:$country, mailStatus:$mailStatus) {
         profile {
           id,
           username,
           name, 
           bio,
-          country
+          country,
+          mailSubsStatus
         }
       }
     }

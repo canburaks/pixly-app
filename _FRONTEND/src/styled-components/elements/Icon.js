@@ -32,7 +32,7 @@ export const UserIcon = (props) => <User {...props} />
 export const EyeIcon = (props) => <Eye {...props} />
 
 export const LogoutIcon = (props) => <Logout size={props.size || 24} {...props} />
-export const CloseIcon = (props) => <Close {...props} />
+export const CloseIcon = (props) => <Close top={"20px"} right="20px" position="absolute" color="black" stroke="black"  {...props} />
 export const WatchIcon = (props) => <Watch {...props} />
 export const ClockIcon = (props) => <Clock {...props} />
 
@@ -49,7 +49,19 @@ const Path = styled.path`
 	${position};
 	${color};
 `
-
+export const CloseIcon2 = ({size=28, color="#000000", props}) => (
+<Svg xmlns="http://www.w3.org/2000/svg" 
+	width={size} height={size} 
+	viewBox="0 0 24 24" fill="none" 
+	stroke={color} 
+	strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+	{...props}
+>
+	<circle cx="12" cy="12" r="10"></circle>
+	<line x1="15" y1="9" x2="9" y2="15"></line>
+	<line x1="9" y1="9" x2="15" y2="15"></line>
+</Svg>
+)
 
   
 export const QuotationLeftIcon = (props) => (
