@@ -75,13 +75,19 @@ const HomePage = (props) => {
     //console.log(likes, followings)
     //console.log("home page: ",state, renderitems)
 
-    const insertModal = useCallback(() =>{
+    //This is original settings modal
+    const _insertModal = useCallback(() =>{
         //first insert updateform to state
         globalstate.methods.updateModalComponent(<UpdateForm profile={profile} refetch={props.refetch} /> );
         //then opens the form
         globalstate.methods.toggleModal()
     },[])
 
+    //Route to settings page
+    const insertModal = useCallback(() =>{
+        //first insert updateform to state
+        props.history.push("settings")
+    },[])
     /*--------------------------------------------------*/
 
 

@@ -67,9 +67,11 @@ class Profile(SocialMedia, SEO):
     #Social Media
     connected_with_facebook = models.BooleanField(default=False)
     registered_with_facebook = models.BooleanField(default=False)
+    subscribe_mail = models.BooleanField(default=True)
 
     def __str__(self):
         return self.username
+
 
     @property
     def is_verified(self):
