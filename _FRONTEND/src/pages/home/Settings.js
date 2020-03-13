@@ -220,7 +220,7 @@ const UploadAvatar = ({refetch}) =>{
 
 export const SettingsPageQuery = () => {
     const { loading, error, data, refetch } = useQuery(PERSONA_MINI, { variables:{username:localStorage.getItem("USERNAME")}})
-    console.log("query",loading, error, data)
+    console.log("query", data.persona.profile)
     if (loading) return <Loading />
     if (error) return <Error />
     if (data) return <SettingsPage data={data} refetch={refetch}/>
@@ -238,6 +238,7 @@ query persona($username:String!){
             active,
             avatar,
             isSelf,
+            subscribeMail,
             cognitoVerified,
             cognitoRegistered,
             shouldChangePassword,
