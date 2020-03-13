@@ -45,6 +45,8 @@ class Persona(Model):
     def __str__(self):
         return str(self.user.id)
 
+    def get_real_similars():
+        return self.similars_real
 
     def print_info(self, text):
         if print_log==True:

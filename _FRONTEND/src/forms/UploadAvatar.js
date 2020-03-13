@@ -2,9 +2,6 @@ import React, {useState} from "react";
 import { Mutation } from "react-apollo";
 import  { IMAGE_UPLOAD } from "../functions/mutations"
 
-const Message = (props) =>(
-    <div>{props.content}</div>
-)
 
 const UploadAvatar = ({refetch}) =>{
     const [errorMessage, setErrorMessage] = useState(null)
@@ -14,7 +11,11 @@ const UploadAvatar = ({refetch}) =>{
 
     //development: make it false for upload 
     const prevent = false;
-
+    
+    const Message = (props) =>(
+        <div>{props.content}</div>
+    )
+    
     const MessageSetter = (loading)=>{
         if (loading){
             return <Message  content={"Just one second"} size="mini"/>

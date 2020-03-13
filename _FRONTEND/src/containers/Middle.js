@@ -16,6 +16,8 @@ import TopicList from "../list/topic/TopicList";
 
 
 import HomePage from "../pages/home/HomePage.js";
+import { SettingsPageQuery } from "../pages/home/Settings.js";
+
 import Collections from "../list/lists/Collections";
 import MovieList from "../list/movie/MovieList";
 import PeoplePage from "../list/people/PeoplePage";
@@ -117,6 +119,8 @@ const Middle = (props) => {
             */}
 
             <Route exact path={`/${state.methods.getUsername()}/dashboard`} component={HomeQuery} />
+            <Route exaxt path={`/:username/settings`} component={SettingsPageQuery} />
+
             <Route path="*" component={StaticRoute} />
             {/* 
             <Route component={StaticRoute} />
