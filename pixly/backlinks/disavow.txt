@@ -102,15 +102,16 @@ domain:revistaemprender.info
 domain:clickblatt.info
 domain:canariasdeportiva.com
 domain:miamiwakeboard-cablecomplex.com
-
+domain:blackberriesandredbones.com
+domain:texasyogaconference.info
+domain:german-online.info
+domain:forumaden.com
 
 #Tried contacting webmaster, no response after 10 days
 http://107.182.233.166/canburaks/
 107.182.233.166/canburaks/
 https://hacklines.com/en/editions/153123/click
 https://canariasdeportiva.com/image/the-best-romantic-comedy-movies-of-all-time
-https://texasyogaconference.info/pics/slug-field-url-django
-https://texasyogaconference.info/pics/slug-field-url-django
-https://german-online.info/images/similar-movies
-https://forumaden.com/image-gallery/django-file-server
+
+
 
