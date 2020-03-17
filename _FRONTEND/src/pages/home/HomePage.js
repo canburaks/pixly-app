@@ -108,7 +108,7 @@ const HomePage = (props) => {
     const RenderElementContainer = React.memo(() => <ElementListContainer items={renderitems.items} type={renderitems.type} />, [state])
 /*----------------------------------------------------------------*/
      
-    console.log(recommendationmovies)
+    //console.log(recommendationmovies)
     //const newestfilms = persona.newestLists.forEach(l => l.link=`/list/${l.slug}`)
     //<CoverPanel profile={profile} settingsHandler={insertModal} ProfileMenuPanel={ProfileMenuPanel} />
     const newestcollections = [ ...persona.newestLists, ...persona.newestTopics ]
