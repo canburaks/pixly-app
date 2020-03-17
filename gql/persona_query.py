@@ -136,13 +136,9 @@ class CustomPersonaType(graphene.ObjectType, SocialMediaType, SEOType):
         return Cache.recent_movies(quantity=20)
 
     def resolve_recommendations(self, info, *_):
-        records = Recommendation.get_recommendations(profile=self.user.profile, real=True)
-        #print("records", records)
-        #records = sorted(
-        #    filter(lambda x: (x.movie.cover_poster != "" and x.movie.cover_poster != None), records),
-        #    key=lambda x:x.prediction, reverse=True
-        #)
-        #print("records", records)
+        print("asd")
+        records = Recommendation.prepare_recommendations(profile=self.user.profile)
+        print("recommendations quantity",len(records))
         return records
 
 

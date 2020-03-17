@@ -306,7 +306,7 @@ class Profile(SocialMedia, SEO):
 
     def get_recommendations(self):
         from persona.models import Recommendation
-        return Recommendation.objects.filter(profile = self, prediction__gte = 4)
+        return Recommendation.prepare_recommendations(self)
 
     def predict(self, target,zscore=False):
         from persona.models import Recommendation

@@ -31,6 +31,20 @@ from tqdm import tqdm
 from django_bulk_update.helper import bulk_update
 t = TmdbMovie.create_from_zero
 
+
+def set_recs_non_recommended(start, end):
+    from tqdm import tqdm
+    import json
+    from django_bulk_update.helper import bulk_update
+    all_recs = Recommendation.objects.all()
+    print("Current  elements: ", all_recs.count())
+    all_recs = all_recs[start: end]
+    for m in tqdm(all_recs):
+        m.is_recommended = False
+    print("start updating: ")
+    bulk_update(all_recs, update_fields=["is_recommended"])
+
+
 def generate_title(movie):
     #start with year, add name at the end
     year_text = f"({movie.year}) - " 
