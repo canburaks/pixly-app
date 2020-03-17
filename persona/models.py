@@ -424,6 +424,8 @@ class Recommendation(models.Model):
 
     is_recommended = models.BooleanField(default = False)
     recommended_at = models.DateTimeField(null=True)
+    rec_date = models.DateField(null=True, blank=True)
+
 
     #When profile rate the movie
     is_watched = models.BooleanField(default=False)
