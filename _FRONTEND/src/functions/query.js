@@ -246,7 +246,9 @@ query persona($username:String!){
             prediction,
             movie{
                 id, name, year, slug, poster, coverPoster, summary,imdbRating, imdb,
-                director{id, name, poster}
+                director{id, name, poster},
+                tags{name, slug, genreTag, subgenreTag}
+                videos{id,title,summary,link,duration,tags,isFaved,ytId,thumb}
             }
         },
     }

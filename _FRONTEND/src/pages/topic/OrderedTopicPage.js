@@ -264,7 +264,7 @@ const TopicQuery = ({ lazyvariables }) =>{
     else return <div></div>
 }
 
-const OrderedCard = ({ item, specs, play}) => (
+export const OrderedCard = ({ item, specs, play}) => (
     <FlexBox width="90vw" flexDirection={["column", "column","column", "row"]}
         border={"0px"} borderRadius={6}
         boxShadow="card" bg="#f1f1f1"
@@ -385,7 +385,7 @@ const OrderedCard = ({ item, specs, play}) => (
             >   
 
             <SuperBox flexGrow={1} height="auto" minWidth="100%" className="img-supbox"
-                src={item.coverPoster}
+                src={item.coverPoster || (item.movie && item.movie.coverPoster)}
                 alt={`${item.movie.name} poster`} 
                 ratio={0.6}  zIndex={0}
             >
