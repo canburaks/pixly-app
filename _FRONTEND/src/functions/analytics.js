@@ -248,7 +248,7 @@ export const BannerAd = () => {
     //if (!production) return <div className="hidden"></div>
     return (
         <ins className="adsbygoogle"
-            style={{ display: "block", width: "100%", minHeight: 90, height:"auto" }}
+            style={{ display: "block", width: "100%", minHeight: 50, height:"auto", maxHeight:180 }}
             data-ad-client="ca-pub-9259748524746137"
             data-ad-slot="6024408481"
             data-ad-format="auto"
