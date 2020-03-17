@@ -1652,7 +1652,7 @@ class ProfileType(DjangoObjectType, SocialMediaType, SEOType):
         return None
 
     def resolve_recommendations(self, info):
-        rec_qs = Recommendation.get_recommendations(self)
+        rec_qs = Recommendation.prepare_recommendations(self)
         return rec_qs
 
     def resolve_ratingset(self, info):

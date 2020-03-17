@@ -438,6 +438,7 @@ class Recommendation(models.Model):
     def __str__(self):
         return "Profile: {}, Movie: {}, Prediction:{}".format(self.profile, self.movie,self.prediction)
 
+    #deprecated
     @classmethod
     def get_recommendation_movies(cls, profile, real=False):
         is_eligible = cls.passed_week(profile)
@@ -454,8 +455,9 @@ class Recommendation(models.Model):
                     movies.add(rec.movie)
             return movies
 
+    #deprecated
     @classmethod
-    def get_recommendations(cls, profile, real=False):
+    def get_recommendations(cls, profile):
         is_eligible = cls.passed_week(profile)
         if is_eligible or real==False:
             all_qs = cls.filter_by_prediction(profile, 3.7)
@@ -486,6 +488,40 @@ class Recommendation(models.Model):
             #print("persona",result)
             return result
 
+    @classmethod
+    def prepare_recommendations(cls, profile, real=False):
+        is_eligible = cls.is_eligible_for_new_recommendation(profile)
+        print("is eligible for new recommendations: ", is_eligible)
+        
+        #yeni öneri yap
+        if is_eligible:
+            all_qs = cls.filter_by_prediction(profile, 3.7)
+            #print("all_qs", all_qs.count(), all_qs)
+            y1960_1990 = cls.filter_by_year(all_qs, 1960, 1990).order_by("?")[:2]
+            #print("year_qs", y1960_1990, y1960_1990.count())
+            y1990_2000 = cls.filter_by_year(all_qs, 1990, 2000).order_by("?")[:2]
+            y2000_2010 = cls.filter_by_year(all_qs, 2000, 2010).order_by("?")[:2]
+            y2010_2020 = cls.filter_by_year(all_qs, 2010, 2020).order_by("?")[:2]
+            #print("year_qs", y2010_2020, y2010_2020.count())
+            above42 = all_qs.filter(prediction__gte = 4.2).order_by("?")[:2]
+            qs_sum = [y1960_1990, y1990_2000, y2000_2010, y2010_2020, above42]
+            #print("eligible persona",len(qs_sum))
+            records = set()
+            for qs in qs_sum:
+                print("qs counts:",qs.count())
+                for rec in qs:
+                    rec.make_recommended()
+                    records.add(rec)
+            print("persona records", records)
+            return records
+
+        # not passed a week, recommend previous recs 
+        elif not is_eligible:
+            latest_rec = profile.recommendations.order_by("-rec_date").first()
+            latest_recs = profile.recommendations.filter(rec_date = latest_rec.rec_date)
+            print("previous recs are recommended: ",latest_recs.count())
+            return latest_recs
+
 
     @classmethod
     def filter_by_year(cls,qs, start, stop ):
@@ -493,12 +529,13 @@ class Recommendation(models.Model):
         return new_qs
 
     @classmethod
-    def filter_by_prediction(cls, profile, min ):
+    def filter_by_prediction(cls, profile, min):
         Q1 = Q(prediction__gte = min)
         Q2 = Q(profile = profile, is_watched=False, is_recommended=False)
         q_filter = (Q1 & Q2)
         return cls.objects.select_related("movie").exclude(movie__poster="").filter(q_filter)
 
+    #deprecated
     @classmethod
     def last_recommendation_date(cls, profile):
         qs = cls.objects.filter(profile=profile, is_recommended=True,
@@ -508,6 +545,7 @@ class Recommendation(models.Model):
         else:
             return None
 
+    #deprecated
     @classmethod
     def passed_week(cls, profile):
         import datetime
@@ -522,10 +560,32 @@ class Recommendation(models.Model):
         elif last_date==None:
             return True
 
+    @classmethod
+    def is_eligible_for_new_recommendation(cls, profile):
+        import datetime
+        profile_latest_rec = profile.recommendations.order_by("-rec_date").first()
+
+        #Currently no recommendations with rec_date, eligible
+        if profile_latest_rec == None or profile_latest_rec.rec_date == None:
+            return True
+        
+        today = datetime.date.today()
+        last_rec = profile_latest_rec.rec_date
+        dif_days = (today - last_rec).days
+
+        #passed more than 6 days, eligible
+        if dif_days > 6:
+            return True
+
+        #passed less than 6 days, not eligible
+        else:
+            return False
+
     def make_recommended(self):
-        from datetime import datetime, timezone
+        import datetime
         self.is_recommended = True
-        self.recommended_at = datetime.now(timezone.utc)
+        self.recommended_at = datetime.datetime.now(datetime.timezone.utc) #will be removed in future
+        self.rec_date = datetime.date.today()
         self.save()
 
 """
