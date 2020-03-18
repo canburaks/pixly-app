@@ -61,6 +61,12 @@ themes.default.colors = {
 	accent2: "#f42c04",
 	active: '#3437c7',
 
+	viv1:"#0a0bc4",
+	viv2:"#372dff",
+	viv3:"#2a1c7c",
+	viv4:"#87379a",
+	viv5:"#be4b9a",
+
 	green: "#30c5b1",
 	shark: "#21292d",
 

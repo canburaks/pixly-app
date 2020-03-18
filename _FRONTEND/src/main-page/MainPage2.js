@@ -159,7 +159,7 @@ const MainPage = (props) => {
 					<SubHeaderText fontSize={["22px", "22px", "28px"]} 
 						fontWeight="bold" alignItems="center" 
 						textAlign="center" width="100%"
-						my={4}
+						my={4} color="viv1"
 					>
 						Personal Movie Recommendations
 					</SubHeaderText>
