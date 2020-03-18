@@ -124,7 +124,6 @@ const HomePage = (props) => {
                 onClick={stateHandler} 
                 onClickSettings={insertModal} 
             />
-            <BannerAd />
             <ContentContainer>
                 {profile.cognitoRegistered==true && profile.cognitoVerified==false &&
                     <ActivationMessage 
@@ -222,6 +221,7 @@ const RecommendationsContainer = ({ items }) => {
 
     return (
         <>
+            <BannerAd />
             {items.slice(0,4).map( item => (
                     <WideCard key={"rec" + item.movie.id}
                         item={item}

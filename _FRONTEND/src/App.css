@@ -52,9 +52,6 @@ html, body {
 }
 .adsbygoogle {
     height: auto;
-    /*
-    min-height: 150px !important;
-    */
     min-width: 300px !important;
     min-height:100px;
     width: 100%;
