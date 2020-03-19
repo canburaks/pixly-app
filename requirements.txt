@@ -30,6 +30,7 @@ django-graphql-jwt==0.1.13
 django-import-export==1.1.0
 django-imagekit==4.0.2 
 django-mysql==2.4.1
+django-redirect-to-non-www==0.1.1
 django-redis==4.9.0
 django-rest-knox==3.1.5
 django-sslserver==0.21
