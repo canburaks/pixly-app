@@ -69,6 +69,7 @@ ALLOWED_HOSTS = ["*",
     "http://playthough.com",
     'http://localhost:3000',
     'https://127.0.0.1:3000',
+    "ec2-35-178-89-86.eu-west-2.compute.amazonaws.com"
     ]
 
 #INTERNAL_IPS = ('127.0.0.1')
