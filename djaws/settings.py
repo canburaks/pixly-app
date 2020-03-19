@@ -141,8 +141,8 @@ MIDDLEWARE = [
     'graphql_jwt.middleware.JSONWebTokenMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'redirect_to_non_www.middleware.RedirectToNonWww',
     'django_hosts.middleware.HostsResponseMiddleware'   #for subdomain
-    'redirect_to_non_www.middleware.RedirectToNonWww'
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
