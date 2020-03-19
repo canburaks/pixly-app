@@ -78,7 +78,8 @@ const MainPage = (props) => {
 	
 	var simulateClick = function () {
 		//console.log("elem", elem)
-		if (window.location.href.includes("pixly.app")){
+		if (window.location.href.includes("pixly.app") || true){
+			console.log("asd")
 			try {
 				setTimeout(function(){
 					var elem = document.getElementById("sumo-form")
@@ -89,10 +90,19 @@ const MainPage = (props) => {
 			}
 		}
 	};
+	const enableSumoForm = () => {
+		if (window.location.href.includes("pixly.app") || true){
+			setTimeout(function(){
+				var elem = document.getElementById("sumo-form")
+				if (elem) elem.click()
+			},10000)
+		}
+	}
+
 	useEffect(()=>{
-		document.addEventListener('DOMContentLoaded', simulateClick)
-		return () => document.removeEventListener("DOMContentLoaded", simulateClick)
-	},[])
+		document.addEventListener('DOMContentLoaded', enableSumoForm)
+		return () => document.removeEventListener("DOMContentLoaded", enableSumoForm)
+	},[window.location.href])
 
 	return (
     <>
