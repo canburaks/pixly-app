@@ -77,10 +77,16 @@ const MainPage = (props) => {
 	const featurecolor = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-cards/aqua.jpg" // aqua, kırmızı, mor, mor-pembe, sarı, yesil
 	
 	var simulateClick = function () {
-			var elem = document.getElementById("sumo-form")
-			//console.log("elem", elem)
-			if (elem ){
-				setTimeout(function(){elem.click()}, 5000);
+		//console.log("elem", elem)
+		if (window.location.href.includes("pixly.app")){
+			try {
+				setTimeout(function(){
+					var elem = document.getElementById("sumo-form")
+					elem.click()
+					}, 5000);
+				} catch(e){
+					console.log("sumo err")
+			}
 		}
 	};
 	useEffect(()=>{
