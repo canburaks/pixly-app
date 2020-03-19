@@ -1757,6 +1757,7 @@ class ProfileType(DjangoObjectType, SocialMediaType, SEOType):
         return [x.profile for x in qs]
 
 
+
 class MovieListType(DjangoObjectType):
     is_self = graphene.Boolean()
     image = graphene.types.json.JSONString()
