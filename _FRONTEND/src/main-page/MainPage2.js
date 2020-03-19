@@ -77,21 +77,18 @@ const MainPage = (props) => {
 	const featurecolor = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-cards/aqua.jpg" // aqua, kırmızı, mor, mor-pembe, sarı, yesil
 	
 	var simulateClick = function () {
-		if (window.location.href.includes("pixly.app")){
-		var elem = document.getElementsByClassName("sumo-click")
-		// Create our event (with options)
-		var evt = new MouseEvent('click', {
-			bubbles: true,
-			cancelable: true,
-			view: window
-	});
-		// If cancelled, don't dispatch our event
-		var canceled = !elem.dispatchEvent(evt);
+		if (window.location.href.includes("pixly.app") || true){
+			var elem = document.getElementById("sumo-form")
+			console.log("elem", elem)
+			if (elem ){
+				setTimeout(function(){elem.click();}, 5000);
+				
+			}
 		}
 	};
 	useEffect(()=>{
-		window.addEventListener('load', simulateClick)
-		return () => window.removeEventListener("load", simulateClick)
+		document.addEventListener('DOMContentLoaded', simulateClick)
+		return () => document.removeEventListener("DOMContentLoaded", simulateClick)
 	},[])
 
 	return (
@@ -296,7 +293,7 @@ const MainPage = (props) => {
 				<MessageFromPixly />
 			</SuperBox>}
 			<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />
-			<a data-sumome-listbuilder-id="7d4ae060-1439-43a2-ad77-f45a30d154d7" className="hidden sumo-form">Click Here</a>
+			<a data-sumome-listbuilder-id="7d4ae060-1439-43a2-ad77-f45a30d154d7" className="hidden" id="sumo-form">Click Here</a>
 
         </PageContainer>
     </>
