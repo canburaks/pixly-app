@@ -75,7 +75,26 @@ const MainPage = (props) => {
 	const lovesimonposter= "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/love-simon-1280x650.jpg"
 	
 	const featurecolor = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-cards/aqua.jpg" // aqua, kırmızı, mor, mor-pembe, sarı, yesil
-    return (
+	
+	var simulateClick = function () {
+		if (window.location.href.includes("pixly.app")){
+		var elem = document.getElementsByClassName("sumo-click")
+		// Create our event (with options)
+		var evt = new MouseEvent('click', {
+			bubbles: true,
+			cancelable: true,
+			view: window
+	});
+		// If cancelled, don't dispatch our event
+		var canceled = !elem.dispatchEvent(evt);
+		}
+	};
+	useEffect(()=>{
+		window.addEventListener('load', simulateClick)
+		return () => window.removeEventListener("load", simulateClick)
+	},[])
+
+	return (
     <>
         <Head
             description={
@@ -153,7 +172,6 @@ const MainPage = (props) => {
 					<TriangeClip color="#E5E5E5" width={windowWidth} />
 			</FlexBox>
 			
-
 				{/* PERSONAL RECOMMENDATIONS */}
 				<FlexBox px={"5vw"} flexDirection="column" width="100%" justifyContent="center" alignItems="center">
 					<SubHeaderText fontSize={["22px", "22px", "28px"]} 
@@ -278,6 +296,8 @@ const MainPage = (props) => {
 				<MessageFromPixly />
 			</SuperBox>}
 			<SignupFormModal isOpen={isModalOpen} closeModal={closeModal}  />
+			<a data-sumome-listbuilder-id="7d4ae060-1439-43a2-ad77-f45a30d154d7" className="hidden sumo-form">Click Here</a>
+
         </PageContainer>
     </>
     );
