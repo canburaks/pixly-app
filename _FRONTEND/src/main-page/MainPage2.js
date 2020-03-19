@@ -77,11 +77,11 @@ const MainPage = (props) => {
 	const featurecolor = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/feature-cards/aqua.jpg" // aqua, kırmızı, mor, mor-pembe, sarı, yesil
 	
 	var simulateClick = function () {
-		if (window.location.href.includes("pixly.app") || true){
+		if (window.location.href.includes("pixly.app")){
 			var elem = document.getElementById("sumo-form")
-			console.log("elem", elem)
+			//console.log("elem", elem)
 			if (elem ){
-				setTimeout(function(){elem.click();}, 5000);
+				setTimeout(function(){elem.click();}, 7000);
 				
 			}
 		}
