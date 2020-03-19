@@ -16,7 +16,7 @@ import {
 	useClientHeight,
 	rgaSetCloseTime,
 	useWindowWidth,
-	useValues, useHover
+	useValues, useHover,
 } from "../functions";
 import { GlobalContext } from "../";
 
@@ -90,13 +90,13 @@ const MainPage = (props) => {
 			}
 		}
 	};
+
 	const enableSumoForm = () => {
-		if (window.location.href.includes("pixly.app") || true){
-			setTimeout(function(){
-				var elem = document.getElementById("sumo-form")
-				if (elem) elem.click()
-			},10000)
-		}
+		setTimeout(function(){
+			var elem = document.getElementById("sumo-form")
+			if (elem) elem.click()
+		},10000)
+		
 	}
 
 	useEffect(()=>{
@@ -125,6 +125,13 @@ const MainPage = (props) => {
                 property="og:image"
                 content="https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/brand/pixly-hare-circle.png"
             />
+			
+	        {window.location.href.includes("pixly.app") &&
+				<script async>
+				{`(function(s,u,m,o,j,v){j=u.createElement(m);v=u.getElementsByTagName(m)[0];j.async=1;j.src=o;j.dataset.sumoSiteId='a1a48287ffc6dcad869b7bb151d8241fc424f1f09c9d47658d236795a9bd8e8f';v.parentNode.insertBefore(j,v)})(window,document,'script','//load.sumo.com/');`}
+				</script>
+			}
+
         </Head>
 
         <PageContainer bg="#E5E5E5">
