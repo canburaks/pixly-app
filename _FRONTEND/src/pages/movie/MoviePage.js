@@ -180,6 +180,7 @@ const MoviePage = props => {
 				darken
 			/>
 
+
 			<FlexBox flexDirection="column" justifyContent="center" alignItems="center" mt={[0]} bg="rgba(0,0,0,0.95)">
 				<HeaderOneText color="light" my={[3]} />
 				{true && <Text fontWeight="bold" fontSize={["14px", "14px", "16px"]} opacity={0.75} mt={[2]} color="light">How much did you like the movie?</Text>}
