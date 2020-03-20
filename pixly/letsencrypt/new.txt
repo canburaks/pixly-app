@@ -1,0 +1,9 @@
+certbot certonly \
+    --manual \
+    --preferred-challenges=dns \
+    --email canburak@msn.com \
+    --agree-tos \
+    --config-dir ./config \
+    --logs-dir ./logs \
+    --work-dir ./workdir \
+    -d *.pixly.app
