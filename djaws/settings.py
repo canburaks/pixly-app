@@ -64,11 +64,9 @@ ALLOWED_HOSTS = ["*",
     "http://pixly.app/*",
     "http://www.pixly.app/*",
     "https://pixly.app/graphql",
-    "https://playthough.com/",
-    "https://playthough.com/graphql",
-    "http://playthough.com",
     'http://localhost:3000',
     'https://127.0.0.1:3000',
+    "ec2-3-11-72-113.eu-west-2.compute.amazonaws.com",
     "ec2-35-178-89-86.eu-west-2.compute.amazonaws.com"
     ]
 
