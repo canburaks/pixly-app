@@ -136,7 +136,8 @@ const SettingsPage = props => {
                         maxWidth={"40px"} 
                         ref={register} />
                     Receive notification mails
-                </FlexBox>
+                </FlexBox> 
+                
 
                 <ActionButton className="frm-item info-submit" mt={[4]} type="submit" isLoading={loading}>
                     Submit
