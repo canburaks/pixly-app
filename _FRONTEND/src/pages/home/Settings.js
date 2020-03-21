@@ -138,7 +138,6 @@ const SettingsPage = props => {
                     Receive notification mails
                 </FlexBox> 
                 
-
                 <ActionButton className="frm-item info-submit" mt={[4]} type="submit" isLoading={loading}>
                     Submit
                 </ActionButton>
