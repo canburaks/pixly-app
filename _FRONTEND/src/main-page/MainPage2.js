@@ -31,14 +31,15 @@ import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,G
 	LinkButton,CoverLink,CoverCard, BubbleButton, Button,Image, SimpleModal,
 	GradientAnimationBox,SignupForm, SignupFormModal, production, PulseButton,
 	ScaleButton, Hr, Popup,KeyIcon,LinkIcon, CoverImage, AbsoluteImage, CardContainer,
-	TriangeClip, SinusWave
+	TriangeClip, SinusWave, Ul, Li
 	
 } from "../styled-components";
 import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon, RateIcon, SimilarFinderIcon} from "./icons"
+import { MailIcon, StarIcon, LightningIcon, MrsIcon, SrIcon, BmIcon, FinderIcon} from "./assets/index"
 
 import "./MainPage.css";
 import "./dist/css/style.css"
-
+import "./assets/style.css"
 
 
 const MainPage = (props) => {
@@ -150,25 +151,32 @@ const MainPage = (props) => {
 					top={0} left={0} right={0} 
 					width={["100vw"]} zIndex={0}
 					alt={"Pixly AI Movie Recommendation"} minHeight={[ "410px", "410px", "500px"]}
-				/>	
+				/>
+				<Box 
+					position="absolute" bg={"rgba(0,0,0,0.4)"}
+					top={0} left={0} right={0} 
+					width={["100vw"]} zIndex={0}
+					alt={"Pixly AI Movie Recommendation"} minHeight={[ "410px", "410px", "500px"]}
+				/>
 
 				<HeaderText 
-					mt={["80px", "80px", 4,5]} mb={[2]}
-					fontSize={["24px","24px","28px", "40px", "44px"]} 
+					mt={["50px", "50px", 4,5]} mb={[4]}
+					fontSize={["28px","28px","34px", "40px", "44px"]} 
 					textAlign="center"
 					uncapitalize 
-					textShadow="-3px 3px 2px rgba(40, 40, 40, 0.8)" 
+					textShadow="-1px 1px 2px rgba(40, 40, 40, 0.8)" 
 					zIndex={8} 
 					opacity={1}
 					color="light"
 					maxWidth={"600px"}
 				>
-					{heroMainText}
+					Discover Best Movies <br/>
+					That Fit Your Cinema Taste
 				</HeaderText>
 				<Text mt={[2]} zIndex={8} 
 					mb={[3,3,4]} px={[3,3,4]} textAlign="center"
 					fontSize={["14px", "14px", "16px", "16px", "18px"]}  
-					color="light" maxWidth={"800px"}
+					color="light" maxWidth={"900px"}
 					textShadow="-1px 1px 1px rgba(40, 40, 40, 0.8)"
 				>
 					{heroSubheaderText}
@@ -176,98 +184,213 @@ const MainPage = (props) => {
 				{!authStatus && 
 					<Button px={[2]} mx={[4]} my={[3]}
 						onClick={setModalOpen} 
-						width={"200px"} height={"40px"}
-						color="light"  zIndex={18} borderRadius={"6px"}
+						width={"200px"} height={"50px"}
+						color="light" fontSize={["18px"]} fontWeight="bold"  
+						zIndex={18} 
+						border="3px solid" borderColor="light"
+						borderRadius={"6px"}
 						
-						gradient="pinkish"
+						bg="transparent"
 						boxShadow={"card"} 
-						fontWeight="bold" hoverBg={"dark"}
-						hoverScale={1.1}
+						hoverColor={"#f42c04"} hoverBorderColor="#f42c04"
+						hoverScale={1.01}
 						>
-						Join
+						JOIN
 					</Button>}
-					<TriangeClip color="#E5E5E5" width={windowWidth} />
 			</FlexBox>
-			
-				{/* PERSONAL RECOMMENDATIONS */}
-				<FlexBox px={"5vw"} flexDirection="column" width="100%" justifyContent="center" alignItems="center">
-					<SubHeaderText fontSize={["22px", "22px", "28px"]} 
-						fontWeight="bold" alignItems="center" 
-						textAlign="center" width="100%"
-						my={4}
-					>
-						Personal Movie Recommendations
-					</SubHeaderText>
 
-					<Text fontSize={["14px"]} fontSize="bold" opacity={0.8} pb={[5]} textAlign="center" >
-						We will recommend you good movies considering your taste. 
-						In order to get personal movie recommendations, 
-						join us by creating an account. 
-						After you rate 40 movies, give us some time to analyze. 
-						Then, Our AI-assisted algorithms will find and recommend good movies weekly.
-					</Text>
-					<PersonalRecommendations screenSize={screenSize} />
-				</FlexBox>
+			{/* PERSONAL RECOMMENDATIONS */}
+			<FlexBox flexDirection="column" width="100%" 
+				justifyContent="center" 
+				alignItems="center" 
+				width={["90vw", "90vw", "86vw"]} maxWidth={"900px"} 
+				alignSelf="center" boxShadow="0 16px 32px rgba(0,0,0,0.35)"
+				my={[3]} p={[3,3,4]}
+			>
+
+
+				<SubHeaderText fontSize={["22px", "22px", "28px"]} 
+					fontWeight="bold" alignItems="center" 
+					textAlign="center" width="100%"
+					my={2}
+				>
+					Personal Movie Recommendations
+				</SubHeaderText>
+
+				<Text fontSize={["14px"]} fontSize="bold" opacity={0.8} textAlign="center" >
+					We will recommend you good movies considering your taste. 
+					In order to get personal movie recommendations, 
+					join us by creating an account. 
+					After you rate 40 movies, give us some time to analyze. 
+					Then, Our AI-assisted algorithms will find and recommend good movies weekly.
+				</Text>
+				
+				<Ul width="100%" mt={[2]} position="relative" ml={0}
+					className="svg-progressbar" display="flex" 
+					flexDirection={["column", "column","column", "row"]} 
+					alignItems={["center", "center","center", "flex-start"]}
+					justifyContent="flex-start"
+				>
+					<Hr className="green-arrow" boxShadow="0 4px 4px rgba(0,0,0,0.25)" position="absolute" top={"34px"} left={"15%"} width={["62%"]} zIndex={0}  m={0} display={["none", "none", "none","flex"]}/>
+					<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
+						<MailIcon />
+						<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]}  mt={[2,2,2,4]}>JOIN US</Text>
+						<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>You can use our services effectively by creating an account. <strong className="anchor-color" onClick={setModalOpen}>It's free.</strong> </Text>
+					</Li>
+					<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
+						<StarIcon />
+						<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]} mt={[2,2,2,4]}>SCORE MOVIES</Text>
+						<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>Rate at least 40 movies so we can recognize your cinema taste. After than, give us some time to analyze.</Text>
+					</Li>
+					<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
+						<LightningIcon />
+						<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]} mt={[2,2,2,4]}>GET RECOMMENDATIONS</Text>
+						<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>We will find the movies you like based on your ratings with AI-boosted technologies and recommend them to you weekly.</Text>
+					</Li>
+				</Ul>
+
+
+			</FlexBox>
 
 
 
 	
 			{/* FEATURES */}
-			<ContentContainer boxSizing="border-box" bg="#E5E5E5">
-				<Grid columns={[1,1,1,2,2,2,4]} px={[2]} py={[4]} mt={4}>
-					<CardContainer p={[4]} alignItems="center" bg="#ffffff" zIndex={1}>
-						<SubHeaderText 
-							fontSize={["16px", "16px", "16px", "18px"]} 
-							fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
-						>
-							Movie Recommendations
-						</SubHeaderText>
-						<Text fontSize={["14px", "14px","14px", "16px"]}>
-							After you rate 40 movies, give us some time to analyze. 
-							Then, Our AI-assisted algorithms will find and make <strong><em>very personal movie recommendations</em></strong>.
-						</Text>
+			<ContentContainer boxSizing="border-box" bg="#E5E5E5" my={[4]}>
+				<Grid columns={[1,1,1,2,2,2,4]} px={[2]} py={[4]} mt={3}>
+					<CardContainer p={[4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="0 16px 32px rgba(0,0,0,0.35)">
+						<FlexBox>
+							<MrsIcon />
+							<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
+								<SubHeaderText 
+									fontSize={["16px", "16px", "16px", "18px"]} 
+									fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
+								>
+									Movie Recommendations
+								</SubHeaderText>
+								<Text fontSize={["14px", "14px","14px", "16px"]}>
+									After you rate 40 movies, give us some time to analyze. 
+									Then, Our AI-assisted algorithms will find and make <strong><em>very personal movie recommendations</em></strong>.
+								</Text>
+								{!authStatus && 
+									<Button px={[2]} mx={[0]} my={[3]}
+										zIndex={18} 
+										onClick={setModalOpen} 
+
+										width={"200px"} height={"35px"}
+										color="light" fontSize={["14px"]} fontWeight="bold"  
+										border="3px solid" borderColor="#1eaa6e"
+										borderRadius={"6px"} hoverScale={1.001}
+										bg="#1eaa6e" boxShadow={"card"} 
+										
+									>
+										Create Account
+									</Button>
+									}
+							</FlexBox>
+						</FlexBox>
 					</CardContainer>
 
-					<CardContainer p={[4]} alignItems="center" bg="#ffffff" zIndex={1}>
-						<SubHeaderText 
-							fontSize={["16px", "16px", "16px", "18px"]} 
-							fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
-						>
-							Find Similar Movies
-						</SubHeaderText>
-						<Text fontSize={["14px", "14px","14px", "16px"]}>
-						Discover movies that are similar to your favorite movies, both algorithmically and contextually.
-						</Text>
-						<CoverLink to="/similar-movie-finder" />
+					<CardContainer p={[4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="0 16px 32px rgba(0,0,0,0.35)">
+						<FlexBox height="100%">
+							<FinderIcon />
+							<FlexBox width={"100%"} flexDirection="column" pl={[2]} height="100%">
+								<SubHeaderText 
+									fontSize={["18px"]} 
+									fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
+								>
+									Similar Movie Finder
+								</SubHeaderText>
+								<Text fontSize={["14px", "14px","14px", "16px"]}>
+									Discover movies that are similar to your favorite movies, both algorithmically and contextually.
+								</Text>
+								<FlexBox justifyContent="center" alignItems="center"
+									width={"200px"} height={"35px"} mt={[4]}
+									border="3px solid" borderColor="rgba(61, 51, 204, 0.8)"
+									borderRadius={"6px"}
+									bg="transparent" boxShadow={"card"} 
+									hoverColor={"#f42c04"} hoverBorderColor="#f42c04"
+									hoverScale={1.001}
+								>
+									<NewLink to="/similar-movie-finder" className="valign-middle"
+											color="rgba(61, 51, 204, 0.8)" fontSize={["14px"]} fontWeight="bold"  
+											textAlign="center" width="100%"
+									>
+										Find Similar Movies
+									</NewLink>
+								</FlexBox>
+							</FlexBox>
+						</FlexBox>
 					</CardContainer>
 
-					<CardContainer p={[4]} alignItems="center" bg="#ffffff" zIndex={1}>
-						<SubHeaderText 
-							fontSize={["16px", "16px", "16px", "18px"]} 
-							fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
-						>
-							Advance Film Search
-						</SubHeaderText>
-						<Text fontSize={["14px", "14px","14px", "16px"]}>
-						You can search movies within your favourite genre or subgenre and filter them with IMDb rating or release year.
-						</Text>
+					<CardContainer p={[4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="0 16px 32px rgba(0,0,0,0.35)">
+						<FlexBox>
+							<SrIcon />
+							<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
+								<SubHeaderText 
+									fontSize={["18px"]} 
+									fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
+								>
+									Advance Film Search
+								</SubHeaderText>
+								<Text fontSize={["14px", "14px","14px", "16px"]}>
+									You can search movies within your favourite genre or subgenre and filter them with IMDb rating or release year.
+								</Text>
+								<FlexBox justifyContent="center" alignItems="center"
+									width={"200px"} height={"35px"} my={[3]}
+									border="3px solid" borderColor="rgba(61, 51, 204, 0.8)"
+									borderRadius={"6px"}
+									bg="transparent" boxShadow={"card"} 
+									hoverColor={"#f42c04"} hoverBorderColor="#f42c04"
+									hoverScale={1.001}
+								>
+									<NewLink to="/advance-search" className="valign-middle"
+											color="rgba(61, 51, 204, 0.8)" fontSize={["14px"]} fontWeight="bold"  
+											textAlign="center" width="100%"
+									>
+										Search Films
+									</NewLink>
+								</FlexBox>
+							</FlexBox>
+						</FlexBox>
 					</CardContainer>
-					<CardContainer  p={[4]} alignItems="center" bg="#ffffff" zIndex={1}>
-						<SubHeaderText 
-							fontSize={["16px", "16px", "16px", "18px"]} 
-							fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
-						>
-							Ratings, Favorites, Watchlist
-						</SubHeaderText>
-						<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px","14px", "16px"]}>
-							Besides recommendations, Pixly is a movie rating website. Keep your favorite films and watch list in one platform.
-						</Text>
+
+					<CardContainer  p={[4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="0 16px 32px rgba(0,0,0,0.35)">
+						<FlexBox>
+							<BmIcon />
+							<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
+								<SubHeaderText 
+									fontSize={["18px"]} 
+									fontWeight="bold" alignItems="center" pb={[2]} textAlign="center"
+								>
+									Personal Cinema History
+								</SubHeaderText>
+								<Text mr={[1,1,2]} textAlign="center" fontSize={["14px", "14px","14px", "16px"]}>
+									Besides recommendations, Pixly is a movie rating website. Keep and track your favorite films and watchlist in one platform.
+								</Text>
+								{!authStatus && 
+									<Button px={[2]} mx={[0]} my={[3]}
+										zIndex={18} hoverScale={1.001}
+										onClick={setModalOpen} 
+
+										width={"200px"} height={"35px"}
+										color="rgba(61, 51, 204, 0.8)" fontSize={["14px"]} fontWeight="bold"  
+										border="3px solid" borderColor="rgba(61, 51, 204, 0.8)"
+										borderRadius={"6px"}
+										bg="transparent" boxShadow={"card"} 
+										hoverColor={"#f42c04"} hoverBorderColor="#f42c04"
+									>
+										Join Us
+									</Button>
+									}
+							</FlexBox>
+						</FlexBox>
 					</CardContainer>
 				</Grid>
 
 			
-				<CardContainer bg="#ffffff" width={"100%"} mb={[5]}>
-					<SubHeaderText fontSize={["16px", "16px", "16px", "18px"]}
+				<CardContainer  width={"100%"} mb={[5]} bg="transparent" boxShadow="0 16px 32px rgba(0,0,0,0.35)">
+					<SubHeaderText fontSize={["18px"]}
 						fontWeight="bold" alignItems="center" 
 						pb={[2]} mt={[3]} 
 						textAlign="center" width="100%"
