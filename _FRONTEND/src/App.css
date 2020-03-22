@@ -60,7 +60,9 @@ html, body {
 .hidden {
     visibility:hidden;
 }
-
+.valign-middle {
+    vertical-align:middle;
+}
 .page-container {
     position: relative;
     width: 99vw;
@@ -292,3 +294,31 @@ h3 {
     --button-anchor-color-hover: #f1bfa0;
     --button-anchor-border: 1px solid #8c633c;
 }    
+
+.overlay-color-full-purple {
+    background-image: linear-gradient(130deg, #4954de 0%, #aa49de 100%);
+    background-image: -webkit-linear-gradient(130deg, #4954de 0%, #aa49de 100%);
+    background-image: -moz-linear-gradient(130deg, #4954de 0%, #aa49de 100%);
+    background-image: -ms-linear-gradient(130deg, #4954de 0%, #aa49de 100%);
+    background-image: -o-linear-gradient(130deg, #4954de 0%, #aa49de 100%);
+    /* 0% transparency */
+  }
+
+hr.green-arrow {
+    background-image: linear-gradient(to right, #248f61, #1eaa6e, #15c57a, #09e185, #00fd90);
+    height:6px;
+}
+
+.anchor-color{
+    cursor:pointer;
+    text-decoration: none;
+    background-image: linear-gradient( transparent 0%, transparent calc(50% - 9px), rgba(10, 11, 196, 0.35) calc(50% - 9px), rgba(61, 51, 204, 0.35) 100% );
+    transition: background-position 320ms ease-in-out, padding 220ms ease-in-out;
+    background-size: 100% 200%;
+    background-position: 0 0;
+    word-break: break-word;
+}
+.anchor-color:hover{
+    background-image: linear-gradient( transparent 0%, transparent calc(50% - 9px), rgba(10, 11, 196, 0.35) calc(50% - 9px), rgba(61, 51, 204, 0.8) 100% );
+    background-position: 0 100%;
+}
