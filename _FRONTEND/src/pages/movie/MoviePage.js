@@ -162,7 +162,7 @@ const MoviePage = props => {
 		}
 		else (window.scrollTo({left:0, top:0, behavior:"smooth"}))
 	},[])
-	console.log(item)
+	//console.log(item)
 	return (
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
 			<Head
