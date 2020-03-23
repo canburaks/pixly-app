@@ -331,7 +331,12 @@ export const ImdbRatingIconLink = (props) => (
 )
 export const ImdbRatingIcon = (props) => (
 <FlexBox mr={[1]} display="flex" alignItems="flex-end">
-	<ImdbIcon title="See IMDb Page" fill="#f1f1f1" {...props} />
+
+	{props.imdblink 
+		? <OuterLink href={props.link} mr={[1]} title="See IMDb Page"><ImdbIcon  fill="#f1f1f1" {...props} /></OuterLink>
+		: <ImdbIcon title="See IMDb Page" fill="#f1f1f1" {...props} />
+	
+	}
 	{props.rating && 
 	<Text 
 		fontWeight="bold"
@@ -456,7 +461,7 @@ const Bookmark = (props) => (
 
 const Facebook = (props) => (
 	<SocialMediaSvg xmlns="http://www.w3.org/2000/svg" 
-		viewBox="0 0 24 24" fill="#f1f1f1"
+		viewBox="0 0 24 24" 
 		{...props}
 	>
 		<path d="M20 0a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h16zm-4 7.28V4.5h-2.29c-2.1 0-3.42 1.6-3.42 3.89v1.67H8v2.77h2.29v6.67h2.85v-6.67h2.29l.57-2.77h-2.86V8.94c0-1.1.58-1.66 1.72-1.66H16z"/>

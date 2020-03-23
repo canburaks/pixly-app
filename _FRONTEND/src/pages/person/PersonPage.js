@@ -92,7 +92,7 @@ const PersonPage = (props) => {
 
 
     const styles = {
-        contCon: { paddingBottom:50, paddingLeft:40, paddingRight:40 }
+        contCon: { paddingBottom:50}
     }
 
     //console.log("rdf",item.richdata)

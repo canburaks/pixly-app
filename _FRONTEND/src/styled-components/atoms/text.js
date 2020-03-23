@@ -284,7 +284,6 @@ export const TagText = styled('p')({
   )
 
 export const Blockquote = styled('blockquote')`
-    
     ${color}
     ${space}
     ${shadow}

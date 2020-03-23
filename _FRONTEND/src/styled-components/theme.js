@@ -154,6 +154,7 @@ themes.default.shadows = {
 	//		"0 8px 8px   rgba(0, 0, 0, 0.22), " + 
 	//		"0 16px 16px rgba(0, 0, 0, 0.22), " + 
 	//		"0 32px 32px rgba(0, 0, 255, 0.12)" 
+	blurry:"0 8px 16px rgba(0,0,0,0.20), 0 2px 18px rgba(0,0,0,0.20)"
 }
 themes.default.shadows.card = themes.default.shadows.diffuse2
 
