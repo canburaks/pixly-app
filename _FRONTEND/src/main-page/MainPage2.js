@@ -217,21 +217,28 @@ const MainPage = (props) => {
 						Personal Movie Recommendations
 					</SubHeaderText>
 
-					<Text fontSize={["14px"]} fontSize="bold" opacity={0.8} textAlign="center" >
+					<Text fontSize={["14px"]} fontSize="bold" opacity={0.8} textAlign="center" pb={[4]}>
 						We will recommend you good movies considering your taste. 
 						In order to get personal movie recommendations, 
 						join us by creating an account. 
 						After you rate 40 movies, give us some time to analyze. 
 						Then, Our AI-assisted algorithms will find and recommend good movies weekly.
 					</Text>
-					
-					<Ul width="100%" mt={[2]} position="relative" ml={0}
+					<HeaderMini fontSize={["22px", "22px"]} opacity={0.8} mt={[4]} position="relative" bottom={"-8px"}>How to get personalized recommendations?</HeaderMini>
+					<Ul width="100%"  position="relative" ml={0}
 						className="svg-progressbar" display="flex" 
 						flexDirection={["column", "column","column", "row"]} 
 						alignItems={["center", "center","center", "flex-start"]}
 						justifyContent="flex-start"
 					>
-						<Hr className="green-arrow" boxShadow="0 4px 4px rgba(0,0,0,0.25)" position="absolute" top={"34px"} left={"15%"} width={["62%"]} zIndex={0}  m={0} display={["none", "none", "none","flex"]}/>
+						<Hr 
+							className="green-arrow" boxShadow="0 4px 4px rgba(0,0,0,0.25)" 
+							position="absolute" 
+							top={"34px"} left={"15%"} width={"65%"} 
+							zIndex={0}  m={0} 
+							display={["none", "none", "none","flex"]}
+						/>
+
 						<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
 							<MailIcon />
 							<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]}  mt={[2,2,2,4]}>JOIN US</Text>
