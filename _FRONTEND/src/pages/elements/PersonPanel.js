@@ -31,7 +31,7 @@ export const HomeLink = ({link, name, size, className="", }) => (
 
 
 const PersonPanel = (props) =>{
-    console.log(props)
+    //console.log(props)
     return(
         <CardContainer flexDirection="row">
             <Image 
