@@ -36,12 +36,12 @@ export const MovieCoverPanel = (props) => (
             {...props}
         >
             <DirectorLinks directors={props.item.director}  color="lightDark1" fontSize="m" mb={[1,1,1,2]}/>
-            <TagBox tags= {props.item.tags.filter(tag => tag.genreTag === true)} />
-            {/*console.log("movie cover")
-            <RatingMutation  item={props.item}  />
-            */}
+            
+            {props.children}
         </TopPanelCoverElement>
 )
+
+
 
 const ListActions = (props) => (
 <FlexBox position="absolute" top="20px" left={[1,1,2,2]} height="auto" minWidth="28px" flexDirection="column">

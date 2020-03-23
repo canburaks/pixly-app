@@ -90,6 +90,7 @@ export const CoverLink = (props) => (
 )
 
 export const NewLink = styled(LinkNoFollow)`
+  transition:  ${themeGet("transitions.medium")};
   color: unset !important;
   color:${props => props.color ? props.color : themeGet("light")} !important;
   font-family: ${props => props.fontFamily ? props.fontFamily : themeGet("fonts.paragraph")};
@@ -101,7 +102,6 @@ export const NewLink = styled(LinkNoFollow)`
       opacity:1;
   };
   text-decoration:${props => (props.underline || props.textUnderline) ? "underline" : "initial"};
-  transition: ${themeGet("transitions.fast")};
   lineHeight:inherit;
   ${props => props.hidden && hideText()}
   ${flexbox}

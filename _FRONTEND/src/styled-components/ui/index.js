@@ -6,5 +6,6 @@ export * from "./SimilarMovies"
 export * from "./DoubleRangeSlider"
 export * from "./VideoPlayer"
 export * from "./Bot"
+//export * from "./MovieCoverPanel"
 
 //export * from "./Popup"

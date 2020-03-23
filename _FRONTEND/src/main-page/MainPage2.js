@@ -35,7 +35,7 @@ import {Box,Span,FlexBox,  MovieCoverBox,DirectorCard,MovieCoverCard,ImageCard,G
 	
 } from "../styled-components";
 import {ActionsIcon, CollectionsIcon, RecommendationIcon, SearchIcon, PeopleIcon, RateIcon, SimilarFinderIcon} from "./icons"
-import { MailIcon, StarIcon, LightningIcon, MrsIcon, SrIcon, BmIcon, FinderIcon} from "./assets/index"
+import { MailIcon, StarIcon, LightningIcon, MrsIcon,ListIcon, SrIcon, BmIcon, FinderIcon} from "./assets/index"
 
 import "./MainPage.css";
 import "./dist/css/style.css"
@@ -199,66 +199,63 @@ const MainPage = (props) => {
 					</Button>}
 			</FlexBox>
 
-			{/* PERSONAL RECOMMENDATIONS */}
-			<FlexBox flexDirection="column" width="100%" 
-				justifyContent="center" 
-				alignItems="center" 
-				width={["90vw", "90vw", "86vw"]} maxWidth={"900px"} 
-				alignSelf="center" boxShadow="0 16px 32px rgba(0,0,0,0.35)"
-				my={[3]} p={[3,3,4]}
-			>
 
+			<ContentContainer boxSizing="border-box" bg="#E5E5E5" my={[4]}  px={"5vw", "5vw", "5vw", "8vw"}>
 
-				<SubHeaderText fontSize={["22px", "22px", "28px"]} 
-					fontWeight="bold" alignItems="center" 
-					textAlign="center" width="100%"
-					my={2}
+				{/* PERSONAL RECOMMENDATIONS */}
+				<FlexBox flexDirection="column" width="100%" 
+					justifyContent="center" 
+					alignItems="center" 
+					alignSelf="center" boxShadow="blurry"
+					my={[3]} p={[3,3,4]}
 				>
-					Personal Movie Recommendations
-				</SubHeaderText>
+					<SubHeaderText fontSize={["22px", "22px", "28px"]} 
+						fontWeight="bold" alignItems="center" 
+						textAlign="center" width="100%"
+						my={2}
+					>
+						Personal Movie Recommendations
+					</SubHeaderText>
 
-				<Text fontSize={["14px"]} fontSize="bold" opacity={0.8} textAlign="center" >
-					We will recommend you good movies considering your taste. 
-					In order to get personal movie recommendations, 
-					join us by creating an account. 
-					After you rate 40 movies, give us some time to analyze. 
-					Then, Our AI-assisted algorithms will find and recommend good movies weekly.
-				</Text>
-				
-				<Ul width="100%" mt={[2]} position="relative" ml={0}
-					className="svg-progressbar" display="flex" 
-					flexDirection={["column", "column","column", "row"]} 
-					alignItems={["center", "center","center", "flex-start"]}
-					justifyContent="flex-start"
-				>
-					<Hr className="green-arrow" boxShadow="0 4px 4px rgba(0,0,0,0.25)" position="absolute" top={"34px"} left={"15%"} width={["62%"]} zIndex={0}  m={0} display={["none", "none", "none","flex"]}/>
-					<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
-						<MailIcon />
-						<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]}  mt={[2,2,2,4]}>JOIN US</Text>
-						<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>You can use our services effectively by creating an account. <strong className="anchor-color" onClick={setModalOpen}>It's free.</strong> </Text>
-					</Li>
-					<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
-						<StarIcon />
-						<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]} mt={[2,2,2,4]}>SCORE MOVIES</Text>
-						<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>Rate at least 40 movies so we can recognize your cinema taste. After than, give us some time to analyze.</Text>
-					</Li>
-					<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
-						<LightningIcon />
-						<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]} mt={[2,2,2,4]}>GET RECOMMENDATIONS</Text>
-						<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>We will find the movies you like based on your ratings with AI-boosted technologies and recommend them to you weekly.</Text>
-					</Li>
-				</Ul>
-
-
-			</FlexBox>
+					<Text fontSize={["14px"]} fontSize="bold" opacity={0.8} textAlign="center" >
+						We will recommend you good movies considering your taste. 
+						In order to get personal movie recommendations, 
+						join us by creating an account. 
+						After you rate 40 movies, give us some time to analyze. 
+						Then, Our AI-assisted algorithms will find and recommend good movies weekly.
+					</Text>
+					
+					<Ul width="100%" mt={[2]} position="relative" ml={0}
+						className="svg-progressbar" display="flex" 
+						flexDirection={["column", "column","column", "row"]} 
+						alignItems={["center", "center","center", "flex-start"]}
+						justifyContent="flex-start"
+					>
+						<Hr className="green-arrow" boxShadow="0 4px 4px rgba(0,0,0,0.25)" position="absolute" top={"34px"} left={"15%"} width={["62%"]} zIndex={0}  m={0} display={["none", "none", "none","flex"]}/>
+						<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
+							<MailIcon />
+							<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]}  mt={[2,2,2,4]}>JOIN US</Text>
+							<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>You can use our services effectively by creating an account. <strong className="anchor-color" onClick={setModalOpen}>It's free.</strong> </Text>
+						</Li>
+						<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
+							<StarIcon />
+							<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]} mt={[2,2,2,4]}>SCORE MOVIES</Text>
+							<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>Rate at least 40 movies so we can recognize your cinema taste. After than, give us some time to analyze.</Text>
+						</Li>
+						<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
+							<LightningIcon />
+							<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]} mt={[2,2,2,4]}>GET RECOMMENDATIONS</Text>
+							<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>We will find the movies you like based on your ratings with AI-boosted technologies and recommend them to you weekly.</Text>
+						</Li>
+					</Ul>
+				</FlexBox>
 
 
 
 	
 			{/* FEATURES */}
-			<ContentContainer boxSizing="border-box" bg="#E5E5E5" my={[4]}>
-				<Grid columns={[1,1,1,2,2,2,4]} px={[2]} py={[4]} mt={3}>
-					<CardContainer p={[4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="0 16px 32px rgba(0,0,0,0.35)">
+				<Grid columns={[1,1,1,2,2,2,2,2,4]} py={[4]} mt={3}>
+					<CardContainer p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="blurry">
 						<FlexBox>
 							<MrsIcon />
 							<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
@@ -291,7 +288,7 @@ const MainPage = (props) => {
 						</FlexBox>
 					</CardContainer>
 
-					<CardContainer p={[4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="0 16px 32px rgba(0,0,0,0.35)">
+					<CardContainer p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="blurry">
 						<FlexBox height="100%">
 							<FinderIcon />
 							<FlexBox width={"100%"} flexDirection="column" pl={[2]} height="100%">
@@ -323,7 +320,7 @@ const MainPage = (props) => {
 						</FlexBox>
 					</CardContainer>
 
-					<CardContainer p={[4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="0 16px 32px rgba(0,0,0,0.35)">
+					<CardContainer p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="blurry">
 						<FlexBox>
 							<SrIcon />
 							<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
@@ -355,7 +352,7 @@ const MainPage = (props) => {
 						</FlexBox>
 					</CardContainer>
 
-					<CardContainer  p={[4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="0 16px 32px rgba(0,0,0,0.35)">
+					<CardContainer  p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="blurry">
 						<FlexBox>
 							<BmIcon />
 							<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
@@ -389,27 +386,46 @@ const MainPage = (props) => {
 				</Grid>
 
 			
-				<CardContainer  width={"100%"} mb={[5]} bg="transparent" boxShadow="0 16px 32px rgba(0,0,0,0.35)">
-					<SubHeaderText fontSize={["18px"]}
-						fontWeight="bold" alignItems="center" 
-						pb={[2]} mt={[3]} 
-						textAlign="center" width="100%"
-					>
-						Lists of Films
-					</SubHeaderText>
-					<Text maxWidth="100%"  textAlign="center" mb={[3]} fontSize={["14px", "14px","14px", "16px"]}>
-						We are passionately expanding our movie lists. Besides categorical film lists, 
-						we have many collected popular collections. <NewLink underline to="/lists-of-films">See other movie lists</NewLink>
-					</Text>
+				<CardContainer  p={[4]}  width={"100%"} mb={[5]} bg="transparent" boxShadow="blurry">
+					<FlexBox>
+						<ListIcon />
+						<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
+							<SubHeaderText
+								fontSize={["18px"]} fontWeight="bold" 
+								alignItems="center" pb={[2]} textAlign="center"
+							>
+								Curated Lists of Films
+							</SubHeaderText>
+							<Text fontSize={["14px", "14px","14px", "16px"]}>
+								We are passionately expanding our movie lists. Besides categorical film lists, 
+								we have many collected popular collections. <NewLink underline to="/lists-of-films">See other movie lists</NewLink>
+							</Text>
+							<FlexBox justifyContent="center" alignItems="center"
+								width={"200px"} height={"35px"} my={[3]}
+								border="3px solid" borderColor="rgba(61, 51, 204, 0.8)"
+								borderRadius={"6px"}
+								bg="transparent" boxShadow={"card"} 
+								hoverColor={"#f42c04"} hoverBorderColor="#f42c04"
+								hoverScale={1.001}
+							>
+								<NewLink to="/lists-of-films" className="valign-middle"
+										color="rgba(61, 51, 204, 0.8)" fontSize={["14px"]} fontWeight="bold"  
+										textAlign="center" width="100%"
+								>
+									Visit Movie Lists
+								</NewLink>
+							</FlexBox>
+						</FlexBox>
+					</FlexBox>
 
-					<Grid columns={[2,2,3,]} py={[2]} gridColumnGap={[2]} mt={[3]}>
+					<Grid columns={[2,2,4]} py={[2]} gridColumnGap={[2]} mt={[3]}>
 						{[{name:"Cyberpunk", slug:"cyberpunk", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/5/cover/cyberpunk-2.jpg"},
 							{name:"Outbreak", slug:"outbreak-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/30/cover/virus.jpg"},
 							{name:"Mystery", slug:"mystery", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/19/cover/mystery-3.jpg"},
 							{name:"Rom-Com", slug:"romantic-comedy", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/24/cover/romantic-comedy-movies.jpg"},
 							{name:"Biography", slug:"historical-figures", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/17/cover/historical-figures-2.jpg"},
 							{name:"Thought Provoking", slug:"thought-provoking", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/10/cover/thought-provoking-3.jpg"},
-							{name:"Anorexia and Bulimia", slug:"eating-disorder-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/31/cover/card.jpg"},
+							//{name:"Anorexia and Bulimia", slug:"eating-disorder-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/31/cover/card.jpg"},
 							{name:"Gangster", slug:"gangster-films", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/22/cover/best-gangster-movies.jpg"},
 							{name:"BDSM", slug:"bdsm-movies", coverPoster:"https://cbs-static.s3.amazonaws.com/static/media/topics/27/cover/bdsm.jpg"},
 

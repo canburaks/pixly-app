@@ -10,7 +10,7 @@ import { MOVIE } from "../../functions/query";
 import { useQuery } from '@apollo/react-hooks';
 
 
-import { useAuthCheck } from "../../functions/hooks";
+import { useAuthCheck, useValues } from "../../functions/hooks";
 import { Col } from "react-flexbox-grid";
 import { ScrollInto } from "../../functions";
 
@@ -24,8 +24,8 @@ import { twitter } from "../../functions/third-party/twitter/twitter"
 import { CrewCard, MovieSimilarBox, PageContainer, ContentContainer, MovieCoverBox, MovieCoverPanel,
 	HiddenHeader,HeaderMini,Grid,Card,Image,ImageCard,HiddenSpan,RatingMutation,HeaderText,Text,Span,NewLink,TextSection,
 	MovieRichCardBox, MovieRichCard, FlexBox, Box, HashLink, YoutubeIcon,InfoIcon,QuotationLeftIcon,
-	HtmlContainer, SuperBox, TagBox, AbsoluteBox, CoverLink,CardContainer,HtmlParagraph,
-	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText, Blockquote,
+	HtmlContainer, SuperBox, TagBox, AbsoluteBox, CoverLink,CardContainer,HtmlParagraph, Button,
+	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText, Blockquote, Iframe,
 } from "../../styled-components";
 
 import { ExpansionBox, SimpleDialog } from "../../styled-material"
@@ -37,6 +37,9 @@ import "../pages.css";
 const MoviePage = props => {
 	//rgaPageView();
 	//console.log("props", props)
+	const _wwidth = window.innerWidth - 20
+	const ytPlayerWidth = useValues([_wwidth, _wwidth, 420, 560, 640]) 
+
 	const { movie: item, viewer } = props.item;
 	const { cacheUpdate } = props;
 	const { hash } = useLocation()
@@ -65,9 +68,28 @@ const MoviePage = props => {
 	if (viewer && viewer.points) {
 		state.methods.updatePoints(viewer.points);
 	}
+
 	const hasVideos = item.videos && item.videos.length > 0 ? true : false;
 	const haveTrailer = item.videoTags.includes("trailer")
 	const haveNonTrailer = item.videoTags.filter(t => t !== "trailer").length > 0
+
+	const trailerVideo = useMemo(() => {
+		if (item.videos && item.videos.length > 0){
+			const trs = item.videos.filter(v => v.tags.includes("trailer"))
+			const trailer = [...trs, ...item.videos][0]
+			trailer.link = trailer.link.replace("watch?v=", "embed/");
+			trailer.width = parseInt(ytPlayerWidth)
+			trailer.height = parseInt(ytPlayerWidth * 0.5625)
+			return trailer
+		}
+		return false
+	},[item.slug])
+
+	const Trailer = React.memo(() => <Iframe 
+			frameBorder="0"
+			width={trailerVideo.width} height={trailerVideo.height}
+			src={trailerVideo.link} 
+		/>,() => item.slug === item.slug)
 
 	const videoText = haveTrailer 
 		? haveNonTrailer
@@ -83,22 +105,6 @@ const MoviePage = props => {
 	const actorFilter = item.crew.filter(c => c.job == "A");
 	const allCrews = [...directorFilter, ...actorFilter];
 
-
-	//console.log(directorFilter)
-
-
-	//const listsThatInvolveText = useMemo(() => {
-	//	if(item.appears.length > 0){
-	//		const directornames = item.appears.map(list => list.relatedPersons[0].name).join(", ")
-	//		const text = `${item.name} is the favorite movie of ${directornames}. You can check these great film lists that includes ${item.name}`
-	//		return text
-	//	}
-	//	return null
-	//},[item.slug] )
-
-	//console.log(item.appears)
-	//console.log("page status",item.isBookmarked, item.isFaved, item.viewerRating)
-	//console.log(item.seoShortDescription)
 	const headerOneText = useMemo(() => item.header 
 		? item.header
 		: ((item.inPageGroups && item.inPageGroups.length > 0) || (item.topics && item.topics.length > 0))
@@ -156,7 +162,7 @@ const MoviePage = props => {
 		}
 		else (window.scrollTo({left:0, top:0, behavior:"smooth"}))
 	},[])
-	//console.log(item.htmlContent, item.header)
+	console.log(item)
 	return (
 		<PageContainer className={item.hasCover ? "cover-true" : "cover-false"}>
 			<Head
@@ -166,7 +172,6 @@ const MoviePage = props => {
 				image={item.coverPoster ? item.coverPoster : item.poster}
 				canonical={`https://pixly.app/movie/${item.slug}`}
 			/>
-
 			<MovieCoverPanel
 				blur={20}
 				mb={[3]}
@@ -176,14 +181,31 @@ const MoviePage = props => {
 				cacheUpdate={cacheUpdate}
 				authStatus={authStatus}
 				isLargeScreen={isLargeScreen}
-				Trailer={hasVideos ? () => <TrailerIcon onClick={openVideoHandler} /> : null}
 				darken
-			/>
+			>
+				{item.videos.length > 0 && 
+					<Button px={[2]}
+						onClick={openVideoHandler} 
+						width={"120px"} height={"auto"}
+						color="light" fontSize={["12px", "12px"]} fontWeight="bold"  
+						zIndex={18} 
+						border="2px solid" borderColor="light"
+						borderRadius={"6px"}
+						
+						bg="transparent"
+						boxShadow={"card"} 
+						hoverColor={"#3D33CC"} hoverBorderColor="#3D33CC"
+						>
+						PLAY TRAILER
+					</Button>
+				}
+			</MovieCoverPanel>
 
 
 			<FlexBox flexDirection="column" justifyContent="center" alignItems="center" mt={[0]} bg="rgba(0,0,0,0.95)">
-				<HeaderOneText color="light" my={[3]} />
-				{true && <Text fontWeight="bold" fontSize={["14px", "14px", "16px"]} opacity={0.75} mt={[2]} color="light">How much did you like the movie?</Text>}
+				<HeaderOneText color="light" mt={[3]} />
+				<TagBox tags={item.tags.filter(tag => (tag.genreTag === true || tag.subgenreTag === true))} fontSize={["12px", "12px", "14px"]} />
+				{true && <Text fontWeight="bold" fontSize={["14px", "14px", "16px"]} opacity={0.75} mt={[3]} position="relative" bottom={-16} color="light">How much did you like the movie?</Text>}
 				<RatingMutation item={item} size={50}/>
 			</FlexBox>
 			<BannerAd />
@@ -192,24 +214,23 @@ const MoviePage = props => {
 			<ContentContainer zIndex={1} pt={[4]}>
 				{/* Quotation  */}
 				{item.reviews.filter(r => r.primary === true).map(r => (
-					<Blockquote key={r.text.slice(0,8)} cite={r.referenceLink} 
-						opacity={0.9} 
-						m={0} mb={[4,4,5]} mx={[4,4,5]}
-						px={[2]} py={[2]} 
-						
-						border="8px solid" borderRadius="12px"
-						boxShadow="0 8px 32px rgba(0,0,0,0.4)"
-						bg={"rgba(255,255,255,0.9)"}
-						borderColor="rgba(0,0,255,0.6)"
+					<Blockquote key={r.text.slice(0,8)} 
+						cite={r.referenceLink} 
+						className="movie-blockquote"
 						display="flex" flexDirection="column"
+						m={0} mb={[4,4,5]}
+						p={[3,3,4]}
+						width="100%"
+						borderRadius="6px"
+						boxShadow="card"
 						
 					>
-						<QuotationLeftIcon size="34px" opacity={0.4}/>
+						<QuotationLeftIcon size="34px"  color="black" />
 						<Text 
-							ml={[2,2,3,4,5]} textAlign="center"
-							fontSize={["18px"]} 
+							ml={[2,2,3,4,5]} textAlign="center" pr={[2]}
+							fontSize={["18px", "18px", "20px"]} 
 							fontWeight="bold" 
-							opacity={0.9}
+							opacity={0.9} color="#ffffff"
 						>
 							{r.text}
 						</Text>
@@ -217,13 +238,11 @@ const MoviePage = props => {
 								ml={[2,2,3,4,5]} 
 								html={r.htmlContent}  
 								mt={[3]} 
-								style={{p:{fontSize:["12px", "14px"], textAlign:"right", padding:"auto"}}} 
+								style={{p:{fontSize:["12px","12px", "14px", "16px"], textAlign:"right", padding:"auto", color:"white", fontWeight:"bold"}}} 
 
 								width="auto"	
 								selfAlign="flex-end"
 							/>
-						<FlexBox justifyContent="flex-end" width="100%" px={[3,4,4,5]}>
-						</FlexBox>
 					</Blockquote>
 				))}
 
@@ -234,7 +253,7 @@ const MoviePage = props => {
 				{item.htmlContent && <HtmlContent movie={item} style={{p:{fontSize:textSize}}} />}
 
 				{/* VIDEO */}
-				{hasVideos && 
+				{item.videos.length > 1 &&
 					<Box ref={nodeVideoSection}  >
 						<ExpansionBox header={videoText}>
 								<LazyLoadComponent>
@@ -255,7 +274,6 @@ const MoviePage = props => {
 							alignItems="center" 
 							px={[3]} mt={[4]}
 							className="other-films-of-director"
-							color="light"
 							borderRadius="6px"
 							boxShadow="card"
 						>
@@ -274,16 +292,16 @@ const MoviePage = props => {
 							</NewLink>
 							<NewLink follow zIndex={1}
 								link={`/person/${d.person.slug}#director-page-filmography`} 
-								width="100%"
+								ml={[3,3,4]}
 								fontWeight="bold" 
 								textAlign="center"
 								fontSize={["20px", "20px", "24px", "28px"]}
-								hoverUnderline
-								color={"#f1f1f1"}
+								hoverUnderline opacity={0.85}
+								color={"dark"}
 								title={`See the other films of the director of ${item.name} (${item.year}): ${d.person.name}`}
 							>
 								
-								<em>See {d.person.name}</em>'s Other Films
+								Director's Other Films
 							</NewLink>
 						</FlexBox>
 					))
@@ -396,14 +414,8 @@ const MoviePage = props => {
 						onClose={closeHandler}
 						isOpen={openVideoSection}
 					>
-                <FlexBox minWidth="90vw" minHeight={["auto", "auto", "70vh"]} maxWidth="100%" overflowX="hidden">
-					<YoutubePlayer
-						videos={item.videos}
-						title={item.name + " Videos"}
-					/>
-                </FlexBox>
-            </SimpleDialog>}
-
+						<Trailer />
+					</SimpleDialog>}
 
 			</ContentContainer>
 		</PageContainer>

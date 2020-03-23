@@ -1,6 +1,6 @@
 .person-poster-panel {
     min-height:30vh;
-    width:100vw;
+    width:100%;
     position: relative; 
     margin-bottom:40px;
     background: rgba(90, 90, 90, 0.2);

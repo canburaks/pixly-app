@@ -25,7 +25,7 @@ export const CardContainer = (props) => (
         p={[3]} mt={[3]} px={[3,3,4]}
         width={"100%"} height="auto"
         border={"0px"}
-        borderRadius={6}
+        borderRadius={"6px"}
         boxShadow="card"
         bg="#f1f1f1"
         {...props}
@@ -283,7 +283,7 @@ export const TopPanelCoverElement = React.memo((props) => (
             left={0} bottom={0} 
             width={"100%"} height={"auto"} maxHeight={"50%"}
             darken={props.darken}
-            bg={"rgba(0,0,0, 0.5)"}
+            bg={"rgba(0,0,0, 0.8)"}
         >
             <Span 
                 color="lightDark1" textShadow={"textDark"} 

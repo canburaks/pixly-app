@@ -62,7 +62,12 @@ export const MovieSvg = styled(Svg)`
 `
 export const SocialMediaSvg = styled(Svg)`
     stroke: ${themeGet("colors.light")};
-    fill: light;
+    fill: ${props => !props.fill ? themeGet("colors.light")
+        :              props.imdb ? "#fac539" : 
+            (props.facebook ? "#3a67af" : 
+            (props.twitter ? "#009de7" : 
+            (props.instagram ? "#C13584" : "#f1f1f1")))
+    };
     width:  ${props => props.size || ["20px", "26px", "32px", "36px"]} !important;
     height: ${props => props.size || ["20px", "26px", "32px", "36px"]} !important;
     cursor: ${props => props.clickable && "pointer"};

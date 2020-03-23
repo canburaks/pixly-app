@@ -435,3 +435,65 @@ export function SrIcon(props) {
     </Svg>
   )
 }
+
+export function ListIcon(props) {
+  return (
+    <Svg width={120} height={122} viewBox="0 0 120 122" fill="none" {...props}>
+      <g filter="url(#prefix__filter0_dd)">
+        <rect
+          x={20}
+          y={2}
+          width={80}
+          height={80}
+          rx={24}
+          fill="url(#prefix__paint0_linear)"
+        />
+      </g>
+      <path
+        d="M85 54V24c0-2.75-2.25-5-5-5H50c-2.75 0-5 2.25-5 5v30c0 2.75 2.25 5 5 5h30c2.75 0 5-2.25 5-5zM57.5 44l5.075 6.775L70 41.5 80 54H50l7.5-10zM35 29v35c0 2.75 2.25 5 5 5h35v-5H40V29h-5z"
+        fill="#fff"
+      />
+      <defs>
+        <linearGradient
+          id="prefix__paint0_linear"
+          x1={20}
+          y1={42}
+          x2={100}
+          y2={42}
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#3437C7" />
+          <stop offset={1} stopColor="#4B55E1" />
+        </linearGradient>
+        <filter
+          id="prefix__filter0_dd"
+          x={0}
+          y={0}
+          width={120}
+          height={122}
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity={0} result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          />
+          <feOffset dy={20} />
+          <feGaussianBlur stdDeviation={10} />
+          <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.29876 0" />
+          <feBlend in2="BackgroundImageFix" result="effect1_dropShadow" />
+          <feColorMatrix
+            in="SourceAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          />
+          <feOffset dy={2} />
+          <feGaussianBlur stdDeviation={2} />
+          <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" />
+          <feBlend in2="effect1_dropShadow" result="effect2_dropShadow" />
+          <feBlend in="SourceGraphic" in2="effect2_dropShadow" result="shape" />
+        </filter>
+      </defs>
+    </Svg>
+  )
+}
