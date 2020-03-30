@@ -205,7 +205,7 @@ class Profile(SocialMedia, SEO):
     @property
     def persona(self):
         from persona.models import Persona
-        if self.points<40:
+        if self.points<40 and scan_recommendations!=True:
             self.print_info("has less than 40 ratings.(profile.persona function)")
             return None
         else:
