@@ -640,7 +640,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
                     text += f"A {director_name} movie released in {self.year}."
 
             # Similars, Recommendation
-            sim_text = f" See similar movies like {self.name} ({self.year}), {self.name} cast, plot and the trailer." 
+            sim_text = f"See similar movies like {self.name} ({self.year}), cast, plot and the trailer." 
             sim_text_num = len(sim_text)
             current_num = len(text)
             available_num = 150 - (current_num + sim_text_num)
