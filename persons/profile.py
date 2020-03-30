@@ -28,6 +28,7 @@ def avatar_upload_path(instance, filename):
 
 scan_recommendations = False
 
+
 class Profile(SocialMedia, SEO):
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
