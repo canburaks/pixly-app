@@ -104,7 +104,8 @@ const MainPage = (props) => {
 		document.addEventListener('DOMContentLoaded', enableSumoForm)
 		return () => document.removeEventListener("DOMContentLoaded", enableSumoForm)
 	},[window.location.href])
-
+	const heroimage= "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/kesik-hero.jpg"
+	const lala = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"
 	return (
     <>
         <Head
@@ -139,30 +140,30 @@ const MainPage = (props) => {
 			
 			{/* HERO*/}
 			<FlexBox
-				flexDirection="column" minHeight={[ "400px", "400px", "500px"]}
-				alignItems="center" justifyContent="center" boxSizing="border-box"
+				flexDirection="column" 
+				boxSizing="border-box"
 				zIndex={9}  boxSizing="border-box"
 				px={[2,2,3,4]} 
-				height={"100%"} overflow="hidden"
-				position="relative"
+				height="56vw"  overflow="hidden"
+				position="relative" minHeight="400px"
 			>
-				<CoverImage ratio={0.56} src={"https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"} 
+				<CoverImage ratio={0.5625} src={heroimage} 
 					position="absolute"  className="hero-image"
 					top={0} left={0} right={0} 
 					width={["100vw"]} zIndex={0}
-					alt={"Pixly AI Movie Recommendation"} minHeight={[ "410px", "410px", "500px"]}
+					alt={"Pixly AI Movie Recommendation"} height="56vw" minHeight="400px"
 				/>
 				<Box 
-					position="absolute" bg={"rgba(0,0,0,0.4)"}
+					position="absolute" className="easing-grad"
 					top={0} left={0} right={0} 
 					width={["100vw"]} zIndex={0}
-					alt={"Pixly AI Movie Recommendation"} minHeight={[ "410px", "410px", "500px"]}
+					alt={"Pixly AI Movie Recommendation"} height="56vw" minHeight="400px"
 				/>
 
 				<HeaderText 
-					mt={["50px", "50px", 4,5]} mb={[4]}
-					fontSize={["28px","28px","34px", "40px", "44px"]} 
-					textAlign="center"
+					mt={["50px", "50px", 5,6]} mb={[4]}
+					fontSize={["24px","24px","34px", "40px", "44px"]} 
+					textAlign="left"
 					uncapitalize 
 					textShadow="-1px 1px 2px rgba(40, 40, 40, 0.8)" 
 					zIndex={8} 
@@ -174,17 +175,18 @@ const MainPage = (props) => {
 					That Fit Your Cinema Taste
 				</HeaderText>
 				<Text mt={[2]} zIndex={8} 
-					mb={[3,3,4]} px={[3,3,4]} textAlign="center"
-					fontSize={["14px", "14px", "16px", "16px", "18px"]}  
-					color="light" maxWidth={"900px"}
+					mb={[3,3,4]}  					textAlign="left"
+					fontSize={["14px", "14px", "16px"]}  
+					color="light" maxWidth={"400px"}
 					textShadow="-1px 1px 1px rgba(40, 40, 40, 0.8)"
+
 				>
 					{heroSubheaderText}
 				</Text>
 				{!authStatus && 
-					<Button px={[2]} mx={[4]} my={[3]}
+					<Button px={[2]}  my={[3]}
 						onClick={setModalOpen} 
-						width={"200px"} height={"50px"}
+						width={"140px"} height={"40px"}
 						color="light" fontSize={["18px"]} fontWeight="bold"  
 						zIndex={18} 
 						border="3px solid" borderColor="light"
@@ -242,7 +244,10 @@ const MainPage = (props) => {
 						<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
 							<MailIcon />
 							<Text mt={[1]} fontWeight="bold" textAlign="center" fontSize={["16px"]}  mt={[2,2,2,4]}>JOIN US</Text>
-							<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>You can use our services effectively by creating an account. <strong className="anchor-color" onClick={setModalOpen}>It's free.</strong> </Text>
+							<Text pr={[2]} textAlign="self" fontSize={["14px", "14px"]}>
+								You can use our services effectively by creating an account. 
+								<strong className="anchor-color" onClick={setModalOpen}>It's free.</strong> 
+								</Text>
 						</Li>
 						<Li display="flex" flexDirection="column" alignItems="center" width={["90%", "85%", "80%", "32%"]} zIndex={1} mt={[5,5,5,1]} >
 							<StarIcon />
