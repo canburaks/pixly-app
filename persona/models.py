@@ -147,7 +147,7 @@ class Persona(Model):
         print("Scan movies by id is FINISHED")
     
     @chronometer
-    def scan_movies_by_rating(self, rating, min_dummy_sim=0.25, min_movie_sim=0.25):
+    def scan_movies_by_rating(self, rating, min_dummy_sim=0.35, min_movie_sim=0.25):
         #print("<------- MOVIE SCAN----------------------->\n")
         movie_ids_with_specific_rating = self.filter_movieset_by_rating(rating)
         #print(f"{len(movie_ids_with_specific_rating)} number of movies with rated {rating} stars will be scanned")
