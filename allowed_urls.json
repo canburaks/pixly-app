@@ -109,6 +109,10 @@
         "/person/joaquin-phoenix-73421"
     ],
     "movie":[
+        "/movie/fatherland-1994",
+        "/movie/chasing-liberty-2004",
+        "/movie/secondhand-lions-2003",
+        "/movie/somewhere-2010",
         "/movie/a-quiet-place-2018",
         "/movie/the-ice-harvest-2005",
         "/movie/the-in-laws-1979",
@@ -810,6 +814,10 @@
         "/movie/sex-and-lucia-2001",
         "/movie/the-in-laws-1979",
         "/movie/the-ice-harvest-2005",
-        "/movie/a-quiet-place-2018"
+        "/movie/a-quiet-place-2018",
+        "/movie/fatherland-1994",
+        "/movie/chasing-liberty-2004",
+        "/movie/secondhand-lions-2003",
+        "/movie/somewhere-2010"
     ]
 }
