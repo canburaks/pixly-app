@@ -311,21 +311,21 @@ hr.green-arrow {
 .anchor-color{
     cursor:pointer;
     text-decoration: none;
-    background-image: linear-gradient( transparent 0%, transparent calc(50% - 9px), rgba(10, 11, 196, 0.35) calc(50% - 9px), rgba(61, 51, 204, 0.35) 100% );
+    background-image: linear-gradient( transparent 0%, transparent calc(50% - 4px), rgba(10, 11, 196, 0.70) calc(50% - 4px), rgba(61, 51, 204, 0.35) 100% );
     transition: background-position 320ms ease-in-out, padding 220ms ease-in-out;
     background-size: 100% 200%;
     background-position: 0 0;
     word-break: break-word;
 }
 .anchor-color:hover{
-    background-image: linear-gradient( transparent 0%, transparent calc(50% - 9px), rgba(10, 11, 196, 0.35) calc(50% - 9px), rgba(61, 51, 204, 0.8) 100% );
+    background-image: linear-gradient( transparent 0%, transparent calc(50% - 4px), rgba(10, 11, 196, 0.70) calc(50% - 4px), rgba(61, 51, 204, 0.4) 100% );
     background-position: 0 100%;
 }
 
 blockquote.movie-blockquote {
-    background: #3437C7;
-    background: -webkit-linear-gradient(top, #3437C7 0%, #4B55E1 100%);
-    background: linear-gradient(to bottom, #3437C7 0%, #4B55E1 100%);
+    background: #fdf6e5;
+    background: -webkit-linear-gradient(top, #fdf6e5 0%, #fdf6e5 100%);
+    background: linear-gradient(to bottom, #fdf6e5 0%, #fdf6e5 100%);
 }
 
 .easing-grad {

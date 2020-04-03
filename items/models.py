@@ -116,6 +116,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
     updated_at = models.DateTimeField(auto_now=True, null=True, blank = True)
 
     cast_summary = RichTextField(max_length=20000,null=True, blank=True, help_text="Cast summary")
+    free_watch_link = models.URLField(null=True, blank=True, help_text="if a movie can be watch freely, give the address")
 
     class Meta:
         ordering = ["-year"]

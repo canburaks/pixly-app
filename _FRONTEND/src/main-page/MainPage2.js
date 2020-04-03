@@ -104,8 +104,12 @@ const MainPage = (props) => {
 		document.addEventListener('DOMContentLoaded', enableSumoForm)
 		return () => document.removeEventListener("DOMContentLoaded", enableSumoForm)
 	},[window.location.href])
+
 	const heroimage= "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/kesik-hero.jpg"
+	const heroimagesmall = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/kesik-hero-small.jpg"
 	const lala = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"
+	const posterUrl = windowWidth < 600 ? heroimagesmall : heroimage
+
 	return (
     <>
         <Head
@@ -147,21 +151,21 @@ const MainPage = (props) => {
 				height="56vw"  overflow="hidden"
 				position="relative" minHeight="400px"
 			>
-				<CoverImage ratio={0.5625} src={heroimage} 
+				<CoverImage ratio={0.5625} src={posterUrl} 
 					position="absolute"  className="hero-image"
 					top={0} left={0} right={0} 
 					width={["100vw"]} zIndex={0}
 					alt={"Pixly AI Movie Recommendation"} height="56vw" minHeight="400px"
 				/>
 				<Box 
-					position="absolute" className="easing-grad"
+					position="absolute" bg="rgba(0,0,0, 0.2)"
 					top={0} left={0} right={0} 
 					width={["100vw"]} zIndex={0}
 					alt={"Pixly AI Movie Recommendation"} height="56vw" minHeight="400px"
 				/>
 
 				<HeaderText 
-					mt={["50px", "50px", 5,6]} mb={[4]}
+					mt={["50px", "50px",4, 4,5,6]} mb={[3,3,3,4,5]}
 					fontSize={["24px","24px","34px", "40px", "44px"]} 
 					textAlign="left"
 					uncapitalize 
