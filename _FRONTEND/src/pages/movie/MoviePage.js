@@ -202,9 +202,9 @@ const MoviePage = props => {
 					</Button>
 				}
 				{item.freeWatchLink &&
-					<OuterLink href={item.freeWatchLink}>
+					<OuterLink href={item.freeWatchLink} title="You can watch the movie legally and free of charge at this address">
 						<Button px={[2]}
-							width={"120px"} height={"auto"}
+							minWidth={"120px"} height={"auto"}
 							color="light" fontSize={["12px", "12px"]} fontWeight="bold"  
 							zIndex={18} 
 							border="2px solid" borderColor="light"
@@ -214,7 +214,7 @@ const MoviePage = props => {
 							boxShadow={"card"} 
 							hoverColor={"#3D33CC"} hoverBorderColor="#3D33CC"
 							>
-							FULL MOVIE
+							FULL MOVIE LINK
 						</Button>
 					</OuterLink>
 				}
