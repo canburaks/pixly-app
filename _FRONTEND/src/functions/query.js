@@ -53,6 +53,7 @@ export const MOVIE = gql`
             release,
             quotes,
             isImportantPage,
+            freeWatchLink,
             director{id,name,slug},
             topics{id,name,slug,coverPoster, summary, shortName},
             crew{job, character, info, person{id,name, poster, slug}},

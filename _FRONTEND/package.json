@@ -223,7 +223,11 @@
     },
     "include": [
       "",
-      "/"
+      "/",
+      "/movie/fatherland-1994",
+      "/movie/chasing-liberty-2004",
+      "/movie/secondhand-lions-2003",
+      "/movie/somewhere-2010"
    
     ],
     "publicPath": "/"

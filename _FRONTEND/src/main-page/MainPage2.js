@@ -80,14 +80,14 @@ const MainPage = (props) => {
 	var simulateClick = function () {
 		//console.log("elem", elem)
 		if (window.location.href.includes("pixly.app") || true){
-			console.log("asd")
+			//console.log("asd")
 			try {
 				setTimeout(function(){
 					var elem = document.getElementById("sumo-form")
 					elem.click()
 					}, 5000);
 				} catch(e){
-					console.log("sumo err")
+					//console.log("sumo err")
 			}
 		}
 	};
@@ -271,9 +271,9 @@ const MainPage = (props) => {
 	
 			{/* FEATURES */}
 				<Grid columns={[1,1,1,2,2,2,2,2,4]} py={[4]} mt={3}>
-					<CardContainer p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="blurry">
+					<CardContainer p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} width={"98%"} boxShadow="blurry">
 						<FlexBox>
-							<MrsIcon />
+							<MrsIcon height={"90px"} width={"90px"}/>
 							<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
 								<SubHeaderText 
 									fontSize={["16px", "16px", "16px", "18px"]} 
@@ -304,9 +304,9 @@ const MainPage = (props) => {
 						</FlexBox>
 					</CardContainer>
 
-					<CardContainer p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="blurry">
+					<CardContainer p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} width={"98%"} boxShadow="blurry">
 						<FlexBox height="100%">
-							<FinderIcon />
+							<FinderIcon height={"90px"} width={"90px"}/>
 							<FlexBox width={"100%"} flexDirection="column" pl={[2]} height="100%">
 								<SubHeaderText 
 									fontSize={["18px"]} 
@@ -336,9 +336,9 @@ const MainPage = (props) => {
 						</FlexBox>
 					</CardContainer>
 
-					<CardContainer p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="blurry">
+					<CardContainer p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} width={"98%"} boxShadow="blurry">
 						<FlexBox>
-							<SrIcon />
+							<SrIcon height={"90px"} width={"90px"}/>
 							<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
 								<SubHeaderText 
 									fontSize={["18px"]} 
@@ -368,9 +368,9 @@ const MainPage = (props) => {
 						</FlexBox>
 					</CardContainer>
 
-					<CardContainer  p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} boxShadow="blurry">
+					<CardContainer  p={[3,3,4]} alignItems="center" bg="transparent"  zIndex={1} width={"98%"} boxShadow="blurry">
 						<FlexBox>
-							<BmIcon />
+							<BmIcon height={"90px"} width={"90px"}/>
 							<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
 								<SubHeaderText 
 									fontSize={["18px"]} 
@@ -402,9 +402,9 @@ const MainPage = (props) => {
 				</Grid>
 
 			
-				<CardContainer  p={[4]}  width={"100%"} mb={[5]} bg="transparent" boxShadow="blurry">
+				<CardContainer  p={[4]}  width={"98%"} mb={[5]} bg="transparent" boxShadow="blurry">
 					<FlexBox>
-						<ListIcon />
+						<ListIcon height={"90px"} width={"90px"}/>
 						<FlexBox width={"100%"} flexDirection="column" pl={[2]}>
 							<SubHeaderText
 								fontSize={["18px"]} fontWeight="bold" 

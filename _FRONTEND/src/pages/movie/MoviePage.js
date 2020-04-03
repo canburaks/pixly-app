@@ -26,6 +26,7 @@ import { CrewCard, MovieSimilarBox, PageContainer, ContentContainer, MovieCoverB
 	MovieRichCardBox, MovieRichCard, FlexBox, Box, HashLink, YoutubeIcon,InfoIcon,QuotationLeftIcon,
 	HtmlContainer, SuperBox, TagBox, AbsoluteBox, CoverLink,CardContainer,HtmlParagraph, Button,
 	SimilarMovies, MessageBox, CoverImage, Dl,Dt,Dd, Loading, SubHeaderText, Blockquote, Iframe,
+	OuterLink
 } from "../../styled-components";
 
 import { ExpansionBox, SimpleDialog } from "../../styled-material"
@@ -183,6 +184,7 @@ const MoviePage = props => {
 				isLargeScreen={isLargeScreen}
 				darken
 			>
+				<FlexBox>
 				{item.videos.length > 0 && 
 					<Button px={[2]}
 						onClick={openVideoHandler} 
@@ -199,12 +201,28 @@ const MoviePage = props => {
 						PLAY TRAILER
 					</Button>
 				}
+				{item.freeWatchLink &&
+					<OuterLink href={item.freeWatchLink}>
+						<Button px={[2]}
+							width={"120px"} height={"auto"}
+							color="light" fontSize={["12px", "12px"]} fontWeight="bold"  
+							zIndex={18} 
+							border="2px solid" borderColor="light"
+							borderRadius={"6px"}
+							
+							bg="transparent"
+							boxShadow={"card"} 
+							hoverColor={"#3D33CC"} hoverBorderColor="#3D33CC"
+							>
+							FULL MOVIE
+						</Button>
+					</OuterLink>
+				}
+				</FlexBox>
 			</MovieCoverPanel>
 
 
 			<FlexBox flexDirection="column" justifyContent="center" alignItems="center" mt={[0]} bg="rgba(0,0,0,0.95)">
-				<HeaderOneText color="light" mt={[3]} />
-				<TagBox tags={item.tags.filter(tag => (tag.genreTag === true || tag.subgenreTag === true))} fontSize={["12px", "12px", "14px"]} />
 				{true && <Text fontWeight="bold" fontSize={["14px", "14px", "16px"]} opacity={0.75} mt={[3]} position="relative" bottom={-16} color="light">How much did you like the movie?</Text>}
 				<RatingMutation item={item} size={50}/>
 			</FlexBox>
@@ -212,6 +230,16 @@ const MoviePage = props => {
 			{/*<!-- Page Container --> */}
 
 			<ContentContainer zIndex={1} pt={[4]}>
+
+				<FlexBox flexDirection="column" justifyContent="center" alignItems="center" mb={[4]} >
+					<HeaderOneText  mt={[3]} fontSize={["26px", "26px", "30px","34px", "38px"]}/>
+					<TagBox 
+						tags={item.tags.filter(tag => (tag.genreTag === true || tag.subgenreTag === true))} 
+						fontSize={["12px", "12px", "14px"]} 
+						color="dark"
+					/>
+				</FlexBox>
+
 				{/* Quotation  */}
 				{item.reviews.filter(r => r.primary === true).map(r => (
 					<Blockquote key={r.text.slice(0,8)} 
@@ -238,7 +266,7 @@ const MoviePage = props => {
 								ml={[2,2,3,4,5]} 
 								html={r.htmlContent}  
 								mt={[3]} 
-								style={{p:{fontSize:["12px","12px", "14px", "16px"], textAlign:"right", padding:"auto", color:"dark", fontWeight:"bold"}}} 
+								style={{p:{fontSize:["12px","12px", "14px", "16px"], textAlign:"right", padding:"auto", color:"", fontWeight:"bold"}}} 
 
 								width="auto"	
 								selfAlign="flex-end"
