@@ -136,12 +136,6 @@ const TopicQuery = ({ lazyvariables }) =>{
     const prevPage = () => history.push(`/topic/${slug}${dynamicSuffix}`)
 
     var contentContainerWidth;
-    useEffect(()=>{
-        console.log("ue")
-        if (node){
-            console.log("node",node.current)
-        }
-    },[node])
 
     //Network
     const { effectiveConnectionType } = useNetworkStatus();
