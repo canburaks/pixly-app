@@ -403,10 +403,14 @@ class MovieType(DjangoObjectType):
     is_important_page = graphene.Boolean()
     group_items = graphene.List("gql.types.MovieGroupItemType")
     reviews = graphene.List(ReviewType)
+    free_watch_link = graphene.String()
 
 
     class Meta:
         model = Movie
+
+    def resolve_free_watch_link(self, info):
+        return self.free_watch_link
 
     def resolve_header(self, info):
         return self.header
@@ -2150,6 +2154,7 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
     group_items = graphene.List("gql.types.MovieGroupItemType")
 
     reviews = graphene.List(ReviewType)
+    free_watch_link = graphene.String()
 
 
     def __init__(self, id=None, slug=None, viewer=None):
@@ -2171,6 +2176,9 @@ class CustomMovieType(graphene.ObjectType, SocialMediaType, SEOType):
         #self.seo_description = self.movie.seo_description
             
         self.viewer = viewer #Profile
+
+    def resolve_free_watch_link(self, info):
+        return self.movie.free_watch_link
 
     def resolve_cast_summary(self, info):
         return self.movie.cast_summary

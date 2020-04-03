@@ -85,7 +85,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                 )}
                 const newlink =  haveProtocol ? domNode.attribs.href.split("://pixly.app")[1]  : domNode.attribs.href
                 return (
-                    <NewLink  className="newlink"
+                    <NewLink  className="newlink anchor-color"
                         fontSize={style.p.fontSize || ["14px", "14px", "16px"]}
                         follow={domNode.attribs.rel === "nofollow" && false}
                         link={newlink}

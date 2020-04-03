@@ -230,7 +230,7 @@ const MoviePage = props => {
 							ml={[2,2,3,4,5]} textAlign="center" pr={[2]}
 							fontSize={["18px", "18px", "20px"]} 
 							fontWeight="bold" 
-							opacity={0.9} color="#ffffff"
+							opacity={0.9} color="dark"
 						>
 							{r.text}
 						</Text>
@@ -238,7 +238,7 @@ const MoviePage = props => {
 								ml={[2,2,3,4,5]} 
 								html={r.htmlContent}  
 								mt={[3]} 
-								style={{p:{fontSize:["12px","12px", "14px", "16px"], textAlign:"right", padding:"auto", color:"white", fontWeight:"bold"}}} 
+								style={{p:{fontSize:["12px","12px", "14px", "16px"], textAlign:"right", padding:"auto", color:"dark", fontWeight:"bold"}}} 
 
 								width="auto"	
 								selfAlign="flex-end"
