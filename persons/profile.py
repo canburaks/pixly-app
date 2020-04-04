@@ -23,6 +23,7 @@ FOLLOW_TYPE = (
     ('t', 'Topic'),
 )
 
+
 def avatar_upload_path(instance, filename):
     return "avatars/{0}/{1}".format(instance.id,filename)
 
