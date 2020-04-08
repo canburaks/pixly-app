@@ -108,6 +108,9 @@ domain:german-online.info
 domain:forumaden.com
 domain:twibur.com
 domain:linkseo.com
+domain:asprem-hcm.org
+domain:lokanathswamiprojects.info
+domain:alternative-economics.com
 
 #Tried contacting webmaster, no response after 10 days
 http://107.182.233.166/canburaks/
