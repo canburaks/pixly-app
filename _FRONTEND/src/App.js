@@ -34,6 +34,7 @@ import { Box, ScrollTopButton, navbarheight, PageContainer, Image, SignupFormMod
 import themes from './styled-components/theme'
 import { Clippy } from './styled-components'
 import { GlobalContext } from "./";
+import AdBlockDetect from 'react-ad-block-detect';
 
 
 const App = (props) => {

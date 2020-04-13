@@ -127,6 +127,7 @@
     "postcss-js": "^2.0.3",
     "query-string": "^6.7.0",
     "react": "^16.12.0",
+    "react-ad-block-detect": "^1.0.1",
     "react-adaptive-hooks": "^0.0.8",
     "react-adsense": "^0.0.6",
     "react-apollo": "^3.0.1",
@@ -277,7 +278,6 @@
       "/list/andrei-tarkovsky-creates-a-list-of-his-10-favorite-films/1",
       "/list/martin-scorsese-reveals-his-12-favorite-movies/1",
       "/list/martin-scorsese-creates-a-list-of-39-essential-foreign-films-for-a-young-filmmaker/1"
-   
     ],
     "publicPath": "/"
   }
