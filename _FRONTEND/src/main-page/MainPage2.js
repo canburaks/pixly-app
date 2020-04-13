@@ -105,7 +105,7 @@ const MainPage = (props) => {
 		return () => document.removeEventListener("DOMContentLoaded", enableSumoForm)
 	},[window.location.href])
 
-	const heroimage= "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/kesik-hero.jpg"
+	const heroimage= "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/new-hero.jpg"
 	const heroimagesmall = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/kesik-hero-small.jpg"
 	const lala = "https://cbs-static.s3.eu-west-2.amazonaws.com/static/images/landing-page/lalaland-dark.jpg"
 	const posterUrl = windowWidth < 600 ? heroimagesmall : heroimage
@@ -148,20 +148,20 @@ const MainPage = (props) => {
 				boxSizing="border-box"
 				zIndex={9}  boxSizing="border-box"
 				px={[2,2,3,4]} 
-				height="56vw"  overflow="hidden"
+				height="50vw"  overflow="hidden"
 				position="relative" minHeight="400px"
 			>
-				<CoverImage ratio={0.5625} src={posterUrl} 
+				<CoverImage ratio={0.5} src={posterUrl} 
 					position="absolute"  className="hero-image"
 					top={0} left={0} right={0} 
 					width={["100vw"]} zIndex={0}
-					alt={"Pixly AI Movie Recommendation"} height="56vw" minHeight="400px"
+					alt={"Pixly AI Movie Recommendation"} height="50vw" minHeight="400px"
 				/>
 				<Box 
 					position="absolute" bg="rgba(0,0,0, 0.2)"
 					top={0} left={0} right={0} 
 					width={["100vw"]} zIndex={0}
-					alt={"Pixly AI Movie Recommendation"} height="56vw" minHeight="400px"
+					alt={"Pixly AI Movie Recommendation"} height="50vw" minHeight="400px"
 				/>
 
 				<HeaderText 
