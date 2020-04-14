@@ -827,8 +827,8 @@
         "/movie/chasing-liberty-2004",
         "/movie/secondhand-lions-2003",
         "/movie/somewhere-2010",
-        "https://pixly.app/movie/meeks-cutoff-2010",
-        "https://pixly.app/movie/wendy-and-lucy-2008",
-        "https://pixly.app/movie/the-unloved-2009"
+        "/movie/meeks-cutoff-2010",
+        "/movie/wendy-and-lucy-2008",
+        "/movie/the-unloved-2009"
     ]
 }
