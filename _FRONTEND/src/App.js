@@ -58,7 +58,7 @@ const App = (props) => {
     }
     const haveFooter = checkFooter()
     const offsetfromtop = window.scrollY
-    //console.log(window.innerWidth)
+    //console.log("canrunads", window.adsbygoogle)
     return (
     <ThemeProvider theme={themes.default}>
         <div className="App" theme="palette-1"  id="app-container">
