@@ -52,7 +52,7 @@ const App = (props) => {
     const checkFooter = () => {
         let blacklist = ["lists-of-films",
             "topic", "list/",  "advance-search",
-            "similar-movie-finder", "blog"]
+            "similar-movie-finder", "blog", "movie", "directors", "person"]
         return !blacklist.some(e => window.location.pathname.includes(e))
         
     }
