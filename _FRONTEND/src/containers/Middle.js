@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, {  useContext, useMemo  }  from "react";
+import React, {  useContext, useMemo, useEffect, useState  }  from "react";
 
 //import { connect } from "react-redux";
 import { Route, Switch, Redirect, withRouter,StaticRouter, useParams } from "react-router-dom"
@@ -54,12 +54,35 @@ import { Loading, Error, PageContainer, Image } from "../styled-components"
 import { GlobalContext } from "../";
 
 
-
+const AdBlockDetected = () => (
+    <div style={{position:"fixed", top:0, left:0,width:"100vw", height:"100vh",
+        display:"flex", flexDirection:"column", justifyContent:"center",
+        alignItems:"center", background:"rgba(0,0,0,0.7)", zIndex:10000, 
+        }}
+    >
+        <div style={{background:"rgba(255,255,255)", width:"80%", maxWidth:"36  0px", padding:"16px"}}>
+            <h4>Our Service is a free service</h4>
+            <p>Please disable AdBlock to contribute us.</p>
+        </div>
+    </div>
+)
 
 const Middle = (props) => {
     const state = useContext(GlobalContext)
+    const [haveAdBlock, setAdBlock] = useState(false)
+
+    useEffect(() =>{
+        //console.log(window.adsbygoogle.loaded ===true)
+        setTimeout(function(){
+            if (window.adsbygoogle.loaded !== true){
+                //console.log("Ad Block detected")
+                setAdBlock(true)
+            }
+        }, 10000)
+    },[])
     return (
         <Switch>
+            {haveAdBlock && <AdBlockDetected />}
             <Route exact path="/draft" component={DraftPage} />
 
             <Route exact path="/film-lists" component={Collections} />
