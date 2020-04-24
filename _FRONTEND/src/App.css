@@ -40,7 +40,7 @@ html, body {
     position: absolute !important;
     left:0 !important;
     right:0 !important;
-    display: flex;
+    display: block;
     min-width: 100%;
     max-width:100% !important;
     min-height: 90vh;
