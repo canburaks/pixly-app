@@ -6,6 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+
   "scripts": {
     "start": "webpack-dev-server --open --hot --mode development",
     "build": "webpack --mode production",
@@ -224,9 +225,6 @@
     },
     "include": [
       "",
-      "/",
-      "/blog/django-graphql-react-integration-tutorial-part-1",
-      "/blog/django-graphql-react-integration-tutorial-part-2",
       "/blog"
     ],
     "publicPath": "/"
