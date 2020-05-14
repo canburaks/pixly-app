@@ -70,7 +70,8 @@ export const HtmlContainer = ({ html, ...props }) => {
                 const haveProtocol = domNode.attribs.href.includes("http://") || domNode.attribs.href.includes("https://")
 
                 if (!isInnerLink) {
-                    //console.log(domNode.attribs.href)
+                    console.log("outer link", domNode.attribs.href.includes("la-cuisinette"))
+                    const willFollow = (domNode.attribs.href.includes("studio") || domNode.attribs.href.includes("cbsofyalioglu") || domNode.attribs.href.includes("la-cuisinette") )
                     return (
                         <OuterLink
                             fontSize={style.p.fontSize || ["14px", "14px", "16px"]}
@@ -78,7 +79,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                             title={domNode.attribs.title}
                             textUnderline hoverColor="#000000"
                             { ...style.a}
-                            follow={false}
+                            follow={willFollow ? true : false}
                         >
                             {domToReact(domNode.children, options)}
                         </OuterLink>

@@ -224,8 +224,9 @@
     },
     "include": [
       "",
-      "/"
-    
+      "/",
+      "/blog/django-graphql-react-integration-tutorial-part-1",
+      "/blog/django-graphql-react-integration-tutorial-part-2"
     ],
     "publicPath": "/"
   }
