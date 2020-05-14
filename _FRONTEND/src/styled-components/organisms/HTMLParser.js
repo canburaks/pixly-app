@@ -78,6 +78,7 @@ export const HtmlContainer = ({ html, ...props }) => {
                             href={domNode.attribs.href}
                             title={domNode.attribs.title}
                             textUnderline hoverColor="#000000"
+                            className={willFollow ? "anchor-color" : ""}
                             { ...style.a}
                             follow={willFollow ? true : false}
                         >
