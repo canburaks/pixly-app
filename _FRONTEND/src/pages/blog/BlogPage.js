@@ -47,6 +47,7 @@ const BlogPage = (props) =>{
                 canonical={`https://pixly.app/blog`}
             />
             <HeaderText px={[2,2,3]}>Pixly Blog - Articles About Movie Recommendation, and Technical Stuff</HeaderText>
+            <p>Note: All the articles are supported generously by <a href="https://la-cuisinette.com">LA-CUISINETTE Vegand Foods</a>. However due to reasons Pixly has completed its lifetime. Therefore, all the articles will be transferred to my <a href="https://cbsofyalioglu.com">design and development blog</a></p>
             <ContentContainer pb={"80px"}>
                 {props.posts.map(post => <PostInfoBox post={post} key={post.slug} follow/>)}
             </ContentContainer>
