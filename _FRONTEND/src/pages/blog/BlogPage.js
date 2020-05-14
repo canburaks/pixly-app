@@ -47,7 +47,12 @@ const BlogPage = (props) =>{
                 canonical={`https://pixly.app/blog`}
             />
             <HeaderText px={[2,2,3]}>Pixly Blog - Articles About Movie Recommendation, and Technical Stuff</HeaderText>
-            <p>Note: All the articles are supported generously by <a href="https://la-cuisinette.com">LA-CUISINETTE Vegand Foods</a>. However due to reasons Pixly has completed its lifetime. Therefore, all the articles will be transferred to my <a href="https://cbsofyalioglu.com">design and development blog</a></p>
+            <Text px={[4,4,5]} mt={[5]}> 
+                Pixly has completed its lifetime. It was the first project and we learned many things in its lifetime. Thanks for your support.<br></br>
+                We will continue our web projects on <a class="anchor-color" rel="noopener" target="_blank" href="https://studiowoke.com">Studio Woke ~ Design & Technology & SEO</a><br></br>
+                The articles will transferred to <a class="anchor-color" rel="noopener" target="_blank" href="https://cbsofyalioglu.com">Personal Blog About Design and Technology Stuff</a> <br></br>
+                At this time, we also thanks <a class="anchor-color" rel="noopener" target="_blank" href="https://la-cuisinette.com">LA-CUISINETTE Vegand Foods</a> for their moral supports                
+            </Text>
             <ContentContainer pb={"80px"}>
                 {props.posts.map(post => <PostInfoBox post={post} key={post.slug} follow/>)}
             </ContentContainer>
