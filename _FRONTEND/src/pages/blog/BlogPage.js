@@ -51,7 +51,7 @@ const BlogPage = (props) =>{
                 Pixly has completed its lifetime. It was the first project and we learned many things in its lifetime. Thanks for your support.<br></br>
                 We will continue our web projects on <a class="anchor-color" rel="noopener" target="_blank" href="https://studiowoke.com">Studio Woke ~ Design & Technology & SEO</a><br></br>
                 The articles will transferred to <a class="anchor-color" rel="noopener" target="_blank" href="https://cbsofyalioglu.com">Personal Blog About Design and Technology Stuff</a> <br></br>
-                At this time, we also thanks <a class="anchor-color" rel="noopener" target="_blank" href="https://la-cuisinette.com">LA-CUISINETTE Vegand Foods</a> for their moral supports                
+                At this time, we also thanks <a class="anchor-color" rel="noopener" target="_blank" href="https://la-cuisinette.com">LA-CUISINETTE Organic Foods</a> for their moral supports.          
             </Text>
             <ContentContainer pb={"80px"}>
                 {props.posts.map(post => <PostInfoBox post={post} key={post.slug} follow/>)}
