@@ -853,7 +853,7 @@ def post_save_user_model_receiver(sender, instance, created, *args, **kwargs):
                 name = "{} {}".format(instance.first_name, instance.last_name)
             else:
                 name=None
-            p = Profile(user=instance, email=instance.email, username=instance.username,joined= instance.date_joined, name=name)
+            p = Profile(user=instance, email=instance.email, username=instance.username, joined=instance.date_joined, name=name)
             p.save()
         except:
             print("Error:")

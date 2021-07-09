@@ -1,7 +1,7 @@
 ﻿# For more info check: https://support.google.com/webmasters/answer/2648487?hl=en
 
 
-## 2020-02-27
+## 2020-12-10
 domain:pathimba.com
 domain:suzi.zzone.today
 domain:zzone.today
@@ -114,7 +114,6 @@ domain:alternative-economics.com
 
 #Tried contacting webmaster, no response after 10 days
 http://107.182.233.166/canburaks/
-107.182.233.166/canburaks/
 https://hacklines.com/en/editions/153123/click
 https://canariasdeportiva.com/image/the-best-romantic-comedy-movies-of-all-time
 
