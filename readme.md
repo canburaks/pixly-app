@@ -1,6 +1,6 @@
-# A deprecated movie recommendation engine: Pixly
+# Pixly: Movie Recommendation Engine
 
-Pixly is a movie recommendation engine that uses [MovieLens data](https://grouplens.org/datasets/movielens/). 
+Pixly is a deprecated movie recommendation engine that uses [MovieLens data](https://grouplens.org/datasets/movielens/). 
 It was a learning project that opened the doors of the full-stack web development world to me. 
 
 ## Tech Stack
