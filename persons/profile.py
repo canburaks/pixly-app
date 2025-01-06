@@ -150,163 +150,205 @@ class Profile(SocialMedia, SEO):
 
     @property
     def token(self):
+        """Get JWT token for user authentication"""
         from graphql_jwt import shortcuts
         return shortcuts.get_token(self.user)
 
-    @property
+    @property 
     def points(self):
+        """Get number of movies rated by user"""
         return len(self.ratings.keys())
-    
+
     def get_mean(self):
+        """Calculate mean rating value for user"""
         values = cc.carray(list(self.ratings.values()))
         return round(cc.mean(values), 3)
 
-    def isBookmarked(self,target):
+    def isBookmarked(self, target):
+        """Check if movie is bookmarked by user"""
         return target in self.bookmarks.all()
 
     def bookmarking(self, target, item="Movie"):
+        """
+        Toggle bookmark status for a movie and record activity.
+        
+        Args:
+            target: Movie object to bookmark/unbookmark
+            item: Type of item being bookmarked (default: "Movie")
+        """
         from persons.profile import Activity
-        if item=="Movie":
+        
+        if item == "Movie":
             if target not in self.bookmarks.all():
+                # Add bookmark
                 self.bookmarks.add(target)
                 self.save()
                 Activity.objects.create(profile=self, action="bm", movie_id=target.id)
-            elif target in self.bookmarks.all():
+            else:
+                # Remove bookmark
                 self.bookmarks.remove(target)
-                activity_qs = Activity.objects.filter(profile=self, action="bm", movie_id=target.id)
-                activity_qs.delete()
+                Activity.objects.filter(
+                    profile=self,
+                    action="bm",
+                    movie_id=target.id
+                ).delete()
                 self.save()
 
     def fav(self, target, type):
+        """
+        Toggle favorite status for a video or movie and record activity.
+        
+        Args:
+            target: Video or Movie object to favorite/unfavorite
+            type: Type of content ('v' for video, 'm' for movie)
+        """
         if type.lower().startswith("v"):
+            # Handle video favorites
             if target not in self.videos.all():
                 self.videos.add(target)
                 self.save()
                 Activity.objects.create(profile=self, action="lv", movie_id=target.id)
-            elif target in self.videos.all():
+            else:
                 self.videos.remove(target)
                 self.save()
 
         elif type.lower().startswith("m"):
+            # Handle movie favorites
             if target not in self.liked_movies.all():
                 self.liked_movies.add(target)
                 self.save()
                 Activity.objects.create(profile=self, action="lm", movie_id=target.id)
-            elif target in self.liked_movies.all():
+            else:
                 self.liked_movies.remove(target)
-                activity_qs = Activity.objects.filter(profile=self, action="lm", movie_id=target.id)
-                activity_qs.delete()
+                Activity.objects.filter(
+                    profile=self,
+                    action="lm", 
+                    movie_id=target.id
+                ).delete()
                 self.save()
 
 
     def create_persona(self):
-        # returns persona, create
-        from persona.models import  Persona
-        self_p = Persona.objects.create(id = self.user.id, user = self.user)
+        """Create and return a new Persona object for this profile"""
+        from persona.models import Persona
+        self_p = Persona.objects.create(id=self.user.id, user=self.user)
         return self_p
     
     @property
     def persona(self):
+        """
+        Get associated Persona object if profile has enough ratings.
+        
+        Returns:
+            Persona object if profile has 40+ ratings or scan_recommendations=True,
+            None otherwise
+        """
         from persona.models import Persona
-        if self.points<40 and scan_recommendations!=True:
+        if self.points < 40 and not scan_recommendations:
             self.print_info("has less than 40 ratings.(profile.persona function)")
             return None
-        else:
-            return Persona.objects.filter(user=self.user, id=self.user.id).defer("similars_dummy").first()
+        return Persona.objects.filter(
+            user=self.user,
+            id=self.user.id
+        ).defer("similars_dummy").first()
 
     def promote(self):
-        if self.points>=40 or scan_recommendations:
+        """
+        Promote profile by initializing recommendations if eligible.
+        
+        Triggers when profile reaches 40 ratings. Sets up SEO metadata,
+        syncs movie archives, creates persona, and starts movie scanning.
+        
+        Returns:
+            bool: True if promotion successful
+        """
+        if self.points >= 40 or scan_recommendations:
+            # Initialize metadata and archives
             self.set_seo_description_keywords()
             MyQueue.put(self.sync_movie_archives)
-            print("*")
+            
+            # Create and sync persona
             MyQueue.put(self.sync_persona, full=True, create=True)
-            print("*")
-            MyQueue.put(self.scan_movies_by_rating, 5)
-            print("*")
-            MyQueue.put(self.scan_movies_by_rating, 4.5)
-            print("*")
-            MyQueue.put(self.scan_movies_by_rating, 4)
-            MyQueue.put(self.scan_movies_by_rating, 3.5)
-            MyQueue.put(self.scan_movies_by_rating, 3)
-            MyQueue.put(self.scan_movies_by_rating, 2.5)
-            MyQueue.put(self.scan_movies_by_rating, 2)
+            
+            # Queue movie scanning for different ratings
+            for rating in [5, 4.5, 4, 3.5, 3, 2.5, 2]:
+                MyQueue.put(self.scan_movies_by_rating, rating)
 
             self.sync_active_status()
             return True
 
     def rate(self, target, rate, **kwargs):
+        """
+        Rate a movie and handle related updates.
+        
+        Updates profile ratings, creates rating record, and handles promotion
+        and recommendation updates if profile becomes eligible.
+        
+        Args:
+            target: Movie object to rate
+            rate: Rating value
+            **kwargs: Optional notes and date
+            
+        Returns:
+            Rating: Created/updated rating object
+        """
         from items.models import Rating, Movie
         from archive.models import UserArchive, MovieArchive
+        
         notes = kwargs.get("notes")
         date = kwargs.get("date")
         movie_id = target.id     
         
-        # Update profile.ratings       
-        self.ratings.update({str(movie_id):float(rate)})
+        # Update profile ratings       
+        self.ratings.update({str(movie_id): float(rate)})
         self.save()
 
-        #<---------------PROFILE RATING------------------------------------->
-        self.print_info(f" movie id:{movie_id}, rating:{rate}, notes:{notes}, diary_date:{date}, new_points:{self.points}")
+        # Create/update rating record
+        self.print_info(
+            f"movie id:{movie_id}, rating:{rate}, "
+            f"notes:{notes}, diary_date:{date}, new_points:{self.points}"
+        )
         
-        r , created = Rating.objects.update_or_create(profile=self, movie=target)
+        r, created = Rating.objects.update_or_create(profile=self, movie=target)
         r.rating = rate
         r.notes = notes
         r.date = date
         r.save()
-        print("created?",created)
-        #<--------------------------------------------------------------->
 
-        #<---------------PROMOTING------------------------------------->
-        # WHEN PROFILE REACHED 40 RATING PROMOTE IT
-        if len(self.ratings.keys())==40 and scan_recommendations:
+        # Handle promotion if profile reaches 40 ratings
+        if len(self.ratings.keys()) == 40 and scan_recommendations:
             self.print_info("has reached exactly 40 points. NOW PROMOTING!!!")
-            #threaded(self.promote)
-            #MyQueue.put(self.promote)
-
-            print("<--------PROMOTING---------------->")
             self.promote()
             self.sync_active_status()
-            print("<----------------------------------->")
-        #<--------------------------------------------------------------->
 
-
-        #<---------------ACTIVE RATING------------------------------------->
-        #IF PROFILE HAVE MORE THAN 40 RATINGS
-        if len(self.ratings.keys())>40 and scan_recommendations:
-            print("<----------ACTIVE RATING--------------------->")
-            #threaded(self.active_rate, movie_id=movie_id, rating=rate )            
-            
-            # MovieArchive objects
-            ma = MovieArchive.objects.filter(movie_id=movie_id).only("movie_id", "userset")[0]
+        # Handle active rating updates
+        if len(self.ratings.keys()) > 40 and scan_recommendations:
+            # Update movie archives
+            ma = MovieArchive.objects.filter(
+                movie_id=movie_id
+            ).only("movie_id", "userset")[0]
             ma.userset.add(self.user.id)
             ma.save()
 
-            #UPDATE IF PREVIOUS RECOMMENDATION IS EXISTS
+            # Update recommendations if persona exists
             if self.persona:
                 self.persona.update_recommendation(target, rate)
 
-            #SCAN MOVIES IF RATING IS HIGHER THAN MEAN
+            # Scan similar movies for high ratings
             if rate >= 4:
                 MyQueue.put(self.scan_movies_by_id, movie_id)
 
-            # Persona objects
-            if self.points>=40 and self.points//10==0:
-                #only scan real users 
-                self.print_info("points has increased by 10. Real users will be scanned.")
-                MyQueue.put(self.sync_persona, full=False, create=True)
-            elif self.points>=40 and self.points//20==0:
-                #scan both dummy and real users
-                self.print_info("points has increased by 20. New full scan will start.")
-                MyQueue.put(self.sync_persona, full=True, create=True)
-                MyQueue.put(self.scan_movies_by_rating, 5)
-                MyQueue.put(self.scan_movies_by_rating, 4.5)
-                MyQueue.put(self.scan_movies_by_rating, 4)
-                MyQueue.put(self.scan_movies_by_rating, 3.5)
+            # Periodic persona updates based on rating count
+            if self.points >= 40:
+                if self.points % 10 == 0:
+                    self.print_info("points increased by 10. Real users will be scanned.")
+                    MyQueue.put(self.sync_persona, full=False, create=True)
+                elif self.points % 20 == 0:
+                    self.print_info("points increased by 20. New full scan will start.")
+                    MyQueue.put(self.sync_persona, full=True, create=True)
+                    for rating in [5, 4.5, 4, 3.5]:
+                        MyQueue.put(self.scan_movies_by_rating, rating)
 
-            print("<------------------------------------------------>")
-        #<--------------------------------------------------------------->
-
-        print("<------------------------------------------>")
         return r
 
     def get_recommendations(self):

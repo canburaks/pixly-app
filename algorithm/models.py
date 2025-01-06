@@ -12,8 +12,11 @@ if cmd_subfolder not in sys.path:
 import calculations as af
 from algorithm import custom_functions as cbs
 from items.models import Movie
+
+# Define the Ms class for movie similarity calculations
 class Ms():
     def __init__(self, movie_id):
+        """Initialize with a movie ID, ensuring correct format."""
         from items.models import Movie
         if isinstance(movie_id, Movie):
             self.movie_id = "m{}".format(movie_id.id)
@@ -26,16 +29,20 @@ class Ms():
 
     @property
     def userset(self):
+        """Retrieve the set of users who have interacted with the movie."""
         return cache.get(self.movie_id)
     
     def commons(self, other_movie):
+        """Find common users between two movies."""
         return np.intersect1d(np.array(self.userset), np.array(other_movie.userset))
 
     def commons_length(self, other_movie):
+        """Calculate the number of common users between two movies."""
         return np.intersect1d(np.array(self.userset), np.array(other_movie.userset)).shape[0]
     
     @classmethod
     def user_collection(cls,movie_id1, movie_id2, common_users):
+        """Collect user data for two movies based on common users."""
         movie_i = movie_id1.split("m")[1]
         movie_j = movie_id2.split("m")[1]
         collection = []
@@ -63,45 +70,56 @@ class Ms():
 
     
 
+# Define the Rs class for user similarity calculations
 class Rs():
     def __init__(self, user_id):
+        """Initialize with a user ID."""
         self.ratings = cache.get(user_id)
     
 
 
     @property
     def movieset(self):
+        """Retrieve the set of movies the user has interacted with."""
         return np.array([x for x in self.ratings.keys()], dtype=np.uint32)
 
     @property
     def average(self):
+        """Calculate the average rating given by the user."""
         return af.mean(self.ratings)
     
     @property
     def variance(self):
+        """Calculate the variance of the user's ratings."""
         return af.variance(self.ratings)
     
     @property
     def stdev(self):
+        """Calculate the standard deviation of the user's ratings."""
         return af.stdev(self.ratings)
 
     def commons(self,other_user):
+        """Find common movies between two users."""
         umovies = self.movieset
         vmovies = other_user.movieset
         return np.intersect1d(umovies, vmovies)
     
     def commons_length(self, other_user):
+        """Calculate the number of common movies between two users."""
         return np.intersect1d( self.movieset, other_user.movieset).shape[0] 
     
     def vector(self, common_movies):
+        """Generate a vector of ratings for common movies."""
         return np.array([self.ratings.get(str(x)) for x in common_movies ], dtype=np.float64)
     
     def normalized_vector(self, common_movies):
+        """Generate a normalized vector of ratings for common movies."""
         self_vector = self.vector(common_movies)
         mean_vector = np.full(len(common_movies), self.average)
         return self_vector - mean_vector
 
     def pearson(self, other_user):
+        """Calculate the Pearson correlation coefficient between two users."""
         common_movies = self.commons(other_user)
         if len(common_movies)>0:
             self_vector = self.vector(common_movies)
@@ -113,6 +131,7 @@ class Rs():
             return 0
 
     def final_calculation(self,list_of_highly_correlated_users, movie_id, zscore):
+        """Perform the final calculation for movie recommendations."""
         print("zcore:{}".format(zscore))
         if zscore==True:
             # [ [average, stdev, rating_of_target_movie, correlation],[]...]
@@ -132,6 +151,7 @@ class Rs():
 
 
     def prediction(self,movie, zscore=False):
+        """Predict the rating a user would give to a movie."""
         if isinstance(movie, Movie):
             movid = str(movie.id)
         elif isinstance(movie, int):
