@@ -1,0 +1,14 @@
+# Add directories or file patterns to ignore during indexing (e.g. foo/ or *.csv)
+archive/*
+_FRONTEND/*
+*.json
+*.csv
+*.log
+*.txt
+*.pyc
+*.pyo
+*.pyd
+*/migrations/*
+*/__pycache__/*
+*/venv/*
+*/.env

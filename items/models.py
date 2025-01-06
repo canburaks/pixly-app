@@ -15,61 +15,102 @@ from imagekit.processors import ResizeToFill
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 
+# Define upload paths for various media types
+
 def item_image_upload_path(instance, filename):
+    """Generate file path for item images."""
     return "posters/{0}/{1}".format(instance.movie.id,filename)
 
+
 def movie_poster_upload_path(instance, filename):
+    """Generate file path for movie posters."""
     return "posters/{0}/{1}".format(instance.id,filename)
 
+
 def movie_large_poster_upload_path(instance, filename):
+    """Generate file path for large movie posters."""
     return "posters/{0}/large-{1}".format(instance.id,filename)
 
+
 def movie_cover_poster_upload_path(instance, filename):
+    """Generate file path for movie cover posters."""
     return "posters/{0}/cover/{1}".format(instance.id,filename)
 
+
 def movie_topic_poster_upload_path(instance, filename):
+    """Generate file path for movie topic posters."""
     return "posters/{0}/topic-poster/{1}".format(instance.id,filename)
 
+
 def topic_image_upload_path(instance, filename):
+    """Generate file path for topic images."""
     return "topics/{0}/{1}".format(instance.name, filename)
 
+
 def topic_cover_poster_upload_path(instance, filename):
+    """Generate file path for topic cover posters."""
     return "topics/{0}/cover/{1}".format(instance.id,filename)
     
+
 def topic_hero_poster_upload_path(instance, filename):
+    """Generate file path for topic hero posters."""
     return "topics/{0}/hero/{1}".format(instance.id,filename)
 
+
 def tag_image_upload_path(instance, filename):
+    """Generate file path for tag images."""
     return "tags/{0}/{1}".format(instance.name, filename)
 
+
 def list_image_upload_path(instance, filename):
+    """Generate file path for list images."""
     return "lists/{0}/{1}".format(instance.id, filename)
 
+
 def list_cover_image_upload_path(instance, filename):
+    """Generate file path for list cover images."""
     return "lists/{0}/cover/{1}".format(instance.id, filename)
 
+
 def list_large_cover_image_upload_path(instance, filename):
+    """Generate file path for large list cover images."""
     return "lists/{0}/large_cover/{1}".format(instance.id, filename)
 
+
 def video_image_upload_path(instance, filename):
+    """Generate file path for video images."""
     return "videos/{0}/{1}".format(instance.id, filename)
 
+
 def topic_item_cover_poster_path(instance, filename):
+    """Generate file path for topic item cover posters."""
     return "topics/{0}/items/cover/{1}".format(instance.id,filename)
 
+
 def topic_item_poster_path(instance, filename):
+    """Generate file path for topic item posters."""
     return "topics/{0}/items/poster/{1}".format(instance.id,filename)
     
+
 def movie_group_poster_path(instance, filename):
+    """Generate file path for movie group posters."""
     return "movie-group/{0}/items/poster/{1}".format(instance.slug,filename)
+
+
 def movie_group_cover_path(instance, filename):
+    """Generate file path for movie group cover posters."""
     return "movie-group/{0}/items/cover/{1}".format(instance.slug,filename)
 
 
 def tag_group_poster_path(instance, filename):
+    """Generate file path for tag group posters."""
     return "tag-group/{0}/items/poster/{1}".format(instance.slug,filename)
+
+
 def tag_group_cover_path(instance, filename):
+    """Generate file path for tag group cover posters."""
     return "tag-group/{0}/items/cover/{1}".format(instance.slug,filename)
+
 
 LIST_RELATION_TYPE = (
     ('df', "Director's Favourite"),
@@ -82,6 +123,7 @@ LIST_RELATION_TYPE = (
 
 
 class Movie(SocialMedia, SEO, RichMedia, MainPage):
+    """Represents a movie in the database."""
     id = models.IntegerField(primary_key=True)
     imdb_id = models.CharField(max_length=9, null=True)
     tmdb_id = models.IntegerField(null=True)
@@ -126,31 +168,37 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
     @classmethod
     def common_content_tags_of_movies(cls,movie_1, movie_2):
+        """Return common content tags between two movies."""
         Q_TAG = Q(genre_tag=False) & (Q(subgenre_tag=True) | Q(theme_tag=True) | Q(character_tag=True) | Q(base_tag=True) | Q(phenomenal_tag=True))
         tags_1 = movie_1.tags.filter(Q_TAG).values_list("name", flat=True)
         tags_2 = movie_2.tags.filter(Q_TAG).values_list("name", flat=True)
         return set(tags_1).intersection(set(tags_2))
     
     def common_content_tags(self, movie_2):
+        """Return common content tags between this movie and another movie."""
         Q_TAG = (Q(subgenre_tag=True) | Q(theme_tag=True) | Q(character_tag=True) | Q(base_tag=True) | Q(phenomenal_tag=True))
         tags_1 = self.tags.filter(Q_TAG).values_list("name", flat=True)
         tags_2 = movie_2.tags.filter(Q_TAG).values_list("name", flat=True)
         return set(tags_1).intersection(set(tags_2))
 
     def common_nongenre_tags(self, movie_2):
+        """Return common non-genre tags between this movie and another movie."""
         return list(set(self.nongenre_tag_names).intersection(set(movie_2.nongenre_tag_names)))
         
     def common_tags(self, movie_2):
+        """Return common tags between this movie and another movie."""
         return list(set(self.tag_names).intersection(set(movie_2.tag_names)))
     #-------------CONTENT SIMILARS------------------------
     @property
     def cso(self):
+        """Return the content similarity object for this movie."""
         if self.content_similar_object.exists():
             return self.content_similar_object.first()
         return None
 
     @property
     def cso_similars(self):
+        """Return the similar movies based on content similarity."""
         if self.cso:
             return self.cso.similars.all().only(
                 "id", "slug", "name", "year", "poster",
@@ -160,6 +208,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
     
     @property
     def cso_similars_of(self):
+        """Return the similar movies based on content similarity."""
         if self.cso:
             return self.cso.similars.all().only(
                 "id", "slug", "name", "year", "poster",
@@ -168,6 +217,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
         return []
 
     def cso_add(self, movie):
+        """Add a movie as a content similar to this movie."""
         if self.cso:
             self.cso.similars.add(movie)
             self.cso.save()
@@ -182,6 +232,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
         return True
 
     def cso_remove(self, movie):
+        """Remove a movie from the content similarity of this movie."""
         if self.cso:
             self.cso.similars.remove(movie)
             self.cso.save()
@@ -194,14 +245,17 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
     @property
     def genre_names(self):
+        """Return the names of the genres associated with this movie."""
         return self.tags.filter(genre_tag=True).values_list("slug", flat=True)
     
     @property
     def tag_names(self):
+        """Return the names of all tags associated with this movie."""
         return self.tags.all().values_list("slug", flat=True)
 
     @property
     def nongenre_tag_names(self, include_mix_tags=True):
+        """Return the names of non-genre tags associated with this movie."""
         if include_mix_tags:
             mix_tags = self.tags.filter(genre_tag=True, theme_tag=True).values_list("slug", flat=True)
             nongenres =  set(self.tag_names).difference(self.genre_names)
@@ -211,14 +265,17 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
     @property
     def video_tags(self):
+        """Return the tags associated with the videos of this movie."""
         return self.videos.values_list("tags__slug", flat=True)
 
     @property
     def have_trailer(self):
+        """Check if this movie has a trailer."""
         return "trailer" in self.video_tags
 
     @property
     def have_content_similars(self):
+        """Check if this movie has content similar movies."""
         try:
             return self.content_similar_object.all()[0].similars.all().exists()
         except:
@@ -226,6 +283,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
     
     @property
     def have_similars(self):
+        """Check if this movie has similar movies."""
         from archive.models import MovSim
         return MovSim.objects.filter(
                 base_id=self.id, pearson__gte=0.35,commons__gte=200 ).count()>0
@@ -233,36 +291,42 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
     @property
     def have_director(self):
+        """Check if this movie has a director."""
         return Crew.objects.filter(movie=self, job__in="d" \
             ).exclude(person__poster__exact='').exists()
 
     @property
     def director_names(self):
+        """Return the names of the directors of this movie."""
         return Crew.objects.filter(movie=self, job="d"
             ).values_list("person__name", flat=True)
 
     @property
     def have_crew(self):
-        # returns true if more than 3 actor.
+        """Check if this movie has a crew (more than 3 actors)."""
         return Crew.objects.filter(movie=self, job__in="a" \
             ).exclude(person__poster__exact='').count() > 3
 
     @property
     def get_content_similar_object(self):
+        """Return the content similarity object for this movie."""
         return self.content_similar_object.all()[0]
     
     def __old_get_similar_ids(self):
+        """Return the IDs of similar movies (old method)."""
         from archive.models import MovSim
         return MovSim.objects.filter(base_id=self.id, pearson__gte=0.3, 
             commons__gte=200).values_list("target_id", flat=True)
 
     def get_similar_ids(self, min_similarity=0.25):
+        """Return the IDs of similar movies."""
         from archive.models import MovSim
         Q_SIM = Q(commons__gte=200) & (Q(pearson__gte=min_similarity) | Q(acs__gte=min_similarity)) 
         return MovSim.objects.filter(Q_SIM, base_id=self.id
                 ).order_by("pearson").values_list("target_id", flat=True)
 
     def get_short_summary(self):
+        """Return a short summary of the movie."""
         if len(self.summary) < 200:
             return self.summary
         else:
@@ -271,10 +335,11 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
                 return plot
             else:
                 return self.summary[:200] + "..."
-
+2025
 
 
     def set_summary_from_omdb(self):
+        """Set the summary of the movie from OMDB data."""
         import requests
         url = ("http://www.omdbapi.com/?i={}&apikey=3f49586a&plot=full").format(str(self.imdb_id))
         try:
@@ -289,6 +354,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
             print(f"error id:{self.id}")
 
     def set_richdata(self, save=True):
+        """Set rich data for the movie."""
         from gql.rich_data import RichData
         rdf = RichData.create_movie_data(self)
         if len(rdf.keys()) > 3:
@@ -299,6 +365,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
 
     def add_slug(self):
+        """Add a slug for the movie."""
         from django.utils.text import slugify
         try:
             convert = f"{self.name} {self.year}"
@@ -313,10 +380,12 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
     @staticmethod
     def autocomplete_search_fields():
+        """Return fields for autocomplete search."""
         return ("id__iexact", "name__icontains",)
 
     @property
     def archive(self):
+        """Return the archive object for this movie."""
         from archive.models import MovieArchive
         qs = MovieArchive.objects.get(movie_id= self.id)
         if qs.exists():
@@ -328,20 +397,23 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
     @property
     def shortName(self):
+        """Return a short name for the movie."""
         if len(self.name)>10:
             return "{}...".format(self.name[:10])
         else:
             return self.name
 
     def get_absolute_url(self):
-        "Returns the url to access a particular movie instance."
+        """Return the URL for this movie."""
         return reverse('movie-detail', args=[str(self.id)])
         
     @property
     def image(self):
+        """Return the URL of the movie poster."""
         return self.poster.url
 
     def setOmdbInfo(self, force=False):
+        """Set OMDB info for the movie."""
         from .outerApi import omdb_details
         if self.summary and not force:
             return 0
@@ -401,6 +473,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
             print("could not get:",self.id, self.name, sep=",")
 
     def setTmdbInfo(self, force=False):
+            """Set TMDB info for the movie."""
             from .outerApi import getPosterUrlAndSummary
             from django.core import files
             from io import BytesIO
@@ -428,6 +501,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
                     print("error Id:{}".format(self.id))
 
     def getCastCrew(self):
+        """Get cast and crew info for the movie."""
         from gql import tmdb_class as t
         if self.tmdb_id:
             tmovie = t.Movie(self.tmdb_id)
@@ -440,12 +514,14 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
     @property
     def tmdb(self):
+        """Return the TMDB object for this movie."""
         from gql.tmdb_class import Movie as TM
         if self.tmdb_id:
             return TM(self.tmdb_id)
 
     @property
     def tmdb_object(self):
+        """Return the TMDB movie object for this movie."""
         from archive.models import TmdbMovie
         qs = TmdbMovie.objects.filter(tmdb_id=self.tmdb_id)
         if qs.exists():
@@ -453,6 +529,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
         return None
 
     def set_imdb_rating_and_votes(self):
+        """Set IMDb rating and votes for the movie."""
         if self.imdb_id:
             try:
                 rating, votes = parse_imdb_movie(self.imdb_id)
@@ -465,6 +542,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
 
     def update_cover_poster(self):
+        """Update the cover poster for the movie."""
         from pixly.lib import url_image
         cover_url = self.tmdb.poster_links().get("tmdb_cover_path")
         if cover_url:
@@ -476,11 +554,13 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
 
     def create_or_update_tmdb_movie(self):
+        """Create or update the TMDB movie object for this movie."""
         from archive.models import TmdbMovie
         tmovie, created = TmdbMovie.objects.update_or_create(movielens_id=self.id, tmdb_id=self.tmdb_id, registered=True)
         tmovie.save_data()
 
     def update_from_tmdb_movie(self):
+        """Update this movie from the TMDB movie object."""
         from archive.models import TmdbMovie
         tmovie, created = TmdbMovie.objects.update_or_create(movielens_id=self.id, tmdb_id=self.tmdb_id, registered=True)
         tmovie.save_data()
@@ -499,6 +579,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
 
     def update_social(self):
+        """Update social media info for the movie."""
         tmdb_movie= self.tmdb_object
         if tmdb_movie:
             socials = tmdb_movie.data.get("external_ids")
@@ -542,6 +623,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
                 return True
 
     def update_content_similars(self):
+        """Update content similar movies for the movie."""
         from archive.models import ContentSimilarity 
         if self.tmdb_object and self.tmdb_object.data.get("similars"):
             similar_movie_records = self.tmdb_object.data.get("similars")
@@ -564,6 +646,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
                 print(f"{len(tmdb_ids)} number of content similars saved")
 
     def update_tags_from_data_keywords(self):
+        """Update tags for the movie based on TMDB data."""
         from items.models import Tag
         keywords = self.data.get("keywords")
         init_num = self.tags.count()
@@ -595,6 +678,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
 
     def full_update(self):
+        """Perform a full update of the movie."""
         self.update_from_tmdb_movie()
         #print("1")
         self.set_seo_title()
@@ -605,6 +689,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
         self.set_richdata()
 
     def generate_description(self):
+        """Generate a description for the movie."""
         text = ""
         dn = list(self.director_names)
         tag_names = self.tag_names
@@ -651,6 +736,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
         return text
 
     def generate_title(self):
+        """Generate a title for the movie."""
         #start with year, add name at the end
         year_text = f" ({self.year}) - " 
 
@@ -680,6 +766,7 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
 
     #in order to bulk update, does not save
     def set_seo_description_keywords(self, save=True):
+        """Set SEO description and keywords for the movie."""
         description_text = self.generate_description()
         self.seo_description = description_text
         #print(self.seo_description)
@@ -688,11 +775,13 @@ class Movie(SocialMedia, SEO, RichMedia, MainPage):
             self.save()
 
     def set_seo_title(self, save=True):
+        """Set SEO title for the movie."""
         self.seo_title = self.generate_title()
         self.save()
 
 
     def save(self, *args, **kwargs):
+        """Save the movie."""
         #self.quantity = self.related_movies.all().only("id").count()
         if not self.created_at:
             import datetime
@@ -709,6 +798,7 @@ POSTER_TYPE = (
     ('p', "Vertical Poster"),
 )
 class MovieGroup(SEO, MainPage):
+    """Represents a group of movies."""
     slug = models.SlugField(db_index=True, max_length=50 )
     header = models.CharField(max_length=80, null=True, blank=True, help_text="Name")
     have_page = models.BooleanField(default=False, help_text="if yes, group treated like list or topic and have unique url")
@@ -732,6 +822,7 @@ class MovieGroup(SEO, MainPage):
 
 
 class MovieGroupItem(models.Model):
+    """Represents an item in a movie group."""
     movie = models.ForeignKey(Movie, related_name="group_items", on_delete=models.CASCADE)
     group = models.ForeignKey(MovieGroup, related_name="items", on_delete=models.CASCADE)
 
@@ -744,686 +835,4 @@ class MovieGroupItem(models.Model):
         return self.movie.name
 
 
-
-
-class List(SEO,MainPage):
-
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=100)
-    summary = models.TextField(max_length=1000,null=True, blank=True,
-        help_text="Minimumun 250 character, otherwise will not be shown.")
-    movies = models.ManyToManyField(Movie, related_name="lists")
-    content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
-    html_content = RichTextField(max_length=10000,null=True, blank=True,
-                help_text = "Description for all the movies and topic. In mov")
-
-    slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
-
-    owner = models.ForeignKey(Profile, related_name='lists', on_delete=models.DO_NOTHING)
-    public = models.BooleanField(default=True)
-
-    related_persons = models.ManyToManyField(Person, null=True, blank=True, related_name="related_lists")
-    list_type = models.CharField(max_length=3, choices=LIST_RELATION_TYPE, null=True, blank=True ,
-                help_text="What is the relation about the list and person? E.g; 'Directors favourite movie list'")
-
-    reference_notes = models.CharField(max_length=400, null=True, blank=True, help_text="Notes about reference.")
-    reference_link = models.URLField(null=True, blank=True, help_text="Reference of relation with person. Enter link of url")
-
-    poster = models.ImageField(blank=True, null=True, upload_to=list_image_upload_path)
-    cover_poster = models.ImageField(blank=True, null=True, upload_to=list_image_upload_path)
-    large_cover_poster = models.ImageField(blank=True, null=True, upload_to=list_large_cover_image_upload_path)
-
-    order = JSONField(default=dict, blank=True,null=True)
-
-    created_at = models.DateTimeField(auto_now_add=True, null=True, blank = True)
-    updated_at = models.DateTimeField(auto_now=True, null=True, blank = True)
-
-    is_published = models.BooleanField(default=False, help_text="True for RSS publishing, leave it False if you are unsure")
-    is_newest = models.BooleanField(default=False, help_text="True for displaying in the latest section")
-
-    def __str__(self):
-        return self.name
-
-    def set_richdata(self, save=True):
-        from gql.rich_data import RichData
-        rdf = RichData.create_movie_list_data(self)
-        if len(rdf.keys()) > 2:
-            self.richdata = rdf
-        if save:
-            self.save()
-    
-
-
-    def save(self, *args, **kwargs):
-        from django.utils.text import slugify
-        if not self.slug:
-            self.slug = slugify(self.name)
-        return super().save(*args, **kwargs)
-
-    def add_slug(self):
-        from django.utils.text import slugify
-        self.slug = slugify(self.name)
-        self.save()
-
-
-    @classmethod
-    def autokey(cls):
-        return cls.objects.all().order_by("-id")[0].id + 1
-
-    @staticmethod
-    def autocomplete_search_fields():
-        return ("id__iexact", "name__icontains",)
-
-    @cached_property
-    def get_movies(self):
-        return self.movies.all()
-    
-    @property
-    def image(self):
-        aws = settings.MEDIA_URL
-        posters = self.movies.order_by("-imdb_rating").values("poster")[:4]
-        poster_urls = ["{}{}".format(aws,i["poster"]) for i in posters]
-        return poster_urls
-    
-    @property
-    def single_image(self):
-        mqs = self.movies.exclude(poster="").order_by("-imdb_rating")[:10]
-        for m in mqs:
-            if m.poster and hasattr(m.poster, "url"):
-                return m.poster.url
-
-    @property
-    def images_all(self):
-        aws = settings.MEDIA_URL
-        movies = self.movies.order_by("-year").values("poster", "name", "id")[:]
-        image_set = [{
-            "poster":"{}{}".format(aws,i["poster"]), "name":i.get("name"), "id":i.get("id")
-            } for i in movies]
-        return image_set
-        
-    def movieset(self):
-        return self.movies.values_list("id", flat=True)
-
-
-    #in order to bulk update, does not save
-    def set_seo_description_keywords(self, save=True):
-        from items.models import Tag
-        #from persons.models import Crew
-        #from archive.models import MovSim
-        description_text = "Pixly Collections: " +  self.name
-        #words = [self.name]
-        keywords = ["Movie Lists", "Movie Collections", "Pixly Lists", "Pixly Collections"]
-
-        #KEYWORDS
-        if self.list_type == "df" and self.related_persons.all().count() > 0:
-            print("df")
-            print(self.related_persons.all())
-            for p in self.related_persons.all():
-                keywords.append(f"{p.name} Favourite Movies")
-                keywords.append(f"{p.name} Liked Movies")
-                keywords.append(f"{p.name} Top Movies")
-
-        if self.list_type == "fw":
-            keywords.append(f"{self.name}")
-            keywords.append(f"Festival Winner Movies")
-            keywords.append(f"Festival Award Movies")
-            keywords.append(f"Festival Movies")
-
-        if self.list_type == "gr":
-            description_text += ". This list is edited and curated by Pixly." 
-
-        #if self.list_type == "gr" and  self.tags.all().count() > 0:
-        #    list_tags = self.tags.all().only("name", "slug")
-        #    for t in list_tags:
-        #        keywords.append(t.name.capitalize())
-
-        self.seo_description = description_text
-        self.seo_keywords = ", ".join(keywords)
-        #print(self.seo_description)
-        #print(self.seo_keywords)
-        if save:
-            self.save()
-        return (self.seo_description, self.seo_keywords)
-
-
-
-class Video(DateRecords):
-    id = models.IntegerField(primary_key=True)
-    title = models.CharField(max_length=150)
-    summary = models.CharField(max_length=2000, null=True, blank=True)
-    link = models.URLField()
-    tagss = ListTextField(default = list(),base_field=models.CharField(max_length=40),
-                    null=True, help_text="Enter the type of video category.\n E.g:'video-essay or interview or conversations'")
-    duration = models.IntegerField(null=True,blank=True, help_text="seconds")
-    thumbnail = models.URLField(null=True, blank=True, help_text="Thumbnail url if exists.")
-    youtube_id = models.CharField(max_length=50, null=True, blank=True,unique=True, help_text="Youtube video id, if video is on TouTube.")
-    
-    data = JSONField(default=dict, null=True, blank=True)
-
-    channel_url = models.URLField(null=True, blank=True, help_text="Youtube channel's main page link")
-    channel_name = models.CharField(max_length=150, null=True, blank=True, help_text="Name of the Youtube channel")
-
-    related_persons = models.ManyToManyField(Person, blank=True, related_name="videos")
-    related_movies = models.ManyToManyField(Movie, blank=True, related_name="videos")
-
-    def __str__(self):
-        return self.title
-    
-    @property
-    def youtube_object(self):
-        from gql.youtube_client import Youtube
-        return Youtube(self.youtube_id)
-        
-
-    def get_caption_data(self):
-        import requests
-        key = "AIzaSyBdIAvGGzQn_IieJtZrrdLp1theKPe_FU0"
-        url = f'https://www.googleapis.com/youtube/v3/captions?part=snippet&videoId={self.youtube_id}&key={key}'
-        req = requests.get(url)
-        return req.json()
-
-
-    def update_data(self):
-        youtube_data = self.youtube_object.get_data()
-        caption_data = self.youtube_object.get_caption_data()
-        try:
-            video_item = youtube_data.get("items")[0]
-
-            content_details = video_item.get("contentDetails")
-            snippet = video_item.get("snippet")
-            topics =  video_item.get("topicDetails")
-
-            data = {}
-            if content_details:
-                data["license"] = content_details.get("licensedContent")
-                data["duration_iso"] = content_details.get("duration")
-            if topics and topics.get("topicCategories"):
-                data["topics"] = topics.get("topicCategories")
-            if snippet:
-                data["title"] = snippet.get("title")
-                data["category_id"] = snippet.get("categoryId")
-                data["thumbnails"] = snippet.get("thumbnails")
-                data["tags"] = snippet.get("tags")
-                #CHANNEL
-                if snippet.get("channelTitle"):
-                    data["channel_name"] = snippet.get("channelTitle")
-                    self.channel_name = snippet.get("channelTitle")
-                if snippet.get("channelId"):
-                    ch_id = snippet.get("channelId")
-                    data["channel_id"] = ch_id
-                    self.channel_url = f"https://www.youtube.com/channel/{ch_id}"
-                data["summary"] = snippet.get("description")
-                data["published_at"] = snippet.get("publishedAt")
-            if caption_data and len(caption_data) > 0:
-                data["captions"] = caption_data
-            if len(list(data.keys())) > 0:
-                self.data = data
-                self.save()
-                print(f"{self.id} - data was updated")
-        except:
-            print(f"Error - {self.id} data could not be updated")      
-                
-
-    @staticmethod
-    def autocomplete_search_fields():
-        return ("id__iexact", "title__icontains",)
-
-    @classmethod
-    def autokey(cls):
-        return cls.objects.all().order_by("-id")[0].id + 1
-
-    @property
-    def tag_list(self):
-        video_tags = self.tags.all().values_list("name", flat=True)
-
-
-
-class VideoList(DateRecords):
-
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=100)
-    summary = models.TextField(max_length=2000,null=True, blank=True)
-
-    videos = models.ManyToManyField(Video, related_name="related_lists")
-
-    owner = models.ForeignKey(Profile, related_name='video_lists', on_delete=models.DO_NOTHING)
-    public = models.BooleanField(default=True)
-    tags = models.ManyToManyField("items.Tag", null=True, blank=True, related_name="related_video_lists")
-    related_persons = models.ManyToManyField(Person, null=True, blank=True, related_name="related_video_lists")
-
-
-    reference_notes = models.CharField(max_length=400, null=True, blank=True, help_text="Notes about reference.")
-    reference_link = models.URLField(null=True, blank=True, help_text="Reference: Enter link of url")
-
-    poster = models.ImageField(blank=True, null=True, upload_to=video_image_upload_path)
-
-    def __str__(self):
-        return self.name
-    
-    @classmethod
-    def autokey(cls):
-        return cls.objects.all().order_by("-id")[0].id + 1
-
-
-
-class Article(models.Model):
-    id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=250)
-    abstract = models.CharField(max_length=2000, null=True, blank=True)
-    content = models.TextField(max_length=20000, null=True, blank=True)
-    link = models.URLField(null=True, blank=True)
-
-    related_persons = models.ManyToManyField(Person, blank=True, related_name="articles")
-    related_movies = models.ManyToManyField(Movie, blank=True, related_name="articles")
-    related_topics = models.ManyToManyField("items.Topic", blank=True, related_name="articles")
-    
-    def __str__(self):
-        return self.title
-
-    @staticmethod
-    def autocomplete_search_fields():
-        return ("id__iexact", "name__icontains",)
-        
-class Rating(models.Model):
-    profile = models.ForeignKey(Profile, related_name='rates', on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, related_name='rates', on_delete=models.CASCADE)
-    rating = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-
-    notes = models.CharField(max_length=2500, blank=True, null=True)
-    date = models.DateField(null=True, blank=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        unique_together = ("profile","movie",)
-
-    def __str__(self):
-        return "Profile: {}, Movie: {}, Ratings:{}".format(self.profile, self.movie,self.rating)
-
-class Prediction(models.Model):
-    profile = models.ForeignKey(Profile, related_name='predictions', on_delete=models.CASCADE)
-    profile_points = models.IntegerField()
-
-    movie = models.ForeignKey(Movie, related_name='predictions', on_delete=models.CASCADE)
-    prediction = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ["-created_at"]
-
-    def __str__(self):
-        return "Profile: {}, Movie: {}, Prediction:{}".format(self.profile, self.movie,self.prediction)
-
-
-
-class Topic(SEO,RichMedia, MainPage):
-    id = models.IntegerField(primary_key=True)
-    is_ordered = models.BooleanField(default=False, help_text="True for ordered movies and synopsis display.(default=False)")
-
-    slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
-    tag = models.OneToOneField("items.Tag", null=True, blank=True, on_delete=models.CASCADE)
-    
-    name = models.CharField(max_length=400)
-    short_name = models.CharField(max_length=50, null=True, blank=True, help_text="This will be used in a situation that requires short name rather than 'The Best ....'")
-    summary = models.TextField(max_length=300,null=True, blank=True, help_text="short summary of topic. max: 300 characters")
-
-    content = models.TextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
-    html_content = RichTextField(max_length=50000,null=True, blank=True, help_text="Detailed description")
-    html_content2 = RichTextField(max_length=10000,null=True, blank=True, help_text="Second part of detailed description")
-    html_content3 = RichTextField(max_length=1000,null=True, blank=True, help_text="Final part of detailed description, use for last senteces, or if html_content2 is not visible.")
-    show_html_content2 = models.BooleanField(default=True,help_text="For mobile hiding of the text.")
-
-    references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")
-
-    wiki = models.URLField(blank=True, null=True)
-    
-    movies = models.ManyToManyField(Movie,null=True, blank=True, related_name="topics", help_text="Leave blank if is_ordered=True")
-
-    tags = models.ManyToManyField("items.Tag",null=True, blank=True, related_name="topics")
-    persons = models.ManyToManyField(Person,null=True, blank=True, related_name="topics")
-    quotes = models.ManyToManyField("items.Quote",null=True, blank=True, related_name="topics")
-
-    searchable = models.BooleanField(default=False, help_text="Allows year and rating filtering. " + 
-        "If there are many movies, select this.")
-    
-    is_article = models.BooleanField(default=False,help_text="If the content is rich enough select this.")
-
-    poster = models.ImageField(blank=True, upload_to=topic_image_upload_path)
-    cover_poster = models.ImageField(blank=True, upload_to=topic_cover_poster_upload_path)
-    hero_poster = models.ImageField(blank=True, upload_to=topic_hero_poster_upload_path)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(default=False, help_text="True for RSS publishing, leave it False if you are unsure")
-    is_newest = models.BooleanField(default=False, help_text="True for displaying in the latest section")
-
-    def __str__(self):
-        return self.name
-
-    @classmethod
-    def create_tag_topic(cls, tag, copy_movies=False):
-        last_pk = Topic.objects.all().last().pk
-        topic = cls(id=last_pk + 1, name=tag.name, slug=tag.slug, summary=tag.summary, tag=tag)
-        topic.save()
-        for m in tag.related_movies.all().only("id", "slug"):
-            topic.movies.add(m)
-        topic.main_page = tag.main_page
-        topic.tags.add(tag)
-        topic.save()
-
-    def set_richdata(self, save=True):
-        from gql.rich_data import RichData
-        rdf = RichData.create_topic_data(self)
-        self.richdata = rdf
-        if save:
-            self.save()
-    
-
-    def add_slug(self):
-        from django.utils.text import slugify
-        self.slug = slugify(self.name)
-        self.save()
-
-    def pair_tag(self, tag_object):
-        if self.tag:
-            self.slug = tag_object.slug
-            self.main_page = tag_object.main_page
-            for m in tag_object.related_movies.all().only("id", "slug"):
-                self.movies.add(m)
-            self.save()
-            
-
-    def save(self, *args, **kwargs):
-        if not self.pk or not self.id:
-            last_pk = Topic.objects.all().last().pk
-            print("last pk id:", last_pk)
-            self.id = last_pk + 1
-        if not self.slug:
-            self.add_slug()
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-
-
-class TopicItem(models.Model):
-    movie = models.ForeignKey(Movie, related_name="in_topics", on_delete=models.CASCADE)
-    topic = models.ForeignKey(Topic, related_name="items", on_delete=models.CASCADE)
-    persons = models.ManyToManyField(Person,null=True, blank=True, related_name="topic_items")
-    rank = models.IntegerField(default=100, null=True, blank=True)
-
-    header = models.CharField(max_length=80, null=True, blank=True, help_text="In case of different text, use this as header")
-    html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="Detailed description")
-
-    cover_poster = models.ImageField(blank=True, null=True, upload_to=topic_item_cover_poster_path)
-    poster = models.ImageField(blank=True, null=True, upload_to=topic_item_poster_path)
-
-    references = RichTextField(max_length=1000,null=True, blank=True, help_text="References at the bottom of the page")
-
-    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
-
-
-    def __str__(self):
-        return self.movie.name
-
-TAG_INFO_TYPE = (
-    ("award", "Awarded"),
-    ('base', "Based on"),
-    ("content", "Content-Tag"),
-    ("country", "Country"),
-    ("genre", "Genre"),
-    ("subgenre", "Sub-Genre"),
-    ("era", "Era movie"),
-)
-TAG_DISCIPLINE_TYPE = (
-    ("phil", "Philosophy"),
-    ("soc", "Sociology"),
-    ("psy", "Psychology"),
-)
-TAG_OBJECT_TYPE = (
-    ("movie", "Movie Content Tags"),
-    ("video", "Video Content Tags"),
-    ("list", "List Content Tags"),
-    ("article", "Article/Blog Post Tags"),
-)
-
-class Tag( SEO, MainPage):
-    
-    name = models.CharField(max_length=400)
-    summary = models.TextField(max_length=5000,null=True, blank=True)
-    slug = models.SlugField(max_length=100, null=True, blank=True, unique=True, db_index=True)
-
-    custom_id = models.IntegerField(unique=True,  null=True, blank=True,)
-    movielens_id = models.IntegerField(unique=True,  null=True, blank=True,)
-    tmdb_id = models.IntegerField(unique=True,  null=True, blank=True,)
-    tmdb_id_2 = models.IntegerField(unique=True,  null=True, blank=True, help_text="in case of similar tags like: 'heartwarming' and 'heart-warming'")
-    netflix_id = models.IntegerField(unique=True,  null=True, blank=True,)
-
-    video_tag = models.BooleanField(default=False, help_text="tags that classifies video object")
-    era_tag = models.BooleanField(default=False)
-    geo_tag = models.BooleanField(default=False)
-    genre_tag = models.BooleanField(default=False)
-    subgenre_tag = models.BooleanField(default=False)
-    award_tag = models.BooleanField(default=False)
-    base_tag = models.BooleanField(default=False)
-
-    theme_tag = models.BooleanField(default=False, help_text="Narrow topics, or more special cases; suicide-attempt, surf, prison-escape")
-    character_tag = models.BooleanField(default=False)
-    historical_person_tag = models.BooleanField(default=False)
-    phenomenal_tag = models.BooleanField(default=False)
-    series_tag = models.BooleanField(default=False)
-    documentary_tag = models.BooleanField(default=False)
-    form_tag = models.BooleanField(default=False, help_text="About form of movie; no-dialogue, dialogue, 70mm, nonlinear, multiple-storylines, etc..")
-    adult_tag = models.BooleanField(default=False)
-    topic_tag = models.BooleanField(default=False)
-
-
-
-    parent_genres = ListTextField(default = list(),base_field=models.CharField(max_length=100),
-        null=True, blank=True, help_text="list of parent-genres slugs")
-
-
-    related_movies = models.ManyToManyField(Movie, null=True, blank=True, related_name="tags")
-    related_videos = models.ManyToManyField(Video, null=True, blank=True, related_name="tags")
-    related_lists = models.ManyToManyField(List, null=True, blank=True, related_name="tags")
-
-    #this for movies and lists
-    tag_type = models.CharField(max_length=11, choices=TAG_INFO_TYPE, null=True, blank=True )
-
-    discipline_type = models.CharField(max_length=11, choices=TAG_DISCIPLINE_TYPE, null=True, blank=True )
-    object_type = models.CharField(max_length=11, choices=TAG_OBJECT_TYPE, null=True, blank=True )
-
-
-    poster = models.ImageField(blank=True, null=True, upload_to=tag_image_upload_path)
-    class Meta:
-        ordering = ["name"]
-        
-    def __str__(self):
-        return self.name
-
-    @property
-    def tmdb(self):
-        from gql.tmdb_class import Tag
-        if self.tmdb_id:
-            ttag = Tag(self.tmdb_id)
-            return ttag.details()
-    
-    @property
-    def tmdb2(self):
-        from gql.tmdb_class import Tag
-        if self.tmdb_id_2:
-            ttag = Tag(self.tmdb_id_2)
-            return ttag.details()
-            
-    def update_tmdb_movies(self):
-        if self.tmdb_id_2:
-            initial_num = self.related_movies.all().count()
-            response = self.tmdb2.get("results")
-            if response and len(response) > 0:
-                founded_num = len(response)
-        
-                movie_tmdb_ids = [x.get("id") for x in response]
-                mqs = Movie.objects.filter(tmdb_id__in=movie_tmdb_ids).only("id", "tmdb_id")
-                for m in mqs:
-                    self.related_movies.add(m)
-                final_num =  self.related_movies.all().count()
-                m.save()
-                print(f"TMDB-ID-2 => Founded: {founded_num}, before:{initial_num}, final: {final_num} ---{self.name}")
-        if self.tmdb_id:
-            initial_num = self.related_movies.all().count()
-            response = self.tmdb.get("results")
-            if response and len(response) > 0:
-                founded_num = len(response)
-        
-                movie_tmdb_ids = [x.get("id") for x in response]
-                mqs = Movie.objects.filter(tmdb_id__in=movie_tmdb_ids).only("id", "tmdb_id")
-                for m in mqs:
-                    self.related_movies.add(m)
-                final_num =  self.related_movies.all().count()
-                m.save()
-                print(f"TMDB-ID-1 => Founded: {founded_num}, before:{initial_num}, final: {final_num} ---{self.name}")
-                
-
-    @property
-    def movie_quantity(self):
-        return self.related_movies.all().count()
-    
-    @property
-    def movie_ids(self):
-        return [x.id for x  in self.related_movies.only("id").all()]
-
-    def add_slug(self):
-        from django.utils.text import slugify
-        try:
-            convert = f"{self.name}"
-            self.slug = slugify(convert)
-            self.save()
-        except:
-            convert = f"{self.name} {self.custom_id} "
-            self.slug = slugify(convert)
-            self.save()
-
-    @classmethod
-    def set_tag_type(cls, tag_id_list, tag_type):
-        from tqdm import tqdm
-        tag_qs = cls.objects.filter(movielens_id__in=tag_id_list)
-        for t in tqdm(tag_qs):
-            t.tag_type= tag_type
-            t.save()
-
-    def save(self, *args, **kwargs):
-        #self.quantity = self.related_movies.all().only("id").count()
-        if not self.pk or not self.id:
-            last_pk = Tag.objects.all().last().pk
-            print("last pk id:", last_pk)
-            self.pk = last_pk + 1
-            self.id = last_pk + 1
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-
-
-AWARD_TYPE = (
-    ("best_picture", "Best Picture"),
-    ("best_director", "Best Director"),
-    ("best_actor", "Best Actor"),
-    ("best_actress", "Best Actress"),
-    ("supporting_actor", "Best Actor in Supporting Role"),
-    ("supporting_actress", "Best Actress in Supporting Role"),
-    ("best_cinematography", "Best Cinematography"),
-    ("best_animated", "Best Animated Feature Film"),
-    ("best_international", "Best International Film"),
-    ("best_visual_effects", "Best International Film"),
-    ("best_original_song", "Best International Film"),
-    ("best_adapted_screenplay", "Best Adapted Screenplay"),
-    ("best_original_screenplay", "Best Original Screenplay"),
-    ("golden_palm", "Cannes Film Festival - Golden Palm"),
-    ("golden_bear", "Berlin Film Festival - Golden Bear"),
-    ("golden_lion", "Venice Film Festival - Golden Lion"),
-)
-
-class Award(models.Model):
-    award = models.CharField(max_length=25, choices=AWARD_TYPE, null=True)
-    year = models.IntegerField()
-
-    #best person and nominees
-    person = models.ForeignKey(Person, null=True, blank=True, related_name="awards", on_delete=models.CASCADE)
-    persons = models.ManyToManyField(Person, null=True, blank=True, related_name="awards_nominee")
-
-    #best movie and nominees
-    movie = models.ForeignKey(Movie, related_name="awards", on_delete=models.CASCADE, help_text="winner of the award's movie.")
-    movies = models.ManyToManyField(Movie,null=True, blank=True,  related_name="awards_nominee", help_text="Nominees. If the award is personal set movies that the person play in.")
-
-    note = models.TextField(max_length=500,null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.year} - {self.award}"
-
-
-class Quote(models.Model):
-    id = models.IntegerField(primary_key=True)
-    text = models.TextField(max_length=2000)
-
-    owner_name = models.TextField(max_length=100, null=True, blank=True)
-
-    #person who said that
-    person = models.ForeignKey(Person, null=True, blank=True, related_name="quotes", on_delete=models.CASCADE)
-    
-    #movie that includes the quote
-    movie = models.ForeignKey(Movie, null=True, blank=True, related_name="quotes", on_delete=models.CASCADE)
-
-    reference_notes = models.CharField(max_length=400, null=True, blank=True, help_text="Notes about reference.")
-    reference_link = models.URLField(null=True, blank=True, help_text="Reference of relation with person. Enter link of url")
-
-    def __str__(self):
-        return self.text[:50]
-
-class Review(models.Model):
-    text = models.TextField(max_length=2000, help_text="Quote without quotation mark.")
-
-    html_content = RichTextField(max_length=10000,null=True, blank=True, help_text="The owner of review and related info.")
-    critic = models.CharField(max_length=100, null=True, blank=True, help_text="for database query and other differentiations. Write everything including critic to html_content." )
-
-    #person who said that
-    person = models.ForeignKey(Person, null=True, blank=True, related_name="reviews", on_delete=models.CASCADE)
-    
-    #movie that includes the quote
-    movie = models.ForeignKey(Movie, related_name="reviews", on_delete=models.CASCADE)
-
-    reference_notes = models.CharField(max_length=400, null=True, blank=True, help_text="Notes about reference.")
-    reference_link = models.URLField(null=True, blank=True, help_text="Reference of relation with person. Enter link of url")
-
-    primary = models.BooleanField(default=False, help_text="Use this for featured review")
-
-    def __str__(self):
-        return f"{self.critic} {self.movie.name}"
-
-#######################################################################################
-
-def post_save_rating_signal(sender, instance, created, *args, **kwargs):
-    if created:
-        try:
-            from persons.profile import Activity
-            a = Activity(profile=instance.profile, action="rm", movie_id=instance.movie.id)
-            a.save()
-            print("Rating Signal failed.")
-        except:
-            print("Rating Signal failed.")
-
-post_save.connect(post_save_rating_signal, sender=Rating)
-
-
-def post_movie_create(sender, instance, created, *args, **kwargs):
-    if created:
-        try:
-            from archive.models import MovieArchive
-            qs = MovieArchive.objects.filter(movie_id = instance.id)
-            if not qs.exists():
-                MovieArchive(movie_id = instance.id)
-                print("MovieArchive object created due to new movie with id {}.".format(instance.id))
-        except:
-            print("MovieArchive object creation failed.(Post movie signal id:{})".format(instance.id))
-
-post_save.connect(post_movie_create, sender=Movie)
-
-######################################################################################
 
